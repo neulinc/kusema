@@ -19,6 +19,7 @@ mod memory;
 mod overlay;
 mod paste_tx;
 pub mod portable;
+mod screen;
 mod secrets;
 mod secure_input;
 mod settings;
@@ -784,6 +785,14 @@ pub fn run(cli_args: CliArgs) {
             helpers::clamshell::is_laptop,
             assistant::get_assistant_conversation,
             assistant::clear_assistant_conversation,
+            assistant::change_assistant_screen_confirm_setting,
+            assistant::change_assistant_screen_provider_setting,
+            assistant::change_assistant_screen_model_setting,
+            screen::card::get_screen_card,
+            screen::card::screen_card_ready,
+            screen::card::answer_screen_card,
+            screen::card::dismiss_screen_card,
+            screen::card::set_screen_card_enlarged,
             tts::get_tts_voices,
             tts::preview_tts_voice,
             tts::change_assistant_speak_replies_setting,
@@ -920,6 +929,7 @@ pub fn run(cli_args: CliArgs) {
         ))
         .manage(cli_args.clone())
         .manage(assistant::AssistantState::default())
+        .manage(screen::ScreenState::default())
         .setup(move |app| {
             #[cfg(target_os = "windows")]
             log::info!(

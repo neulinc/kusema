@@ -10,6 +10,14 @@ default-run = "handy"
 [profile.dev]
 incremental = true # Compile your binary in smaller steps.
 
+# Kusema: resizing and encoding a screenshot takes seconds unoptimized.
+[profile.dev.package.image]
+opt-level = 3
+[profile.dev.package.png]
+opt-level = 3
+[profile.dev.package.fdeflate]
+opt-level = 3
+
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [lib]
@@ -69,6 +77,9 @@ keyring = "4.2.0"
 # Kusema: Kokoro voices. ONNX Runtime itself is downloaded with the voices and
 # loaded at runtime (load-dynamic), so builds neither link nor fetch it.
 ort = { version = "=2.0.0-rc.15", default-features = false, features = ["std", "load-dynamic"] }
+# Kusema: Ask about my screen (downscale and encode the screenshot)
+image = { version = "0.25", default-features = false, features = ["png", "jpeg"] }
+base64 = "0.22"
 rustfft = "6.4.0"
 strsim = "0.11.0"
 natural = "0.5.0"
@@ -132,6 +143,9 @@ windows = { version = "0.61.3", features = [
   "Win32_Foundation",
   "Win32_Graphics_Gdi",
   "Win32_UI_WindowsAndMessaging",
+  # Kusema: Ask about my screen (window bounds, DPI)
+  "Win32_Graphics_Dwm",
+  "Win32_UI_HiDpi",
 ] }
 winreg = "0.55"
 # Kusema: unpacks the ONNX Runtime archive for Kokoro voices

@@ -552,9 +552,23 @@ pub struct AppSettings {
     /// Kusema: speaking rate, 1.0 being the voice's normal speed.
     #[serde(default = "default_assistant_speech_rate")]
     pub assistant_speech_rate: f32,
+    /// Kusema: show a screenshot and wait for Send before it leaves the computer.
+    #[serde(default = "default_assistant_screen_confirm")]
+    pub assistant_screen_confirm: bool,
+    /// Kusema: provider for screen questions; `None` uses the Assistant's.
+    #[serde(default)]
+    pub assistant_screen_provider_id: Option<String>,
+    /// Kusema: model for screen questions with a different provider; `None`
+    /// uses that provider's Post Process model.
+    #[serde(default)]
+    pub assistant_screen_model: Option<String>,
 }
 
 fn default_assistant_speak_replies() -> bool {
+    true
+}
+
+fn default_assistant_screen_confirm() -> bool {
     true
 }
 
@@ -990,6 +1004,21 @@ pub fn get_default_settings() -> AppSettings {
             current_binding: default_assistant_shortcut.to_string(),
         },
     );
+    #[cfg(target_os = "macos")]
+    let default_assistant_screen_shortcut = "ctrl+option+shift+space";
+    #[cfg(not(target_os = "macos"))]
+    let default_assistant_screen_shortcut = "ctrl+alt+shift+space";
+
+    bindings.insert(
+        "assistant_screen".to_string(),
+        ShortcutBinding {
+            id: "assistant_screen".to_string(),
+            name: "Ask about my screen".to_string(),
+            description: "Ask a spoken question about the window you're looking at.".to_string(),
+            default_binding: default_assistant_screen_shortcut.to_string(),
+            current_binding: default_assistant_screen_shortcut.to_string(),
+        },
+    );
     bindings.insert(
         "cancel".to_string(),
         ShortcutBinding {
@@ -1069,6 +1098,9 @@ pub fn get_default_settings() -> AppSettings {
         assistant_speak_replies: default_assistant_speak_replies(),
         assistant_voice: None,
         assistant_speech_rate: default_assistant_speech_rate(),
+        assistant_screen_confirm: default_assistant_screen_confirm(),
+        assistant_screen_provider_id: None,
+        assistant_screen_model: None,
     }
 }
 

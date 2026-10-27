@@ -1,5 +1,6 @@
 #[cfg(all(target_os = "macos", target_arch = "aarch64"))]
 use crate::apple_intelligence;
+use crate::assistant::AskMode;
 use crate::audio_feedback::{play_feedback_sound, play_feedback_sound_blocking, SoundType};
 use crate::audio_toolkit::VadPolicy;
 use crate::managers::audio::{recording_error_type, AudioRecordingManager};
@@ -114,7 +115,7 @@ pub trait ShortcutAction: Send + Sync {
 struct TranscribeAction {
     post_process: bool,
     /// Kusema Assistant mode: answer the text instead of pasting it.
-    assistant: bool,
+    assistant: Option<AskMode>,
 }
 
 /// Field name for structured output JSON schema
@@ -453,8 +454,13 @@ impl ShortcutAction for TranscribeAction {
         // Kusema: a new recording interrupts a spoken reply; an assistant
         // question gets the voice ready while the user speaks.
         crate::tts::stop(app);
-        if self.assistant {
+        if self.assistant.is_some() {
             crate::tts::prepare(app);
+        }
+        // The window is captured now, before any overlay of ours can cover it.
+        // If there's nothing that can be captured, say why instead of recording.
+        if self.assistant == Some(AskMode::Screen) && !crate::screen::capture_at_press(app) {
+            return;
         }
 
         // Load model in the background
@@ -675,6 +681,10 @@ impl ShortcutAction for TranscribeAction {
 
         tauri::async_runtime::spawn(async move {
             let _guard = FinishGuard(ah.clone(), Arc::clone(&tm));
+            // Taken now so it's dropped whichever way this task ends.
+            let screenshot = (assistant == Some(AskMode::Screen))
+                .then(|| crate::screen::take_capture(&ah))
+                .flatten();
             debug!(
                 "Starting async transcription task for binding: {}",
                 binding_id
@@ -792,6 +802,12 @@ impl ShortcutAction for TranscribeAction {
 
                             // Save to history if WAV was saved
                             if wav_saved {
+                                // Kusema: only a marker, never the screenshot.
+                                let transcription = if assistant == Some(AskMode::Screen) {
+                                    format!("[screenshot] {transcription}")
+                                } else {
+                                    transcription
+                                };
                                 if let Err(err) = hm.save_entry(
                                     file_name,
                                     transcription,
@@ -812,7 +828,7 @@ impl ShortcutAction for TranscribeAction {
                                     sample_count,
                                     stop_time,
                                 );
-                            } else if assistant {
+                            } else if let Some(mode) = assistant {
                                 if use_streaming_overlay {
                                     tm.emit_stream_working(StreamWorkKind::Polishing);
                                 } else {
@@ -820,10 +836,26 @@ impl ShortcutAction for TranscribeAction {
                                 }
                                 // Escape must reach an in-flight request too.
                                 shortcut::register_cancel_shortcut(&ah);
-                                crate::assistant::ask(&ah, processed.final_text, || {
-                                    rm.was_cancelled_since(cancel_generation)
-                                })
-                                .await;
+                                let is_cancelled = || rm.was_cancelled_since(cancel_generation);
+                                match mode {
+                                    AskMode::Plain => {
+                                        crate::assistant::ask(
+                                            &ah,
+                                            processed.final_text,
+                                            is_cancelled,
+                                        )
+                                        .await
+                                    }
+                                    AskMode::Screen => {
+                                        crate::assistant::ask_about_screen(
+                                            &ah,
+                                            processed.final_text,
+                                            screenshot,
+                                            is_cancelled,
+                                        )
+                                        .await
+                                    }
+                                }
                                 // A reply still being spoken keeps the UI until it ends.
                                 if !rm.was_cancelled_since(cancel_generation)
                                     && !crate::tts::is_speaking(&ah)
@@ -995,21 +1027,28 @@ pub static ACTION_MAP: Lazy<HashMap<String, Arc<dyn ShortcutAction>>> = Lazy::ne
         "transcribe".to_string(),
         Arc::new(TranscribeAction {
             post_process: false,
-            assistant: false,
+            assistant: None,
         }) as Arc<dyn ShortcutAction>,
     );
     map.insert(
         "transcribe_with_post_process".to_string(),
         Arc::new(TranscribeAction {
             post_process: true,
-            assistant: false,
+            assistant: None,
         }) as Arc<dyn ShortcutAction>,
     );
     map.insert(
         "assistant".to_string(),
         Arc::new(TranscribeAction {
             post_process: false,
-            assistant: true,
+            assistant: Some(AskMode::Plain),
+        }) as Arc<dyn ShortcutAction>,
+    );
+    map.insert(
+        "assistant_screen".to_string(),
+        Arc::new(TranscribeAction {
+            post_process: false,
+            assistant: Some(AskMode::Screen),
         }) as Arc<dyn ShortcutAction>,
     );
     map.insert(

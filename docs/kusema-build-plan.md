@@ -215,7 +215,7 @@ If the build fails, open Claude Code in the folder and paste:
 
 ---
 
-## Step 6 — "Ask about my screen" (window screenshot + vision)
+## Step 6 — "Ask about my screen" (window screenshot + vision) ✅ Done (2026-10-27)
 
 **Goal:** the user holds a dedicated hotkey and asks "what do you think of this document?" Kusema captures the **active window**, shows the user exactly what will be sent, and only after confirmation sends the screenshot plus the question to a vision-capable model. The voice stays local as always; the screenshot leaves only on explicit approval.
 
@@ -235,6 +235,18 @@ If the build fails, open Claude Code in the folder and paste:
 > Add tests for image encoding/downscaling, both request formats with images, and the "drop older screenshots" logic. Run `cargo check`, `cargo test`, lint, `bun run tauri dev`. Stop any processes you started. Mark Step 6 done and commit as "Add Ask about my screen".
 
 **Test:** open a Word document or PDF, press Ctrl+Alt+Shift+Space, ask "what do you think of this document?", check the confirmation shows the right window, click Send, and listen to the answer. Then follow up with "make the first paragraph shorter." Also test Cancel (nothing sent), a non-vision model (clear error), and the local-model setting if Ollama is installed.
+
+### Notes from Step 6
+
+- **Capture: GDI copy of the window's area of the screen, not `xcap` or Windows Graphics Capture.** At the hotkey press, before any overlay, Kusema takes the foreground window, refuses Kusema's own windows, the desktop, taskbar/Start, minimized and cloaked windows (a notice card explains, and is spoken), takes its visible bounds from DWM (`DWMWA_EXTENDED_FRAME_BOUNDS`, physical pixels; Kusema is per-monitor DPI aware) clipped to the virtual screen, and copies that rectangle with `BitBlt`. It's what the user sees, GPU-rendered content included, on any monitor or across two, in ~10–30 ms. `xcap` uses `PrintWindow` on Windows, which waits on (and can hang with) the target app, and on Linux pulls in PipeWire/XCB system libraries the CI and Nix builds don't have. WGC can capture a covered window, but needs a D3D capture session, delivers frames asynchronously and draws a yellow border on Windows 10. The trade-off: an always-on-top window over the target ends up in the shot, which the confirmation card shows. Windows only; elsewhere the hotkey explains that.
+- **Border flash:** a click-through layered window shaped as a 4 px frame (`SetWindowRgn`) in the logo colour, held 250 ms then faded; drawn after the capture, so never in it.
+- **In memory only:** the capture sits in `ScreenState` from press to transcription and is taken (and dropped) by the stop task. `ChatImage`'s `Debug` prints only its size, `ChatTurn.image` is `#[serde(skip)]` (the UI gets a `screenshot` flag), History gets "[screenshot] question". Cleared with the conversation; nothing on disk.
+- **Image:** long edge ≤ 1568 px (Catmull-Rom), then PNG and JPEG (q85) are both encoded and the smaller is sent. `image`, `png` and `fdeflate` are built optimized in dev, or resizing takes seconds.
+- **Confirmation card:** a fresh webview window per card (`screen_card_<n>`, page `src/screen-card/`), placed beside the window on its monitor if there's room, else above/below, else inside its bottom-right corner, never over the middle. It shows the exact image to be sent (click to enlarge), the question and provider/model, says "Send this screenshot to …?" when replies are spoken, takes focus once rendered (Enter/Escape), gives focus back to the window after, and cancels after 30 s. The Cancel hotkey also cancels it. Errors after capture (no vision, no key, provider errors) appear on a notice card beside the window and are spoken, as well as on the Assistant page.
+- **Requests:** `send_conversation` sends a turn's image as an Anthropic `image` block (base64) or an OpenAI `image_url` data URL, image before the text. A rejection mentioning images/vision/content types becomes "This model can't see images…".
+- **Follow-ups and cost:** the latest screenshot stays attached, so plain Ask Kusema follow-ups can see it; a new screenshot drops older ones, and their questions are marked "[An earlier screenshot, no longer attached]". The screen system prompt is added once a conversation has a screenshot.
+- **Privacy option:** "Use for screen questions" (provider plus optional model, keys from Post Process). Once a conversation includes a screenshot, every follow-up goes to that provider too, as the answers describe the screen; an image only goes to the provider it was approved for.
+- **Tested by the user** with a vision model: capture, card, Send and follow-ups worked. Not yet tried: a non-vision model, a local Ollama vision model, and confirmation turned off.
 
 ---
 

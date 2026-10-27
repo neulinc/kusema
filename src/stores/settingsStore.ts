@@ -175,6 +175,12 @@ const settingUpdaters: {
     commands.changeAssistantVoiceSetting(value as string | null),
   assistant_speech_rate: (value) =>
     commands.changeAssistantSpeechRateSetting(value as number),
+  assistant_screen_confirm: (value) =>
+    commands.changeAssistantScreenConfirmSetting(value as boolean),
+  assistant_screen_provider_id: (value) =>
+    commands.changeAssistantScreenProviderSetting(value as string | null),
+  assistant_screen_model: (value) =>
+    commands.changeAssistantScreenModelSetting(value as string | null),
   log_level: (value) => commands.setLogLevel(value as any),
   app_language: (value) => commands.changeAppLanguageSetting(value as string),
   theme: (value) => commands.changeThemeSetting(value as string),

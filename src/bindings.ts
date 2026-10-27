@@ -993,10 +993,70 @@ async getAssistantConversation() : Promise<ChatTurn[]> {
 },
 /**
  * Start a new conversation. A reply still in flight, or being spoken, is
- * discarded.
+ * discarded, and so is any screenshot.
  */
 async clearAssistantConversation() : Promise<void> {
     await TAURI_INVOKE("clear_assistant_conversation");
+},
+async changeAssistantScreenConfirmSetting(enabled: boolean) : Promise<Result<null, string>> {
+    try {
+    return { status: "ok", data: await TAURI_INVOKE("change_assistant_screen_confirm_setting", { enabled }) };
+} catch (e) {
+    if(e instanceof Error) throw e;
+    else return { status: "error", error: e  as any };
+}
+},
+/**
+ * `None` (or empty) uses the Assistant's provider for screen questions.
+ */
+async changeAssistantScreenProviderSetting(providerId: string | null) : Promise<Result<null, string>> {
+    try {
+    return { status: "ok", data: await TAURI_INVOKE("change_assistant_screen_provider_setting", { providerId }) };
+} catch (e) {
+    if(e instanceof Error) throw e;
+    else return { status: "error", error: e  as any };
+}
+},
+/**
+ * `None` (or empty) uses the provider's Post Process model.
+ */
+async changeAssistantScreenModelSetting(model: string | null) : Promise<Result<null, string>> {
+    try {
+    return { status: "ok", data: await TAURI_INVOKE("change_assistant_screen_model_setting", { model }) };
+} catch (e) {
+    if(e instanceof Error) throw e;
+    else return { status: "error", error: e  as any };
+}
+},
+/**
+ * The card's content, for its page.
+ */
+async getScreenCard() : Promise<ScreenCard | null> {
+    return await TAURI_INVOKE("get_screen_card");
+},
+/**
+ * The card's page has rendered: show it, focused if it's asking something.
+ */
+async screenCardReady() : Promise<void> {
+    await TAURI_INVOKE("screen_card_ready");
+},
+/**
+ * Send (`true`) or cancel (`false`) from the confirmation card.
+ */
+async answerScreenCard(send: boolean) : Promise<void> {
+    await TAURI_INVOKE("answer_screen_card", { send });
+},
+/**
+ * Close a notice card.
+ */
+async dismissScreenCard() : Promise<void> {
+    await TAURI_INVOKE("dismiss_screen_card");
+},
+/**
+ * Show the screenshot large (or back to the small card).
+ */
+async setScreenCardEnlarged(enlarged: boolean) : Promise<void> {
+    await TAURI_INVOKE("set_screen_card_enlarged", { enlarged });
 },
 async getTtsVoices() : Promise<Result<Voice[], string>> {
     try {
@@ -1180,7 +1240,20 @@ assistant_voice?: string | null;
 /**
  * Kusema: speaking rate, 1.0 being the voice's normal speed.
  */
-assistant_speech_rate?: number }
+assistant_speech_rate?: number; 
+/**
+ * Kusema: show a screenshot and wait for Send before it leaves the computer.
+ */
+assistant_screen_confirm?: boolean; 
+/**
+ * Kusema: provider for screen questions; `None` uses the Assistant's.
+ */
+assistant_screen_provider_id?: string | null; 
+/**
+ * Kusema: model for screen questions with a different provider; `None`
+ * uses that provider's Post Process model.
+ */
+assistant_screen_model?: string | null }
 export type AudioDevice = { index: string; name: string; is_default: boolean }
 export type AutoSubmitKey = "enter" | "ctrl_enter" | "cmd_enter"
 export type AvailableAccelerators = { transcribe: string[]; gpu_devices: GpuDeviceOption[] }
@@ -1192,7 +1265,11 @@ export type ChatRole = "user" | "assistant"
 /**
  * One message of a multi-turn conversation.
  */
-export type ChatTurn = { role: ChatRole; content: string }
+export type ChatTurn = { role: ChatRole; content: string; 
+/**
+ * The question was asked about a screenshot (the UI shows a marker).
+ */
+screenshot?: boolean }
 /**
  * Script applied to Mandarin and Cantonese output. Traditional carries its region
  * (Taiwan vs Hong Kong forms, e.g. 裡/裏) rather than guessing it.
@@ -1324,6 +1401,10 @@ export type RecordingStateEvent = { phase: RecordingPhase }
  * A retired ONNX model found on disk.
  */
 export type RetiredModel = { id: string; name: string; size_mb: number; replacement_repo: string }
+/**
+ * What the card shows.
+ */
+export type ScreenCard = { kind: "confirm"; image: string; question: string; provider: string; model: string; timeoutSecs: number } | { kind: "notice"; message: string }
 export type SecretMap = Partial<{ [key in string]: string }>
 export type SecureInputStatus = { 
 /**

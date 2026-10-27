@@ -350,6 +350,10 @@
           "assistant": {
             "name": "Ask Kusema",
             "description": "Hold or press to ask a spoken question. The reply appears below instead of being pasted."
+          },
+          "assistant_screen": {
+            "name": "Ask About My Screen",
+            "description": "Hold or press to ask a spoken question about the window you're working in. You see the screenshot before anything is sent."
           }
         },
         "errors": {
@@ -628,10 +632,32 @@
         "noKey": "No API key is set for {{provider}}. Add one on the Post Process page.",
         "noModel": "Choose a model on the Post Process page."
       },
+      "screen": {
+        "title": "Ask About My Screen",
+        "description": "Ask about the window you're working in, like “What do you think of this document?” Only that window is captured, and it stays on this computer until you press Send.",
+        "confirm": {
+          "label": "Confirm Before Sending Screenshots",
+          "description": "Show the screenshot, your question and where it will go, then wait for Send (Enter) or Cancel (Escape). Unanswered, it cancels after 30 seconds.",
+          "offWarning": "Screenshots will be sent to {{provider}} as soon as you finish speaking, without showing you first. Everything visible in the window goes with them, including private or confidential information."
+        },
+        "provider": {
+          "label": "Use for Screen Questions",
+          "description": "Send screenshots to a different provider than normal questions, for example a local vision model in Ollama (the Custom provider) for confidential documents. Follow-up questions go to the same provider until you start a new conversation.",
+          "same": "Same as Assistant",
+          "sameNamed": "Same as Assistant ({{provider}})",
+          "yourProvider": "your AI provider"
+        },
+        "model": {
+          "label": "Model for Screen Questions",
+          "description": "A model that can see images. Leave empty to use the model chosen for this provider on the Post Process page.",
+          "placeholder": "e.g. qwen2.5vl"
+        }
+      },
       "conversation": {
         "title": "Conversation",
         "empty": "Ask a question with the Ask Kusema shortcut. The conversation will appear here.",
-        "new": "New conversation"
+        "new": "New conversation",
+        "screenshot": "Screenshot"
       },
       "voice": {
         "title": "Voice",
@@ -1004,6 +1030,20 @@
     "processing": "Zpracovávám...",
     "loadingModel": "Načítání modelu...",
     "speaking": "Speaking..."
+  },
+  "screenCard": {
+    "title": "Send this screenshot?",
+    "autoCancel": "Cancels in {{seconds}} s",
+    "enlarge": "Click to enlarge",
+    "shrink": "Click to make smaller",
+    "imageAlt": "Screenshot of the window you asked about",
+    "question": "“{{question}}”",
+    "sendsTo": "Goes to {{provider}} · {{model}}",
+    "onlyThis": "Only this window. Nothing is sent until you press Send.",
+    "send": "Send",
+    "cancel": "Cancel",
+    "noticeTitle": "Ask About My Screen",
+    "close": "Close"
   },
   "secureInput": {
     "blockedWithCulprit_one": "{{name}} může blokovat 1 zkratku",

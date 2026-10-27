@@ -7,7 +7,7 @@ use serde_json::Value;
 use specta::Type;
 use std::collections::HashSet;
 use std::error::Error as StdError;
-use std::sync::{Mutex, OnceLock};
+use std::sync::{Arc, Mutex, OnceLock};
 
 #[derive(Debug, Serialize)]
 struct ChatMessage {
@@ -112,9 +112,9 @@ fn remember_rejection(key: String) {
 }
 
 #[derive(Debug, Serialize)]
-struct ChatCompletionRequest {
+struct ChatCompletionRequest<M = ChatMessage> {
     model: String,
-    messages: Vec<ChatMessage>,
+    messages: Vec<M>,
     stream: bool,
     #[serde(skip_serializing_if = "Option::is_none")]
     response_format: Option<ResponseFormat>,
@@ -143,14 +143,14 @@ struct ChatMessageResponse {
 const ANTHROPIC_MAX_TOKENS: u32 = 4096;
 
 #[derive(Debug, Serialize)]
-struct AnthropicMessagesRequest {
+struct AnthropicMessagesRequest<M = ChatMessage> {
     model: String,
     max_tokens: u32,
     #[serde(skip_serializing_if = "std::ops::Not::not")]
     stream: bool,
     #[serde(skip_serializing_if = "Option::is_none")]
     system: Option<String>,
-    messages: Vec<ChatMessage>,
+    messages: Vec<M>,
 }
 
 #[derive(Debug, Deserialize)]
@@ -610,18 +610,103 @@ impl ChatRole {
     }
 }
 
+/// An image sent with a question (Kusema: a window screenshot). Held in
+/// memory only; `Debug` prints its size, never its bytes, so it can't end up
+/// in a log.
+#[derive(Clone, PartialEq, Eq)]
+pub struct ChatImage {
+    /// "image/png" or "image/jpeg".
+    pub media_type: &'static str,
+    pub data: Arc<[u8]>,
+    /// Id of the provider the user agreed to send this image to.
+    pub approved_for: String,
+}
+
+impl std::fmt::Debug for ChatImage {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.debug_struct("ChatImage")
+            .field("media_type", &self.media_type)
+            .field("bytes", &self.data.len())
+            .finish()
+    }
+}
+
+impl ChatImage {
+    pub fn base64(&self) -> String {
+        use base64::Engine;
+        base64::engine::general_purpose::STANDARD.encode(&self.data)
+    }
+
+    pub fn data_url(&self) -> String {
+        format!("data:{};base64,{}", self.media_type, self.base64())
+    }
+}
+
 /// One message of a multi-turn conversation.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Type)]
 pub struct ChatTurn {
     pub role: ChatRole,
     pub content: String,
+    /// The question was asked about a screenshot (the UI shows a marker).
+    #[serde(default)]
+    pub screenshot: bool,
+    /// The screenshot itself, while it's still attached. Never sent to the UI.
+    #[serde(skip)]
+    pub image: Option<ChatImage>,
 }
 
-fn chat_messages(turns: &[ChatTurn]) -> impl Iterator<Item = ChatMessage> + '_ {
-    turns.iter().map(|turn| ChatMessage {
-        role: turn.role.as_str().to_string(),
-        content: turn.content.clone(),
-    })
+impl ChatTurn {
+    pub fn new(role: ChatRole, content: impl Into<String>) -> Self {
+        Self {
+            role,
+            content: content.into(),
+            screenshot: false,
+            image: None,
+        }
+    }
+}
+
+/// A conversation message whose content is either plain text or, for a turn
+/// with an image, a list of content blocks.
+#[derive(Debug, Serialize)]
+struct ConversationMessage {
+    role: String,
+    content: Value,
+}
+
+/// Messages for a conversation request. Images go before the question, as
+/// Anthropic recommends, in each format's own block shape.
+fn conversation_messages(turns: &[ChatTurn], anthropic: bool) -> Vec<ConversationMessage> {
+    turns
+        .iter()
+        .map(|turn| {
+            let content = match &turn.image {
+                None => Value::String(turn.content.clone()),
+                Some(image) if anthropic => serde_json::json!([
+                    {
+                        "type": "image",
+                        "source": {
+                            "type": "base64",
+                            "media_type": image.media_type,
+                            "data": image.base64(),
+                        },
+                    },
+                    { "type": "text", "text": turn.content },
+                ]),
+                Some(image) => serde_json::json!([
+                    {
+                        "type": "image_url",
+                        "image_url": { "url": image.data_url() },
+                    },
+                    { "type": "text", "text": turn.content },
+                ]),
+            };
+            ConversationMessage {
+                role: turn.role.as_str().to_string(),
+                content,
+            }
+        })
+        .collect()
 }
 
 /// Anthropic Messages body for a conversation: the system prompt goes in the
@@ -630,13 +715,13 @@ fn anthropic_conversation_request(
     model: &str,
     system_prompt: &str,
     turns: &[ChatTurn],
-) -> AnthropicMessagesRequest {
+) -> AnthropicMessagesRequest<ConversationMessage> {
     AnthropicMessagesRequest {
         model: model.to_string(),
         max_tokens: ANTHROPIC_MAX_TOKENS,
         stream: true,
         system: (!system_prompt.is_empty()).then(|| system_prompt.to_string()),
-        messages: chat_messages(turns).collect(),
+        messages: conversation_messages(turns, true),
     }
 }
 
@@ -645,15 +730,15 @@ fn chat_conversation_request(
     model: &str,
     system_prompt: &str,
     turns: &[ChatTurn],
-) -> ChatCompletionRequest {
+) -> ChatCompletionRequest<ConversationMessage> {
     let mut messages = Vec::with_capacity(turns.len() + 1);
     if !system_prompt.is_empty() {
-        messages.push(ChatMessage {
+        messages.push(ConversationMessage {
             role: "system".to_string(),
-            content: system_prompt.to_string(),
+            content: Value::String(system_prompt.to_string()),
         });
     }
-    messages.extend(chat_messages(turns));
+    messages.extend(conversation_messages(turns, false));
 
     ChatCompletionRequest {
         model: model.to_string(),
@@ -1226,18 +1311,9 @@ mod tests {
 
     fn conversation() -> Vec<ChatTurn> {
         vec![
-            ChatTurn {
-                role: ChatRole::User,
-                content: "What's the capital of Ghana?".to_string(),
-            },
-            ChatTurn {
-                role: ChatRole::Assistant,
-                content: "Accra.".to_string(),
-            },
-            ChatTurn {
-                role: ChatRole::User,
-                content: "What's its population?".to_string(),
-            },
+            ChatTurn::new(ChatRole::User, "What's the capital of Ghana?"),
+            ChatTurn::new(ChatRole::Assistant, "Accra."),
+            ChatTurn::new(ChatRole::User, "What's its population?"),
         ]
     }
 
@@ -1286,6 +1362,63 @@ mod tests {
         assert!(anthropic.get("system").is_none());
         let chat = chat_conversation_request("m", "", &conversation());
         assert_eq!(chat.messages[0].role, "user");
+    }
+
+    fn with_image() -> Vec<ChatTurn> {
+        let mut turns = conversation();
+        turns[2].screenshot = true;
+        turns[2].image = Some(ChatImage {
+            media_type: "image/png",
+            data: Arc::from(&b"\x89PNG"[..]),
+            approved_for: "anthropic".to_string(),
+        });
+        turns
+    }
+
+    #[test]
+    fn anthropic_image_is_a_base64_block_before_the_question() {
+        let json =
+            serde_json::to_value(anthropic_conversation_request("m", "", &with_image())).unwrap();
+        let messages = json["messages"].as_array().unwrap();
+        // Text-only turns stay plain strings.
+        assert_eq!(messages[0]["content"], "What's the capital of Ghana?");
+        let blocks = messages[2]["content"].as_array().unwrap();
+        assert_eq!(blocks.len(), 2);
+        assert_eq!(blocks[0]["type"], "image");
+        assert_eq!(blocks[0]["source"]["type"], "base64");
+        assert_eq!(blocks[0]["source"]["media_type"], "image/png");
+        assert_eq!(blocks[0]["source"]["data"], "iVBORw==");
+        assert_eq!(blocks[1]["type"], "text");
+        assert_eq!(blocks[1]["text"], "What's its population?");
+    }
+
+    #[test]
+    fn chat_image_is_a_data_url() {
+        let json =
+            serde_json::to_value(chat_conversation_request("m", "Sys", &with_image())).unwrap();
+        let messages = json["messages"].as_array().unwrap();
+        assert_eq!(messages[0]["content"], "Sys");
+        assert_eq!(messages[1]["content"], "What's the capital of Ghana?");
+        let blocks = messages[3]["content"].as_array().unwrap();
+        assert_eq!(blocks[0]["type"], "image_url");
+        assert_eq!(
+            blocks[0]["image_url"]["url"],
+            "data:image/png;base64,iVBORw=="
+        );
+        assert_eq!(blocks[1]["type"], "text");
+        assert_eq!(blocks[1]["text"], "What's its population?");
+    }
+
+    #[test]
+    fn image_bytes_never_appear_in_debug_output() {
+        let turns = with_image();
+        let debug = format!("{:?}", turns[2]);
+        assert!(debug.contains("bytes: 4"));
+        assert!(!debug.contains("iVBOR"));
+        // Nor in what the UI receives.
+        let json = serde_json::to_value(&turns[2]).unwrap();
+        assert!(json.get("image").is_none());
+        assert_eq!(json["screenshot"], true);
     }
 
     async fn converse(

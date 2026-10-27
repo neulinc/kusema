@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { listen } from "@tauri-apps/api/event";
+import { Image } from "lucide-react";
 import { commands, type ChatTurn } from "@/bindings";
 import { SettingsGroup } from "../../ui/SettingsGroup";
 import { Button } from "../../ui/Button";
@@ -8,6 +9,7 @@ import { Alert } from "../../ui/Alert";
 import { ShortcutInput } from "../ShortcutInput";
 import { AssistantVoiceSettings } from "./AssistantVoiceSettings";
 import { AssistantProviderSettings } from "./AssistantProviderSettings";
+import { AssistantScreenSettings } from "./AssistantScreenSettings";
 
 interface AssistantErrorPayload {
   question: string;
@@ -72,6 +74,8 @@ export const AssistantSettings: React.FC<{
 
       <AssistantProviderSettings onOpenPostProcessing={onOpenPostProcessing} />
 
+      <AssistantScreenSettings />
+
       <AssistantVoiceSettings />
 
       <SettingsGroup title={t("settings.assistant.conversation.title")}>
@@ -93,6 +97,12 @@ export const AssistantSettings: React.FC<{
                     : "bg-wash border border-line"
                 }`}
               >
+                {message.screenshot && (
+                  <span className="mb-1 flex items-center gap-1 text-xs text-ink-2">
+                    <Image className="h-3.5 w-3.5" />
+                    {t("settings.assistant.conversation.screenshot")}
+                  </span>
+                )}
                 {message.content}
               </div>
             </div>

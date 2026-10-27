@@ -172,6 +172,22 @@ fn configure(engine: &dyn TtsEngine, settings: &AppSettings) -> (Option<String>,
     )
 }
 
+/// Say a short prompt or notice ("Send this screenshot to Anthropic?") when
+/// replies are spoken. Unlike a reply it leaves the overlay and tray alone.
+pub fn say(app: &AppHandle, text: &str) {
+    let settings = settings::get_settings(app);
+    if !settings.assistant_speak_replies {
+        return;
+    }
+    let Some(state) = state(app) else {
+        return;
+    };
+    let (voice, rate) = configure(state.engine.as_ref(), &settings);
+    if let Err(e) = state.engine.speak(text, voice.as_deref(), rate) {
+        warn!("Could not speak: {e}");
+    }
+}
+
 /// Speaks one streamed reply: feed it text as it arrives, then `finish()`.
 pub struct ReplySpeech {
     app: AppHandle,
