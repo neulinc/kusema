@@ -1,7 +1,7 @@
 use crate::settings::{PostProcessApiFormat, PostProcessProvider};
+use futures_util::StreamExt;
 use log::{debug, error, info};
 use reqwest::header::{HeaderMap, HeaderValue, AUTHORIZATION, CONTENT_TYPE, REFERER, USER_AGENT};
-use serde::de::DeserializeOwned;
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
 use specta::Type;
@@ -146,6 +146,8 @@ const ANTHROPIC_MAX_TOKENS: u32 = 4096;
 struct AnthropicMessagesRequest {
     model: String,
     max_tokens: u32,
+    #[serde(skip_serializing_if = "std::ops::Not::not")]
+    stream: bool,
     #[serde(skip_serializing_if = "Option::is_none")]
     system: Option<String>,
     messages: Vec<ChatMessage>,
@@ -541,6 +543,7 @@ async fn send_anthropic_message(
     let request_body = AnthropicMessagesRequest {
         model: model.to_string(),
         max_tokens: ANTHROPIC_MAX_TOKENS,
+        stream: false,
         system: None,
         messages: vec![ChatMessage {
             role: "user".to_string(),
@@ -631,6 +634,7 @@ fn anthropic_conversation_request(
     AnthropicMessagesRequest {
         model: model.to_string(),
         max_tokens: ANTHROPIC_MAX_TOKENS,
+        stream: true,
         system: (!system_prompt.is_empty()).then(|| system_prompt.to_string()),
         messages: chat_messages(turns).collect(),
     }
@@ -654,19 +658,19 @@ fn chat_conversation_request(
     ChatCompletionRequest {
         model: model.to_string(),
         messages,
-        stream: false,
+        stream: true,
         response_format: None,
         reasoning: ReasoningParams::default(),
     }
 }
 
-/// POST a JSON body and decode a successful JSON response.
-async fn post_json<B: Serialize, R: DeserializeOwned>(
+/// POST a JSON body; returns the response once its status is a success.
+async fn post_json<B: Serialize>(
     provider: &PostProcessProvider,
     api_key: &str,
     url: &str,
     body: &B,
-) -> Result<R, String> {
+) -> Result<reqwest::Response, String> {
     debug!(
         "Sending conversation request to: {}",
         sanitized_url_for_log(url)
@@ -696,48 +700,204 @@ async fn post_json<B: Serialize, R: DeserializeOwned>(
             status, error_text
         ));
     }
+    Ok(response)
+}
 
-    response
-        .json()
-        .await
-        .map_err(|e| report_reqwest_error("Failed to parse API response", &e))
+/// Collects the payloads of `data:` lines from a server-sent event stream,
+/// whatever way the bytes are chunked.
+#[derive(Default)]
+struct SseParser {
+    buf: Vec<u8>,
+}
+
+impl SseParser {
+    fn push(&mut self, chunk: &[u8]) -> Vec<String> {
+        self.buf.extend_from_slice(chunk);
+        let mut payloads = Vec::new();
+        while let Some(newline) = self.buf.iter().position(|&b| b == b'\n') {
+            let line: Vec<u8> = self.buf.drain(..=newline).collect();
+            let line = String::from_utf8_lossy(&line);
+            let line = line.trim_end_matches(['\r', '\n']);
+            if let Some(data) = line.strip_prefix("data:") {
+                payloads.push(data.strip_prefix(' ').unwrap_or(data).to_string());
+            }
+        }
+        payloads
+    }
+}
+
+/// What one streamed event contributes to the reply.
+#[derive(Debug, Default, PartialEq)]
+struct StreamPiece {
+    text: Option<String>,
+    truncated: bool,
+    done: bool,
+}
+
+fn json_str<'a>(value: &'a Value, pointer: &str) -> Option<&'a str> {
+    value.pointer(pointer).and_then(Value::as_str)
+}
+
+fn stream_error(value: &Value) -> Option<String> {
+    let error = value.get("error")?;
+    Some(format!(
+        "API error: {}",
+        json_str(error, "/message")
+            .or_else(|| error.as_str())
+            .unwrap_or("unknown error")
+    ))
+}
+
+/// Interpret one Anthropic Messages streaming event.
+fn anthropic_stream_piece(data: &str) -> Result<StreamPiece, String> {
+    let Ok(event) = serde_json::from_str::<Value>(data) else {
+        return Ok(StreamPiece::default());
+    };
+    match json_str(&event, "/type") {
+        Some("content_block_delta") if json_str(&event, "/delta/type") == Some("text_delta") => {
+            Ok(StreamPiece {
+                text: json_str(&event, "/delta/text").map(str::to_string),
+                ..Default::default()
+            })
+        }
+        Some("message_delta") => Ok(StreamPiece {
+            truncated: json_str(&event, "/delta/stop_reason") == Some("max_tokens"),
+            ..Default::default()
+        }),
+        Some("message_stop") => Ok(StreamPiece {
+            done: true,
+            ..Default::default()
+        }),
+        Some("error") => Err(stream_error(&event).unwrap_or_else(|| "API error".to_string())),
+        _ => Ok(StreamPiece::default()),
+    }
+}
+
+/// Interpret one OpenAI chat streaming chunk.
+fn chat_stream_piece(data: &str) -> Result<StreamPiece, String> {
+    if data.trim() == "[DONE]" {
+        return Ok(StreamPiece {
+            done: true,
+            ..Default::default()
+        });
+    }
+    let Ok(chunk) = serde_json::from_str::<Value>(data) else {
+        return Ok(StreamPiece::default());
+    };
+    if let Some(error) = stream_error(&chunk) {
+        return Err(error);
+    }
+    Ok(StreamPiece {
+        text: json_str(&chunk, "/choices/0/delta/content").map(str::to_string),
+        truncated: json_str(&chunk, "/choices/0/finish_reason") == Some("length"),
+        done: false,
+    })
 }
 
 /// Send a multi-turn conversation (oldest message first) and return the reply.
 /// Works for both the Anthropic Messages format and the OpenAI chat format.
-/// Used by Assistant mode; the post-processing requests above are unchanged.
-pub async fn send_conversation(
+/// The reply is streamed: `on_text` receives each piece as it arrives, and the
+/// full text is returned at the end. Used by Assistant mode; the
+/// post-processing requests above are unchanged.
+pub async fn send_conversation<F: FnMut(&str)>(
     provider: &PostProcessProvider,
     api_key: String,
     model: &str,
     system_prompt: &str,
     turns: &[ChatTurn],
+    mut on_text: F,
 ) -> Result<Option<String>, String> {
     let base_url = provider.base_url.trim_end_matches('/');
-
-    if provider.api_format == PostProcessApiFormat::Anthropic {
-        let url = format!("{}/messages", base_url);
-        let body = anthropic_conversation_request(model, system_prompt, turns);
-        let message: AnthropicMessagesResponse = post_json(provider, &api_key, &url, &body).await?;
-        if message.stop_reason.as_deref() == Some("max_tokens") {
-            return Err(format!(
+    let anthropic = provider.api_format == PostProcessApiFormat::Anthropic;
+    let truncated_error = || {
+        if anthropic {
+            format!(
                 "Response was truncated at the {} token limit",
                 ANTHROPIC_MAX_TOKENS
-            ));
+            )
+        } else {
+            "Response was truncated at the provider's output token limit".to_string()
         }
-        return Ok(message.into_text());
+    };
+
+    let response = if anthropic {
+        let body = anthropic_conversation_request(model, system_prompt, turns);
+        post_json(provider, &api_key, &format!("{}/messages", base_url), &body).await?
+    } else {
+        let body = chat_conversation_request(model, system_prompt, turns);
+        post_json(
+            provider,
+            &api_key,
+            &format!("{}/chat/completions", base_url),
+            &body,
+        )
+        .await?
+    };
+
+    let is_event_stream = response
+        .headers()
+        .get(CONTENT_TYPE)
+        .and_then(|v| v.to_str().ok())
+        .is_some_and(|v| v.contains("text/event-stream"));
+    if !is_event_stream {
+        // Some OpenAI-compatible servers ignore `stream: true` and answer in
+        // one piece.
+        let reply = if anthropic {
+            let message: AnthropicMessagesResponse = response
+                .json()
+                .await
+                .map_err(|e| report_reqwest_error("Failed to parse API response", &e))?;
+            if message.stop_reason.as_deref() == Some("max_tokens") {
+                return Err(truncated_error());
+            }
+            message.into_text()
+        } else {
+            let completion: ChatCompletionResponse = response
+                .json()
+                .await
+                .map_err(|e| report_reqwest_error("Failed to parse API response", &e))?;
+            let Some(choice) = completion.choices.into_iter().next() else {
+                return Ok(None);
+            };
+            if choice.finish_reason.as_deref() == Some("length") {
+                return Err(truncated_error());
+            }
+            choice.message.content
+        };
+        if let Some(text) = &reply {
+            on_text(text);
+        }
+        return Ok(reply);
     }
 
-    let url = format!("{}/chat/completions", base_url);
-    let body = chat_conversation_request(model, system_prompt, turns);
-    let completion: ChatCompletionResponse = post_json(provider, &api_key, &url, &body).await?;
-    let Some(choice) = completion.choices.into_iter().next() else {
-        return Ok(None);
-    };
-    if choice.finish_reason.as_deref() == Some("length") {
-        return Err("Response was truncated at the provider's output token limit".to_string());
+    let mut parser = SseParser::default();
+    let mut reply = String::new();
+    let mut truncated = false;
+    let mut chunks = response.bytes_stream();
+    'stream: while let Some(chunk) = chunks.next().await {
+        let chunk =
+            chunk.map_err(|e| report_reqwest_error("Failed to read streamed response", &e))?;
+        for data in parser.push(&chunk) {
+            let piece = if anthropic {
+                anthropic_stream_piece(&data)?
+            } else {
+                chat_stream_piece(&data)?
+            };
+            if let Some(text) = piece.text.filter(|t| !t.is_empty()) {
+                on_text(&text);
+                reply.push_str(&text);
+            }
+            truncated |= piece.truncated;
+            if piece.done {
+                break 'stream;
+            }
+        }
     }
-    Ok(choice.message.content)
+
+    if truncated {
+        return Err(truncated_error());
+    }
+    Ok((!reply.is_empty()).then_some(reply))
 }
 
 /// Fetch available models from an OpenAI-compatible API
@@ -866,10 +1026,18 @@ mod tests {
     }
 
     async fn serve_one_response(status: &str, body: &str) -> String {
+        serve_response(status, "", body).await
+    }
+
+    async fn serve_event_stream(body: &str) -> String {
+        serve_response("200 OK", "Content-Type: text/event-stream\r\n", body).await
+    }
+
+    async fn serve_response(status: &str, headers: &str, body: &str) -> String {
         let listener = tokio::net::TcpListener::bind("127.0.0.1:0").await.unwrap();
         let address = listener.local_addr().unwrap();
         let response = format!(
-            "HTTP/1.1 {status}\r\nContent-Length: {}\r\nConnection: close\r\n\r\n{body}",
+            "HTTP/1.1 {status}\r\n{headers}Content-Length: {}\r\nConnection: close\r\n\r\n{body}",
             body.len()
         );
 
@@ -1041,6 +1209,7 @@ mod tests {
         let request = AnthropicMessagesRequest {
             model: "claude-haiku".to_string(),
             max_tokens: ANTHROPIC_MAX_TOKENS,
+            stream: false,
             system: None,
             messages: vec![ChatMessage {
                 role: "user".to_string(),
@@ -1082,6 +1251,7 @@ mod tests {
         .unwrap();
         assert_eq!(json["system"], "Be brief.");
         assert_eq!(json["max_tokens"], ANTHROPIC_MAX_TOKENS);
+        assert_eq!(json["stream"], true);
         let messages = json["messages"].as_array().unwrap();
         assert_eq!(messages.len(), 3);
         assert_eq!(messages[0]["role"], "user");
@@ -1104,7 +1274,7 @@ mod tests {
         assert_eq!(messages[0]["content"], "Be brief.");
         assert_eq!(messages[1]["role"], "user");
         assert_eq!(messages[2]["role"], "assistant");
-        assert_eq!(json["stream"], false);
+        assert_eq!(json["stream"], true);
         assert!(json.get("response_format").is_none());
         assert!(json.get("reasoning_effort").is_none());
     }
@@ -1118,50 +1288,116 @@ mod tests {
         assert_eq!(chat.messages[0].role, "user");
     }
 
+    async fn converse(
+        provider: &PostProcessProvider,
+    ) -> (Result<Option<String>, String>, Vec<String>) {
+        let mut pieces = Vec::new();
+        let result = send_conversation(
+            provider,
+            "key".to_string(),
+            "model",
+            "Be brief.",
+            &conversation(),
+            |text| pieces.push(text.to_string()),
+        )
+        .await;
+        (result, pieces)
+    }
+
     #[tokio::test]
-    async fn conversation_parses_both_formats() {
+    async fn non_streamed_replies_still_parse() {
         let base_url = serve_one_response(
             "200 OK",
             r#"{"type":"message","role":"assistant","content":[{"type":"text","text":"About 2.5 million."}]}"#,
         )
         .await;
-        let result = send_conversation(
-            &anthropic_format_provider(&base_url),
-            "key".to_string(),
-            "claude-haiku",
-            "Be brief.",
-            &conversation(),
-        )
-        .await;
+        let (result, pieces) = converse(&anthropic_format_provider(&base_url)).await;
         assert_eq!(result, Ok(Some("About 2.5 million.".to_string())));
+        assert_eq!(pieces, ["About 2.5 million."]);
 
         let base_url = serve_one_response(
             "200 OK",
             r#"{"choices":[{"message":{"content":"About 2.5 million."},"finish_reason":"stop"}]}"#,
         )
         .await;
-        let result = send_conversation(
-            &provider("custom", &base_url),
-            String::new(),
-            "llama",
-            "Be brief.",
-            &conversation(),
+        let (result, _) = converse(&provider("custom", &base_url)).await;
+        assert_eq!(result, Ok(Some("About 2.5 million.".to_string())));
+    }
+
+    #[tokio::test]
+    async fn anthropic_reply_is_streamed() {
+        let base_url = serve_event_stream(concat!(
+            "event: message_start\n",
+            "data: {\"type\":\"message_start\",\"message\":{}}\n\n",
+            "event: content_block_delta\n",
+            "data: {\"type\":\"content_block_delta\",\"index\":0,\"delta\":{\"type\":\"thinking_delta\",\"thinking\":\"hmm\"}}\n\n",
+            "event: content_block_delta\n",
+            "data: {\"type\":\"content_block_delta\",\"index\":1,\"delta\":{\"type\":\"text_delta\",\"text\":\"Accra. \"}}\n\n",
+            "event: ping\n",
+            "data: {\"type\":\"ping\"}\n\n",
+            "event: content_block_delta\n",
+            "data: {\"type\":\"content_block_delta\",\"index\":1,\"delta\":{\"type\":\"text_delta\",\"text\":\"Yes.\"}}\n\n",
+            "event: message_delta\n",
+            "data: {\"type\":\"message_delta\",\"delta\":{\"stop_reason\":\"end_turn\"}}\n\n",
+            "event: message_stop\n",
+            "data: {\"type\":\"message_stop\"}\n\n",
+        ))
+        .await;
+        let (result, pieces) = converse(&anthropic_format_provider(&base_url)).await;
+        assert_eq!(result, Ok(Some("Accra. Yes.".to_string())));
+        assert_eq!(pieces, ["Accra. ", "Yes."]);
+    }
+
+    #[tokio::test]
+    async fn chat_reply_is_streamed() {
+        let base_url = serve_event_stream(concat!(
+            "data: {\"choices\":[{\"delta\":{\"role\":\"assistant\"}}]}\r\n\r\n",
+            "data: {\"choices\":[{\"delta\":{\"content\":\"Accra.\"}}]}\r\n\r\n",
+            "data: {\"choices\":[{\"delta\":{\"content\":\" Yes.\"},\"finish_reason\":\"stop\"}]}\r\n\r\n",
+            "data: [DONE]\r\n\r\n",
+        ))
+        .await;
+        let (result, pieces) = converse(&provider("custom", &base_url)).await;
+        assert_eq!(result, Ok(Some("Accra. Yes.".to_string())));
+        assert_eq!(pieces, ["Accra.", " Yes."]);
+    }
+
+    #[tokio::test]
+    async fn streamed_errors_and_truncation_are_reported() {
+        let base_url = serve_event_stream(
+            "event: error\ndata: {\"type\":\"error\",\"error\":{\"type\":\"overloaded_error\",\"message\":\"Overloaded\"}}\n\n",
         )
         .await;
-        assert_eq!(result, Ok(Some("About 2.5 million.".to_string())));
+        let (result, _) = converse(&anthropic_format_provider(&base_url)).await;
+        assert_eq!(result, Err("API error: Overloaded".to_string()));
+
+        let base_url = serve_event_stream(concat!(
+            "data: {\"choices\":[{\"delta\":{\"content\":\"Cut\"},\"finish_reason\":\"length\"}]}\n\n",
+            "data: [DONE]\n\n",
+        ))
+        .await;
+        let (result, _) = converse(&provider("custom", &base_url)).await;
+        assert!(result.unwrap_err().contains("truncated"));
+    }
+
+    #[test]
+    fn sse_parser_handles_split_chunks() {
+        let mut parser = SseParser::default();
+        assert!(parser.push(b"event: x\ndata: {\"a\"").is_empty());
+        assert_eq!(
+            parser.push(b":1}\r\n\r\ndata:[DONE]\n"),
+            ["{\"a\":1}", "[DONE]"]
+        );
+        // A multi-byte character split across chunks survives.
+        let text = "data: caf\u{e9}\n".as_bytes();
+        assert!(parser.push(&text[..9]).is_empty());
+        assert_eq!(parser.push(&text[9..]), ["caf\u{e9}"]);
     }
 
     #[tokio::test]
     async fn conversation_reports_http_errors() {
         let base_url = serve_one_response("401 Unauthorized", r#"{"error":"bad key"}"#).await;
-        let result = send_conversation(
-            &provider("custom", &base_url),
-            "key".to_string(),
-            "m",
-            "",
-            &conversation(),
-        )
-        .await;
+        let (result, _) = converse(&provider("custom", &base_url)).await;
         assert!(result.unwrap_err().contains("401"));
     }
 

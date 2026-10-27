@@ -630,6 +630,11 @@ pub fn show_processing_overlay(app_handle: &AppHandle) {
     show_overlay_state(app_handle, "processing");
 }
 
+/// Kusema: shows the overlay while an assistant reply is spoken
+pub fn show_speaking_overlay(app_handle: &AppHandle) {
+    show_overlay_state(app_handle, "speaking");
+}
+
 /// Updates the overlay window position based on current settings
 pub fn update_overlay_position(app_handle: &AppHandle) {
     // Positioning queries monitors/cursor (GDK/Xlib on Linux) and moves the

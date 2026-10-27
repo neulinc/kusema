@@ -543,6 +543,23 @@ pub struct AppSettings {
     /// `overlay_position` (position `none` → style `None`).
     #[serde(default = "default_overlay_style")]
     pub overlay_style: OverlayStyle,
+    /// Kusema: read assistant replies aloud.
+    #[serde(default = "default_assistant_speak_replies")]
+    pub assistant_speak_replies: bool,
+    /// Kusema: text-to-speech voice id; `None` uses the system default voice.
+    #[serde(default)]
+    pub assistant_voice: Option<String>,
+    /// Kusema: speaking rate, 1.0 being the voice's normal speed.
+    #[serde(default = "default_assistant_speech_rate")]
+    pub assistant_speech_rate: f32,
+}
+
+fn default_assistant_speak_replies() -> bool {
+    true
+}
+
+fn default_assistant_speech_rate() -> f32 {
+    1.0
 }
 
 fn default_model() -> String {
@@ -1049,6 +1066,9 @@ pub fn get_default_settings() -> AppSettings {
         vad_backend: VadBackend::default(),
         long_form_chunking: default_long_form_chunking(),
         overlay_style: default_overlay_style(),
+        assistant_speak_replies: default_assistant_speak_replies(),
+        assistant_voice: None,
+        assistant_speech_rate: default_assistant_speech_rate(),
     }
 }
 

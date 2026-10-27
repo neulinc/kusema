@@ -169,6 +169,12 @@ const settingUpdaters: {
     commands.changeMuteWhileRecordingSetting(value as boolean),
   append_trailing_space: (value) =>
     commands.changeAppendTrailingSpaceSetting(value as boolean),
+  assistant_speak_replies: (value) =>
+    commands.changeAssistantSpeakRepliesSetting(value as boolean),
+  assistant_voice: (value) =>
+    commands.changeAssistantVoiceSetting(value as string | null),
+  assistant_speech_rate: (value) =>
+    commands.changeAssistantSpeechRateSetting(value as number),
   log_level: (value) => commands.setLogLevel(value as any),
   app_language: (value) => commands.changeAppLanguageSetting(value as string),
   theme: (value) => commands.changeThemeSetting(value as string),

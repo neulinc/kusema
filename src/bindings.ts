@@ -994,10 +994,54 @@ async getAssistantConversation() : Promise<ChatTurn[]> {
     return await TAURI_INVOKE("get_assistant_conversation");
 },
 /**
- * Start a new conversation. A reply still in flight is discarded.
+ * Start a new conversation. A reply still in flight, or being spoken, is
+ * discarded.
  */
 async clearAssistantConversation() : Promise<void> {
     await TAURI_INVOKE("clear_assistant_conversation");
+},
+async getTtsVoices() : Promise<Result<Voice[], string>> {
+    try {
+    return { status: "ok", data: await TAURI_INVOKE("get_tts_voices") };
+} catch (e) {
+    if(e instanceof Error) throw e;
+    else return { status: "error", error: e  as any };
+}
+},
+/**
+ * Speak `text` with the given voice and rate, interrupting anything playing.
+ */
+async previewTtsVoice(text: string, voiceId: string | null, rate: number) : Promise<Result<null, string>> {
+    try {
+    return { status: "ok", data: await TAURI_INVOKE("preview_tts_voice", { text, voiceId, rate }) };
+} catch (e) {
+    if(e instanceof Error) throw e;
+    else return { status: "error", error: e  as any };
+}
+},
+async changeAssistantSpeakRepliesSetting(enabled: boolean) : Promise<Result<null, string>> {
+    try {
+    return { status: "ok", data: await TAURI_INVOKE("change_assistant_speak_replies_setting", { enabled }) };
+} catch (e) {
+    if(e instanceof Error) throw e;
+    else return { status: "error", error: e  as any };
+}
+},
+async changeAssistantVoiceSetting(voice: string | null) : Promise<Result<null, string>> {
+    try {
+    return { status: "ok", data: await TAURI_INVOKE("change_assistant_voice_setting", { voice }) };
+} catch (e) {
+    if(e instanceof Error) throw e;
+    else return { status: "error", error: e  as any };
+}
+},
+async changeAssistantSpeechRateSetting(rate: number) : Promise<Result<null, string>> {
+    try {
+    return { status: "ok", data: await TAURI_INVOKE("change_assistant_speech_rate_setting", { rate }) };
+} catch (e) {
+    if(e instanceof Error) throw e;
+    else return { status: "error", error: e  as any };
+}
 }
 }
 
@@ -1104,7 +1148,19 @@ long_form_chunking?: boolean;
  * not gated on this — that follows model capability. Migrated from the old
  * `overlay_position` (position `none` → style `None`).
  */
-overlay_style?: OverlayStyle }
+overlay_style?: OverlayStyle; 
+/**
+ * Kusema: read assistant replies aloud.
+ */
+assistant_speak_replies?: boolean; 
+/**
+ * Kusema: text-to-speech voice id; `None` uses the system default voice.
+ */
+assistant_voice?: string | null; 
+/**
+ * Kusema: speaking rate, 1.0 being the voice's normal speed.
+ */
+assistant_speech_rate?: number }
 export type AudioDevice = { index: string; name: string; is_default: boolean }
 export type AutoSubmitKey = "enter" | "ctrl_enter" | "cmd_enter"
 export type AvailableAccelerators = { transcribe: string[]; gpu_devices: GpuDeviceOption[] }
@@ -1373,6 +1429,11 @@ export type TranscriptionOutcome =
 "failed"
 export type TypingTool = "auto" | "wtype" | "kwtype" | "dotool" | "ydotool" | "xdotool"
 export type VadBackend = "silero" | "earshot"
+export type Voice = { id: string; name: string; 
+/**
+ * BCP-47 tag, e.g. "en-US".
+ */
+language: string }
 export type WindowsMicrophonePermissionStatus = { supported: boolean; overall_access: PermissionAccess; device_access: PermissionAccess; app_access: PermissionAccess; desktop_app_access: PermissionAccess }
 
 /** tauri-specta globals **/

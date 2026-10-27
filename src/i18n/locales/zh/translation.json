@@ -618,6 +618,28 @@
         "title": "Conversation",
         "empty": "Ask a question with the Ask Kusema shortcut. The conversation will appear here.",
         "new": "New conversation"
+      },
+      "voice": {
+        "title": "Voice",
+        "systemDefault": "System default",
+        "previewText": "Hi, I'm Kusema. This is how I'll sound when I answer your questions.",
+        "speakReplies": {
+          "label": "Speak Replies",
+          "description": "Read replies aloud as they arrive. Press Cancel (Escape), start a new recording, or start a new conversation to stop."
+        },
+        "voice": {
+          "label": "Voice",
+          "description": "Choose from the voices installed on your computer. On Windows, add more under Settings > Time & language > Speech."
+        },
+        "rate": {
+          "label": "Speaking Rate",
+          "description": "How fast replies are read. 1.00× is the voice's normal speed."
+        },
+        "preview": {
+          "label": "Preview Voice",
+          "description": "Hear the selected voice at the selected speed.",
+          "button": "Preview"
+        }
       }
     },
     "postProcessing": {
@@ -953,7 +975,8 @@
   "overlay": {
     "transcribing": "正在转录...",
     "processing": "处理中...",
-    "loadingModel": "正在加载模型..."
+    "loadingModel": "正在加载模型...",
+    "speaking": "Speaking..."
   },
   "secureInput": {
     "blockedWithCulprit_one": "{{name}} 可能正在阻止 1 个快捷键",

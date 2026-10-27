@@ -450,6 +450,8 @@ impl ShortcutAction for TranscribeAction {
     fn start(&self, app: &AppHandle, binding_id: &str, _shortcut_str: &str) {
         let start_time = Instant::now();
         debug!("TranscribeAction::start called for binding: {}", binding_id);
+        // Kusema: a new recording interrupts a spoken reply.
+        crate::tts::stop(app);
 
         // Load model in the background
         let tm = app.state::<Arc<TranscriptionManager>>();
@@ -818,7 +820,10 @@ impl ShortcutAction for TranscribeAction {
                                     rm.was_cancelled_since(cancel_generation)
                                 })
                                 .await;
-                                if !rm.was_cancelled_since(cancel_generation) {
+                                // A reply still being spoken keeps the UI until it ends.
+                                if !rm.was_cancelled_since(cancel_generation)
+                                    && !crate::tts::is_speaking(&ah)
+                                {
                                     shortcut::unregister_cancel_shortcut(&ah);
                                     utils::hide_recording_overlay(&ah);
                                     set_tray_state(&ah, TrayIconState::Idle);

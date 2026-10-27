@@ -102,6 +102,9 @@ fn native_windows_machine() -> Option<u16> {
 pub fn cancel_current_operation(app: &AppHandle) {
     info!("Initiating operation cancellation...");
 
+    // Kusema: silence a spoken assistant reply.
+    crate::tts::stop(app);
+
     // Unregister the cancel shortcut asynchronously
     shortcut::unregister_cancel_shortcut(app);
 

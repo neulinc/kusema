@@ -36,6 +36,11 @@ pub fn handle_shortcut_event(
 
     // Transcribe bindings are handled by the coordinator.
     if is_transcribe_binding(binding_id) {
+        // Kusema: pressing any recording hotkey interrupts a spoken reply at
+        // once, even if the recording itself has to wait.
+        if is_pressed {
+            crate::tts::stop(app);
+        }
         if let Some(coordinator) = app.try_state::<TranscriptionCoordinator>() {
             coordinator.send_input(
                 binding_id,
@@ -62,7 +67,11 @@ pub fn handle_shortcut_event(
     if binding_id == "cancel" {
         let audio_manager = app.state::<Arc<AudioRecordingManager>>();
         // Kusema: also cancels a question waiting for its answer.
-        if (audio_manager.is_recording() || crate::assistant::is_busy(app)) && is_pressed {
+        if (audio_manager.is_recording()
+            || crate::assistant::is_busy(app)
+            || crate::tts::is_speaking(app))
+            && is_pressed
+        {
             action.start(app, binding_id, hotkey_string);
         }
         return;

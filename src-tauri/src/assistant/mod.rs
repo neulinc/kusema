@@ -172,12 +172,19 @@ pub async fn ask<C: Fn() -> bool>(app: &AppHandle, question: String, is_cancelle
         turns.len()
     );
 
+    // Speak each sentence as soon as it has streamed in.
+    let mut speech = crate::tts::begin_reply(app);
     let request = llm_client::send_conversation(
         &target.provider,
         target.api_key,
         &target.model,
         &system_prompt,
         &turns,
+        |text| {
+            if let Some(speech) = speech.as_mut() {
+                speech.push(text);
+            }
+        },
     );
     let Some(result) = complete_unless_cancelled(request, is_cancelled).await else {
         info!("Assistant request cancelled");
@@ -187,8 +194,14 @@ pub async fn ask<C: Fn() -> bool>(app: &AppHandle, question: String, is_cancelle
     let answer = match result {
         Ok(Some(text)) => strip_think_block(&text).trim().to_string(),
         Ok(None) => String::new(),
-        Err(e) => return emit_error(app, &question, describe_error(&target.provider, &e)),
+        Err(e) => {
+            crate::tts::stop(app);
+            return emit_error(app, &question, describe_error(&target.provider, &e));
+        }
     };
+    if let Some(speech) = speech {
+        speech.finish();
+    }
     if answer.is_empty() {
         return emit_error(
             app,
@@ -201,6 +214,8 @@ pub async fn ask<C: Fn() -> bool>(app: &AppHandle, question: String, is_cancelle
         let mut inner = state.lock();
         if inner.epoch != epoch {
             debug!("Dropping assistant reply for a conversation that was cleared");
+            drop(inner);
+            crate::tts::stop(app);
             return;
         }
         inner
@@ -218,13 +233,17 @@ pub fn get_assistant_conversation(state: State<'_, AssistantState>) -> Vec<ChatT
     state.lock().conversation.messages().to_vec()
 }
 
-/// Start a new conversation. A reply still in flight is discarded.
+/// Start a new conversation. A reply still in flight, or being spoken, is
+/// discarded.
 #[tauri::command]
 #[specta::specta]
-pub fn clear_assistant_conversation(state: State<'_, AssistantState>) {
-    let mut inner = state.lock();
-    inner.conversation.clear();
-    inner.epoch += 1;
+pub fn clear_assistant_conversation(app: AppHandle, state: State<'_, AssistantState>) {
+    {
+        let mut inner = state.lock();
+        inner.conversation.clear();
+        inner.epoch += 1;
+    }
+    crate::tts::stop_and_idle(&app);
 }
 
 #[cfg(test)]

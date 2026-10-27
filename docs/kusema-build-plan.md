@@ -106,7 +106,7 @@ If the build fails, open Claude Code in the folder and paste:
 
 ---
 
-## Step 3 — Speak the replies (Windows built-in voices)
+## Step 3 — Speak the replies (Windows built-in voices) ✅ Done (2026-10-27)
 
 > Read CLAUDE.md first. Kusema's Assistant mode now emits `assistant-reply`. Add text-to-speech so the reply is spoken aloud.
 >
@@ -117,6 +117,14 @@ If the build fails, open Claude Code in the folder and paste:
 > 5. Show a "speaking" state in the overlay/tray while talking.
 >
 > Run `cargo check`, `cargo test`, `bun run tauri dev`. Commit as "Speak assistant replies".
+
+### Notes from Step 3
+
+- **Engine choice:** the `windows` crate (already a dependency) calling WinRT `Windows.Media.SpeechSynthesis` directly, not the `tts` crate. It gives the OneCore voices (David, Zira, Mark and any installed language packs) rather than legacy SAPI ones. Each sentence comes back as WAV and plays through rodio, so speech uses Kusema's selected output device and Cancel stops it instantly. The `tts` crate does its own playback (no output-device choice), brings in another `windows` version, and needs speech-dispatcher libraries to build on Linux. Windows 11's "Natural" Narrator voices aren't available to apps through this API.
+- **macOS / Linux:** `system.rs` uses `say` on macOS and `espeak-ng` on Linux, through the same WAV and rodio path. This code compiles on those platforms but hasn't been run there yet.
+- **Where things live:** `src-tauri/src/tts/` (`TtsEngine` trait, `SpeechState`, `ReplySpeech`, `sentences.rs` splitter, `system.rs` engine). `llm_client::send_conversation` now streams (SSE) for both formats, and falls back to a plain JSON reply if a server ignores `stream: true`.
+- **Interrupts:** `utils::cancel_current_operation` (Escape, the overlay ✕, the tray's Cancel and `--cancel`), any recording-hotkey press, `TranscribeAction::start`, "New conversation", and turning "Speak replies" off all call `tts::stop`.
+- **For Step 5 (Kokoro):** implement `TtsEngine` for Kokoro, returning WAV (or samples) into the same rodio queue in `system.rs`. Voice ids will need an engine prefix once there are two engines.
 
 **Milestone:** at this point the full privacy loop works: your voice stays local, only text goes to Claude, and the reply is spoken locally.
 

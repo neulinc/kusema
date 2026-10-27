@@ -6,6 +6,7 @@ import { SettingsGroup } from "../../ui/SettingsGroup";
 import { Button } from "../../ui/Button";
 import { Alert } from "../../ui/Alert";
 import { ShortcutInput } from "../ShortcutInput";
+import { AssistantVoiceSettings } from "./AssistantVoiceSettings";
 
 interface AssistantErrorPayload {
   question: string;
@@ -65,6 +66,8 @@ export const AssistantSettings: React.FC = () => {
       >
         <ShortcutInput shortcutId="assistant" grouped={true} />
       </SettingsGroup>
+
+      <AssistantVoiceSettings />
 
       <SettingsGroup title={t("settings.assistant.conversation.title")}>
         <div className="flex flex-col gap-3 p-4">

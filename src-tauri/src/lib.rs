@@ -27,6 +27,7 @@ mod system_languages;
 mod transcription_coordinator;
 mod tray;
 mod tray_i18n;
+mod tts;
 mod utils;
 
 pub use cli::CliArgs;
@@ -782,6 +783,11 @@ pub fn run(cli_args: CliArgs) {
             helpers::clamshell::is_laptop,
             assistant::get_assistant_conversation,
             assistant::clear_assistant_conversation,
+            tts::get_tts_voices,
+            tts::preview_tts_voice,
+            tts::change_assistant_speak_replies_setting,
+            tts::change_assistant_voice_setting,
+            tts::change_assistant_speech_rate_setting,
         ])
         .events(collect_events![
             managers::history::HistoryUpdatePayload,
@@ -909,6 +915,9 @@ pub fn run(cli_args: CliArgs) {
         ))
         .manage(cli_args.clone())
         .manage(assistant::AssistantState::default())
+        .manage(tts::SpeechState::new(std::sync::Arc::new(
+            tts::SystemTts::new(),
+        )))
         .setup(move |app| {
             #[cfg(target_os = "windows")]
             log::info!(
