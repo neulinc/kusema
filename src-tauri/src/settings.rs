@@ -1341,10 +1341,16 @@ fn os_languages() -> &'static [String] {
 /// Update checks are forced off (without touching the persisted setting) when
 /// `HANDY_DISABLE_UPDATER` is set — e.g. by the Nix package, since self-update
 /// can't work against an immutable /nix/store install.
+///
+/// Kusema: always forced off until Kusema has its own update channel and
+/// signing key; the inherited updater pointed at Handy's releases.
 pub fn update_checks_forced_disabled() -> bool {
     use std::sync::OnceLock;
+    const KUSEMA_UPDATE_CHANNEL_CONFIGURED: bool = false;
     static IS_UPDATER_DISABLED: OnceLock<bool> = OnceLock::new();
-    *IS_UPDATER_DISABLED.get_or_init(|| utils::env_flag_enabled("HANDY_DISABLE_UPDATER"))
+    *IS_UPDATER_DISABLED.get_or_init(|| {
+        !KUSEMA_UPDATE_CHANNEL_CONFIGURED || utils::env_flag_enabled("HANDY_DISABLE_UPDATER")
+    })
 }
 
 /// Effective updater state: the user's stored preference, overridden to `false`

@@ -62,6 +62,17 @@ If the build fails, open Claude Code in the folder and paste:
 >
 > Then run `bun run tauri dev` to confirm it still builds. Commit as "Rebrand to Kusema".
 
+### Notes from Step 1
+
+- **Artwork still to replace** (still Handy's):
+  - Everything in `src-tauri/icons/`. Regenerate the whole set from one square source image with `bun tauri icon path/to/kusema-icon.png`.
+  - The tray icons in `src-tauri/resources/`.
+  - The React logo components `HandyTextLogo.tsx`, `HandyHand.tsx`, `HandyMascot.tsx` and `TrayIcon.tsx` in `src/components/icons/`. Keep the file names so upstream merges stay easy; just change what they draw.
+- **Code signing removed.** The upstream Windows signing command used the Handy author's Azure account. Installers are unsigned until we have our own certificate (see "Later").
+- **`src/bindings.ts` gets regenerated on Windows builds** (tauri-specta writes it at dev startup). The diff is only platform-specific doc comments, such as the `isLaptop` stub. It's harmless; commit it or discard it.
+- **Auto-updater disabled.** It pointed at Handy's GitHub releases and Handy's signing key. The endpoint and public key are now blank in `tauri.conf.json`, `createUpdaterArtifacts` is off, `update_checks_forced_disabled()` in `settings.rs` always returns true, and the footer "Check for updates" link and tray item are hidden. **Before distributing Kusema, set up our own update channel**: generate a signing key with `bun tauri signer generate`, put the public key and a Kusema `latest.json` endpoint in `tauri.conf.json`, turn `createUpdaterArtifacts` back on, and set `KUSEMA_UPDATE_CHANNEL_CONFIGURED` to true in `settings.rs`.
+- **AI provider requests identify as Kusema.** The User-Agent, Referer and X-Title headers in `llm_client.rs` now say Kusema.
+
 ---
 
 ## Step 2 — Assistant mode (text replies first)

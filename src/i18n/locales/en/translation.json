@@ -721,7 +721,7 @@
       "updateChecks": {
         "label": "Check for Updates",
         "description": "Automatically check for new versions of Kusema",
-        "lockedDescription": "Disabled by system configuration (HANDY_DISABLE_UPDATER)"
+        "lockedDescription": "Not available yet: Kusema does not have an update channel"
       },
       "whatsNewPreview": {
         "title": "Preview What's New",
