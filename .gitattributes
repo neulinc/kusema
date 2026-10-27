@@ -1,1 +1,13 @@
 src-tauri/src/catalog/catalog.json -text
+
+# Kusema: LF everywhere, including Windows checkouts, so Prettier/rustfmt
+# (endOfLine: lf) don't flag every file when core.autocrlf is true.
+* text=auto eol=lf
+
+*.png binary
+*.jpg binary
+*.ico binary
+*.icns binary
+*.wav binary
+*.woff2 binary
+*.gguf binary

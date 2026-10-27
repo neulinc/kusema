@@ -1,21 +1,21 @@
 # Kusema — Build Plan & Claude Code Prompts
 
-*Fork of cjpais/Handy (MIT). Mapped against Handy `main` on 2026-10-27.*
+_Fork of cjpais/Handy (MIT). Mapped against Handy `main` on 2026-10-27._
 
 ## What Handy already gives us
 
-| Need | Already in Handy | Where |
-|---|---|---|
-| Hotkey → record → local transcription | Yes | `actions.rs` → `TranscribeAction` |
-| Send text to Claude / OpenAI / Groq / OpenRouter | Yes (used for "post-processing") | `llm_client.rs` |
-| Ollama / any local model | Yes, via the "Custom" provider (base URL `http://localhost:11434/v1`) | `settings.rs` `default_post_process_providers()` |
-| Provider, model and API key settings UI | Yes | `src/components/settings/post-processing/` |
-| Audio playback library | Yes (`rodio`) | `Cargo.toml` |
-| Repo instructions for AI agents | Yes | `CLAUDE.md`, `AGENTS.md` (Claude Code reads these automatically) |
+| Need                                             | Already in Handy                                                      | Where                                                            |
+| ------------------------------------------------ | --------------------------------------------------------------------- | ---------------------------------------------------------------- |
+| Hotkey → record → local transcription            | Yes                                                                   | `actions.rs` → `TranscribeAction`                                |
+| Send text to Claude / OpenAI / Groq / OpenRouter | Yes (used for "post-processing")                                      | `llm_client.rs`                                                  |
+| Ollama / any local model                         | Yes, via the "Custom" provider (base URL `http://localhost:11434/v1`) | `settings.rs` `default_post_process_providers()`                 |
+| Provider, model and API key settings UI          | Yes                                                                   | `src/components/settings/post-processing/`                       |
+| Audio playback library                           | Yes (`rodio`)                                                         | `Cargo.toml`                                                     |
+| Repo instructions for AI agents                  | Yes                                                                   | `CLAUDE.md`, `AGENTS.md` (Claude Code reads these automatically) |
 
 ## What's missing
 
-1. **An "Assistant" mode.** Today every transcription ends in a paste (`utils::paste(...)` inside `TranscribeAction::stop`, around line 826 of `actions.rs`). We add a third hotkey that sends the text to the LLM as a *question* and keeps the answer.
+1. **An "Assistant" mode.** Today every transcription ends in a paste (`utils::paste(...)` inside `TranscribeAction::stop`, around line 826 of `actions.rs`). We add a third hotkey that sends the text to the LLM as a _question_ and keeps the answer.
 2. **Conversation memory.** `send_anthropic_message` sends one user message only. Assistant mode needs a message history.
 3. **Text-to-speech.** Nothing speaks yet.
 4. **Somewhere to see the conversation.** A small panel or window.
@@ -30,17 +30,20 @@ Keep new code in **new files/modules** and make the **smallest possible edits** 
 ## Step 0 — Get the unmodified fork running (you, manually)
 
 On Windows, install:
+
 1. Rust via https://rustup.rs (default MSVC toolchain)
 2. Visual Studio Build Tools → "Desktop development with C++"
 3. Bun: `powershell -c "irm bun.sh/install.ps1 | iex"`
 4. Git
 
 Then in your fork folder:
+
 ```
 git remote add upstream https://github.com/cjpais/Handy.git
 bun install
 bun run tauri dev
 ```
+
 Read `BUILD.md` if anything fails. In the running app, pick **Parakeet V3** as the speech model (Whisper crashes on some Windows setups). Confirm dictation works before changing anything.
 
 If the build fails, open Claude Code in the folder and paste:
@@ -81,11 +84,13 @@ If the build fails, open Claude Code in the folder and paste:
 > Read CLAUDE.md first. We're adding an **Assistant mode** to Kusema: the user holds a hotkey, speaks a question, it's transcribed locally (as now), the text is sent to the LLM provider the user configured, and the reply is kept, without pasting anything.
 >
 > Context from the codebase:
+>
 > - `src-tauri/src/actions.rs`: `TranscribeAction { post_process: bool }` handles the hotkey. In `stop()`, after transcription and optional post-processing, it spawns a "paste" thread that calls `utils::paste(final_text, ...)`. Actions are registered in `ACTION_MAP`.
 > - `src-tauri/src/settings.rs`: default hotkeys are created in the default settings (`transcribe`, `transcribe_with_post_process`, `cancel`). Providers come from `default_post_process_providers()`; the active one from `settings.active_post_process_provider()`; keys from `post_process_api_keys`; model from `post_process_models`.
 > - `src-tauri/src/llm_client.rs`: already speaks both the Anthropic Messages format and the OpenAI chat format, but only single-turn.
 >
 > Do this:
+>
 > 1. Create a new module `src-tauri/src/assistant/` with `mod.rs` and `conversation.rs`. Keep a `Conversation` holding an ordered list of user/assistant messages plus a system prompt (default: "You are Kusema, a helpful voice assistant. Answers will be spoken aloud, so reply in short, natural spoken sentences. No markdown, lists, code blocks or emoji unless asked."). Store it in Tauri managed state.
 > 2. In `llm_client.rs`, add a multi-turn function (e.g. `send_conversation`) that accepts a system prompt plus a message list and works for both the Anthropic format (system goes in the top-level `system` field) and OpenAI format (system as the first message). Reuse the existing headers/client helpers. Don't change the behavior of the existing post-processing functions.
 > 3. Add a new hotkey binding `assistant` (Windows default `ctrl+alt+space`; pick sensible macOS/Linux defaults) named "Ask Kusema", and register it in `ACTION_MAP`. Implement it with the smallest possible change to `TranscribeAction`: e.g. replace the `post_process: bool` with a small enum mode (`Dictate`, `DictateWithPostProcess`, `Assistant`), or add an `assistant: bool`. In Assistant mode, skip the paste thread entirely and instead hand the final text to the assistant module.
@@ -169,7 +174,7 @@ If the build fails, open Claude Code in the folder and paste:
 
 ## Step 6 — Computer control (voice commands for Windows)
 
-**Goal:** "Kusema, switch to dark mode" changes the setting and replies "Done." The AI only *chooses* from a fixed whitelist of actions Kusema implements locally; it never runs arbitrary commands.
+**Goal:** "Kusema, switch to dark mode" changes the setting and replies "Done." The AI only _chooses_ from a fixed whitelist of actions Kusema implements locally; it never runs arbitrary commands.
 
 > Read docs/kusema-build-plan.md and CLAUDE.md first. We're on **Step 6: computer control via tool use**. Assistant mode (Steps 2–3) works; extend it so the LLM can call a fixed set of local actions.
 >
@@ -227,7 +232,7 @@ If the build fails, open Claude Code in the folder and paste:
 - **Interrupt by voice:** say "Hey Kusema" while it's talking to cut it off. Needs echo cancellation, so do this after Step 7.
 - **Paste the answer:** an option to type the assistant's reply into the active app instead of speaking it ("draft a reply declining this meeting").
 - **Remaining Handy links:** replace handy.computer links (Linux setup guide, macOS Secure Input help, About-page donate link) with Kusema pages or remove them.
-- **Line endings:** add a `.gitattributes` (`* text=auto eol=lf`) or set `git config core.autocrlf input`, so Prettier stops flagging every file on Windows.
+- **Line endings:** ✅ Done (2026-10-27). `.gitattributes` sets `* text=auto eol=lf`, so checkouts are LF even with `core.autocrlf=true`, and `bun run format:check` passes on Windows.
 
 ## Keeping up with Handy
 
@@ -235,4 +240,5 @@ If the build fails, open Claude Code in the folder and paste:
 git fetch upstream
 git merge upstream/main
 ```
+
 If there are conflicts, ask Claude Code: "Merge upstream/main from cjpais/Handy, resolve conflicts preserving Kusema's Assistant, TTS, keychain and branding changes, then run cargo check and the tests."
