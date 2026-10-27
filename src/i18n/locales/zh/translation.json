@@ -629,7 +629,16 @@
         },
         "voice": {
           "label": "Voice",
-          "description": "Choose from the voices installed on your computer. On Windows, add more under Settings > Time & language > Speech."
+          "description": "Kokoro voices sound the most natural; download them above. The other voices come with your computer (on Windows, add more under Settings > Time & language > Speech)."
+        },
+        "kokoro": {
+          "label": "Kokoro Voices",
+          "description": "28 natural-sounding English voices (US and UK) generated on this computer. A one-time download.",
+          "installed": "Installed. Pick a Kokoro voice below. Removing them frees the disk space; replies then use the system voice.",
+          "download": "Download ({{size}} MB)",
+          "downloading": "Downloading… {{percentage}}%",
+          "cancel": "Cancel",
+          "delete": "Remove"
         },
         "rate": {
           "label": "Speaking Rate",

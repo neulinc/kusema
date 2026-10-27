@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { commands, type Voice } from "@/bindings";
 import { useSettings } from "../../../hooks/useSettings";
@@ -8,6 +8,7 @@ import { ToggleSwitch } from "../../ui/ToggleSwitch";
 import { Dropdown } from "../../ui/Dropdown";
 import { Slider } from "../../ui/Slider";
 import { Button } from "../../ui/Button";
+import { KokoroVoices } from "./KokoroVoices";
 
 const MIN_RATE = 0.5;
 const MAX_RATE = 2.0;
@@ -22,12 +23,13 @@ export const AssistantVoiceSettings: React.FC = () => {
   const voice = getSetting("assistant_voice") ?? null;
   const rate = getSetting("assistant_speech_rate") ?? 1;
 
-  useEffect(() => {
+  const loadVoices = useCallback(() => {
     commands
       .getTtsVoices()
       .then((result) => {
         if (result.status === "ok") {
           setVoices(result.data);
+          setVoicesError(null);
         } else {
           setVoicesError(result.error);
         }
@@ -35,11 +37,13 @@ export const AssistantVoiceSettings: React.FC = () => {
       .catch((e) => setVoicesError(String(e)));
   }, []);
 
+  useEffect(loadVoices, [loadVoices]);
+
   const voiceOptions = [
     { value: "", label: t("settings.assistant.voice.systemDefault") },
     ...voices.map((v) => ({
       value: v.id,
-      label: v.language ? `${v.name} (${v.language})` : v.name,
+      label: `${v.engine} — ${v.language ? `${v.name} (${v.language})` : v.name}`,
     })),
   ];
 
@@ -67,6 +71,7 @@ export const AssistantVoiceSettings: React.FC = () => {
         descriptionMode="tooltip"
         grouped
       />
+      <KokoroVoices onChange={loadVoices} />
       <SettingContainer
         title={t("settings.assistant.voice.voice.label")}
         description={

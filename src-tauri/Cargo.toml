@@ -66,6 +66,9 @@ reqwest = { version = "0.12", features = ["json", "stream", "gzip", "brotli", "d
 futures-util = "0.3"
 # Kusema: API keys in the OS keychain (Credential Manager / Keychain / Secret Service)
 keyring = "4.2.0"
+# Kusema: Kokoro voices. ONNX Runtime itself is downloaded with the voices and
+# loaded at runtime (load-dynamic), so builds neither link nor fetch it.
+ort = { version = "=2.0.0-rc.15", default-features = false, features = ["std", "load-dynamic"] }
 rustfft = "6.4.0"
 strsim = "0.11.0"
 natural = "0.5.0"
@@ -97,6 +100,9 @@ hf-hub = { git = "https://github.com/cjpais/hf-hub", branch = "cancellable-downl
 
 [target.'cfg(unix)'.dependencies]
 signal-hook = "0.3"
+# Kusema: unpacks the ONNX Runtime archive for Kokoro voices
+flate2 = "1"
+tar = "0.4"
 
 [target.'cfg(not(any(target_os = "android", target_os = "ios")))'.dependencies]
 tauri-plugin-autostart = "2.5.1"
@@ -128,6 +134,8 @@ windows = { version = "0.61.3", features = [
   "Win32_UI_WindowsAndMessaging",
 ] }
 winreg = "0.55"
+# Kusema: unpacks the ONNX Runtime archive for Kokoro voices
+zip = { version = "4", default-features = false, features = ["deflate"] }
 
 # Whisper backend per Windows arch. x86_64 ships the Vulkan GPU backend and
 # keeps the dynamic-backends posture (loadable per-ISA CPU modules + Vulkan),

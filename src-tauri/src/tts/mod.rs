@@ -1,9 +1,9 @@
 //! Kusema text-to-speech: speaks assistant replies sentence by sentence.
 
+pub mod kokoro;
+mod player;
 mod sentences;
 mod system;
-
-pub use system::SystemTts;
 
 use crate::managers::audio::AudioRecordingManager;
 use crate::settings::{self, AppSettings};
@@ -18,6 +18,8 @@ use std::sync::Arc;
 use std::time::Duration;
 use tauri::{AppHandle, Manager, State};
 
+pub use player::Speaker;
+
 /// Lowest and highest speaking rate offered (1.0 is the voice's normal speed).
 pub const MIN_RATE: f32 = 0.5;
 pub const MAX_RATE: f32 = 2.0;
@@ -30,6 +32,33 @@ pub struct Voice {
     pub name: String,
     /// BCP-47 tag, e.g. "en-US".
     pub language: String,
+    /// Engine label for the voice picker: "Kokoro", "Windows", "macOS"...
+    pub engine: String,
+}
+
+/// Synthesized speech for the player.
+pub enum Audio {
+    Wav(Vec<u8>),
+    /// Mono samples in -1.0..=1.0.
+    Mono {
+        sample_rate: u32,
+        samples: Vec<f32>,
+    },
+}
+
+/// Turns text into audio; [`Speaker`] queues and plays it.
+pub trait Synthesizer: Send + Sync {
+    fn voices(&self) -> Result<Vec<Voice>, String>;
+    /// Synthesize `text`, passing each piece to `out` as soon as it's ready
+    /// (long sentences may come in several pieces). `out` returns `false` once
+    /// speech was interrupted, so the rest can be skipped.
+    fn synthesize(
+        &self,
+        text: &str,
+        voice_id: Option<&str>,
+        rate: f32,
+        out: &mut dyn FnMut(Audio) -> bool,
+    ) -> Result<(), String>;
 }
 
 /// A text-to-speech engine. `speak` queues text behind anything already
@@ -63,6 +92,32 @@ impl SpeechState {
             epoch: AtomicU64::new(0),
             speaking: AtomicBool::new(false),
         }
+    }
+}
+
+/// Set up speech: the Kokoro voices (files in the app data folder) and the
+/// shared player. Called from `setup`, as Kokoro needs the app handle.
+pub fn init(app: &AppHandle) {
+    let kokoro = Arc::new(kokoro::Kokoro::new(app));
+    app.manage(SpeechState::new(Arc::new(Speaker::new(Arc::clone(
+        &kokoro,
+    )))));
+    app.manage(kokoro);
+}
+
+/// Get ready to speak a reply soon: loads Kokoro in the background when the
+/// selected voice uses it, so the first sentence isn't held up by loading.
+pub fn prepare(app: &AppHandle) {
+    let settings = settings::get_settings(app);
+    if !settings.assistant_speak_replies {
+        return;
+    }
+    let is_kokoro = settings
+        .assistant_voice
+        .as_deref()
+        .is_some_and(|v| v.starts_with(kokoro::VOICE_PREFIX));
+    if let (true, Some(kokoro)) = (is_kokoro, app.try_state::<Arc<kokoro::Kokoro>>()) {
+        kokoro.preload();
     }
 }
 
@@ -209,7 +264,13 @@ impl ReplySpeech {
 #[specta::specta]
 pub async fn get_tts_voices(state: State<'_, SpeechState>) -> Result<Vec<Voice>, String> {
     let mut voices = state.engine.list_voices()?;
-    voices.sort_by(|a, b| a.language.cmp(&b.language).then(a.name.cmp(&b.name)));
+    // Kokoro first, then the system voices.
+    voices.sort_by(|a, b| {
+        (b.engine == kokoro::ENGINE)
+            .cmp(&(a.engine == kokoro::ENGINE))
+            .then_with(|| a.language.cmp(&b.language))
+            .then_with(|| a.name.cmp(&b.name))
+    });
     Ok(voices)
 }
 

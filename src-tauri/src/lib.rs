@@ -789,6 +789,10 @@ pub fn run(cli_args: CliArgs) {
             tts::change_assistant_speak_replies_setting,
             tts::change_assistant_voice_setting,
             tts::change_assistant_speech_rate_setting,
+            tts::kokoro::assets::get_kokoro_status,
+            tts::kokoro::assets::download_kokoro,
+            tts::kokoro::assets::cancel_kokoro_download,
+            tts::kokoro::assets::delete_kokoro,
         ])
         .events(collect_events![
             managers::history::HistoryUpdatePayload,
@@ -916,9 +920,6 @@ pub fn run(cli_args: CliArgs) {
         ))
         .manage(cli_args.clone())
         .manage(assistant::AssistantState::default())
-        .manage(tts::SpeechState::new(std::sync::Arc::new(
-            tts::SystemTts::new(),
-        )))
         .setup(move |app| {
             #[cfg(target_os = "windows")]
             log::info!(
@@ -969,6 +970,8 @@ pub fn run(cli_args: CliArgs) {
                 });
                 return Ok(());
             }
+
+            tts::init(app.handle());
 
             // Create main window programmatically so we can set data_directory
             // for portable mode (redirects WebView2 cache to portable Data dir)

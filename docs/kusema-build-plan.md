@@ -130,7 +130,7 @@ If the build fails, open Claude Code in the folder and paste:
 - **macOS / Linux:** `system.rs` uses `say` on macOS and `espeak-ng` on Linux, through the same WAV and rodio path. This code compiles on those platforms but hasn't been run there yet.
 - **Where things live:** `src-tauri/src/tts/` (`TtsEngine` trait, `SpeechState`, `ReplySpeech`, `sentences.rs` splitter, `system.rs` engine). `llm_client::send_conversation` now streams (SSE) for both formats, and falls back to a plain JSON reply if a server ignores `stream: true`.
 - **Interrupts:** `utils::cancel_current_operation` (Escape, the overlay ✕, the tray's Cancel and `--cancel`), any recording-hotkey press, `TranscribeAction::start`, "New conversation", and turning "Speak replies" off all call `tts::stop`.
-- **For Step 5 (Kokoro):** implement `TtsEngine` for Kokoro, returning WAV (or samples) into the same rodio queue in `system.rs`. Voice ids will need an engine prefix once there are two engines.
+- **For Step 5 (Kokoro):** ✅ done; see Notes from Step 5.
 
 **Milestone:** at this point the full privacy loop works: your voice stays local, only text goes to Claude, and the reply is spoken locally.
 
@@ -159,7 +159,7 @@ If the build fails, open Claude Code in the folder and paste:
 
 ---
 
-## Step 5 — Kokoro voices + voice picker
+## Step 5 — Kokoro voices + voice picker ✅ Done (2026-10-27)
 
 > Read CLAUDE.md first. Add **Kokoro** (Kokoro-82M, Apache 2.0) as a second `TtsEngine` in `src-tauri/src/tts/kokoro.rs`, running locally via ONNX.
 >
@@ -169,6 +169,18 @@ If the build fails, open Claude Code in the folder and paste:
 > 4. Must run on CPU in real time on a mid-range laptop. Measure time-to-first-audio and report it.
 >
 > Commit as "Add Kokoro voices".
+
+### Notes from Step 5
+
+- **No ONNX runtime to reuse.** Upstream Handy now runs every model (Parakeet included) through `transcribe-cpp` (GGML), which has no TTS. Kokoro on GGML (kokoro.cpp) would bring a second copy of ggml next to transcribe-cpp's, and needs espeak-ng.
+- **Engine: our own small module on `ort` (ONNX Runtime), not a Kokoro crate.** Every Rust Kokoro crate phonemizes with espeak-ng (GPL-3.0); `kokoro-tts` even compiles extracted espeak-ng C code while calling itself Apache-2.0. Kusema instead uses **misaki's dictionaries** (Kokoro's own phonemizer data, Apache-2.0, ~180k US and UK entries in Kokoro's phoneme set) plus Rust for numbers/money/times, inflections, compounds and acronyms, and public-domain NRL letter-to-sound rules for unknown words (mostly names). English only; Kokoro's other languages need other phonemizers.
+- **Runtime: `ort` with `load-dynamic`.** The official Microsoft ONNX Runtime 1.31.1 library is downloaded with the voices and loaded at runtime, so the installer doesn't grow and builds don't fetch anything. Supported: Windows x64/ARM64, macOS Apple Silicon, Linux x64/ARM64 (Intel Macs show no Kokoro option). Only Windows x64 has been run.
+- **Download:** ~202 MB once (ONNX Runtime archive 83 MB, of which only the 17 MB DLL is kept; int8 model 92 MB; 28 English voices 15 MB; dictionaries 13 MB), 131 MB on disk, in `<app data>/kokoro/`. Every file is pinned by URL revision, size and SHA-256 and fetched with Handy's resumable downloader (`managers/model/download.rs`, made `pub(crate)`; no other change to it). Remove deletes the files; on Windows the loaded DLL stays until restart and is reused by the next download.
+- **Where things live:** `src-tauri/src/tts/kokoro/` (`mod.rs` engine, `assets.rs` manifest/download/commands, `g2p.rs`, `numbers.rs`, `rules.rs`) and `src-tauri/src/tts/player.rs`, the shared playback queue that used to be in `system.rs`. Both engines implement a small `Synthesizer` trait; voice ids `kokoro:<name>` go to Kokoro, everything else to the system voices (old voice settings keep working). Frontend: `KokoroVoices.tsx` (download / progress / cancel / remove) in the Voice section, and engine-labelled voices ("Kokoro — Heart (en-US)", "Windows — Microsoft Zira (en-US)").
+- **Fallbacks:** if Kokoro isn't downloaded or fails on a sentence, that sentence is spoken with the default system voice. The first download switches "System default" to Kokoro Heart; removing Kokoro switches back.
+- **Speed (Ryzen 5 5600H, a mid-range laptop CPU, int8 model):** real-time factor 0.26–0.32, i.e. ~3× faster than playback. Model load 1.0 s plus 0.5 s for the dictionary, done in the background when an Ask Kusema recording starts, so it overlaps the user speaking. **Time to first audio** (after the reply's first sentence arrives): 0.6 s for a short sentence, 0.75 s for a 6-second one. Long sentences are split at clause punctuation, so the first clause plays while the rest is synthesized, with no gaps measured. The fp32 model was ~15% slower and 3.5× larger, so it isn't offered.
+- **Memory:** the model is freed after 10 idle minutes and reloaded on the next question.
+- **Tests:** unit tests for phonemization, numbers, rules and the manifest. Two opt-in tests: `kokoro_downloads` (downloads and verifies everything into `KUSEMA_KOKORO_DOWNLOAD_DIR`) and `kokoro_speaks` (synthesizes with the real model from `KUSEMA_KOKORO_DIR`, prints timings, writes `kokoro-test.wav`).
 
 ---
 
@@ -232,6 +244,7 @@ If the build fails, open Claude Code in the folder and paste:
 - **Interrupt by voice:** say "Hey Kusema" while it's talking to cut it off. Needs echo cancellation, so do this after Step 7.
 - **Paste the answer:** an option to type the assistant's reply into the active app instead of speaking it ("draft a reply declining this meeting").
 - **Remaining Handy links:** replace handy.computer links (Linux setup guide, macOS Secure Input help, About-page donate link) with Kusema pages or remove them.
+- **More Kokoro languages:** Kokoro also has Spanish, French, Hindi, Italian, Japanese, Portuguese and Chinese voices; each needs its own phonemizer (misaki has some), without espeak-ng.
 - **Line endings:** ✅ Done (2026-10-27). `.gitattributes` sets `* text=auto eol=lf`, so checkouts are LF even with `core.autocrlf=true`, and `bun run format:check` passes on Windows.
 
 ## Keeping up with Handy

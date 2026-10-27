@@ -1,200 +1,49 @@
 //! Speech with the operating system's built-in voices.
 //!
-//! Each sentence is synthesized to WAV and queued on a rodio player, so
-//! playback goes to the output device chosen in Kusema's settings, sentences
-//! play back to back, and `stop()` silences everything at once.
-//!
 //! - Windows: WinRT `Windows.Media.SpeechSynthesis`, i.e. the OneCore voices,
 //!   which sound more natural than the legacy SAPI desktop voices.
 //! - macOS: the `say` command.
 //! - Linux: `espeak-ng` (or `espeak`), if installed.
+//!
+//! Each sentence comes back as WAV for the shared player (`player.rs`).
 
-use super::{TtsEngine, Voice};
-use crate::audio_toolkit::audio::output_device_name;
-use log::{debug, warn};
-use rodio::cpal::traits::HostTrait;
-use rodio::{Decoder, DeviceSinkBuilder, MixerDeviceSink, Player};
-use std::io::Cursor;
-use std::sync::atomic::{AtomicU64, AtomicUsize, Ordering};
-use std::sync::mpsc::{self, Receiver, RecvTimeoutError, Sender};
-use std::sync::{Arc, Mutex};
-use std::time::Duration;
+use super::{Audio, Synthesizer, Voice};
 
-/// Close the output device after this long with nothing to say.
-const IDLE_CLOSE: Duration = Duration::from_secs(2);
+/// How the voice picker labels these voices.
+const ENGINE: &str = if cfg!(windows) {
+    "Windows"
+} else if cfg!(target_os = "macos") {
+    "macOS"
+} else {
+    "System"
+};
 
-struct Job {
-    text: String,
-    voice_id: Option<String>,
-    rate: f32,
-    epoch: u64,
-}
-
-#[derive(Default)]
-struct Shared {
-    /// Bumped by `stop()`; queued sentences from an older epoch are dropped.
-    epoch: AtomicU64,
-    /// Sentences accepted by `speak()` but not yet queued for playback.
-    pending: AtomicUsize,
-    player: Mutex<Option<Arc<Player>>>,
-    output_device: Mutex<Option<String>>,
-}
-
-impl Shared {
-    fn player(&self) -> std::sync::MutexGuard<'_, Option<Arc<Player>>> {
-        self.player.lock().unwrap_or_else(|e| e.into_inner())
+fn voice(id: String, name: String, language: String) -> Voice {
+    Voice {
+        id,
+        name,
+        language,
+        engine: ENGINE.to_string(),
     }
 }
 
-pub struct SystemTts {
-    tx: Mutex<Sender<Job>>,
-    shared: Arc<Shared>,
-}
+pub struct SystemVoices;
 
-impl SystemTts {
-    pub fn new() -> Self {
-        let (tx, rx) = mpsc::channel();
-        let shared = Arc::new(Shared::default());
-        let worker_shared = Arc::clone(&shared);
-        std::thread::Builder::new()
-            .name("tts".into())
-            .spawn(move || worker(rx, worker_shared))
-            .expect("failed to start the text-to-speech thread");
-        Self {
-            tx: Mutex::new(tx),
-            shared,
-        }
-    }
-}
-
-impl TtsEngine for SystemTts {
-    fn list_voices(&self) -> Result<Vec<Voice>, String> {
+impl Synthesizer for SystemVoices {
+    fn voices(&self) -> Result<Vec<Voice>, String> {
         platform::voices()
     }
 
-    fn speak(&self, text: &str, voice_id: Option<&str>, rate: f32) -> Result<(), String> {
-        let job = Job {
-            text: text.to_string(),
-            voice_id: voice_id.map(str::to_string),
-            rate,
-            epoch: self.shared.epoch.load(Ordering::SeqCst),
-        };
-        self.shared.pending.fetch_add(1, Ordering::SeqCst);
-        let sent = self.tx.lock().unwrap_or_else(|e| e.into_inner()).send(job);
-        if sent.is_err() {
-            self.shared.pending.fetch_sub(1, Ordering::SeqCst);
-            return Err("The text-to-speech thread has stopped".to_string());
-        }
+    fn synthesize(
+        &self,
+        text: &str,
+        voice_id: Option<&str>,
+        rate: f32,
+        out: &mut dyn FnMut(Audio) -> bool,
+    ) -> Result<(), String> {
+        out(Audio::Wav(platform::synthesize(text, voice_id, rate)?));
         Ok(())
     }
-
-    fn stop(&self) {
-        self.shared.epoch.fetch_add(1, Ordering::SeqCst);
-        if let Some(player) = self.shared.player().take() {
-            player.stop();
-        }
-    }
-
-    fn is_speaking(&self) -> bool {
-        self.shared.pending.load(Ordering::SeqCst) > 0
-            || self.shared.player().as_ref().is_some_and(|p| !p.empty())
-    }
-
-    fn set_output_device(&self, device: Option<String>) {
-        *self
-            .shared
-            .output_device
-            .lock()
-            .unwrap_or_else(|e| e.into_inner()) = device;
-    }
-}
-
-/// Synthesizes queued sentences and appends them to the player. Owns the
-/// output device, which is opened on demand and closed again when idle.
-fn worker(rx: Receiver<Job>, shared: Arc<Shared>) {
-    let mut sink: Option<(Option<String>, MixerDeviceSink)> = None;
-    loop {
-        let job = match rx.recv_timeout(IDLE_CLOSE) {
-            Ok(job) => job,
-            Err(RecvTimeoutError::Timeout) => {
-                let mut player = shared.player();
-                if sink.is_some() && player.as_ref().is_none_or(|p| p.empty()) {
-                    debug!("Closing text-to-speech output device");
-                    *player = None;
-                    sink = None;
-                }
-                continue;
-            }
-            Err(RecvTimeoutError::Disconnected) => return,
-        };
-
-        let current = |job: &Job| job.epoch == shared.epoch.load(Ordering::SeqCst);
-        if current(&job) {
-            match platform::synthesize(&job.text, job.voice_id.as_deref(), job.rate) {
-                Ok(wav) if current(&job) => {
-                    if let Err(e) = play(&shared, &mut sink, wav) {
-                        warn!("Failed to play synthesized speech: {e}");
-                    }
-                }
-                Ok(_) => {}
-                Err(e) => warn!("Speech synthesis failed: {e}"),
-            }
-        }
-        shared.pending.fetch_sub(1, Ordering::SeqCst);
-    }
-}
-
-fn play(
-    shared: &Shared,
-    sink: &mut Option<(Option<String>, MixerDeviceSink)>,
-    wav: Vec<u8>,
-) -> Result<(), String> {
-    let device = shared
-        .output_device
-        .lock()
-        .unwrap_or_else(|e| e.into_inner())
-        .clone();
-    let mut player = shared.player();
-
-    // Reopen when the output device setting changed since the last sentence.
-    if sink.as_ref().is_some_and(|(open, _)| *open != device) && player.is_none() {
-        *sink = None;
-    }
-    if sink.is_none() {
-        *sink = Some((device.clone(), open_output(device)?));
-    }
-    let mixer = sink.as_ref().map(|(_, s)| s.mixer()).expect("opened above");
-    let player = player.get_or_insert_with(|| Arc::new(Player::connect_new(mixer)));
-
-    let source = Decoder::new_wav(Cursor::new(wav)).map_err(|e| e.to_string())?;
-    player.append(source);
-    Ok(())
-}
-
-/// Open the selected output device, falling back to the default one. Mirrors
-/// `audio_feedback::play_audio_file`.
-fn open_output(selected_device: Option<String>) -> Result<MixerDeviceSink, String> {
-    let builder = match selected_device.filter(|name| name != "Default") {
-        Some(name) => {
-            let found = crate::audio_toolkit::get_cpal_host()
-                .output_devices()
-                .map_err(|e| e.to_string())?
-                .find(|device| output_device_name(device).as_deref() == Some(&name));
-            match found {
-                Some(device) => DeviceSinkBuilder::from_device(device),
-                None => {
-                    warn!("Device '{name}' not found, using default device");
-                    DeviceSinkBuilder::from_default_device()
-                }
-            }
-        }
-        None => DeviceSinkBuilder::from_default_device(),
-    };
-    let mut sink = builder
-        .and_then(|b| b.open_stream())
-        .map_err(|e| e.to_string())?;
-    sink.log_on_drop(false);
-    Ok(sink)
 }
 
 /// Words per minute at rate 1.0 for the command-line engines.
@@ -215,10 +64,12 @@ fn parse_say_voices(output: &str) -> Vec<Voice> {
             let left = line.split('#').next()?.trim_end();
             let (name, language) = left.rsplit_once(char::is_whitespace)?;
             let name = name.trim();
-            (!name.is_empty()).then(|| Voice {
-                id: name.to_string(),
-                name: name.to_string(),
-                language: language.replace('_', "-"),
+            (!name.is_empty()).then(|| {
+                voice(
+                    name.to_string(),
+                    name.to_string(),
+                    language.replace('_', "-"),
+                )
             })
         })
         .collect()
@@ -236,11 +87,11 @@ fn parse_espeak_voices(output: &str) -> Vec<Voice> {
             let language = cols.next()?;
             let _age_gender = cols.next()?;
             let name = cols.next()?;
-            Some(Voice {
-                id: language.to_string(),
-                name: name.replace('_', " "),
-                language: language.to_string(),
-            })
+            Some(voice(
+                language.to_string(),
+                name.replace('_', " "),
+                language.to_string(),
+            ))
         })
         .collect()
 }
@@ -267,11 +118,11 @@ mod platform {
                 voices
                     .iter()
                     .map(|v| {
-                        Ok(Voice {
-                            id: v.Id()?.to_string(),
-                            name: v.DisplayName()?.to_string(),
-                            language: v.Language()?.to_string(),
-                        })
+                        Ok(super::voice(
+                            v.Id()?.to_string(),
+                            v.DisplayName()?.to_string(),
+                            v.Language()?.to_string(),
+                        ))
                     })
                     .collect()
             })
@@ -464,7 +315,7 @@ mod tests {
         let wav = platform::synthesize("The capital of Ghana is Accra.", None, 1.0).unwrap();
         println!("synthesized {} bytes in {:?}", wav.len(), started.elapsed());
         assert_eq!(&wav[..4], b"RIFF");
-        assert!(Decoder::new_wav(Cursor::new(wav)).is_ok());
+        assert!(rodio::Decoder::new_wav(std::io::Cursor::new(wav)).is_ok());
 
         if let Some(voice) = voices.last() {
             let fast = platform::synthesize("Faster.", Some(&voice.id), 2.0).unwrap();

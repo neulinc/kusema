@@ -1040,6 +1040,28 @@ async changeAssistantSpeechRateSetting(rate: number) : Promise<Result<null, stri
     if(e instanceof Error) throw e;
     else return { status: "error", error: e  as any };
 }
+},
+async getKokoroStatus() : Promise<KokoroStatus> {
+    return await TAURI_INVOKE("get_kokoro_status");
+},
+async downloadKokoro() : Promise<Result<null, string>> {
+    try {
+    return { status: "ok", data: await TAURI_INVOKE("download_kokoro") };
+} catch (e) {
+    if(e instanceof Error) throw e;
+    else return { status: "error", error: e  as any };
+}
+},
+async cancelKokoroDownload() : Promise<void> {
+    await TAURI_INVOKE("cancel_kokoro_download");
+},
+async deleteKokoro() : Promise<Result<null, string>> {
+    try {
+    return { status: "ok", data: await TAURI_INVOKE("delete_kokoro") };
+} catch (e) {
+    if(e instanceof Error) throw e;
+    else return { status: "error", error: e  as any };
+}
 }
 }
 
@@ -1212,6 +1234,15 @@ export type KeyboardDiagnosticReport = { secure_input_enabled: boolean; culprit_
  */
 key_down: number; key_up: number; flags_changed: number; mouse: number; duration_ms: number }
 export type KeyboardImplementation = "tauri" | "handy_keys"
+export type KokoroStatus = { 
+/**
+ * Kokoro can run on this platform.
+ */
+supported: boolean; downloaded: boolean; downloading: boolean; 
+/**
+ * Total download size.
+ */
+size_mb: number }
 export type LLMPrompt = { id: string; name: string; prompt: string }
 export type LogLevel = "trace" | "debug" | "info" | "warn" | "error"
 export type ModelInfo = { id: string; name: string; description: string; filename: string; source: ModelSource; size_mb: number; is_downloaded: boolean; is_downloading: boolean; partial_size: number; accuracy_score: number; speed_score: number; supports_translation: boolean; is_recommended: boolean; supported_languages: string[]; supports_language_selection: boolean; is_custom: boolean; supports_streaming: boolean; supports_language_detection: boolean }
@@ -1431,7 +1462,11 @@ export type Voice = { id: string; name: string;
 /**
  * BCP-47 tag, e.g. "en-US".
  */
-language: string }
+language: string; 
+/**
+ * Engine label for the voice picker: "Kokoro", "Windows", "macOS"...
+ */
+engine: string }
 export type WindowsMicrophonePermissionStatus = { supported: boolean; overall_access: PermissionAccess; device_access: PermissionAccess; app_access: PermissionAccess; desktop_app_access: PermissionAccess }
 
 /** tauri-specta globals **/

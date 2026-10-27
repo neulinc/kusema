@@ -450,8 +450,12 @@ impl ShortcutAction for TranscribeAction {
     fn start(&self, app: &AppHandle, binding_id: &str, _shortcut_str: &str) {
         let start_time = Instant::now();
         debug!("TranscribeAction::start called for binding: {}", binding_id);
-        // Kusema: a new recording interrupts a spoken reply.
+        // Kusema: a new recording interrupts a spoken reply; an assistant
+        // question gets the voice ready while the user speaks.
         crate::tts::stop(app);
+        if self.assistant {
+            crate::tts::prepare(app);
+        }
 
         // Load model in the background
         let tm = app.state::<Arc<TranscriptionManager>>();
