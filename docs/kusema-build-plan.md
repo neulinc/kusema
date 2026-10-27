@@ -158,6 +158,56 @@ If the build fails, open Claude Code in the folder and paste:
 
 ---
 
+## Step 6 — Computer control (voice commands for Windows)
+
+**Goal:** "Kusema, switch to dark mode" changes the setting and replies "Done." The AI only *chooses* from a fixed whitelist of actions Kusema implements locally; it never runs arbitrary commands.
+
+> Read docs/kusema-build-plan.md and CLAUDE.md first. We're on **Step 6: computer control via tool use**. Assistant mode (Steps 2–3) works; extend it so the LLM can call a fixed set of local actions.
+>
+> 1. **Tool registry:** create `src-tauri/src/tools/` with a `Tool` trait (name, description, JSON-schema parameters, risk level `Safe | Confirm`, `execute(args) -> Result<String>`) and a registry. The registry is a fixed whitelist. There must be no tool that runs arbitrary shell commands, scripts, or file deletion.
+> 2. **LLM tool calling:** extend `send_conversation` in `llm_client.rs` to send tool definitions and handle tool-use responses in both the Anthropic format (`tools`, `tool_use` / `tool_result` blocks) and the OpenAI format (`tools`, `tool_calls`). Loop: model requests a tool, Kusema executes it locally, returns the result, model gives the final spoken reply. Cap at 5 tool rounds per question. Keep streaming speech for the final text reply. Models or providers without tool support must fail gracefully ("This model can't control the computer; try Claude or GPT").
+> 3. **First Windows actions** (gate each behind `#[cfg(target_os = "windows")]`, and return "not supported on this OS" elsewhere):
+>    - `set_theme(mode: light|dark)`: `HKCU\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize` (`AppsUseLightTheme`, `SystemUsesLightTheme`), then broadcast `WM_SETTINGCHANGE` ("ImmersiveColorSet") so it applies immediately.
+>    - `set_wallpaper(path)`: `SystemParametersInfoW(SPI_SETDESKWALLPAPER, …)`. Only allow image files in the user's Pictures folder or a Kusema wallpapers folder; reject other paths.
+>    - `set_volume(level 0–100)`, `change_volume(delta)`, `mute(bool)`: Windows Core Audio API.
+>    - `open_settings_page(page)`: launch from an allowlisted set of `ms-settings:` URIs (display, bluetooth, sound, wifi, personalization, notifications…).
+>    - `open_app(name)`: launch from an allowlist of common apps (Notepad, Calculator, Explorer, the default browser, Outlook, Word, Excel), never a raw path from the model.
+>    - `open_url(url)`: https only, opened in the default browser.
+>    - `lock_screen()`, risk `Safe`.
+>    - `get_system_info()`: battery, time, current theme, volume.
+>    - `sleep()` and `shutdown()`: risk `Confirm`.
+> 4. **Confirmation:** for `Confirm` tools, speak/show "Shut down now? Say yes or click Confirm," and only proceed on explicit approval (a button in the overlay/Assistant page, or a spoken "yes" via a quick follow-up recording). Time out to "cancelled" after 15 seconds.
+> 5. **Activity log and undo:** record every executed action (time, tool, arguments, result) in a visible list on the Assistant page. Where possible, store the previous value so the user can say or click "undo" (theme, wallpaper, volume).
+> 6. **Settings:** "Allow computer control" (default **off**), with per-tool toggles grouped by risk. When off, no tools are sent to the model at all.
+> 7. Update the assistant system prompt to tell the model which tools exist, to confirm completed actions in one short spoken sentence, and to say plainly when something isn't possible.
+>
+> Add unit tests for the registry, argument validation (path and URL allowlists), and the tool-call parsing for both formats. Run `cargo check`, `cargo test`, `bun run tauri dev`. Stop any processes you started. Mark Step 6 done in the plan and commit as "Add computer control (tool use)".
+
+**Test:** turn on "Allow computer control", then try "switch to dark mode", "set the volume to 30 percent", "open Bluetooth settings", "undo that", and "shut down" (it should ask first; say no).
+
+---
+
+## Step 7 — Optional wake word ("Hey Kusema")
+
+**Goal:** hands-free activation as an alternative to hotkeys. Off by default; detection runs entirely on-device.
+
+> Read docs/kusema-build-plan.md and CLAUDE.md first. We're on **Step 7: optional wake word**.
+>
+> 1. **Engine:** evaluate openWakeWord (Apache 2.0, ONNX models; custom phrases trainable from synthetic speech) and Rustpotter (pure Rust, Apache 2.0). Prefer openWakeWord via the ONNX runtime Kusema already ships, if practical. Explain the choice before writing much code. Don't use Porcupine (commercial license).
+> 2. **Wake phrase:** "Hey Kusema". Document (in `docs/wake-word.md`) how to train/regenerate the custom model with openWakeWord's training pipeline, and ship a pre-trained model file downloaded on demand like the speech models. Until a trained model exists, support a built-in openWakeWord phrase (e.g. "hey jarvis") as a stand-in, clearly labelled in settings.
+> 3. **Listening pipeline:** a background listener on the selected microphone feeding the detector from a short in-memory ring buffer. Nothing is written to disk or sent anywhere before detection.
+> 4. **On detection:** play a short chime, start an Assistant-mode recording, and stop automatically when the speaker goes quiet, using the existing Silero VAD (~1 second of silence, with a max length cap). Then follow the normal Assistant flow (transcribe → LLM → speak).
+> 5. **Never trigger on itself:** pause detection while Kusema is speaking and while any hotkey recording is active. Also pause when the screen is locked, and optionally when on battery.
+> 6. **Settings:** "Wake word" toggle (default **off**) with a one-time explanation dialog: "Kusema will listen for 'Hey Kusema' on this device. Audio is processed locally and discarded." Add a sensitivity slider and a "Test wake word" mode that shows detections without starting the assistant.
+> 7. **Visibility and control:** a distinct tray state while listening, a tray menu item "Pause wake word", and a hotkey to toggle it (e.g. during client calls).
+> 8. Measure and report idle CPU usage while listening; target under ~2% on a mid-range laptop.
+>
+> Add tests where practical (detector wrapper, pause/resume state machine). Run `cargo check`, `cargo test`, `bun run tauri dev`. Stop any processes you started. Mark Step 7 done in the plan and commit as "Add optional wake word".
+
+**Test:** enable the wake word, say "Hey Kusema, what's the weather like in Kingston usually in March?" with no hotkey. Then check it doesn't trigger while Kusema is speaking, and that "Pause wake word" stops it.
+
+---
+
 ## Later (v2 ideas)
 
 - **"Sensitive mode" toggle**: one switch that routes Assistant mode to a local Ollama model instead of a cloud provider.
@@ -165,6 +215,10 @@ If the build fails, open Claude Code in the folder and paste:
 - **Chatterbox voice cloning** with a consent step (live recording of a scripted consent line, no uploaded files).
 - **Separate provider settings for Assistant vs. post-processing**, if you want, e.g., Groq for fast cleanup and Claude for questions.
 - **Code signing** for the Windows installer before giving it to clients.
+- **Interrupt by voice:** say "Hey Kusema" while it's talking to cut it off. Needs echo cancellation, so do this after Step 7.
+- **Paste the answer:** an option to type the assistant's reply into the active app instead of speaking it ("draft a reply declining this meeting").
+- **Remaining Handy links:** replace handy.computer links (Linux setup guide, macOS Secure Input help, About-page donate link) with Kusema pages or remove them.
+- **Line endings:** add a `.gitattributes` (`* text=auto eol=lf`) or set `git config core.autocrlf input`, so Prettier stops flagging every file on Windows.
 
 ## Keeping up with Handy
 
