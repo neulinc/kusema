@@ -49,7 +49,7 @@ If the build fails, open Claude Code in the folder and paste:
 
 ---
 
-## Step 1 — Rebrand to Kusema
+## Step 1 — Rebrand to Kusema ✅ Done (2026-10-27)
 
 > Read CLAUDE.md and AGENTS.md first. This repo is a fork of Handy that we're rebranding as **Kusema** (Swahili for "to speak"), published by Neulinc. Handy's license requires forks to use their own name and branding.
 >
