@@ -1,20 +1,21 @@
-# Contributing to Handy
+# Contributing to Kusema
 
-Thank you for your interest in contributing to Handy! This guide will help you get started with contributing to this open source speech-to-text application.
+Thank you for your interest in contributing to Kusema! This guide will help you get started with contributing to this open source dictation app and spoken AI assistant.
 
-## ⚠️ Feature Freeze
+## 🧭 Kusema and Handy
 
-**Handy is currently undergoing a feature freeze.** If you are submitting a PR which is a new feature that the community has not asked for, it will be rejected. If the community has asked for it, or you have explicitly gathered support, it may still be considered.
+Kusema is built on [Handy](https://github.com/cjpais/Handy), which provides its dictation engine, audio pipeline and much of its interface. Kusema adds the assistant, spoken replies and its own settings on top.
 
-**Bug fixes are the top priority.** There are 60+ issues to fix. Please focus your contributions on fixing bugs and improving stability.
+- **Problems with Kusema**, including anything about Ask Kusema, voices, AI providers or installing and updating Kusema: report them in [Kusema's issues](https://github.com/neulinc/kusema/issues).
+- **Problems that also happen in Handy** (dictation itself, speech models, microphones): those are best fixed upstream, in [Handy's issues](https://github.com/cjpais/Handy/issues). Kusema picks up Handy's fixes when it merges from upstream.
 
 ## 📖 Philosophy
 
-Handy aims to be the most forkable speech-to-text app. The goal is to create both a useful tool and a foundation for others to build upon—a well-patterned, simple codebase that serves the community. We prioritize:
+Kusema keeps Handy's priorities:
 
 - **Simplicity**: Clear, maintainable code over clever solutions
 - **Extensibility**: Make it easy for others to fork and customize
-- **Privacy**: Keep everything local and offline
+- **Privacy**: Your voice stays on your computer, and nothing else leaves it unless you choose to send it
 - **Accessibility**: Free tooling that belongs in everyone's hands
 
 ## 🚀 Getting Started
@@ -34,14 +35,14 @@ Before you begin, ensure you have the following installed:
 2. **Clone your fork**:
 
    ```bash
-   git clone git@github.com:YOUR_USERNAME/Handy.git
-   cd Handy
+   git clone git@github.com:YOUR_USERNAME/kusema.git
+   cd kusema
    ```
 
 3. **Add upstream remote**:
 
    ```bash
-   git remote add upstream git@github.com:cjpais/Handy.git
+   git remote add upstream git@github.com:neulinc/kusema.git
    ```
 
 4. **Install dependencies**:
@@ -50,14 +51,9 @@ Before you begin, ensure you have the following installed:
    bun install
    ```
 
-5. **Download required models**:
+   The voice-activity model (`src-tauri/resources/models/silero-vad-v6.2-F32.gguf`) is already in the repository, so there's nothing else to download.
 
-   ```bash
-   mkdir -p src-tauri/resources/models
-   curl -L -o src-tauri/resources/models/silero-vad-v6.2-F32.gguf https://huggingface.co/handy-computer/silero-vad-v6.2-gguf/resolve/main/silero-vad-v6.2-F32.gguf
-   ```
-
-6. **Run in development mode**:
+5. **Run in development mode**:
    ```bash
    bun run tauri dev
    # On macOS if you encounter cmake errors:
@@ -68,7 +64,7 @@ For detailed platform-specific setup instructions, see [BUILD.md](BUILD.md).
 
 ### Understanding the Codebase
 
-Handy follows a clean architecture pattern:
+Kusema follows Handy's architecture:
 
 **Backend (Rust - `src-tauri/src/`):**
 
@@ -76,8 +72,10 @@ Handy follows a clean architecture pattern:
 - `managers/` - Core business logic (audio, model, transcription)
 - `audio_toolkit/` - Low-level audio processing (recording, VAD)
 - `commands/` - Tauri command handlers for frontend communication
-- `shortcut.rs` - Global keyboard shortcut handling
+- `shortcut/` - Global keyboard shortcut handling
 - `settings.rs` - Application settings management
+- `assistant/` - Ask Kusema: the conversation and AI provider requests (Kusema)
+- `tts/` - Spoken replies: Kokoro and system voices (Kusema)
 
 **Frontend (React/TypeScript - `src/`):**
 
@@ -86,16 +84,15 @@ Handy follows a clean architecture pattern:
 - `hooks/` - Reusable React hooks
 - `lib/types.ts` - Shared TypeScript types
 
-For more details, see the Architecture section in [README.md](README.md) or [AGENTS.md](AGENTS.md).
+For more details, see the Architecture Overview in [AGENTS.md](AGENTS.md).
 
 ## 🐛 Reporting Bugs
 
 ### Before Submitting a Bug Report
 
-1. **Search existing issues** at [github.com/cjpais/Handy/issues](https://github.com/cjpais/Handy/issues)
-2. **Check discussions** at [github.com/cjpais/Handy/discussions](https://github.com/cjpais/Handy/discussions)
-3. **Try the latest release** to see if the issue has been fixed
-4. **Enable debug mode** (`Cmd/Ctrl+Shift+D`) to gather diagnostic information
+1. **Search existing issues** at [github.com/neulinc/kusema/issues](https://github.com/neulinc/kusema/issues)
+2. **Try the latest release** to see if the issue has been fixed
+3. **Enable debug mode** (`Cmd/Ctrl+Shift+D`) to gather diagnostic information
 
 ### Submitting a Bug Report
 
@@ -121,25 +118,19 @@ Use the [Bug Report template](.github/ISSUE_TEMPLATE/bug_report.md) when creatin
 
 ## 💡 Suggesting Features
 
-We use GitHub Discussions for feature requests rather than issues. This keeps issues focused on bugs and actionable tasks while allowing more open-ended conversations about features.
-
 ### Before Suggesting a Feature
 
-1. **Search existing discussions** at [github.com/cjpais/Handy/discussions](https://github.com/cjpais/Handy/discussions)
-2. **Check common feature requests**:
-   - [Post-processing / Editing Transcripts](https://github.com/cjpais/Handy/discussions/168)
-   - [Keyboard Shortcuts / Hotkeys](https://github.com/cjpais/Handy/discussions/211)
+1. **Search existing issues** at [github.com/neulinc/kusema/issues](https://github.com/neulinc/kusema/issues), open and closed
+2. **Check the build plan** in [docs/kusema-build-plan.md](docs/kusema-build-plan.md): it may already be planned
 
 ### Submitting a Feature Request
 
-1. Go to [Discussions](https://github.com/cjpais/Handy/discussions)
-2. Click "New discussion"
-3. Choose the appropriate category (Ideas, Feature Requests, etc.)
-4. Describe your feature idea including:
+1. Open a [new issue](https://github.com/neulinc/kusema/issues/new)
+2. Describe your feature idea including:
    - The problem you're trying to solve
    - Your proposed solution
    - Any alternatives you've considered
-   - How it fits with Handy's philosophy
+   - How it fits with Kusema's philosophy
 
 ## 🔧 Making Code Contributions
 
@@ -148,19 +139,17 @@ We use GitHub Discussions for feature requests rather than issues. This keeps is
 **This is critical:** Before writing any code, please do the following:
 
 1. **Search existing issues and PRs** - Check both open AND closed issues and pull requests. Someone may have already addressed this, or there may be a reason it was closed.
-   - [Open issues](https://github.com/cjpais/Handy/issues)
-   - [Closed issues](https://github.com/cjpais/Handy/issues?q=is%3Aissue+is%3Aclosed)
-   - [Open PRs](https://github.com/cjpais/Handy/pulls)
-   - [Closed PRs](https://github.com/cjpais/Handy/pulls?q=is%3Apr+is%3Aclosed)
+   - [Open issues](https://github.com/neulinc/kusema/issues)
+   - [Closed issues](https://github.com/neulinc/kusema/issues?q=is%3Aissue+is%3Aclosed)
+   - [Open PRs](https://github.com/neulinc/kusema/pulls)
+   - [Closed PRs](https://github.com/neulinc/kusema/pulls?q=is%3Apr+is%3Aclosed)
 
 2. **If something was previously closed** - If you want to revisit a closed issue or PR, you need to:
    - Provide a strong argument for why it should be reconsidered
-   - Gather community feedback first via [Discussions](https://github.com/cjpais/Handy/discussions)
-   - Link to that discussion in your PR
+   - Discuss it in an issue first
+   - Link to that issue in your PR
 
-3. **Get community feedback for features** - PRs with demonstrated community interest are **much more likely to be merged**. Start a discussion, get feedback, and link to it in your PR. This helps ensure Handy stays focused and useful for the most people without becoming bloated.
-
-Community feedback is essential to keeping Handy the best it can be for everyone. It helps prioritize what matters most and prevents feature creep.
+3. **Discuss features first** - Open an issue describing the feature before writing it, and link to it in your PR. This helps keep Kusema focused and useful without becoming bloated.
 
 ### Development Workflow
 
@@ -215,18 +204,18 @@ Community feedback is essential to keeping Handy the best it can be for everyone
    ```
 
 7. **Create a Pull Request**:
-   - Go to the [Handy repository](https://github.com/cjpais/Handy)
+   - Go to the [Kusema repository](https://github.com/neulinc/kusema)
    - Click "New Pull Request"
    - Select your fork and branch
    - Fill out the PR template completely, including:
      - Clear description of changes
-     - Links to related issues or discussions
+     - Links to related issues
      - **Community feedback** (especially important for features)
      - How you tested the changes
      - Screenshots/videos if applicable
      - Breaking changes (if any)
 
-   **Remember:** PRs with community support are prioritized. If you haven't already, start a [discussion](https://github.com/cjpais/Handy/discussions) to gather feedback before or alongside your PR. It is not explicitly required to gather feedback, but it certainly helps your PR get merged faster.
+   **Remember:** PRs linked to an [issue](https://github.com/neulinc/kusema/issues) where the change was discussed are much easier to review and merge.
 
 ### AI Assistance Disclosure
 
@@ -297,7 +286,7 @@ Documentation improvements are highly valued! You can contribute by:
 - **Be patient** - This is maintained by a small team, responses may take time
 - **Be constructive** - Focus on solutions and improvements
 - **Be collaborative** - Help others and share knowledge
-- **Search first** - Check existing issues/discussions before creating new ones
+- **Search first** - Check existing issues before creating new ones
 
 ## 🎯 Good First Issues
 
@@ -309,14 +298,12 @@ Look for issues labeled `good first issue` or `help wanted` if you're new to the
 
 ## 📞 Getting Help
 
-- **Discord**: Join our [Discord community](https://discord.com/invite/WVBeWsNXK4)
-- **Discussions**: Ask questions in [GitHub Discussions](https://github.com/cjpais/Handy/discussions)
-- **Email**: Reach out at [contact@handy.computer](mailto:contact@handy.computer)
+- **Issues**: Ask questions or report problems in [Kusema's issues](https://github.com/neulinc/kusema/issues)
 
 ## 📜 License
 
-By contributing to Handy, you agree that your contributions will be licensed under the MIT License. See [LICENSE](LICENSE) for details.
+By contributing to Kusema, you agree that your contributions will be licensed under the MIT License. See [LICENSE](LICENSE) for details.
 
 ---
 
-**Thank you for contributing to Handy!** Your efforts help make speech-to-text technology more accessible, private, and extensible for everyone.
+**Thank you for contributing to Kusema!** Your efforts help make voice and AI tools more accessible, private, and extensible for everyone.

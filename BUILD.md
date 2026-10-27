@@ -77,8 +77,8 @@ This guide covers how to set up the development environment and build Handy from
 ### 1. Clone the Repository
 
 ```bash
-git clone git@github.com:cjpais/Handy.git
-cd Handy
+git clone git@github.com:neulinc/kusema.git
+cd kusema
 ```
 
 ### 2. Install Dependencies
