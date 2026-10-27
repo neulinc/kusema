@@ -64,10 +64,11 @@ If the build fails, open Claude Code in the folder and paste:
 
 ### Notes from Step 1
 
-- **Artwork still to replace** (still Handy's):
-  - Everything in `src-tauri/icons/`. Regenerate the whole set from one square source image with `bun tauri icon path/to/kusema-icon.png`.
-  - The tray icons in `src-tauri/resources/`.
-  - The React logo components `HandyTextLogo.tsx`, `HandyHand.tsx`, `HandyMascot.tsx` and `TrayIcon.tsx` in `src/components/icons/`. Keep the file names so upstream merges stay easy; just change what they draw.
+- **Artwork: replaced with the Kusema branding kit ✅ (2026-10-27).** `branding/` is the source of truth (see `branding/README.md`).
+  - App icons: `bun tauri icon branding/kusema-icon-1024.png` regenerates `src-tauri/icons/`. `logo.png` isn't produced by that command, so copy `kusema-icon-1024.png` over it.
+  - Tray icons: `branding/tray/*.png` are copied over `src-tauri/resources/`.
+  - React components in `src/components/icons/` keep Handy's file and component names, so upstream merges stay easy. If upstream changes these files, keep our versions.
+  - Theme colors are in `src/styles/theme.css`. Primary buttons (`--color-background-ui`) use `#6d5ce8` from the icon gradient.
 - **Code signing removed.** The upstream Windows signing command used the Handy author's Azure account. Installers are unsigned until we have our own certificate (see "Later").
 - **`src/bindings.ts` gets regenerated on Windows builds** (tauri-specta writes it at dev startup). The diff is only platform-specific doc comments, such as the `isLaptop` stub. It's harmless; commit it or discard it.
 - **Auto-updater disabled.** It pointed at Handy's GitHub releases and Handy's signing key. The endpoint and public key are now blank in `tauri.conf.json`, `createUpdaterArtifacts` is off, `update_checks_forced_disabled()` in `settings.rs` always returns true, and the footer "Check for updates" link and tray item are hidden. **Before distributing Kusema, set up our own update channel**: generate a signing key with `bun tauri signer generate`, put the public key and a Kusema `latest.json` endpoint in `tauri.conf.json`, turn `createUpdaterArtifacts` back on, and set `KUSEMA_UPDATE_CHANNEL_CONFIGURED` to true in `settings.rs`.

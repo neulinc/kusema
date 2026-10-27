@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+<defs>
+ <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+  <stop offset="0" stop-color="#3b35b5"/><stop offset="1" stop-color="#6d5ce8"/></linearGradient>
+ <filter id="sh" x="-20%" y="-20%" width="140%" height="140%">
+  <feDropShadow dx="0" dy="18" stdDeviation="22" flood-color="#120f33" flood-opacity="0.35"/></filter>
+</defs>
+<rect x="40" y="40" width="944" height="944" rx="216" fill="url(#bg)"/>
+<g transform="translate(152 168) scale(11.25)" filter="url(#sh)">
+ <path d="M20 8H44A14 14 0 0 1 58 22V34A14 14 0 0 1 44 48H27L13.5 57.5L15.5 47.26A14 14 0 0 1 6 34V22A14 14 0 0 1 20 8Z" fill="#ffffff"/>
+ <path d="M22.0 22.0H22.000000000000004A3.2 3.2 0 0 1 25.200000000000003 25.2V30.8A3.2 3.2 0 0 1 22.000000000000004 34.0H22.0A3.2 3.2 0 0 1 18.8 30.8V25.2A3.2 3.2 0 0 1 22.0 22.0Z" fill="#3b35b5"/><path d="M32.0 17.5H32.0A3.2 3.2 0 0 1 35.2 20.7V35.3A3.2 3.2 0 0 1 32.0 38.5H32.0A3.2 3.2 0 0 1 28.8 35.3V20.7A3.2 3.2 0 0 1 32.0 17.5Z" fill="#ffb547"/><path d="M42.0 20.5H41.99999999999999A3.2 3.2 0 0 1 45.199999999999996 23.7V32.3A3.2 3.2 0 0 1 41.99999999999999 35.5H42.0A3.2 3.2 0 0 1 38.8 32.3V23.7A3.2 3.2 0 0 1 42.0 20.5Z" fill="#3b35b5"/>
+</g>
+</svg>
