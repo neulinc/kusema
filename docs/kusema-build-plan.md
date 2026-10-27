@@ -75,7 +75,7 @@ If the build fails, open Claude Code in the folder and paste:
 
 ---
 
-## Step 2 — Assistant mode (text replies first)
+## Step 2 — Assistant mode (text replies first) ✅ Done (2026-10-27)
 
 > Read CLAUDE.md first. We're adding an **Assistant mode** to Kusema: the user holds a hotkey, speaks a question, it's transcribed locally (as now), the text is sent to the LLM provider the user configured, and the reply is kept, without pasting anything.
 >
@@ -95,6 +95,14 @@ If the build fails, open Claude Code in the folder and paste:
 > Don't add text-to-speech yet; that's the next step. Run `cargo check`, `cargo test` and `bun run tauri dev`. Commit as "Add Assistant mode (text replies)".
 
 **Test:** In settings, choose Anthropic as the post-processing provider, paste your Claude API key, pick a model. Press Ctrl+Alt+Space, ask "What's the capital of Ghana?", and check the reply appears on the Assistant page. Then ask a follow-up ("What's its population?") to confirm memory works.
+
+### Notes from Step 2
+
+- **Where things live:** `src-tauri/src/assistant/` (`Conversation`, `ask()`, the `get_assistant_conversation` / `clear_assistant_conversation` commands), `llm_client::send_conversation`, and `src/components/settings/assistant/AssistantSettings.tsx`. The Handy files were touched only lightly: `actions.rs` (an `assistant` flag on `TranscribeAction` plus one branch in `stop()`), `shortcut/handler.rs` (Cancel also fires while a request is in flight), `transcription_coordinator.rs` (`assistant` counts as a transcribe binding), `settings.rs` (the default binding) and `lib.rs`.
+- **For Step 3:** speak the reply in `assistant::ask()`, where it emits `assistant-reply`. The request is awaited inside the transcription pipeline, so the overlay and tray stay busy and Cancel (Escape) works until `ask()` returns.
+- **Post Process page:** it only appears when Post Processing is turned on in Advanced settings, so turn that on to configure the provider. The hotkey itself works either way.
+- **History:** assistant questions are also saved to History like normal dictations. The conversation itself is in memory only and is lost on restart.
+- **Other locales:** the new strings were copied in English into every locale so `bun run check:translations` passes. Translate them later.
 
 ---
 

@@ -986,6 +986,18 @@ async isLaptop() : Promise<Result<boolean, string>> {
     if(e instanceof Error) throw e;
     else return { status: "error", error: e  as any };
 }
+},
+/**
+ * The current conversation, oldest message first.
+ */
+async getAssistantConversation() : Promise<ChatTurn[]> {
+    return await TAURI_INVOKE("get_assistant_conversation");
+},
+/**
+ * Start a new conversation. A reply still in flight is discarded.
+ */
+async clearAssistantConversation() : Promise<void> {
+    await TAURI_INVOKE("clear_assistant_conversation");
 }
 }
 
@@ -1097,6 +1109,14 @@ export type AudioDevice = { index: string; name: string; is_default: boolean }
 export type AutoSubmitKey = "enter" | "ctrl_enter" | "cmd_enter"
 export type AvailableAccelerators = { transcribe: string[]; gpu_devices: GpuDeviceOption[] }
 export type BindingResponse = { success: boolean; binding: ShortcutBinding | null; error: string | null }
+/**
+ * Who sent a message in a multi-turn conversation.
+ */
+export type ChatRole = "user" | "assistant"
+/**
+ * One message of a multi-turn conversation.
+ */
+export type ChatTurn = { role: ChatRole; content: string }
 /**
  * Script applied to Mandarin and Cantonese output. Traditional carries its region
  * (Taiwan vs Hong Kong forms, e.g. 裡/裏) rather than guessing it.

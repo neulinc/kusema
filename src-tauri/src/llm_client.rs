@@ -1,8 +1,10 @@
 use crate::settings::{PostProcessApiFormat, PostProcessProvider};
 use log::{debug, error, info};
 use reqwest::header::{HeaderMap, HeaderValue, AUTHORIZATION, CONTENT_TYPE, REFERER, USER_AGENT};
+use serde::de::DeserializeOwned;
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
+use specta::Type;
 use std::collections::HashSet;
 use std::error::Error as StdError;
 use std::sync::{Mutex, OnceLock};
@@ -144,6 +146,8 @@ const ANTHROPIC_MAX_TOKENS: u32 = 4096;
 struct AnthropicMessagesRequest {
     model: String,
     max_tokens: u32,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    system: Option<String>,
     messages: Vec<ChatMessage>,
 }
 
@@ -537,6 +541,7 @@ async fn send_anthropic_message(
     let request_body = AnthropicMessagesRequest {
         model: model.to_string(),
         max_tokens: ANTHROPIC_MAX_TOKENS,
+        system: None,
         messages: vec![ChatMessage {
             role: "user".to_string(),
             content: prompt,
@@ -583,6 +588,156 @@ async fn send_anthropic_message(
     }
 
     Ok(message.into_text())
+}
+
+/// Who sent a message in a multi-turn conversation.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, Type)]
+#[serde(rename_all = "lowercase")]
+pub enum ChatRole {
+    User,
+    Assistant,
+}
+
+impl ChatRole {
+    fn as_str(self) -> &'static str {
+        match self {
+            ChatRole::User => "user",
+            ChatRole::Assistant => "assistant",
+        }
+    }
+}
+
+/// One message of a multi-turn conversation.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Type)]
+pub struct ChatTurn {
+    pub role: ChatRole,
+    pub content: String,
+}
+
+fn chat_messages(turns: &[ChatTurn]) -> impl Iterator<Item = ChatMessage> + '_ {
+    turns.iter().map(|turn| ChatMessage {
+        role: turn.role.as_str().to_string(),
+        content: turn.content.clone(),
+    })
+}
+
+/// Anthropic Messages body for a conversation: the system prompt goes in the
+/// top-level `system` field, never in the message list.
+fn anthropic_conversation_request(
+    model: &str,
+    system_prompt: &str,
+    turns: &[ChatTurn],
+) -> AnthropicMessagesRequest {
+    AnthropicMessagesRequest {
+        model: model.to_string(),
+        max_tokens: ANTHROPIC_MAX_TOKENS,
+        system: (!system_prompt.is_empty()).then(|| system_prompt.to_string()),
+        messages: chat_messages(turns).collect(),
+    }
+}
+
+/// OpenAI chat body for a conversation: the system prompt is the first message.
+fn chat_conversation_request(
+    model: &str,
+    system_prompt: &str,
+    turns: &[ChatTurn],
+) -> ChatCompletionRequest {
+    let mut messages = Vec::with_capacity(turns.len() + 1);
+    if !system_prompt.is_empty() {
+        messages.push(ChatMessage {
+            role: "system".to_string(),
+            content: system_prompt.to_string(),
+        });
+    }
+    messages.extend(chat_messages(turns));
+
+    ChatCompletionRequest {
+        model: model.to_string(),
+        messages,
+        stream: false,
+        response_format: None,
+        reasoning: ReasoningParams::default(),
+    }
+}
+
+/// POST a JSON body and decode a successful JSON response.
+async fn post_json<B: Serialize, R: DeserializeOwned>(
+    provider: &PostProcessProvider,
+    api_key: &str,
+    url: &str,
+    body: &B,
+) -> Result<R, String> {
+    debug!(
+        "Sending conversation request to: {}",
+        sanitized_url_for_log(url)
+    );
+
+    let response = create_client(provider, api_key)?
+        .post(url)
+        .json(body)
+        .send()
+        .await
+        .map_err(|e| report_reqwest_error("HTTP request failed", &e))?;
+    let status = response.status();
+    debug!(
+        "Conversation response received with status {} over {:?} from {}",
+        status,
+        response.version(),
+        sanitized_url(response.url())
+    );
+
+    if !status.is_success() {
+        let error_text = response
+            .text()
+            .await
+            .unwrap_or_else(|e| report_reqwest_error("Failed to read API error response", &e));
+        return Err(format!(
+            "API request failed with status {}: {}",
+            status, error_text
+        ));
+    }
+
+    response
+        .json()
+        .await
+        .map_err(|e| report_reqwest_error("Failed to parse API response", &e))
+}
+
+/// Send a multi-turn conversation (oldest message first) and return the reply.
+/// Works for both the Anthropic Messages format and the OpenAI chat format.
+/// Used by Assistant mode; the post-processing requests above are unchanged.
+pub async fn send_conversation(
+    provider: &PostProcessProvider,
+    api_key: String,
+    model: &str,
+    system_prompt: &str,
+    turns: &[ChatTurn],
+) -> Result<Option<String>, String> {
+    let base_url = provider.base_url.trim_end_matches('/');
+
+    if provider.api_format == PostProcessApiFormat::Anthropic {
+        let url = format!("{}/messages", base_url);
+        let body = anthropic_conversation_request(model, system_prompt, turns);
+        let message: AnthropicMessagesResponse = post_json(provider, &api_key, &url, &body).await?;
+        if message.stop_reason.as_deref() == Some("max_tokens") {
+            return Err(format!(
+                "Response was truncated at the {} token limit",
+                ANTHROPIC_MAX_TOKENS
+            ));
+        }
+        return Ok(message.into_text());
+    }
+
+    let url = format!("{}/chat/completions", base_url);
+    let body = chat_conversation_request(model, system_prompt, turns);
+    let completion: ChatCompletionResponse = post_json(provider, &api_key, &url, &body).await?;
+    let Some(choice) = completion.choices.into_iter().next() else {
+        return Ok(None);
+    };
+    if choice.finish_reason.as_deref() == Some("length") {
+        return Err("Response was truncated at the provider's output token limit".to_string());
+    }
+    Ok(choice.message.content)
 }
 
 /// Fetch available models from an OpenAI-compatible API
@@ -886,6 +1041,7 @@ mod tests {
         let request = AnthropicMessagesRequest {
             model: "claude-haiku".to_string(),
             max_tokens: ANTHROPIC_MAX_TOKENS,
+            system: None,
             messages: vec![ChatMessage {
                 role: "user".to_string(),
                 content: "hi".to_string(),
@@ -896,6 +1052,117 @@ mod tests {
         assert_eq!(json["messages"][0]["role"], "user");
         assert!(json.get("stream").is_none());
         assert!(json.get("reasoning_effort").is_none());
+        assert!(json.get("system").is_none());
+    }
+
+    fn conversation() -> Vec<ChatTurn> {
+        vec![
+            ChatTurn {
+                role: ChatRole::User,
+                content: "What's the capital of Ghana?".to_string(),
+            },
+            ChatTurn {
+                role: ChatRole::Assistant,
+                content: "Accra.".to_string(),
+            },
+            ChatTurn {
+                role: ChatRole::User,
+                content: "What's its population?".to_string(),
+            },
+        ]
+    }
+
+    #[test]
+    fn anthropic_conversation_puts_system_prompt_at_top_level() {
+        let json = serde_json::to_value(anthropic_conversation_request(
+            "claude-haiku",
+            "Be brief.",
+            &conversation(),
+        ))
+        .unwrap();
+        assert_eq!(json["system"], "Be brief.");
+        assert_eq!(json["max_tokens"], ANTHROPIC_MAX_TOKENS);
+        let messages = json["messages"].as_array().unwrap();
+        assert_eq!(messages.len(), 3);
+        assert_eq!(messages[0]["role"], "user");
+        assert_eq!(messages[1]["role"], "assistant");
+        assert_eq!(messages[1]["content"], "Accra.");
+        assert_eq!(messages[2]["role"], "user");
+    }
+
+    #[test]
+    fn chat_conversation_puts_system_prompt_first() {
+        let json = serde_json::to_value(chat_conversation_request(
+            "gpt",
+            "Be brief.",
+            &conversation(),
+        ))
+        .unwrap();
+        let messages = json["messages"].as_array().unwrap();
+        assert_eq!(messages.len(), 4);
+        assert_eq!(messages[0]["role"], "system");
+        assert_eq!(messages[0]["content"], "Be brief.");
+        assert_eq!(messages[1]["role"], "user");
+        assert_eq!(messages[2]["role"], "assistant");
+        assert_eq!(json["stream"], false);
+        assert!(json.get("response_format").is_none());
+        assert!(json.get("reasoning_effort").is_none());
+    }
+
+    #[test]
+    fn empty_system_prompt_is_omitted() {
+        let anthropic =
+            serde_json::to_value(anthropic_conversation_request("m", "", &conversation())).unwrap();
+        assert!(anthropic.get("system").is_none());
+        let chat = chat_conversation_request("m", "", &conversation());
+        assert_eq!(chat.messages[0].role, "user");
+    }
+
+    #[tokio::test]
+    async fn conversation_parses_both_formats() {
+        let base_url = serve_one_response(
+            "200 OK",
+            r#"{"type":"message","role":"assistant","content":[{"type":"text","text":"About 2.5 million."}]}"#,
+        )
+        .await;
+        let result = send_conversation(
+            &anthropic_format_provider(&base_url),
+            "key".to_string(),
+            "claude-haiku",
+            "Be brief.",
+            &conversation(),
+        )
+        .await;
+        assert_eq!(result, Ok(Some("About 2.5 million.".to_string())));
+
+        let base_url = serve_one_response(
+            "200 OK",
+            r#"{"choices":[{"message":{"content":"About 2.5 million."},"finish_reason":"stop"}]}"#,
+        )
+        .await;
+        let result = send_conversation(
+            &provider("custom", &base_url),
+            String::new(),
+            "llama",
+            "Be brief.",
+            &conversation(),
+        )
+        .await;
+        assert_eq!(result, Ok(Some("About 2.5 million.".to_string())));
+    }
+
+    #[tokio::test]
+    async fn conversation_reports_http_errors() {
+        let base_url = serve_one_response("401 Unauthorized", r#"{"error":"bad key"}"#).await;
+        let result = send_conversation(
+            &provider("custom", &base_url),
+            "key".to_string(),
+            "m",
+            "",
+            &conversation(),
+        )
+        .await;
+        assert!(result.unwrap_err().contains("401"));
     }
 
     #[test]

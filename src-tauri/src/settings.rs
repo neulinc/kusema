@@ -958,6 +958,21 @@ pub fn get_default_settings() -> AppSettings {
             current_binding: default_post_process_shortcut.to_string(),
         },
     );
+    #[cfg(target_os = "macos")]
+    let default_assistant_shortcut = "ctrl+option+space";
+    #[cfg(not(target_os = "macos"))]
+    let default_assistant_shortcut = "ctrl+alt+space";
+
+    bindings.insert(
+        "assistant".to_string(),
+        ShortcutBinding {
+            id: "assistant".to_string(),
+            name: "Ask Kusema".to_string(),
+            description: "Ask a spoken question and get a reply from your AI provider.".to_string(),
+            default_binding: default_assistant_shortcut.to_string(),
+            current_binding: default_assistant_shortcut.to_string(),
+        },
+    );
     bindings.insert(
         "cancel".to_string(),
         ShortcutBinding {

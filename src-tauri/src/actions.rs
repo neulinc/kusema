@@ -113,6 +113,8 @@ pub trait ShortcutAction: Send + Sync {
 // Transcribe Action
 struct TranscribeAction {
     post_process: bool,
+    /// Kusema Assistant mode: answer the text instead of pasting it.
+    assistant: bool,
 }
 
 /// Field name for structured output JSON schema
@@ -127,7 +129,7 @@ fn strip_invisible_chars(s: &str) -> String {
 /// reasoning, and some local servers put the reasoning text into `content`
 /// instead of a separate field — without this the user would get the model's
 /// chain of thought pasted along with the cleaned transcription.
-fn strip_think_block(s: &str) -> &str {
+pub(crate) fn strip_think_block(s: &str) -> &str {
     if let Some(rest) = s.trim_start().strip_prefix("<think>") {
         if let Some(end) = rest.find("</think>") {
             return rest[end + "</think>".len()..].trim_start();
@@ -151,7 +153,10 @@ fn is_blank_transcription(transcription: &str) -> bool {
     transcription.trim().is_empty()
 }
 
-async fn complete_unless_cancelled<F, C>(operation: F, is_cancelled: C) -> Option<F::Output>
+pub(crate) async fn complete_unless_cancelled<F, C>(
+    operation: F,
+    is_cancelled: C,
+) -> Option<F::Output>
 where
     F: Future,
     C: Fn() -> bool,
@@ -659,6 +664,7 @@ impl ShortcutAction for TranscribeAction {
 
         let binding_id = binding_id.to_string(); // Clone binding_id for the async task
         let post_process = self.post_process;
+        let assistant = self.assistant;
         let cancel_generation = rm.cancel_generation();
 
         tauri::async_runtime::spawn(async move {
@@ -800,6 +806,23 @@ impl ShortcutAction for TranscribeAction {
                                     sample_count,
                                     stop_time,
                                 );
+                            } else if assistant {
+                                if use_streaming_overlay {
+                                    tm.emit_stream_working(StreamWorkKind::Polishing);
+                                } else {
+                                    show_processing_overlay(&ah);
+                                }
+                                // Escape must reach an in-flight request too.
+                                shortcut::register_cancel_shortcut(&ah);
+                                crate::assistant::ask(&ah, processed.final_text, || {
+                                    rm.was_cancelled_since(cancel_generation)
+                                })
+                                .await;
+                                if !rm.was_cancelled_since(cancel_generation) {
+                                    shortcut::unregister_cancel_shortcut(&ah);
+                                    utils::hide_recording_overlay(&ah);
+                                    set_tray_state(&ah, TrayIconState::Idle);
+                                }
                             } else {
                                 let ah_clone = ah.clone();
                                 let paste_time = Instant::now();
@@ -963,11 +986,22 @@ pub static ACTION_MAP: Lazy<HashMap<String, Arc<dyn ShortcutAction>>> = Lazy::ne
         "transcribe".to_string(),
         Arc::new(TranscribeAction {
             post_process: false,
+            assistant: false,
         }) as Arc<dyn ShortcutAction>,
     );
     map.insert(
         "transcribe_with_post_process".to_string(),
-        Arc::new(TranscribeAction { post_process: true }) as Arc<dyn ShortcutAction>,
+        Arc::new(TranscribeAction {
+            post_process: true,
+            assistant: false,
+        }) as Arc<dyn ShortcutAction>,
+    );
+    map.insert(
+        "assistant".to_string(),
+        Arc::new(TranscribeAction {
+            post_process: false,
+            assistant: true,
+        }) as Arc<dyn ShortcutAction>,
     );
     map.insert(
         "cancel".to_string(),

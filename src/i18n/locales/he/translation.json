@@ -11,6 +11,7 @@
   },
   "sidebar": {
     "general": "כללי",
+    "assistant": "Assistant",
     "models": "מודלים",
     "advanced": "מתקדם",
     "postProcessing": "עיבוד משלים",
@@ -345,6 +346,10 @@
           "transcribe_with_post_process": {
             "name": "קיצור לעיבוד משלים",
             "description": "אופציונלי: קיצור מקשים ייעודי שתמיד מפעיל עיבוד AI על התמלול."
+          },
+          "assistant": {
+            "name": "Ask Kusema",
+            "description": "Hold or press to ask a spoken question. The reply appears below instead of being pasted."
           }
         },
         "errors": {
@@ -604,6 +609,15 @@
           "traditionalTw": "מסורתית (טייוואן)",
           "traditionalHk": "מסורתית (הונג קונג)"
         }
+      }
+    },
+    "assistant": {
+      "title": "Assistant",
+      "description": "Replies use the provider, model and API key from the Post Process page. To see that page, turn on Post Processing in Advanced settings.",
+      "conversation": {
+        "title": "Conversation",
+        "empty": "Ask a question with the Ask Kusema shortcut. The conversation will appear here.",
+        "new": "New conversation"
       }
     },
     "postProcessing": {

@@ -11,6 +11,7 @@
   },
   "sidebar": {
     "general": "通用",
+    "assistant": "Assistant",
     "models": "模型",
     "advanced": "高级",
     "postProcessing": "后处理",
@@ -345,6 +346,10 @@
           "transcribe_with_post_process": {
             "name": "后处理快捷键",
             "description": "可选：一个专用快捷键，始终对您的转录应用 AI 后处理。"
+          },
+          "assistant": {
+            "name": "Ask Kusema",
+            "description": "Hold or press to ask a spoken question. The reply appears below instead of being pasted."
           }
         },
         "errors": {
@@ -604,6 +609,15 @@
           "traditionalTw": "繁体（台湾）",
           "traditionalHk": "繁体（香港）"
         }
+      }
+    },
+    "assistant": {
+      "title": "Assistant",
+      "description": "Replies use the provider, model and API key from the Post Process page. To see that page, turn on Post Processing in Advanced settings.",
+      "conversation": {
+        "title": "Conversation",
+        "empty": "Ask a question with the Ask Kusema shortcut. The conversation will appear here.",
+        "new": "New conversation"
       }
     },
     "postProcessing": {
