@@ -185,11 +185,53 @@ If the build fails, open Claude Code in the folder and paste:
 
 ---
 
-## Step 6 — Computer control (voice commands for Windows)
+## Step 5b — Kusema release channel and auto-updates
+
+**Goal:** testers (and later customers) get new versions automatically. Testers on 0.1.0 have the updater disabled, so they must install the _next_ version manually **once**; every version after that updates itself.
+
+> Read docs/kusema-build-plan.md and CLAUDE.md first. We're on **Step 5b: Kusema's own release channel and auto-updater**. In Step 1 we disabled Handy's updater (`KUSEMA_UPDATE_CHANNEL_CONFIGURED = false`, blank pubkey/endpoint in `tauri.conf.json`). Set up our own.
+>
+> 1. **Updater signing key:** walk me through generating a Tauri updater key pair (`bun tauri signer generate`), protected with a password. The **private key and password must never be committed**: tell me where to store them (password manager, plus GitHub Actions secrets `TAURI_SIGNING_PRIVATE_KEY` and `TAURI_SIGNING_PRIVATE_KEY_PASSWORD`). Put only the public key in `tauri.conf.json`. Explain that this key is separate from Windows code signing (Authenticode), which we still don't have.
+> 2. **Endpoint:** point the updater at `https://github.com/neulinc/kusema/releases/latest/download/latest.json`. Check whether the repo is public; if it's private, release assets need auth and the updater can't fetch them. In that case tell me and propose an alternative host (e.g. a public releases-only repo or Cloudflare R2) instead of guessing.
+> 3. Set `createUpdaterArtifacts` back on, re-enable the updater (`KUSEMA_UPDATE_CHANNEL_CONFIGURED = true`) and restore the "Check for updates" UI, keeping any behavior that disables updates via `HANDY_DISABLE_UPDATER` or portable mode.
+> 4. **Release workflow:** add or adapt a GitHub Actions workflow that, when I push a tag like `v0.2.0`, builds the Windows NSIS and MSI installers, signs the update artifacts with the secrets, and publishes a GitHub Release with the installers plus `latest.json`. Windows only for now. Remove or disable Handy's upstream release workflows that would publish to the wrong place or need Handy's secrets.
+> 5. **Release checklist** in `docs/releasing.md`: bump the version in `tauri.conf.json`, `Cargo.toml` and `package.json`, write short release notes, tag, push, verify the release, and test the update on a machine with the previous version.
+> 6. Bump the version to 0.2.0 for the first release with the updater enabled.
+>
+> Run lint, `cargo check`, tests and a local `bun run tauri build` to confirm updater artifacts are produced (signing with my key via environment variables, not files in the repo). Stop any processes you started. Mark Step 5b done and commit as "Add Kusema release channel and auto-updates".
+
+**Test:** install 0.2.0 from the release on a test machine, publish 0.2.1 with a trivial change, and confirm the app offers and installs the update with settings, models, voices and the API key intact.
+
+---
+
+## Step 6 — "Ask about my screen" (window screenshot + vision)
+
+**Goal:** the user holds a dedicated hotkey and asks "what do you think of this document?" Kusema captures the **active window**, shows the user exactly what will be sent, and only after confirmation sends the screenshot plus the question to a vision-capable model. The voice stays local as always; the screenshot leaves only on explicit approval.
+
+> Read docs/kusema-build-plan.md and CLAUDE.md first. We're on **Step 6: Ask about my screen**. Assistant mode (Steps 2–5) works. Add a screen-aware variant.
+>
+> 1. **Hotkey:** new binding `assistant_screen`, "Ask about my screen", Windows default `ctrl+alt+shift+space` (sensible macOS/Linux defaults), registered like `assistant`. Plain Ask Kusema must never capture anything.
+> 2. **Capture, at hotkey press:** record the foreground window _before_ any Kusema overlay appears, and capture only that window, never the full screen or other monitors. If the foreground window is Kusema itself, the desktop or the taskbar, don't capture; explain instead. Evaluate the `xcap` crate versus the Windows Graphics Capture API directly; handle DPI scaling and multiple monitors correctly; explain your choice. Briefly show a subtle border flash around the captured window so the user knows what was captured.
+> 3. **In memory only:** never write screenshots to disk, logs or History. History records the question and answer with a "[screenshot]" marker only. Discard the image when the conversation is cleared or the app exits.
+> 4. **Confirmation (default ON):** after transcription, show a small confirmation window with a thumbnail of the captured window (click to enlarge), the transcribed question, the provider/model it will go to, and **Send** / **Cancel** buttons (Enter / Escape). Kusema can say "Send this screenshot to Claude?" if speech is on. Auto-cancel after 30 seconds. Nothing is uploaded before Send. A setting "Confirm before sending screenshots" defaults on; turning it off shows a clear warning.
+> 5. **Preparing the image:** downscale so the long edge is at most ~1568 px (good for Claude vision; keeps cost and latency down) and encode as JPEG (~85%) or PNG for text-heavy windows, whichever is smaller.
+> 6. **Sending:** extend `send_conversation` to support image content in a user turn: Anthropic format (`image` content block, base64 source) and OpenAI format (`image_url` with a data URL). Ollama's OpenAI-compatible endpoint should work for local vision models through the Custom provider. If the selected model or provider doesn't support images, show and speak a clear error ("This model can't see images. Choose a vision model like Claude, or a local vision model in Ollama") instead of failing silently.
+> 7. **Follow-ups:** keep the most recent screenshot in the conversation so follow-ups like "summarise the second paragraph" work, but drop older screenshots from history to control cost.
+> 8. **Provider for screen questions (setting):** "Use for screen questions: same as Assistant / a different provider", so users can force screenshots to a **local** model (Ollama) while normal questions go to Claude. This is the privacy option for confidential documents.
+> 9. Update the assistant system prompt for screen questions: describe what it sees, answer the question, and keep spoken answers short. Let the user ask for detail.
+> 10. English strings copied to other locales, as before.
+>
+> Add tests for image encoding/downscaling, both request formats with images, and the "drop older screenshots" logic. Run `cargo check`, `cargo test`, lint, `bun run tauri dev`. Stop any processes you started. Mark Step 6 done and commit as "Add Ask about my screen".
+
+**Test:** open a Word document or PDF, press Ctrl+Alt+Shift+Space, ask "what do you think of this document?", check the confirmation shows the right window, click Send, and listen to the answer. Then follow up with "make the first paragraph shorter." Also test Cancel (nothing sent), a non-vision model (clear error), and the local-model setting if Ollama is installed.
+
+---
+
+## Step 7 — Computer control (voice commands for Windows)
 
 **Goal:** "Kusema, switch to dark mode" changes the setting and replies "Done." The AI only _chooses_ from a fixed whitelist of actions Kusema implements locally; it never runs arbitrary commands.
 
-> Read docs/kusema-build-plan.md and CLAUDE.md first. We're on **Step 6: computer control via tool use**. Assistant mode (Steps 2–3) works; extend it so the LLM can call a fixed set of local actions.
+> Read docs/kusema-build-plan.md and CLAUDE.md first. We're on **Step 7: computer control via tool use**. Assistant mode (Steps 2–3) works; extend it so the LLM can call a fixed set of local actions.
 >
 > 1. **Tool registry:** create `src-tauri/src/tools/` with a `Tool` trait (name, description, JSON-schema parameters, risk level `Safe | Confirm`, `execute(args) -> Result<String>`) and a registry. The registry is a fixed whitelist. There must be no tool that runs arbitrary shell commands, scripts, or file deletion.
 > 2. **LLM tool calling:** extend `send_conversation` in `llm_client.rs` to send tool definitions and handle tool-use responses in both the Anthropic format (`tools`, `tool_use` / `tool_result` blocks) and the OpenAI format (`tools`, `tool_calls`). Loop: model requests a tool, Kusema executes it locally, returns the result, model gives the final spoken reply. Cap at 5 tool rounds per question. Keep streaming speech for the final text reply. Models or providers without tool support must fail gracefully ("This model can't control the computer; try Claude or GPT").
@@ -208,17 +250,17 @@ If the build fails, open Claude Code in the folder and paste:
 > 6. **Settings:** "Allow computer control" (default **off**), with per-tool toggles grouped by risk. When off, no tools are sent to the model at all.
 > 7. Update the assistant system prompt to tell the model which tools exist, to confirm completed actions in one short spoken sentence, and to say plainly when something isn't possible.
 >
-> Add unit tests for the registry, argument validation (path and URL allowlists), and the tool-call parsing for both formats. Run `cargo check`, `cargo test`, `bun run tauri dev`. Stop any processes you started. Mark Step 6 done in the plan and commit as "Add computer control (tool use)".
+> Add unit tests for the registry, argument validation (path and URL allowlists), and the tool-call parsing for both formats. Run `cargo check`, `cargo test`, `bun run tauri dev`. Stop any processes you started. Mark Step 7 done in the plan and commit as "Add computer control (tool use)".
 
 **Test:** turn on "Allow computer control", then try "switch to dark mode", "set the volume to 30 percent", "open Bluetooth settings", "undo that", and "shut down" (it should ask first; say no).
 
 ---
 
-## Step 7 — Optional wake word ("Hey Kusema")
+## Step 8 — Optional wake word ("Hey Kusema")
 
 **Goal:** hands-free activation as an alternative to hotkeys. Off by default; detection runs entirely on-device.
 
-> Read docs/kusema-build-plan.md and CLAUDE.md first. We're on **Step 7: optional wake word**.
+> Read docs/kusema-build-plan.md and CLAUDE.md first. We're on **Step 8: optional wake word**.
 >
 > 1. **Engine:** evaluate openWakeWord (Apache 2.0, ONNX models; custom phrases trainable from synthetic speech) and Rustpotter (pure Rust, Apache 2.0). Prefer openWakeWord via the ONNX runtime Kusema already ships, if practical. Explain the choice before writing much code. Don't use Porcupine (commercial license).
 > 2. **Wake phrase:** "Hey Kusema". Document (in `docs/wake-word.md`) how to train/regenerate the custom model with openWakeWord's training pipeline, and ship a pre-trained model file downloaded on demand like the speech models. Until a trained model exists, support a built-in openWakeWord phrase (e.g. "hey jarvis") as a stand-in, clearly labelled in settings.
@@ -229,7 +271,7 @@ If the build fails, open Claude Code in the folder and paste:
 > 7. **Visibility and control:** a distinct tray state while listening, a tray menu item "Pause wake word", and a hotkey to toggle it (e.g. during client calls).
 > 8. Measure and report idle CPU usage while listening; target under ~2% on a mid-range laptop.
 >
-> Add tests where practical (detector wrapper, pause/resume state machine). Run `cargo check`, `cargo test`, `bun run tauri dev`. Stop any processes you started. Mark Step 7 done in the plan and commit as "Add optional wake word".
+> Add tests where practical (detector wrapper, pause/resume state machine). Run `cargo check`, `cargo test`, `bun run tauri dev`. Stop any processes you started. Mark Step 8 done in the plan and commit as "Add optional wake word".
 
 **Test:** enable the wake word, say "Hey Kusema, what's the weather like in Kingston usually in March?" with no hotkey. Then check it doesn't trigger while Kusema is speaking, and that "Pause wake word" stops it.
 
@@ -241,8 +283,9 @@ If the build fails, open Claude Code in the folder and paste:
 - **Redaction**: optional local step stripping names, emails and phone numbers before text goes to a cloud provider.
 - **Chatterbox voice cloning** with a consent step (live recording of a scripted consent line, no uploaded files).
 - **Separate provider settings for Assistant vs. post-processing**, if you want, e.g., Groq for fast cleanup and Claude for questions.
-- **Code signing** for the Windows installer before giving it to clients.
-- **Interrupt by voice:** say "Hey Kusema" while it's talking to cut it off. Needs echo cancellation, so do this after Step 7.
+- **Windows code signing (Authenticode):** removes the SmartScreen warning; needed before selling.
+- **Offline/air-gapped installer (Pro):** bundle the speech model, ONNX Runtime and Kokoro voices in the installer for offices that block downloads.
+- **Interrupt by voice:** say "Hey Kusema" while it's talking to cut it off. Needs echo cancellation, so do this after Step 8.
 - **Paste the answer:** an option to type the assistant's reply into the active app instead of speaking it ("draft a reply declining this meeting").
 - **Remaining Handy links:** replace handy.computer links (Linux setup guide, macOS Secure Input help, About-page donate link) with Kusema pages or remove them.
 - **More Kokoro languages:** Kokoro also has Spanish, French, Hindi, Italian, Japanese, Portuguese and Chinese voices; each needs its own phonemizer (misaki has some), without espeak-ng.
