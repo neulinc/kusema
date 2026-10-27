@@ -19,7 +19,6 @@ import {
   AboutSettings,
   PostProcessingSettings,
   ModelsSettings,
-  AssistantSettings,
 } from "./settings";
 
 export type SidebarSection = keyof typeof SECTIONS_CONFIG;
@@ -50,7 +49,8 @@ export const SECTIONS_CONFIG = {
   assistant: {
     labelKey: "sidebar.assistant",
     icon: MessageCircle,
-    component: AssistantSettings,
+    // Rendered by App, which passes it navigation.
+    component: null,
     enabled: () => true,
   },
   history: {

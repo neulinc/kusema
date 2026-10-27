@@ -7,13 +7,16 @@ import { Button } from "../../ui/Button";
 import { Alert } from "../../ui/Alert";
 import { ShortcutInput } from "../ShortcutInput";
 import { AssistantVoiceSettings } from "./AssistantVoiceSettings";
+import { AssistantProviderSettings } from "./AssistantProviderSettings";
 
 interface AssistantErrorPayload {
   question: string;
   message: string;
 }
 
-export const AssistantSettings: React.FC = () => {
+export const AssistantSettings: React.FC<{
+  onOpenPostProcessing: () => void;
+}> = ({ onOpenPostProcessing }) => {
   const { t } = useTranslation();
   const [messages, setMessages] = useState<ChatTurn[]>([]);
   const [error, setError] = useState<AssistantErrorPayload | null>(null);
@@ -66,6 +69,8 @@ export const AssistantSettings: React.FC = () => {
       >
         <ShortcutInput shortcutId="assistant" grouped={true} />
       </SettingsGroup>
+
+      <AssistantProviderSettings onOpenPostProcessing={onOpenPostProcessing} />
 
       <AssistantVoiceSettings />
 

@@ -1,15 +1,10 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { SettingContainer } from "../../ui/SettingContainer";
-import { Dropdown, type DropdownOption } from "../../ui/Dropdown";
+import { Dropdown } from "../../ui/Dropdown";
 import { useSettings } from "../../../hooks/useSettings";
 import { commands } from "@/bindings";
 import { toast } from "sonner";
-
-const KEYBOARD_IMPLEMENTATION_OPTIONS: DropdownOption[] = [
-  { value: "tauri", label: "Tauri Global Shortcut" },
-  { value: "handy_keys", label: "Handy Keys" },
-];
 
 interface KeyboardImplementationSelectorProps {
   descriptionMode?: "tooltip" | "inline";
@@ -60,7 +55,16 @@ export const KeyboardImplementationSelector: React.FC<
       layout="horizontal"
     >
       <Dropdown
-        options={KEYBOARD_IMPLEMENTATION_OPTIONS}
+        options={[
+          {
+            value: "tauri",
+            label: t("settings.debug.keyboardImplementation.options.tauri"),
+          },
+          {
+            value: "handy_keys",
+            label: t("settings.debug.keyboardImplementation.options.builtIn"),
+          },
+        ]}
         selectedValue={currentImplementation}
         onSelect={handleSelect}
         disabled={isUpdating("keyboard_implementation")}

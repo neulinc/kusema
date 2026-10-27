@@ -561,7 +561,7 @@ fn initialize_handy_keys_with_rollback(app: &AppHandle) -> Result<bool, String> 
         crate::secure_input::reconcile_fallback(app);
         tauri_impl::init_shortcuts(app);
         return Err(format!(
-            "Failed to initialize HandyKeys: {}. Reverted to Tauri.",
+            "Failed to start the built-in keyboard shortcuts: {}. Switched to Tauri Global Shortcut.",
             e
         ));
     }

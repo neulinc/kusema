@@ -613,7 +613,21 @@
     },
     "assistant": {
       "title": "Assistant",
-      "description": "Replies use the provider, model and API key from the Post Process page. To see that page, turn on Post Processing in Advanced settings.",
+      "description": "Hold the shortcut, ask a question out loud, and Kusema answers.",
+      "provider": {
+        "title": "AI Provider",
+        "provider": "Provider",
+        "description": "Assistant mode uses the same provider and API key as Post Process.",
+        "model": "Model",
+        "modelDescription": "The model that answers your questions. Change it on the Post Process page.",
+        "notSet": "Not chosen",
+        "open": "Open Post Process settings",
+        "disabled": "Assistant mode needs an AI provider (such as Anthropic, OpenAI or a local Ollama model) to answer questions. Providers are set up on the Post Process page, which appears once Post Processing is turned on. Turning it on doesn't change how normal dictation works.",
+        "enable": "Turn on Post Processing",
+        "noProvider": "Choose a provider on the Post Process page.",
+        "noKey": "No API key is set for {{provider}}. Add one on the Post Process page.",
+        "noModel": "Choose a model on the Post Process page."
+      },
       "conversation": {
         "title": "Conversation",
         "empty": "Ask a question with the Ask Kusema shortcut. The conversation will appear here.",
@@ -846,7 +860,11 @@
       "keyboardImplementation": {
         "title": "Gestion du clavier",
         "description": "Choisissez le système des raccourcis clavier.",
-        "bindingsReset": "Raccourcis clavier étaient incompatibles et ont été réinitialisés aux valeurs par défaut"
+        "bindingsReset": "Raccourcis clavier étaient incompatibles et ont été réinitialisés aux valeurs par défaut",
+        "options": {
+          "tauri": "Tauri Global Shortcut",
+          "builtIn": "Built-in (recommended)"
+        }
       },
       "pasteDelay": {
         "title": "Délai de collage (avant)",

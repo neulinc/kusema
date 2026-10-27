@@ -76,6 +76,7 @@ If the build fails, open Claude Code in the folder and paste:
 - **`src/bindings.ts` gets regenerated on Windows builds** (tauri-specta writes it at dev startup). The diff is only platform-specific doc comments, such as the `isLaptop` stub. It's harmless; commit it or discard it.
 - **Auto-updater disabled.** It pointed at Handy's GitHub releases and Handy's signing key. The endpoint and public key are now blank in `tauri.conf.json`, `createUpdaterArtifacts` is off, `update_checks_forced_disabled()` in `settings.rs` always returns true, and the footer "Check for updates" link and tray item are hidden. **Before distributing Kusema, set up our own update channel**: generate a signing key with `bun tauri signer generate`, put the public key and a Kusema `latest.json` endpoint in `tauri.conf.json`, turn `createUpdaterArtifacts` back on, and set `KUSEMA_UPDATE_CHANNEL_CONFIGURED` to true in `settings.rs`.
 - **AI provider requests identify as Kusema.** The User-Agent, Referer and X-Title headers in `llm_client.rs` now say Kusema.
+- **Version numbers track Kusema, not Handy** (2026-10-27). Kusema is v0.1.0 in `tauri.conf.json`, `src-tauri/Cargo.toml` and `package.json`, and is versioned on its own from here on. When merging upstream, keep ours if Handy bumps its version in those files. Handy's "What's new" release notes are for Handy versions above 0.1.0, so they no longer pop up.
 
 ---
 

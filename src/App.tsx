@@ -28,7 +28,11 @@ import {
   clearOnboardingProgress,
   type OnboardingStep as OnboardingPreviewStep,
 } from "./components/onboarding/onboardingStore";
-import { DebugSettings, ModelsSettings } from "./components/settings";
+import {
+  AssistantSettings,
+  DebugSettings,
+  ModelsSettings,
+} from "./components/settings";
 import { ErrorBoundary } from "./components/ErrorBoundary";
 import { FileDropOverlay } from "./components/FileDropOverlay";
 import { Sidebar, SidebarSection, SECTIONS_CONFIG } from "./components/Sidebar";
@@ -57,6 +61,13 @@ const renderSettingsContent = (
   if (section === "models") {
     return (
       <ModelsSettings onChangeLanguages={() => onSectionChange("general")} />
+    );
+  }
+  if (section === "assistant") {
+    return (
+      <AssistantSettings
+        onOpenPostProcessing={() => onSectionChange("postprocessing")}
+      />
     );
   }
   if (section === "debug") {
