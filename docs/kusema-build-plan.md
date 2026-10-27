@@ -131,7 +131,7 @@ If the build fails, open Claude Code in the folder and paste:
 
 ---
 
-## Step 4 — Store API keys in Windows Credential Manager
+## Step 4 — Store API keys in Windows Credential Manager ✅ Done (2026-10-27)
 
 > Read CLAUDE.md first. API keys are stored in the settings file via `SecretMap` (`post_process_api_keys` in `settings.rs`). They're redacted from logs but sit in plain text on disk. Move them to the OS keychain using the `keyring` crate (Windows Credential Manager, macOS Keychain, Linux Secret Service).
 >
@@ -142,6 +142,15 @@ If the build fails, open Claude Code in the folder and paste:
 > - Keep the diff small and localized; this file is heavily touched upstream.
 >
 > Add tests where practical. Commit as "Store API keys in OS keychain".
+
+### Notes from Step 4
+
+- **How it works:** `src-tauri/src/secrets.rs`. In memory, `AppSettings.post_process_api_keys` still holds the real keys, so nothing that reads them changed (actions, assistant, the settings UI). Only the copy written to `settings_store.json` changes: `secrets::for_disk` moves each key into the keychain and blanks it in the file, and `secrets::load_keys` fills the blanks back in on every `get_settings` (cached, so the keychain is read once per provider per run). The `settings.rs` diff is the four `store.set` calls plus one `load_keys` line each.
+- **Entries:** service `com.neulinc.kusema`, user = provider id. On Windows they show in Credential Manager as `anthropic.com.neulinc.kusema` and so on, under Windows Credentials > Generic Credentials.
+- **Migration:** a plaintext key found in the file moves to the keychain on first read, and the file is rewritten without it. Clearing a key in the UI deletes the keychain entry.
+- **Fallback:** if the keychain can't be used (e.g. Linux without a Secret Service), keys stay in the file as before, with a single warning in the log.
+- **Crate:** `keyring` 4 (Windows Credential Manager, macOS Keychain, and a pure-Rust Secret Service client on Linux, so no new system libraries). Keychain calls run on a short-lived OS thread so a blocking backend can't stall the async runtime.
+- **Downgrade caveat:** a build from before this step will see blank keys, because it doesn't read the keychain. Re-enter the key there if you ever need an older build.
 
 ---
 

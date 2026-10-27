@@ -1126,6 +1126,8 @@ pub fn get_settings(app: &AppHandle) -> AppSettings {
                     (salvage_settings(&settings_value), true)
                 }
             };
+        // Kusema: API keys live in the OS keychain (see secrets.rs).
+        updated |= crate::secrets::load_keys(&mut settings);
 
         if apply_settings_migrations(&mut settings, &settings_value) {
             updated = true;
@@ -1141,18 +1143,20 @@ pub fn get_settings(app: &AppHandle) -> AppSettings {
         }
 
         if updated {
-            store.set("settings", serde_json::to_value(&settings).unwrap());
+            store.set("settings", crate::secrets::for_disk(&settings));
         }
 
         settings
     } else {
-        let default_settings = get_default_settings();
-        store.set("settings", serde_json::to_value(&default_settings).unwrap());
+        let mut default_settings = get_default_settings();
+        crate::secrets::load_keys(&mut default_settings);
+        store.set("settings", crate::secrets::for_disk(&default_settings));
         default_settings
     };
 
     if ensure_post_process_defaults(&mut settings) {
-        store.set("settings", serde_json::to_value(&settings).unwrap());
+        crate::secrets::load_keys(&mut settings);
+        store.set("settings", crate::secrets::for_disk(&settings));
     }
 
     settings
@@ -1401,7 +1405,7 @@ pub fn write_settings(app: &AppHandle, settings: AppSettings) {
         .store(crate::portable::store_path(SETTINGS_STORE_PATH))
         .expect("Failed to initialize store");
 
-    store.set("settings", serde_json::to_value(&settings).unwrap());
+    store.set("settings", crate::secrets::for_disk(&settings));
 }
 
 pub fn get_bindings(app: &AppHandle) -> HashMap<String, ShortcutBinding> {
