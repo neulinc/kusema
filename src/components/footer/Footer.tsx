@@ -3,7 +3,6 @@ import { getVersion } from "@tauri-apps/api/app";
 
 import ModelSelector from "../model-selector";
 import UpdateChecker from "../update-checker";
-import { useSettings } from "../../hooks/useSettings";
 import TranscriptionStatus from "./TranscriptionStatus";
 
 interface FooterProps {
@@ -12,9 +11,6 @@ interface FooterProps {
 
 const Footer: React.FC<FooterProps> = ({ onShowHistory }) => {
   const [version, setVersion] = useState("");
-  // Hide the updater entirely while it is locked off (Kusema has no update
-  // channel yet), rather than showing a dead "Check for updates" label.
-  const { updateChecksLocked } = useSettings();
 
   useEffect(() => {
     const fetchVersion = async () => {
@@ -40,12 +36,8 @@ const Footer: React.FC<FooterProps> = ({ onShowHistory }) => {
 
         {/* Update Status */}
         <div className="flex items-center gap-1">
-          {updateChecksLocked === false && (
-            <>
-              <UpdateChecker />
-              <span>•</span>
-            </>
-          )}
+          <UpdateChecker />
+          <span>•</span>
           {/* eslint-disable-next-line i18next/no-literal-string */}
           <span>v{version}</span>
         </div>

@@ -1,6 +1,22 @@
 name: "Release"
 
-on: workflow_dispatch
+# Kusema: pushing a version tag (e.g. v0.2.0) builds the Windows x64 NSIS and
+# MSI installers, signs the update artifacts with Kusema's updater key and
+# publishes them, plus latest.json, as a GitHub Release in this repo. Installed
+# copies poll releases/latest/download/latest.json, so the release stays a
+# draft until every upload has finished. See docs/releasing.md.
+#
+# Required repository secrets:
+#   TAURI_SIGNING_PRIVATE_KEY           contents of the updater private key
+#   TAURI_SIGNING_PRIVATE_KEY_PASSWORD  its password
+
+on:
+  push:
+    tags: ["v*.*.*"]
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
 
 jobs:
   create-release:
@@ -14,70 +30,110 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v5
 
-      - name: Get version from tauri.conf.json
+      - name: Check the updater signing key is configured
+        env:
+          TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
+          TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
+        run: |
+          if [ -z "$TAURI_SIGNING_PRIVATE_KEY" ] || [ -z "$TAURI_SIGNING_PRIVATE_KEY_PASSWORD" ]; then
+            echo "::error::Add the TAURI_SIGNING_PRIVATE_KEY and TAURI_SIGNING_PRIVATE_KEY_PASSWORD repository secrets (see docs/releasing.md)."
+            exit 1
+          fi
+
+      - name: Get version and check it matches the tag
         id: get-version
         shell: bash
         run: |
           VERSION=$(grep -o '"version": "[^"]*"' src-tauri/tauri.conf.json | cut -d'"' -f4)
           echo "Application version from tauri.conf.json: $VERSION"
+          if [ "${GITHUB_REF_NAME}" != "v${VERSION}" ]; then
+            echo "::error::Tag ${GITHUB_REF_NAME} does not match version ${VERSION} in tauri.conf.json."
+            exit 1
+          fi
+          for f in package.json src-tauri/Cargo.toml; do
+            if ! grep -q "^\s*\"\?version\"\?\s*[:=]\s*\"${VERSION}\"" "$f"; then
+              echo "::error::$f does not have version ${VERSION}."
+              exit 1
+            fi
+          done
+          NOTES="src/content/release-notes/${VERSION}.md"
+          if [ ! -f "$NOTES" ]; then
+            echo "::error::Missing release notes: $NOTES"
+            exit 1
+          fi
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
 
-      - name: Create Draft Release
+      - name: Create draft release
         id: create-release
         uses: actions/github-script@v9
         with:
           script: |
+            const fs = require("fs");
+            const version = "${{ steps.get-version.outputs.version }}";
+            const body = fs.readFileSync(`src/content/release-notes/${version}.md`, "utf8");
             const { data } = await github.rest.repos.createRelease({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              tag_name: `v${{ steps.get-version.outputs.version }}`,
-              name: `v${{ steps.get-version.outputs.version }}`,
+              tag_name: `v${version}`,
+              name: `Kusema ${version}`,
+              body,
               draft: true,
               prerelease: false,
-              generate_release_notes: true
-            })
-            return data.id
+            });
+            return data.id;
 
-  publish-tauri:
+  build-windows:
     permissions:
       contents: write
     needs: create-release
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - platform: "macos-26" # for Arm based macs (M1 and above). Uses macOS 26 for Apple Intelligence SDK.
-            args: "--target aarch64-apple-darwin"
-            target: "aarch64-apple-darwin"
-          - platform: "macos-latest" # for Intel based macs.
-            args: "--target x86_64-apple-darwin"
-            target: "x86_64-apple-darwin"
-          - platform: "ubuntu-22.04" # Build .deb on 22.04
-            args: "--bundles deb"
-            target: "x86_64-unknown-linux-gnu"
-          - platform: "ubuntu-24.04" # Build AppImage and RPM on 24.04
-            args: "--bundles appimage,rpm"
-            target: "x86_64-unknown-linux-gnu"
-          - platform: "ubuntu-24.04-arm" # Build for ARM64 Linux
-            args: "--bundles appimage,deb,rpm"
-            target: "aarch64-unknown-linux-gnu"
-          - platform: "windows-latest"
-            args: ""
-            target: "x86_64-pc-windows-msvc"
-          - platform: "windows-11-arm" # for ARM64 Windows runner
-            args: "--target aarch64-pc-windows-msvc"
-            target: "aarch64-pc-windows-msvc"
-
     uses: ./.github/workflows/build.yml
     with:
-      platform: ${{ matrix.platform }}
-      target: ${{ matrix.target }}
-      build-args: ${{ matrix.args }}
+      platform: "windows-latest"
+      target: "x86_64-pc-windows-msvc"
+      build-args: ""
+      # Passes the updater signing secrets to the build. Kusema has no
+      # Authenticode certificate yet, so the installers themselves are unsigned.
       sign-binaries: true
-      asset-prefix: "handy"
       upload-artifacts: false
       release-id: ${{ needs.create-release.outputs.release-id }}
       # Releases always build from scratch — never restore the Rust cache, so a
       # stale cached native lib can never be linked into a shipped artifact.
       no-cache: true
     secrets: inherit
+
+  publish-release:
+    permissions:
+      contents: write
+    needs: [create-release, build-windows]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check the assets and publish the release
+        uses: actions/github-script@v9
+        with:
+          script: |
+            const release_id = Number("${{ needs.create-release.outputs.release-id }}");
+            const assets = await github.paginate(github.rest.repos.listReleaseAssets, {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              release_id,
+            });
+            const names = assets.map((a) => a.name);
+            core.info(`Assets:\n${names.join("\n")}`);
+            const required = [
+              (n) => n === "latest.json",
+              (n) => n.endsWith("-setup.exe"),
+              (n) => n.endsWith("-setup.exe.sig"),
+              (n) => n.endsWith(".msi"),
+              (n) => n.endsWith(".msi.sig"),
+            ];
+            if (!required.every((test) => names.some(test))) {
+              core.setFailed("The release is missing installers, signatures or latest.json; it was left as a draft.");
+              return;
+            }
+            await github.rest.repos.updateRelease({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              release_id,
+              draft: false,
+              make_latest: "true",
+            });

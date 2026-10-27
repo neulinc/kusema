@@ -3,10 +3,13 @@ name: "Main Branch Build"
 # Runs the full cross-platform build on every push to main so breakage is
 # caught before a manual release is triggered. Artifacts are kept for 30 days
 # so any commit on main has a downloadable, testable build.
+#
+# Kusema: manual only. The macOS legs need Apple signing secrets Kusema
+# doesn't have, so every push would fail; Windows releases come from
+# release.yml.
 
 on:
-  push:
-    branches: [main]
+  workflow_dispatch:
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}

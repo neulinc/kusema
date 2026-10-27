@@ -74,7 +74,7 @@ If the build fails, open Claude Code in the folder and paste:
   - Theme colors are in `src/styles/theme.css`. Primary buttons (`--color-background-ui`) use `#6d5ce8` from the icon gradient.
 - **Code signing removed.** The upstream Windows signing command used the Handy author's Azure account. Installers are unsigned until we have our own certificate (see "Later").
 - **`src/bindings.ts` gets regenerated on Windows builds** (tauri-specta writes it at dev startup). The diff is only platform-specific doc comments, such as the `isLaptop` stub. It's harmless; commit it or discard it.
-- **Auto-updater disabled.** It pointed at Handy's GitHub releases and Handy's signing key. The endpoint and public key are now blank in `tauri.conf.json`, `createUpdaterArtifacts` is off, `update_checks_forced_disabled()` in `settings.rs` always returns true, and the footer "Check for updates" link and tray item are hidden. **Before distributing Kusema, set up our own update channel**: generate a signing key with `bun tauri signer generate`, put the public key and a Kusema `latest.json` endpoint in `tauri.conf.json`, turn `createUpdaterArtifacts` back on, and set `KUSEMA_UPDATE_CHANNEL_CONFIGURED` to true in `settings.rs`.
+- **Auto-updater disabled.** It pointed at Handy's GitHub releases and Handy's signing key. The endpoint and public key are now blank in `tauri.conf.json`, `createUpdaterArtifacts` is off, `update_checks_forced_disabled()` in `settings.rs` always returns true, and the footer "Check for updates" link and tray item are hidden. **Before distributing Kusema, set up our own update channel**: generate a signing key with `bun tauri signer generate`, put the public key and a Kusema `latest.json` endpoint in `tauri.conf.json`, turn `createUpdaterArtifacts` back on, and set `KUSEMA_UPDATE_CHANNEL_CONFIGURED` to true in `settings.rs`. ✅ Done in Step 5b.
 - **AI provider requests identify as Kusema.** The User-Agent, Referer and X-Title headers in `llm_client.rs` now say Kusema.
 - **Version numbers track Kusema, not Handy** (2026-10-27). Kusema is v0.1.0 in `tauri.conf.json`, `src-tauri/Cargo.toml` and `package.json`, and is versioned on its own from here on. When merging upstream, keep ours if Handy bumps its version in those files. Handy's "What's new" release notes are for Handy versions above 0.1.0, so they no longer pop up.
 
@@ -185,7 +185,7 @@ If the build fails, open Claude Code in the folder and paste:
 
 ---
 
-## Step 5b — Kusema release channel and auto-updates
+## Step 5b — Kusema release channel and auto-updates ✅ Done (2026-10-27)
 
 **Goal:** testers (and later customers) get new versions automatically. Testers on 0.1.0 have the updater disabled, so they must install the _next_ version manually **once**; every version after that updates itself.
 
@@ -201,6 +201,17 @@ If the build fails, open Claude Code in the folder and paste:
 > Run lint, `cargo check`, tests and a local `bun run tauri build` to confirm updater artifacts are produced (signing with my key via environment variables, not files in the repo). Stop any processes you started. Mark Step 5b done and commit as "Add Kusema release channel and auto-updates".
 
 **Test:** install 0.2.0 from the release on a test machine, publish 0.2.1 with a trivial change, and confirm the app offers and installs the update with settings, models, voices and the API key intact.
+
+### Notes from Step 5b
+
+- **Host: GitHub Releases on `neulinc/kusema`.** The repo is public, so the app can fetch `releases/latest/download/latest.json` and the installers without auth. If the repo ever goes private, move releases to a public host and change the endpoint.
+- **Updater re-enabled by reverting Step 1's changes** rather than flipping a constant: `update_checks_forced_disabled()`, the footer and the "locked" text are back to Handy's code, so `HANDY_DISABLE_UPDATER` and portable mode behave as upstream (portable installs get a "download the installer" dialog, now pointing at Kusema's releases).
+- **Release workflow:** `.github/workflows/release.yml` (replaces Handy's) runs on a `v*.*.*` tag. It checks that the signing secrets exist, that the tag matches the version in all three files, and that `src/content/release-notes/<version>.md` exists; creates a draft release from those notes; builds Windows x64 through Handy's `build.yml` (which also installs and smoke-tests both installers); and publishes the release only once `latest.json`, both installers and both `.sig` files are uploaded, so the updater never sees a half-finished release. `main-build.yml` no longer runs on every push (its macOS legs need Apple secrets); keep our `release.yml` and `main-build.yml` on upstream merges.
+- **GitHub Actions has never run on this fork**: GitHub disables workflows on forks until they're enabled in the Actions tab. The workflow also needs "Read and write" workflow permissions. Both are in `docs/releasing.md`.
+- **Local signing:** `TAURI_SIGNING_PRIVATE_KEY` must hold the key's contents or its path; `TAURI_SIGNING_PRIVATE_KEY_PATH` is ignored by tauri-cli 2.11.4 (the build fails at the signing step). `bun run tauri build --no-sign` builds without the key. Verified locally with a throwaway key: `Kusema_0.2.0_x64-setup.exe`, `Kusema_0.2.0_x64_en-US.msi` and their `.sig` files.
+- **Release notes** in `src/content/release-notes/<version>.md` show once in the app after an update and are the GitHub Release text. Handy's `0.9.0.md` and `0.9.7.md` are still there and would show when Kusema reaches 0.9; delete them before then.
+- **0.2.0 is the first version with the updater.** Testers on 0.1.0 install it by hand once.
+- **Updater public key** (minisign key ID `A8BC6AC0C1F11AB4`) is in `tauri.conf.json`. The private key and password are kept outside the repo (password manager and GitHub Actions secrets).
 
 ---
 

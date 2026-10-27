@@ -1,7 +1,7 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
   "productName": "Kusema",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "identifier": "com.neulinc.kusema",
   "build": {
     "beforeDevCommand": "bun run dev",
@@ -25,7 +25,7 @@
   },
   "bundle": {
     "active": true,
-    "createUpdaterArtifacts": false,
+    "createUpdaterArtifacts": true,
     "targets": "all",
     "resources": ["resources/**/*"],
     "license": "MIT",
@@ -79,8 +79,10 @@
   },
   "plugins": {
     "updater": {
-      "pubkey": "",
-      "endpoints": []
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEE4QkM2QUMwQzFGMTFBQjQKUldTMEd2SEJ3R3E4cU5VUU1lOWZYTUtENWM0UGxoSjRBdVhhR1BXQnNjb2YyVXlmbzBFLytNQmUK",
+      "endpoints": [
+        "https://github.com/neulinc/kusema/releases/latest/download/latest.json"
+      ]
     }
   }
 }
