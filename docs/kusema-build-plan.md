@@ -388,6 +388,7 @@ Everything else moves behind a "Show all models" link under Advanced, including 
 - **Foot pedal and dictation mic support:** start and stop from the hardware legal staff already own.
 - **Transcribing recordings:** turn recorded dictation into text.
 - **Personal stats:** words dictated and time saved, kept on the computer.
+- **Watch folder:** automatically transcribe audio files saved by a dictation recorder into a chosen folder (local only, results saved as text/Word alongside).
 
 ---
 
@@ -400,6 +401,7 @@ Nothing is sold until all of these are done.
 - **Product page:** what Kusema does, its privacy claims and how to get it, written for small law firms.
 - **IT documentation:** what Kusema sends (ledger), what it never sends (audio), and Windows/WebView2 network traffic outside Kusema's control.
 - **License review:** have a lawyer review model and dependency licenses (especially NVIDIA Open Model License terms) before selling.
+- **Detach from the Handy fork network:** detach neulinc/kusema via GitHub Support (so it appears in GitHub search); keep the upstream remote, MIT license and Handy credit.
 - **Launch:** to small and solo US law firms, with accessibility users as the community channel.
 
 ### Notes on model hosting
@@ -475,6 +477,7 @@ Turn meetings into notes, only with a clear consent step: recording a conversati
 
 ### Other ideas
 
+- **Local API / MCP server** so other tools can use Kusema's private transcription.
 - **Redaction**: optional local step stripping names, emails and phone numbers before text goes to a cloud provider.
 - **Chatterbox voice cloning** with a consent step (live recording of a scripted consent line, no uploaded files).
 - **Separate provider settings for Assistant vs. post-processing**, if you want, e.g., Groq for fast cleanup and Claude for questions.
@@ -485,6 +488,8 @@ Turn meetings into notes, only with a clear consent step: recording a conversati
 - **Line endings:** ✅ Done (2026-10-27). `.gitattributes` sets `* text=auto eol=lf`, so checkouts are LF even with `core.autocrlf=true`, and `bun run format:check` passes on Windows.
 
 ## Keeping up with Handy
+
+**Don't reuse code from AGPL/GPL projects** (e.g. debpalash/VoiceStudio); ideas only.
 
 **Files to watch so downloads don't switch back to Handy's server.** `src-tauri/src/catalog/mod.rs` (`KUSEMA_MIRRORS` replaced Handy's `MIRRORS`), the `ModelSource::Url` entries in `src-tauri/src/managers/model.rs`, and `src-tauri/src/catalog/catalog.json` (a new revision can change a pinned hash, so a mirrored model's copy must be republished with `scripts/kusema_mirror.py`). `cargo test` fails if `blob.handy.computer` appears anywhere in `src-tauri/src`, if a legacy URL leaves `huggingface.co/kusema/`, or if a mirror isn't Kusema's. `scripts/mirror_models.py` is Handy's own tool for its server; Kusema doesn't use it.
 
