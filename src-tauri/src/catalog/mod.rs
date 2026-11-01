@@ -7,8 +7,8 @@
 //! the curated subset. It is compiled into the binary so Handy ships a
 //! complete model list with zero network access.
 //!
-//! Every supported transcription model is offered for download and mirrored
-//! at the package's default quant, independently of recommendation ranking.
+//! Every supported transcription model is offered for download, independently
+//! of recommendation ranking. A few are also mirrored by Kusema (`KUSEMA_MIRRORS`).
 //!
 //! Each entry is normalised into a [`ModelDescriptor`] — the same source-agnostic
 //! shape every other producer (HF discovery, on-disk scans, the legacy table)
@@ -29,11 +29,28 @@ use crate::managers::model_capabilities::{CapabilityProbe, Compatibility};
 /// breaking change; additive fields are ignored.
 const SCHEMA: u32 = 2;
 
-/// Base URLs tried in order when the Hugging Face download fails. The full
-/// file URL is `{mirror}/{repo_id}/{revision}/{filename}` — the same three
-/// values that form the HF resolve URL, so a mirror is a plain static host.
-/// `scripts/mirror_models.py` populates it from this catalog.
-const MIRRORS: &[&str] = &["https://blob.handy.computer"];
+/// Kusema: tried when the catalog's Hugging Face repo fails, as (catalog repo,
+/// Kusema's copy). Each holds only the default quant, byte for byte, published by
+/// `scripts/kusema_mirror.py`. Every other model has no fallback. Handy's own
+/// server is not used: this replaced its `MIRRORS`, so check this after a merge.
+const KUSEMA_MIRRORS: &[(&str, &str)] = &[
+    (
+        "handy-computer/parakeet-unified-en-0.6b-gguf",
+        "kusema/parakeet-unified-en-0.6b-gguf",
+    ),
+    (
+        "handy-computer/parakeet-tdt-0.6b-v3-gguf",
+        "kusema/parakeet-tdt-0.6b-v3-gguf",
+    ),
+    (
+        "handy-computer/nemotron-3.5-asr-streaming-0.6b-gguf",
+        "kusema/nemotron-3.5-asr-streaming-0.6b-gguf",
+    ),
+    (
+        "handy-computer/canary-180m-flash-gguf",
+        "kusema/canary-180m-flash-gguf",
+    ),
+];
 
 /// Kusema: catalog models not offered, because their licenses don't fit a paid
 /// product. `catalog.json` stays an exact copy of Handy's, so they're filtered
@@ -111,8 +128,8 @@ struct CatalogModel {
     description: String,
     /// HF repo id, e.g. `handy-computer/whisper-small-gguf`.
     repository: String,
-    /// Commit the files and hashes are pinned to. Both HF acquisition and
-    /// mirror keys use it, so downloaded bytes provably match the hashes.
+    /// Commit the files and hashes are pinned to, so downloaded bytes provably
+    /// match the hashes.
     revision: String,
     /// The catalog's license id. Only read by the test guarding what's offered.
     #[cfg_attr(not(test), allow(dead_code))]
@@ -177,7 +194,6 @@ impl CatalogModel {
 
     /// Handy uses a flat models directory for mirror downloads, so only
     /// transcription models with root-level default files can be offered.
-    /// Must match `offered_models` in `scripts/mirror_models.py`.
     fn is_offered(&self) -> bool {
         self.role == "asr"
             && self
@@ -416,11 +432,9 @@ pub struct MirrorFile {
     pub size_bytes: u64,
 }
 
-/// Ordered mirror URLs for an offered catalog model's file — any listed quant,
-/// not just the default — or empty when the model isn't offered from the
-/// catalog. `model_id` is the registry id (`"{repo_id}/{filename}"`). (The
-/// mirror only hosts default quants; a miss there just 404s and the caller
-/// reports it, so listing every quant here costs nothing.)
+/// Ordered mirror URLs for an offered catalog model's file, or empty when it
+/// has none: most models, and any quant but the default, which is all Kusema
+/// hosts. `model_id` is the registry id (`"{repo_id}/{filename}"`).
 pub fn mirror_fallbacks(model_id: &str) -> Vec<MirrorFile> {
     let Some((m, file)) = transcription_models()
         .filter(|m| m.is_offered())
@@ -433,45 +447,30 @@ pub fn mirror_fallbacks(model_id: &str) -> Vec<MirrorFile> {
     else {
         return Vec::new();
     };
-    mirror_files(
-        &m.repository,
-        &m.revision,
-        &file.filename,
-        &file.sha256,
-        file.size,
-    )
+    if m.default_file().map(|f| f.filename.as_str()) != Some(file.filename.as_str()) {
+        return Vec::new();
+    }
+    mirror_files(&m.repository, &file.filename, &file.sha256, file.size)
 }
 
 /// Ordered mirror URLs for the language detector's file.
 pub fn language_detector_mirrors() -> Vec<MirrorFile> {
     LANGUAGE_DETECTOR.as_ref().map_or_else(Vec::new, |d| {
-        mirror_files(
-            &d.repo_id,
-            &d.revision,
-            &d.filename,
-            &d.sha256,
-            d.size_bytes,
-        )
+        mirror_files(&d.repo_id, &d.filename, &d.sha256, d.size_bytes)
     })
 }
 
 fn mirror_files(
     repository: &str,
-    revision: &str,
     filename: &str,
     sha256: &str,
     size_bytes: u64,
 ) -> Vec<MirrorFile> {
-    MIRRORS
+    KUSEMA_MIRRORS
         .iter()
-        .map(|base| MirrorFile {
-            url: format!(
-                "{}/{}/{}/{}",
-                base.trim_end_matches('/'),
-                repository,
-                revision,
-                filename
-            ),
+        .filter(|(catalog_repo, _)| *catalog_repo == repository)
+        .map(|(_, kusema_repo)| MirrorFile {
+            url: format!("https://huggingface.co/{kusema_repo}/resolve/main/{filename}"),
             sha256: sha256.to_string(),
             size_bytes,
         })
@@ -665,18 +664,75 @@ mod tests {
     }
 
     #[test]
-    fn every_offered_model_has_mirror_fallbacks_with_hashes() {
-        // The mirror fallback is the safety net for HF outages and blocked
-        // networks; an offered entry without one silently loses that net.
-        for d in CATALOG.iter() {
+    fn only_kusemas_own_copies_are_mirrors() {
+        let mirrored: Vec<&ModelDescriptor> = CATALOG
+            .iter()
+            .filter(|d| !mirror_fallbacks(&d.id).is_empty())
+            .collect();
+        assert_eq!(mirrored.len(), KUSEMA_MIRRORS.len());
+        for d in mirrored {
             let mirrors = mirror_fallbacks(&d.id);
-            assert!(!mirrors.is_empty(), "{}: no mirror fallbacks", d.id);
-            for m in &mirrors {
-                assert_eq!(m.sha256.len(), 64, "{}: mirror entry lacks a sha256", d.id);
-                assert!(m.size_bytes > 0, "{}: mirror entry lacks a size", d.id);
-                assert!(m.url.starts_with("https://"), "{}: bad url {}", d.id, m.url);
+            assert_eq!(mirrors.len(), 1, "{}", d.id);
+            let m = &mirrors[0];
+            assert_eq!(m.sha256.len(), 64, "{}: mirror entry lacks a sha256", d.id);
+            assert!(m.size_bytes > 0, "{}: mirror entry lacks a size", d.id);
+            assert!(
+                m.url.starts_with("https://huggingface.co/kusema/"),
+                "{}: bad url {}",
+                d.id,
+                m.url
+            );
+        }
+    }
+
+    #[test]
+    fn the_default_model_has_a_mirror_and_other_quants_do_not() {
+        let default_id =
+            "handy-computer/parakeet-unified-en-0.6b-gguf/parakeet-unified-en-0.6b-Q8_0.gguf";
+        assert_eq!(
+            mirror_fallbacks(default_id)[0].url,
+            "https://huggingface.co/kusema/parakeet-unified-en-0.6b-gguf/resolve/main/parakeet-unified-en-0.6b-Q8_0.gguf"
+        );
+        let other_quant =
+            "handy-computer/parakeet-unified-en-0.6b-gguf/parakeet-unified-en-0.6b-F16.gguf";
+        assert!(mirror_fallbacks(other_quant).is_empty());
+    }
+
+    #[test]
+    fn unmirrored_models_and_the_detector_have_no_fallback() {
+        assert!(
+            mirror_fallbacks("handy-computer/whisper-small-gguf/whisper-small-Q8_0.gguf")
+                .is_empty()
+        );
+        assert!(language_detector_mirrors().is_empty());
+    }
+
+    fn rust_files(dir: &std::path::Path, found: &mut Vec<std::path::PathBuf>) {
+        for entry in std::fs::read_dir(dir).unwrap().flatten() {
+            let path = entry.path();
+            if path.is_dir() {
+                rust_files(&path, found);
+            } else if path.extension().is_some_and(|e| e == "rs") {
+                found.push(path);
             }
         }
+    }
+
+    /// A merge from Handy mustn't quietly bring its server back into download
+    /// paths. If this fails, see "Keeping up with Handy" in the build plan.
+    #[test]
+    fn handys_server_is_not_in_any_download_path() {
+        let src = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("src");
+        let mut files = Vec::new();
+        rust_files(&src, &mut files);
+        assert!(files.len() > 50);
+        // In two pieces, so this file doesn't match itself.
+        let server = concat!("blob.handy", ".computer");
+        let found: Vec<_> = files
+            .iter()
+            .filter(|file| std::fs::read_to_string(file).unwrap().contains(server))
+            .collect();
+        assert!(found.is_empty(), "{server} appears in {found:?}");
     }
 
     #[test]

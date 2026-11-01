@@ -261,7 +261,7 @@ If the build fails, open Claude Code in the folder and paste:
 | v0.4    | Step 7 continuous dictation; Step 8 privacy ledger and Local-only mode; Step 9 smart cleanup by default; Step 10 two-minute first-run setup |
 | v0.5    | Step 11 voice editing, dictionary, legal vocabulary, Dragon import, styles per app, type-to-ask, paste-the-answer                           |
 | v0.6    | Step 12 legal templates and snippets, foot pedal and dictation mics, transcribing recordings, personal stats                                |
-| Launch  | Launch gate: Windows code signing, product page, launch                                                                                     |
+| Launch  | Launch gate: model hosting ✅, Windows code signing, product page, launch                                                                   |
 
 ---
 
@@ -297,19 +297,19 @@ If the build fails, open Claude Code in the folder and paste:
 - **Code:** `src-tauri/src/network/`. `network::send` is the one way HTTP leaves Kusema: it records the request, then sends or refuses it. `policy.rs` (the rules) and `ledger.rs` (the record) are pure and tested. A test scans the source and fails if a new HTTP client appears outside `network`, which is also how a merge from Handy that adds one gets caught.
 - **Every way out of Kusema:**
 
-| What                                                          | Goes to                                                                            | How it's controlled                                                                                                                                                                   |
-| ------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Ask Kusema, screen questions, AI cleanup, provider model list | The configured provider                                                            | `network::send`, enforced in Rust                                                                                                                                                     |
-| Mirror and URL model downloads, Kokoro voices                 | `blob.handy.computer`, `huggingface.co`, `raw.githubusercontent.com`, `github.com` | `network::send`, enforced in Rust                                                                                                                                                     |
-| Hugging Face model downloads                                  | `huggingface.co` and its CDN                                                       | **Not routed:** `hf_hub` makes its own requests. Logged and refused with `network::announce` just before it starts; its redirects to the CDN aren't listed                            |
-| Update check and update install                               | `github.com`                                                                       | **Not routed:** the updater plugin runs from the webview. The frontend asks `authorize_update_check` first, which logs and refuses; that check lives in the frontend, unlike the rest |
-| Links the user clicks (About, help)                           | The default browser                                                                | Not Kusema's request. Not listed                                                                                                                                                      |
-| Webview                                                       | Nothing                                                                            | The frontend makes no requests, and a Content Security Policy now stops it (it was `null`, inherited from Handy). `connect-src` allows only Kusema's own IPC and asset protocols      |
+| What                                                          | Goes to                                                     | How it's controlled                                                                                                                                                                   |
+| ------------------------------------------------------------- | ----------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Ask Kusema, screen questions, AI cleanup, provider model list | The configured provider                                     | `network::send`, enforced in Rust                                                                                                                                                     |
+| Mirror and URL model downloads, Kokoro voices                 | `huggingface.co`, `raw.githubusercontent.com`, `github.com` | `network::send`, enforced in Rust                                                                                                                                                     |
+| Hugging Face model downloads                                  | `huggingface.co` and its CDN                                | **Not routed:** `hf_hub` makes its own requests. Logged and refused with `network::announce` just before it starts; its redirects to the CDN aren't listed                            |
+| Update check and update install                               | `github.com`                                                | **Not routed:** the updater plugin runs from the webview. The frontend asks `authorize_update_check` first, which logs and refuses; that check lives in the frontend, unlike the rest |
+| Links the user clicks (About, help)                           | The default browser                                         | Not Kusema's request. Not listed                                                                                                                                                      |
+| Webview                                                       | Nothing                                                     | The frontend makes no requests, and a Content Security Policy now stops it (it was `null`, inherited from Handy). `connect-src` allows only Kusema's own IPC and asset protocols      |
 
 - **Protections the audit added:** each redirect is checked like a request, since a local server could otherwise 307 a question to the cloud with its body. System proxies are skipped for local addresses, since one could carry "localhost" traffic off the computer. A hostname that only looks local (`ollama`, `localhost.example.com`) counts as public: Privileged mode needs an address it can check, so LAN servers need a private IP or a `.local` name.
 - **Windows clipboard:** normal dictation's paste now carries the markers that keep text out of clipboard history and cloud clipboard sync, as continuous dictation's did. Without them, Windows could have uploaded dictated text outside anything this ledger can see. (The "copy to clipboard" setting and Copy buttons stay ordinary copies, because the user asked for them.)
 - **Audio:** the "0 bytes" on the Privacy page is true by construction, not counted. `llm_client` sends only text and images, `DataKind` has no audio, and recordings are only read by the local engine and the local player.
-- **Telemetry:** none, including anything inherited from Handy. No analytics library in `Cargo.lock` or `package.json`, and no such calls in the source. Note that model and update requests necessarily show the server the computer's IP address, and some default model downloads come from Handy's server (`blob.handy.computer`), which is worth moving before launch. AI requests identify themselves as Kusema in the `User-Agent`, `Referer` and `X-Title` headers.
+- **Telemetry:** none, including anything inherited from Handy. No analytics library in `Cargo.lock` or `package.json`, and no such calls in the source. Note that model and update requests necessarily show the server the computer's IP address, though downloads no longer touch Handy's own server (see "Launch gate"). AI requests identify themselves as Kusema in the `User-Agent`, `Referer` and `X-Title` headers.
 - **Outside what this can see:** Windows and the WebView2 runtime have their own network traffic (Edge updates, for example). This wasn't measured. An "external script" paste method runs whatever the user configured, with the dictated text.
 - **Also inherited, not changed:** the asset protocol's scope is `**`, so the webview can read any file the user can. The new CSP means it couldn't send them anywhere, but this is worth narrowing to the recordings folder.
 - **Refusals:** AI cleanup still types the raw dictation and shows the message. A blocked screenshot skips the confirmation card. Blocked requests list the size they would have been. The message is English only, like the rest of the backend's messages.
@@ -368,11 +368,19 @@ Everything else moves behind a "Show all models" link under Advanced, including 
 
 ## Launch gate
 
-Nothing is sold until all three are done.
+Nothing is sold until all of these are done.
 
+- **Host model downloads ourselves:** ✅ Done (2026-11-01). See the notes below.
 - **Windows code signing (Azure Artifact Signing):** removes the SmartScreen warning from the installer and updates.
 - **Product page:** what Kusema does, its privacy claims and how to get it, written for small law firms.
 - **Launch:** to small and solo US law firms, with accessibility users as the community channel.
+
+### Notes on model hosting
+
+- **What's hosted, at [huggingface.co/kusema](https://huggingface.co/kusema):** the five legacy files (`kusema/whisper-ggml`, `kusema/breeze-asr-ggml`) and the default quant of four catalog models (`kusema/parakeet-unified-en-0.6b-gguf`, `parakeet-tdt-0.6b-v3-gguf`, `nemotron-3.5-asr-streaming-0.6b-gguf`, `canary-180m-flash-gguf`): 7.2 GB in all. Each is byte-identical to what Kusema pins, with a model card, attribution and license files; the NVIDIA Open Model License repo also has its required `NOTICE`. `scripts/kusema_mirror.py` publishes and re-verifies them. Its only remaining use of Handy's server is as the source of the legacy files, in case one ever has to be published again.
+- **How downloads work now:** legacy models come only from Kusema's repos. Catalog models come from their `handy-computer/*` repo on Hugging Face at the pinned revision; the four above fall back to Kusema's copy, and everything else, including the language detector, has no fallback. Size and SHA-256 checks are unchanged.
+- **What still isn't ours:** the primary source of every catalog model is still Handy's organization on Hugging Face. If those repos go away, the four mirrored models keep working through the fallback and the rest can't be downloaded. Kokoro voices still come from `huggingface.co/onnx-community`, `raw.githubusercontent.com` and `github.com`.
+- **Privacy ledger:** direct downloads go through `network::send` and `hf_hub` through `network::announce`, so both list `huggingface.co`, not the CDN hosts it redirects to.
 
 ---
 
@@ -450,6 +458,8 @@ Turn meetings into notes, only with a clear consent step: recording a conversati
 - **Line endings:** ✅ Done (2026-10-27). `.gitattributes` sets `* text=auto eol=lf`, so checkouts are LF even with `core.autocrlf=true`, and `bun run format:check` passes on Windows.
 
 ## Keeping up with Handy
+
+**Files to watch so downloads don't switch back to Handy's server.** `src-tauri/src/catalog/mod.rs` (`KUSEMA_MIRRORS` replaced Handy's `MIRRORS`), the `ModelSource::Url` entries in `src-tauri/src/managers/model.rs`, and `src-tauri/src/catalog/catalog.json` (a new revision can change a pinned hash, so a mirrored model's copy must be republished with `scripts/kusema_mirror.py`). `cargo test` fails if `blob.handy.computer` appears anywhere in `src-tauri/src`, if a legacy URL leaves `huggingface.co/kusema/`, or if a mirror isn't Kusema's. `scripts/mirror_models.py` is Handy's own tool for its server; Kusema doesn't use it.
 
 **Licenses to re-check after every merge.** Kusema's model list is Handy's catalog minus `REMOVED_MODELS` in `src-tauri/src/catalog/mod.rs`, repeated in `src/lib/models/removed.ts`. The catalog's license field can be wrong (it calls the non-English Moonshine models MIT), so after a merge that changes `catalog.json` or bumps `@handy-computer/models`, read the Hugging Face card of anything new. `cargo test` fails on any new model whose license isn't MIT, Apache-2.0, CC-BY-4.0 or CC-BY-SA-4.0 until someone reviews it, but it can't catch a wrong label, so re-check these by hand:
 

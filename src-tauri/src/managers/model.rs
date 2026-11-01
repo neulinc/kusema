@@ -26,7 +26,7 @@ use download::{
 /// for downloading and on-disk resolution.
 #[derive(Debug, Clone, Serialize, Deserialize, Type)]
 pub enum ModelSource {
-    /// Direct HTTP download from a URL (current blob.handy.computer hosting).
+    /// Direct HTTP download from a URL (Kusema's copies of the legacy models).
     Url {
         url: String,
         /// Expected SHA-256 for integrity verification; `None` skips it.
@@ -913,7 +913,8 @@ impl ModelManager {
                 description: "Fast and fairly accurate.".to_string(),
                 filename: "ggml-small.bin".to_string(),
                 source: ModelSource::Url {
-                    url: "https://blob.handy.computer/ggml-small.bin".to_string(),
+                    url: "https://huggingface.co/kusema/whisper-ggml/resolve/main/ggml-small.bin"
+                        .to_string(),
                     sha256: Some(
                         "1be3a9b2063867b937e64e2ec7483364a79917e157fa98c5d94b5c1fffea987b"
                             .to_string(),
@@ -944,7 +945,7 @@ impl ModelManager {
                 description: "Good accuracy, medium speed".to_string(),
                 filename: "whisper-medium-q4_1.bin".to_string(),
                 source: ModelSource::Url {
-                    url: "https://blob.handy.computer/whisper-medium-q4_1.bin".to_string(),
+                    url: "https://huggingface.co/kusema/whisper-ggml/resolve/main/whisper-medium-q4_1.bin".to_string(),
                     sha256: Some(
                         "79283fc1f9fe12ca3248543fbd54b73292164d8df5a16e095e2bceeaaabddf57"
                             .to_string(),
@@ -974,7 +975,7 @@ impl ModelManager {
                 description: "Balanced accuracy and speed.".to_string(),
                 filename: "ggml-large-v3-turbo.bin".to_string(),
                 source: ModelSource::Url {
-                    url: "https://blob.handy.computer/ggml-large-v3-turbo.bin".to_string(),
+                    url: "https://huggingface.co/kusema/whisper-ggml/resolve/main/ggml-large-v3-turbo.bin".to_string(),
                     sha256: Some(
                         "1fc70f774d38eb169993ac391eea357ef47c88757ef72ee5943879b7e8e2bc69"
                             .to_string(),
@@ -1004,7 +1005,7 @@ impl ModelManager {
                 description: "Good accuracy, but slow.".to_string(),
                 filename: "ggml-large-v3-q5_0.bin".to_string(),
                 source: ModelSource::Url {
-                    url: "https://blob.handy.computer/ggml-large-v3-q5_0.bin".to_string(),
+                    url: "https://huggingface.co/kusema/whisper-ggml/resolve/main/ggml-large-v3-q5_0.bin".to_string(),
                     sha256: Some(
                         "d75795ecff3f83b5faa89d1900604ad8c780abd5739fae406de19f23ecd98ad1"
                             .to_string(),
@@ -1035,7 +1036,7 @@ impl ModelManager {
                     .to_string(),
                 filename: "breeze-asr-q5_k.bin".to_string(),
                 source: ModelSource::Url {
-                    url: "https://blob.handy.computer/breeze-asr-q5_k.bin".to_string(),
+                    url: "https://huggingface.co/kusema/breeze-asr-ggml/resolve/main/breeze-asr-q5_k.bin".to_string(),
                     sha256: Some(
                         "8efbf0ce8a3f50fe332b7617da787fb81354b358c288b008d3bdef8359df64c6"
                             .to_string(),
@@ -2745,6 +2746,27 @@ mod tests {
         }
     }
 
+    /// The five legacy files come only from Kusema's own repos, and a size or
+    /// hash that doesn't match still fails the download.
+    #[test]
+    fn test_legacy_models_download_from_kusema_with_their_hashes_pinned() {
+        let source = include_str!("model.rs");
+        let urls: Vec<&str> = source
+            .lines()
+            .filter_map(|line| line.trim().strip_prefix("url: \"https://"))
+            .filter(|rest| !rest.starts_with("example.com"))
+            .collect();
+        assert_eq!(urls.len(), 5, "{urls:?}");
+        for url in urls {
+            assert!(url.starts_with("huggingface.co/kusema/"), "{url}");
+        }
+        assert_eq!(
+            source.matches("sha256: Some(\n").count(),
+            5,
+            "every legacy file keeps a pinned hash"
+        );
+    }
+
     #[test]
     fn test_every_retired_model_has_a_downloadable_replacement() {
         // A missing replacement would silently hide a row in the migration UI.
@@ -2763,12 +2785,7 @@ mod tests {
                         retired.id, retired.replacement_repo
                     )
                 });
-            assert!(
-                !crate::catalog::mirror_fallbacks(&replacement.id).is_empty(),
-                "{}: replacement {} has no mirror fallback",
-                retired.id,
-                replacement.id
-            );
+            assert!(!replacement.filename.is_empty(), "{}", retired.id);
         }
     }
 

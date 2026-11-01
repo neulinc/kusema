@@ -1662,7 +1662,7 @@ export type ModelLoadStatus = { is_loaded: boolean; current_model: string | null
  */
 export type ModelSource = 
 /**
- * Direct HTTP download from a URL (current blob.handy.computer hosting).
+ * Direct HTTP download from a URL (Kusema's copies of the legacy models).
  */
 { Url: { url: string; 
 /**

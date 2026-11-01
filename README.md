@@ -49,6 +49,16 @@ Check your AI provider's own terms for how they handle the text you send them.
 
 Kusema updates itself: when a new version is released, the app offers to install it.
 
+## Where the speech models come from
+
+Kusema downloads its speech models from Hugging Face the first time you pick one, checks each file's size and SHA-256, then runs them on your computer. No account is needed. Every download appears on the **Privacy** page.
+
+If your office blocks downloads, you can install a model by hand: download its file on another computer and put it in Kusema's `models` folder (`%APPDATA%\com.neulinc.kusema\models`), then restart Kusema. Kusema's copies, with their licenses and hashes, are at [huggingface.co/kusema](https://huggingface.co/kusema):
+
+- [Parakeet Unified English](https://huggingface.co/kusema/parakeet-unified-en-0.6b-gguf) (the default)
+- [Parakeet TDT v3](https://huggingface.co/kusema/parakeet-tdt-0.6b-v3-gguf), [Nemotron 3.5 Streaming](https://huggingface.co/kusema/nemotron-3.5-asr-streaming-0.6b-gguf) and [Canary 180M Flash](https://huggingface.co/kusema/canary-180m-flash-gguf)
+- [Whisper in GGML format](https://huggingface.co/kusema/whisper-ggml) and [Breeze ASR](https://huggingface.co/kusema/breeze-asr-ggml) (older formats)
+
 ## Status
 
 Kusema is **early software** (version 0.x), currently developed and tested on **Windows 10/11 (x64)**. macOS and Linux builds may compile but aren't supported yet.

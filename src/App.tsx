@@ -356,7 +356,7 @@ function App() {
   // Rendered once around every step below (including onboarding) so
   // toast.error() calls surface to the user. sonner renders via a portal, so
   // its position in the tree doesn't affect layout. Without this, errors during
-  // onboarding (e.g. a model download failing because blob.handy.computer is
+  // onboarding (e.g. a model download failing because Hugging Face is
   // unreachable) are silently swallowed and the wizard just appears to "blink".
   const toaster = (
     <Toaster
