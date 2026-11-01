@@ -101,6 +101,40 @@ check:translations`, and `cargo test` in `src-tauri`.
    install it; Kusema restarts on the new version with settings, models,
    Kokoro voices and the API key still there, and shows the release notes.
 
+## Pre-release test checklist
+
+Automated tests use fake audio and stand-in AI servers, so run these by hand on
+an installed build, with a real microphone, before tagging. Use a clean Windows
+account or VM for the first item.
+
+- [ ] **Fresh setup timing:** with a stopwatch, from opening Kusema to the first
+      sentence in the practice box. Target: under two minutes, not counting a
+      slow model download (note the download time separately).
+- [ ] **Microphone meter:** the bar moves when you speak, and "Kusema can hear
+      you" appears.
+- [ ] **Dictation in Word, normal:** hold the key, speak, let go. The text lands
+      at the cursor.
+- [ ] **Dictation in Word, continuous:** start, speak several sentences with
+      pauses, say "new paragraph" and "scratch that", stop. Check the text and
+      the History entry.
+- [ ] **Spoken punctuation:** "comma", "period", "question mark", "open quote"
+      and "close quote" become marks. "The limitations period expired" keeps its
+      words.
+- [ ] **AI cleanup with a real model:** dictate something with a correction
+      ("Tuesday, no, Wednesday") and a few specifics. It fixes the correction and
+      **never adds facts**: no names, dates or figures you didn't say.
+- [ ] **Ask Kusema:** ask a question by voice. The answer is shown and spoken, and
+      the checklist on the General page ticks.
+- [ ] **Ask about my screen:** the card shows only the chosen window. Cancel sends
+      nothing; Send gets an answer about that window.
+- [ ] **Privileged mode:** with it on, cloud AI is refused and says so, a local
+      model still works, and dictation still works.
+- [ ] **Privacy ledger:** each request above is listed on the Privacy page with
+      the right destination, and blocked ones show as blocked.
+- [ ] **Startup entry:** with "Start Kusema when I sign in" on, the Kusema entry
+      under Startup apps (or `HKCU\Software\Microsoft\Windows\CurrentVersion\Run`)
+      points at the installed app, in `AppData\Local\Kusema`, not a dev build.
+
 ## Testers on 0.1.0
 
 0.1.0 shipped with the updater turned off, so testers on it must install 0.2.0
