@@ -254,6 +254,19 @@ If the build fails, open Claude Code in the folder and paste:
 
 ---
 
+## Testing rule (hard rule)
+
+**No test or dev run may use the real user's app data, settings, models folder, ledger, History, API keys, startup entry or clipboard.** This became a hard rule after real data was touched twice.
+
+- **Launch only through `scripts/dev_isolated.py start`,** never `bun run tauri dev` directly, and that includes "run the app so I can try it". It sets up an isolated folder first, launches, then verifies the folder is in use and stops the app if it can't. `stop` ends the run and reports whether anything real changed.
+- **Never run setup and launch in parallel.** Setup finishes and is confirmed before anything starts, so a failed setup can't turn into a run on real data. This is how it went wrong the second time.
+- **The build enforces it too.** With `KUSEMA_DEBUG_ISOLATED` set, a debug build refuses to start without its isolated folder, keeps API keys in memory rather than Credential Manager, leaves the Windows startup entry alone and refuses to touch the clipboard, so tests type with the Direct paste method. `HF_HOME` keeps the shared model cache out of reach. Release builds ignore all of this.
+- **Headless runs count.** Regenerating bindings with `--list-devices` also goes through the isolated folder; `tauri dev` regenerates them, so just use the launcher.
+- **If real data is touched anyway:** stop at once, restore it, and tell the user exactly what changed.
+- **What the isolated run can't separate:** global hotkeys and the foreground window are shared with the real desktop. Tests only type into a private test window.
+
+---
+
 ## Roadmap
 
 | Version | Steps                                                                                                                                       |
@@ -282,7 +295,7 @@ If the build fails, open Claude Code in the folder and paste:
 - **"Scratch that":** deletes with Backspace and also removes the text from History. Refused, with a message in the overlay, if the focused window or control changed, or if the keyboard or mouse was used at all since the last typing (a click can move the caret; Windows' last-input time doesn't say which input it was). It only goes back one segment.
 - **Auto-stop** counts from the last words, not the last sound: in testing, room noise set off the VAD about every 30 seconds and transcribed to nothing.
 - **Capitalization** only ever adds a capital: after a sentence end (not after abbreviations like "v." or "Inc."), and after a line break. It doesn't lowercase what the model capitalized, so names are safe, but a model that leaves off a period gives "the motion The parties". Step 9's cleanup is the place to fix that.
-- **Debug hooks:** in debug builds, `KUSEMA_DEBUG_SECOND_INSTANCE` runs beside an installed Kusema (add a `portable` marker for separate data), and `KUSEMA_DEBUG_DICTATION_WAV` / `KUSEMA_DEBUG_DICTATION_SPEED` feed a session from a file through the real VAD and model.
+- **Debug hooks:** in debug builds, `KUSEMA_DEBUG_ISOLATED` (set by `scripts/dev_isolated.py`; see the testing rule) runs beside an installed Kusema, and `KUSEMA_DEBUG_DICTATION_WAV` / `KUSEMA_DEBUG_DICTATION_SPEED` feed a session from a file through the real VAD and model.
 - **Memory:** a simulated 30-minute session (30 min of synthesized speech fed through the real VAD, Parakeet and History at about 7x, so 4.5 minutes of wall time; about 350 segments, 3,402 words; debug build, paste method None so no keystrokes) stayed flat: app 169–176 MB, transcribe worker 177–178 MB, WebViews 567–588 MB and falling. The app dropped to 63 MB when the session ended. CPU came to about 270 s, or roughly 15% of one core if spread over the real 30 minutes. The segmenter holds at most one 30 s segment (under 2 MB). A slow model can't grow the queue past 5 minutes of audio: the session stops and what's queued finishes.
 - **Known limits:** room noise can occasionally transcribe to a stray word ("On." once in 4 minutes of an idle room here); filtering harder would drop real short words like "no", so it's left to "scratch that". Changing the overlay position setting during a session resizes the overlay to the normal width until the next session.
 

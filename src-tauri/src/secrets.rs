@@ -58,6 +58,39 @@ impl KeyStore for OsKeychain {
     }
 }
 
+/// Keys kept only in memory: for tests and isolated test runs.
+#[derive(Default)]
+struct MemoryStore {
+    entries: Mutex<HashMap<String, String>>,
+}
+
+impl KeyStore for MemoryStore {
+    fn get(&self, id: &str) -> Result<Option<String>, String> {
+        Ok(self
+            .entries
+            .lock()
+            .unwrap_or_else(|e| e.into_inner())
+            .get(id)
+            .cloned())
+    }
+
+    fn set(&self, id: &str, secret: &str) -> Result<(), String> {
+        self.entries
+            .lock()
+            .unwrap_or_else(|e| e.into_inner())
+            .insert(id.to_string(), secret.to_string());
+        Ok(())
+    }
+
+    fn delete(&self, id: &str) -> Result<(), String> {
+        self.entries
+            .lock()
+            .unwrap_or_else(|e| e.into_inner())
+            .remove(id);
+        Ok(())
+    }
+}
+
 struct Secrets {
     store: Box<dyn KeyStore>,
     /// What the keychain holds per provider id, as far as we know; "" means
@@ -167,11 +200,12 @@ impl Secrets {
 fn secrets() -> &'static Secrets {
     static SECRETS: OnceLock<Secrets> = OnceLock::new();
     SECRETS.get_or_init(|| {
-        // Tests must never touch the real keychain.
-        #[cfg(test)]
-        let store: Box<dyn KeyStore> = Box::new(tests::MemoryStore::default());
-        #[cfg(not(test))]
-        let store: Box<dyn KeyStore> = Box::new(OsKeychain);
+        // Tests and isolated runs must never touch the real keychain.
+        let store: Box<dyn KeyStore> = if cfg!(test) || crate::portable::is_debug_isolated() {
+            Box::new(MemoryStore::default())
+        } else {
+            Box::new(OsKeychain)
+        };
         Secrets::new(store)
     })
 }
@@ -193,28 +227,6 @@ mod tests {
     use super::*;
     use crate::settings::get_default_settings;
     use std::sync::Arc;
-
-    #[derive(Default)]
-    pub(super) struct MemoryStore {
-        pub entries: Mutex<HashMap<String, String>>,
-    }
-
-    impl KeyStore for MemoryStore {
-        fn get(&self, id: &str) -> Result<Option<String>, String> {
-            Ok(self.entries.lock().unwrap().get(id).cloned())
-        }
-        fn set(&self, id: &str, secret: &str) -> Result<(), String> {
-            self.entries
-                .lock()
-                .unwrap()
-                .insert(id.to_string(), secret.to_string());
-            Ok(())
-        }
-        fn delete(&self, id: &str) -> Result<(), String> {
-            self.entries.lock().unwrap().remove(id);
-            Ok(())
-        }
-    }
 
     /// A keychain that is never available (e.g. Linux without Secret Service).
     struct BrokenStore;

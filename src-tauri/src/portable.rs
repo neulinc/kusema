@@ -52,6 +52,23 @@ pub fn init() {
     });
 }
 
+/// Kusema: a debug run set up by `scripts/dev_isolated.py`, which must not touch
+/// the real user's API keys, startup entry or clipboard. Always false in release.
+pub fn is_debug_isolated() -> bool {
+    cfg!(debug_assertions) && std::env::var_os("KUSEMA_DEBUG_ISOLATED").is_some()
+}
+
+/// Kusema: an isolated run with no isolated data folder must not go any further.
+/// Stops the app before anything can read or write real data.
+pub fn enforce_debug_isolation() {
+    if is_debug_isolated() && !is_portable() {
+        eprintln!(
+            "KUSEMA_DEBUG_ISOLATED is set but portable mode isn't active. Refusing to start."
+        );
+        std::process::exit(78);
+    }
+}
+
 /// Return the Hugging Face home configured before portable mode redirected it.
 ///
 /// Portable releases before v0.9.6 downloaded models to this location (or to

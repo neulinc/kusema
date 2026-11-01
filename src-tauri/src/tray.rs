@@ -709,6 +709,10 @@ pub fn copy_last_transcript(app: &AppHandle) {
         return;
     }
 
+    // Kusema: an isolated test run must not change the real clipboard.
+    if crate::portable::is_debug_isolated() {
+        return;
+    }
     if let Err(err) = app.clipboard().write_text(text) {
         error!("Failed to copy last transcript to clipboard: {}", err);
         return;

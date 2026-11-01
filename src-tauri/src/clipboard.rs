@@ -70,6 +70,16 @@ fn finish_clipboard_paste(
     paste_result
 }
 
+/// Kusema: an isolated test run must not read or change the real clipboard.
+fn refuse_clipboard_in_isolated_run() -> Result<(), String> {
+    if crate::portable::is_debug_isolated() {
+        return Err(
+            "The clipboard is off in an isolated test run; use the Direct paste method".into(),
+        );
+    }
+    Ok(())
+}
+
 /// Pastes text using the clipboard: saves current content, writes text, sends paste keystroke, restores clipboard.
 fn paste_via_clipboard(
     text: &str,
@@ -78,6 +88,7 @@ fn paste_via_clipboard(
     paste_delay_ms: u64,
     paste_delay_after_ms: u64,
 ) -> Result<(), String> {
+    refuse_clipboard_in_isolated_run()?;
     let clipboard = app_handle.clipboard();
     let saved_text = clipboard.read_text().ok().filter(|t| !t.is_empty());
     // Only probe for an image when there is no text to restore. Text is by far the
@@ -863,6 +874,7 @@ pub fn type_segment(
             paste_via_external_script(text, script_path)?;
         }
         PasteMethod::CtrlV | PasteMethod::CtrlShiftV | PasteMethod::ShiftInsert => {
+            refuse_clipboard_in_isolated_run()?;
             let clipboard = app_handle.clipboard();
             let saved_text = clipboard.read_text().ok().filter(|t| !t.is_empty());
             let saved_image = if saved_text.is_none() {

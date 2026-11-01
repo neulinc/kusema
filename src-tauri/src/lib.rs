@@ -382,7 +382,10 @@ fn initialize_core_logic(app_handle: &AppHandle) {
 
     // Apply the autostart preference (SMAppService login item on macOS 13+,
     // tauri-plugin-autostart elsewhere)
-    autostart::apply_autostart(app_handle, settings.autostart_enabled);
+    // Kusema: an isolated test run leaves the real startup entry alone.
+    if !portable::is_debug_isolated() {
+        autostart::apply_autostart(app_handle, settings.autostart_enabled);
+    }
 
     // Create the recording overlay window (hidden by default)
     utils::create_recording_overlay(app_handle);
@@ -666,6 +669,7 @@ pub fn run(cli_args: CliArgs) {
 
     // Detect portable mode before anything else
     portable::init();
+    portable::enforce_debug_isolation();
 
     // Parse console logging directives from RUST_LOG, falling back to info-level logging
     // when the variable is unset
@@ -922,11 +926,8 @@ pub fn run(cli_args: CliArgs) {
     // (--transcribe-file/--list-devices/--list-models) a silent no-op whenever the
     // app is already open, so skip it in headless mode and run a standalone
     // instance instead.
-    // Debug builds can run beside an installed Kusema, for testing without
-    // touching it (give the build its own data with a `portable` marker).
-    let second_instance_ok =
-        cfg!(debug_assertions) && std::env::var_os("KUSEMA_DEBUG_SECOND_INSTANCE").is_some();
-    if !headless_mode && !second_instance_ok {
+    // An isolated test run can sit beside an installed Kusema without touching it.
+    if !headless_mode && !portable::is_debug_isolated() {
         builder = builder.plugin(tauri_plugin_single_instance::init(|app, args, _cwd| {
             if args.iter().any(|a| a == "--toggle-transcription") {
                 signal_handle::send_transcription_input(app, "transcribe", "CLI");
