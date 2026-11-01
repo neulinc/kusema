@@ -1,6 +1,10 @@
 # Kusema — Build Plan & Claude Code Prompts
 
-_Fork of cjpais/Handy (MIT). Mapped against Handy `main` on 2026-10-27._
+_Fork of cjpais/Handy (MIT). Mapped against Handy `main` on 2026-10-27; last merged 2026-10-31._
+
+## Who Kusema is for
+
+The primary market is **small and solo US law firms on Windows**, plus their paralegals and assistants. They need confidentiality they can explain to a client, and setup that doesn't need an IT department. **Accessibility users** are the community channel. Steps 1–6 and 5b are done; the [Roadmap](#roadmap) below is built around this.
 
 ## What Handy already gives us
 
@@ -72,7 +76,7 @@ If the build fails, open Claude Code in the folder and paste:
   - Tray icons: `branding/tray/*.png` are copied over `src-tauri/resources/`.
   - React components in `src/components/icons/` keep Handy's file and component names, so upstream merges stay easy. If upstream changes these files, keep our versions.
   - Theme colors are in `src/styles/theme.css`. Primary buttons (`--color-background-ui`) use `#6d5ce8` from the icon gradient.
-- **Code signing removed.** The upstream Windows signing command used the Handy author's Azure account. Installers are unsigned until we have our own certificate (see "Later").
+- **Code signing removed.** The upstream Windows signing command used the Handy author's Azure account. Installers are unsigned until we have our own certificate (see "Launch gate").
 - **`src/bindings.ts` gets regenerated on Windows builds** (tauri-specta writes it at dev startup). The diff is only platform-specific doc comments, such as the `isLaptop` stub. It's harmless; commit it or discard it.
 - **Auto-updater disabled.** It pointed at Handy's GitHub releases and Handy's signing key. The endpoint and public key are now blank in `tauri.conf.json`, `createUpdaterArtifacts` is off, `update_checks_forced_disabled()` in `settings.rs` always returns true, and the footer "Check for updates" link and tray item are hidden. **Before distributing Kusema, set up our own update channel**: generate a signing key with `bun tauri signer generate`, put the public key and a Kusema `latest.json` endpoint in `tauri.conf.json`, turn `createUpdaterArtifacts` back on, and set `KUSEMA_UPDATE_CHANNEL_CONFIGURED` to true in `settings.rs`. ✅ Done in Step 5b.
 - **AI provider requests identify as Kusema.** The User-Agent, Referer and X-Title headers in `llm_client.rs` now say Kusema.
@@ -250,11 +254,99 @@ If the build fails, open Claude Code in the folder and paste:
 
 ---
 
-## Step 7 — Computer control (voice commands for Windows)
+## Roadmap
+
+| Version | Steps                                                                                                                                       |
+| ------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| v0.4    | Step 7 continuous dictation; Step 8 privacy ledger and Local-only mode; Step 9 smart cleanup by default; Step 10 two-minute first-run setup |
+| v0.5    | Step 11 voice editing, dictionary, legal vocabulary, Dragon import, styles per app, type-to-ask, paste-the-answer                           |
+| v0.6    | Step 12 legal templates and snippets, foot pedal and dictation mics, transcribing recordings, personal stats                                |
+| Launch  | Launch gate: Windows code signing, product page, launch                                                                                     |
+
+---
+
+## Step 7 (v0.4) — Continuous dictation with voice commands
+
+**Goal:** a lawyer starts dictating once and keeps talking, for a long memo if need be. Text appears in the active app at each pause, and spoken commands like "new paragraph" or "delete that" act instead of being typed. Everything happens on the computer.
+
+> Read docs/kusema-build-plan.md and CLAUDE.md first. We're on **Step 7: continuous dictation with voice commands**. Hold-to-talk stays exactly as it is; add a hands-free mode alongside it. Explain your approach before writing much code.
+>
+> 1. **Mode:** a new binding, `dictate_continuous`, "Continuous dictation": press once to start, again to stop. Pick a Windows default that doesn't clash with the existing hotkeys, and explain it. The existing dictation and Assistant hotkeys keep working the way they do now; decide what they do during a session (pause it, or wait) and explain.
+> 2. **Never left on by accident:** a clear overlay and tray state for the whole session, Cancel stops it, and it stops by itself after a period of silence (a setting, default 5 minutes), telling the user it did.
+> 3. **Cutting at pauses:** reuse what Handy has: the VAD and `audio_toolkit/chunking` for models that decode in chunks, and live decoding for streaming models (`managers/transcription/policy.rs`, `chunked.rs`, `live.rs`). Only finished text is output, and text already typed is never retyped.
+> 4. **Output:** each finished piece goes through the existing paste path to whichever window has focus, with correct spacing and capitalization between pieces. Don't paste into Kusema's own windows. Respect the clipboard-handling setting.
+> 5. **Voice commands:** a fixed, English, local list, handled by a small pure parser with no AI involved: "new line", "new paragraph", spoken punctuation ("period", "comma", "question mark"), "delete that" (removes the last piece, only if focus hasn't moved), and "stop dictating". A command counts only when it's said on its own between pauses, so "the new paragraph in the contract" is typed normally. Add a setting to turn commands off.
+> 6. **Long sessions:** memory must stay flat over an hour of dictation. Measure it and report the numbers, with CPU use. Save the session to History as one entry, under the existing recording retention settings.
+> 7. English strings copied to other locales, as before.
+>
+> Add tests for the command parser, spacing and capitalization between pieces, and the session state machine (start, stop, silence timeout, cancel). Run `cargo check`, `cargo test`, lint and `bun run tauri dev`. Stop any processes you started. Mark Step 7 done in the plan and commit as "Add continuous dictation with voice commands".
+
+**Test:** start it in Word and dictate several paragraphs for at least 10 minutes, using each command. Say "new paragraph" inside a sentence and check it's typed, not obeyed. Switch windows mid-session, then stay silent until it stops by itself.
+
+---
+
+## Step 8 (v0.4) — Privacy ledger and Local-only ("Privileged") mode
+
+**Goal:** a firm can see and control what leaves the computer. A local ledger lists everything sent: when, to which provider and model, and what kind (text or screenshot). One "Privileged" switch guarantees that no dictation, question or screenshot leaves the computer: cloud requests are refused and explained, never sent quietly.
+
+---
+
+## Step 9 (v0.4) — Smart cleanup on by default, with a local option
+
+**Goal:** dictated text reads well from the first sentence (punctuation, filler words, false starts) without the user finding Post Processing or getting an API key. A local option means this also works in Privileged mode.
+
+---
+
+## Step 10 (v0.4) — Two-minute first-run setup
+
+**Goal:** someone non-technical goes from opening the installer to their first dictated sentence and first spoken answer in under two minutes, with sensible defaults and no decisions they can't make yet.
+
+---
+
+## Step 11 (v0.5) — Voice editing, dictionary, styles and more ways to ask
+
+**Goal:** fix and shape text by voice, and have Kusema learn how the user's practice talks.
+
+- **Voice editing:** change text by voice ("change Tuesday to Thursday").
+- **Learning personal dictionary:** picks up names and terms from the user's corrections.
+- **Legal vocabulary pack:** legal terms, Latin and citation forms recognized correctly out of the box.
+- **Dragon custom-word import:** bring over the word list from Dragon.
+- **Styles per app:** different cleanup for email, a legal document or a chat.
+- **Type-to-ask:** ask Kusema by typing, when speaking isn't possible.
+- **Paste-the-answer:** type the assistant's reply into the active app instead of speaking it ("draft a reply declining this meeting").
+
+---
+
+## Step 12 (v0.6) — Legal templates, dictation hardware, recordings and stats
+
+**Goal:** fit the way legal staff already dictate.
+
+- **Legal templates and snippets:** insert standard letters and clauses by voice.
+- **Foot pedal and dictation mic support:** start and stop from the hardware legal staff already own.
+- **Transcribing recordings:** turn recorded dictation into text.
+- **Personal stats:** words dictated and time saved, kept on the computer.
+
+---
+
+## Launch gate
+
+Nothing is sold until all three are done.
+
+- **Windows code signing (Azure Artifact Signing):** removes the SmartScreen warning from the installer and updates.
+- **Product page:** what Kusema does, its privacy claims and how to get it, written for small law firms.
+- **Launch:** to small and solo US law firms, with accessibility users as the community channel.
+
+---
+
+## Later
+
+Not scheduled. The first two keep their detailed prompts, ready to use.
+
+### Voice commands for Windows settings (computer control)
 
 **Goal:** "Kusema, switch to dark mode" changes the setting and replies "Done." The AI only _chooses_ from a fixed whitelist of actions Kusema implements locally; it never runs arbitrary commands.
 
-> Read docs/kusema-build-plan.md and CLAUDE.md first. We're on **Step 7: computer control via tool use**. Assistant mode (Steps 2–3) works; extend it so the LLM can call a fixed set of local actions.
+> Read docs/kusema-build-plan.md and CLAUDE.md first. We're on **voice commands for Windows settings: computer control via tool use**. Assistant mode (Steps 2–3) works; extend it so the LLM can call a fixed set of local actions.
 >
 > 1. **Tool registry:** create `src-tauri/src/tools/` with a `Tool` trait (name, description, JSON-schema parameters, risk level `Safe | Confirm`, `execute(args) -> Result<String>`) and a registry. The registry is a fixed whitelist. There must be no tool that runs arbitrary shell commands, scripts, or file deletion.
 > 2. **LLM tool calling:** extend `send_conversation` in `llm_client.rs` to send tool definitions and handle tool-use responses in both the Anthropic format (`tools`, `tool_use` / `tool_result` blocks) and the OpenAI format (`tools`, `tool_calls`). Loop: model requests a tool, Kusema executes it locally, returns the result, model gives the final spoken reply. Cap at 5 tool rounds per question. Keep streaming speech for the final text reply. Models or providers without tool support must fail gracefully ("This model can't control the computer; try Claude or GPT").
@@ -273,17 +365,15 @@ If the build fails, open Claude Code in the folder and paste:
 > 6. **Settings:** "Allow computer control" (default **off**), with per-tool toggles grouped by risk. When off, no tools are sent to the model at all.
 > 7. Update the assistant system prompt to tell the model which tools exist, to confirm completed actions in one short spoken sentence, and to say plainly when something isn't possible.
 >
-> Add unit tests for the registry, argument validation (path and URL allowlists), and the tool-call parsing for both formats. Run `cargo check`, `cargo test`, `bun run tauri dev`. Stop any processes you started. Mark Step 7 done in the plan and commit as "Add computer control (tool use)".
+> Add unit tests for the registry, argument validation (path and URL allowlists), and the tool-call parsing for both formats. Run `cargo check`, `cargo test`, `bun run tauri dev`. Stop any processes you started. Mark this done in the plan and commit as "Add computer control (tool use)".
 
 **Test:** turn on "Allow computer control", then try "switch to dark mode", "set the volume to 30 percent", "open Bluetooth settings", "undo that", and "shut down" (it should ask first; say no).
 
----
-
-## Step 8 — Optional wake word ("Hey Kusema")
+### Optional wake word ("Hey Kusema")
 
 **Goal:** hands-free activation as an alternative to hotkeys. Off by default; detection runs entirely on-device.
 
-> Read docs/kusema-build-plan.md and CLAUDE.md first. We're on **Step 8: optional wake word**.
+> Read docs/kusema-build-plan.md and CLAUDE.md first. We're on **the optional wake word**.
 >
 > 1. **Engine:** evaluate openWakeWord (Apache 2.0, ONNX models; custom phrases trainable from synthetic speech) and Rustpotter (pure Rust, Apache 2.0). Prefer openWakeWord via the ONNX runtime Kusema already ships, if practical. Explain the choice before writing much code. Don't use Porcupine (commercial license).
 > 2. **Wake phrase:** "Hey Kusema". Document (in `docs/wake-word.md`) how to train/regenerate the custom model with openWakeWord's training pipeline, and ship a pre-trained model file downloaded on demand like the speech models. Until a trained model exists, support a built-in openWakeWord phrase (e.g. "hey jarvis") as a stand-in, clearly labelled in settings.
@@ -294,22 +384,29 @@ If the build fails, open Claude Code in the folder and paste:
 > 7. **Visibility and control:** a distinct tray state while listening, a tray menu item "Pause wake word", and a hotkey to toggle it (e.g. during client calls).
 > 8. Measure and report idle CPU usage while listening; target under ~2% on a mid-range laptop.
 >
-> Add tests where practical (detector wrapper, pause/resume state machine). Run `cargo check`, `cargo test`, `bun run tauri dev`. Stop any processes you started. Mark Step 8 done in the plan and commit as "Add optional wake word".
+> Add tests where practical (detector wrapper, pause/resume state machine). Run `cargo check`, `cargo test`, `bun run tauri dev`. Stop any processes you started. Mark this done in the plan and commit as "Add optional wake word".
 
 **Test:** enable the wake word, say "Hey Kusema, what's the weather like in Kingston usually in March?" with no hotkey. Then check it doesn't trigger while Kusema is speaking, and that "Pause wake word" stops it.
 
----
+### Linux
 
-## Later (v2 ideas)
+Make Linux a supported platform, with its own builds and release channel. It may compile today, but isn't supported or released.
 
-- **"Sensitive mode" toggle**: one switch that routes Assistant mode to a local Ollama model instead of a cloud provider.
+### Moonshine streaming engine
+
+Evaluate Moonshine as a low-latency streaming engine for dictation.
+
+### Meeting notes with consent
+
+Turn meetings into notes, only with a clear consent step: recording a conversation has legal consent requirements, and some US states require every party's consent.
+
+### Other ideas
+
 - **Redaction**: optional local step stripping names, emails and phone numbers before text goes to a cloud provider.
 - **Chatterbox voice cloning** with a consent step (live recording of a scripted consent line, no uploaded files).
 - **Separate provider settings for Assistant vs. post-processing**, if you want, e.g., Groq for fast cleanup and Claude for questions.
-- **Windows code signing (Authenticode):** removes the SmartScreen warning; needed before selling.
 - **Offline/air-gapped installer (Pro):** bundle the speech model, ONNX Runtime and Kokoro voices in the installer for offices that block downloads.
-- **Interrupt by voice:** say "Hey Kusema" while it's talking to cut it off. Needs echo cancellation, so do this after Step 8.
-- **Paste the answer:** an option to type the assistant's reply into the active app instead of speaking it ("draft a reply declining this meeting").
+- **Interrupt by voice:** say "Hey Kusema" while it's talking to cut it off. Needs echo cancellation, so do this after the wake word.
 - **Remaining Handy links:** replace handy.computer links (Linux setup guide, macOS Secure Input help, About-page donate link) with Kusema pages or remove them.
 - **More Kokoro languages:** Kokoro also has Spanish, French, Hindi, Italian, Japanese, Portuguese and Chinese voices; each needs its own phonemizer (misaki has some), without espeak-ng.
 - **Line endings:** ✅ Done (2026-10-27). `.gitattributes` sets `* text=auto eol=lf`, so checkouts are LF even with `core.autocrlf=true`, and `bun run format:check` passes on Windows.

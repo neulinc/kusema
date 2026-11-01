@@ -16,7 +16,7 @@ the release. Windows only for now.
   certificate from a certificate authority (or Azure Trusted Signing) that
   signs the `.exe`/`.msi` themselves. Without it, Windows SmartScreen shows
   "Windows protected your PC" on first install (testers click **More info →
-  Run anyway**). Needed before selling; see "Later" in the build plan.
+  Run anyway**). Needed before selling; see "Launch gate" in the build plan.
 
 ## One-time setup
 
