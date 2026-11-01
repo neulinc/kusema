@@ -580,6 +580,27 @@ pub struct AppSettings {
     /// uses that provider's Post Process model.
     #[serde(default)]
     pub assistant_screen_model: Option<String>,
+    /// Kusema: a pause this long ends a continuous dictation segment.
+    #[serde(default = "default_dictation_pause_ms")]
+    pub dictation_pause_ms: u64,
+    /// Kusema: continuous dictation stops after this much silence.
+    #[serde(default = "default_dictation_auto_stop_minutes")]
+    pub dictation_auto_stop_minutes: u32,
+    /// Kusema: "new paragraph", "scratch that" and so on act instead of being typed.
+    #[serde(default = "default_dictation_voice_commands")]
+    pub dictation_voice_commands: bool,
+}
+
+fn default_dictation_pause_ms() -> u64 {
+    700
+}
+
+fn default_dictation_auto_stop_minutes() -> u32 {
+    3
+}
+
+fn default_dictation_voice_commands() -> bool {
+    true
 }
 
 fn default_assistant_speak_replies() -> bool {
@@ -1041,6 +1062,21 @@ pub fn get_default_settings() -> AppSettings {
             current_binding: default_assistant_screen_shortcut.to_string(),
         },
     );
+    #[cfg(target_os = "macos")]
+    let default_dictation_shortcut = "ctrl+option+shift+d";
+    #[cfg(not(target_os = "macos"))]
+    let default_dictation_shortcut = "ctrl+alt+shift+d";
+
+    bindings.insert(
+        crate::dictation::BINDING.to_string(),
+        ShortcutBinding {
+            id: crate::dictation::BINDING.to_string(),
+            name: "Continuous dictation".to_string(),
+            description: "Press to start dictating hands-free, and again to stop.".to_string(),
+            default_binding: default_dictation_shortcut.to_string(),
+            current_binding: default_dictation_shortcut.to_string(),
+        },
+    );
     bindings.insert(
         "cancel".to_string(),
         ShortcutBinding {
@@ -1125,6 +1161,9 @@ pub fn get_default_settings() -> AppSettings {
         assistant_screen_confirm: default_assistant_screen_confirm(),
         assistant_screen_provider_id: None,
         assistant_screen_model: None,
+        dictation_pause_ms: default_dictation_pause_ms(),
+        dictation_auto_stop_minutes: default_dictation_auto_stop_minutes(),
+        dictation_voice_commands: default_dictation_voice_commands(),
     }
 }
 

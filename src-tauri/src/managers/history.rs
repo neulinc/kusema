@@ -311,6 +311,76 @@ impl HistoryManager {
         Ok(entry)
     }
 
+    /// Kusema: adds to an entry's text as a continuous dictation goes, so a
+    /// crash keeps everything said so far. False if the entry is gone.
+    pub fn append_text(&self, id: i64, text: &str) -> Result<bool> {
+        let conn = self.get_connection()?;
+        let found = Self::append_text_with_conn(&conn, id, text)?;
+        self.announce_text_change(&conn, id, found);
+        Ok(found)
+    }
+
+    fn append_text_with_conn(conn: &Connection, id: i64, text: &str) -> Result<bool> {
+        let updated = conn.execute(
+            "UPDATE transcription_history
+             SET transcription_text = transcription_text || ?1
+             WHERE id = ?2",
+            params![text, id],
+        )?;
+        Ok(updated > 0)
+    }
+
+    /// Kusema: removes the last `chars` characters of an entry's text ("scratch
+    /// that"). False if the entry is gone.
+    pub fn trim_text_end(&self, id: i64, chars: usize) -> Result<bool> {
+        let conn = self.get_connection()?;
+        let found = Self::trim_text_end_with_conn(&conn, id, chars)?;
+        self.announce_text_change(&conn, id, found);
+        Ok(found)
+    }
+
+    fn trim_text_end_with_conn(conn: &Connection, id: i64, chars: usize) -> Result<bool> {
+        let updated = conn.execute(
+            "UPDATE transcription_history
+             SET transcription_text =
+                 substr(transcription_text, 1, max(length(transcription_text) - ?1, 0))
+             WHERE id = ?2",
+            params![chars as i64, id],
+        )?;
+        Ok(updated > 0)
+    }
+
+    /// Kusema: an entry's text, `None` if the entry is gone.
+    pub fn entry_text(&self, id: i64) -> Result<Option<String>> {
+        let conn = self.get_connection()?;
+        Ok(conn
+            .query_row(
+                "SELECT transcription_text FROM transcription_history WHERE id = ?1",
+                params![id],
+                |row| row.get(0),
+            )
+            .optional()?)
+    }
+
+    fn announce_text_change(&self, conn: &Connection, id: i64, found: bool) {
+        if !found {
+            return;
+        }
+        let entry = conn.query_row(
+            &format!("SELECT {ENTRY_COLUMNS} FROM transcription_history WHERE id = ?1"),
+            params![id],
+            Self::map_history_entry,
+        );
+        match entry {
+            Ok(entry) => {
+                if let Err(e) = (HistoryUpdatePayload::Updated { entry }).emit(&self.app_handle) {
+                    error!("Failed to emit history-updated event: {}", e);
+                }
+            }
+            Err(e) => error!("Failed to read back history entry {}: {}", id, e),
+        }
+    }
+
     /// Save the entry for a file whose audio is already at `file_name`.
     /// Retention never removes it (only deleting it does); never
     /// post-processed.
@@ -734,6 +804,51 @@ impl HistoryManager {
 mod tests {
     use super::*;
     use rusqlite::{params, Connection};
+
+    fn dictation_entry(conn: &Connection, text: &str) -> i64 {
+        conn.execute(
+            "INSERT INTO transcription_history (file_name, timestamp, title, transcription_text)
+             VALUES ('continuous-1.txt', 1, 't', ?1)",
+            params![text],
+        )
+        .unwrap();
+        conn.last_insert_rowid()
+    }
+
+    fn entry_text(conn: &Connection, id: i64) -> String {
+        conn.query_row(
+            "SELECT transcription_text FROM transcription_history WHERE id = ?1",
+            params![id],
+            |row| row.get(0),
+        )
+        .unwrap()
+    }
+
+    #[test]
+    fn append_builds_up_one_entry() {
+        let conn = setup_conn();
+        let id = dictation_entry(&conn, "One.");
+        assert!(HistoryManager::append_text_with_conn(&conn, id, " Two.").unwrap());
+        assert!(HistoryManager::append_text_with_conn(&conn, id, "\n\nThree.").unwrap());
+        assert_eq!(entry_text(&conn, id), "One. Two.\n\nThree.");
+    }
+
+    #[test]
+    fn append_to_a_deleted_entry_reports_it() {
+        let conn = setup_conn();
+        assert!(!HistoryManager::append_text_with_conn(&conn, 99, "x").unwrap());
+    }
+
+    #[test]
+    fn trim_removes_characters_not_bytes() {
+        let conn = setup_conn();
+        let id = dictation_entry(&conn, "Fini. Été là");
+        assert!(HistoryManager::trim_text_end_with_conn(&conn, id, 7).unwrap());
+        assert_eq!(entry_text(&conn, id), "Fini.");
+        assert!(HistoryManager::trim_text_end_with_conn(&conn, id, 100).unwrap());
+        assert_eq!(entry_text(&conn, id), "");
+        assert!(!HistoryManager::trim_text_end_with_conn(&conn, 99, 1).unwrap());
+    }
 
     fn setup_conn() -> Connection {
         let conn = Connection::open_in_memory().expect("open in-memory db");

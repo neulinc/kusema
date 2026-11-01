@@ -199,8 +199,14 @@ enum Effect {
 /// Commands processed sequentially by the coordinator thread.
 enum Command {
     Input(InputEvent),
-    Cancel { recording_was_active: bool },
+    Cancel {
+        recording_was_active: bool,
+    },
     ProcessingFinished,
+    /// Kusema: stop `binding_id` if it's recording, whatever anyone pressed.
+    StopRecording {
+        binding_id: String,
+    },
 }
 
 /// Decide whether a key-up should be deferred (so auto-repeat can cancel it)
@@ -506,6 +512,17 @@ impl CoordinatorState {
         }
     }
 
+    /// Stops a recording from outside the keyboard, keeping its audio. Unlike
+    /// a toggle press, this can never start one, so a request that crosses a
+    /// key press does nothing rather than start a new session.
+    fn on_stop_recording(&mut self, binding_id: &str) -> Option<Effect> {
+        if !matches!(&self.stage, Stage::Recording(id) if id == binding_id) {
+            return None;
+        }
+        self.pending_release = None;
+        Some(self.begin_processing(binding_id.to_string(), binding_id.to_string()))
+    }
+
     fn on_processing_finished(&mut self) -> Option<Effect> {
         self.stage = Stage::Idle;
         self.hold = None;
@@ -573,6 +590,7 @@ pub fn is_transcribe_binding(id: &str) -> bool {
         || id == "transcribe_with_post_process"
         || id == "assistant"
         || id == "assistant_screen"
+        || id == crate::dictation::BINDING
 }
 
 impl TranscriptionCoordinator {
@@ -626,6 +644,11 @@ impl TranscriptionCoordinator {
                         }
                         Command::ProcessingFinished => {
                             if let Some(effect) = state.on_processing_finished() {
+                                run_effect(&app, &mut state, effect);
+                            }
+                        }
+                        Command::StopRecording { binding_id } => {
+                            if let Some(effect) = state.on_stop_recording(&binding_id) {
                                 run_effect(&app, &mut state, effect);
                             }
                         }
@@ -707,6 +730,19 @@ impl TranscriptionCoordinator {
             .tx
             .send(Command::Cancel {
                 recording_was_active,
+            })
+            .is_err()
+        {
+            warn!("Transcription coordinator channel closed");
+        }
+    }
+
+    /// Kusema: ends a recording the way its key would, if it's running.
+    pub fn stop_recording(&self, binding_id: &str) {
+        if self
+            .tx
+            .send(Command::StopRecording {
+                binding_id: binding_id.to_string(),
             })
             .is_err()
         {
@@ -1262,6 +1298,25 @@ mod tests {
 
         state.on_start_result(BINDING, false);
         assert_eq!(state.stage, Stage::Idle);
+    }
+
+    /// A stop from outside the keyboard ends the recording it names, and does
+    /// nothing otherwise: above all, it never starts one.
+    #[test]
+    fn stop_recording_only_stops_its_own_running_recording() {
+        let mut state = CoordinatorState::new();
+        let t0 = Instant::now();
+        assert!(state.on_stop_recording(BINDING).is_none());
+        assert_eq!(state.stage, Stage::Idle);
+
+        state.on_input(toggle_input(false), t0);
+        assert!(state.on_stop_recording(OTHER_BINDING).is_none());
+        assert!(matches!(
+            state.on_stop_recording(BINDING),
+            Some(Effect::Stop { .. })
+        ));
+        assert_eq!(state.stage, Stage::Processing);
+        assert!(state.on_stop_recording(BINDING).is_none());
     }
 
     // ---------------------------------------------------------------------

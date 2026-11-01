@@ -53,10 +53,16 @@ const OVERLAY_HEIGHT: f64 = 50.0;
 const OVERLAY_STREAM_WIDTH: f64 = 400.0;
 const OVERLAY_STREAM_HEIGHT: f64 = 120.0;
 
+// Kusema: continuous dictation's pill (--ov-dictation-w) holds its status, timer
+// and stop button.
+const OVERLAY_DICTATION_WIDTH: f64 = 420.0;
+
 /// Overlay window size (logical) for a given UI state.
 fn overlay_dimensions(state: &str) -> (f64, f64) {
     if state == "streaming" {
         (OVERLAY_STREAM_WIDTH, OVERLAY_STREAM_HEIGHT)
+    } else if state == "dictating" {
+        (OVERLAY_DICTATION_WIDTH, OVERLAY_HEIGHT)
     } else {
         (OVERLAY_WIDTH, OVERLAY_HEIGHT)
     }
@@ -633,6 +639,13 @@ pub fn show_processing_overlay(app_handle: &AppHandle) {
 /// Kusema: shows the overlay while an assistant reply is spoken
 pub fn show_speaking_overlay(app_handle: &AppHandle) {
     show_overlay_state(app_handle, "speaking");
+}
+
+/// Kusema: shows the continuous dictation overlay. Ignores the overlay style:
+/// an open microphone must always be visible.
+pub fn show_dictation_overlay(app_handle: &AppHandle) {
+    let handle = app_handle.clone();
+    let _ = app_handle.run_on_main_thread(move || show_overlay_state_on_main(&handle, "dictating"));
 }
 
 /// Updates the overlay window position based on current settings

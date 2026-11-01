@@ -354,6 +354,10 @@
           "assistant_screen": {
             "name": "Ask About My Screen",
             "description": "Hold or press to ask a spoken question about the window you're working in. You see the screenshot before anything is sent."
+          },
+          "dictate_continuous": {
+            "name": "Continuous Dictation",
+            "description": "Press to start dictating hands-free, and press again to stop. Text appears each time you pause."
           }
         },
         "errors": {
@@ -442,6 +446,29 @@
     },
     "languages": {
       "title": "Språk"
+    },
+    "dictation": {
+      "title": "Continuous Dictation",
+      "description": "Keep talking, and the text is typed into your window each time you pause. Speech recognition stays on this computer, and AI cleanup never runs in this mode.",
+      "dragonKey": {
+        "title": "Dragon's Key",
+        "description": "Use Numpad + to start and stop, as Dragon does. While it's set, that key no longer types a plus sign.",
+        "button": "Use Dragon's key (Numpad +)"
+      },
+      "pause": {
+        "title": "Pause Length",
+        "description": "How long you pause before what you said is typed. Longer pauses keep sentences together; shorter ones show text sooner.",
+        "seconds": "{{seconds}} s"
+      },
+      "autoStop": {
+        "title": "Stop After Silence",
+        "description": "Dictation stops by itself after this long without speech, so the microphone is never left on by accident.",
+        "minutes": "{{minutes}} min"
+      },
+      "voiceCommands": {
+        "label": "Voice Commands",
+        "description": "Say \"new paragraph\", \"new line\", \"scratch that\" or \"stop dictation\" on its own, between pauses, and it acts instead of being typed. The same words inside a sentence are always typed."
+      }
     },
     "sound": {
       "title": "Ljud",
@@ -1048,7 +1075,23 @@
     "transcribing": "Transkriberar...",
     "processing": "Bearbetar...",
     "loadingModel": "Laddar modell...",
-    "speaking": "Speaking..."
+    "speaking": "Speaking...",
+    "dictation": {
+      "dictating": "Dictating",
+      "paused": "Paused, window changed",
+      "noTarget": "Click where the text should go",
+      "finishing": "Finishing...",
+      "stop": "Stop",
+      "nothingToScratch": "Nothing to scratch",
+      "scratchWindowChanged": "Can't scratch: the window changed",
+      "scratchOtherInput": "Can't scratch: keyboard or mouse used",
+      "savedToHistory": "Said while paused: saved in History",
+      "stoppedSilence": "Stopped after silence",
+      "microphoneLost": "Stopped: microphone lost",
+      "cantKeepUp": "Stopped: this computer couldn't keep up",
+      "transcriptionFailed": "Couldn't transcribe that",
+      "pasteFailed": "Couldn't type that; it's in History"
+    }
   },
   "screenCard": {
     "title": "Send this screenshot?",

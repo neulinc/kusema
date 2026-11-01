@@ -29,6 +29,7 @@
   --ov-work-w: 216px; /* working pill (transcribing / polishing) -- wide enough to
                          center longer labels; shared by Live (collapsed) + minimal */
   --ov-open-w: 392px; /* Live panel, expanded */
+  --ov-dictation-w: 412px; /* continuous dictation (OVERLAY_DICTATION_WIDTH) */
   --ov-base-h: 40px; /* control-row height (.sbase) */
   --ov-cap-max-h: 64px; /* max height of the scrolling live-text region */
 }
@@ -156,6 +157,45 @@
 }
 .scard.compact.cworking {
   width: var(--ov-work-w);
+}
+.scard.compact.dictating {
+  width: var(--ov-dictation-w);
+}
+
+/* Continuous dictation: dot | waveform | status (takes the room) | timer | stop */
+.drow {
+  height: var(--ov-base-h);
+  padding: 0 8px 0 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.drow .stimer {
+  opacity: 1;
+}
+.dlabel {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 13px;
+  color: var(--color-text);
+}
+.dstop {
+  flex: none;
+  height: 26px;
+  padding: 0 12px;
+  border: 1px solid var(--s-border);
+  border-radius: 13px;
+  background: transparent;
+  font: inherit;
+  font-size: 12px;
+  color: var(--color-text);
+  cursor: pointer;
+}
+.dstop:hover {
+  background: var(--s-hair);
 }
 
 /* text region — auto-height open via grid-rows trick; region fades as a whole */

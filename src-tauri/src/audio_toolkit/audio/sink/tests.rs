@@ -59,7 +59,7 @@ fn harness(policy: VadPolicy) -> Harness {
     let on_levels: LevelCallback = Arc::new(|_| {});
     let (ready_tx, ready) = mpsc::channel();
     let sink = CaptureSink::new(
-        CaptureVad::new(Box::new(vad), 10, 20),
+        CaptureVad::new(Box::new(vad), 10, 20, 5),
         policy,
         on_levels,
         on_audio,

@@ -42,11 +42,17 @@ pub fn handle_shortcut_event(
             crate::tts::stop(app);
         }
         if let Some(coordinator) = app.try_state::<TranscriptionCoordinator>() {
+            // Kusema: continuous dictation is toggle only, whatever the setting.
+            let activation = if binding_id == crate::dictation::BINDING {
+                crate::settings::ShortcutActivation::Toggle
+            } else {
+                settings.shortcut_activation
+            };
             coordinator.send_input(
                 binding_id,
                 hotkey_string,
                 is_pressed,
-                settings.shortcut_activation,
+                activation,
                 std::time::Duration::from_millis(settings.hold_threshold_ms),
             );
         } else {

@@ -273,6 +273,7 @@ pub struct TranscriptionManager {
     /// True while a background job is queued or running. It holds the model,
     /// so one transcript is never written by two models.
     job_active: Arc<AtomicBool>,
+    model_held: Arc<AtomicBool>,
     /// Handy's spoken-language detector, loaded in this process on first
     /// use and unloaded with the model.
     language_detector: Arc<LanguageDetector>,
@@ -296,6 +297,7 @@ impl TranscriptionManager {
             next_stream_worker_id: Arc::new(AtomicU64::new(1)),
             active_stream_worker: Arc::new(AtomicU64::new(0)),
             job_active: Arc::new(AtomicBool::new(false)),
+            model_held: Arc::new(AtomicBool::new(false)),
             language_detector: Arc::new(LanguageDetector::default()),
         };
 
@@ -725,9 +727,16 @@ impl TranscriptionManager {
         self.engine.loaded().map(|info| info.backend)
     }
 
-    /// Whether a file job is queued or running, which holds the model.
+    /// Whether a file job is queued or running, or a continuous dictation is
+    /// under way, either of which holds the model.
     pub fn job_active(&self) -> bool {
-        self.job_active.load(Ordering::Acquire)
+        self.job_active.load(Ordering::Acquire) || self.model_held.load(Ordering::Acquire)
+    }
+
+    /// Kusema: keeps the model through a continuous dictation, so the "unload
+    /// immediately" setting doesn't reload it for every segment.
+    pub fn hold_model(&self, held: bool) {
+        self.model_held.store(held, Ordering::Release);
     }
 
     pub fn set_job_active(&self, active: bool) {
@@ -738,7 +747,10 @@ impl TranscriptionManager {
     /// model.
     pub fn ensure_model_unlocked(&self) -> std::result::Result<(), String> {
         if self.job_active() {
-            return Err("The model can't change while a file is transcribing".to_string());
+            return Err(
+                "The model can't change while a file is transcribing or a dictation is running"
+                    .to_string(),
+            );
         }
         Ok(())
     }

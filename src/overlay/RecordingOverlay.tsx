@@ -4,6 +4,8 @@ import { useTranslation } from "react-i18next";
 import "./RecordingOverlay.css";
 import { commands, events } from "@/bindings";
 import type {
+  DictationNotice,
+  DictationStatusEvent,
   StreamPhase,
   StreamPhaseEvent,
   StreamTextEvent,
@@ -18,7 +20,20 @@ type OverlayState =
   | "streaming"
   | "transcribing"
   | "processing"
-  | "speaking";
+  | "speaking"
+  | "dictating";
+
+const DICTATION_NOTICES: Record<DictationNotice, string> = {
+  nothing_to_scratch: "overlay.dictation.nothingToScratch",
+  scratch_window_changed: "overlay.dictation.scratchWindowChanged",
+  scratch_other_input: "overlay.dictation.scratchOtherInput",
+  saved_to_history: "overlay.dictation.savedToHistory",
+  stopped_silence: "overlay.dictation.stoppedSilence",
+  microphone_lost: "overlay.dictation.microphoneLost",
+  cant_keep_up: "overlay.dictation.cantKeepUp",
+  transcription_failed: "overlay.dictation.transcriptionFailed",
+  paste_failed: "overlay.dictation.pasteFailed",
+};
 
 // Number of reactive bars in the waveform (the simple, smoothed style shared by
 // every overlay form). Mic levels arrive as 16 FFT buckets; we take the first N.
@@ -57,6 +72,8 @@ const RecordingOverlay: React.FC = () => {
   const [phase, setPhase] = useState<StreamPhase>("listening");
   const [workKind, setWorkKind] = useState<StreamWorkKind>("transcribing");
   const [elapsed, setElapsed] = useState(0);
+  const [dictation, setDictation] = useState<DictationStatusEvent | null>(null);
+  const [now, setNow] = useState(Date.now());
   // Bumped on each new streaming session so the Live card remounts fresh (replays
   // the pop-in, and never animates in from the previous panel's open size).
   const [session, setSession] = useState(0);
@@ -82,6 +99,11 @@ const RecordingOverlay: React.FC = () => {
         // Reset synchronously before settings I/O. A fast microphone can emit
         // recording-ready while the awaits below are in flight; resetting after
         // them would overwrite that event and leave the overlay stuck arming.
+        if (overlayState === "dictating") {
+          setDictation(null);
+          smoothedLevelsRef.current = Array(16).fill(0);
+          setLevels(Array(WAVE_BARS).fill(0));
+        }
         if (overlayState === "recording" || overlayState === "streaming") {
           setCaptureReady(false);
           smoothedLevelsRef.current = Array(16).fill(0);
@@ -139,6 +161,13 @@ const RecordingOverlay: React.FC = () => {
         setStreamText(event.payload);
       });
 
+      const unlistenDictation = await events.dictationStatusEvent.listen(
+        (event) => {
+          setDictation(event.payload);
+          setNow(Date.now());
+        },
+      );
+
       const unlistenPhase = await events.streamPhaseEvent.listen((event) => {
         const payload: StreamPhaseEvent = event.payload;
         setPhase(payload.phase);
@@ -178,6 +207,7 @@ const RecordingOverlay: React.FC = () => {
         unlistenReady();
         unlistenLevel();
         unlistenStream();
+        unlistenDictation();
         unlistenPhase();
         unlistenModel();
         clearTimeout(modelLoadTimerRef.current);
@@ -193,6 +223,13 @@ const RecordingOverlay: React.FC = () => {
     const id = setInterval(() => setElapsed((e) => e + 1), 1000);
     return () => clearInterval(id);
   }, [state, isVisible, captureReady]);
+
+  // The dictation timer counts from the session's start, paused or not.
+  useEffect(() => {
+    if (state !== "dictating" || !isVisible) return;
+    const id = setInterval(() => setNow(Date.now()), 1000);
+    return () => clearInterval(id);
+  }, [state, isVisible]);
 
   // Stick to the bottom as text streams in — but only while pinned, so a user who
   // has scrolled up to read history isn't yanked back down by the next chunk.
@@ -289,6 +326,62 @@ const RecordingOverlay: React.FC = () => {
       <div className="sbase-r">{showCancel && cancelBtn}</div>
     </div>
   );
+
+  // ---- Continuous dictation: what's happening, how long, and a way out ----
+  if (state === "dictating") {
+    const phase = dictation?.phase ?? "dictating";
+    const label = dictation?.notice
+      ? t(DICTATION_NOTICES[dictation.notice])
+      : phase === "paused"
+        ? t("overlay.dictation.paused")
+        : phase === "no_target"
+          ? t("overlay.dictation.noTarget")
+          : phase === "dictating"
+            ? t("overlay.dictation.dictating")
+            : t("overlay.dictation.finishing");
+    const seconds = dictation
+      ? Math.max(0, Math.floor((now - dictation.started_at_ms) / 1000))
+      : 0;
+    const listening = phase === "dictating";
+    const stoppable = phase !== "finishing" && phase !== "ended";
+
+    return (
+      <div
+        dir={direction}
+        className={`ov-stage ${position} ov-fade ${isVisible ? "show" : ""}`}
+      >
+        <div className="scard compact dictating">
+          <div className="drow">
+            <span className={`sdot ${listening ? "ready" : "arming"}`} />
+            {listening && (
+              <div className="swave ready">
+                {levels.slice(0, 5).map((v, i) => (
+                  <i
+                    key={i}
+                    style={{
+                      height: `${Math.max(3, Math.min(18, 3 + Math.pow(v, 0.7) * 15))}px`,
+                    }}
+                  />
+                ))}
+              </div>
+            )}
+            <span className="dlabel" role="status" title={label}>
+              {label}
+            </span>
+            <span className="stimer">{fmtTime(seconds)}</span>
+            {stoppable && (
+              <button
+                className="dstop"
+                onClick={() => commands.cancelOperation()}
+              >
+                {t("overlay.dictation.stop")}
+              </button>
+            )}
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   // ---- Live overlay: a pill that sculpts open into a panel ----
   if (state === "streaming") {

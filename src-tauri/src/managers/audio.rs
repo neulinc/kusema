@@ -1,8 +1,8 @@
 use crate::audio_toolkit::{
-    audio::{AudioFrameCallback, LevelCallback},
+    audio::{AudioFrameCallback, FrameTap, LevelCallback},
     vad::{
-        frames_for_duration_ms, EarshotVad, SmoothedVad, VAD_OFFLINE_HANGOVER_MS, VAD_ONSET_MS,
-        VAD_PREFILL_MS, VAD_STREAMING_HANGOVER_MS,
+        frames_for_duration_ms, EarshotVad, SmoothedVad, VAD_CONTINUOUS_HANGOVER_MS,
+        VAD_OFFLINE_HANGOVER_MS, VAD_ONSET_MS, VAD_PREFILL_MS, VAD_STREAMING_HANGOVER_MS,
     },
     CaptureSink, CaptureVad, SileroVad, SpeechScorer, VadPolicy, VoiceActivityDetector,
 };
@@ -389,6 +389,7 @@ fn create_capture_vad(
         Box::new(smoothed_vad),
         offline_hangover_frames,
         streaming_hangover_frames,
+        frames_for_duration_ms(VAD_CONTINUOUS_HANGOVER_MS, frame_samples),
     ))
 }
 
@@ -1015,6 +1016,35 @@ impl AudioRecordingManager {
         binding_id: &str,
         vad_policy: VadPolicy,
     ) -> Result<RecordingReadiness, anyhow::Error> {
+        self.start_recording(binding_id, vad_policy, None)
+    }
+
+    /// Kusema: a recording whose audio goes to a tap as it arrives instead of
+    /// being kept. `make_tap` is called again if the microphone has to reopen.
+    pub fn try_start_segmented(
+        &self,
+        binding_id: &str,
+        vad_policy: VadPolicy,
+        make_tap: &dyn Fn() -> Box<dyn FrameTap>,
+    ) -> Result<RecordingReadiness, anyhow::Error> {
+        self.start_recording(binding_id, vad_policy, Some(make_tap))
+    }
+
+    /// Whether the open microphone has failed (unplugged, for instance).
+    pub fn microphone_failed(&self) -> bool {
+        self.recorder
+            .lock()
+            .unwrap()
+            .as_ref()
+            .is_some_and(OpenMicrophone::needs_reopen)
+    }
+
+    fn start_recording(
+        &self,
+        binding_id: &str,
+        vad_policy: VadPolicy,
+        make_tap: Option<&dyn Fn() -> Box<dyn FrameTap>>,
+    ) -> Result<RecordingReadiness, anyhow::Error> {
         let mut state = self.state.lock().unwrap();
         if !matches!(*state, RecordingState::Idle) {
             return Err(anyhow::anyhow!("Already recording"));
@@ -1045,6 +1075,10 @@ impl AudioRecordingManager {
                 Arc::clone(&self.on_audio),
                 ready_tx,
             );
+            let sink = match make_tap {
+                Some(make_tap) => sink.with_tap(make_tap()),
+                None => sink,
+            };
 
             let recorder = self.recorder.lock().unwrap();
             let Some(microphone) = recorder.as_ref() else {

@@ -21,6 +21,8 @@ const COMPOUND_KEY_DISPLAY: Record<string, string> = {
   pagedown: "Page Down",
   printscreen: "Print Screen",
   scrolllock: "Scroll Lock",
+  keypadplus: "Numpad +",
+  numpadadd: "Numpad +",
 };
 
 /**
@@ -183,7 +185,8 @@ const capitalizeKey = (key: string): string => {
   if (/^f\d+$/.test(key)) return key.toUpperCase();
   // Single char: a -> A
   if (key.length === 1) return key.toUpperCase();
-  if (COMPOUND_KEY_DISPLAY[key]) return COMPOUND_KEY_DISPLAY[key];
+  const compound = COMPOUND_KEY_DISPLAY[key.toLowerCase()];
+  if (compound) return compound;
   // Multi-word: capitalize first letter of each word
   return key.replace(/\b\w/g, (c) => c.toUpperCase());
 };

@@ -10,6 +10,7 @@ mod chinese_script;
 pub mod cli;
 mod clipboard;
 mod commands;
+mod dictation;
 pub mod engine_supervisor;
 mod helpers;
 mod input;
@@ -794,6 +795,9 @@ pub fn run(cli_args: CliArgs) {
             assistant::change_assistant_screen_confirm_setting,
             assistant::change_assistant_screen_provider_setting,
             assistant::change_assistant_screen_model_setting,
+            dictation::change_dictation_pause_ms_setting,
+            dictation::change_dictation_auto_stop_minutes_setting,
+            dictation::change_dictation_voice_commands_setting,
             screen::card::get_screen_card,
             screen::card::screen_card_ready,
             screen::card::answer_screen_card,
@@ -815,6 +819,7 @@ pub fn run(cli_args: CliArgs) {
             managers::transcription::StreamTextEvent,
             managers::transcription::StreamPhaseEvent,
             transcription_coordinator::RecordingStateEvent,
+            dictation::DictationStatusEvent,
             actions::TranscriptionCompleteEvent,
         ]);
 
@@ -895,7 +900,11 @@ pub fn run(cli_args: CliArgs) {
     // (--transcribe-file/--list-devices/--list-models) a silent no-op whenever the
     // app is already open, so skip it in headless mode and run a standalone
     // instance instead.
-    if !headless_mode {
+    // Debug builds can run beside an installed Kusema, for testing without
+    // touching it (give the build its own data with a `portable` marker).
+    let second_instance_ok =
+        cfg!(debug_assertions) && std::env::var_os("KUSEMA_DEBUG_SECOND_INSTANCE").is_some();
+    if !headless_mode && !second_instance_ok {
         builder = builder.plugin(tauri_plugin_single_instance::init(|app, args, _cwd| {
             if args.iter().any(|a| a == "--toggle-transcription") {
                 signal_handle::send_transcription_input(app, "transcribe", "CLI");
@@ -936,6 +945,7 @@ pub fn run(cli_args: CliArgs) {
         .manage(cli_args.clone())
         .manage(assistant::AssistantState::default())
         .manage(screen::ScreenState::default())
+        .manage(dictation::DictationState::default())
         .setup(move |app| {
             #[cfg(target_os = "windows")]
             log::info!(

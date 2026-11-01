@@ -411,6 +411,8 @@ const HistoryEntryComponent: React.FC<HistoryEntryProps> = ({
     }
   };
 
+  // Continuous dictation discards its audio: nothing to play or re-transcribe.
+  const hasAudio = !entry.file_name.startsWith("continuous-");
   const formattedDate = formatDateTime(String(entry.timestamp), i18n.language);
 
   let progressText = t("settings.history.transcribing");
@@ -475,14 +477,14 @@ const HistoryEntryComponent: React.FC<HistoryEntryProps> = ({
             >
               <X width={16} height={16} />
             </IconButton>
-          ) : (
+          ) : hasAudio ? (
             <IconButton
               onClick={() => retryTranscription(entry.id)}
               title={t("settings.history.retranscribe")}
             >
               <RotateCcw width={16} height={16} />
             </IconButton>
-          )}
+          ) : null}
           <IconButton
             onClick={handleDeleteEntry}
             title={t("settings.history.delete")}
@@ -545,7 +547,9 @@ const HistoryEntryComponent: React.FC<HistoryEntryProps> = ({
         )}
       </div>
 
-      <AudioPlayer onLoadRequest={handleLoadAudio} className="w-full" />
+      {hasAudio && (
+        <AudioPlayer onLoadRequest={handleLoadAudio} className="w-full" />
+      )}
     </div>
   );
 };

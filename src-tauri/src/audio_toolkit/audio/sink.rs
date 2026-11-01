@@ -8,6 +8,17 @@ use crate::audio_toolkit::{
     vad::{VadFrame, VoiceActivityDetector},
 };
 
+/// Takes a recording's audio as it's filtered, instead of the sink keeping it,
+/// so a session of any length holds nothing here.
+pub trait FrameTap: Send {
+    /// Audio the detector passed as speech.
+    fn speech(&mut self, frame: &[f32]);
+    /// `samples` of audio the detector dropped as silence.
+    fn silence(&mut self, samples: usize);
+    /// The recording ended.
+    fn finish(&mut self);
+}
+
 /// How 16 kHz mono frames should be filtered for one recording session.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum VadPolicy {
@@ -17,6 +28,8 @@ pub enum VadPolicy {
     Offline,
     /// VAD profile with a longer post-speech tail for streaming-capable models.
     Streaming,
+    /// Kusema: a short tail, because a pause ends a dictated segment.
+    Continuous,
 }
 
 /// A single VAD engine plus the two hangover-tail lengths its smoothing wrapper
@@ -27,6 +40,7 @@ pub struct CaptureVad {
     detector: Box<dyn VoiceActivityDetector>,
     offline_hangover_frames: usize,
     streaming_hangover_frames: usize,
+    continuous_hangover_frames: usize,
 }
 
 impl CaptureVad {
@@ -34,6 +48,7 @@ impl CaptureVad {
         detector: Box<dyn VoiceActivityDetector>,
         offline_hangover_frames: usize,
         streaming_hangover_frames: usize,
+        continuous_hangover_frames: usize,
     ) -> Self {
         assert!(
             detector.frame_samples() > 0,
@@ -43,6 +58,7 @@ impl CaptureVad {
             detector,
             offline_hangover_frames,
             streaming_hangover_frames,
+            continuous_hangover_frames,
         }
     }
 
@@ -56,6 +72,7 @@ impl CaptureVad {
     fn hangover_for(&self, policy: VadPolicy) -> usize {
         match policy {
             VadPolicy::Streaming => self.streaming_hangover_frames,
+            VadPolicy::Continuous => self.continuous_hangover_frames,
             VadPolicy::Offline | VadPolicy::Disabled => self.offline_hangover_frames,
         }
     }
@@ -92,6 +109,8 @@ pub struct CaptureSink {
     ready: Option<mpsc::Sender<()>>,
     samples: Vec<f32>,
     heard_sound: bool,
+    /// Kusema: takes the audio instead of `samples`.
+    tap: Option<Box<dyn FrameTap>>,
 }
 
 /// Spectrum window at 16 kHz: 32 ms, near the overlay's ~30 Hz refresh.
@@ -128,7 +147,14 @@ impl CaptureSink {
             ready: Some(ready),
             samples: Vec::new(),
             heard_sound: false,
+            tap: None,
         }
+    }
+
+    /// Sends the audio to `tap` instead of keeping it.
+    pub fn with_tap(mut self, tap: Box<dyn FrameTap>) -> Self {
+        self.tap = Some(tap);
+        self
     }
 
     /// The detector, from a sink that never recorded (its start failed).
@@ -138,7 +164,10 @@ impl CaptureSink {
 
     /// Hands back the recording and the detector. Logs what VAD still held
     /// back when the recording stopped.
-    pub fn finish(self) -> CapturedAudio {
+    pub fn finish(mut self) -> CapturedAudio {
+        if let Some(tap) = &mut self.tap {
+            tap.finish();
+        }
         // Diagnostic for audio still withheld when capture stopped; it is not
         // conclusive in either direction.
         if self.policy != VadPolicy::Disabled {
@@ -197,8 +226,15 @@ impl Sink for CaptureSink {
             .push_frame(chunk.samples)
             .unwrap_or(VadFrame::Speech(chunk.samples))
         {
-            VadFrame::Speech(frame) => Self::emit(&mut self.samples, &self.on_audio, frame),
-            VadFrame::Noise => {}
+            VadFrame::Speech(frame) => match &mut self.tap {
+                Some(tap) => tap.speech(frame),
+                None => Self::emit(&mut self.samples, &self.on_audio, frame),
+            },
+            VadFrame::Noise => {
+                if let Some(tap) = &mut self.tap {
+                    tap.silence(chunk.samples.len());
+                }
+            }
         }
     }
 }

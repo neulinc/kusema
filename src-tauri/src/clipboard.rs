@@ -794,6 +794,142 @@ fn should_send_auto_submit(auto_submit: bool, paste_method: PasteMethod) -> bool
     auto_submit && paste_method != PasteMethod::None
 }
 
+/// Whether the window being typed into is still in front.
+pub type OnTarget = std::sync::Arc<dyn Fn() -> bool + Send + Sync>;
+
+/// How typing a continuous dictation segment went.
+#[derive(Debug, PartialEq, Eq)]
+pub enum TypeOutcome {
+    Typed,
+    /// The paste method is "None": nothing is typed, by choice.
+    NotTyping,
+    /// The window changed before the keystroke; nothing was typed.
+    WindowChanged,
+}
+
+/// How many Backspaces `press_backspaces` sends between checks of the window.
+const BACKSPACES_PER_CHECK: usize = 20;
+
+/// Kusema: types one segment of a continuous dictation with the user's paste
+/// method. Unlike `paste`, it never auto-submits and adds no trailing space, and
+/// `on_target` is checked on the input thread, immediately before the keystroke,
+/// so the text can't land in a window the user just switched to. On the clipboard,
+/// the text carries the markers that keep it out of clipboard history and cloud
+/// sync.
+pub fn type_segment(
+    text: &str,
+    app_handle: &AppHandle,
+    on_target: OnTarget,
+) -> Result<TypeOutcome, String> {
+    let _paste = PASTE_LOCK.lock().unwrap_or_else(PoisonError::into_inner);
+    let settings = get_settings(app_handle);
+    let paste_method = settings.paste_method;
+    if paste_method == PasteMethod::None {
+        return Ok(TypeOutcome::NotTyping);
+    }
+    if !on_target() {
+        return Ok(TypeOutcome::WindowChanged);
+    }
+
+    match paste_method {
+        PasteMethod::None => unreachable!("returned above"),
+        PasteMethod::Direct => {
+            #[cfg(target_os = "linux")]
+            paste_direct(text, app_handle, settings.typing_tool)?;
+            #[cfg(not(target_os = "linux"))]
+            {
+                let text = text.to_string();
+                let sent = with_enigo(app_handle, move |enigo| {
+                    if !on_target() {
+                        return Ok(false);
+                    }
+                    input::paste_text_direct(enigo, &text).map(|()| true)
+                })?;
+                if !sent {
+                    return Ok(TypeOutcome::WindowChanged);
+                }
+            }
+        }
+        PasteMethod::ExternalScript => {
+            let script_path = settings
+                .external_script_path
+                .as_ref()
+                .filter(|p| !p.is_empty())
+                .ok_or("External script path is not configured")?;
+            paste_via_external_script(text, script_path)?;
+        }
+        PasteMethod::CtrlV | PasteMethod::CtrlShiftV | PasteMethod::ShiftInsert => {
+            let clipboard = app_handle.clipboard();
+            let saved_text = clipboard.read_text().ok().filter(|t| !t.is_empty());
+            let saved_image = if saved_text.is_none() {
+                clipboard.read_image().ok().map(|image| image.to_owned())
+            } else {
+                None
+            };
+            let restore = || {
+                if let Some(content) = &saved_text {
+                    let _ = write_text_to_clipboard(app_handle, content);
+                } else if let Some(image) = &saved_image {
+                    let _ = clipboard.write_image(image);
+                } else {
+                    let _ = clipboard.clear();
+                }
+            };
+
+            // Windows apps expect CRLF line breaks on the clipboard.
+            let clip_text = text.replace('\n', "\r\n");
+            crate::dictation::write_clipboard_private(&clip_text)?;
+            std::thread::sleep(Duration::from_millis(settings.paste_delay_ms));
+            let sent = with_enigo(app_handle, move |enigo| {
+                if !on_target() {
+                    return Ok(false);
+                }
+                match paste_method {
+                    PasteMethod::CtrlV => input::send_paste_ctrl_v(enigo, 100),
+                    PasteMethod::CtrlShiftV => input::send_paste_ctrl_shift_v(enigo, 100),
+                    PasteMethod::ShiftInsert => input::send_paste_shift_insert(enigo, 100),
+                    _ => Err("Invalid paste method for clipboard paste".into()),
+                }
+                .map(|()| true)
+            });
+            if matches!(sent, Ok(false)) {
+                restore();
+                return Ok(TypeOutcome::WindowChanged);
+            }
+            finish_clipboard_paste(sent.map(|_| ()), settings.paste_delay_after_ms, restore)?;
+        }
+    }
+    Ok(TypeOutcome::Typed)
+}
+
+/// Kusema: deletes `count` characters before the caret, stopping if `on_target`
+/// turns false.
+pub fn press_backspaces(
+    count: usize,
+    app_handle: &AppHandle,
+    on_target: OnTarget,
+) -> Result<(), String> {
+    let _paste = PASTE_LOCK.lock().unwrap_or_else(PoisonError::into_inner);
+    let mut left = count;
+    while left > 0 {
+        let batch = left.min(BACKSPACES_PER_CHECK);
+        let on_target = on_target.clone();
+        with_enigo(app_handle, move |enigo| {
+            if !on_target() {
+                return Err("The window changed while deleting".to_string());
+            }
+            for _ in 0..batch {
+                enigo
+                    .key(Key::Backspace, Direction::Click)
+                    .map_err(|e| format!("Failed to press Backspace: {e}"))?;
+            }
+            Ok(())
+        })?;
+        left -= batch;
+    }
+    Ok(())
+}
+
 /// Pastes `text` into the focused app. Call from a worker thread, never the main
 /// thread: it sleeps between steps (input injection hops via `with_enigo`).
 pub fn paste(text: String, app_handle: AppHandle) -> Result<(), String> {

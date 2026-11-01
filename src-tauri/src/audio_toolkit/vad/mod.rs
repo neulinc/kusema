@@ -6,6 +6,8 @@ pub const VAD_PREFILL_MS: u64 = 450;
 pub const VAD_OFFLINE_HANGOVER_MS: u64 = 450;
 pub const VAD_STREAMING_HANGOVER_MS: u64 = 1650;
 pub const VAD_ONSET_MS: u64 = 60;
+/// Kusema: tail for continuous dictation, which cuts segments at pauses.
+pub const VAD_CONTINUOUS_HANGOVER_MS: u64 = 150;
 
 /// Convert a VAD timing duration to whole detector frames, rounding up so an
 /// alternate backend never shortens Handy's onset, pre-roll, or hangover tail.

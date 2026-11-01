@@ -100,6 +100,11 @@ fn native_windows_machine() -> Option<u16> {
 /// Centralized cancellation function that can be called from anywhere in the app.
 /// Handles cancelling both recording and transcription operations and updates UI state.
 pub fn cancel_current_operation(app: &AppHandle) {
+    // Kusema: Escape ends a continuous dictation and keeps its text.
+    if crate::dictation::stop_if_active(app) {
+        return;
+    }
+
     info!("Initiating operation cancellation...");
 
     // Kusema: silence a spoken assistant reply.

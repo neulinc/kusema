@@ -182,6 +182,12 @@ const settingUpdaters: {
     commands.changeAssistantScreenProviderSetting(value as string | null),
   assistant_screen_model: (value) =>
     commands.changeAssistantScreenModelSetting(value as string | null),
+  dictation_pause_ms: (value) =>
+    commands.changeDictationPauseMsSetting(value as number),
+  dictation_auto_stop_minutes: (value) =>
+    commands.changeDictationAutoStopMinutesSetting(value as number),
+  dictation_voice_commands: (value) =>
+    commands.changeDictationVoiceCommandsSetting(value as boolean),
   log_level: (value) => commands.setLogLevel(value as any),
   app_language: (value) => commands.changeAppLanguageSetting(value as string),
   theme: (value) => commands.changeThemeSetting(value as string),

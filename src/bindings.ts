@@ -1069,6 +1069,30 @@ async changeAssistantScreenModelSetting(model: string | null) : Promise<Result<n
     else return { status: "error", error: e  as any };
 }
 },
+async changeDictationPauseMsSetting(ms: number) : Promise<Result<null, string>> {
+    try {
+    return { status: "ok", data: await TAURI_INVOKE("change_dictation_pause_ms_setting", { ms }) };
+} catch (e) {
+    if(e instanceof Error) throw e;
+    else return { status: "error", error: e  as any };
+}
+},
+async changeDictationAutoStopMinutesSetting(minutes: number) : Promise<Result<null, string>> {
+    try {
+    return { status: "ok", data: await TAURI_INVOKE("change_dictation_auto_stop_minutes_setting", { minutes }) };
+} catch (e) {
+    if(e instanceof Error) throw e;
+    else return { status: "error", error: e  as any };
+}
+},
+async changeDictationVoiceCommandsSetting(enabled: boolean) : Promise<Result<null, string>> {
+    try {
+    return { status: "ok", data: await TAURI_INVOKE("change_dictation_voice_commands_setting", { enabled }) };
+} catch (e) {
+    if(e instanceof Error) throw e;
+    else return { status: "error", error: e  as any };
+}
+},
 /**
  * The card's content, for its page.
  */
@@ -1170,6 +1194,7 @@ async deleteKokoro() : Promise<Result<null, string>> {
 
 
 export const events = __makeEvents__<{
+dictationStatusEvent: DictationStatusEvent,
 historyUpdatePayload: HistoryUpdatePayload,
 recordingStateEvent: RecordingStateEvent,
 streamPhaseEvent: StreamPhaseEvent,
@@ -1177,6 +1202,7 @@ streamTextEvent: StreamTextEvent,
 transcriptionCompleteEvent: TranscriptionCompleteEvent,
 transcriptionJob: TranscriptionJob
 }>({
+dictationStatusEvent: "dictation-status-event",
 historyUpdatePayload: "history-update-payload",
 recordingStateEvent: "recording-state-event",
 streamPhaseEvent: "stream-phase-event",
@@ -1299,7 +1325,19 @@ assistant_screen_provider_id?: string | null;
  * Kusema: model for screen questions with a different provider; `None`
  * uses that provider's Post Process model.
  */
-assistant_screen_model?: string | null }
+assistant_screen_model?: string | null; 
+/**
+ * Kusema: a pause this long ends a continuous dictation segment.
+ */
+dictation_pause_ms?: number; 
+/**
+ * Kusema: continuous dictation stops after this much silence.
+ */
+dictation_auto_stop_minutes?: number; 
+/**
+ * Kusema: "new paragraph", "scratch that" and so on act instead of being typed.
+ */
+dictation_voice_commands?: boolean }
 export type AudioDevice = { index: string; name: string; is_default: boolean }
 export type AutoSubmitKey = "enter" | "ctrl_enter" | "cmd_enter"
 export type AutoUnavailableReason = 
@@ -1348,6 +1386,39 @@ export type ChineseScript =
 "traditional_hk"
 export type ClipboardHandling = "dont_modify" | "copy_to_clipboard"
 export type CustomSounds = { start: boolean; stop: boolean }
+/**
+ * A message under the phase.
+ */
+export type DictationNotice = "nothing_to_scratch" | "scratch_window_changed" | "scratch_other_input" | 
+/**
+ * Something said while paused was saved to History, not typed.
+ */
+"saved_to_history" | "stopped_silence" | "microphone_lost" | "cant_keep_up" | "transcription_failed" | "paste_failed"
+/**
+ * What the overlay shows.
+ */
+export type DictationPhase = "dictating" | 
+/**
+ * The target window isn't in front.
+ */
+"paused" | 
+/**
+ * Started in Kusema: waiting for a window to type into.
+ */
+"no_target" | 
+/**
+ * Stopped; the last segments are finishing.
+ */
+"finishing" | 
+/**
+ * Over; the overlay is only still up to say why.
+ */
+"ended"
+export type DictationStatusEvent = { phase: DictationPhase; notice: DictationNotice | null; 
+/**
+ * When the session started, in milliseconds since the epoch.
+ */
+started_at_ms: number }
 export type GpuDeviceOption = { id: string; name: string; total_vram_mb: number }
 export type HistoryEntry = { id: number; file_name: string; timestamp: number; saved: boolean; title: string; transcription_text: string; post_processed_text: string | null; post_process_prompt: string | null; post_process_requested: boolean; 
 /**
