@@ -218,6 +218,14 @@ fn initialize_core_logic(app_handle: &AppHandle) {
     );
     let history_manager =
         Arc::new(HistoryManager::new(app_handle).expect("Failed to initialize history manager"));
+    // Kusema: the recordings are all the webview may read from disk (History's
+    // audio player). Allowed here because portable mode keeps them elsewhere.
+    if let Err(e) = app_handle
+        .asset_protocol_scope()
+        .allow_directory(history_manager.recordings_dir(), false)
+    {
+        log::error!("Couldn't allow the recordings folder for playback: {e}");
+    }
 
     // Add managers to Tauri's managed state
     app_handle.manage(recording_manager.clone());
