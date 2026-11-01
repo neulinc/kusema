@@ -83,7 +83,13 @@ export const SECTIONS_CONFIG = {
     labelKey: "sidebar.postProcessing",
     icon: Sparkles,
     component: PostProcessingSettings,
-    enabled: (settings) => settings?.post_process_enabled ?? false,
+    // Also where a model chosen in setup is changed.
+    enabled: (settings) =>
+      (settings?.post_process_enabled ||
+        !!settings?.post_process_models?.[
+          settings?.post_process_provider_id
+        ]) ??
+      false,
   },
   debug: {
     labelKey: "sidebar.debug",

@@ -39,6 +39,8 @@ STATE = DEBUG / "isolated-run.json"
 RUN_LOG = DEBUG / "isolated-run.log"
 APP_LOG = DATA / "logs" / "handy.log"
 READY_TEXT = "Shortcuts initialized successfully"
+# Setup asks for its speech model as soon as it opens, before any shortcut.
+FIRST_RUN_READY_TEXT = "Downloading "
 START_TIMEOUT_SECS = 580
 
 REAL = Path(os.environ["APPDATA"]) / "com.neulinc.kusema"
@@ -150,6 +152,10 @@ def start(args):
     else:
         store = {"settings": {}}
     store["settings"].update(DEFAULT_SETTINGS)
+    if args.first_run:
+        store["settings"]["onboarding_completed"] = False
+        # A partial store reads as an upgrade; a real first run has no What's New.
+        store["settings"]["show_whats_new_on_update"] = False
     for item in args.set:
         name, _, value = item.partition("=")
         store["settings"][name] = json.loads(value)
@@ -189,7 +195,7 @@ def start(args):
         if APP_LOG.exists():
             with open(APP_LOG, encoding="utf-8", errors="replace") as handle:
                 handle.seek(offset)
-                if READY_TEXT in handle.read():
+                if (FIRST_RUN_READY_TEXT if args.first_run else READY_TEXT) in handle.read():
                     break
     else:
         stop_run()
@@ -225,6 +231,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     commands = parser.add_subparsers(dest="command", required=True)
     start_parser = commands.add_parser("start")
+    start_parser.add_argument("--first-run", action="store_true", help="open on first-run setup")
     start_parser.add_argument("--set", action="append", default=[], metavar="NAME=JSON")
     start_parser.add_argument("--env", action="append", default=[], metavar="NAME=VALUE")
     stop_parser = commands.add_parser("stop")

@@ -77,6 +77,51 @@ async changeStartHiddenSetting(enabled: boolean) : Promise<Result<null, string>>
     else return { status: "error", error: e  as any };
 }
 },
+/**
+ * Shows every model on the Models page, not just the short list.
+ */
+async changeShowAllModelsSetting(enabled: boolean) : Promise<Result<null, string>> {
+    try {
+    return { status: "ok", data: await TAURI_INVOKE("change_show_all_models_setting", { enabled }) };
+} catch (e) {
+    if(e instanceof Error) throw e;
+    else return { status: "error", error: e  as any };
+}
+},
+/**
+ * Setup finished: the checklist appears on the main page.
+ */
+async activateFirstWins() : Promise<void> {
+    await TAURI_INVOKE("activate_first_wins");
+},
+async dismissFirstWins() : Promise<void> {
+    await TAURI_INVOKE("dismiss_first_wins");
+},
+/**
+ * Is Ollama running on this computer, and with which models?
+ */
+async detectLocalAi() : Promise<Result<LocalAiStatus, string>> {
+    try {
+    return { status: "ok", data: await TAURI_INVOKE("detect_local_ai") };
+} catch (e) {
+    if(e instanceof Error) throw e;
+    else return { status: "error", error: e  as any };
+}
+},
+/**
+ * Starts the meter on the selected microphone, replacing any meter running.
+ */
+async startMicTest() : Promise<Result<null, string>> {
+    try {
+    return { status: "ok", data: await TAURI_INVOKE("start_mic_test") };
+} catch (e) {
+    if(e instanceof Error) throw e;
+    else return { status: "error", error: e  as any };
+}
+},
+async stopMicTest() : Promise<void> {
+    await TAURI_INVOKE("stop_mic_test");
+},
 async changeAutostartSetting(enabled: boolean) : Promise<Result<null, string>> {
     try {
     return { status: "ok", data: await TAURI_INVOKE("change_autostart_setting", { enabled }) };
@@ -1480,7 +1525,15 @@ privileged_hotkey_enabled?: boolean;
 /**
  * Kusema: days the privacy ledger keeps a request.
  */
-ledger_retention_days?: number }
+ledger_retention_days?: number; 
+/**
+ * Kusema: the "First three wins" checklist on the main page.
+ */
+first_wins?: FirstWins; 
+/**
+ * Kusema: the Models page lists every model, not just the short list.
+ */
+show_all_models?: boolean }
 export type AudioDevice = { index: string; name: string; is_default: boolean }
 export type AutoSubmitKey = "enter" | "ctrl_enter" | "cmd_enter"
 export type AutoUnavailableReason = 
@@ -1571,6 +1624,11 @@ export type DictationStatusEvent = { phase: DictationPhase; notice: DictationNot
  * When the session started, in milliseconds since the epoch.
  */
 started_at_ms: number }
+export type FirstWins = { 
+/**
+ * Setup finished, so wins count. Practice in setup doesn't.
+ */
+active: boolean; dictated: boolean; new_paragraph: boolean; asked: boolean; dismissed: boolean }
 export type GpuDeviceOption = { id: string; name: string; total_vram_mb: number }
 export type HistoryEntry = { id: number; file_name: string; timestamp: number; saved: boolean; title: string; transcription_text: string; post_processed_text: string | null; post_process_prompt: string | null; post_process_requested: boolean; 
 /**
@@ -1693,6 +1751,11 @@ export type LedgerFilter = { purpose: Purpose | null; result: RequestResult | nu
  * Seconds since the epoch.
  */
 since: number | null }
+export type LocalAiStatus = { found: boolean; 
+/**
+ * Installed models. Empty when it's running but none are installed yet.
+ */
+models: string[]; base_url: string }
 export type LogLevel = "trace" | "debug" | "info" | "warn" | "error"
 export type ModelInfo = { id: string; name: string; description: string; filename: string; source: ModelSource; size_mb: number; is_downloaded: boolean; is_downloading: boolean; partial_size: number; accuracy_score: number; speed_score: number; supports_translation: boolean; is_recommended: boolean; supported_languages: string[]; supports_language_selection: boolean; is_custom: boolean; supports_streaming: boolean; supports_language_detection: boolean }
 export type ModelLoadStatus = { is_loaded: boolean; current_model: string | null }

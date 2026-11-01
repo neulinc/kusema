@@ -26,7 +26,8 @@ export const AssistantProviderSettings: React.FC<{
   const hasKey = !!getSetting("post_process_api_keys")?.[providerId];
   const needsKey = !KEY_OPTIONAL_PROVIDERS.includes(providerId);
 
-  if (!enabled) {
+  // A model chosen in setup answers questions; AI cleanup can stay off.
+  if (!enabled && !model) {
     return (
       <SettingsGroup title={t("settings.assistant.provider.title")}>
         <div className="flex flex-col gap-3 p-4">

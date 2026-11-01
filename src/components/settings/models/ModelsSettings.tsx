@@ -9,6 +9,8 @@ import {
   useModelFilters,
   type TableSection,
 } from "@/components/shared/modelTable/ModelTable";
+import { useSettings } from "@/hooks/useSettings";
+import { CuratedModels } from "./CuratedModels";
 import RetiredModelsNotice from "./RetiredModelsNotice";
 import { ModelRow } from "./ModelRow";
 import { Legend } from "./Legend";
@@ -44,10 +46,18 @@ interface ModelsSettingsProps {
   onChangeLanguages?: () => void;
 }
 
-/** The Models page: onboarding's model table, filling the window. */
-export const ModelsSettings: React.FC<ModelsSettingsProps> = ({
-  onChangeLanguages,
-}) => {
+/** The Models page: the short list, or every model once Advanced says so. */
+export const ModelsSettings: React.FC<ModelsSettingsProps> = (props) => {
+  const { getSetting } = useSettings();
+  return getSetting("show_all_models") ? (
+    <AllModels {...props} />
+  ) : (
+    <CuratedModels />
+  );
+};
+
+/** Every model: onboarding's model table, filling the window. */
+const AllModels: React.FC<ModelsSettingsProps> = ({ onChangeLanguages }) => {
   const { t } = useTranslation();
   const loading = useModelStore((s) => s.loading);
   const { facts, lists } = useModelEntries();

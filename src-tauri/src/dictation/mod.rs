@@ -385,7 +385,11 @@ fn handle_text(shared: &Shared, text: &str, started_at: Instant) {
         Some(VoiceCommand::ScratchThat) => scratch(shared),
         Some(VoiceCommand::NewLine) => write(shared, Piece::Break(LINE_BREAK), started_at),
         Some(VoiceCommand::NewParagraph) => {
-            write(shared, Piece::Break(PARAGRAPH_BREAK), started_at)
+            write(shared, Piece::Break(PARAGRAPH_BREAK), started_at);
+            crate::setup::first_wins::record(
+                &shared.app,
+                crate::setup::first_wins::Win::NewParagraph,
+            );
         }
         None => {
             // Local only. AI cleanup never runs per segment.
@@ -394,6 +398,10 @@ fn handle_text(shared: &Shared, text: &str, started_at: Instant) {
             let cleaned = cleaned.trim();
             if !cleaned.is_empty() {
                 write(shared, Piece::Words(cleaned.to_string()), started_at);
+                crate::setup::first_wins::record(
+                    &shared.app,
+                    crate::setup::first_wins::Win::Dictated,
+                );
             }
         }
     }

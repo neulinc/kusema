@@ -19,6 +19,11 @@ use tauri_plugin_autostart::ManagerExt;
 /// startup. This mirrors the pre-existing behavior of ignoring
 /// enable()/disable() results.
 pub fn apply_autostart(app: &AppHandle, enabled: bool) {
+    // Kusema: an isolated test run leaves the real startup entry alone.
+    if crate::portable::is_debug_isolated() {
+        return;
+    }
+
     #[cfg(target_os = "macos")]
     if macos::login_item_api_available() {
         macos::remove_plugin_launch_agent(app);

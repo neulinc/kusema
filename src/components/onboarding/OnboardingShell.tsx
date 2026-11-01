@@ -14,6 +14,8 @@ interface OnboardingShellProps {
   /** Warnings read as warnings, not hints. */
   hintTone?: "quiet" | "warning";
   primary?: React.ReactNode;
+  /** Grows with its content and scrolls, for large text. */
+  fluid?: boolean;
 }
 
 /** Frame for every onboarding screen: progress dashes, screen, footer. */
@@ -26,16 +28,19 @@ export const OnboardingShell: React.FC<OnboardingShellProps> = ({
   hint,
   hintTone = "quiet",
   primary,
+  fluid = false,
 }) => {
   const { t } = useTranslation();
   return (
     <div
       data-onboarding=""
-      className="h-screen w-full flex overflow-hidden bg-background select-none cursor-default"
+      className={`h-screen w-full flex ${fluid ? "overflow-auto" : "overflow-hidden"} bg-background select-none cursor-default`}
     >
       {/* Disabled buttons go neutral so the only brand-colored one is the next step.
           The column is capped so a long row truncates instead of widening. */}
-      <div className="relative m-auto grid h-[600px] w-[720px] shrink-0 grid-cols-[minmax(0,1fr)] grid-rows-[48px_1fr_76px] font-ui text-body leading-[1.6] text-text antialiased [&_button:disabled]:border-line [&_button:disabled]:bg-wash [&_button:disabled]:text-ink-3 [&_button:disabled]:opacity-100">
+      <div
+        className={`relative m-auto grid ${fluid ? "min-h-[600px] w-[720px] max-w-full grid-rows-[48px_1fr_minmax(76px,auto)]" : "h-[600px] w-[720px] grid-rows-[48px_1fr_76px]"} shrink-0 grid-cols-[minmax(0,1fr)] font-ui text-body leading-[1.6] text-text antialiased [&_button:disabled]:border-line [&_button:disabled]:bg-wash [&_button:disabled]:text-ink-3 [&_button:disabled]:opacity-100`}
+      >
         <div className="relative flex items-center justify-between ps-[28px] pe-[20px]">
           {progress ? (
             <div
@@ -65,7 +70,9 @@ export const OnboardingShell: React.FC<OnboardingShellProps> = ({
           {pill}
         </div>
         <div className="min-h-0">{children}</div>
-        <div className="flex items-center justify-between gap-[16px] px-[28px] pb-[4px]">
+        <div
+          className={`flex items-center justify-between gap-[16px] px-[28px] pb-[4px] ${fluid ? "flex-wrap py-[8px]" : ""}`}
+        >
           {left ??
             (onBack ? (
               <button

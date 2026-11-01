@@ -1,27 +1,15 @@
 import { create } from "zustand";
 import {
   CHINESE_SCRIPTS,
-  suggestedLanguages,
   suggestedScript,
   type ChineseScriptChoice,
 } from "@/lib/utils/languageSuggestions";
 
-export type OnboardingStep =
-  | "welcome"
-  | "permissions"
-  | "model"
-  | "demo"
-  | "try"
-  | "done";
+import { SETUP_STEPS, type OnboardingStep } from "./setup/flow";
 
-export const STEP_ORDER: OnboardingStep[] = [
-  "welcome",
-  "permissions",
-  "model",
-  "demo",
-  "try",
-  "done",
-];
+export type { OnboardingStep };
+
+export const STEP_ORDER = SETUP_STEPS;
 
 /** What the flow remembers between screens, and across a relaunch. */
 interface Persisted {
@@ -61,7 +49,7 @@ const STORAGE_KEY = "handy.onboarding";
 
 const fresh = (): Persisted => ({
   step: "welcome",
-  languages: suggestedLanguages(),
+  languages: ["en"],
   script: suggestedScript(),
   modelId: null,
   extraModelId: null,

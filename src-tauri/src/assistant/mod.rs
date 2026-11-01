@@ -494,6 +494,7 @@ fn record(
         }
         push(&mut inner.conversation, question.clone(), answer.clone());
     }
+    crate::setup::first_wins::record(app, crate::setup::first_wins::Win::Asked);
 
     let _ = app.emit("assistant-reply", AssistantReply { question, answer });
 }

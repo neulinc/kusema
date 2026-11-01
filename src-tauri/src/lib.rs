@@ -27,6 +27,7 @@ mod screen;
 mod secrets;
 mod secure_input;
 mod settings;
+mod setup;
 mod shortcut;
 mod signal_handle;
 mod system_languages;
@@ -391,10 +392,7 @@ fn initialize_core_logic(app_handle: &AppHandle) {
 
     // Apply the autostart preference (SMAppService login item on macOS 13+,
     // tauri-plugin-autostart elsewhere)
-    // Kusema: an isolated test run leaves the real startup entry alone.
-    if !portable::is_debug_isolated() {
-        autostart::apply_autostart(app_handle, settings.autostart_enabled);
-    }
+    autostart::apply_autostart(app_handle, settings.autostart_enabled);
 
     // Create the recording overlay window (hidden by default)
     utils::create_recording_overlay(app_handle);
@@ -695,6 +693,12 @@ pub fn run(cli_args: CliArgs) {
             shortcut::change_sound_theme_setting,
             shortcut::change_theme_setting,
             shortcut::change_start_hidden_setting,
+            setup::change_show_all_models_setting,
+            setup::first_wins::activate_first_wins,
+            setup::first_wins::dismiss_first_wins,
+            setup::local_ai::detect_local_ai,
+            setup::mic_test::start_mic_test,
+            setup::mic_test::stop_mic_test,
             shortcut::change_autostart_setting,
             shortcut::change_translate_to_english_setting,
             shortcut::change_selected_language_setting,
@@ -981,6 +985,7 @@ pub fn run(cli_args: CliArgs) {
         .manage(assistant::AssistantState::default())
         .manage(screen::ScreenState::default())
         .manage(dictation::DictationState::default())
+        .manage(setup::mic_test::MicTestState::default())
         .setup(move |app| {
             #[cfg(target_os = "windows")]
             log::info!(

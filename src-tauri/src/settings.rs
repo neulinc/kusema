@@ -611,6 +611,12 @@ pub struct AppSettings {
     /// Kusema: days the privacy ledger keeps a request.
     #[serde(default = "default_ledger_retention_days")]
     pub ledger_retention_days: u32,
+    /// Kusema: the "First three wins" checklist on the main page.
+    #[serde(default)]
+    pub first_wins: crate::setup::first_wins::FirstWins,
+    /// Kusema: the Models page lists every model, not just the short list.
+    #[serde(default)]
+    pub show_all_models: bool,
 }
 
 fn default_local_cleanup_enabled() -> bool {
@@ -1229,6 +1235,8 @@ pub fn get_default_settings() -> AppSettings {
         privileged_block_downloads: false,
         privileged_hotkey_enabled: false,
         ledger_retention_days: default_ledger_retention_days(),
+        first_wins: Default::default(),
+        show_all_models: false,
     }
 }
 

@@ -218,6 +218,81 @@
     "linux": {
       "tryIt": "Non funziona? <guide>Guida alla configurazione su Linux</guide>",
       "done": "Non funziona in altre app? <guide>Guida alla configurazione su Linux</guide>"
+    },
+    "setup": {
+      "retryDownload": "Try again",
+      "welcome": {
+        "title": "Kusema turns your voice into text on this computer.",
+        "privacy": "Your voice never leaves it.",
+        "language": "Language you'll dictate in"
+      },
+      "microphone": {
+        "title": "Choose your microphone",
+        "sub": "Say something. The bar should move as you speak.",
+        "label": "Microphone",
+        "meter": "Microphone level",
+        "heard": "Kusema can hear you.",
+        "quiet": "No sound yet. Check that this microphone isn't muted, or choose another one.",
+        "failed": "Kusema couldn't open this microphone. Choose another one.",
+        "tip": "Tip: a headset gives the best accuracy and fewer stray words."
+      },
+      "practice": {
+        "title": "Dictate your first sentence",
+        "how": "Hold <keys/>, say this sentence, then let go:",
+        "sentence": "Dear Mr. Smith comma thank you for your letter period",
+        "box": "Practice box: your words appear here",
+        "placeholder": "Your words appear here",
+        "listening": "Listening...",
+        "typing": "Typing...",
+        "success": "That's it. Saying \"comma\" and \"period\" types the marks.",
+        "waiting": "Your speech model is still downloading. This box will work as soon as it's ready.",
+        "continuous": "For longer dictation, press <keys/> to keep listening until you press it again. Used to Dragon? You can set this to Numpad + under General."
+      },
+      "assistant": {
+        "title": "Set up the AI assistant (optional)",
+        "sub": "Ask Kusema answers questions you speak. Dictation doesn't need it.",
+        "model": "Model",
+        "continueWithout": "Continue without AI",
+        "privileged": "Privileged mode blocks all cloud AI with one switch, for matters that must stay on this computer.",
+        "local": {
+          "title": "Private: use a local AI on this computer",
+          "description": "Your questions stay here. Uses Ollama, a free app.",
+          "checking": "Looking for Ollama on this computer...",
+          "found": "Found Ollama. Choose a model to use.",
+          "notFound": "Ollama isn't running on this computer.",
+          "noModels": "Ollama is running, but has no models yet. Run \"ollama pull llama3.2\", then check again.",
+          "instructions": "How to set up Ollama",
+          "again": "Check again"
+        },
+        "cloud": {
+          "title": "Use a cloud AI provider",
+          "description": "Your questions go to the provider you choose, using your own API key.",
+          "provider": "Provider",
+          "key": "API key",
+          "check": "Save and check",
+          "checking": "Checking the key...",
+          "saved": "Key saved in Windows Credential Manager. Choose a model to use.",
+          "where": "The key is stored in Windows Credential Manager, not in a file.",
+          "keyFailed": "The key was saved, but the provider didn't list any models. Check the key and try again."
+        },
+        "skip": {
+          "title": "Skip for now",
+          "description": "You can set this up later on the Assistant page."
+        }
+      },
+      "done": {
+        "title": "You're all set",
+        "sub": "Kusema keeps running in the system tray and works in any app.",
+        "finish": "Start using Kusema",
+        "wins": "Your first three wins are waiting on the main page.",
+        "atLogin": "Start Kusema when I sign in",
+        "keys": {
+          "dictate": "Dictate: hold",
+          "continuous": "Continuous dictation: press to start and stop",
+          "ask": "Ask Kusema",
+          "askScreen": "Ask about my screen"
+        }
+      }
     }
   },
   "modelTable": {
@@ -449,6 +524,38 @@
       "rescan": {
         "label": "Riscansiona",
         "tooltip": "Riscansiona per trovare modelli aggiunti alla cartella dei modelli o alla cache di Hugging Face al di fuori di Handy"
+      },
+      "curated": {
+        "inUse": "In use",
+        "gettingReady": "Getting ready...",
+        "downloading": "Downloading: {{percent}}%",
+        "cancel": "Cancel",
+        "cancelLabel": "Cancel downloading {{name}}",
+        "use": "Use",
+        "useLabel": "Use {{name}}",
+        "download": "Download ({{size}})",
+        "downloadLabel": "Download {{name}}",
+        "recommended": "Recommended",
+        "others": "Also on this computer",
+        "showAllHint": "More models are available: turn on Show all models under Advanced.",
+        "rows": {
+          "parakeetUnified": {
+            "name": "Parakeet Unified English",
+            "description": "The best choice for English. Chosen automatically."
+          },
+          "parakeetV3": {
+            "name": "Parakeet TDT v3",
+            "description": "For dictating in other languages, including Spanish, French and German."
+          },
+          "canary": {
+            "name": "Canary 180M Flash",
+            "description": "A small download, for older computers or when disk space is low."
+          },
+          "nemotron": {
+            "name": "Nemotron 3.5 Streaming",
+            "description": "Shows live text as you speak, but makes more mistakes."
+          }
+        }
       }
     },
     "languages": {
@@ -662,6 +769,10 @@
           "traditionalTw": "Tradizionale (Taiwan)",
           "traditionalHk": "Tradizionale (Hong Kong)"
         }
+      },
+      "showAllModels": {
+        "label": "Show all models",
+        "description": "List every model on the Models page, with accuracy and speed details, instead of the short list."
       }
     },
     "assistant": {
@@ -872,10 +983,10 @@
         "screens": {
           "welcome": "Benvenuto",
           "permissions": "Permessi",
-          "model": "Modello",
-          "demo": "Demo",
-          "try": "Provalo",
-          "done": "Tutto pronto"
+          "done": "Tutto pronto",
+          "microphone": "Microphone",
+          "practice": "Practice",
+          "assistant": "AI assistant"
         }
       },
       "onboardingRun": {
@@ -1125,6 +1236,17 @@
         "recommendLocal": "We recommend a model that runs on this computer, such as one in Ollama, so confidential text stays here. AI cleanup runs when you dictate with its own shortcut, and never during continuous dictation.",
         "setUp": "Set Up AI Cleanup"
       }
+    },
+    "firstWins": {
+      "title": "First three wins",
+      "dismiss": "Dismiss",
+      "dictated": "Dictate an email",
+      "newParagraph": "Use continuous dictation and say \"new paragraph\"",
+      "asked": "Ask Kusema a question",
+      "done": "Done",
+      "notDone": "Not done yet",
+      "progress": "{{done}} of {{count}} done",
+      "allDone": "All three done. Nice work."
     }
   },
   "footer": {

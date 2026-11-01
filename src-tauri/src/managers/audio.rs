@@ -577,6 +577,13 @@ impl AudioRecordingManager {
         *self.cached_device.lock().unwrap() = None;
     }
 
+    /// The selected microphone, for setup's level meter.
+    pub fn mic_test_config(&self) -> RecorderConfig {
+        let settings = get_settings(&self.app_handle);
+        let device = self.resolve_microphone_device(&settings).device;
+        microphone_config(device, None, 480)
+    }
+
     fn resolve_microphone_device(&self, settings: &AppSettings) -> MicrophoneResolution {
         let desired = self.desired_microphone(settings);
         let (device_name, selected_microphone) = match desired {

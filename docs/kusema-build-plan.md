@@ -347,11 +347,11 @@ If the build fails, open Claude Code in the folder and paste:
 
 ---
 
-## Step 10 (v0.4) — Two-minute first-run setup
+## Step 10 (v0.4) — Two-minute first-run setup ✅ Done (2026-11-01)
 
 **Goal:** someone non-technical goes from opening the installer to their first dictated sentence and first spoken answer in under two minutes, with sensible defaults and no decisions they can't make yet.
 
-**Proposed model list (not built yet):** a short list for English-speaking law firms, replacing the full catalog in setup and on the Models page. Error is the catalog's English benchmark, not legal dictation, so check it against real dictation first. Speed is times real time on CPU.
+**Model list (built, see the notes below):** a short list for English-speaking law firms, replacing the full catalog in setup and on the Models page. Error is the catalog's English benchmark, not legal dictation, so check it against real dictation first. Speed is times real time on CPU.
 
 | Model                        | Shown as                                 | Size   | English error | Speed | License           |
 | ---------------------------- | ---------------------------------------- | ------ | ------------- | ----- | ----------------- |
@@ -361,6 +361,18 @@ If the build fails, open Claude Code in the folder and paste:
 | Nemotron 3.5 Streaming       | "Live text as you speak" (less accurate) | 751 MB | 7.90%         | 11x   | OpenMDW           |
 
 Everything else moves behind a "Show all models" link under Advanced, including the legacy Whisper and Breeze files, which stay usable for anyone who already has them. Models whose licenses don't fit a paid product are already gone: see "Keeping up with Handy".
+
+### Notes from Step 10
+
+- **Code:** screens and rules in `src/components/onboarding/setup/` (`flow.ts` is pure and tested), backend in `src-tauri/src/setup/` (`first_wins`, `mic_test`, `local_ai`), and `src/lib/models/curated.ts` with `settings/models/CuratedModels.tsx`. Handy's Model, Demo and Try it screens stay in the tree for merges; only Model is still used, by the migration screens. Handy's `useTryEngine` runs the practice box.
+- **The model download** starts as setup opens, follows the language (English: Parakeet Unified; anything else: Parakeet TDT v3, cancelling the other download) and picks back up after a quit. A finished model that hears the language is kept rather than downloading a second one.
+- **Ollama** is looked for through `llm_client::fetch_models`, so it passes the choke point and shows in the ledger, also in Privileged mode. The address is fixed, not the Custom provider's setting.
+- **Choosing an AI model in setup does not turn on AI cleanup.** Ask Kusema doesn't need that switch, so the Assistant page and the sidebar's Post Process entry now also show when a model is chosen.
+- **First three wins:** only counted after setup finishes, so practice doesn't tick anything. Any dictation counts as "dictate an email": the app can't tell what's in the document. Existing users never see the card.
+- **Models page:** four rows in plain language. Other models on disk stay listed under "Also on this computer", so one in use never vanishes. Deleting a model needs Show all models under Advanced.
+- **Accessibility:** native controls, focus moves to each screen's title (Practice: the box), and the shell grows and scrolls for large text. Tested with real Tab, Enter, Space and arrow keys and at half the viewport (200%). The settings sidebar isn't keyboard reachable, as in Handy. That's outside this flow and still open.
+- **Timing:** on a fresh profile, a script reached a typed first sentence in 19.5 s, nearly all of it the download (697 MB in 15 to 18 s here). A person reading and speaking should add about a minute, which still needs measuring with a real person: see the pre-release checklist in `releasing.md`.
+- **Testing:** `dev_isolated.py start --first-run` opens on setup. Isolated runs now skip the startup entry inside `apply_autostart`, because finishing setup in a test run changed the real one through the settings command. It was restored at once, and the launcher's comparison would have flagged it.
 
 ---
 

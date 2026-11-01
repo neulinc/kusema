@@ -200,6 +200,8 @@ const settingUpdaters: {
     commands.changePrivilegedBlockDownloadsSetting(value as boolean),
   privileged_hotkey_enabled: (value) =>
     commands.changePrivilegedHotkeyEnabledSetting(value as boolean),
+  show_all_models: (value) =>
+    commands.changeShowAllModelsSetting(value as boolean),
   ledger_retention_days: (value) =>
     commands.changeLedgerRetentionDaysSetting(value as number),
   log_level: (value) => commands.setLogLevel(value as any),

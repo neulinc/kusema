@@ -924,6 +924,10 @@ impl ShortcutAction for TranscribeAction {
                                                         "Text pasted successfully in {:?}",
                                                         paste_time.elapsed()
                                                     );
+                                                    crate::setup::first_wins::record(
+                                                        &ah_clone,
+                                                        crate::setup::first_wins::Win::Dictated,
+                                                    );
                                                     TranscriptionOutcome::Typed
                                                 }
                                                 Err(e) => {
