@@ -6,6 +6,8 @@ _Fork of cjpais/Handy (MIT). Mapped against Handy `main` on 2026-10-27; last mer
 
 The primary market is **small and solo US law firms on Windows**, plus their paralegals and assistants. They need confidentiality they can explain to a client, and setup that doesn't need an IT department. **Accessibility users** are the community channel. Steps 1–6 and 5b are done; the [Roadmap](#roadmap) below is built around this.
 
+**Second wave: therapists and small medical practices.** They have the same need for confidentiality and simple setup, so they come after the law-firm launch. Kusema makes no HIPAA compliance claims. Sending patient data to a cloud AI service needs a Business Associate Agreement (BAA) with that provider, so the medical preset in Step 12 uses local AI only.
+
 ## What Handy already gives us
 
 | Need                                             | Already in Handy                                                      | Where                                                            |
@@ -384,9 +386,12 @@ Everything else moves behind a "Show all models" link under Advanced, including 
 - **Voice editing:** change text by voice ("change Tuesday to Thursday").
 - **Learning personal dictionary:** picks up names and terms from the user's corrections.
 - **Legal vocabulary pack:** legal terms, Latin and citation forms recognized correctly out of the box.
+- **Medical vocabulary pack:** medical terms and drug names recognized correctly out of the box.
 - **Dragon custom-word import:** bring over the word list from Dragon.
 - **Styles per app:** different cleanup for email, a legal document or a chat.
 - **Type-to-ask:** ask Kusema by typing, when speaking isn't possible.
+- **Tutor style for screen questions:** an option for students that explains step by step rather than just giving the answer.
+- **Keyboard access to the settings sidebar:** reach every settings page without a mouse. Found in Step 10; the setup flow already works by keyboard.
 - **Paste-the-answer:** type the assistant's reply into the active app instead of speaking it ("draft a reply declining this meeting").
 - **"Clean up this dictation session":** AI cleanup of a whole continuous session, with a preview, at its end. Deferred from Step 9 because replacing text already in the document isn't safe: clicking the preview loses the caret, the app can't see the document, and deleting thousands of characters by count could eat other text, the same risk "scratch that" refuses. A version that replaces only the History entry, for the user to copy, is safe if that's enough.
 - **Live preview while dictating:** show words in the overlay as they're spoken (like Dragon's results box) while still typing into the document only at pauses. Evaluate periodic re-transcription vs. a streaming engine (Moonshine).
@@ -398,6 +403,8 @@ Everything else moves behind a "Show all models" link under Advanced, including 
 **Goal:** fit the way legal staff already dictate.
 
 - **Legal templates and snippets:** insert standard letters and clauses by voice.
+- **Clinical templates:** SOAP notes, therapy progress notes and referral letters.
+- **Medical setup preset:** one choice that sets Privileged mode on, local AI only and short History retention.
 - **Foot pedal and dictation mic support:** start and stop from the hardware legal staff already own.
 - **Transcribing recordings:** turn recorded dictation into text.
 - **Personal stats:** words dictated and time saved, kept on the computer.
