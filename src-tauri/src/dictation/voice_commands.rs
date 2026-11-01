@@ -20,6 +20,12 @@ const PHRASES: &[(&str, VoiceCommand)] = &[
     ("stop dictating", VoiceCommand::StopDictation),
 ];
 
+/// Every command phrase, for the list in `cleanup` that "literal" protects.
+#[cfg(test)]
+pub fn phrases() -> impl Iterator<Item = &'static str> {
+    PHRASES.iter().map(|(phrase, _)| *phrase)
+}
+
 /// The command `segment` consists of, if any. Case and punctuation are ignored,
 /// because models add them ("New paragraph.").
 pub fn parse(segment: &str) -> Option<VoiceCommand> {

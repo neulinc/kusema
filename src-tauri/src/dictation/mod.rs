@@ -387,7 +387,15 @@ fn handle_text(shared: &Shared, text: &str, started_at: Instant) {
         Some(VoiceCommand::NewParagraph) => {
             write(shared, Piece::Break(PARAGRAPH_BREAK), started_at)
         }
-        None => write(shared, Piece::Words(text.to_string()), started_at),
+        None => {
+            // Local only. AI cleanup never runs per segment.
+            let settings = get_settings(&shared.app);
+            let cleaned = crate::cleanup::apply(&settings, text, None);
+            let cleaned = cleaned.trim();
+            if !cleaned.is_empty() {
+                write(shared, Piece::Words(cleaned.to_string()), started_at);
+            }
+        }
     }
 }
 
@@ -630,6 +638,14 @@ impl Drop for NotifyFinished {
     }
 }
 
+fn new_join_state(settings: &crate::settings::AppSettings) -> JoinState {
+    if settings.local_cleanup_enabled {
+        JoinState::with_period_insertion()
+    } else {
+        JoinState::default()
+    }
+}
+
 fn start(app: &AppHandle) {
     if !platform::SUPPORTED {
         warn!("Continuous dictation is Windows only for now");
@@ -658,8 +674,8 @@ fn start(app: &AppHandle) {
         app: app.clone(),
         core: Mutex::new(Core {
             guard: WindowGuard::new(platform::foreground()),
-            typed_join: JoinState::default(),
-            history_join: JoinState::default(),
+            typed_join: new_join_state(&settings),
+            history_join: new_join_state(&settings),
             last_typed: None,
             held: Vec::new(),
             history_id: None,
@@ -878,6 +894,11 @@ fn copy_session_if_asked(app: &AppHandle, history_id: Option<i64>) {
 }
 
 pub use platform::write_clipboard_private;
+
+#[cfg(test)]
+pub fn command_phrases() -> impl Iterator<Item = &'static str> {
+    voice_commands::phrases()
+}
 
 pub struct DictateContinuousAction;
 

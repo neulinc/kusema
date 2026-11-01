@@ -5,6 +5,7 @@ import { MicrophoneSelector } from "../MicrophoneSelector";
 import { ChannelSelector } from "../ChannelSelector";
 import { ShortcutInput } from "../ShortcutInput";
 import { ContinuousDictationSettings } from "../ContinuousDictationSettings";
+import { CleanupSettings } from "../CleanupSettings";
 import { SettingsGroup } from "../../ui/SettingsGroup";
 import { OutputDeviceSelector } from "../OutputDeviceSelector";
 import { ShortcutActivationSetting } from "../ShortcutActivation";
@@ -17,7 +18,9 @@ import { PreferredLanguages } from "../PreferredLanguages";
 import { ChineseScriptSetting } from "../ChineseScript";
 import { isChinese } from "@/lib/utils/languageSuggestions";
 
-export const GeneralSettings: React.FC = () => {
+export const GeneralSettings: React.FC<{
+  onOpenPostProcessing?: () => void;
+}> = ({ onOpenPostProcessing }) => {
   const { t } = useTranslation();
   const { audioFeedbackEnabled, getSetting } = useSettings();
   const isLinux = type() === "linux";
@@ -34,6 +37,7 @@ export const GeneralSettings: React.FC = () => {
         {!isLinux && <ShortcutInput shortcutId="cancel" grouped={true} />}
       </SettingsGroup>
       <ContinuousDictationSettings />
+      <CleanupSettings onOpenPostProcessing={onOpenPostProcessing} />
       <SettingsGroup title={t("settings.languages.title")}>
         <PreferredLanguages descriptionMode="tooltip" grouped={true} />
         {speaksChinese && (

@@ -1152,6 +1152,25 @@ async changeLedgerRetentionDaysSetting(days: number) : Promise<Result<null, stri
     else return { status: "error", error: e  as any };
 }
 },
+async getAiCleanupStatus() : Promise<AiCleanupStatus> {
+    return await TAURI_INVOKE("get_ai_cleanup_status");
+},
+async changeLocalCleanupSetting(enabled: boolean) : Promise<Result<null, string>> {
+    try {
+    return { status: "ok", data: await TAURI_INVOKE("change_local_cleanup_setting", { enabled }) };
+} catch (e) {
+    if(e instanceof Error) throw e;
+    else return { status: "error", error: e  as any };
+}
+},
+async changeSpokenPunctuationSetting(enabled: boolean) : Promise<Result<null, string>> {
+    try {
+    return { status: "ok", data: await TAURI_INVOKE("change_spoken_punctuation_setting", { enabled }) };
+} catch (e) {
+    if(e instanceof Error) throw e;
+    else return { status: "error", error: e  as any };
+}
+},
 async changeDictationPauseMsSetting(ms: number) : Promise<Result<null, string>> {
     try {
     return { status: "ok", data: await TAURI_INVOKE("change_dictation_pause_ms_setting", { ms }) };
@@ -1301,6 +1320,18 @@ transcriptionJob: "transcription-job"
 /** user-defined types **/
 
 /**
+ * What the Cleanup settings say about AI cleanup's provider.
+ */
+export type AiCleanupStatus = { provider: string | null; model: string | null; 
+/**
+ * On this computer, not a cloud service.
+ */
+is_local: boolean; has_key: boolean; 
+/**
+ * Privileged mode would refuse it.
+ */
+blocked: boolean }
+/**
  * The container-level `serde(default)` (backed by the `Default` impl below)
  * guarantees every field — including ones added in the future — falls back to
  * its `get_default_settings()` value when missing from a stored settings
@@ -1421,6 +1452,15 @@ dictation_auto_stop_minutes?: number;
  * Kusema: "new paragraph", "scratch that" and so on act instead of being typed.
  */
 dictation_voice_commands?: boolean; 
+/**
+ * Kusema: local, rule-based cleanup of dictated text: filler words, missing
+ * periods and spoken punctuation. Off, the text is left as transcribed.
+ */
+local_cleanup_enabled?: boolean; 
+/**
+ * Kusema: "comma", "period" and so on become marks (part of local cleanup).
+ */
+spoken_punctuation_enabled?: boolean; 
 /**
  * Kusema: nothing goes to a cloud AI service. Enforced in `network`.
  */

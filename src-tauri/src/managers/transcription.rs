@@ -1625,7 +1625,7 @@ fn post_process_transcription_text(
         let output_language = match output_language {
             OutputLanguageEvidence::Unknown
                 if converts_script
-                    || (settings.filler_word_removal_enabled
+                    || (settings.filler_removal_active()
                         && settings.custom_filler_words.is_none()) =>
             {
                 match detect_output_language(&raw, supported_languages) {
@@ -1666,7 +1666,7 @@ fn post_process_transcription_text(
             &corrected,
             &output_language,
             &settings.custom_filler_words,
-            settings.filler_word_removal_enabled,
+            settings.filler_removal_active(),
         );
 
         normalize_transcription_output(&without_fillers)

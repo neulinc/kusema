@@ -7,6 +7,7 @@ pub mod audio_toolkit;
 mod autostart;
 mod catalog;
 mod chinese_script;
+mod cleanup;
 pub mod cli;
 mod clipboard;
 mod commands;
@@ -829,6 +830,9 @@ pub fn run(cli_args: CliArgs) {
             network::change_privileged_block_downloads_setting,
             network::change_privileged_hotkey_enabled_setting,
             network::change_ledger_retention_days_setting,
+            cleanup::get_ai_cleanup_status,
+            cleanup::change_local_cleanup_setting,
+            cleanup::change_spoken_punctuation_setting,
             dictation::change_dictation_pause_ms_setting,
             dictation::change_dictation_auto_stop_minutes_setting,
             dictation::change_dictation_voice_commands_setting,

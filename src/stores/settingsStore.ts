@@ -188,6 +188,10 @@ const settingUpdaters: {
     commands.changeDictationAutoStopMinutesSetting(value as number),
   dictation_voice_commands: (value) =>
     commands.changeDictationVoiceCommandsSetting(value as boolean),
+  local_cleanup_enabled: (value) =>
+    commands.changeLocalCleanupSetting(value as boolean),
+  spoken_punctuation_enabled: (value) =>
+    commands.changeSpokenPunctuationSetting(value as boolean),
   privileged_mode: (value) =>
     commands.changePrivilegedModeSetting(value as boolean),
   privileged_allow_lan: (value) =>

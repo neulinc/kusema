@@ -858,7 +858,18 @@ pub fn type_segment(
                     if !on_target() {
                         return Ok(false);
                     }
-                    input::paste_text_direct(enigo, &text).map(|()| true)
+                    // One Return per line break: typed as text, a break counts twice.
+                    for (index, line) in text.split('\n').enumerate() {
+                        if index > 0 {
+                            enigo
+                                .key(Key::Return, Direction::Click)
+                                .map_err(|e| format!("Failed to press Return: {e}"))?;
+                        }
+                        if !line.is_empty() {
+                            input::paste_text_direct(enigo, line)?;
+                        }
+                    }
+                    Ok(true)
                 })?;
                 if !sent {
                     return Ok(TypeOutcome::WindowChanged);

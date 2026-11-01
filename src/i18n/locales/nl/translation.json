@@ -921,8 +921,8 @@
         "description": "Microfoon die gebruikt moet worden wanneer het laptopscherm gesloten is"
       },
       "postProcessingToggle": {
-        "label": "Naverwerking",
-        "description": "Schakel AI-gestuurde tekstverfijning in na transcriptie"
+        "label": "AI Cleanup",
+        "description": "Optional. Rewrites dictated text with an AI model when you use the AI cleanup shortcut: fixes self-corrections and grammar, keeps your meaning, and never adds facts."
       },
       "muteWhileRecording": {
         "label": "Dempen tijdens opname",
@@ -1100,6 +1100,30 @@
           "days_one": "{{count}} day",
           "days_other": "{{count}} days"
         }
+      }
+    },
+    "cleanup": {
+      "title": "Cleanup",
+      "description": "Dictated text should need little editing. Local cleanup runs on this computer and sends nothing anywhere.",
+      "local": {
+        "label": "Local Cleanup",
+        "description": "Removes filler words, adds missing periods between phrases in continuous dictation, and handles spoken punctuation, all on this computer. Off, your words are typed as transcribed."
+      },
+      "spokenPunctuation": {
+        "label": "Spoken Punctuation",
+        "description": "Say \"comma\", \"period\", \"question mark\", \"colon\", \"open quote\", \"close paren\", \"dash\", \"section symbol\" and more, as in Dragon. \"Period\" only counts at the end of a phrase, so \"the limitations period expired\" stays as words. Say \"literal period\" to type the word."
+      },
+      "ai": {
+        "status": {
+          "noProvider": "No AI provider is set up yet.",
+          "noKey": "{{provider}} needs an API key.",
+          "noModel": "{{provider}} needs a model chosen.",
+          "local": "Using {{model}} on this computer through {{provider}}. Nothing leaves this computer.",
+          "cloud": "Using {{model}} from {{provider}}, a cloud service. Text you clean up goes to {{provider}}.",
+          "blocked": "Privileged mode is on, so nothing will be sent to {{provider}}. Use a local model or turn off Privileged mode."
+        },
+        "recommendLocal": "We recommend a model that runs on this computer, such as one in Ollama, so confidential text stays here. AI cleanup runs when you dictate with its own shortcut, and never during continuous dictation.",
+        "setUp": "Set Up AI Cleanup"
       }
     }
   },

@@ -412,6 +412,11 @@ pub fn would_block(purpose: Purpose, url: &str) -> bool {
     }
 }
 
+/// Whether `url` points at this computer, not a server elsewhere.
+pub fn is_on_this_computer(url: &str) -> bool {
+    classify(&host_of(url)) == Reach::Loopback
+}
+
 fn ledger() -> Result<Ledger, String> {
     gate()
         .and_then(|gate| gate.ledger.clone())

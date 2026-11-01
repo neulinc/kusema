@@ -307,6 +307,18 @@ impl TranscriptionJobManager {
             return Ok(());
         }
 
+        // Kusema: a re-transcribed dictation gets local cleanup like the first
+        // time. A transcribed file isn't dictation, so it doesn't.
+        let text = if entry.source_name.is_none() {
+            crate::cleanup::apply(
+                &crate::settings::get_settings(&self.app),
+                &text,
+                language.as_ref().and_then(|l| l.language.as_deref()),
+            )
+        } else {
+            text
+        };
+
         let processed = tauri::async_runtime::block_on(process_transcription_output(
             &self.app,
             &text,

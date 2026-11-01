@@ -30,6 +30,7 @@ import {
 } from "./components/onboarding/onboardingStore";
 import {
   AssistantSettings,
+  GeneralSettings,
   DebugSettings,
   ModelsSettings,
 } from "./components/settings";
@@ -61,6 +62,13 @@ const renderSettingsContent = (
   if (section === "models") {
     return (
       <ModelsSettings onChangeLanguages={() => onSectionChange("general")} />
+    );
+  }
+  if (section === "general") {
+    return (
+      <GeneralSettings
+        onOpenPostProcessing={() => onSectionChange("postprocessing")}
+      />
     );
   }
   if (section === "assistant") {

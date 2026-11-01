@@ -330,9 +330,20 @@ If the build fails, open Claude Code in the folder and paste:
 
 ---
 
-## Step 9 (v0.4) — Smart cleanup on by default, with a local option
+## Step 9 (v0.4) — Smart cleanup on by default, with a local option ✅ Done (2026-11-01)
 
 **Goal:** dictated text reads well from the first sentence (punctuation, filler words, false starts) without the user finding Post Processing or getting an API key. A local option means this also works in Privileged mode. Also spoken punctuation for Dragon users: comma, period/full stop, question mark, exclamation mark, colon, semicolon, open/close quote, open/close paren(thesis), hyphen/dash, new paragraph/new line already done; applied locally, in continuous and normal dictation.
+
+### Notes from Step 9
+
+- **Code:** `src-tauri/src/cleanup/` (spoken punctuation, pure and tested) and `dictation/join.rs` (missing periods). It runs after Handy's filler removal, before any AI cleanup, for dictated text only: questions to the Assistant and transcribed files stay as they were. Other languages pass through, because the rules are English words.
+- **The false-positive rule:** speech recognition gives no reliable pauses, and Parakeet adds its own period after a spoken one, so the rule reads the surrounding words. "period" counts only at the end of a phrase or before a capitalized word, never after a determiner or a word that makes a time period ("the limitations period expired", "within the limitations period."). Other marks count anywhere unless a determiner comes before them ("the colon") or a neighboring word marks them as ordinary ("colon cancer", "Oxford comma").
+- **The trade-offs:** "denied period the parties may appeal", one lowercase run, stays as words. "a busy period." at the end of a phrase becomes punctuation, because "busy" isn't on the list. "literal period" and "scratch that" are the ways out, and the setting turns it all off. The word lists are in `punctuation.rs`.
+- **"literal"** only counts before a spoken mark or a voice command, so "a literal reading" stays as said.
+- **Missing periods:** added between continuous dictation segments only when this segment could finish a sentence (at least three words, not ending in a word like "the" or an abbreviation like "Mr", "U.S" or "Inc") and the next opens with a word from a list of sentence openers. A list, not "any capital", so names never qualify. Nothing is ever lowercased. No period at a "new line" or "new paragraph", because those are often address lines. Not in normal dictation, which has no next segment.
+- **The one switch:** Local Cleanup off also stops filler removal, so text is left as transcribed (Handy's stutter and spacing cleanup still runs).
+- **AI cleanup:** moved from Experimental to the General page's Cleanup section, with its provider status. The default prompt is rewritten for professional writing; settings holding Handy's untouched prompt move to it, and an edited prompt is left alone. It only runs with its own shortcut, never in continuous dictation, and goes through the privacy ledger and Privileged mode like everything else.
+- **Tested on real Parakeet output** with synthesized speech. That found two bugs unit tests missed: the model's period after "close quote" was being dropped, and the Direct paste method doubled line breaks.
 
 ---
 
@@ -364,6 +375,7 @@ Everything else moves behind a "Show all models" link under Advanced, including 
 - **Styles per app:** different cleanup for email, a legal document or a chat.
 - **Type-to-ask:** ask Kusema by typing, when speaking isn't possible.
 - **Paste-the-answer:** type the assistant's reply into the active app instead of speaking it ("draft a reply declining this meeting").
+- **"Clean up this dictation session":** AI cleanup of a whole continuous session, with a preview, at its end. Deferred from Step 9 because replacing text already in the document isn't safe: clicking the preview loses the caret, the app can't see the document, and deleting thousands of characters by count could eat other text, the same risk "scratch that" refuses. A version that replaces only the History entry, for the user to copy, is safe if that's enough.
 - **Live preview while dictating:** show words in the overlay as they're spoken (like Dragon's results box) while still typing into the document only at pauses. Evaluate periodic re-transcription vs. a streaming engine (Moonshine).
 
 ---

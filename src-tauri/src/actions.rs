@@ -792,6 +792,18 @@ impl ShortcutAction for TranscribeAction {
                                 utils::redact_text(&transcription)
                             );
 
+                            // Kusema: local cleanup, for text that gets typed.
+                            // A question to the Assistant is left as spoken.
+                            let transcription = if assistant.is_none() {
+                                crate::cleanup::apply(
+                                    &get_settings(&ah),
+                                    &transcription,
+                                    language.as_ref().and_then(|l| l.language.as_deref()),
+                                )
+                            } else {
+                                transcription
+                            };
+
                             if post_process {
                                 if use_streaming_overlay {
                                     tm.emit_stream_working(StreamWorkKind::Polishing);
