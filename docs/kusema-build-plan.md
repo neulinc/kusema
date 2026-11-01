@@ -372,6 +372,7 @@ Everything else moves behind a "Show all models" link under Advanced, including 
 - **Models page:** four rows in plain language. Other models on disk stay listed under "Also on this computer", so one in use never vanishes. Deleting a model needs Show all models under Advanced.
 - **Accessibility:** native controls, focus moves to each screen's title (Practice: the box), and the shell grows and scrolls for large text. Tested with real Tab, Enter, Space and arrow keys and at half the viewport (200%). The settings sidebar isn't keyboard reachable, as in Handy. That's outside this flow and still open.
 - **Timing:** on a fresh profile, a script reached a typed first sentence in 19.5 s, nearly all of it the download (697 MB in 15 to 18 s here). A person reading and speaking should add about a minute, which still needs measuring with a real person: see the pre-release checklist in `releasing.md`.
+- **Practicing with the continuous key:** continuous dictation still never types into Kusema's own windows, so the practice box shows the session's History text instead, and Back and Continue wait until it's stopped. While a session runs, the hold key is ignored, which a real test found: it looked like dictation wasn't working.
 - **Testing:** `dev_isolated.py start --first-run` opens on setup. Isolated runs now skip the startup entry inside `apply_autostart`, because finishing setup in a test run changed the real one through the settings command. It was restored at once, and the launcher's comparison would have flagged it.
 
 ---

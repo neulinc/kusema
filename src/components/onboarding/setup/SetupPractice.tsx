@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
-import type { OSType } from "@/lib/utils/keyboard";
+import { events } from "@/bindings";
+import { keycapLabel, type OSType } from "@/lib/utils/keyboard";
 import { useSettings } from "@/hooks/useSettings";
 import { Button } from "../../ui/Button";
 import { Keycaps } from "../../shared/Keycaps";
@@ -31,24 +32,62 @@ export const SetupPractice: React.FC<SetupPracticeProps> = ({
   const { getSetting } = useSettings();
   const continuous =
     getSetting("bindings")?.dictate_continuous?.current_binding ?? "";
-  const done = e.lessons.hold || e.lessons.tap;
   const kind = e.result.kind;
 
+  // Continuous dictation never types into Kusema's own windows, but each piece
+  // lands in its History entry, so the box shows that instead.
+  const [continuousTry, setContinuousTry] = useState<
+    "none" | "running" | "ended"
+  >("none");
+  const [continuousWords, setContinuousWords] = useState(false);
+  const running = useRef(false);
+  const done = e.lessons.hold || e.lessons.tap || continuousWords;
+  useEffect(() => {
+    const offStatus = events.dictationStatusEvent.listen(({ payload }) => {
+      running.current = payload.phase !== "ended";
+      setContinuousTry(running.current ? "running" : "ended");
+    });
+    const offHistory = events.historyUpdatePayload.listen(({ payload }) => {
+      if (!running.current || !e.field.current) return;
+      if (payload.action !== "added" && payload.action !== "updated") return;
+      e.field.current.value = payload.entry.transcription_text;
+      setContinuousWords(true);
+    });
+    // A hold after a session has ended is the practice this screen asks for.
+    const offState = events.recordingStateEvent.listen(({ payload }) => {
+      if (payload.phase === "started")
+        setContinuousTry((was) => (was === "ended" ? "none" : was));
+    });
+    return () => {
+      offStatus.then((off) => off());
+      offHistory.then((off) => off());
+      offState.then((off) => off());
+    };
+  }, []);
   const status =
-    e.phase === "listening"
-      ? t("onboarding.setup.practice.listening")
-      : e.phase === "typing"
-        ? t("onboarding.setup.practice.typing")
-        : kind === "silent" || kind === "noWords" || kind === "nothingTyped"
-          ? `${t(`onboarding.try.${kind}`)} ${t(`onboarding.try.${kind}Sub`)}`
-          : done
-            ? t("onboarding.setup.practice.success")
-            : !ready
-              ? t("onboarding.setup.practice.waiting")
-              : "";
+    continuousTry === "running"
+      ? t("onboarding.setup.practice.continuousRunning", {
+          stop: keycapLabel(continuous, os),
+        })
+      : continuousTry === "ended"
+        ? t("onboarding.setup.practice.continuousEnded")
+        : e.phase === "listening"
+          ? t("onboarding.setup.practice.listening")
+          : e.phase === "typing"
+            ? t("onboarding.setup.practice.typing")
+            : kind === "silent" || kind === "noWords" || kind === "nothingTyped"
+              ? `${t(`onboarding.try.${kind}`)} ${t(`onboarding.try.${kind}Sub`)}`
+              : done
+                ? t("onboarding.setup.practice.success")
+                : !ready
+                  ? t("onboarding.setup.practice.waiting")
+                  : "";
   const problem =
+    continuousTry === "none" &&
     e.phase === "idle" &&
     (kind === "silent" || kind === "noWords" || kind === "nothingTyped");
+  // Moving on would leave it listening, ready to type into the next window.
+  const locked = continuousTry === "running";
 
   return (
     <SetupScreen
@@ -56,13 +95,14 @@ export const SetupPractice: React.FC<SetupPracticeProps> = ({
       title={t("onboarding.setup.practice.title")}
       // The cursor belongs in the box, so the first try lands there.
       focusTitle={false}
-      onBack={onBack}
+      onBack={locked ? undefined : onBack}
       hint={download}
       primary={
         <Button
           variant={done ? "primary" : "outline"}
           size="lg"
           onClick={onContinue}
+          disabled={locked}
         >
           {t(done ? "onboarding.shell.continue" : "onboarding.try.skip")}
         </Button>

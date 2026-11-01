@@ -246,7 +246,9 @@
         "typing": "Typing...",
         "success": "That's it. Saying \"comma\" and \"period\" types the marks.",
         "waiting": "Your speech model is still downloading. This box will work as soon as it's ready.",
-        "continuous": "For longer dictation, press <keys/> to keep listening until you press it again. Used to Dragon? You can set this to Numpad + under General."
+        "continuous": "For longer dictation, press <keys/> to keep listening until you press it again. Used to Dragon? You can set this to Numpad + under General.",
+        "continuousRunning": "Continuous dictation is on. Your words appear in the box each time you pause. Press {{stop}} to stop it.",
+        "continuousEnded": "That's continuous dictation. In your other apps, your words are typed at the cursor."
       },
       "assistant": {
         "title": "Set up the AI assistant (optional)",
