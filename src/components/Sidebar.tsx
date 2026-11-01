@@ -8,6 +8,7 @@ import {
   Sparkles,
   Cpu,
   MessageCircle,
+  Shield,
 } from "lucide-react";
 import HandyTextLogo from "./icons/HandyTextLogo";
 import HandyHand from "./icons/HandyHand";
@@ -19,6 +20,7 @@ import {
   AboutSettings,
   PostProcessingSettings,
   ModelsSettings,
+  PrivacySettings,
 } from "./settings";
 
 export type SidebarSection = keyof typeof SECTIONS_CONFIG;
@@ -51,6 +53,12 @@ export const SECTIONS_CONFIG = {
     icon: MessageCircle,
     // Rendered by App, which passes it navigation.
     component: null,
+    enabled: () => true,
+  },
+  privacy: {
+    labelKey: "sidebar.privacy",
+    icon: Shield,
+    component: PrivacySettings,
     enabled: () => true,
   },
   history: {

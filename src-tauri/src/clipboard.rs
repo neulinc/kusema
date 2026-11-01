@@ -89,7 +89,11 @@ fn paste_via_clipboard(
         None
     };
 
-    // Write text to clipboard first
+    // Write text to clipboard first. Kusema: on Windows, with the markers that
+    // keep dictated text out of clipboard history and cloud clipboard sync.
+    #[cfg(target_os = "windows")]
+    crate::dictation::write_clipboard_private(text)?;
+    #[cfg(not(target_os = "windows"))]
     write_text_to_clipboard(app_handle, text)?;
 
     std::thread::sleep(Duration::from_millis(paste_delay_ms));

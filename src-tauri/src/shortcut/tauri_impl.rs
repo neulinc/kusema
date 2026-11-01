@@ -25,6 +25,9 @@ pub fn init_shortcuts(app: &AppHandle) {
         if id == "transcribe_with_post_process" && !user_settings.post_process_enabled {
             continue;
         }
+        if id == crate::network::TOGGLE_BINDING && !user_settings.privileged_hotkey_enabled {
+            continue;
+        }
         let binding = user_settings
             .bindings
             .get(&id)

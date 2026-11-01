@@ -490,6 +490,7 @@ async fn fetch_missing(
             }
         };
         let outcome = ModelManager::download_http_resumable_with_events(
+            crate::network::Purpose::VoiceDownload,
             "kokoro",
             &asset.url,
             &partial,

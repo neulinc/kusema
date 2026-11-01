@@ -589,6 +589,25 @@ pub struct AppSettings {
     /// Kusema: "new paragraph", "scratch that" and so on act instead of being typed.
     #[serde(default = "default_dictation_voice_commands")]
     pub dictation_voice_commands: bool,
+    /// Kusema: nothing goes to a cloud AI service. Enforced in `network`.
+    #[serde(default)]
+    pub privileged_mode: bool,
+    /// Kusema: Privileged mode also allows AI servers on the local network.
+    #[serde(default)]
+    pub privileged_allow_lan: bool,
+    /// Kusema: Privileged mode also blocks model downloads and update checks.
+    #[serde(default)]
+    pub privileged_block_downloads: bool,
+    /// Kusema: the hotkey for Privileged mode is registered.
+    #[serde(default)]
+    pub privileged_hotkey_enabled: bool,
+    /// Kusema: days the privacy ledger keeps a request.
+    #[serde(default = "default_ledger_retention_days")]
+    pub ledger_retention_days: u32,
+}
+
+fn default_ledger_retention_days() -> u32 {
+    30
 }
 
 fn default_dictation_pause_ms() -> u64 {
@@ -1077,6 +1096,21 @@ pub fn get_default_settings() -> AppSettings {
             current_binding: default_dictation_shortcut.to_string(),
         },
     );
+    #[cfg(target_os = "macos")]
+    let default_privileged_shortcut = "ctrl+option+shift+p";
+    #[cfg(not(target_os = "macos"))]
+    let default_privileged_shortcut = "ctrl+alt+shift+p";
+
+    bindings.insert(
+        crate::network::TOGGLE_BINDING.to_string(),
+        ShortcutBinding {
+            id: crate::network::TOGGLE_BINDING.to_string(),
+            name: "Privileged mode".to_string(),
+            description: "Turns Privileged mode on or off.".to_string(),
+            default_binding: default_privileged_shortcut.to_string(),
+            current_binding: default_privileged_shortcut.to_string(),
+        },
+    );
     bindings.insert(
         "cancel".to_string(),
         ShortcutBinding {
@@ -1164,6 +1198,11 @@ pub fn get_default_settings() -> AppSettings {
         dictation_pause_ms: default_dictation_pause_ms(),
         dictation_auto_stop_minutes: default_dictation_auto_stop_minutes(),
         dictation_voice_commands: default_dictation_voice_commands(),
+        privileged_mode: false,
+        privileged_allow_lan: false,
+        privileged_block_downloads: false,
+        privileged_hotkey_enabled: false,
+        ledger_retention_days: default_ledger_retention_days(),
     }
 }
 

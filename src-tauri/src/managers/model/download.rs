@@ -185,6 +185,7 @@ impl ModelManager {
         let app_handle = self.app_handle.clone();
         let id = target.model_id.clone();
         Self::download_http_resumable_with_events(
+            crate::network::Purpose::ModelDownload,
             &target.model_id,
             url,
             partial_path,
@@ -239,6 +240,7 @@ impl ModelManager {
     /// - the final bytes are checked against `expected_size` (catalog, or
     ///   content-length when unknown) and `expected_sha256` before returning
     pub(crate) async fn download_http_resumable_with_events(
+        purpose: crate::network::Purpose,
         model_id: &str,
         url: &str,
         partial_path: &Path,
@@ -273,7 +275,7 @@ impl ModelManager {
             info!("Starting fresh download of {} from {}", model_id, url);
         }
 
-        let client = reqwest::Client::builder()
+        let client = crate::network::client_builder(purpose, url)
             .connect_timeout(HTTP_CONNECT_TIMEOUT)
             .build()?;
         let mut request = client.get(url);
@@ -281,7 +283,10 @@ impl ModelManager {
             request = request.header("Range", format!("bytes={}-", resume_from));
         }
         let response = tokio::select! {
-            r = tokio::time::timeout(DOWNLOAD_STALL_TIMEOUT, request.send()) => r
+            r = tokio::time::timeout(
+                DOWNLOAD_STALL_TIMEOUT,
+                crate::network::send(purpose, crate::network::DataKind::None, request),
+            ) => r
                 .map_err(|_| anyhow::anyhow!(
                     "no response within {}s from {}",
                     DOWNLOAD_STALL_TIMEOUT.as_secs(), url

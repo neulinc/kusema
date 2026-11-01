@@ -2028,6 +2028,11 @@ impl ModelManager {
                 stream_count
             );
 
+            // hf_hub makes its own requests, so this is as near as the gate gets.
+            let endpoint = std::env::var("HF_ENDPOINT")
+                .unwrap_or_else(|_| "https://huggingface.co".to_string());
+            crate::network::announce(crate::network::Purpose::ModelDownload, &endpoint)?;
+
             // Fresh client per attempt so a wedged connection from the previous
             // try can't poison the retry.
             let api = ApiBuilder::from_env()

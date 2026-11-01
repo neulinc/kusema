@@ -30,6 +30,7 @@
                          center longer labels; shared by Live (collapsed) + minimal */
   --ov-open-w: 392px; /* Live panel, expanded */
   --ov-dictation-w: 412px; /* continuous dictation (OVERLAY_DICTATION_WIDTH) */
+  --ov-chip-w: 76px; /* room for the Privileged chip */
   --ov-base-h: 40px; /* control-row height (.sbase) */
   --ov-cap-max-h: 64px; /* max height of the scrolling live-text region */
 }
@@ -159,6 +160,38 @@
   width: var(--ov-work-w);
 }
 .scard.compact.dictating {
+  width: var(--ov-dictation-w);
+}
+
+/* Privileged mode: a chip beside the dot, in cards widened to hold it. Keep the
+   widest (--ov-work-w + --ov-chip-w) within OVERLAY_WIDTH in overlay.rs. */
+.pchip {
+  flex: none;
+  margin-inline-start: 6px;
+  padding: 1px 7px;
+  border-radius: 9px;
+  background: var(--s-accent-soft);
+  font-size: 11px;
+  line-height: 16px;
+  color: var(--color-text);
+  white-space: nowrap;
+}
+.ov-stage.privileged .scard {
+  width: calc(var(--ov-pill-w) + var(--ov-chip-w));
+}
+.ov-stage.privileged .scard.open {
+  width: var(--ov-open-w);
+}
+.ov-stage.privileged .scard.working {
+  width: calc(var(--ov-work-w) + var(--ov-chip-w));
+}
+.ov-stage.privileged .scard.compact {
+  width: calc(var(--ov-rest-w) + var(--ov-chip-w));
+}
+.ov-stage.privileged .scard.compact.cworking {
+  width: calc(var(--ov-work-w) + var(--ov-chip-w));
+}
+.ov-stage.privileged .scard.compact.dictating {
   width: var(--ov-dictation-w);
 }
 

@@ -10,6 +10,8 @@ import { ShortcutInput } from "../ShortcutInput";
 import { AssistantVoiceSettings } from "./AssistantVoiceSettings";
 import { AssistantProviderSettings } from "./AssistantProviderSettings";
 import { AssistantScreenSettings } from "./AssistantScreenSettings";
+import { useSettings } from "../../../hooks/useSettings";
+import { PrivilegedChip, PrivilegedToggle } from "../privacy/PrivilegedToggle";
 
 interface AssistantErrorPayload {
   question: string;
@@ -20,6 +22,7 @@ export const AssistantSettings: React.FC<{
   onOpenPostProcessing: () => void;
 }> = ({ onOpenPostProcessing }) => {
   const { t } = useTranslation();
+  const { getSetting } = useSettings();
   const [messages, setMessages] = useState<ChatTurn[]>([]);
   const [error, setError] = useState<AssistantErrorPayload | null>(null);
   const bottomRef = useRef<HTMLDivElement>(null);
@@ -65,11 +68,17 @@ export const AssistantSettings: React.FC<{
 
   return (
     <div className="max-w-3xl w-full mx-auto space-y-6">
+      {getSetting("privileged_mode") && (
+        <div className="flex justify-end -mb-3">
+          <PrivilegedChip />
+        </div>
+      )}
       <SettingsGroup
         title={t("settings.assistant.title")}
         description={t("settings.assistant.description")}
       >
         <ShortcutInput shortcutId="assistant" grouped={true} />
+        <PrivilegedToggle />
       </SettingsGroup>
 
       <AssistantProviderSettings onOpenPostProcessing={onOpenPostProcessing} />

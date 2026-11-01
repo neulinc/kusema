@@ -1,3 +1,4 @@
+use crate::network::{self, DataKind, Purpose, SendError};
 use crate::settings::{PostProcessApiFormat, PostProcessProvider};
 use futures_util::StreamExt;
 use log::{debug, error, info};
@@ -222,12 +223,25 @@ fn build_headers(provider: &PostProcessProvider, api_key: &str) -> Result<Header
 }
 
 /// Create an HTTP client with provider-specific headers
-fn create_client(provider: &PostProcessProvider, api_key: &str) -> Result<reqwest::Client, String> {
+fn create_client(
+    provider: &PostProcessProvider,
+    api_key: &str,
+    purpose: Purpose,
+) -> Result<reqwest::Client, String> {
     let headers = build_headers(provider, api_key)?;
-    reqwest::Client::builder()
+    network::client_builder(purpose, &provider.base_url)
         .default_headers(headers)
         .build()
         .map_err(|e| report_reqwest_error("Failed to build HTTP client", &e))
+}
+
+/// A failed send as `llm_client`'s string error. A refusal keeps its wording, so
+/// callers can recognize it with `network::is_blocked`.
+fn report_send_error(context: &str, error: SendError) -> String {
+    match error {
+        SendError::Blocked(blocked) => blocked.to_string(),
+        SendError::Http(error) => report_reqwest_error(context, &error),
+    }
 }
 
 /// Format a bounded error source chain.
@@ -396,7 +410,7 @@ pub async fn send_chat_completion_with_schema(
         sanitized_url_for_log(&url)
     );
 
-    let client = create_client(provider, &api_key)?;
+    let client = create_client(provider, &api_key, Purpose::PostProcessing)?;
 
     // Build messages vector
     let mut messages = Vec::new();
@@ -440,12 +454,13 @@ pub async fn send_chat_completion_with_schema(
         reasoning,
     };
 
-    let mut response = client
-        .post(&url)
-        .json(&request_body)
-        .send()
-        .await
-        .map_err(|e| report_reqwest_error("HTTP request failed", &e))?;
+    let mut response = network::send(
+        Purpose::PostProcessing,
+        DataKind::Text,
+        client.post(&url).json(&request_body),
+    )
+    .await
+    .map_err(|e| report_send_error("HTTP request failed", e))?;
     let mut status = response.status();
     debug!(
         "Chat completion response received with status {} over {:?} from {}",
@@ -469,12 +484,13 @@ pub async fn send_chat_completion_with_schema(
         );
 
         request_body.reasoning = ReasoningParams::default();
-        response = client
-            .post(&url)
-            .json(&request_body)
-            .send()
-            .await
-            .map_err(|e| report_reqwest_error("HTTP retry failed", &e))?;
+        response = network::send(
+            Purpose::PostProcessing,
+            DataKind::Text,
+            client.post(&url).json(&request_body),
+        )
+        .await
+        .map_err(|e| report_send_error("HTTP retry failed", e))?;
         status = response.status();
         debug!(
             "Chat completion retry response received with status {} over {:?} from {}",
@@ -551,12 +567,15 @@ async fn send_anthropic_message(
         }],
     };
 
-    let response = create_client(provider, &api_key)?
-        .post(&url)
-        .json(&request_body)
-        .send()
-        .await
-        .map_err(|e| report_reqwest_error("HTTP request failed", &e))?;
+    let response = network::send(
+        Purpose::PostProcessing,
+        DataKind::Text,
+        create_client(provider, &api_key, Purpose::PostProcessing)?
+            .post(&url)
+            .json(&request_body),
+    )
+    .await
+    .map_err(|e| report_send_error("HTTP request failed", e))?;
     let status = response.status();
     debug!(
         "Anthropic Messages response received with status {} over {:?} from {}",
@@ -755,18 +774,23 @@ async fn post_json<B: Serialize>(
     api_key: &str,
     url: &str,
     body: &B,
+    purpose: Purpose,
+    kind: DataKind,
 ) -> Result<reqwest::Response, String> {
     debug!(
         "Sending conversation request to: {}",
         sanitized_url_for_log(url)
     );
 
-    let response = create_client(provider, api_key)?
-        .post(url)
-        .json(body)
-        .send()
-        .await
-        .map_err(|e| report_reqwest_error("HTTP request failed", &e))?;
+    let response = network::send(
+        purpose,
+        kind,
+        create_client(provider, api_key, purpose)?
+            .post(url)
+            .json(body),
+    )
+    .await
+    .map_err(|e| report_send_error("HTTP request failed", e))?;
     let status = response.status();
     debug!(
         "Conversation response received with status {} over {:?} from {}",
@@ -905,9 +929,22 @@ pub async fn send_conversation<F: FnMut(&str)>(
         }
     };
 
+    let (purpose, kind) = if turns.iter().any(|turn| turn.image.is_some()) {
+        (Purpose::ScreenQuestion, DataKind::Image)
+    } else {
+        (Purpose::AssistantQuestion, DataKind::Text)
+    };
     let response = if anthropic {
         let body = anthropic_conversation_request(model, system_prompt, turns);
-        post_json(provider, &api_key, &format!("{}/messages", base_url), &body).await?
+        post_json(
+            provider,
+            &api_key,
+            &format!("{}/messages", base_url),
+            &body,
+            purpose,
+            kind,
+        )
+        .await?
     } else {
         let body = chat_conversation_request(model, system_prompt, turns);
         post_json(
@@ -915,6 +952,8 @@ pub async fn send_conversation<F: FnMut(&str)>(
             &api_key,
             &format!("{}/chat/completions", base_url),
             &body,
+            purpose,
+            kind,
         )
         .await?
     };
@@ -996,13 +1035,11 @@ pub async fn fetch_models(
 
     debug!("Fetching models from: {}", sanitized_url_for_log(&url));
 
-    let client = create_client(provider, &api_key)?;
+    let client = create_client(provider, &api_key, Purpose::ProviderModels)?;
 
-    let response = client
-        .get(&url)
-        .send()
+    let response = network::send(Purpose::ProviderModels, DataKind::None, client.get(&url))
         .await
-        .map_err(|e| report_reqwest_error("Failed to fetch models", &e))?;
+        .map_err(|e| report_send_error("Failed to fetch models", e))?;
 
     let status = response.status();
     debug!(
@@ -1134,6 +1171,138 @@ mod tests {
         });
 
         format!("http://{address}")
+    }
+
+    /// Each AI feature, refused at the choke point in Privileged mode.
+    mod privileged_refusals {
+        use super::*;
+        use crate::network::{
+            self, set_test_gate, Gate, GateConfig, LedgerEntry, LedgerFilter, RequestResult, Rules,
+        };
+        use std::sync::Arc;
+
+        const QUESTION: &str = "What did Jane Doe tell us?";
+
+        /// Runs `request` in Privileged mode and returns what was recorded.
+        fn refused<T: std::fmt::Debug>(
+            request: impl std::future::Future<Output = Result<T, String>>,
+        ) -> LedgerEntry {
+            let dir = tempfile::TempDir::new().unwrap();
+            let ledger = network::test_ledger(&dir.path().join("ledger.db"));
+            set_test_gate(Arc::new(Gate::new(
+                || GateConfig {
+                    rules: Rules {
+                        privileged: true,
+                        ..Default::default()
+                    },
+                    retention_days: 30,
+                },
+                Some(ledger.clone()),
+                || {},
+            )));
+            let error = tauri::async_runtime::block_on(request).unwrap_err();
+            assert!(network::is_blocked(&error), "{error}");
+            let entries = ledger.list(&LedgerFilter::default(), 10).unwrap();
+            assert_eq!(entries.len(), 1, "one attempt, one entry");
+            assert_eq!(entries[0].result, RequestResult::Blocked);
+            entries.into_iter().next().unwrap()
+        }
+
+        fn turn(image: Option<ChatImage>) -> ChatTurn {
+            ChatTurn {
+                image,
+                ..ChatTurn::new(ChatRole::User, QUESTION)
+            }
+        }
+
+        #[test]
+        fn ask_kusema() {
+            let provider = provider("openai", "https://api.openai.com/v1");
+            let turns = [turn(None)];
+            let entry = refused(send_conversation(
+                &provider,
+                "key".to_string(),
+                "gpt",
+                "",
+                &turns,
+                |_| {},
+            ));
+            assert_eq!(entry.purpose, Purpose::AssistantQuestion);
+            assert_eq!(entry.data_kind, DataKind::Text);
+            assert_eq!(entry.host, "api.openai.com");
+            assert!(entry.bytes > QUESTION.len() as i64);
+        }
+
+        #[test]
+        fn ask_about_my_screen() {
+            let provider = anthropic_format_provider("https://api.anthropic.com/v1");
+            let turns = [turn(Some(ChatImage {
+                media_type: "image/png",
+                data: Arc::from(&b"hello"[..]),
+                approved_for: provider.id.clone(),
+            }))];
+            let entry = refused(send_conversation(
+                &provider,
+                "key".to_string(),
+                "claude",
+                "",
+                &turns,
+                |_| {},
+            ));
+            assert_eq!(entry.purpose, Purpose::ScreenQuestion);
+            assert_eq!(entry.data_kind, DataKind::Image);
+            assert_eq!(entry.host, "api.anthropic.com");
+        }
+
+        #[test]
+        fn ai_cleanup() {
+            let provider = provider("openai", "https://api.openai.com/v1");
+            let entry = refused(send_chat_completion(
+                &provider,
+                "key".to_string(),
+                "gpt",
+                QUESTION.to_string(),
+                false,
+            ));
+            assert_eq!(entry.purpose, Purpose::PostProcessing);
+            assert_eq!(entry.data_kind, DataKind::Text);
+        }
+
+        #[test]
+        fn ai_cleanup_with_anthropic() {
+            let provider = anthropic_format_provider("https://api.anthropic.com/v1");
+            let entry = refused(send_chat_completion(
+                &provider,
+                "key".to_string(),
+                "claude",
+                QUESTION.to_string(),
+                false,
+            ));
+            assert_eq!(entry.purpose, Purpose::PostProcessing);
+        }
+
+        #[test]
+        fn ai_cleanup_with_structured_output() {
+            let provider = provider("openai", "https://api.openai.com/v1");
+            let entry = refused(send_chat_completion_with_schema(
+                &provider,
+                "key".to_string(),
+                "gpt",
+                QUESTION.to_string(),
+                None,
+                None,
+                false,
+            ));
+            assert_eq!(entry.purpose, Purpose::PostProcessing);
+        }
+
+        #[test]
+        fn listing_a_providers_models() {
+            let provider = provider("openai", "https://api.openai.com/v1");
+            let entry = refused(fetch_models(&provider, "key".to_string()));
+            assert_eq!(entry.purpose, Purpose::ProviderModels);
+            assert_eq!(entry.data_kind, DataKind::None);
+        }
     }
 
     #[test]

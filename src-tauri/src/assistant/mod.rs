@@ -96,6 +96,14 @@ struct Target {
     api_key: String,
 }
 
+/// Which request a target is for, by whether it's about the screen.
+fn would_be_refused(provider: &PostProcessProvider) -> bool {
+    crate::network::would_block(
+        crate::network::Purpose::AssistantQuestion,
+        &provider.base_url,
+    )
+}
+
 fn resolve_target(settings: &AppSettings) -> Result<Target, String> {
     let provider = settings.active_post_process_provider().cloned().ok_or(
         "No AI provider selected. Choose one in the Post Processing settings.".to_string(),
@@ -147,7 +155,9 @@ fn resolve_provider(
                 .map(|model| model.trim().to_string())
         })
         .unwrap_or_default();
-    if model.is_empty() {
+    // Privileged mode's refusal says more than a missing key or model would.
+    let refused = would_be_refused(&provider);
+    if model.is_empty() && !refused {
         return Err(format!("No model selected for {}", provider.label));
     }
 
@@ -157,7 +167,7 @@ fn resolve_provider(
         .map(|key| key.trim().to_string())
         .unwrap_or_default();
     // A custom endpoint (e.g. a local Ollama server) may not need a key.
-    if api_key.is_empty() && provider.id != "custom" {
+    if api_key.is_empty() && provider.id != "custom" && !refused {
         return Err(format!("No API key set for {}", provider.label));
     }
 
@@ -191,7 +201,9 @@ fn is_image_rejection(error: &str) -> bool {
 /// `with_image`: the request carried a screenshot.
 fn describe_error(provider: &PostProcessProvider, error: &str, with_image: bool) -> String {
     let label = &provider.label;
-    if error.contains("status 401") || error.contains("status 403") {
+    if crate::network::is_blocked(error) {
+        crate::network::refusal_message(label)
+    } else if error.contains("status 401") || error.contains("status 403") {
         format!("{label} rejected the API key. Check it in the Post Processing settings.")
     } else if with_image && !error.contains("status 429") && is_image_rejection(error) {
         NO_VISION_MESSAGE.to_string()
@@ -331,7 +343,8 @@ pub async fn ask_about_screen<C: Fn() -> bool>(
         approved_for: target.provider.id.clone(),
     };
 
-    if settings.assistant_screen_confirm {
+    // A screenshot that can't go needs no confirming: the refusal comes below.
+    if settings.assistant_screen_confirm && !would_be_refused(&target.provider) {
         crate::utils::hide_recording_overlay(app);
         let confirmation = screen::card::confirm(
             app,
@@ -434,6 +447,17 @@ async fn get_answer<C: Fn() -> bool>(
     let answer = match result {
         Ok(Some(text)) => strip_think_block(&text).trim().to_string(),
         Ok(None) => String::new(),
+        Err(e) if crate::network::is_blocked(&e) => {
+            crate::tts::stop(app);
+            // Shown and spoken wherever the user is, for every kind of question.
+            emit_screen_error(
+                app,
+                question,
+                describe_error(&target.provider, &e, with_image),
+                screen,
+            );
+            return None;
+        }
         Err(e) => {
             crate::tts::stop(app);
             fail(describe_error(&target.provider, &e, with_image));
@@ -537,6 +561,30 @@ pub fn change_assistant_screen_model_setting(
 
 #[cfg(test)]
 mod tests {
+    /// The words a lawyer sees and hears, for any AI feature that's refused.
+    #[test]
+    fn a_refusal_is_described_with_the_exact_message() {
+        let provider = PostProcessProvider {
+            label: "Anthropic".to_string(),
+            ..crate::settings::get_default_settings()
+                .post_process_providers
+                .into_iter()
+                .next()
+                .unwrap()
+        };
+        let blocked = crate::network::Blocked {
+            host: "api.anthropic.com".to_string(),
+            verdict: crate::network::BlockReason::CloudAi,
+        }
+        .to_string();
+        for with_image in [false, true] {
+            assert_eq!(
+                describe_error(&provider, &blocked, with_image),
+                "Privileged mode is on, so this wasn't sent to Anthropic. Use a local model or turn off Privileged mode."
+            );
+        }
+    }
+
     use super::*;
     use crate::settings::get_default_settings;
 

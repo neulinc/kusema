@@ -68,6 +68,7 @@ struct MenuInputs {
     downloaded_models: Vec<(String, String)>,
     locale: String,
     update_checks_enabled: bool,
+    privileged: bool,
 }
 
 /// Complete description of what the tray should look like.
@@ -193,7 +194,12 @@ fn windows_taskbar_theme() -> Option<AppTheme> {
 /// `warning` overlays a badge on the idle icon while keyboard shortcuts are
 /// blocked (macOS Secure Input); recording/transcribing states keep their
 /// normal icons so in-flight activity stays recognizable.
-pub fn get_icon_path(theme: AppTheme, state: TrayIconState, warning: bool) -> &'static str {
+pub fn get_icon_path(
+    theme: AppTheme,
+    state: TrayIconState,
+    warning: bool,
+    privileged: bool,
+) -> &'static str {
     if warning && state == TrayIconState::Idle {
         return match theme {
             AppTheme::Dark => "resources/tray_idle_warning.png",
@@ -202,6 +208,15 @@ pub fn get_icon_path(theme: AppTheme, state: TrayIconState, warning: bool) -> &'
             // but fall back to the normal icon just in case.
             AppTheme::Colored => "resources/handy.png",
         };
+    }
+    // Kusema: Privileged mode's badge. Like the warning, only on the idle icon,
+    // so recording and transcribing stay recognizable.
+    if privileged && state == TrayIconState::Idle {
+        match theme {
+            AppTheme::Dark => return "resources/tray_idle_privileged.png",
+            AppTheme::Light => return "resources/tray_idle_privileged_dark.png",
+            AppTheme::Colored => {}
+        }
     }
     match (theme, state) {
         // Dark theme uses light icons
@@ -345,7 +360,7 @@ fn compute_desired(app: &AppHandle, icon_state: TrayIconState) -> TrayDesired {
     downloaded_models.sort_by(|a, b| a.1.cmp(&b.1));
 
     TrayDesired {
-        icon_path: get_icon_path(theme, icon_state, warning),
+        icon_path: get_icon_path(theme, icon_state, warning, settings.privileged_mode),
         menu: MenuInputs {
             busy: icon_state.is_busy(),
             models_locked,
@@ -355,6 +370,7 @@ fn compute_desired(app: &AppHandle, icon_state: TrayIconState) -> TrayDesired {
             downloaded_models,
             locale: settings.app_language,
             update_checks_enabled: settings.update_checks_enabled,
+            privileged: settings.privileged_mode,
         },
     }
 }
@@ -607,6 +623,19 @@ fn build_menu(app: &AppHandle, inputs: &MenuInputs) -> tauri::Result<(Menu<tauri
     // Both layouts start with [version, separator, ...]; slot the warning in
     // right below the version line so it's the first actionable thing seen.
     let mut tooltip = version_label;
+    let privileged_i = CheckMenuItem::with_id(
+        app,
+        "privileged_mode",
+        &strings.privileged_mode,
+        true,
+        inputs.privileged,
+        None::<&str>,
+    )?;
+    menu.insert(&privileged_i, 2)?;
+    menu.insert(&separator()?, 3)?;
+    if inputs.privileged {
+        tooltip = format!("{} — {}", tooltip, strings.privileged_on);
+    }
     if let Some(warning_item) = secure_input_warning {
         menu.insert(&warning_item, 2)?;
         menu.insert(&separator()?, 3)?;
@@ -720,6 +749,7 @@ mod tests {
             downloaded_models: vec![("small".to_string(), "Small".to_string())],
             locale: "en".to_string(),
             update_checks_enabled: true,
+            privileged: false,
         }
     }
 

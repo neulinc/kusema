@@ -288,15 +288,38 @@ If the build fails, open Claude Code in the folder and paste:
 
 ---
 
-## Step 8 (v0.4) — Privacy ledger and Local-only ("Privileged") mode
+## Step 8 (v0.4) — Privacy ledger and Local-only ("Privileged") mode ✅ Done (2026-11-01)
 
 **Goal:** a firm can see and control what leaves the computer. A local ledger lists everything sent: when, to which provider and model, and what kind (text or screenshot). One "Privileged" switch guarantees that no dictation, question or screenshot leaves the computer: cloud requests are refused and explained, never sent quietly.
+
+### Notes from Step 8
+
+- **Code:** `src-tauri/src/network/`. `network::send` is the one way HTTP leaves Kusema: it records the request, then sends or refuses it. `policy.rs` (the rules) and `ledger.rs` (the record) are pure and tested. A test scans the source and fails if a new HTTP client appears outside `network`, which is also how a merge from Handy that adds one gets caught.
+- **Every way out of Kusema:**
+
+| What                                                          | Goes to                                                                            | How it's controlled                                                                                                                                                                   |
+| ------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Ask Kusema, screen questions, AI cleanup, provider model list | The configured provider                                                            | `network::send`, enforced in Rust                                                                                                                                                     |
+| Mirror and URL model downloads, Kokoro voices                 | `blob.handy.computer`, `huggingface.co`, `raw.githubusercontent.com`, `github.com` | `network::send`, enforced in Rust                                                                                                                                                     |
+| Hugging Face model downloads                                  | `huggingface.co` and its CDN                                                       | **Not routed:** `hf_hub` makes its own requests. Logged and refused with `network::announce` just before it starts; its redirects to the CDN aren't listed                            |
+| Update check and update install                               | `github.com`                                                                       | **Not routed:** the updater plugin runs from the webview. The frontend asks `authorize_update_check` first, which logs and refuses; that check lives in the frontend, unlike the rest |
+| Links the user clicks (About, help)                           | The default browser                                                                | Not Kusema's request. Not listed                                                                                                                                                      |
+| Webview                                                       | Nothing                                                                            | The frontend makes no requests, and a Content Security Policy now stops it (it was `null`, inherited from Handy). `connect-src` allows only Kusema's own IPC and asset protocols      |
+
+- **Protections the audit added:** each redirect is checked like a request, since a local server could otherwise 307 a question to the cloud with its body. System proxies are skipped for local addresses, since one could carry "localhost" traffic off the computer. A hostname that only looks local (`ollama`, `localhost.example.com`) counts as public: Privileged mode needs an address it can check, so LAN servers need a private IP or a `.local` name.
+- **Windows clipboard:** normal dictation's paste now carries the markers that keep text out of clipboard history and cloud clipboard sync, as continuous dictation's did. Without them, Windows could have uploaded dictated text outside anything this ledger can see. (The "copy to clipboard" setting and Copy buttons stay ordinary copies, because the user asked for them.)
+- **Audio:** the "0 bytes" on the Privacy page is true by construction, not counted. `llm_client` sends only text and images, `DataKind` has no audio, and recordings are only read by the local engine and the local player.
+- **Telemetry:** none, including anything inherited from Handy. No analytics library in `Cargo.lock` or `package.json`, and no such calls in the source. Note that model and update requests necessarily show the server the computer's IP address, and some default model downloads come from Handy's server (`blob.handy.computer`), which is worth moving before launch. AI requests identify themselves as Kusema in the `User-Agent`, `Referer` and `X-Title` headers.
+- **Outside what this can see:** Windows and the WebView2 runtime have their own network traffic (Edge updates, for example). This wasn't measured. An "external script" paste method runs whatever the user configured, with the dictated text.
+- **Also inherited, not changed:** the asset protocol's scope is `**`, so the webview can read any file the user can. The new CSP means it couldn't send them anywhere, but this is worth narrowing to the recordings folder.
+- **Refusals:** AI cleanup still types the raw dictation and shows the message. A blocked screenshot skips the confirmation card. Blocked requests list the size they would have been. The message is English only, like the rest of the backend's messages.
+- **Debug hooks:** Step 7's still apply. For a test against a real page, `WEBVIEW2_ADDITIONAL_BROWSER_ARGUMENTS=--remote-debugging-port=9333` opens the WebViews to DevTools.
 
 ---
 
 ## Step 9 (v0.4) — Smart cleanup on by default, with a local option
 
-**Goal:** dictated text reads well from the first sentence (punctuation, filler words, false starts) without the user finding Post Processing or getting an API key. A local option means this also works in Privileged mode.
+**Goal:** dictated text reads well from the first sentence (punctuation, filler words, false starts) without the user finding Post Processing or getting an API key. A local option means this also works in Privileged mode. Also spoken punctuation for Dragon users: comma, period/full stop, question mark, exclamation mark, colon, semicolon, open/close quote, open/close paren(thesis), hyphen/dash, new paragraph/new line already done; applied locally, in continuous and normal dictation.
 
 ---
 
@@ -317,6 +340,7 @@ If the build fails, open Claude Code in the folder and paste:
 - **Styles per app:** different cleanup for email, a legal document or a chat.
 - **Type-to-ask:** ask Kusema by typing, when speaking isn't possible.
 - **Paste-the-answer:** type the assistant's reply into the active app instead of speaking it ("draft a reply declining this meeting").
+- **Live preview while dictating:** show words in the overlay as they're spoken (like Dragon's results box) while still typing into the document only at pauses. Evaluate periodic re-transcription vs. a streaming engine (Moonshine).
 
 ---
 

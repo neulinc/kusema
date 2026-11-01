@@ -139,6 +139,7 @@ async fn run_download(
     cancel: &CancellationToken,
 ) -> Result<HttpDownloadOutcome> {
     ModelManager::download_http_resumable_with_events(
+        crate::network::Purpose::ModelDownload,
         "test/model",
         url,
         partial,

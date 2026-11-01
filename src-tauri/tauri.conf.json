@@ -13,7 +13,9 @@
     "macOSPrivateApi": true,
     "windows": [],
     "security": {
-      "csp": null,
+      "csp": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' asset: http://asset.localhost data: blob:; media-src 'self' asset: http://asset.localhost blob:; font-src 'self' data:; connect-src ipc: http://ipc.localhost asset: http://asset.localhost; object-src 'none'; base-uri 'none'",
+      "devCsp": "default-src * 'unsafe-inline' 'unsafe-eval' data: blob: ws: asset: ipc:",
+      "dangerousDisableAssetCspModification": ["style-src"],
       "assetProtocol": {
         "enable": true,
         "scope": {

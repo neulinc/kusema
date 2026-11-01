@@ -188,6 +188,16 @@ const settingUpdaters: {
     commands.changeDictationAutoStopMinutesSetting(value as number),
   dictation_voice_commands: (value) =>
     commands.changeDictationVoiceCommandsSetting(value as boolean),
+  privileged_mode: (value) =>
+    commands.changePrivilegedModeSetting(value as boolean),
+  privileged_allow_lan: (value) =>
+    commands.changePrivilegedAllowLanSetting(value as boolean),
+  privileged_block_downloads: (value) =>
+    commands.changePrivilegedBlockDownloadsSetting(value as boolean),
+  privileged_hotkey_enabled: (value) =>
+    commands.changePrivilegedHotkeyEnabledSetting(value as boolean),
+  ledger_retention_days: (value) =>
+    commands.changeLedgerRetentionDaysSetting(value as number),
   log_level: (value) => commands.setLogLevel(value as any),
   app_language: (value) => commands.changeAppLanguageSetting(value as string),
   theme: (value) => commands.changeThemeSetting(value as string),

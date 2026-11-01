@@ -7,7 +7,9 @@
     "model": "Mô hình",
     "quit": "Thoát",
     "cancel": "Hủy",
-    "secureInputWarning": "⚠ Phím tắt bị Secure Input chặn"
+    "secureInputWarning": "⚠ Phím tắt bị Secure Input chặn",
+    "privilegedMode": "Privileged Mode",
+    "privilegedOn": "Privileged mode on"
   },
   "sidebar": {
     "general": "Chung",
@@ -17,7 +19,8 @@
     "postProcessing": "Xử lý sau",
     "history": "Lịch sử",
     "debug": "Gỡ lỗi",
-    "about": "Giới thiệu"
+    "about": "Giới thiệu",
+    "privacy": "Privacy"
   },
   "onboarding": {
     "customModelDescription": "Không được hỗ trợ chính thức",
@@ -358,6 +361,10 @@
           "dictate_continuous": {
             "name": "Continuous Dictation",
             "description": "Press to start dictating hands-free, and press again to stop. Text appears each time you pause."
+          },
+          "toggle_privileged": {
+            "name": "Privileged Mode",
+            "description": "Press to turn Privileged mode on or off."
           }
         },
         "errors": {
@@ -1011,6 +1018,89 @@
           "details": "Handy sử dụng ggml để xử lý chuyển đổi giọng nói thành văn bản nhanh, cục bộ. Cảm ơn công việc tuyệt vời của Georgi Gerganov và các cộng tác viên."
         }
       }
+    },
+    "privacy": {
+      "thisComputer": "This computer ({{host}})",
+      "nothingSent": "Nothing to show yet.",
+      "updateBlocked": "Update checks are blocked in Privileged mode.",
+      "audio": {
+        "title": "Audio sent off this computer: 0 bytes",
+        "description": "Speech recognition runs on this computer, and nothing in Kusema can upload your voice. Only the text of what you say, and only for features you choose, ever goes to an AI provider."
+      },
+      "privileged": {
+        "title": "Privileged Mode",
+        "description": "For confidential matters. While it's on, nothing you say, type or show goes to a cloud AI service. Ask Kusema and AI cleanup only work with a model running on this computer.",
+        "chip": "Privileged",
+        "toggle": {
+          "label": "Privileged Mode",
+          "description": "Blocks every request to cloud AI providers, including ones already set up. Dictation keeps working, because it never uses the cloud."
+        },
+        "allowLan": {
+          "label": "Allow Local Network AI Servers",
+          "description": "Also allows AI servers on your office network, by private address (like 192.168.1.20). Models on this computer are always allowed."
+        },
+        "blockDownloads": {
+          "label": "Also Block Downloads and Update Checks",
+          "description": "For offline offices. Model and voice downloads and update checks carry none of your content, so they normally stay allowed and are listed below. Turn this on to stop them too while Privileged mode is on."
+        },
+        "hotkey": {
+          "label": "Privileged Mode Shortcut",
+          "description": "Adds a keyboard shortcut that turns Privileged mode on or off. Off by default, so it can't be pressed by accident."
+        }
+      },
+      "counts": {
+        "title": "Where Requests Went",
+        "today": "Today",
+        "week": "Last 7 days"
+      },
+      "columns": {
+        "time": "Time",
+        "destination": "Destination",
+        "purpose": "Why",
+        "data": "Data",
+        "size": "Size",
+        "result": "Result"
+      },
+      "purposes": {
+        "assistant_question": "Question to Kusema",
+        "screen_question": "Question about the screen",
+        "post_processing": "AI cleanup",
+        "provider_models": "Listing a provider's models",
+        "model_download": "Speech model download",
+        "voice_download": "Voice download",
+        "update_check": "Update check"
+      },
+      "data": {
+        "text": "Text",
+        "image": "Screenshot",
+        "none": "None of yours"
+      },
+      "results": {
+        "sent": "Sent",
+        "blocked": "Blocked",
+        "failed": "Failed"
+      },
+      "list": {
+        "title": "Every Request",
+        "description": "Each request Kusema has made: when, where, why, what kind of data and how large. What was in it is never recorded. Shows the latest 500; the export has them all.",
+        "all": "All",
+        "allPurposes": "Any reason",
+        "allResults": "Any result",
+        "allDestinations": "Any destination",
+        "anyTime": "Any time",
+        "lastDays_one": "Last {{count}} day",
+        "lastDays_other": "Last {{count}} days",
+        "export": "Export CSV",
+        "exported_one": "Exported {{count}} request.",
+        "exported_other": "Exported {{count}} requests.",
+        "clear": "Clear",
+        "retention": {
+          "title": "Keep This List For",
+          "description": "Older entries are deleted from this computer automatically.",
+          "days_one": "{{count}} day",
+          "days_other": "{{count}} days"
+        }
+      }
     }
   },
   "footer": {
@@ -1091,7 +1181,8 @@
       "cantKeepUp": "Stopped: this computer couldn't keep up",
       "transcriptionFailed": "Couldn't transcribe that",
       "pasteFailed": "Couldn't type that; it's in History"
-    }
+    },
+    "privileged": "Privileged"
   },
   "screenCard": {
     "title": "Send this screenshot?",
@@ -1104,7 +1195,7 @@
     "onlyThis": "Only this window. Nothing is sent until you press Send.",
     "send": "Send",
     "cancel": "Cancel",
-    "noticeTitle": "Ask About My Screen",
+    "noticeTitle": "Kusema",
     "close": "Close"
   },
   "secureInput": {

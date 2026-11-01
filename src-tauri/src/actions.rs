@@ -360,6 +360,10 @@ async fn post_process_transcription(settings: &AppSettings, transcription: &str)
                 error!("LLM API response has no content");
                 return None;
             }
+            Err(e) if crate::network::is_blocked(&e) => {
+                warn!("{e}");
+                return None;
+            }
             Err(e) => {
                 warn!(
                     "Structured output failed for provider '{}': {}. Falling back to legacy mode.",
@@ -424,6 +428,17 @@ pub(crate) async fn process_transcription_output(
     let mut post_process_prompt: Option<String> = None;
 
     if post_process {
+        // Kusema: Privileged mode. The text is still typed, just not cleaned up;
+        // the choke point refuses the request and records that it did.
+        if let Some(provider) = settings.active_post_process_provider().filter(|provider| {
+            provider.id != APPLE_INTELLIGENCE_PROVIDER_ID
+                && crate::network::would_block(
+                    crate::network::Purpose::PostProcessing,
+                    &provider.base_url,
+                )
+        }) {
+            crate::network::announce_refusal(app, &provider.label);
+        }
         if let Some(processed_text) = post_process_transcription(&settings, &final_text).await {
             post_processed_text = Some(processed_text.clone());
             final_text = processed_text;
@@ -1059,6 +1074,10 @@ pub static ACTION_MAP: Lazy<HashMap<String, Arc<dyn ShortcutAction>>> = Lazy::ne
     map.insert(
         crate::dictation::BINDING.to_string(),
         Arc::new(crate::dictation::DictateContinuousAction) as Arc<dyn ShortcutAction>,
+    );
+    map.insert(
+        crate::network::TOGGLE_BINDING.to_string(),
+        Arc::new(crate::network::TogglePrivilegedAction) as Arc<dyn ShortcutAction>,
     );
     map.insert(
         "cancel".to_string(),

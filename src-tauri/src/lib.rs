@@ -18,6 +18,7 @@ mod language_detection;
 mod llm_client;
 mod managers;
 mod memory;
+mod network;
 mod overlay;
 mod paste_tx;
 pub mod portable;
@@ -199,6 +200,9 @@ fn initialize_core_logic(app_handle: &AppHandle) {
     // after onboarding completes. This avoids triggering permission dialogs
     // on macOS before the user is ready.
 
+    // Kusema: before anything that could make a request.
+    network::init(app_handle);
+
     // Initialize the managers. The audio recorder receives the streaming router
     // explicitly, so always-on microphone startup can wire live-preview frames
     // even before Tauri state is populated.
@@ -243,7 +247,12 @@ fn initialize_core_logic(app_handle: &AppHandle) {
     let initial_theme = tray::get_current_theme(app_handle);
 
     // Choose the appropriate initial icon based on theme
-    let initial_icon_path = tray::get_icon_path(initial_theme, tray::TrayIconState::Idle, false);
+    let initial_icon_path = tray::get_icon_path(
+        initial_theme,
+        tray::TrayIconState::Idle,
+        false,
+        settings::get_settings(app_handle).privileged_mode,
+    );
 
     let mut tray_builder = TrayIconBuilder::new()
         .icon(
@@ -305,6 +314,9 @@ fn initialize_core_logic(app_handle: &AppHandle) {
             }
             "copy_last_transcript" => {
                 tray::copy_last_transcript(app);
+            }
+            "privileged_mode" => {
+                network::toggle_privileged(app);
             }
             "unload_model" => {
                 let transcription_manager = app.state::<Arc<TranscriptionManager>>();
@@ -795,6 +807,16 @@ pub fn run(cli_args: CliArgs) {
             assistant::change_assistant_screen_confirm_setting,
             assistant::change_assistant_screen_provider_setting,
             assistant::change_assistant_screen_model_setting,
+            network::get_privacy_overview,
+            network::get_privacy_ledger,
+            network::clear_privacy_ledger,
+            network::export_privacy_ledger,
+            network::authorize_update_check,
+            network::change_privileged_mode_setting,
+            network::change_privileged_allow_lan_setting,
+            network::change_privileged_block_downloads_setting,
+            network::change_privileged_hotkey_enabled_setting,
+            network::change_ledger_retention_days_setting,
             dictation::change_dictation_pause_ms_setting,
             dictation::change_dictation_auto_stop_minutes_setting,
             dictation::change_dictation_voice_commands_setting,

@@ -309,6 +309,9 @@ pub fn resume_all_shortcuts(app: &AppHandle) {
         if id == "transcribe_with_post_process" && !settings.post_process_enabled {
             continue;
         }
+        if id == crate::network::TOGGLE_BINDING && !settings.privileged_hotkey_enabled {
+            continue;
+        }
         if let Err(e) = register_shortcut(app, binding.clone()) {
             debug!("resume_all_shortcuts: could not register '{}': {}", id, e);
         }
@@ -499,6 +502,9 @@ fn register_all_shortcuts_for_implementation(
 
         // Skip post-processing shortcut when the feature is disabled
         if id == "transcribe_with_post_process" && !current_settings.post_process_enabled {
+            continue;
+        }
+        if id == crate::network::TOGGLE_BINDING && !current_settings.privileged_hotkey_enabled {
             continue;
         }
 
@@ -1333,14 +1339,25 @@ pub async fn fetch_post_process_models(
         .unwrap_or_default();
 
     // Skip fetching if no API key for providers that typically need one
-    if api_key.trim().is_empty() && provider.id != "custom" {
+    if api_key.trim().is_empty()
+        && provider.id != "custom"
+        && !crate::network::would_block(crate::network::Purpose::ProviderModels, &provider.base_url)
+    {
         return Err(format!(
             "API key is required for {}. Please add an API key to list available models.",
             provider.label
         ));
     }
 
-    crate::llm_client::fetch_models(provider, api_key).await
+    crate::llm_client::fetch_models(provider, api_key)
+        .await
+        .map_err(|e| {
+            if crate::network::is_blocked(&e) {
+                crate::network::refusal_message(&provider.label)
+            } else {
+                e
+            }
+        })
 }
 
 #[tauri::command]

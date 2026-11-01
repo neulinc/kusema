@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
+import { toast } from "sonner";
 import { check } from "@tauri-apps/plugin-updater";
 import { relaunch } from "@tauri-apps/plugin-process";
 import { listen } from "@tauri-apps/api/event";
@@ -80,6 +81,15 @@ const UpdateChecker: React.FC<UpdateCheckerProps> = ({ className = "" }) => {
   const checkForUpdates = async () => {
     if (!updateChecksEnabled || isChecking) return;
 
+    // Kusema: logs the request, or refuses it in Privileged mode.
+    if (!(await commands.authorizeUpdateCheck())) {
+      if (isManualCheckRef.current) {
+        isManualCheckRef.current = false;
+        toast.info(t("settings.privacy.updateBlocked"));
+      }
+      return;
+    }
+
     try {
       setIsChecking(true);
       const update = await check();
@@ -133,6 +143,10 @@ const UpdateChecker: React.FC<UpdateCheckerProps> = ({ className = "" }) => {
       setDownloadProgress(0);
       downloadedBytesRef.current = 0;
       contentLengthRef.current = 0;
+      if (!(await commands.authorizeUpdateCheck())) {
+        toast.info(t("settings.privacy.updateBlocked"));
+        return;
+      }
       const update = await check();
 
       if (!update) {

@@ -1069,6 +1069,89 @@ async changeAssistantScreenModelSetting(model: string | null) : Promise<Result<n
     else return { status: "error", error: e  as any };
 }
 },
+async getPrivacyOverview() : Promise<Result<PrivacyOverview, string>> {
+    try {
+    return { status: "ok", data: await TAURI_INVOKE("get_privacy_overview") };
+} catch (e) {
+    if(e instanceof Error) throw e;
+    else return { status: "error", error: e  as any };
+}
+},
+async getPrivacyLedger(filter: LedgerFilter) : Promise<Result<LedgerEntry[], string>> {
+    try {
+    return { status: "ok", data: await TAURI_INVOKE("get_privacy_ledger", { filter }) };
+} catch (e) {
+    if(e instanceof Error) throw e;
+    else return { status: "error", error: e  as any };
+}
+},
+async clearPrivacyLedger() : Promise<Result<null, string>> {
+    try {
+    return { status: "ok", data: await TAURI_INVOKE("clear_privacy_ledger") };
+} catch (e) {
+    if(e instanceof Error) throw e;
+    else return { status: "error", error: e  as any };
+}
+},
+/**
+ * Writes the whole ledger, whatever the page's filters show, to `path`.
+ */
+async exportPrivacyLedger(path: string) : Promise<Result<number, string>> {
+    try {
+    return { status: "ok", data: await TAURI_INVOKE("export_privacy_ledger", { path }) };
+} catch (e) {
+    if(e instanceof Error) throw e;
+    else return { status: "error", error: e  as any };
+}
+},
+/**
+ * Logs the updater plugin's request, and says whether it may go. The plugin
+ * makes it from the webview, where it can't be stopped from Rust, so this is
+ * the nearest point.
+ */
+async authorizeUpdateCheck() : Promise<boolean> {
+    return await TAURI_INVOKE("authorize_update_check");
+},
+async changePrivilegedModeSetting(enabled: boolean) : Promise<Result<null, string>> {
+    try {
+    return { status: "ok", data: await TAURI_INVOKE("change_privileged_mode_setting", { enabled }) };
+} catch (e) {
+    if(e instanceof Error) throw e;
+    else return { status: "error", error: e  as any };
+}
+},
+async changePrivilegedAllowLanSetting(enabled: boolean) : Promise<Result<null, string>> {
+    try {
+    return { status: "ok", data: await TAURI_INVOKE("change_privileged_allow_lan_setting", { enabled }) };
+} catch (e) {
+    if(e instanceof Error) throw e;
+    else return { status: "error", error: e  as any };
+}
+},
+async changePrivilegedBlockDownloadsSetting(enabled: boolean) : Promise<Result<null, string>> {
+    try {
+    return { status: "ok", data: await TAURI_INVOKE("change_privileged_block_downloads_setting", { enabled }) };
+} catch (e) {
+    if(e instanceof Error) throw e;
+    else return { status: "error", error: e  as any };
+}
+},
+async changePrivilegedHotkeyEnabledSetting(enabled: boolean) : Promise<Result<null, string>> {
+    try {
+    return { status: "ok", data: await TAURI_INVOKE("change_privileged_hotkey_enabled_setting", { enabled }) };
+} catch (e) {
+    if(e instanceof Error) throw e;
+    else return { status: "error", error: e  as any };
+}
+},
+async changeLedgerRetentionDaysSetting(days: number) : Promise<Result<null, string>> {
+    try {
+    return { status: "ok", data: await TAURI_INVOKE("change_ledger_retention_days_setting", { days }) };
+} catch (e) {
+    if(e instanceof Error) throw e;
+    else return { status: "error", error: e  as any };
+}
+},
 async changeDictationPauseMsSetting(ms: number) : Promise<Result<null, string>> {
     try {
     return { status: "ok", data: await TAURI_INVOKE("change_dictation_pause_ms_setting", { ms }) };
@@ -1337,7 +1420,27 @@ dictation_auto_stop_minutes?: number;
 /**
  * Kusema: "new paragraph", "scratch that" and so on act instead of being typed.
  */
-dictation_voice_commands?: boolean }
+dictation_voice_commands?: boolean; 
+/**
+ * Kusema: nothing goes to a cloud AI service. Enforced in `network`.
+ */
+privileged_mode?: boolean; 
+/**
+ * Kusema: Privileged mode also allows AI servers on the local network.
+ */
+privileged_allow_lan?: boolean; 
+/**
+ * Kusema: Privileged mode also blocks model downloads and update checks.
+ */
+privileged_block_downloads?: boolean; 
+/**
+ * Kusema: the hotkey for Privileged mode is registered.
+ */
+privileged_hotkey_enabled?: boolean; 
+/**
+ * Kusema: days the privacy ledger keeps a request.
+ */
+ledger_retention_days?: number }
 export type AudioDevice = { index: string; name: string; is_default: boolean }
 export type AutoSubmitKey = "enter" | "ctrl_enter" | "cmd_enter"
 export type AutoUnavailableReason = 
@@ -1386,6 +1489,15 @@ export type ChineseScript =
 "traditional_hk"
 export type ClipboardHandling = "dont_modify" | "copy_to_clipboard"
 export type CustomSounds = { start: boolean; stop: boolean }
+/**
+ * What kind of data a request carries. Audio isn't one: no code path can send
+ * it, and the Privacy page's "0 bytes" rests on that.
+ */
+export type DataKind = "text" | "image" | "none"
+/**
+ * Requests to one destination.
+ */
+export type DestinationCount = { host: string; sent: number; blocked: number; failed: number; bytes: number }
 /**
  * A message under the phase.
  */
@@ -1517,6 +1629,30 @@ export type LanguageStatus =
  * Auto can't work here; `language` is used instead.
  */
 { kind: "auto_unavailable"; language: string; reason: AutoUnavailableReason }
+/**
+ * One request, as listed.
+ */
+export type LedgerEntry = { id: number; 
+/**
+ * Seconds since the epoch.
+ */
+timestamp: number; 
+/**
+ * The host only: never a path or query, which can hold keys.
+ */
+host: string; purpose: Purpose; data_kind: DataKind; 
+/**
+ * Bytes of request body sent (or that would have been sent).
+ */
+bytes: number; result: RequestResult }
+/**
+ * What to list. Everything is optional.
+ */
+export type LedgerFilter = { purpose: Purpose | null; result: RequestResult | null; host: string | null; 
+/**
+ * Seconds since the epoch.
+ */
+since: number | null }
 export type LogLevel = "trace" | "debug" | "info" | "warn" | "error"
 export type ModelInfo = { id: string; name: string; description: string; filename: string; source: ModelSource; size_mb: number; is_downloaded: boolean; is_downloading: boolean; partial_size: number; accuracy_score: number; speed_score: number; supports_translation: boolean; is_recommended: boolean; supported_languages: string[]; supports_language_selection: boolean; is_custom: boolean; supports_streaming: boolean; supports_language_detection: boolean }
 export type ModelLoadStatus = { is_loaded: boolean; current_model: string | null }
@@ -1571,6 +1707,18 @@ export type PostProcessApiFormat =
 "anthropic"
 export type PostProcessProvider = { id: string; label: string; base_url: string; allow_base_url_edit?: boolean; models_endpoint?: string | null; supports_structured_output?: boolean; api_format?: PostProcessApiFormat }
 /**
+ * The top of the Privacy page.
+ */
+export type PrivacyOverview = { today: DestinationCount[]; last_7_days: DestinationCount[] }
+/**
+ * Why a request was made.
+ */
+export type Purpose = "assistant_question" | "screen_question" | "post_processing" | 
+/**
+ * Listing a provider's models in the settings: the API key, no content.
+ */
+"provider_models" | "model_download" | "voice_download" | "update_check"
+/**
  * Recording phase events for windows that follow along (onboarding's Try it).
  */
 export type RecordingPhase = 
@@ -1593,6 +1741,7 @@ export type RecordingPhase =
 "cancelled"
 export type RecordingRetentionPeriod = "never" | "preserve_limit" | "days_3" | "weeks_2" | "months_3"
 export type RecordingStateEvent = { phase: RecordingPhase }
+export type RequestResult = "sent" | "blocked" | "failed"
 /**
  * A retired ONNX model found on disk.
  */

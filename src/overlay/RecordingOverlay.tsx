@@ -74,6 +74,7 @@ const RecordingOverlay: React.FC = () => {
   const [elapsed, setElapsed] = useState(0);
   const [dictation, setDictation] = useState<DictationStatusEvent | null>(null);
   const [now, setNow] = useState(Date.now());
+  const [privileged, setPrivileged] = useState(false);
   // Bumped on each new streaming session so the Live card remounts fresh (replays
   // the pop-in, and never animates in from the previous panel's open size).
   const [session, setSession] = useState(0);
@@ -120,6 +121,7 @@ const RecordingOverlay: React.FC = () => {
             setPosition(
               settings.data.overlay_position === "top" ? "top" : "bottom",
             );
+            setPrivileged(settings.data.privileged_mode ?? false);
           }
         } catch {
           // Keep the previous/default placement if settings can't be read.
@@ -144,6 +146,11 @@ const RecordingOverlay: React.FC = () => {
         setElapsed(0);
         setCaptureReady(true);
       });
+
+      const unlistenPrivileged = await listen<boolean>(
+        "privileged-changed",
+        (event) => setPrivileged(event.payload),
+      );
 
       const unlistenLevel = await listen<number[]>("mic-level", (event) => {
         const newLevels = event.payload as number[];
@@ -207,6 +214,7 @@ const RecordingOverlay: React.FC = () => {
         unlistenReady();
         unlistenLevel();
         unlistenStream();
+        unlistenPrivileged();
         unlistenDictation();
         unlistenPhase();
         unlistenModel();
@@ -283,6 +291,10 @@ const RecordingOverlay: React.FC = () => {
     </div>
   );
 
+  const privilegedChip = privileged && (
+    <span className="pchip">{t("overlay.privileged")}</span>
+  );
+
   const cancelBtn = (
     <button
       className="sx"
@@ -306,6 +318,7 @@ const RecordingOverlay: React.FC = () => {
     <div className="sbase">
       <div className="sbase-l">
         <span className={`sdot ${captureReady ? "ready" : "arming"}`} />
+        {privilegedChip}
       </div>
       {waveform}
       <div className="sbase-r">
@@ -321,6 +334,7 @@ const RecordingOverlay: React.FC = () => {
     <div className="sbase">
       <div className="sbase-l">
         <span className="sspinner" />
+        {privilegedChip}
       </div>
       <span className="swork-label">{label}</span>
       <div className="sbase-r">{showCancel && cancelBtn}</div>
@@ -353,6 +367,7 @@ const RecordingOverlay: React.FC = () => {
         <div className="scard compact dictating">
           <div className="drow">
             <span className={`sdot ${listening ? "ready" : "arming"}`} />
+            {privilegedChip}
             {listening && (
               <div className="swave ready">
                 {levels.slice(0, 5).map((v, i) => (
@@ -399,7 +414,10 @@ const RecordingOverlay: React.FC = () => {
     const collapsed = working && !hasText;
 
     return (
-      <div dir={direction} className={`ov-stage ${position}`}>
+      <div
+        dir={direction}
+        className={`ov-stage ${position} ${privileged ? "privileged" : ""}`}
+      >
         <div
           key={session}
           className={`scard ${open ? "open" : ""} ${collapsed ? "working" : ""} ${
@@ -459,7 +477,9 @@ const RecordingOverlay: React.FC = () => {
   return (
     <div
       dir={direction}
-      className={`ov-stage ${position} ov-fade ${isVisible ? "show" : ""}`}
+      className={`ov-stage ${position} ov-fade ${isVisible ? "show" : ""} ${
+        privileged ? "privileged" : ""
+      }`}
     >
       <div
         className={`scard compact ${working && isVisible ? "cworking" : ""}`}
