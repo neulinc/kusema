@@ -823,7 +823,7 @@ const RETIRED_ONNX_MODELS: &[RetiredOnnxModel] = &[
         name: "SenseVoice",
         disk_names: &["sense-voice-int8"],
         size_mb: 152,
-        replacement_repo: "handy-computer/SenseVoiceSmall-gguf",
+        replacement_repo: "handy-computer/whisper-small-gguf",
     },
     RetiredOnnxModel {
         id: "gigaam-v3-e2e-ctc",
@@ -3314,17 +3314,17 @@ mod tests {
         // HF repo ids are case-insensitive, so another tool can cache a catalog
         // repo under other casing. On a case-sensitive filesystem only that
         // casing finds the file again, so it must not take the catalog's.
-        let filename = "SenseVoiceSmall-Q8_0.gguf";
-        let folder_repo = "handy-computer/sensevoicesmall-gguf";
+        let filename = "Qwen3-ASR-0.6B-Q8_0.gguf";
+        let folder_repo = "handy-computer/qwen3-asr-0.6b-gguf";
         assert!(crate::catalog::file_in_catalog(
             filename,
-            Some("handy-computer/SenseVoiceSmall-gguf")
+            Some("handy-computer/Qwen3-ASR-0.6B-gguf")
         )
         .is_some());
 
         let cache = TempDir::new().unwrap();
         let path = add_cached_model(cache.path(), folder_repo, "main", filename);
-        write_synthetic_gguf(&path, "sensevoice", &["en", "zh"]);
+        write_synthetic_gguf(&path, "qwen3_asr", &["en", "zh"]);
 
         let mut models = HashMap::new();
         ModelManager::discover_hf_cache_models_in(cache.path(), &mut models);

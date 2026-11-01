@@ -327,6 +327,17 @@ If the build fails, open Claude Code in the folder and paste:
 
 **Goal:** someone non-technical goes from opening the installer to their first dictated sentence and first spoken answer in under two minutes, with sensible defaults and no decisions they can't make yet.
 
+**Proposed model list (not built yet):** a short list for English-speaking law firms, replacing the full catalog in setup and on the Models page. Error is the catalog's English benchmark, not legal dictation, so check it against real dictation first. Speed is times real time on CPU.
+
+| Model                        | Shown as                                 | Size   | English error | Speed | License           |
+| ---------------------------- | ---------------------------------------- | ------ | ------------- | ----- | ----------------- |
+| **Parakeet Unified English** | Default, chosen for the user             | 731 MB | 3.99%         | 14x   | NVIDIA Open Model |
+| Parakeet TDT 0.6B v3         | "Clients who speak other languages" (25) | 740 MB | 4.83%         | 14x   | CC-BY-4.0         |
+| Canary 180M Flash            | "Older computers or little disk space"   | 218 MB | 5.98%         | 22x   | CC-BY-4.0         |
+| Nemotron 3.5 Streaming       | "Live text as you speak" (less accurate) | 751 MB | 7.90%         | 11x   | OpenMDW           |
+
+Everything else moves behind a "Show all models" link under Advanced, including the legacy Whisper and Breeze files, which stay usable for anyone who already has them. Models whose licenses don't fit a paid product are already gone: see "Keeping up with Handy".
+
 ---
 
 ## Step 11 (v0.5) — Voice editing, dictionary, styles and more ways to ask
@@ -439,6 +450,11 @@ Turn meetings into notes, only with a clear consent step: recording a conversati
 - **Line endings:** ✅ Done (2026-10-27). `.gitattributes` sets `* text=auto eol=lf`, so checkouts are LF even with `core.autocrlf=true`, and `bun run format:check` passes on Windows.
 
 ## Keeping up with Handy
+
+**Licenses to re-check after every merge.** Kusema's model list is Handy's catalog minus `REMOVED_MODELS` in `src-tauri/src/catalog/mod.rs`, repeated in `src/lib/models/removed.ts`. The catalog's license field can be wrong (it calls the non-English Moonshine models MIT), so after a merge that changes `catalog.json` or bumps `@handy-computer/models`, read the Hugging Face card of anything new. `cargo test` fails on any new model whose license isn't MIT, Apache-2.0, CC-BY-4.0 or CC-BY-SA-4.0 until someone reviews it, but it can't catch a wrong label, so re-check these by hand:
+
+- **Removed:** `canary-1b` (CC-BY-NC); `granite-speech-5.0-470m-turboctc-nc` (CC-BY-NC-SA); `moonshine-{base,tiny}-{ar,ja,ko,uk,vi,zh}` (Moonshine Community License, non-commercial, labeled MIT); `medasr` (Google HAI-DEF terms); `SenseVoiceSmall`, `Fun-ASR-MLT-Nano-2512`, `Fun-ASR-Nano-2512` (FunASR Model License, "for reference and learning purposes only"; the Fun-ASR upstream cards say Apache-2.0, so these two could come back if that's confirmed).
+- **Kept, conditions apply:** `parakeet-unified-en-0.6b` (labeled CC-BY-4.0, now the NVIDIA Open Model License), `multitalker-parakeet-streaming-0.6b-v1` and `nemotron-speech-streaming-en-0.6b` (NVIDIA Open Model License: commercial use allowed, its Trustworthy AI terms apply); `nemotron-3.5-asr-streaming-0.6b` (OpenMDW); `orukeet` (CC-BY-SA, share-alike); the Cohere and Voxtral models (Apache-2.0, with an upstream access form on some).
 
 ```
 git fetch upstream

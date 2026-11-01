@@ -35,6 +35,37 @@ const SCHEMA: u32 = 2;
 /// `scripts/mirror_models.py` populates it from this catalog.
 const MIRRORS: &[&str] = &["https://blob.handy.computer"];
 
+/// Kusema: catalog models not offered, because their licenses don't fit a paid
+/// product. `catalog.json` stays an exact copy of Handy's, so they're filtered
+/// out here and in `src/lib/models/removed.ts`; a test keeps the lists identical.
+///
+/// - Non-commercial: `canary-1b` (CC-BY-NC), the Granite `-nc` model (CC-BY-NC-SA)
+///   and the non-English Moonshine Tiny and Base models (Moonshine Community
+///   License, though the catalog calls them MIT).
+/// - Use-restricted: MedASR (Google's Health AI Developer Foundations terms).
+/// - Unclear for a paid product: the FunASR Model License models, which say
+///   they're "for reference and learning purposes only".
+const REMOVED_MODELS: &[&str] = &[
+    "canary-1b",
+    "granite-speech-5.0-470m-turboctc-nc",
+    "medasr",
+    "moonshine-base-ar",
+    "moonshine-base-ja",
+    "moonshine-base-ko",
+    "moonshine-base-uk",
+    "moonshine-base-vi",
+    "moonshine-base-zh",
+    "moonshine-tiny-ar",
+    "moonshine-tiny-ja",
+    "moonshine-tiny-ko",
+    "moonshine-tiny-uk",
+    "moonshine-tiny-vi",
+    "moonshine-tiny-zh",
+    "SenseVoiceSmall",
+    "Fun-ASR-MLT-Nano-2512",
+    "Fun-ASR-Nano-2512",
+];
+
 /// Handy's list order and onboarding set, keyed by catalog id. Kept from the
 /// previous generator until onboarding moves to the package's recommendations.
 /// `(id, rank, recommended)`: rank is the editorial sort position (lower =
@@ -49,7 +80,6 @@ const HANDY_RANKING: &[(&str, u32, bool)] = &[
     ("parakeet-tdt-0.6b-v3", 7, false),
     ("parakeet-tdt-0.6b-v2", 8, false),
     ("Qwen3-ASR-0.6B", 9, false),
-    ("Fun-ASR-MLT-Nano-2512", 10, false),
 ];
 
 #[derive(Deserialize)]
@@ -70,7 +100,7 @@ struct CatalogRoot {
 }
 
 /// One model as written in `catalog.json`. Only the fields Handy needs are
-/// declared; serde ignores the rest (license, parameters, …).
+/// declared; serde ignores the rest (parameters, …).
 #[derive(Deserialize)]
 #[serde(rename_all = "camelCase")]
 struct CatalogModel {
@@ -84,6 +114,9 @@ struct CatalogModel {
     /// Commit the files and hashes are pinned to. Both HF acquisition and
     /// mirror keys use it, so downloaded bytes provably match the hashes.
     revision: String,
+    /// The catalog's license id. Only read by the test guarding what's offered.
+    #[cfg_attr(not(test), allow(dead_code))]
+    license: String,
     /// The loader architecture (`general.architecture`).
     family: String,
     languages: Vec<String>,
@@ -317,7 +350,9 @@ static ROOT: Lazy<CatalogRoot> = Lazy::new(|| {
 /// Transcription models: the only role Handy can load. Language ID, VAD and
 /// diarization models are published alongside them but produce no text.
 fn transcription_models() -> impl Iterator<Item = &'static CatalogModel> {
-    ROOT.models.iter().filter(|m| m.role == "asr")
+    ROOT.models
+        .iter()
+        .filter(|m| m.role == "asr" && !REMOVED_MODELS.contains(&m.id.as_str()))
 }
 
 /// Every language a transcription model in the catalog hears, as identities:
@@ -537,6 +572,66 @@ mod tests {
                 .expect("ASR model is offered");
             assert_eq!(desc.default_quant.as_deref(), Some(m.quant.as_str()));
             assert_eq!(m.quant, "Q8_0");
+        }
+    }
+
+    #[test]
+    fn removed_models_are_not_offered_or_mirrored() {
+        for id in REMOVED_MODELS {
+            let model = ROOT
+                .models
+                .iter()
+                .find(|m| m.id == *id)
+                .unwrap_or_else(|| panic!("{id} isn't in the catalog; update REMOVED_MODELS"));
+            let file = model.default_file().expect("a default file");
+            let offered_id = format!("{}/{}", model.repository, file.filename);
+            assert!(
+                CATALOG.iter().all(|d| d.id != offered_id),
+                "{id} is offered"
+            );
+            assert!(mirror_fallbacks(&offered_id).is_empty(), "{id} is mirrored");
+            assert!(
+                file_in_catalog(&file.filename, None).is_none(),
+                "{id} is known"
+            );
+        }
+    }
+
+    /// The frontend filters the same list. It reads the catalog directly.
+    #[test]
+    fn the_frontend_removes_the_same_models() {
+        let source = include_str!("../../../src/lib/models/removed.ts");
+        let listed: Vec<&str> = source
+            .lines()
+            .filter_map(|line| {
+                let line = line.trim();
+                line.strip_prefix('"')?.strip_suffix("\",")
+            })
+            .collect();
+        assert_eq!(listed, REMOVED_MODELS);
+    }
+
+    /// Fails when a merge from Handy brings a model under a license nobody has
+    /// read. Read its terms and its card, then add it to the reviewed list below
+    /// or to `REMOVED_MODELS`. See "Keeping up with Handy" in the build plan.
+    #[test]
+    fn every_offered_model_has_a_reviewed_license() {
+        const OPEN: &[&str] = &["mit", "apache-2.0", "cc-by-4.0", "cc-by-sa-4.0"];
+        // The catalog says "other", or wrongly names a license, for these.
+        // Their real terms were read, and allow commercial use and redistribution.
+        const REVIEWED_OTHER: &[&str] = &[
+            "nemotron-3.5-asr-streaming-0.6b",        // OpenMDW 1.1
+            "nemotron-speech-streaming-en-0.6b",      // NVIDIA Open Model License
+            "multitalker-parakeet-streaming-0.6b-v1", // NVIDIA Open Model License
+        ];
+        for model in transcription_models() {
+            assert!(
+                OPEN.contains(&model.license.as_str())
+                    || REVIEWED_OTHER.contains(&model.id.as_str()),
+                "{}: license '{}' hasn't been reviewed",
+                model.id,
+                model.license
+            );
         }
     }
 

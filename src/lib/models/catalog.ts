@@ -14,11 +14,13 @@ import type { GradeLetter } from "@/components/shared/GradeChip";
 
 export type { CatalogModel, MachineTier };
 
+import { isOfferedByKusema } from "./removed";
+
 const M = catalog.methodology;
 
 /** Curated speech models. */
 export const CURATED_ASR: CatalogModel[] = catalog.curatedModels.filter(
-  (m) => m.role === "asr",
+  (m) => m.role === "asr" && isOfferedByKusema(m),
 );
 
 /** Measured word (or character) error for one language, in percent. */
