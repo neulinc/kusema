@@ -324,7 +324,7 @@ If the build fails, open Claude Code in the folder and paste:
 - **Audio:** the "0 bytes" on the Privacy page is true by construction, not counted. `llm_client` sends only text and images, `DataKind` has no audio, and recordings are only read by the local engine and the local player.
 - **Telemetry:** none, including anything inherited from Handy. No analytics library in `Cargo.lock` or `package.json`, and no such calls in the source. Note that model and update requests necessarily show the server the computer's IP address, though downloads no longer touch Handy's own server (see "Launch gate"). AI requests identify themselves as Kusema in the `User-Agent`, `Referer` and `X-Title` headers.
 - **Outside what this can see:** Windows and the WebView2 runtime have their own network traffic (Edge updates, for example). This wasn't measured. An "external script" paste method runs whatever the user configured, with the dictated text.
-- **Also inherited, not changed:** the asset protocol's scope is `**`, so the webview can read any file the user can. The new CSP means it couldn't send them anywhere, but this is worth narrowing to the recordings folder.
+- **Webview file access:** narrowed from `**` to the recordings folder, the only thing the frontend reads from disk (History's audio player). Models and voices load in Rust, and images are bundled.
 - **Refusals:** AI cleanup still types the raw dictation and shows the message. A blocked screenshot skips the confirmation card. Blocked requests list the size they would have been. The message is English only, like the rest of the backend's messages.
 - **Debug hooks:** Step 7's still apply. For a test against a real page, `WEBVIEW2_ADDITIONAL_BROWSER_ARGUMENTS=--remote-debugging-port=9333` opens the WebViews to DevTools.
 
@@ -386,6 +386,8 @@ Nothing is sold until all of these are done.
 - **Host model downloads ourselves:** ✅ Done (2026-11-01). See the notes below.
 - **Windows code signing (Azure Artifact Signing):** removes the SmartScreen warning from the installer and updates.
 - **Product page:** what Kusema does, its privacy claims and how to get it, written for small law firms.
+- **IT documentation:** what Kusema sends (ledger), what it never sends (audio), and Windows/WebView2 network traffic outside Kusema's control.
+- **License review:** have a lawyer review model and dependency licenses (especially NVIDIA Open Model License terms) before selling.
 - **Launch:** to small and solo US law firms, with accessibility users as the community channel.
 
 ### Notes on model hosting
