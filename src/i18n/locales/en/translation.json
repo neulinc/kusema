@@ -816,10 +816,11 @@
         }
       },
       "conversation": {
-        "title": "Conversation",
         "empty": "Ask a question with the Ask Kusema shortcut. The conversation will appear here.",
         "new": "New conversation",
-        "screenshot": "Screenshot"
+        "screenshot": "Screenshot",
+        "noProvider": "Ask Kusema needs an AI model to answer. Choose one in Settings.",
+        "openSettings": "Open Settings"
       },
       "voice": {
         "title": "Voice",
@@ -851,6 +852,11 @@
           "description": "Hear the selected voice at the selected speed.",
           "button": "Preview"
         }
+      },
+      "tabs": {
+        "label": "Assistant",
+        "conversation": "Conversation",
+        "settings": "Settings"
       }
     },
     "postProcessing": {
