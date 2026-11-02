@@ -13,6 +13,7 @@ mod clipboard;
 mod commands;
 mod dictation;
 pub mod engine_supervisor;
+mod glow;
 mod helpers;
 mod input;
 mod language_detection;
@@ -693,6 +694,13 @@ pub fn run(cli_args: CliArgs) {
             shortcut::change_sound_theme_setting,
             shortcut::change_theme_setting,
             shortcut::change_start_hidden_setting,
+            glow::change_glow_enabled_setting,
+            glow::change_glow_thickness_setting,
+            glow::change_glow_intensity_setting,
+            glow::change_glow_palette_setting,
+            glow::change_dictation_sounds_setting,
+            glow::get_glow_colors,
+            glow::preview_recording_glow,
             setup::change_show_all_models_setting,
             setup::first_wins::activate_first_wins,
             setup::first_wins::dismiss_first_wins,

@@ -6,6 +6,7 @@ import { ChannelSelector } from "../ChannelSelector";
 import { ShortcutInput } from "../ShortcutInput";
 import { ContinuousDictationSettings } from "../ContinuousDictationSettings";
 import { CleanupSettings } from "../CleanupSettings";
+import { RecordingGlowSettings } from "../RecordingGlowSettings";
 import { SettingsGroup } from "../../ui/SettingsGroup";
 import { OutputDeviceSelector } from "../OutputDeviceSelector";
 import { ShortcutActivationSetting } from "../ShortcutActivation";
@@ -25,6 +26,7 @@ export const GeneralSettings: React.FC<{
   const { t } = useTranslation();
   const { audioFeedbackEnabled, getSetting } = useSettings();
   const isLinux = type() === "linux";
+  const isWindows = type() === "windows";
   // Only for Chinese speakers, or anyone who already picked a script.
   const speaksChinese =
     (getSetting("spoken_languages") ?? []).some(isChinese) ||
@@ -39,6 +41,7 @@ export const GeneralSettings: React.FC<{
         {!isLinux && <ShortcutInput shortcutId="cancel" grouped={true} />}
       </SettingsGroup>
       <ContinuousDictationSettings />
+      {isWindows && <RecordingGlowSettings />}
       <CleanupSettings onOpenPostProcessing={onOpenPostProcessing} />
       <SettingsGroup title={t("settings.languages.title")}>
         <PreferredLanguages descriptionMode="tooltip" grouped={true} />

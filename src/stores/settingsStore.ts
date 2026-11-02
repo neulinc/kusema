@@ -10,6 +10,7 @@ import type {
   ShortcutActivation,
   VadBackend,
   LanguageDetectionMode,
+  GlowPalette,
 } from "@/bindings";
 import { commands } from "@/bindings";
 import { toast } from "sonner";
@@ -200,6 +201,15 @@ const settingUpdaters: {
     commands.changePrivilegedBlockDownloadsSetting(value as boolean),
   privileged_hotkey_enabled: (value) =>
     commands.changePrivilegedHotkeyEnabledSetting(value as boolean),
+  glow_enabled: (value) => commands.changeGlowEnabledSetting(value as boolean),
+  glow_thickness: (value) =>
+    commands.changeGlowThicknessSetting(value as number),
+  glow_intensity: (value) =>
+    commands.changeGlowIntensitySetting(value as number),
+  glow_palette: (value) =>
+    commands.changeGlowPaletteSetting(value as GlowPalette),
+  dictation_sounds: (value) =>
+    commands.changeDictationSoundsSetting(value as boolean),
   show_all_models: (value) =>
     commands.changeShowAllModelsSetting(value as boolean),
   ledger_retention_days: (value) =>

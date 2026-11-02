@@ -28,7 +28,7 @@ use tauri::{AppHandle, Emitter, Manager};
 use tauri_specta::Event;
 
 use crate::actions::ShortcutAction;
-use crate::audio_feedback::{play_feedback_sound, play_feedback_sound_blocking, SoundType};
+use crate::audio_feedback::{play_session_sound, play_session_sound_blocking, SoundType};
 use crate::audio_toolkit::{
     audio::FrameTap, constants::WHISPER_SAMPLE_RATE, vad::VAD_CONTINUOUS_HANGOVER_MS, VadPolicy,
 };
@@ -284,6 +284,7 @@ impl Shared {
         if core.last_status.as_ref() != Some(&status) {
             core.last_status = Some(status.clone());
             drop(core);
+            crate::glow::set_paused(&self.app, status.phase == DictationPhase::Paused);
             if let Err(e) = status.emit(&self.app) {
                 warn!("Failed to emit the dictation status: {e}");
             }
@@ -759,7 +760,7 @@ fn start(app: &AppHandle) {
             }
             utils::emit_recording_ready(&app);
             if rm.is_recording_readiness_current(generation) {
-                play_feedback_sound_blocking(&app, SoundType::Start);
+                play_session_sound_blocking(&app, SoundType::Start);
             }
             if rm.is_recording_readiness_current(generation) {
                 rm.apply_mute();
@@ -818,7 +819,7 @@ fn stop(app: &AppHandle) {
     session.shared.emit_status();
     set_tray_state(app, TrayIconState::Transcribing);
     rm.remove_mute();
-    play_feedback_sound(app, SoundType::Stop);
+    play_session_sound(app, SoundType::Stop);
 
     let app = app.clone();
     // Off the coordinator's thread: the last segments take a moment.

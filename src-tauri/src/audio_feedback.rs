@@ -66,6 +66,32 @@ pub fn play_feedback_sound_blocking(app: &AppHandle, sound_type: SoundType) {
     }
 }
 
+/// Kusema: a continuous dictation session's start and stop sound. It has its own
+/// setting, on by default, so a session can't start unnoticed.
+fn plays_session_sounds(settings: &AppSettings) -> bool {
+    settings.audio_feedback || settings.dictation_sounds
+}
+
+pub fn play_session_sound(app: &AppHandle, sound_type: SoundType) {
+    let settings = settings::get_settings(app);
+    if !plays_session_sounds(&settings) {
+        return;
+    }
+    if let Some(path) = resolve_sound_path(app, &settings, sound_type) {
+        play_sound_async(app, path);
+    }
+}
+
+pub fn play_session_sound_blocking(app: &AppHandle, sound_type: SoundType) {
+    let settings = settings::get_settings(app);
+    if !plays_session_sounds(&settings) {
+        return;
+    }
+    if let Some(path) = resolve_sound_path(app, &settings, sound_type) {
+        play_sound_blocking(app, &path);
+    }
+}
+
 pub fn play_test_sound(app: &AppHandle, sound_type: SoundType) {
     let settings = settings::get_settings(app);
     if let Some(path) = resolve_sound_path(app, &settings, sound_type) {

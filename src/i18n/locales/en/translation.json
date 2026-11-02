@@ -1249,6 +1249,41 @@
       "notDone": "Not done yet",
       "progress": "{{done}} of {{count}} done",
       "allDone": "All three done. Nice work."
+    },
+    "glow": {
+      "title": "Recording indicator",
+      "description": "A glow around the edges of your screen shows that Kusema is listening. Only you see it: it stays out of screenshots and screen shares.",
+      "enabled": {
+        "label": "Screen glow",
+        "description": "Show a colored glow around the screen you're working on while Kusema is listening. You can still click and type through it."
+      },
+      "thickness": {
+        "label": "Thickness",
+        "description": "How far the glow reaches in from the edge of the screen."
+      },
+      "intensity": {
+        "label": "Intensity",
+        "description": "How strong the glow is."
+      },
+      "palette": {
+        "label": "Colors",
+        "description": "The color-blind friendly set keeps the modes easy to tell apart with every common kind of color blindness.",
+        "standard": "Standard",
+        "color_blind": "Color-blind friendly"
+      },
+      "modes": {
+        "dictation": "Dictation",
+        "continuous": "Continuous dictation",
+        "ask": "Ask Kusema",
+        "ask_screen": "Ask about my screen",
+        "paused": "Continuous dictation paused (window changed)"
+      },
+      "preview": "Preview",
+      "previewLabel": "Preview the glow for {{mode}}",
+      "sounds": {
+        "label": "Continuous dictation sounds",
+        "description": "Play a short sound when continuous dictation starts and stops. Sounds for other dictation are under Sound below."
+      }
     }
   },
   "footer": {

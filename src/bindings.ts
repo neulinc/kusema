@@ -77,6 +77,55 @@ async changeStartHiddenSetting(enabled: boolean) : Promise<Result<null, string>>
     else return { status: "error", error: e  as any };
 }
 },
+async changeGlowEnabledSetting(enabled: boolean) : Promise<Result<null, string>> {
+    try {
+    return { status: "ok", data: await TAURI_INVOKE("change_glow_enabled_setting", { enabled }) };
+} catch (e) {
+    if(e instanceof Error) throw e;
+    else return { status: "error", error: e  as any };
+}
+},
+async changeGlowThicknessSetting(thickness: number) : Promise<Result<null, string>> {
+    try {
+    return { status: "ok", data: await TAURI_INVOKE("change_glow_thickness_setting", { thickness }) };
+} catch (e) {
+    if(e instanceof Error) throw e;
+    else return { status: "error", error: e  as any };
+}
+},
+async changeGlowIntensitySetting(intensity: number) : Promise<Result<null, string>> {
+    try {
+    return { status: "ok", data: await TAURI_INVOKE("change_glow_intensity_setting", { intensity }) };
+} catch (e) {
+    if(e instanceof Error) throw e;
+    else return { status: "error", error: e  as any };
+}
+},
+async changeGlowPaletteSetting(palette: GlowPalette) : Promise<Result<null, string>> {
+    try {
+    return { status: "ok", data: await TAURI_INVOKE("change_glow_palette_setting", { palette }) };
+} catch (e) {
+    if(e instanceof Error) throw e;
+    else return { status: "error", error: e  as any };
+}
+},
+async changeDictationSoundsSetting(enabled: boolean) : Promise<Result<null, string>> {
+    try {
+    return { status: "ok", data: await TAURI_INVOKE("change_dictation_sounds_setting", { enabled }) };
+} catch (e) {
+    if(e instanceof Error) throw e;
+    else return { status: "error", error: e  as any };
+}
+},
+async getGlowColors() : Promise<GlowColor[]> {
+    return await TAURI_INVOKE("get_glow_colors");
+},
+/**
+ * Shows a mode's glow for a few seconds, so it can be seen without recording.
+ */
+async previewRecordingGlow(mode: GlowMode) : Promise<void> {
+    await TAURI_INVOKE("preview_recording_glow", { mode });
+},
 /**
  * Shows every model on the Models page, not just the short list.
  */
@@ -1533,7 +1582,24 @@ first_wins?: FirstWins;
 /**
  * Kusema: the Models page lists every model, not just the short list.
  */
-show_all_models?: boolean }
+show_all_models?: boolean; 
+/**
+ * Kusema: the glow around the screen while listening.
+ */
+glow_enabled?: boolean; 
+/**
+ * Kusema: the glow's width in logical pixels.
+ */
+glow_thickness?: number; 
+/**
+ * Kusema: the glow's strength, in percent.
+ */
+glow_intensity?: number; glow_palette?: GlowPalette; 
+/**
+ * Kusema: start and stop sounds for continuous dictation, whatever
+ * `audio_feedback` says. A session is too long to start unnoticed.
+ */
+dictation_sounds?: boolean }
 export type AudioDevice = { index: string; name: string; is_default: boolean }
 export type AutoSubmitKey = "enter" | "ctrl_enter" | "cmd_enter"
 export type AutoUnavailableReason = 
@@ -1629,6 +1695,20 @@ export type FirstWins = {
  * Setup finished, so wins count. Practice in setup doesn't.
  */
 active: boolean; dictated: boolean; new_paragraph: boolean; asked: boolean; dismissed: boolean }
+/**
+ * One mode's colour, for the key on the settings page.
+ */
+export type GlowColor = { mode: GlowMode; 
+/**
+ * `#rrggbb`
+ */
+color: string; dashed: boolean }
+export type GlowMode = "dictation" | "continuous" | "ask" | "ask_screen" | 
+/**
+ * Continuous dictation, with its window no longer in front.
+ */
+"paused"
+export type GlowPalette = "standard" | "color_blind"
 export type GpuDeviceOption = { id: string; name: string; total_vram_mb: number }
 export type HistoryEntry = { id: number; file_name: string; timestamp: number; saved: boolean; title: string; transcription_text: string; post_processed_text: string | null; post_process_prompt: string | null; post_process_requested: boolean; 
 /**

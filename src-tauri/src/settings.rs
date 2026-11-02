@@ -617,6 +617,37 @@ pub struct AppSettings {
     /// Kusema: the Models page lists every model, not just the short list.
     #[serde(default)]
     pub show_all_models: bool,
+    /// Kusema: the glow around the screen while listening.
+    #[serde(default = "default_glow_enabled")]
+    pub glow_enabled: bool,
+    /// Kusema: the glow's width in logical pixels.
+    #[serde(default = "default_glow_thickness")]
+    pub glow_thickness: u32,
+    /// Kusema: the glow's strength, in percent.
+    #[serde(default = "default_glow_intensity")]
+    pub glow_intensity: u32,
+    #[serde(default)]
+    pub glow_palette: crate::glow::GlowPalette,
+    /// Kusema: start and stop sounds for continuous dictation, whatever
+    /// `audio_feedback` says. A session is too long to start unnoticed.
+    #[serde(default = "default_dictation_sounds")]
+    pub dictation_sounds: bool,
+}
+
+fn default_glow_enabled() -> bool {
+    true
+}
+
+fn default_glow_thickness() -> u32 {
+    24
+}
+
+fn default_glow_intensity() -> u32 {
+    80
+}
+
+fn default_dictation_sounds() -> bool {
+    true
 }
 
 fn default_local_cleanup_enabled() -> bool {
@@ -1237,6 +1268,11 @@ pub fn get_default_settings() -> AppSettings {
         ledger_retention_days: default_ledger_retention_days(),
         first_wins: Default::default(),
         show_all_models: false,
+        glow_enabled: default_glow_enabled(),
+        glow_thickness: default_glow_thickness(),
+        glow_intensity: default_glow_intensity(),
+        glow_palette: Default::default(),
+        dictation_sounds: default_dictation_sounds(),
     }
 }
 

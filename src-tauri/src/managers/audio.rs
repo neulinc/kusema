@@ -1009,6 +1009,13 @@ impl AudioRecordingManager {
     /// its active-set membership decided here, once.
     fn set_state(&self, guard: &mut RecordingState, new_state: RecordingState) {
         *guard = new_state;
+        // Kusema: the one place every recording starts and stops.
+        match &*guard {
+            RecordingState::Recording { binding_id } => {
+                crate::glow::recording_started(&self.app_handle, binding_id)
+            }
+            _ => crate::glow::recording_stopped(&self.app_handle),
+        }
         self.recording_active.store(
             matches!(
                 *guard,
