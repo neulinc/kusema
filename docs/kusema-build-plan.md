@@ -31,7 +31,7 @@ The primary market is **small and solo US law firms on Windows**, plus their par
 
 Keep new code in **new files/modules** and make the **smallest possible edits** to Handy's existing files. That keeps `git merge upstream/main` painless, so you keep receiving Handy's bug fixes.
 
----
+## **Translations (from 2026-11-02):** every step translates its new strings into all locales instead of copying the English. `bun run check:translations` checks that every placeholder and tag survives and that each language has all the plural forms it needs. Keep product names (Kusema, "Privileged" in Privileged mode), key names, model names and the English spoken commands ("comma", "new paragraph") as they are, since the commands only work in English. All 25 locales were machine-translated in one pass for 0.4.2, with no human review yet; `CONTRIBUTING_TRANSLATIONS.md` has no convention for marking that, so a native speaker's review is welcome for any language.
 
 ## Step 0 — Get the unmodified fork running (you, manually)
 

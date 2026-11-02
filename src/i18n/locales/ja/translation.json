@@ -8,25 +8,25 @@
     "quit": "終了",
     "cancel": "キャンセル",
     "secureInputWarning": "⚠ Secure Input でショートカットがブロック中",
-    "privilegedMode": "Privileged Mode",
-    "privilegedOn": "Privileged mode on"
+    "privilegedMode": "Privileged モード",
+    "privilegedOn": "Privileged モード オン"
   },
   "sidebar": {
     "general": "一般",
-    "assistant": "Assistant",
+    "assistant": "アシスタント",
     "models": "モデル",
     "advanced": "詳細設定",
     "postProcessing": "後処理",
     "history": "履歴",
     "debug": "デバッグ",
     "about": "概要",
-    "privacy": "Privacy"
+    "privacy": "プライバシー"
   },
   "onboarding": {
     "customModelDescription": "公式サポート対象外",
     "migration": {
       "title": "モデルの更新が必要です",
-      "description": "Handy は新しい種類のモデルを使用するようになりました。文字起こしを続けるには、新しいバージョンをダウンロードしてください。古いバージョンは削除されます。",
+      "description": "Kusema は新しい種類のモデルを使用するようになりました。文字起こしを続けるには、新しいバージョンをダウンロードしてください。古いバージョンは削除されます。",
       "replaces": "{{name}} の後継",
       "oldFormat": "旧形式",
       "failed": "ダウンロードに失敗しました",
@@ -63,11 +63,11 @@
     "permissions": {
       "microphone": {
         "name": "マイク",
-        "why": "Handy があなたの声を聞くために必要です。音声はこのコンピューター上でテキストに変換され、アップロードされることはありません。"
+        "why": "Kusema があなたの声を聞くために必要です。音声はこのコンピューター上でテキストに変換され、アップロードされることはありません。"
       },
       "accessibility": {
         "name": "アクセシビリティ",
-        "why": "どのアプリでもショートカットが使え、Handy がカーソル位置にテキストを入力できるようにします。"
+        "why": "どのアプリでもショートカットが使え、Kusema がカーソル位置にテキストを入力できるようにします。"
       },
       "errors": {
         "checkFailed": "権限の確認に失敗しました。もう一度お試しください。",
@@ -81,12 +81,12 @@
       "openSettings": "設定を開く",
       "allowed": "許可済み",
       "waiting": "待機中",
-      "turnOnMac": "システム設定で Handy をオンにして、ここに戻ってください。",
+      "turnOnMac": "システム設定で Kusema をオンにして、ここに戻ってください。",
       "turnOnWindows": "Windows の設定でマイクへのアクセスをオンにして、ここに戻ってください。",
       "hintBoth": "続けるには両方を許可してください",
       "hintMicrophone": "続けるにはマイクを許可してください",
       "welcomeBack": "おかえりなさい。前回の続きから始めます。",
-      "relaunch": "このあとショートカットが反応しない場合は、<relaunch>Handy を再起動</relaunch>してください。この画面にすぐ戻れます。"
+      "relaunch": "このあとショートカットが反応しない場合は、<relaunch>Kusema を再起動</relaunch>してください。この画面にすぐ戻れます。"
     },
     "shell": {
       "back": "戻る",
@@ -97,11 +97,11 @@
       "title": "どのアプリでも、入力のかわりに話すだけ",
       "subtitle": "音声入力で使う言語を選んでください",
       "languagesLabel": "言語",
-      "noMatch": "「{{query}}」に一致する言語はありません。Handy のモデルは約100言語に対応しており、ほかの言語は設定から選べます。",
+      "noMatch": "「{{query}}」に一致する言語はありません。Kusema のモデルは約100言語に対応しており、ほかの言語は設定から選べます。",
       "appLanguage": "アプリの言語",
       "menusIn": "メニューは<b>{{language}}</b>で表示",
       "chinese": {
-        "question": "{{languages}}を話しますね。Handy にはどの文字で書かせますか?",
+        "question": "{{languages}}を話しますね。Kusema にはどの文字で書かせますか?",
         "label": "中国語の文字",
         "zh-Hans": "簡体字",
         "zh-Hant": "台湾",
@@ -171,7 +171,7 @@
     },
     "try": {
       "title": "さっそく試してみよう!",
-      "subtitle": "画面の隅から Handy が案内します",
+      "subtitle": "画面の隅から Kusema が案内します",
       "noteLabel": "メモ",
       "placeholder": "新規メモ",
       "hold": "<keys/> を押したまま話してください。",
@@ -199,14 +199,14 @@
     },
     "done": {
       "title": "準備完了です",
-      "subMac": "Handy はメニューバーにいます。どのアプリでも <keys/> を押したまま、またはタップして話してください。",
-      "subTray": "Handy はシステムトレイにいます。どのアプリでも <keys/> を押したまま、またはタップして話してください。",
+      "subMac": "Kusema はメニューバーにいます。どのアプリでも <keys/> を押したまま、またはタップして話してください。",
+      "subTray": "Kusema はシステムトレイにいます。どのアプリでも <keys/> を押したまま、またはタップして話してください。",
       "hint": "これらは後から設定で変更できます",
       "highFiveLabel": "ハイタッチ",
-      "atLogin": "ログイン時に Handy を起動する",
+      "atLogin": "ログイン時に Kusema を起動する",
       "finish": "完了",
       "panel": {
-        "name": "Handy",
+        "name": "Kusema",
         "ready": "準備完了",
         "languages": "言語",
         "model": "音声モデル",
@@ -220,79 +220,79 @@
       "done": "ほかのアプリで動かない場合は <guide>Linux セットアップガイド</guide>"
     },
     "setup": {
-      "retryDownload": "Try again",
+      "retryDownload": "再試行",
       "welcome": {
-        "title": "Kusema turns your voice into text on this computer.",
-        "privacy": "Your voice never leaves it.",
-        "language": "Language you'll dictate in"
+        "title": "Kusema は、このコンピューター上であなたの声をテキストに変換します。",
+        "privacy": "あなたの声がこのコンピューターの外に出ることはありません。",
+        "language": "ディクテーションする言語"
       },
       "microphone": {
-        "title": "Choose your microphone",
-        "sub": "Say something. The bar should move as you speak.",
-        "label": "Microphone",
-        "meter": "Microphone level",
-        "heard": "Kusema can hear you.",
-        "quiet": "No sound yet. Check that this microphone isn't muted, or choose another one.",
-        "failed": "Kusema couldn't open this microphone. Choose another one.",
-        "tip": "Tip: a headset gives the best accuracy and fewer stray words."
+        "title": "マイクを選択",
+        "sub": "何か話してください。話している間、バーが動くはずです。",
+        "label": "マイク",
+        "meter": "マイクの音量",
+        "heard": "Kusema に声が届いています。",
+        "quiet": "まだ音がありません。このマイクがミュートになっていないか確認するか、別のマイクを選んでください。",
+        "failed": "Kusema はこのマイクを開けませんでした。別のマイクを選んでください。",
+        "tip": "ヒント: ヘッドセットを使うと精度が最も高くなり、余計な単語も減ります。"
       },
       "practice": {
-        "title": "Dictate your first sentence",
-        "how": "Hold <keys/>, say this sentence, then let go:",
+        "title": "最初の文をディクテーションしましょう",
+        "how": "<keys/> を押したまま、この文を話してから離してください:",
         "sentence": "Dear Mr. Smith comma thank you for your letter period",
-        "box": "Practice box: your words appear here",
-        "placeholder": "Your words appear here",
-        "listening": "Listening...",
-        "typing": "Typing...",
-        "success": "That's it. Saying \"comma\" and \"period\" types the marks.",
-        "waiting": "Your speech model is still downloading. This box will work as soon as it's ready.",
-        "continuous": "For longer dictation, press <keys/> to keep listening until you press it again. Used to Dragon? You can set this to Numpad + under General.",
-        "continuousRunning": "Continuous dictation is on. Your words appear in the box each time you pause. Press {{stop}} to stop it.",
-        "continuousEnded": "That's continuous dictation. In your other apps, your words are typed at the cursor."
+        "box": "練習欄: ここに言葉が表示されます",
+        "placeholder": "ここに言葉が表示されます",
+        "listening": "聞き取り中...",
+        "typing": "入力中...",
+        "success": "その調子です。\"comma\" や \"period\" と言うと記号が入力されます。",
+        "waiting": "音声モデルはまだダウンロード中です。準備ができ次第、この欄が使えるようになります。",
+        "continuous": "長いディクテーションには <keys/> を押してください。もう一度押すまで Kusema が聞き続けます。Dragon をお使いでしたか？「一般」でテンキーの + に設定できます。",
+        "continuousRunning": "連続ディクテーションがオンです。区切るたびに言葉が欄に表示されます。止めるには {{stop}} を押してください。",
+        "continuousEnded": "これが連続ディクテーションです。ほかのアプリでは、カーソルの位置に入力されます。"
       },
       "assistant": {
-        "title": "Set up the AI assistant (optional)",
-        "sub": "Ask Kusema answers questions you speak. Dictation doesn't need it.",
-        "model": "Model",
-        "continueWithout": "Continue without AI",
-        "privileged": "Privileged mode blocks all cloud AI with one switch, for matters that must stay on this computer.",
+        "title": "AI アシスタントを設定 (任意)",
+        "sub": "「Kusema に質問」は、声に出した質問に答えます。ディクテーションには不要です。",
+        "model": "モデル",
+        "continueWithout": "AI なしで続ける",
+        "privileged": "Privileged モードは、このコンピューターから出してはいけない案件のために、スイッチ 1 つですべてのクラウド AI をブロックします。",
         "local": {
-          "title": "Private: use a local AI on this computer",
-          "description": "Your questions stay here. Uses Ollama, a free app.",
-          "checking": "Looking for Ollama on this computer...",
-          "found": "Found Ollama. Choose a model to use.",
-          "notFound": "Ollama isn't running on this computer.",
-          "noModels": "Ollama is running, but has no models yet. Run \"ollama pull llama3.2\", then check again.",
-          "instructions": "How to set up Ollama",
-          "again": "Check again"
+          "title": "プライベート: このコンピューター上のローカル AI を使う",
+          "description": "質問はここに留まります。無料アプリの Ollama を使います。",
+          "checking": "このコンピューターで Ollama を探しています...",
+          "found": "Ollama が見つかりました。使うモデルを選んでください。",
+          "notFound": "このコンピューターで Ollama は実行されていません。",
+          "noModels": "Ollama は実行中ですが、まだモデルがありません。\"ollama pull llama3.2\" を実行してから、もう一度確認してください。",
+          "instructions": "Ollama の設定方法",
+          "again": "もう一度確認"
         },
         "cloud": {
-          "title": "Use a cloud AI provider",
-          "description": "Your questions go to the provider you choose, using your own API key.",
-          "provider": "Provider",
-          "key": "API key",
-          "check": "Save and check",
-          "checking": "Checking the key...",
-          "saved": "Key saved in Windows Credential Manager. Choose a model to use.",
-          "where": "The key is stored in Windows Credential Manager, not in a file.",
-          "keyFailed": "The key was saved, but the provider didn't list any models. Check the key and try again."
+          "title": "クラウドの AI プロバイダーを使う",
+          "description": "質問は、あなた自身の API キーを使って、選んだプロバイダーに送られます。",
+          "provider": "プロバイダー",
+          "key": "API キー",
+          "check": "保存して確認",
+          "checking": "キーを確認しています...",
+          "saved": "キーを Windows 資格情報マネージャーに保存しました。使うモデルを選んでください。",
+          "where": "キーはファイルではなく、Windows 資格情報マネージャーに保存されます。",
+          "keyFailed": "キーは保存されましたが、プロバイダーからモデルが返されませんでした。キーを確認して、もう一度お試しください。"
         },
         "skip": {
-          "title": "Skip for now",
-          "description": "You can set this up later on the Assistant page."
+          "title": "今はスキップ",
+          "description": "あとで「アシスタント」ページで設定できます。"
         }
       },
       "done": {
-        "title": "You're all set",
-        "sub": "Kusema keeps running in the system tray and works in any app.",
-        "finish": "Start using Kusema",
-        "wins": "Your first three wins are waiting on the main page.",
-        "atLogin": "Start Kusema when I sign in",
+        "title": "準備が整いました",
+        "sub": "Kusema はシステムトレイで動き続け、どのアプリでも使えます。",
+        "finish": "Kusema を使い始める",
+        "wins": "最初の 3 つの達成目標がメインページで待っています。",
+        "atLogin": "サインイン時に Kusema を起動",
         "keys": {
-          "dictate": "Dictate: hold",
-          "continuous": "Continuous dictation: press to start and stop",
-          "ask": "Ask Kusema",
-          "askScreen": "Ask about my screen"
+          "dictate": "ディクテーション: 押し続ける",
+          "continuous": "連続ディクテーション: 押して開始・停止",
+          "ask": "Kusema に質問",
+          "askScreen": "画面について質問"
         }
       }
     }
@@ -408,7 +408,7 @@
     "general": {
       "title": "一般",
       "shortcut": {
-        "title": "Handy ショートカット",
+        "title": "Kusema ショートカット",
         "description": "音声録音を開始するキーボードショートカットを設定",
         "loading": "ショートカットを読み込み中…",
         "none": "ショートカットが設定されていません",
@@ -428,20 +428,20 @@
             "description": "文字起こしに常に AI 後処理を適用するキーボードショートカット。 (任意)"
           },
           "assistant": {
-            "name": "Ask Kusema",
-            "description": "Hold or press to ask a spoken question. The reply appears below instead of being pasted."
+            "name": "Kusema に質問",
+            "description": "押し続けるか押して、声で質問します。回答は貼り付けられず、下に表示されます。"
           },
           "assistant_screen": {
-            "name": "Ask About My Screen",
-            "description": "Hold or press to ask a spoken question about the window you're working in. You see the screenshot before anything is sent."
+            "name": "画面について質問",
+            "description": "押し続けるか押して、作業中のウィンドウについて声で質問します。何かが送信される前にスクリーンショットを確認できます。"
           },
           "dictate_continuous": {
-            "name": "Continuous Dictation",
-            "description": "Press to start dictating hands-free, and press again to stop. Text appears each time you pause."
+            "name": "連続ディクテーション",
+            "description": "押すとハンズフリーでディクテーションを開始し、もう一度押すと停止します。区切るたびにテキストが表示されます。"
           },
           "toggle_privileged": {
-            "name": "Privileged Mode",
-            "description": "Press to turn Privileged mode on or off."
+            "name": "Privileged モード",
+            "description": "押すと Privileged モードのオン・オフを切り替えます。"
           }
         },
         "errors": {
@@ -466,7 +466,7 @@
       },
       "preferredLanguages": {
         "title": "使用する言語",
-        "description": "あなたが話す言語です。Handy はこれをもとにモデルをおすすめします。",
+        "description": "あなたが話す言語です。Kusema はこれをもとにモデルをおすすめします。",
         "noMatch": "「{{query}}」に一致する言語はありません",
         "weak": "{{languages}}をうまく認識できるモデルはまだありません。"
       },
@@ -493,17 +493,17 @@
         "fits": "選んだ言語向け",
         "untested": "未テスト"
       },
-      "untestedNote": "Handy ではテストされていません。速度が遅かったり、間違いが多かったりする可能性があります。",
+      "untestedNote": "Kusema ではテストされていません。速度が遅かったり、間違いが多かったりする可能性があります。",
       "untestedHidden_one": "音声入力向けに調整されていないモデルがあと {{count}} 個あります。検索で見つけられます。",
       "untestedHidden_other": "音声入力向けに調整されていないモデルがあと {{count}} 個あります。検索で見つけられます。",
-      "emptyYours": "モデルはまだありません。下から選ぶとダウンロードされ、Handy が使用します。",
+      "emptyYours": "モデルはまだありません。下から選ぶとダウンロードされ、Kusema が使用します。",
       "showMore": "さらに {{count}} 個を表示",
       "showFewer": "表示を減らす",
       "download": "ダウンロードして使用",
       "downloadingThenUse": "{{total}} のうち {{percent}}%、完了後に切り替え",
       "loading": "読み込み中…",
       "deleteAsk": "{{name}} を削除しますか? {{size}} の空き容量が増えます。",
-      "deleteAskActive": "{{name}} を削除しますか? ほかのモデルを選ぶまで、Handy は文字起こしできません。",
+      "deleteAskActive": "{{name}} を削除しますか? ほかのモデルを選ぶまで、Kusema は文字起こしできません。",
       "cancel": "キャンセル",
       "deleteModel": "{{name}} を削除",
       "cancelDownload": "{{name}} のダウンロードを中止",
@@ -517,7 +517,7 @@
         "marks": "? はまだ測定されていません。— はその言語を聞き取れません。"
       },
       "retiredNotice": {
-        "title": "古いモデルは Handy で使用できなくなりました",
+        "title": "古いモデルは Kusema で使用できなくなりました",
         "description": "コンピューター上で {{size}} を使用しています。",
         "delete": "モデルを削除",
         "deleted": "古いモデルを削除しました",
@@ -525,37 +525,37 @@
       },
       "rescan": {
         "label": "再スキャン",
-        "tooltip": "Handy を使わずに models フォルダーまたは Hugging Face キャッシュに追加されたモデルを再スキャンします"
+        "tooltip": "Kusema を使わずに models フォルダーまたは Hugging Face キャッシュに追加されたモデルを再スキャンします"
       },
       "curated": {
-        "inUse": "In use",
-        "gettingReady": "Getting ready...",
-        "downloading": "Downloading: {{percent}}%",
-        "cancel": "Cancel",
-        "cancelLabel": "Cancel downloading {{name}}",
-        "use": "Use",
-        "useLabel": "Use {{name}}",
-        "download": "Download ({{size}})",
-        "downloadLabel": "Download {{name}}",
-        "recommended": "Recommended",
-        "others": "Also on this computer",
-        "showAllHint": "More models are available: turn on Show all models under Advanced.",
+        "inUse": "使用中",
+        "gettingReady": "準備中...",
+        "downloading": "ダウンロード中: {{percent}}%",
+        "cancel": "キャンセル",
+        "cancelLabel": "{{name}} のダウンロードをキャンセル",
+        "use": "使用",
+        "useLabel": "{{name}} を使用",
+        "download": "ダウンロード ({{size}})",
+        "downloadLabel": "{{name}} をダウンロード",
+        "recommended": "おすすめ",
+        "others": "このコンピューターにもあるモデル",
+        "showAllHint": "ほかにもモデルがあります。「詳細設定」で「すべてのモデルを表示」をオンにしてください。",
         "rows": {
           "parakeetUnified": {
             "name": "Parakeet Unified English",
-            "description": "The best choice for English. Chosen automatically."
+            "description": "英語に最適です。自動的に選ばれます。"
           },
           "parakeetV3": {
             "name": "Parakeet TDT v3",
-            "description": "For dictating in other languages, including Spanish, French and German."
+            "description": "スペイン語、フランス語、ドイツ語など、ほかの言語でのディクテーション向けです。"
           },
           "canary": {
             "name": "Canary 180M Flash",
-            "description": "A small download, for older computers or when disk space is low."
+            "description": "ダウンロードが小さく、古いコンピューターやディスクの空きが少ないとき向けです。"
           },
           "nemotron": {
             "name": "Nemotron 3.5 Streaming",
-            "description": "Shows live text as you speak, but makes more mistakes."
+            "description": "話している間にテキストをライブ表示しますが、間違いが多くなります。"
           }
         }
       }
@@ -564,26 +564,26 @@
       "title": "言語"
     },
     "dictation": {
-      "title": "Continuous Dictation",
-      "description": "Keep talking, and the text is typed into your window each time you pause. Speech recognition stays on this computer, and AI cleanup never runs in this mode.",
+      "title": "連続ディクテーション",
+      "description": "話し続けると、区切るたびにテキストがウィンドウに入力されます。音声認識はこのコンピューター上で行われ、このモードでは AI クリーンアップは実行されません。",
       "dragonKey": {
-        "title": "Dragon's Key",
-        "description": "Use Numpad + to start and stop, as Dragon does. While it's set, that key no longer types a plus sign.",
-        "button": "Use Dragon's key (Numpad +)"
+        "title": "Dragon のキー",
+        "description": "Dragon と同じように、テンキーの + で開始・停止します。設定中は、このキーでプラス記号が入力されなくなります。",
+        "button": "Dragon のキーを使う (テンキーの +)"
       },
       "pause": {
-        "title": "Pause Length",
-        "description": "How long you pause before what you said is typed. Longer pauses keep sentences together; shorter ones show text sooner.",
+        "title": "区切りの長さ",
+        "description": "話した内容が入力されるまでの間の長さです。長くすると文がまとまり、短くするとテキストが早く表示されます。",
         "seconds": "{{seconds}} s"
       },
       "autoStop": {
-        "title": "Stop After Silence",
-        "description": "Dictation stops by itself after this long without speech, so the microphone is never left on by accident.",
-        "minutes": "{{minutes}} min"
+        "title": "無音で停止",
+        "description": "話さない時間がこの長さに達すると、ディクテーションは自動で止まります。マイクが誤ってオンのままになることはありません。",
+        "minutes": "{{minutes}} 分"
       },
       "voiceCommands": {
-        "label": "Voice Commands",
-        "description": "Say \"new paragraph\" or \"new line\" as you talk, or \"scratch that\" or \"stop dictation\" on its own between pauses, and it acts instead of being typed. Normal sentences with these words are typed as usual."
+        "label": "音声コマンド",
+        "description": "話しながら \"new paragraph\" や \"new line\" と言うか、区切りの間に単独で \"scratch that\" や \"stop dictation\" と言うと、入力されずにその操作が実行されます。これらの語を含むふつうの文はそのまま入力されます。"
       }
     },
     "sound": {
@@ -646,11 +646,11 @@
       },
       "autostart": {
         "label": "起動時に実行",
-        "description": "コンピューターにログインしたときに Handy を自動的に起動。"
+        "description": "コンピューターにログインしたときに Kusema を自動的に起動。"
       },
       "showTrayIcon": {
         "label": "トレイアイコンを表示",
-        "description": "システムトレイに Handy のアイコンを表示します。"
+        "description": "システムトレイに Kusema のアイコンを表示します。"
       },
       "overlay": {
         "style": {
@@ -773,90 +773,90 @@
         }
       },
       "showAllModels": {
-        "label": "Show all models",
-        "description": "List every model on the Models page, with accuracy and speed details, instead of the short list."
+        "label": "すべてのモデルを表示",
+        "description": "短いリストではなく、すべてのモデルを精度と速度の詳細付きで「モデル」ページに表示します。"
       }
     },
     "assistant": {
-      "title": "Assistant",
-      "description": "Hold the shortcut, ask a question out loud, and Kusema answers.",
+      "title": "アシスタント",
+      "description": "ショートカットを押し続けて声で質問すると、Kusema が答えます。",
       "provider": {
-        "title": "AI Provider",
-        "provider": "Provider",
-        "description": "Assistant mode uses the same provider and API key as Post Process.",
-        "model": "Model",
-        "modelDescription": "The model that answers your questions. Change it on the Post Process page.",
-        "notSet": "Not chosen",
-        "open": "Open Post Process settings",
-        "disabled": "Assistant mode needs an AI provider (such as Anthropic, OpenAI or a local Ollama model) to answer questions. Providers are set up on the Post Process page, which appears once Post Processing is turned on. Turning it on doesn't change how normal dictation works.",
-        "enable": "Turn on Post Processing",
-        "noProvider": "Choose a provider on the Post Process page.",
-        "noKey": "No API key is set for {{provider}}. Add one on the Post Process page.",
-        "noModel": "Choose a model on the Post Process page."
+        "title": "AI プロバイダー",
+        "provider": "プロバイダー",
+        "description": "アシスタントは「後処理」と同じプロバイダーと API キーを使います。",
+        "model": "モデル",
+        "modelDescription": "質問に答えるモデルです。「後処理」ページで変更できます。",
+        "notSet": "未選択",
+        "open": "「後処理」の設定を開く",
+        "disabled": "アシスタントが質問に答えるには、AI プロバイダー (Anthropic、OpenAI、ローカルの Ollama モデルなど) が必要です。プロバイダーは「後処理」ページで設定します。このページは後処理をオンにすると表示されます。オンにしても通常のディクテーションは変わりません。",
+        "enable": "後処理をオンにする",
+        "noProvider": "「後処理」ページでプロバイダーを選んでください。",
+        "noKey": "{{provider}} の API キーが設定されていません。「後処理」ページで追加してください。",
+        "noModel": "「後処理」ページでモデルを選んでください。"
       },
       "screen": {
-        "title": "Ask About My Screen",
-        "description": "Ask about the window you're working in, like “What do you think of this document?” Only that window is captured, and it stays on this computer until you press Send.",
+        "title": "画面について質問",
+        "description": "「このドキュメントをどう思う?」のように、作業中のウィンドウについて質問できます。キャプチャされるのはそのウィンドウだけで、「送信」を押すまでこのコンピューターから出ません。",
         "confirm": {
-          "label": "Confirm Before Sending Screenshots",
-          "description": "Show the screenshot, your question and where it will go, then wait for Send (Enter) or Cancel (Escape). Unanswered, it cancels after 30 seconds.",
-          "offWarning": "Screenshots will be sent to {{provider}} as soon as you finish speaking, without showing you first. Everything visible in the window goes with them, including private or confidential information."
+          "label": "スクリーンショット送信前に確認",
+          "description": "スクリーンショット、質問、送信先を表示し、「送信」(Enter) か「キャンセル」(Esc) を待ちます。応答がなければ 30 秒後にキャンセルされます。",
+          "offWarning": "スクリーンショットは、話し終えるとすぐに、事前に表示されることなく {{provider}} に送信されます。ウィンドウに表示されているものはすべて、個人情報や機密情報も含めて送信されます。"
         },
         "provider": {
-          "label": "Use for Screen Questions",
-          "description": "Send screenshots to a different provider than normal questions, for example a local vision model in Ollama (the Custom provider) for confidential documents. Follow-up questions go to the same provider until you start a new conversation.",
-          "same": "Same as Assistant",
-          "sameNamed": "Same as Assistant ({{provider}})",
-          "yourProvider": "your AI provider"
+          "label": "画面についての質問に使う",
+          "description": "スクリーンショットを通常の質問とは別のプロバイダーに送ります。たとえば機密文書には、Ollama のローカル画像モデル (「カスタム」プロバイダー) を使えます。新しい会話を始めるまで、続けての質問も同じプロバイダーに送られます。",
+          "same": "アシスタントと同じ",
+          "sameNamed": "アシスタントと同じ ({{provider}})",
+          "yourProvider": "お使いの AI プロバイダー"
         },
         "model": {
-          "label": "Model for Screen Questions",
-          "description": "A model that can see images. Leave empty to use the model chosen for this provider on the Post Process page.",
-          "placeholder": "e.g. qwen2.5vl"
+          "label": "画面についての質問用モデル",
+          "description": "画像を認識できるモデル。空欄にすると、「後処理」ページでこのプロバイダー用に選んだモデルを使います。",
+          "placeholder": "例: qwen2.5vl"
         }
       },
       "conversation": {
-        "empty": "Ask a question with the Ask Kusema shortcut. The conversation will appear here.",
-        "new": "New conversation",
-        "screenshot": "Screenshot",
-        "noProvider": "Ask Kusema needs an AI model to answer. Choose one in Settings.",
-        "openSettings": "Open Settings"
+        "empty": "「Kusema に質問」ショートカットで質問してください。会話はここに表示されます。",
+        "new": "新しい会話",
+        "screenshot": "スクリーンショット",
+        "noProvider": "「Kusema に質問」が答えるには AI モデルが必要です。「設定」で選んでください。",
+        "openSettings": "設定を開く"
       },
       "voice": {
-        "title": "Voice",
-        "systemDefault": "System default",
-        "previewText": "Hi, I'm Kusema. This is how I'll sound when I answer your questions.",
+        "title": "音声",
+        "systemDefault": "システムの既定",
+        "previewText": "こんにちは、Kusema です。質問にお答えするときは、このような声になります。",
         "speakReplies": {
-          "label": "Speak Replies",
-          "description": "Read replies aloud as they arrive. Press Cancel (Escape), start a new recording, or start a new conversation to stop."
+          "label": "回答を読み上げる",
+          "description": "回答が届きしだい読み上げます。止めるには「キャンセル」(Esc) を押すか、新しい録音や新しい会話を始めてください。"
         },
         "voice": {
-          "label": "Voice",
-          "description": "Kokoro voices sound the most natural; download them above. The other voices come with your computer (on Windows, add more under Settings > Time & language > Speech)."
+          "label": "音声",
+          "description": "Kokoro の音声が最も自然です。上からダウンロードしてください。そのほかの音声はコンピューターに付属しています (Windows では「設定」>「時刻と言語」>「音声認識」で追加できます)。"
         },
         "kokoro": {
-          "label": "Kokoro Voices",
-          "description": "28 natural-sounding English voices (US and UK) generated on this computer. A one-time download.",
-          "installed": "Installed. Pick a Kokoro voice below. Removing them frees the disk space; replies then use the system voice.",
-          "download": "Download ({{size}} MB)",
-          "downloading": "Downloading… {{percentage}}%",
-          "cancel": "Cancel",
-          "delete": "Remove"
+          "label": "Kokoro の音声",
+          "description": "このコンピューター上で生成される、自然な響きの英語音声 28 種 (アメリカ英語・イギリス英語)。ダウンロードは 1 回だけです。",
+          "installed": "インストール済みです。下で Kokoro の音声を選んでください。削除するとディスク容量が空き、回答にはシステムの音声が使われます。",
+          "download": "ダウンロード ({{size}} MB)",
+          "downloading": "ダウンロード中… {{percentage}}%",
+          "cancel": "キャンセル",
+          "delete": "削除"
         },
         "rate": {
-          "label": "Speaking Rate",
-          "description": "How fast replies are read. 1.00× is the voice's normal speed."
+          "label": "話す速さ",
+          "description": "回答を読み上げる速さです。1.00× がその音声の標準の速さです。"
         },
         "preview": {
-          "label": "Preview Voice",
-          "description": "Hear the selected voice at the selected speed.",
-          "button": "Preview"
+          "label": "音声を試聴",
+          "description": "選んだ音声を選んだ速さで聞いてみます。",
+          "button": "試聴"
         }
       },
       "tabs": {
-        "label": "Assistant",
-        "conversation": "Conversation",
-        "settings": "Settings"
+        "label": "アシスタント",
+        "conversation": "会話",
+        "settings": "設定"
       }
     },
     "postProcessing": {
@@ -973,7 +973,7 @@
       },
       "updateChecks": {
         "label": "アップデートを確認",
-        "description": "Handy の新しいバージョンを自動的にチェック",
+        "description": "Kusema の新しいバージョンを自動的にチェック",
         "lockedDescription": "システム設定により無効化されています (HANDY_DISABLE_UPDATER)"
       },
       "whatsNewPreview": {
@@ -992,9 +992,9 @@
           "welcome": "ようこそ",
           "permissions": "権限",
           "done": "準備完了",
-          "microphone": "Microphone",
-          "practice": "Practice",
-          "assistant": "AI assistant"
+          "microphone": "マイク",
+          "practice": "練習",
+          "assistant": "AI アシスタント"
         }
       },
       "onboardingRun": {
@@ -1040,8 +1040,8 @@
         "description": "ノートパソコンの蓋を閉じたときに使用するマイク"
       },
       "postProcessingToggle": {
-        "label": "AI Cleanup",
-        "description": "Optional. Rewrites dictated text with an AI model when you use the AI cleanup shortcut: fixes self-corrections and grammar, keeps your meaning, and never adds facts."
+        "label": "AI クリーンアップ",
+        "description": "任意。AI クリーンアップのショートカットを使ったとき、ディクテーションしたテキストを AI モデルで書き直します。言い直しや文法を直し、意味は変えず、事実を付け加えることはありません。"
       },
       "muteWhileRecording": {
         "label": "録音中にミュート",
@@ -1057,7 +1057,7 @@
         "bindingsReset": "キーボードショートカットに互換性がなかったため、デフォルトにリセットされました",
         "options": {
           "tauri": "Tauri Global Shortcut",
-          "builtIn": "Built-in (recommended)"
+          "builtIn": "組み込み (推奨)"
         }
       },
       "pasteDelay": {
@@ -1086,7 +1086,7 @@
       },
       "keyboardDiagnostic": {
         "title": "キーボード診断",
-        "description": "キーボードイベントが Handy に届いているかを確認します。記録されるのはイベント数のみで、押したキーの内容は記録されません。",
+        "description": "キーボードイベントが Kusema に届いているかを確認します。記録されるのはイベント数のみで、押したキーの内容は記録されません。",
         "run": "10 秒間の診断を実行",
         "running": "待機中… ショートカットを数回押してください (例: Option+Space)",
         "secureInputLabel": "Secure Input",
@@ -1100,7 +1100,7 @@
         "mouse": "マウス",
         "verdictBlocked": "Secure Input がキーイベントをブロックしています。解消されるまで、通常キーを含むショートカットは動作しません。",
         "verdictSuspicious": "修飾キーのイベントは届いていますが、キーイベントは届いていません。Secure Input は無効と報告されているのに、何かがキーを抑制しています。GitHub で報告してください。",
-        "verdictOk": "キーイベントは Handy に正常に届いています。",
+        "verdictOk": "キーイベントは Kusema に正常に届いています。",
         "verdictNoEvents": "イベントを検出できませんでした。テスト中にキーを押しましたか？",
         "failed": "診断に失敗しました: {{error}}"
       }
@@ -1109,203 +1109,203 @@
       "title": "概要",
       "version": {
         "title": "バージョン",
-        "description": "Handy の現在のバージョン"
+        "description": "Kusema の現在のバージョン"
       },
       "whatsNewUpdates": {
         "label": "新機能を表示",
-        "description": "Handy のアップデート後にリリースノートを表示"
+        "description": "Kusema のアップデート後にリリースノートを表示"
       },
       "appDataDirectory": {
         "title": "アプリデータディレクトリ",
-        "description": "Handy がデータを保存する場所"
+        "description": "Kusema がデータを保存する場所"
       },
       "sourceCode": {
         "title": "ソースコード",
-        "description": "View Kusema's source code",
+        "description": "Kusema のソースコードを見る",
         "button": "GitHub で見る"
       },
       "acknowledgments": {
         "ggml": {
           "title": "ggml",
           "description": "オンデバイス機械学習推論のための高性能テンソルライブラリ",
-          "details": "Handy のローカルの音声からテキストへの文字起こしは transcribe.cpp と ggml を基盤としています。Georgi Gerganov 氏と貢献者の皆様の素晴らしい仕事に感謝します。"
+          "details": "Kusema のローカルの音声からテキストへの文字起こしは transcribe.cpp と ggml を基盤としています。Georgi Gerganov 氏と貢献者の皆様の素晴らしい仕事に感謝します。"
         }
       },
       "organizations": {
-        "title": "Kusema for organizations",
-        "description": "Setup, support and options for firms",
-        "button": "Learn more"
+        "title": "組織向け Kusema",
+        "description": "事務所向けの導入、サポート、各種オプション",
+        "button": "詳しく見る"
       },
       "report": {
-        "title": "Report a problem or suggest a feature",
-        "description": "Tell us on GitHub what went wrong or what you'd like",
-        "button": "Open GitHub"
+        "title": "問題を報告・機能を提案",
+        "description": "うまくいかなかったことや欲しい機能を GitHub でお知らせください",
+        "button": "GitHub を開く"
       },
       "credits": {
-        "title": "Credits and licenses",
+        "title": "クレジットとライセンス",
         "handy": {
-          "title": "Built on Handy",
-          "description": "Kusema is built on Handy by CJ Pais, used under the MIT License.",
-          "button": "View Handy"
+          "title": "Handy を基に開発",
+          "description": "Kusema は CJ Pais による Handy を基に開発されており、MIT ライセンスの下で使用しています。",
+          "button": "Handy を見る"
         },
         "nvidiaLicense": "NVIDIA Open Model License",
-        "models": "Speech and voice models ({{count}})",
-        "components": "Open-source components ({{count}})",
-        "notices": "Full license texts",
-        "loading": "Loading..."
+        "models": "音声認識・音声モデル ({{count}})",
+        "components": "オープンソース コンポーネント ({{count}})",
+        "notices": "ライセンス全文",
+        "loading": "読み込み中..."
       }
     },
     "privacy": {
-      "thisComputer": "This computer ({{host}})",
-      "nothingSent": "Nothing to show yet.",
-      "updateBlocked": "Update checks are blocked in Privileged mode.",
+      "thisComputer": "このコンピューター ({{host}})",
+      "nothingSent": "まだ表示するものはありません。",
+      "updateBlocked": "Privileged モードでは更新の確認がブロックされます。",
       "audio": {
-        "title": "Audio sent off this computer: 0 bytes",
-        "description": "Speech recognition runs on this computer, and nothing in Kusema can upload your voice. Only the text of what you say, and only for features you choose, ever goes to an AI provider."
+        "title": "このコンピューターから送信された音声: 0 バイト",
+        "description": "音声認識はこのコンピューター上で行われ、Kusema の機能があなたの声をアップロードすることはありません。AI プロバイダーに送られるのは、あなたが選んだ機能で使う、話した内容のテキストだけです。"
       },
       "privileged": {
-        "title": "Privileged Mode",
-        "description": "For confidential matters. While it's on, nothing you say, type or show goes to a cloud AI service. Ask Kusema and AI cleanup only work with a model running on this computer.",
+        "title": "Privileged モード",
+        "description": "機密性の高い案件向けです。オンの間は、話したこと、入力したこと、表示したことがクラウドの AI サービスに送られることはありません。「Kusema に質問」と AI クリーンアップは、このコンピューター上のモデルでのみ動作します。",
         "chip": "Privileged",
         "toggle": {
-          "label": "Privileged Mode",
-          "description": "Blocks every request to cloud AI providers, including ones already set up. Dictation keeps working, because it never uses the cloud."
+          "label": "Privileged モード",
+          "description": "設定済みのものも含め、クラウドの AI プロバイダーへのリクエストをすべてブロックします。ディクテーションはクラウドを使わないため、そのまま使えます。"
         },
         "allowLan": {
-          "label": "Allow Local Network AI Servers",
-          "description": "Also allows AI servers on your office network, by private address (like 192.168.1.20). Models on this computer are always allowed."
+          "label": "ローカルネットワークの AI サーバーを許可",
+          "description": "プライベート アドレス (192.168.1.20 など) で、オフィスのネットワーク上の AI サーバーも許可します。このコンピューター上のモデルは常に許可されます。"
         },
         "blockDownloads": {
-          "label": "Also Block Downloads and Update Checks",
-          "description": "For offline offices. Model and voice downloads and update checks carry none of your content, so they normally stay allowed and are listed below. Turn this on to stop them too while Privileged mode is on."
+          "label": "ダウンロードと更新の確認もブロック",
+          "description": "オフラインのオフィス向けです。モデルや音声のダウンロード、更新の確認にはあなたのコンテンツは含まれないため、通常は許可され、下に一覧表示されます。Privileged モードがオンの間、これらも止めたい場合はオンにしてください。"
         },
         "hotkey": {
-          "label": "Privileged Mode Shortcut",
-          "description": "Adds a keyboard shortcut that turns Privileged mode on or off. Off by default, so it can't be pressed by accident."
+          "label": "Privileged モードのショートカット",
+          "description": "Privileged モードのオン・オフを切り替えるキーボード ショートカットを追加します。誤って押さないよう、既定ではオフです。"
         }
       },
       "counts": {
-        "title": "Where Requests Went",
-        "today": "Today",
-        "week": "Last 7 days"
+        "title": "リクエストの送信先",
+        "today": "今日",
+        "week": "過去 7 日間"
       },
       "columns": {
-        "time": "Time",
-        "destination": "Destination",
-        "purpose": "Why",
-        "data": "Data",
-        "size": "Size",
-        "result": "Result"
+        "time": "時刻",
+        "destination": "送信先",
+        "purpose": "目的",
+        "data": "データ",
+        "size": "サイズ",
+        "result": "結果"
       },
       "purposes": {
-        "assistant_question": "Question to Kusema",
-        "screen_question": "Question about the screen",
-        "post_processing": "AI cleanup",
-        "provider_models": "Listing a provider's models",
-        "model_download": "Speech model download",
-        "voice_download": "Voice download",
-        "update_check": "Update check"
+        "assistant_question": "Kusema への質問",
+        "screen_question": "画面についての質問",
+        "post_processing": "AI クリーンアップ",
+        "provider_models": "プロバイダーのモデル一覧の取得",
+        "model_download": "音声認識モデルのダウンロード",
+        "voice_download": "音声のダウンロード",
+        "update_check": "更新の確認"
       },
       "data": {
-        "text": "Text",
-        "image": "Screenshot",
-        "none": "None of yours"
+        "text": "テキスト",
+        "image": "スクリーンショット",
+        "none": "あなたのデータなし"
       },
       "results": {
-        "sent": "Sent",
-        "blocked": "Blocked",
-        "failed": "Failed"
+        "sent": "送信済み",
+        "blocked": "ブロック",
+        "failed": "失敗"
       },
       "list": {
-        "title": "Every Request",
-        "description": "Each request Kusema has made: when, where, why, what kind of data and how large. What was in it is never recorded. Shows the latest 500; the export has them all.",
-        "all": "All",
-        "allPurposes": "Any reason",
-        "allResults": "Any result",
-        "allDestinations": "Any destination",
-        "anyTime": "Any time",
-        "lastDays_one": "Last {{count}} day",
-        "lastDays_other": "Last {{count}} days",
-        "export": "Export CSV",
-        "exported_one": "Exported {{count}} request.",
-        "exported_other": "Exported {{count}} requests.",
-        "clear": "Clear",
+        "title": "すべてのリクエスト",
+        "description": "Kusema が行ったすべてのリクエストの、日時、送信先、目的、データの種類、サイズを表示します。内容は記録されません。最新 500 件を表示し、エクスポートにはすべて含まれます。",
+        "all": "すべて",
+        "allPurposes": "すべての目的",
+        "allResults": "すべての結果",
+        "allDestinations": "すべての送信先",
+        "anyTime": "全期間",
+        "lastDays_one": "過去 {{count}} 日間",
+        "lastDays_other": "過去 {{count}} 日間",
+        "export": "CSV をエクスポート",
+        "exported_one": "{{count}} 件のリクエストをエクスポートしました。",
+        "exported_other": "{{count}} 件のリクエストをエクスポートしました。",
+        "clear": "クリア",
         "retention": {
-          "title": "Keep This List For",
-          "description": "Older entries are deleted from this computer automatically.",
-          "days_one": "{{count}} day",
-          "days_other": "{{count}} days"
+          "title": "この一覧の保存期間",
+          "description": "古い項目はこのコンピューターから自動的に削除されます。",
+          "days_one": "{{count}} 日",
+          "days_other": "{{count}} 日"
         }
       }
     },
     "cleanup": {
-      "title": "Cleanup",
-      "description": "Dictated text should need little editing. Local cleanup runs on this computer and sends nothing anywhere.",
+      "title": "クリーンアップ",
+      "description": "ディクテーションしたテキストは、ほとんど手直しが要らないのが理想です。ローカル クリーンアップはこのコンピューター上で実行され、何も送信しません。",
       "local": {
-        "label": "Local Cleanup",
-        "description": "Removes filler words, adds missing periods between phrases in continuous dictation, and handles spoken punctuation, all on this computer. Off, your words are typed as transcribed."
+        "label": "ローカル クリーンアップ",
+        "description": "つなぎ言葉を取り除き、連続ディクテーションでは文の間に抜けた句点を補い、話した句読点を処理します。すべてこのコンピューター上で行われます。オフにすると、書き起こしたとおりに入力されます。"
       },
       "spokenPunctuation": {
-        "label": "Spoken Punctuation",
-        "description": "Say \"comma\", \"period\", \"question mark\", \"colon\", \"open quote\", \"close paren\", \"dash\", \"section symbol\" and more, as in Dragon. \"Period\" only counts at the end of a phrase, so \"the limitations period expired\" stays as words. Say \"literal period\" to type the word."
+        "label": "話した句読点",
+        "description": "Dragon と同じように \"comma\"、\"period\"、\"question mark\"、\"colon\"、\"open quote\"、\"close paren\"、\"dash\"、\"section symbol\" などと言えます。\"Period\" はフレーズの終わりでのみ記号になるため、\"the limitations period expired\" は語のまま残ります。単語そのものを入力するには \"literal period\" と言います。これらのコマンドは英語で使えます。"
       },
       "ai": {
         "status": {
-          "noProvider": "No AI provider is set up yet.",
-          "noKey": "{{provider}} needs an API key.",
-          "noModel": "{{provider}} needs a model chosen.",
-          "local": "Using {{model}} on this computer through {{provider}}. Nothing leaves this computer.",
-          "cloud": "Using {{model}} from {{provider}}, a cloud service. Text you clean up goes to {{provider}}.",
-          "blocked": "Privileged mode is on, so nothing will be sent to {{provider}}. Use a local model or turn off Privileged mode."
+          "noProvider": "AI プロバイダーがまだ設定されていません。",
+          "noKey": "{{provider}} には API キーが必要です。",
+          "noModel": "{{provider}} のモデルを選ぶ必要があります。",
+          "local": "{{provider}} 経由で、このコンピューター上の {{model}} を使用中です。このコンピューターの外には何も出ません。",
+          "cloud": "クラウド サービスの {{provider}} の {{model}} を使用中です。クリーンアップするテキストは {{provider}} に送られます。",
+          "blocked": "Privileged モードがオンのため、{{provider}} には何も送信されません。ローカル モデルを使うか、Privileged モードをオフにしてください。"
         },
-        "recommendLocal": "We recommend a model that runs on this computer, such as one in Ollama, so confidential text stays here. AI cleanup runs when you dictate with its own shortcut, and never during continuous dictation.",
-        "setUp": "Set Up AI Cleanup"
+        "recommendLocal": "機密性の高いテキストをここに留めるため、Ollama のモデルなど、このコンピューター上で動くモデルをおすすめします。AI クリーンアップは専用のショートカットでディクテーションしたときに実行され、連続ディクテーション中は実行されません。",
+        "setUp": "AI クリーンアップを設定"
       }
     },
     "firstWins": {
-      "title": "First three wins",
-      "dismiss": "Dismiss",
-      "dictated": "Dictate an email",
-      "newParagraph": "Use continuous dictation and say \"new paragraph\"",
-      "asked": "Ask Kusema a question",
-      "done": "Done",
-      "notDone": "Not done yet",
-      "progress": "{{done}} of {{count}} done",
-      "allDone": "All three done. Nice work."
+      "title": "最初の 3 つの達成目標",
+      "dismiss": "閉じる",
+      "dictated": "メールをディクテーションする",
+      "newParagraph": "連続ディクテーションで \"new paragraph\" と言う",
+      "asked": "Kusema に質問する",
+      "done": "完了",
+      "notDone": "未完了",
+      "progress": "{{count}} 件中 {{done}} 件完了",
+      "allDone": "3 つとも完了しました。お見事です。"
     },
     "glow": {
-      "title": "Recording indicator",
-      "description": "A glow around the edges of your screen shows that Kusema is listening. Only you see it: it stays out of screenshots and screen shares.",
+      "title": "録音インジケーター",
+      "description": "画面の縁が光って、Kusema が聞き取り中であることを示します。見えるのはあなただけで、スクリーンショットや画面共有には写りません。",
       "enabled": {
-        "label": "Screen glow",
-        "description": "Show a colored glow around the screen you're working on while Kusema is listening. You can still click and type through it."
+        "label": "画面の光",
+        "description": "Kusema が聞き取っている間、作業中の画面の周りを色付きの光で囲みます。光の上からでもクリックや入力ができます。"
       },
       "thickness": {
-        "label": "Thickness",
-        "description": "How far the glow reaches in from the edge of the screen."
+        "label": "太さ",
+        "description": "画面の端から光がどこまで届くかです。"
       },
       "intensity": {
-        "label": "Intensity",
-        "description": "How strong the glow is."
+        "label": "明るさ",
+        "description": "光の強さです。"
       },
       "palette": {
-        "label": "Colors",
-        "description": "The color-blind friendly set keeps the modes easy to tell apart with every common kind of color blindness.",
-        "standard": "Standard",
-        "color_blind": "Color-blind friendly"
+        "label": "色",
+        "description": "色覚に配慮した配色では、一般的などの色覚特性でもモードを見分けやすくなります。",
+        "standard": "標準",
+        "color_blind": "色覚に配慮"
       },
       "modes": {
-        "dictation": "Dictation",
-        "continuous": "Continuous dictation",
-        "ask": "Ask Kusema",
-        "ask_screen": "Ask about my screen",
-        "paused": "Continuous dictation paused (window changed)"
+        "dictation": "ディクテーション",
+        "continuous": "連続ディクテーション",
+        "ask": "Kusema に質問",
+        "ask_screen": "画面について質問",
+        "paused": "連続ディクテーションの一時停止中 (ウィンドウ切り替え)"
       },
-      "preview": "Preview",
-      "previewLabel": "Preview the glow for {{mode}}",
+      "preview": "プレビュー",
+      "previewLabel": "{{mode}} の光をプレビュー",
       "sounds": {
-        "label": "Continuous dictation sounds",
-        "description": "Play a short sound when continuous dictation starts and stops. Sounds for other dictation are under Sound below."
+        "label": "連続ディクテーションの音",
+        "description": "連続ディクテーションの開始時と終了時に短い音を鳴らします。ほかのディクテーションの音は、下の「サウンド」にあります。"
       }
     }
   },
@@ -1325,7 +1325,7 @@
     "portableUpdateBrowseButton": "GitHub Releases を開く"
   },
   "whatsNew": {
-    "title": "Handy v{{version}} の新機能"
+    "title": "Kusema v{{version}} の新機能"
   },
   "common": {
     "loading": "読み込み中…",
@@ -1356,11 +1356,11 @@
   },
   "appLanguage": {
     "title": "アプリの言語",
-    "description": "Handy インターフェースの言語を変更"
+    "description": "Kusema インターフェースの言語を変更"
   },
   "theme": {
     "title": "アプリのテーマ",
-    "description": "Handy をシステムのテーマに合わせるか、ライトまたはダークで固定するかを選択します",
+    "description": "Kusema をシステムのテーマに合わせるか、ライトまたはダークで固定するかを選択します",
     "options": {
       "system": "システム",
       "light": "ライト",
@@ -1371,38 +1371,38 @@
     "transcribing": "文字起こし中…",
     "processing": "処理中…",
     "loadingModel": "モデルを読み込み中…",
-    "speaking": "Speaking...",
+    "speaking": "読み上げ中...",
     "dictation": {
-      "dictating": "Dictating",
-      "paused": "Paused, window changed",
-      "noTarget": "Click where the text should go",
-      "finishing": "Finishing...",
-      "stop": "Stop",
-      "nothingToScratch": "Nothing to scratch",
-      "scratchWindowChanged": "Can't scratch: the window changed",
-      "scratchOtherInput": "Can't scratch: keyboard or mouse used",
-      "savedToHistory": "Said while paused: saved in History",
-      "stoppedSilence": "Stopped after silence",
-      "microphoneLost": "Stopped: microphone lost",
-      "cantKeepUp": "Stopped: this computer couldn't keep up",
-      "transcriptionFailed": "Couldn't transcribe that",
-      "pasteFailed": "Couldn't type that; it's in History"
+      "dictating": "ディクテーション中",
+      "paused": "一時停止中、ウィンドウが切り替わりました",
+      "noTarget": "テキストを入れる場所をクリックしてください",
+      "finishing": "仕上げ中...",
+      "stop": "停止",
+      "nothingToScratch": "取り消すものがありません",
+      "scratchWindowChanged": "取り消せません: ウィンドウが切り替わりました",
+      "scratchOtherInput": "取り消せません: キーボードかマウスが使われました",
+      "savedToHistory": "一時停止中の発言: 履歴に保存しました",
+      "stoppedSilence": "無音のため停止しました",
+      "microphoneLost": "停止: マイクが見つかりません",
+      "cantKeepUp": "停止: このコンピューターの処理が追いつきませんでした",
+      "transcriptionFailed": "書き起こせませんでした",
+      "pasteFailed": "入力できませんでした。履歴にあります"
     },
     "privileged": "Privileged"
   },
   "screenCard": {
-    "title": "Send this screenshot?",
-    "autoCancel": "Cancels in {{seconds}} s",
-    "enlarge": "Click to enlarge",
-    "shrink": "Click to make smaller",
-    "imageAlt": "Screenshot of the window you asked about",
+    "title": "このスクリーンショットを送信しますか?",
+    "autoCancel": "{{seconds}} 秒後にキャンセル",
+    "enlarge": "クリックで拡大",
+    "shrink": "クリックで縮小",
+    "imageAlt": "質問したウィンドウのスクリーンショット",
     "question": "“{{question}}”",
-    "sendsTo": "Goes to {{provider}} · {{model}}",
-    "onlyThis": "Only this window. Nothing is sent until you press Send.",
-    "send": "Send",
-    "cancel": "Cancel",
+    "sendsTo": "送信先: {{provider}} · {{model}}",
+    "onlyThis": "このウィンドウだけです。「送信」を押すまで何も送信されません。",
+    "send": "送信",
+    "cancel": "キャンセル",
     "noticeTitle": "Kusema",
-    "close": "Close"
+    "close": "閉じる"
   },
   "secureInput": {
     "blockedWithCulprit_one": "{{name}} が1個のショートカットをブロックしている可能性があります",

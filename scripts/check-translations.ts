@@ -76,6 +76,17 @@ function hasKeyPath(obj: TranslationData, keyPath: string[]): boolean {
   return true;
 }
 
+/** A plural form of a key English has in the plural, like `days_few`. */
+function isPluralFormOf(
+  reference: TranslationData,
+  keyPath: string[],
+): boolean {
+  const last = keyPath[keyPath.length - 1];
+  const match = /^(.*)_(zero|one|two|few|many|other)$/.exec(last);
+  if (!match) return false;
+  return hasKeyPath(reference, [...keyPath.slice(0, -1), `${match[1]}_other`]);
+}
+
 function loadTranslationFile(lang: string): TranslationData | null {
   const filePath = path.join(LOCALES_DIR, lang, "translation.json");
 
@@ -128,8 +139,12 @@ function validateTranslations(): void {
 
     // Find extra keys (keys in language but not in reference)
     const langKeyPaths = getAllKeyPaths(langData);
+    // Plural forms English doesn't have (Russian "few", Arabic "two"...) are
+    // expected; check-translation-tokens.ts makes sure the right ones are there.
     const extra = langKeyPaths.filter(
-      (keyPath) => !hasKeyPath(referenceData, keyPath),
+      (keyPath) =>
+        !hasKeyPath(referenceData, keyPath) &&
+        !isPluralFormOf(referenceData, keyPath),
     );
 
     results[lang] = {

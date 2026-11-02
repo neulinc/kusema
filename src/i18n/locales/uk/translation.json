@@ -8,25 +8,25 @@
     "quit": "Вийти",
     "cancel": "Скасувати",
     "secureInputWarning": "⚠ Комбінації клавіш заблоковано Secure Input",
-    "privilegedMode": "Privileged Mode",
-    "privilegedOn": "Privileged mode on"
+    "privilegedMode": "Режим Privileged",
+    "privilegedOn": "Режим Privileged увімкнено"
   },
   "sidebar": {
     "general": "Загальні",
-    "assistant": "Assistant",
+    "assistant": "Асистент",
     "models": "Моделі",
     "advanced": "Розширені",
     "postProcessing": "Постобробка",
     "history": "Історія",
     "debug": "Дебаг",
     "about": "Інфо",
-    "privacy": "Privacy"
+    "privacy": "Конфіденційність"
   },
   "onboarding": {
     "customModelDescription": "Офіційно не підтримується",
     "migration": {
       "title": "Ваші моделі потребують оновлення",
-      "description": "Handy тепер використовує моделі нового типу. Завантажте нову версію, щоб і далі транскрибувати. Старі версії буде видалено.",
+      "description": "Kusema тепер використовує моделі нового типу. Завантажте нову версію, щоб і далі транскрибувати. Старі версії буде видалено.",
       "replaces": "Замінює {{name}}",
       "oldFormat": "Старий формат",
       "failed": "Помилка завантаження",
@@ -63,11 +63,11 @@
     "permissions": {
       "microphone": {
         "name": "Мікрофон",
-        "why": "Щоб Handy міг вас чути. Звук перетворюється на текст на цьому комп'ютері й нікуди не надсилається."
+        "why": "Щоб Kusema міг вас чути. Звук перетворюється на текст на цьому комп'ютері й нікуди не надсилається."
       },
       "accessibility": {
         "name": "Універсальний доступ",
-        "why": "Щоб ваша комбінація клавіш працювала в усіх програмах, а Handy міг вводити текст там, де стоїть курсор."
+        "why": "Щоб ваша комбінація клавіш працювала в усіх програмах, а Kusema міг вводити текст там, де стоїть курсор."
       },
       "errors": {
         "checkFailed": "Не вдалося перевірити дозволи. Будь ласка, спробуйте ще раз.",
@@ -81,12 +81,12 @@
       "openSettings": "Відкрити налаштування",
       "allowed": "Дозволено",
       "waiting": "Очікування",
-      "turnOnMac": "Увімкніть Handy в Системних налаштуваннях і поверніться сюди.",
+      "turnOnMac": "Увімкніть Kusema в Системних налаштуваннях і поверніться сюди.",
       "turnOnWindows": "Увімкніть доступ до мікрофона в Параметрах Windows і поверніться сюди.",
       "hintBoth": "Дозвольте обидва, щоб продовжити",
       "hintMicrophone": "Дозвольте мікрофон, щоб продовжити",
       "welcomeBack": "З поверненням. Продовжуємо з того місця, де ви зупинилися.",
-      "relaunch": "Комбінація клавіш після цього не реагує? <relaunch>Перезапустіть Handy</relaunch>, і ви повернетеся просто сюди."
+      "relaunch": "Комбінація клавіш після цього не реагує? <relaunch>Перезапустіть Kusema</relaunch>, і ви повернетеся просто сюди."
     },
     "shell": {
       "back": "Назад",
@@ -97,11 +97,11 @@
       "title": "Говоріть замість друку, в будь-якій програмі",
       "subtitle": "Оберіть мови, якими ви диктуватимете",
       "languagesLabel": "Мови",
-      "noMatch": "Жодна мова не відповідає «{{query}}». Моделі Handy охоплюють близько 100 мов; решту можна знайти в налаштуваннях.",
+      "noMatch": "Жодна мова не відповідає «{{query}}». Моделі Kusema охоплюють близько 100 мов; решту можна знайти в налаштуваннях.",
       "appLanguage": "Мова застосунку",
       "menusIn": "Меню мовою: <b>{{language}}</b>",
       "chinese": {
-        "question": "Ви говорите такими мовами: {{languages}}. Якими ієрогліфами Handy має писати?",
+        "question": "Ви говорите такими мовами: {{languages}}. Якими ієрогліфами Kusema має писати?",
         "label": "Китайські ієрогліфи",
         "zh-Hans": "Спрощені",
         "zh-Hant": "Тайвань",
@@ -110,7 +110,9 @@
       "hint": {
         "pickOne": "Оберіть принаймні одну мову",
         "weak_one": "{{languages}}: жодна модель поки що не розпізнає її добре",
-        "weak_other": "{{languages}}: жодна модель поки що не розпізнає їх добре"
+        "weak_other": "{{languages}}: жодна модель поки що не розпізнає їх добре",
+        "weak_many": "{{languages}}: жодна модель поки що не розпізнає їх добре",
+        "weak_few": "{{languages}}: жодна модель поки що не розпізнає їх добре"
       }
     },
     "download": {
@@ -171,7 +173,7 @@
     },
     "try": {
       "title": "Спробуйте!",
-      "subtitle": "Handy в кутку допоможе вам пройти цей шлях",
+      "subtitle": "Kusema в кутку допоможе вам пройти цей шлях",
       "noteLabel": "Нотатка",
       "placeholder": "Нова нотатка",
       "hold": "Утримуйте <keys/> і говоріть.",
@@ -199,14 +201,14 @@
     },
     "done": {
       "title": "Усе готово",
-      "subMac": "Handy тепер у рядку меню. Утримуйте або натискайте <keys/> у будь-якій програмі, щоб говорити.",
-      "subTray": "Handy тепер у системному треї. Утримуйте або натискайте <keys/> у будь-якій програмі, щоб говорити.",
+      "subMac": "Kusema тепер у рядку меню. Утримуйте або натискайте <keys/> у будь-якій програмі, щоб говорити.",
+      "subTray": "Kusema тепер у системному треї. Утримуйте або натискайте <keys/> у будь-якій програмі, щоб говорити.",
       "hint": "Ви можете змінити це пізніше в налаштуваннях",
       "highFiveLabel": "Дай п'ять",
-      "atLogin": "Запускати Handy під час входу в систему",
+      "atLogin": "Запускати Kusema під час входу в систему",
       "finish": "Готово",
       "panel": {
-        "name": "Handy",
+        "name": "Kusema",
         "ready": "Готово",
         "languages": "Мови",
         "model": "Модель розпізнавання мовлення",
@@ -220,79 +222,79 @@
       "done": "Не працює в інших програмах? <guide>Посібник із налаштування для Linux</guide>"
     },
     "setup": {
-      "retryDownload": "Try again",
+      "retryDownload": "Спробувати ще раз",
       "welcome": {
-        "title": "Kusema turns your voice into text on this computer.",
-        "privacy": "Your voice never leaves it.",
-        "language": "Language you'll dictate in"
+        "title": "Kusema перетворює ваш голос на текст на цьому комп'ютері.",
+        "privacy": "Ваш голос ніколи його не залишає.",
+        "language": "Мова, якою ви диктуватимете"
       },
       "microphone": {
-        "title": "Choose your microphone",
-        "sub": "Say something. The bar should move as you speak.",
-        "label": "Microphone",
-        "meter": "Microphone level",
-        "heard": "Kusema can hear you.",
-        "quiet": "No sound yet. Check that this microphone isn't muted, or choose another one.",
-        "failed": "Kusema couldn't open this microphone. Choose another one.",
-        "tip": "Tip: a headset gives the best accuracy and fewer stray words."
+        "title": "Виберіть мікрофон",
+        "sub": "Скажіть щось. Смужка має рухатися, поки ви говорите.",
+        "label": "Мікрофон",
+        "meter": "Рівень мікрофона",
+        "heard": "Kusema вас чує.",
+        "quiet": "Звуку поки немає. Перевірте, чи мікрофон не вимкнено, або виберіть інший.",
+        "failed": "Kusema не вдалося відкрити цей мікрофон. Виберіть інший.",
+        "tip": "Порада: з гарнітурою розпізнавання найточніше, а зайвих слів менше."
       },
       "practice": {
-        "title": "Dictate your first sentence",
-        "how": "Hold <keys/>, say this sentence, then let go:",
+        "title": "Продиктуйте перше речення",
+        "how": "Утримуйте <keys/>, промовте це речення й відпустіть:",
         "sentence": "Dear Mr. Smith comma thank you for your letter period",
-        "box": "Practice box: your words appear here",
-        "placeholder": "Your words appear here",
-        "listening": "Listening...",
-        "typing": "Typing...",
-        "success": "That's it. Saying \"comma\" and \"period\" types the marks.",
-        "waiting": "Your speech model is still downloading. This box will work as soon as it's ready.",
-        "continuous": "For longer dictation, press <keys/> to keep listening until you press it again. Used to Dragon? You can set this to Numpad + under General.",
-        "continuousRunning": "Continuous dictation is on. Your words appear in the box each time you pause. Press {{stop}} to stop it.",
-        "continuousEnded": "That's continuous dictation. In your other apps, your words are typed at the cursor."
+        "box": "Поле для практики: тут з'являться ваші слова",
+        "placeholder": "Тут з'являться ваші слова",
+        "listening": "Слухаю...",
+        "typing": "Друкую...",
+        "success": "Саме так. Якщо сказати \"comma\" і \"period\", з'являться знаки.",
+        "waiting": "Модель мовлення ще завантажується. Це поле запрацює, щойно вона буде готова.",
+        "continuous": "Для тривалого диктування натисніть <keys/>: Kusema слухатиме, доки ви не натиснете знову. Звикли до Dragon? У розділі «Загальні» можна призначити Num +.",
+        "continuousRunning": "Безперервне диктування увімкнено. Ваші слова з'являються в полі після кожної паузи. Натисніть {{stop}}, щоб зупинити.",
+        "continuousEnded": "Це безперервне диктування. В інших застосунках слова друкуються там, де стоїть курсор."
       },
       "assistant": {
-        "title": "Set up the AI assistant (optional)",
-        "sub": "Ask Kusema answers questions you speak. Dictation doesn't need it.",
-        "model": "Model",
-        "continueWithout": "Continue without AI",
-        "privileged": "Privileged mode blocks all cloud AI with one switch, for matters that must stay on this computer.",
+        "title": "Налаштуйте ШІ-асистента (необов'язково)",
+        "sub": "«Запитати Kusema» відповідає на запитання, поставлені голосом. Для диктування він не потрібен.",
+        "model": "Модель",
+        "continueWithout": "Продовжити без ШІ",
+        "privileged": "Режим Privileged одним перемикачем блокує будь-який хмарний ШІ — для справ, які мають залишатися на цьому комп'ютері.",
         "local": {
-          "title": "Private: use a local AI on this computer",
-          "description": "Your questions stay here. Uses Ollama, a free app.",
-          "checking": "Looking for Ollama on this computer...",
-          "found": "Found Ollama. Choose a model to use.",
-          "notFound": "Ollama isn't running on this computer.",
-          "noModels": "Ollama is running, but has no models yet. Run \"ollama pull llama3.2\", then check again.",
-          "instructions": "How to set up Ollama",
-          "again": "Check again"
+          "title": "Конфіденційно: локальний ШІ на цьому комп'ютері",
+          "description": "Ваші запитання залишаються тут. Використовується Ollama, безкоштовний застосунок.",
+          "checking": "Шукаю Ollama на цьому комп'ютері...",
+          "found": "Ollama знайдено. Виберіть модель.",
+          "notFound": "Ollama не запущено на цьому комп'ютері.",
+          "noModels": "Ollama запущено, але моделей у ній ще немає. Виконайте \"ollama pull llama3.2\" і перевірте ще раз.",
+          "instructions": "Як установити Ollama",
+          "again": "Перевірити ще раз"
         },
         "cloud": {
-          "title": "Use a cloud AI provider",
-          "description": "Your questions go to the provider you choose, using your own API key.",
-          "provider": "Provider",
-          "key": "API key",
-          "check": "Save and check",
-          "checking": "Checking the key...",
-          "saved": "Key saved in Windows Credential Manager. Choose a model to use.",
-          "where": "The key is stored in Windows Credential Manager, not in a file.",
-          "keyFailed": "The key was saved, but the provider didn't list any models. Check the key and try again."
+          "title": "Хмарний постачальник ШІ",
+          "description": "Ваші запитання надсилаються вибраному постачальнику з вашим власним ключем API.",
+          "provider": "Постачальник",
+          "key": "Ключ API",
+          "check": "Зберегти й перевірити",
+          "checking": "Перевіряю ключ...",
+          "saved": "Ключ збережено в диспетчері облікових даних Windows. Виберіть модель.",
+          "where": "Ключ зберігається в диспетчері облікових даних Windows, а не у файлі.",
+          "keyFailed": "Ключ збережено, але постачальник не повернув жодної моделі. Перевірте ключ і спробуйте ще раз."
         },
         "skip": {
-          "title": "Skip for now",
-          "description": "You can set this up later on the Assistant page."
+          "title": "Поки пропустити",
+          "description": "Це можна налаштувати пізніше на сторінці «Асистент»."
         }
       },
       "done": {
-        "title": "You're all set",
-        "sub": "Kusema keeps running in the system tray and works in any app.",
-        "finish": "Start using Kusema",
-        "wins": "Your first three wins are waiting on the main page.",
-        "atLogin": "Start Kusema when I sign in",
+        "title": "Усе готово",
+        "sub": "Kusema продовжує працювати в області сповіщень і працює в будь-якому застосунку.",
+        "finish": "Почати роботу з Kusema",
+        "wins": "Ваші перші три успіхи чекають на головній сторінці.",
+        "atLogin": "Запускати Kusema під час входу в систему",
         "keys": {
-          "dictate": "Dictate: hold",
-          "continuous": "Continuous dictation: press to start and stop",
-          "ask": "Ask Kusema",
-          "askScreen": "Ask about my screen"
+          "dictate": "Диктування: утримувати",
+          "continuous": "Безперервне диктування: натисніть, щоб почати й зупинити",
+          "ask": "Запитати Kusema",
+          "askScreen": "Запитати про мій екран"
         }
       }
     }
@@ -381,7 +383,9 @@
     "addAnother": "Додати ще одну",
     "remove": "Видалити {{language}}",
     "alreadyAdded_one": "{{languages}} уже додано.",
-    "alreadyAdded_other": "{{languages}} уже додано."
+    "alreadyAdded_other": "{{languages}} уже додано.",
+    "alreadyAdded_many": "{{languages}} уже додано.",
+    "alreadyAdded_few": "{{languages}} уже додано."
   },
   "modelSelector": {
     "custom": "Користувацька",
@@ -428,20 +432,20 @@
             "description": "Необов'язково: Спеціальна гаряча клавіша, яка завжди застосовує AI-постобробку до вашої транскрипції."
           },
           "assistant": {
-            "name": "Ask Kusema",
-            "description": "Hold or press to ask a spoken question. The reply appears below instead of being pasted."
+            "name": "Запитати Kusema",
+            "description": "Утримуйте або натисніть, щоб поставити запитання голосом. Відповідь з'явиться нижче, а не буде вставлена."
           },
           "assistant_screen": {
-            "name": "Ask About My Screen",
-            "description": "Hold or press to ask a spoken question about the window you're working in. You see the screenshot before anything is sent."
+            "name": "Запитати про мій екран",
+            "description": "Утримуйте або натисніть, щоб поставити запитання голосом про вікно, у якому ви працюєте. Ви побачите знімок екрана до надсилання."
           },
           "dictate_continuous": {
-            "name": "Continuous Dictation",
-            "description": "Press to start dictating hands-free, and press again to stop. Text appears each time you pause."
+            "name": "Безперервне диктування",
+            "description": "Натисніть, щоб диктувати без рук, і натисніть знову, щоб зупинити. Текст з'являється після кожної паузи."
           },
           "toggle_privileged": {
-            "name": "Privileged Mode",
-            "description": "Press to turn Privileged mode on or off."
+            "name": "Режим Privileged",
+            "description": "Натисніть, щоб увімкнути або вимкнути режим Privileged."
           }
         },
         "errors": {
@@ -466,7 +470,7 @@
       },
       "preferredLanguages": {
         "title": "Бажані мови",
-        "description": "Мови, якими ви говорите. Handy використовує їх, щоб рекомендувати моделі.",
+        "description": "Мови, якими ви говорите. Kusema використовує їх, щоб рекомендувати моделі.",
         "noMatch": "Жодна мова не відповідає «{{query}}»",
         "weak": "Жодна модель поки що не розпізнає добре: {{languages}}."
       },
@@ -493,17 +497,19 @@
         "fits": "Для ваших мов",
         "untested": "Не перевірені"
       },
-      "untestedNote": "Не перевірені з Handy. Вони можуть працювати повільніше або робити більше помилок.",
+      "untestedNote": "Не перевірені з Kusema. Вони можуть працювати повільніше або робити більше помилок.",
       "untestedHidden_one": "Ще {{count}} модель не налаштована для диктування. Скористайтеся пошуком, щоб її знайти.",
       "untestedHidden_other": "Ще {{count}} моделей не налаштовано для диктування. Скористайтеся пошуком, щоб знайти потрібну.",
-      "emptyYours": "Моделей поки немає. Оберіть одну нижче: вона завантажиться, і Handy її використає.",
+      "untestedHidden_many": "Ще {{count}} моделей не налаштовано для диктування. Скористайтеся пошуком, щоб знайти потрібну.",
+      "untestedHidden_few": "Ще {{count}} моделі не налаштовано для диктування. Скористайтеся пошуком, щоб знайти потрібну.",
+      "emptyYours": "Моделей поки немає. Оберіть одну нижче: вона завантажиться, і Kusema її використає.",
       "showMore": "Показати ще {{count}}",
       "showFewer": "Показати менше",
       "download": "Завантажити й використовувати",
       "downloadingThenUse": "{{percent}}% з {{total}}, потім перемкнеться",
       "loading": "Завантаження…",
       "deleteAsk": "Видалити {{name}}? Це звільнить {{size}}.",
-      "deleteAskActive": "Видалити {{name}}? Handy не зможе транскрибувати, доки ви не оберете іншу модель.",
+      "deleteAskActive": "Видалити {{name}}? Kusema не зможе транскрибувати, доки ви не оберете іншу модель.",
       "cancel": "Скасувати",
       "deleteModel": "Видалити {{name}}",
       "cancelDownload": "Зупинити завантаження {{name}}",
@@ -517,7 +523,7 @@
         "marks": "? ще не виміряно. — не розпізнає цю мову."
       },
       "retiredNotice": {
-        "title": "Старі моделі більше не працюють з Handy",
+        "title": "Старі моделі більше не працюють з Kusema",
         "description": "Вони займають {{size}} на вашому комп'ютері.",
         "delete": "Видалити моделі",
         "deleted": "Старі моделі видалено",
@@ -525,37 +531,37 @@
       },
       "rescan": {
         "label": "Пересканувати",
-        "tooltip": "Пересканувати моделі, додані до папки моделей або кешу Hugging Face поза межами Handy"
+        "tooltip": "Пересканувати моделі, додані до папки моделей або кешу Hugging Face поза межами Kusema"
       },
       "curated": {
-        "inUse": "In use",
-        "gettingReady": "Getting ready...",
-        "downloading": "Downloading: {{percent}}%",
-        "cancel": "Cancel",
-        "cancelLabel": "Cancel downloading {{name}}",
-        "use": "Use",
-        "useLabel": "Use {{name}}",
-        "download": "Download ({{size}})",
-        "downloadLabel": "Download {{name}}",
-        "recommended": "Recommended",
-        "others": "Also on this computer",
-        "showAllHint": "More models are available: turn on Show all models under Advanced.",
+        "inUse": "Використовується",
+        "gettingReady": "Підготовка...",
+        "downloading": "Завантаження: {{percent}}%",
+        "cancel": "Скасувати",
+        "cancelLabel": "Скасувати завантаження {{name}}",
+        "use": "Використовувати",
+        "useLabel": "Використовувати {{name}}",
+        "download": "Завантажити ({{size}})",
+        "downloadLabel": "Завантажити {{name}}",
+        "recommended": "Рекомендовано",
+        "others": "Також на цьому комп'ютері",
+        "showAllHint": "Є й інші моделі: увімкніть «Показувати всі моделі» в розділі «Розширені».",
         "rows": {
           "parakeetUnified": {
             "name": "Parakeet Unified English",
-            "description": "The best choice for English. Chosen automatically."
+            "description": "Найкращий вибір для англійської. Вибирається автоматично."
           },
           "parakeetV3": {
             "name": "Parakeet TDT v3",
-            "description": "For dictating in other languages, including Spanish, French and German."
+            "description": "Для диктування іншими мовами, зокрема іспанською, французькою й німецькою."
           },
           "canary": {
             "name": "Canary 180M Flash",
-            "description": "A small download, for older computers or when disk space is low."
+            "description": "Невелике завантаження — для старих комп'ютерів або коли бракує місця на диску."
           },
           "nemotron": {
             "name": "Nemotron 3.5 Streaming",
-            "description": "Shows live text as you speak, but makes more mistakes."
+            "description": "Показує текст наживо, поки ви говорите, але помиляється частіше."
           }
         }
       }
@@ -564,26 +570,26 @@
       "title": "Мови"
     },
     "dictation": {
-      "title": "Continuous Dictation",
-      "description": "Keep talking, and the text is typed into your window each time you pause. Speech recognition stays on this computer, and AI cleanup never runs in this mode.",
+      "title": "Безперервне диктування",
+      "description": "Продовжуйте говорити, і після кожної паузи текст друкуватиметься у вікні. Розпізнавання мовлення залишається на цьому комп'ютері, а очищення за допомогою ШІ в цьому режимі ніколи не працює.",
       "dragonKey": {
-        "title": "Dragon's Key",
-        "description": "Use Numpad + to start and stop, as Dragon does. While it's set, that key no longer types a plus sign.",
-        "button": "Use Dragon's key (Numpad +)"
+        "title": "Клавіша Dragon",
+        "description": "Запускайте й зупиняйте клавішею Num +, як у Dragon. Поки це ввімкнено, клавіша більше не друкує знак плюс.",
+        "button": "Використовувати клавішу Dragon (Num +)"
       },
       "pause": {
-        "title": "Pause Length",
-        "description": "How long you pause before what you said is typed. Longer pauses keep sentences together; shorter ones show text sooner.",
+        "title": "Тривалість паузи",
+        "description": "Скільки триває пауза, перш ніж сказане буде надруковано. Довші паузи тримають речення разом, коротші показують текст швидше.",
         "seconds": "{{seconds}} s"
       },
       "autoStop": {
-        "title": "Stop After Silence",
-        "description": "Dictation stops by itself after this long without speech, so the microphone is never left on by accident.",
-        "minutes": "{{minutes}} min"
+        "title": "Зупинка після тиші",
+        "description": "Диктування зупиниться саме після цього часу без мовлення, щоб мікрофон ніколи не залишився ввімкненим випадково.",
+        "minutes": "{{minutes}} хв"
       },
       "voiceCommands": {
-        "label": "Voice Commands",
-        "description": "Say \"new paragraph\" or \"new line\" as you talk, or \"scratch that\" or \"stop dictation\" on its own between pauses, and it acts instead of being typed. Normal sentences with these words are typed as usual."
+        "label": "Голосові команди",
+        "description": "Кажіть \"new paragraph\" або \"new line\" просто під час мовлення, а \"scratch that\" або \"stop dictation\" — окремо між паузами, і команда виконається замість друку. Звичайні речення з цими словами друкуються як завжди."
       }
     },
     "sound": {
@@ -646,11 +652,11 @@
       },
       "autostart": {
         "label": "Запуск при старті системи",
-        "description": "Автоматично запускати Handy при вході в систему"
+        "description": "Автоматично запускати Kusema при вході в систему"
       },
       "showTrayIcon": {
         "label": "Показати значок у треї",
-        "description": "Відображати значок Handy у системному треї."
+        "description": "Відображати значок Kusema у системному треї."
       },
       "overlay": {
         "style": {
@@ -773,90 +779,90 @@
         }
       },
       "showAllModels": {
-        "label": "Show all models",
-        "description": "List every model on the Models page, with accuracy and speed details, instead of the short list."
+        "label": "Показувати всі моделі",
+        "description": "Показувати на сторінці «Моделі» всі моделі з даними про точність і швидкість замість короткого списку."
       }
     },
     "assistant": {
-      "title": "Assistant",
-      "description": "Hold the shortcut, ask a question out loud, and Kusema answers.",
+      "title": "Асистент",
+      "description": "Утримуйте комбінацію клавіш, поставте запитання вголос, і Kusema відповість.",
       "provider": {
-        "title": "AI Provider",
-        "provider": "Provider",
-        "description": "Assistant mode uses the same provider and API key as Post Process.",
-        "model": "Model",
-        "modelDescription": "The model that answers your questions. Change it on the Post Process page.",
-        "notSet": "Not chosen",
-        "open": "Open Post Process settings",
-        "disabled": "Assistant mode needs an AI provider (such as Anthropic, OpenAI or a local Ollama model) to answer questions. Providers are set up on the Post Process page, which appears once Post Processing is turned on. Turning it on doesn't change how normal dictation works.",
-        "enable": "Turn on Post Processing",
-        "noProvider": "Choose a provider on the Post Process page.",
-        "noKey": "No API key is set for {{provider}}. Add one on the Post Process page.",
-        "noModel": "Choose a model on the Post Process page."
+        "title": "Постачальник ШІ",
+        "provider": "Постачальник",
+        "description": "Асистент використовує того самого постачальника й ключ API, що й постобробка.",
+        "model": "Модель",
+        "modelDescription": "Модель, що відповідає на ваші запитання. Змінити її можна на сторінці «Постобробка».",
+        "notSet": "Не вибрано",
+        "open": "Відкрити налаштування постобробки",
+        "disabled": "Асистентові потрібен постачальник ШІ (наприклад, Anthropic, OpenAI або локальна модель Ollama), щоб відповідати на запитання. Постачальників налаштовують на сторінці «Постобробка», яка з'являється після ввімкнення постобробки. Увімкнення не змінює звичайне диктування.",
+        "enable": "Увімкнути постобробку",
+        "noProvider": "Виберіть постачальника на сторінці «Постобробка».",
+        "noKey": "Для {{provider}} не задано ключ API. Додайте його на сторінці «Постобробка».",
+        "noModel": "Виберіть модель на сторінці «Постобробка»."
       },
       "screen": {
-        "title": "Ask About My Screen",
-        "description": "Ask about the window you're working in, like “What do you think of this document?” Only that window is captured, and it stays on this computer until you press Send.",
+        "title": "Запитати про мій екран",
+        "description": "Запитайте про вікно, у якому працюєте, наприклад: «Що ти думаєш про цей документ?» Знімається лише це вікно, і воно залишається на цьому комп'ютері, доки ви не натиснете «Надіслати».",
         "confirm": {
-          "label": "Confirm Before Sending Screenshots",
-          "description": "Show the screenshot, your question and where it will go, then wait for Send (Enter) or Cancel (Escape). Unanswered, it cancels after 30 seconds.",
-          "offWarning": "Screenshots will be sent to {{provider}} as soon as you finish speaking, without showing you first. Everything visible in the window goes with them, including private or confidential information."
+          "label": "Підтверджувати перед надсиланням знімків екрана",
+          "description": "Показує знімок, ваше запитання і куди воно піде, а тоді чекає на «Надіслати» (Enter) або «Скасувати» (Esc). Без відповіді скасовується через 30 секунд.",
+          "offWarning": "Знімки екрана надсилатимуться {{provider}} одразу, щойно ви закінчите говорити, без попереднього показу. Разом із ними йде все, що видно у вікні, зокрема особиста чи конфіденційна інформація."
         },
         "provider": {
-          "label": "Use for Screen Questions",
-          "description": "Send screenshots to a different provider than normal questions, for example a local vision model in Ollama (the Custom provider) for confidential documents. Follow-up questions go to the same provider until you start a new conversation.",
-          "same": "Same as Assistant",
-          "sameNamed": "Same as Assistant ({{provider}})",
-          "yourProvider": "your AI provider"
+          "label": "Використовувати для запитань про екран",
+          "description": "Надсилати знімки екрана іншому постачальникові, ніж звичайні запитання, наприклад локальній моделі зору в Ollama (постачальник «Власний») для конфіденційних документів. Уточнювальні запитання йдуть тому самому постачальникові, доки ви не почнете нову розмову.",
+          "same": "Як в асистента",
+          "sameNamed": "Як в асистента ({{provider}})",
+          "yourProvider": "вашому постачальникові ШІ"
         },
         "model": {
-          "label": "Model for Screen Questions",
-          "description": "A model that can see images. Leave empty to use the model chosen for this provider on the Post Process page.",
-          "placeholder": "e.g. qwen2.5vl"
+          "label": "Модель для запитань про екран",
+          "description": "Модель, що вміє бачити зображення. Залиште порожнім, щоб використовувати модель, вибрану для цього постачальника на сторінці «Постобробка».",
+          "placeholder": "напр. qwen2.5vl"
         }
       },
       "conversation": {
-        "empty": "Ask a question with the Ask Kusema shortcut. The conversation will appear here.",
-        "new": "New conversation",
-        "screenshot": "Screenshot",
-        "noProvider": "Ask Kusema needs an AI model to answer. Choose one in Settings.",
-        "openSettings": "Open Settings"
+        "empty": "Поставте запитання комбінацією «Запитати Kusema». Розмова з'явиться тут.",
+        "new": "Нова розмова",
+        "screenshot": "Знімок екрана",
+        "noProvider": "«Запитати Kusema» потрібна модель ШІ, щоб відповідати. Виберіть її в розділі «Налаштування».",
+        "openSettings": "Відкрити налаштування"
       },
       "voice": {
-        "title": "Voice",
-        "systemDefault": "System default",
-        "previewText": "Hi, I'm Kusema. This is how I'll sound when I answer your questions.",
+        "title": "Голос",
+        "systemDefault": "Системний за замовчуванням",
+        "previewText": "Привіт, я Kusema. Так я звучатиму, коли відповідатиму на ваші запитання.",
         "speakReplies": {
-          "label": "Speak Replies",
-          "description": "Read replies aloud as they arrive. Press Cancel (Escape), start a new recording, or start a new conversation to stop."
+          "label": "Озвучувати відповіді",
+          "description": "Читає відповіді вголос, щойно вони надходять. Щоб зупинити, натисніть «Скасувати» (Esc), почніть новий запис або нову розмову."
         },
         "voice": {
-          "label": "Voice",
-          "description": "Kokoro voices sound the most natural; download them above. The other voices come with your computer (on Windows, add more under Settings > Time & language > Speech)."
+          "label": "Голос",
+          "description": "Голоси Kokoro звучать найприродніше; завантажте їх вище. Інші голоси входять до системи (у Windows додати нові можна в Настройки > Час і мова > Мовлення)."
         },
         "kokoro": {
-          "label": "Kokoro Voices",
-          "description": "28 natural-sounding English voices (US and UK) generated on this computer. A one-time download.",
-          "installed": "Installed. Pick a Kokoro voice below. Removing them frees the disk space; replies then use the system voice.",
-          "download": "Download ({{size}} MB)",
-          "downloading": "Downloading… {{percentage}}%",
-          "cancel": "Cancel",
-          "delete": "Remove"
+          "label": "Голоси Kokoro",
+          "description": "28 природних англійських голосів (США й Велика Британія), що створюються на цьому комп'ютері. Одноразове завантаження.",
+          "installed": "Установлено. Виберіть голос Kokoro нижче. Видалення звільняє місце на диску; тоді відповіді читатиме системний голос.",
+          "download": "Завантажити ({{size}} МБ)",
+          "downloading": "Завантаження… {{percentage}}%",
+          "cancel": "Скасувати",
+          "delete": "Видалити"
         },
         "rate": {
-          "label": "Speaking Rate",
-          "description": "How fast replies are read. 1.00× is the voice's normal speed."
+          "label": "Швидкість мовлення",
+          "description": "Наскільки швидко читаються відповіді. 1,00× — звичайна швидкість голосу."
         },
         "preview": {
-          "label": "Preview Voice",
-          "description": "Hear the selected voice at the selected speed.",
-          "button": "Preview"
+          "label": "Прослухати голос",
+          "description": "Послухайте вибраний голос із вибраною швидкістю.",
+          "button": "Прослухати"
         }
       },
       "tabs": {
-        "label": "Assistant",
-        "conversation": "Conversation",
-        "settings": "Settings"
+        "label": "Асистент",
+        "conversation": "Розмова",
+        "settings": "Налаштування"
       }
     },
     "postProcessing": {
@@ -973,7 +979,7 @@
       },
       "updateChecks": {
         "label": "Перевірка оновлень",
-        "description": "Автоматично перевіряти наявність нових версій Handy",
+        "description": "Автоматично перевіряти наявність нових версій Kusema",
         "lockedDescription": "Вимкнено системною конфігурацією (HANDY_DISABLE_UPDATER)"
       },
       "whatsNewPreview": {
@@ -992,9 +998,9 @@
           "welcome": "Вітання",
           "permissions": "Дозволи",
           "done": "Усе готово",
-          "microphone": "Microphone",
-          "practice": "Practice",
-          "assistant": "AI assistant"
+          "microphone": "Мікрофон",
+          "practice": "Практика",
+          "assistant": "ШІ-асистент"
         }
       },
       "onboardingRun": {
@@ -1040,8 +1046,8 @@
         "description": "Мікрофон для використання при закритій кришці ноутбука"
       },
       "postProcessingToggle": {
-        "label": "AI Cleanup",
-        "description": "Optional. Rewrites dictated text with an AI model when you use the AI cleanup shortcut: fixes self-corrections and grammar, keeps your meaning, and never adds facts."
+        "label": "Очищення за допомогою ШІ",
+        "description": "Необов'язково. Переписує надиктований текст моделлю ШІ, коли ви використовуєте комбінацію для очищення за допомогою ШІ: виправляє обмовки й граматику, зберігає зміст і ніколи не додає фактів."
       },
       "muteWhileRecording": {
         "label": "Вимкнути звук під час запису",
@@ -1057,7 +1063,7 @@
         "bindingsReset": "Клавіатурні скорочення були несумісні та скинуті до значень за замовчуванням",
         "options": {
           "tauri": "Tauri Global Shortcut",
-          "builtIn": "Built-in (recommended)"
+          "builtIn": "Вбудований (рекомендовано)"
         }
       },
       "pasteDelay": {
@@ -1086,7 +1092,7 @@
       },
       "keyboardDiagnostic": {
         "title": "Діагностика клавіатури",
-        "description": "Перевіряє, чи доходять події клавіатури до Handy. Записується лише кількість подій — ніколи те, які клавіші ви натискаєте.",
+        "description": "Перевіряє, чи доходять події клавіатури до Kusema. Записується лише кількість подій — ніколи те, які клавіші ви натискаєте.",
         "run": "Запустити 10-секундну діагностику",
         "running": "Прослуховування… натисніть свою комбінацію кілька разів (наприклад, Option+Space)",
         "secureInputLabel": "Secure Input",
@@ -1100,7 +1106,7 @@
         "mouse": "Миша",
         "verdictBlocked": "Secure Input блокує події клавіш — комбінації зі звичайною клавішею не працюватимуть, доки це не буде усунуто.",
         "verdictSuspicious": "Події модифікаторів надходять, а події клавіш — ні: щось пригнічує клавіші, хоча Secure Input позначено як вимкнений. Будь ласка, повідомте про це на GitHub.",
-        "verdictOk": "Події клавіш надходять до Handy нормально.",
+        "verdictOk": "Події клавіш надходять до Kusema нормально.",
         "verdictNoEvents": "Подій не зафіксовано — ви натискали клавіші під час тесту?",
         "failed": "Не вдалося виконати діагностику: {{error}}"
       }
@@ -1109,203 +1115,209 @@
       "title": "Інфо",
       "version": {
         "title": "Версія",
-        "description": "Поточна версія Handy"
+        "description": "Поточна версія Kusema"
       },
       "whatsNewUpdates": {
         "label": "Показувати новини",
-        "description": "Показувати примітки до випуску після оновлень Handy"
+        "description": "Показувати примітки до випуску після оновлень Kusema"
       },
       "appDataDirectory": {
         "title": "Папка даних програми",
-        "description": "Розташування даних Handy"
+        "description": "Розташування даних Kusema"
       },
       "sourceCode": {
         "title": "Вихідний код",
-        "description": "View Kusema's source code",
+        "description": "Відкрити вихідний код Kusema",
         "button": "Переглянути на GitHub"
       },
       "acknowledgments": {
         "ggml": {
           "title": "ggml",
           "description": "Високопродуктивний інференс моделі автоматичного розпізнавання мовлення Whisper від OpenAI",
-          "details": "Handy використовує ggml для швидкої локальної обробки мовлення в текст. Дякуємо за чудову роботу Георгію Герганову та контриб'юторам."
+          "details": "Kusema використовує ggml для швидкої локальної обробки мовлення в текст. Дякуємо за чудову роботу Георгію Герганову та контриб'юторам."
         }
       },
       "organizations": {
-        "title": "Kusema for organizations",
-        "description": "Setup, support and options for firms",
-        "button": "Learn more"
+        "title": "Kusema для організацій",
+        "description": "Упровадження, підтримка й варіанти для юридичних фірм",
+        "button": "Докладніше"
       },
       "report": {
-        "title": "Report a problem or suggest a feature",
-        "description": "Tell us on GitHub what went wrong or what you'd like",
-        "button": "Open GitHub"
+        "title": "Повідомити про проблему або запропонувати функцію",
+        "description": "Розкажіть нам на GitHub, що пішло не так або чого вам хотілося б",
+        "button": "Відкрити GitHub"
       },
       "credits": {
-        "title": "Credits and licenses",
+        "title": "Подяки й ліцензії",
         "handy": {
-          "title": "Built on Handy",
-          "description": "Kusema is built on Handy by CJ Pais, used under the MIT License.",
-          "button": "View Handy"
+          "title": "Створено на основі Handy",
+          "description": "Kusema створено на основі Handy від CJ Pais, що використовується за ліцензією MIT.",
+          "button": "Відкрити Handy"
         },
         "nvidiaLicense": "NVIDIA Open Model License",
-        "models": "Speech and voice models ({{count}})",
-        "components": "Open-source components ({{count}})",
-        "notices": "Full license texts",
-        "loading": "Loading..."
+        "models": "Моделі мовлення й голосу ({{count}})",
+        "components": "Компоненти з відкритим кодом ({{count}})",
+        "notices": "Повні тексти ліцензій",
+        "loading": "Завантаження..."
       }
     },
     "privacy": {
-      "thisComputer": "This computer ({{host}})",
-      "nothingSent": "Nothing to show yet.",
-      "updateBlocked": "Update checks are blocked in Privileged mode.",
+      "thisComputer": "Цей комп'ютер ({{host}})",
+      "nothingSent": "Поки нічого показати.",
+      "updateBlocked": "Перевірку оновлень заблоковано в режимі Privileged.",
       "audio": {
-        "title": "Audio sent off this computer: 0 bytes",
-        "description": "Speech recognition runs on this computer, and nothing in Kusema can upload your voice. Only the text of what you say, and only for features you choose, ever goes to an AI provider."
+        "title": "Аудіо, надіслане з цього комп'ютера: 0 байтів",
+        "description": "Розпізнавання мовлення працює на цьому комп'ютері, і ніщо в Kusema не може надіслати ваш голос. Постачальникові ШІ йде лише текст сказаного й лише для функцій, які ви вибрали."
       },
       "privileged": {
-        "title": "Privileged Mode",
-        "description": "For confidential matters. While it's on, nothing you say, type or show goes to a cloud AI service. Ask Kusema and AI cleanup only work with a model running on this computer.",
+        "title": "Режим Privileged",
+        "description": "Для конфіденційних справ. Поки його ввімкнено, ніщо з того, що ви кажете, друкуєте чи показуєте, не йде до хмарного сервісу ШІ. «Запитати Kusema» й очищення за допомогою ШІ працюють лише з моделлю на цьому комп'ютері.",
         "chip": "Privileged",
         "toggle": {
-          "label": "Privileged Mode",
-          "description": "Blocks every request to cloud AI providers, including ones already set up. Dictation keeps working, because it never uses the cloud."
+          "label": "Режим Privileged",
+          "description": "Блокує всі запити до хмарних постачальників ШІ, зокрема вже налаштованих. Диктування працює далі, бо ніколи не використовує хмару."
         },
         "allowLan": {
-          "label": "Allow Local Network AI Servers",
-          "description": "Also allows AI servers on your office network, by private address (like 192.168.1.20). Models on this computer are always allowed."
+          "label": "Дозволити ШІ-сервери в локальній мережі",
+          "description": "Також дозволяє ШІ-сервери в мережі офісу за приватною адресою (наприклад, 192.168.1.20). Моделі на цьому комп'ютері дозволено завжди."
         },
         "blockDownloads": {
-          "label": "Also Block Downloads and Update Checks",
-          "description": "For offline offices. Model and voice downloads and update checks carry none of your content, so they normally stay allowed and are listed below. Turn this on to stop them too while Privileged mode is on."
+          "label": "Блокувати також завантаження й перевірку оновлень",
+          "description": "Для офісів без інтернету. Завантаження моделей і голосів та перевірка оновлень не містять нічого з ваших даних, тому зазвичай залишаються дозволеними й показані нижче. Увімкніть, щоб зупинити й їх, поки ввімкнено режим Privileged."
         },
         "hotkey": {
-          "label": "Privileged Mode Shortcut",
-          "description": "Adds a keyboard shortcut that turns Privileged mode on or off. Off by default, so it can't be pressed by accident."
+          "label": "Комбінація клавіш для режиму Privileged",
+          "description": "Додає комбінацію клавіш, що вмикає й вимикає режим Privileged. За замовчуванням вимкнена, щоб її не натиснули випадково."
         }
       },
       "counts": {
-        "title": "Where Requests Went",
-        "today": "Today",
-        "week": "Last 7 days"
+        "title": "Куди йшли запити",
+        "today": "Сьогодні",
+        "week": "Останні 7 днів"
       },
       "columns": {
-        "time": "Time",
-        "destination": "Destination",
-        "purpose": "Why",
-        "data": "Data",
-        "size": "Size",
-        "result": "Result"
+        "time": "Час",
+        "destination": "Призначення",
+        "purpose": "Причина",
+        "data": "Дані",
+        "size": "Розмір",
+        "result": "Результат"
       },
       "purposes": {
-        "assistant_question": "Question to Kusema",
-        "screen_question": "Question about the screen",
-        "post_processing": "AI cleanup",
-        "provider_models": "Listing a provider's models",
-        "model_download": "Speech model download",
-        "voice_download": "Voice download",
-        "update_check": "Update check"
+        "assistant_question": "Запитання до Kusema",
+        "screen_question": "Запитання про екран",
+        "post_processing": "Очищення за допомогою ШІ",
+        "provider_models": "Отримання списку моделей постачальника",
+        "model_download": "Завантаження моделі мовлення",
+        "voice_download": "Завантаження голосу",
+        "update_check": "Перевірка оновлень"
       },
       "data": {
-        "text": "Text",
-        "image": "Screenshot",
-        "none": "None of yours"
+        "text": "Текст",
+        "image": "Знімок екрана",
+        "none": "Нічого вашого"
       },
       "results": {
-        "sent": "Sent",
-        "blocked": "Blocked",
-        "failed": "Failed"
+        "sent": "Надіслано",
+        "blocked": "Заблоковано",
+        "failed": "Помилка"
       },
       "list": {
-        "title": "Every Request",
-        "description": "Each request Kusema has made: when, where, why, what kind of data and how large. What was in it is never recorded. Shows the latest 500; the export has them all.",
-        "all": "All",
-        "allPurposes": "Any reason",
-        "allResults": "Any result",
-        "allDestinations": "Any destination",
-        "anyTime": "Any time",
-        "lastDays_one": "Last {{count}} day",
-        "lastDays_other": "Last {{count}} days",
-        "export": "Export CSV",
-        "exported_one": "Exported {{count}} request.",
-        "exported_other": "Exported {{count}} requests.",
-        "clear": "Clear",
+        "title": "Усі запити",
+        "description": "Кожен запит, який зробила Kusema: коли, куди, навіщо, які дані й якого розміру. Вміст ніколи не записується. Показано останні 500; в експорті є всі.",
+        "all": "Усі",
+        "allPurposes": "Будь-яка причина",
+        "allResults": "Будь-який результат",
+        "allDestinations": "Будь-яке призначення",
+        "anyTime": "Будь-коли",
+        "lastDays_one": "Останній {{count}} день",
+        "lastDays_other": "Останні {{count}} дня",
+        "lastDays_many": "Останні {{count}} днів",
+        "lastDays_few": "Останні {{count}} дні",
+        "export": "Експорт у CSV",
+        "exported_one": "Експортовано {{count}} запит.",
+        "exported_other": "Експортовано {{count}} запиту.",
+        "exported_many": "Експортовано {{count}} запитів.",
+        "exported_few": "Експортовано {{count}} запити.",
+        "clear": "Очистити",
         "retention": {
-          "title": "Keep This List For",
-          "description": "Older entries are deleted from this computer automatically.",
-          "days_one": "{{count}} day",
-          "days_other": "{{count}} days"
+          "title": "Зберігати цей список",
+          "description": "Старі записи видаляються з цього комп'ютера автоматично.",
+          "days_one": "{{count}} день",
+          "days_other": "{{count}} дня",
+          "days_many": "{{count}} днів",
+          "days_few": "{{count}} дні"
         }
       }
     },
     "cleanup": {
-      "title": "Cleanup",
-      "description": "Dictated text should need little editing. Local cleanup runs on this computer and sends nothing anywhere.",
+      "title": "Очищення",
+      "description": "Надиктований текст має потребувати мінімум правок. Локальне очищення працює на цьому комп'ютері й нічого нікуди не надсилає.",
       "local": {
-        "label": "Local Cleanup",
-        "description": "Removes filler words, adds missing periods between phrases in continuous dictation, and handles spoken punctuation, all on this computer. Off, your words are typed as transcribed."
+        "label": "Локальне очищення",
+        "description": "Прибирає слова-паразити, додає пропущені крапки між фразами під час безперервного диктування й обробляє промовлену пунктуацію — усе на цьому комп'ютері. Якщо вимкнено, слова друкуються так, як розпізнано."
       },
       "spokenPunctuation": {
-        "label": "Spoken Punctuation",
-        "description": "Say \"comma\", \"period\", \"question mark\", \"colon\", \"open quote\", \"close paren\", \"dash\", \"section symbol\" and more, as in Dragon. \"Period\" only counts at the end of a phrase, so \"the limitations period expired\" stays as words. Say \"literal period\" to type the word."
+        "label": "Промовлена пунктуація",
+        "description": "Кажіть \"comma\", \"period\", \"question mark\", \"colon\", \"open quote\", \"close paren\", \"dash\", \"section symbol\" та інші, як у Dragon. \"Period\" враховується лише наприкінці фрази, тому \"the limitations period expired\" залишається словами. Скажіть \"literal period\", щоб надрукувати саме слово. Ці команди працюють англійською."
       },
       "ai": {
         "status": {
-          "noProvider": "No AI provider is set up yet.",
-          "noKey": "{{provider}} needs an API key.",
-          "noModel": "{{provider}} needs a model chosen.",
-          "local": "Using {{model}} on this computer through {{provider}}. Nothing leaves this computer.",
-          "cloud": "Using {{model}} from {{provider}}, a cloud service. Text you clean up goes to {{provider}}.",
-          "blocked": "Privileged mode is on, so nothing will be sent to {{provider}}. Use a local model or turn off Privileged mode."
+          "noProvider": "Постачальника ШІ ще не налаштовано.",
+          "noKey": "{{provider}} потрібен ключ API.",
+          "noModel": "Для {{provider}} потрібно вибрати модель.",
+          "local": "Використовується {{model}} на цьому комп'ютері через {{provider}}. Ніщо не залишає цей комп'ютер.",
+          "cloud": "Використовується {{model}} від {{provider}}, хмарного сервісу. Текст, який ви очищаєте, надсилається {{provider}}.",
+          "blocked": "Режим Privileged увімкнено, тому {{provider}} нічого не буде надіслано. Використайте локальну модель або вимкніть режим Privileged."
         },
-        "recommendLocal": "We recommend a model that runs on this computer, such as one in Ollama, so confidential text stays here. AI cleanup runs when you dictate with its own shortcut, and never during continuous dictation.",
-        "setUp": "Set Up AI Cleanup"
+        "recommendLocal": "Радимо модель, що працює на цьому комп'ютері, наприклад в Ollama, щоб конфіденційний текст залишався тут. Очищення за допомогою ШІ працює, коли ви диктуєте з його власною комбінацією клавіш, і ніколи під час безперервного диктування.",
+        "setUp": "Налаштувати очищення за допомогою ШІ"
       }
     },
     "firstWins": {
-      "title": "First three wins",
-      "dismiss": "Dismiss",
-      "dictated": "Dictate an email",
-      "newParagraph": "Use continuous dictation and say \"new paragraph\"",
-      "asked": "Ask Kusema a question",
-      "done": "Done",
-      "notDone": "Not done yet",
-      "progress": "{{done}} of {{count}} done",
-      "allDone": "All three done. Nice work."
+      "title": "Перші три успіхи",
+      "dismiss": "Приховати",
+      "dictated": "Продиктуйте лист",
+      "newParagraph": "Увімкніть безперервне диктування й скажіть \"new paragraph\"",
+      "asked": "Поставте Kusema запитання",
+      "done": "Готово",
+      "notDone": "Ще ні",
+      "progress": "Готово {{done}} з {{count}}",
+      "allDone": "Усі три готові. Чудова робота."
     },
     "glow": {
-      "title": "Recording indicator",
-      "description": "A glow around the edges of your screen shows that Kusema is listening. Only you see it: it stays out of screenshots and screen shares.",
+      "title": "Індикатор запису",
+      "description": "Світіння по краях екрана показує, що Kusema слухає. Бачите його лише ви: воно не потрапляє на знімки екрана й у демонстрацію екрана.",
       "enabled": {
-        "label": "Screen glow",
-        "description": "Show a colored glow around the screen you're working on while Kusema is listening. You can still click and type through it."
+        "label": "Світіння екрана",
+        "description": "Показувати кольорове світіння навколо екрана, на якому ви працюєте, поки Kusema слухає. Крізь нього можна й далі клацати й друкувати."
       },
       "thickness": {
-        "label": "Thickness",
-        "description": "How far the glow reaches in from the edge of the screen."
+        "label": "Товщина",
+        "description": "Наскільки далеко світіння заходить від краю екрана."
       },
       "intensity": {
-        "label": "Intensity",
-        "description": "How strong the glow is."
+        "label": "Яскравість",
+        "description": "Наскільки сильне світіння."
       },
       "palette": {
-        "label": "Colors",
-        "description": "The color-blind friendly set keeps the modes easy to tell apart with every common kind of color blindness.",
-        "standard": "Standard",
-        "color_blind": "Color-blind friendly"
+        "label": "Кольори",
+        "description": "Кольори для людей із порушенням кольорового зору дають змогу легко розрізняти режими за всіх поширених видів дальтонізму.",
+        "standard": "Стандартні",
+        "color_blind": "Для дальтоніків"
       },
       "modes": {
-        "dictation": "Dictation",
-        "continuous": "Continuous dictation",
-        "ask": "Ask Kusema",
-        "ask_screen": "Ask about my screen",
-        "paused": "Continuous dictation paused (window changed)"
+        "dictation": "Диктування",
+        "continuous": "Безперервне диктування",
+        "ask": "Запитати Kusema",
+        "ask_screen": "Запитати про мій екран",
+        "paused": "Безперервне диктування на паузі (змінилося вікно)"
       },
-      "preview": "Preview",
-      "previewLabel": "Preview the glow for {{mode}}",
+      "preview": "Перегляд",
+      "previewLabel": "Перегляд світіння для режиму {{mode}}",
       "sounds": {
-        "label": "Continuous dictation sounds",
-        "description": "Play a short sound when continuous dictation starts and stops. Sounds for other dictation are under Sound below."
+        "label": "Звуки безперервного диктування",
+        "description": "Відтворювати короткий звук, коли безперервне диктування починається й закінчується. Звуки для іншого диктування — у розділі «Звук» нижче."
       }
     }
   },
@@ -1325,7 +1337,7 @@
     "portableUpdateBrowseButton": "Відкрити GitHub Releases"
   },
   "whatsNew": {
-    "title": "Нове в Handy v{{version}}"
+    "title": "Нове в Kusema v{{version}}"
   },
   "common": {
     "loading": "Завантаження...",
@@ -1356,11 +1368,11 @@
   },
   "appLanguage": {
     "title": "Мова інтерфейсу",
-    "description": "Змінити мову інтерфейсу Handy"
+    "description": "Змінити мову інтерфейсу Kusema"
   },
   "theme": {
     "title": "Тема застосунку",
-    "description": "Виберіть, чи має Handy слідувати темі системи, чи залишатися світлою або темною",
+    "description": "Виберіть, чи має Kusema слідувати темі системи, чи залишатися світлою або темною",
     "options": {
       "system": "Системна",
       "light": "Світла",
@@ -1371,44 +1383,48 @@
     "transcribing": "Обробка...",
     "processing": "Постобробка...",
     "loadingModel": "Завантаження моделі...",
-    "speaking": "Speaking...",
+    "speaking": "Говорю...",
     "dictation": {
-      "dictating": "Dictating",
-      "paused": "Paused, window changed",
-      "noTarget": "Click where the text should go",
-      "finishing": "Finishing...",
-      "stop": "Stop",
-      "nothingToScratch": "Nothing to scratch",
-      "scratchWindowChanged": "Can't scratch: the window changed",
-      "scratchOtherInput": "Can't scratch: keyboard or mouse used",
-      "savedToHistory": "Said while paused: saved in History",
-      "stoppedSilence": "Stopped after silence",
-      "microphoneLost": "Stopped: microphone lost",
-      "cantKeepUp": "Stopped: this computer couldn't keep up",
-      "transcriptionFailed": "Couldn't transcribe that",
-      "pasteFailed": "Couldn't type that; it's in History"
+      "dictating": "Диктування",
+      "paused": "Пауза, змінилося вікно",
+      "noTarget": "Клацніть там, де має бути текст",
+      "finishing": "Завершую...",
+      "stop": "Стоп",
+      "nothingToScratch": "Нічого видаляти",
+      "scratchWindowChanged": "Не вдається видалити: змінилося вікно",
+      "scratchOtherInput": "Не вдається видалити: використано клавіатуру чи мишу",
+      "savedToHistory": "Сказано під час паузи: збережено в «Історії»",
+      "stoppedSilence": "Зупинено після тиші",
+      "microphoneLost": "Зупинено: мікрофон втрачено",
+      "cantKeepUp": "Зупинено: комп'ютер не встигав",
+      "transcriptionFailed": "Не вдалося розпізнати",
+      "pasteFailed": "Не вдалося надрукувати; текст в «Історії»"
     },
     "privileged": "Privileged"
   },
   "screenCard": {
-    "title": "Send this screenshot?",
-    "autoCancel": "Cancels in {{seconds}} s",
-    "enlarge": "Click to enlarge",
-    "shrink": "Click to make smaller",
-    "imageAlt": "Screenshot of the window you asked about",
+    "title": "Надіслати цей знімок екрана?",
+    "autoCancel": "Скасування через {{seconds}} с",
+    "enlarge": "Клацніть, щоб збільшити",
+    "shrink": "Клацніть, щоб зменшити",
+    "imageAlt": "Знімок вікна, про яке ви запитали",
     "question": "“{{question}}”",
-    "sendsTo": "Goes to {{provider}} · {{model}}",
-    "onlyThis": "Only this window. Nothing is sent until you press Send.",
-    "send": "Send",
-    "cancel": "Cancel",
+    "sendsTo": "Надійде {{provider}} · {{model}}",
+    "onlyThis": "Лише це вікно. Нічого не надішлеться, доки ви не натиснете «Надіслати».",
+    "send": "Надіслати",
+    "cancel": "Скасувати",
     "noticeTitle": "Kusema",
-    "close": "Close"
+    "close": "Закрити"
   },
   "secureInput": {
     "blockedWithCulprit_one": "{{name}} може блокувати 1 комбінацію клавіш",
     "blockedWithCulprit_other": "{{name}} може блокувати {{count}} комбінацій клавіш",
+    "blockedWithCulprit_many": "{{name}} може блокувати {{count}} комбінацій клавіш",
+    "blockedWithCulprit_few": "{{name}} може блокувати {{count}} комбінації клавіш",
     "blockedNoCulprit_one": "macOS тимчасово блокує 1 комбінацію клавіш",
     "blockedNoCulprit_other": "macOS тимчасово блокує {{count}} комбінацій клавіш",
+    "blockedNoCulprit_many": "macOS тимчасово блокує {{count}} комбінацій клавіш",
+    "blockedNoCulprit_few": "macOS тимчасово блокує {{count}} комбінації клавіш",
     "recorderBlockedWithCulprit": "{{name}} може блокувати зміну комбінацій клавіш",
     "recorderBlockedNoCulprit": "macOS тимчасово блокує зміну комбінацій клавіш",
     "learnMore": "Як це виправити",

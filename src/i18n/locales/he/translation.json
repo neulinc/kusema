@@ -8,25 +8,25 @@
     "quit": "יציאה",
     "cancel": "ביטול",
     "secureInputWarning": "⚠ קיצורי המקשים חסומים על ידי Secure Input",
-    "privilegedMode": "Privileged Mode",
-    "privilegedOn": "Privileged mode on"
+    "privilegedMode": "מצב Privileged",
+    "privilegedOn": "מצב Privileged פעיל"
   },
   "sidebar": {
     "general": "כללי",
-    "assistant": "Assistant",
+    "assistant": "עוזר",
     "models": "מודלים",
     "advanced": "מתקדם",
     "postProcessing": "עיבוד משלים",
     "history": "היסטוריה",
     "debug": "ניפוי שגיאות",
     "about": "אודות",
-    "privacy": "Privacy"
+    "privacy": "פרטיות"
   },
   "onboarding": {
     "customModelDescription": "לא נתמך באופן רשמי",
     "migration": {
       "title": "המודלים שלך צריכים עדכון",
-      "description": "Handy משתמש כעת בסוג חדש יותר של מודלים. יש להוריד את הגרסה החדשה כדי להמשיך לתמלל. גרסאות ישנות יוסרו.",
+      "description": "Kusema משתמש כעת בסוג חדש יותר של מודלים. יש להוריד את הגרסה החדשה כדי להמשיך לתמלל. גרסאות ישנות יוסרו.",
       "replaces": "מחליף את {{name}}",
       "oldFormat": "פורמט ישן",
       "failed": "ההורדה נכשלה",
@@ -63,11 +63,11 @@
     "permissions": {
       "microphone": {
         "name": "מיקרופון",
-        "why": "כדי ש-Handy ישמע אותך. השמע הופך לטקסט במחשב הזה ולא מועלה לשום מקום."
+        "why": "כדי ש-Kusema ישמע אותך. השמע הופך לטקסט במחשב הזה ולא מועלה לשום מקום."
       },
       "accessibility": {
         "name": "נגישות",
-        "why": "כדי שקיצור המקשים שלך יעבוד בכל אפליקציה, ו-Handy יוכל להקליד את הטקסט איפה שהסמן נמצא."
+        "why": "כדי שקיצור המקשים שלך יעבוד בכל אפליקציה, ו-Kusema יוכל להקליד את הטקסט איפה שהסמן נמצא."
       },
       "errors": {
         "checkFailed": "בדיקת ההרשאות נכשלה. נסה שוב.",
@@ -81,12 +81,12 @@
       "openSettings": "פתח הגדרות",
       "allowed": "מאושר",
       "waiting": "ממתין",
-      "turnOnMac": "הפעל את Handy בהגדרות המערכת ואז חזור לכאן.",
+      "turnOnMac": "הפעל את Kusema בהגדרות המערכת ואז חזור לכאן.",
       "turnOnWindows": "הפעל גישה למיקרופון ב-הגדרות Windows ואז חזור לכאן.",
       "hintBoth": "אשר את שתיהן כדי להמשיך",
       "hintMicrophone": "אשר את המיקרופון כדי להמשיך",
       "welcomeBack": "ברוך שובך. ממשיכים מהמקום שבו עצרת.",
-      "relaunch": "קיצור המקשים לא מגיב אחרי זה? <relaunch>הפעל מחדש את Handy</relaunch> ותחזור בדיוק לכאן."
+      "relaunch": "קיצור המקשים לא מגיב אחרי זה? <relaunch>הפעל מחדש את Kusema</relaunch> ותחזור בדיוק לכאן."
     },
     "shell": {
       "back": "חזרה",
@@ -97,11 +97,11 @@
       "title": "דבר במקום להקליד, בכל אפליקציה",
       "subtitle": "בחר את השפות שבהן תכתיב",
       "languagesLabel": "שפות",
-      "noMatch": "אין שפה שתואמת ל„{{query}}”. המודלים של Handy מכסים כ-100 שפות; עוד שפות זמינות בהגדרות.",
+      "noMatch": "אין שפה שתואמת ל„{{query}}”. המודלים של Kusema מכסים כ-100 שפות; עוד שפות זמינות בהגדרות.",
       "appLanguage": "שפת האפליקציה",
       "menusIn": "תפריטים ב<b>{{language}}</b>",
       "chinese": {
-        "question": "אתה מדבר {{languages}}. באילו תווים Handy צריך לכתוב?",
+        "question": "אתה מדבר {{languages}}. באילו תווים Kusema צריך לכתוב?",
         "label": "תווים סיניים",
         "zh-Hans": "מפושטת",
         "zh-Hant": "טייוואן",
@@ -110,7 +110,8 @@
       "hint": {
         "pickOne": "בחר לפחות שפה אחת",
         "weak_one": "{{languages}}: עדיין אין מודל ששומע אותה היטב",
-        "weak_other": "{{languages}}: עדיין אין מודל ששומע אותן היטב"
+        "weak_other": "{{languages}}: עדיין אין מודל ששומע אותן היטב",
+        "weak_two": "{{languages}}: עדיין אין מודל ששומע אותן היטב"
       }
     },
     "download": {
@@ -171,7 +172,7 @@
     },
     "try": {
       "title": "בוא ננסה!",
-      "subtitle": "Handy בפינה, ילווה אותך בדרך",
+      "subtitle": "Kusema בפינה, ילווה אותך בדרך",
       "noteLabel": "פתק",
       "placeholder": "פתק חדש",
       "hold": "החזק את <keys/> ודבר.",
@@ -199,14 +200,14 @@
     },
     "done": {
       "title": "הכול מוכן",
-      "subMac": "Handy נמצא עכשיו בשורת התפריטים. החזק או הקש על <keys/> בכל אפליקציה כדי לדבר.",
-      "subTray": "Handy נמצא עכשיו במגש המערכת. החזק או הקש על <keys/> בכל אפליקציה כדי לדבר.",
+      "subMac": "Kusema נמצא עכשיו בשורת התפריטים. החזק או הקש על <keys/> בכל אפליקציה כדי לדבר.",
+      "subTray": "Kusema נמצא עכשיו במגש המערכת. החזק או הקש על <keys/> בכל אפליקציה כדי לדבר.",
       "hint": "אפשר לשנות את אלה אחר כך בהגדרות",
       "highFiveLabel": "כיף",
-      "atLogin": "הפעל את Handy כשאני נכנס למערכת",
+      "atLogin": "הפעל את Kusema כשאני נכנס למערכת",
       "finish": "סיום",
       "panel": {
-        "name": "Handy",
+        "name": "Kusema",
         "ready": "מוכן",
         "languages": "שפות",
         "model": "מודל דיבור",
@@ -220,79 +221,79 @@
       "done": "לא עובד באפליקציות אחרות? <guide>מדריך ההתקנה ללינוקס</guide>"
     },
     "setup": {
-      "retryDownload": "Try again",
+      "retryDownload": "לנסות שוב",
       "welcome": {
-        "title": "Kusema turns your voice into text on this computer.",
-        "privacy": "Your voice never leaves it.",
-        "language": "Language you'll dictate in"
+        "title": "Kusema הופך את הקול שלך לטקסט במחשב הזה.",
+        "privacy": "הקול שלך אף פעם לא יוצא ממנו.",
+        "language": "השפה שבה תכתיב"
       },
       "microphone": {
-        "title": "Choose your microphone",
-        "sub": "Say something. The bar should move as you speak.",
-        "label": "Microphone",
-        "meter": "Microphone level",
-        "heard": "Kusema can hear you.",
-        "quiet": "No sound yet. Check that this microphone isn't muted, or choose another one.",
-        "failed": "Kusema couldn't open this microphone. Choose another one.",
-        "tip": "Tip: a headset gives the best accuracy and fewer stray words."
+        "title": "בחר מיקרופון",
+        "sub": "אמור משהו. הפס אמור לזוז כשאתה מדבר.",
+        "label": "מיקרופון",
+        "meter": "עוצמת המיקרופון",
+        "heard": "Kusema שומע אותך.",
+        "quiet": "עדיין אין קול. בדוק שהמיקרופון הזה לא מושתק, או בחר מיקרופון אחר.",
+        "failed": "Kusema לא הצליח לפתוח את המיקרופון הזה. בחר מיקרופון אחר.",
+        "tip": "טיפ: אוזניות עם מיקרופון נותנות את הדיוק הטוב ביותר ופחות מילים מיותרות."
       },
       "practice": {
-        "title": "Dictate your first sentence",
-        "how": "Hold <keys/>, say this sentence, then let go:",
+        "title": "הכתב את המשפט הראשון שלך",
+        "how": "החזק את <keys/>, אמור את המשפט הזה ואז שחרר:",
         "sentence": "Dear Mr. Smith comma thank you for your letter period",
-        "box": "Practice box: your words appear here",
-        "placeholder": "Your words appear here",
-        "listening": "Listening...",
-        "typing": "Typing...",
-        "success": "That's it. Saying \"comma\" and \"period\" types the marks.",
-        "waiting": "Your speech model is still downloading. This box will work as soon as it's ready.",
-        "continuous": "For longer dictation, press <keys/> to keep listening until you press it again. Used to Dragon? You can set this to Numpad + under General.",
-        "continuousRunning": "Continuous dictation is on. Your words appear in the box each time you pause. Press {{stop}} to stop it.",
-        "continuousEnded": "That's continuous dictation. In your other apps, your words are typed at the cursor."
+        "box": "תיבת תרגול: המילים שלך יופיעו כאן",
+        "placeholder": "המילים שלך יופיעו כאן",
+        "listening": "מקשיב...",
+        "typing": "מקליד...",
+        "success": "בדיוק כך. כשאומרים \"comma\" ו-\"period\", הסימנים מוקלדים.",
+        "waiting": "מודל הדיבור שלך עדיין בהורדה. התיבה הזו תעבוד ברגע שהוא יהיה מוכן.",
+        "continuous": "להכתבה ארוכה יותר, לחץ על <keys/> ו-Kusema יקשיב עד שתלחץ שוב. רגיל ל-Dragon? אפשר להגדיר את מקש + של המקלדת הנומרית בכללי.",
+        "continuousRunning": "הכתבה רציפה פועלת. המילים שלך מופיעות בתיבה בכל הפסקה. לחץ על {{stop}} כדי לעצור.",
+        "continuousEnded": "זו הכתבה רציפה. ביישומים האחרים שלך המילים מוקלדות במקום הסמן."
       },
       "assistant": {
-        "title": "Set up the AI assistant (optional)",
-        "sub": "Ask Kusema answers questions you speak. Dictation doesn't need it.",
-        "model": "Model",
-        "continueWithout": "Continue without AI",
-        "privileged": "Privileged mode blocks all cloud AI with one switch, for matters that must stay on this computer.",
+        "title": "הגדרת עוזר ה-AI (רשות)",
+        "sub": "\"לשאול את Kusema\" עונה על שאלות שאתה אומר בקול. ההכתבה לא צריכה אותו.",
+        "model": "מודל",
+        "continueWithout": "להמשיך בלי AI",
+        "privileged": "מצב Privileged חוסם כל AI בענן במתג אחד, לעניינים שחייבים להישאר במחשב הזה.",
         "local": {
-          "title": "Private: use a local AI on this computer",
-          "description": "Your questions stay here. Uses Ollama, a free app.",
-          "checking": "Looking for Ollama on this computer...",
-          "found": "Found Ollama. Choose a model to use.",
-          "notFound": "Ollama isn't running on this computer.",
-          "noModels": "Ollama is running, but has no models yet. Run \"ollama pull llama3.2\", then check again.",
-          "instructions": "How to set up Ollama",
-          "again": "Check again"
+          "title": "פרטי: להשתמש ב-AI מקומי במחשב הזה",
+          "description": "השאלות שלך נשארות כאן. משתמש ב-Ollama, אפליקציה חינמית.",
+          "checking": "מחפש את Ollama במחשב הזה...",
+          "found": "Ollama נמצא. בחר מודל.",
+          "notFound": "Ollama לא פועל במחשב הזה.",
+          "noModels": "Ollama פועל, אבל עדיין אין בו מודלים. הרץ \"ollama pull llama3.2\" ואז בדוק שוב.",
+          "instructions": "איך להתקין את Ollama",
+          "again": "לבדוק שוב"
         },
         "cloud": {
-          "title": "Use a cloud AI provider",
-          "description": "Your questions go to the provider you choose, using your own API key.",
-          "provider": "Provider",
-          "key": "API key",
-          "check": "Save and check",
-          "checking": "Checking the key...",
-          "saved": "Key saved in Windows Credential Manager. Choose a model to use.",
-          "where": "The key is stored in Windows Credential Manager, not in a file.",
-          "keyFailed": "The key was saved, but the provider didn't list any models. Check the key and try again."
+          "title": "להשתמש בספק AI בענן",
+          "description": "השאלות שלך נשלחות לספק שתבחר, עם מפתח ה-API שלך.",
+          "provider": "ספק",
+          "key": "מפתח API",
+          "check": "לשמור ולבדוק",
+          "checking": "בודק את המפתח...",
+          "saved": "המפתח נשמר במנהל האישורים של Windows. בחר מודל.",
+          "where": "המפתח נשמר במנהל האישורים של Windows, לא בקובץ.",
+          "keyFailed": "המפתח נשמר, אבל הספק לא הציג אף מודל. בדוק את המפתח ונסה שוב."
         },
         "skip": {
-          "title": "Skip for now",
-          "description": "You can set this up later on the Assistant page."
+          "title": "לדלג בינתיים",
+          "description": "אפשר להגדיר את זה מאוחר יותר בדף העוזר."
         }
       },
       "done": {
-        "title": "You're all set",
-        "sub": "Kusema keeps running in the system tray and works in any app.",
-        "finish": "Start using Kusema",
-        "wins": "Your first three wins are waiting on the main page.",
-        "atLogin": "Start Kusema when I sign in",
+        "title": "הכול מוכן",
+        "sub": "Kusema ממשיך לפעול במגש המערכת ועובד בכל יישום.",
+        "finish": "להתחיל להשתמש ב-Kusema",
+        "wins": "שלושת ההישגים הראשונים שלך מחכים בדף הראשי.",
+        "atLogin": "להפעיל את Kusema כשאני נכנס למערכת",
         "keys": {
-          "dictate": "Dictate: hold",
-          "continuous": "Continuous dictation: press to start and stop",
-          "ask": "Ask Kusema",
-          "askScreen": "Ask about my screen"
+          "dictate": "הכתבה: להחזיק",
+          "continuous": "הכתבה רציפה: ללחוץ כדי להתחיל ולעצור",
+          "ask": "לשאול את Kusema",
+          "askScreen": "לשאול על המסך שלי"
         }
       }
     }
@@ -381,7 +382,8 @@
     "addAnother": "הוסף עוד",
     "remove": "הסר את {{language}}",
     "alreadyAdded_one": "{{languages}} כבר נוספה.",
-    "alreadyAdded_other": "{{languages}} כבר נוספו."
+    "alreadyAdded_other": "{{languages}} כבר נוספו.",
+    "alreadyAdded_two": "{{languages}} כבר נוספו."
   },
   "modelSelector": {
     "custom": "מותאם אישית",
@@ -408,7 +410,7 @@
     "general": {
       "title": "כללי",
       "shortcut": {
-        "title": "קיצורי מקשים של Handy",
+        "title": "קיצורי מקשים של Kusema",
         "description": "הגדר קיצורי מקשים כדי להפעיל הקלטה ותמלול דיבור",
         "loading": "טוען קיצורי מקשים...",
         "none": "לא הוגדרו קיצורי מקשים",
@@ -428,20 +430,20 @@
             "description": "אופציונלי: קיצור מקשים ייעודי שתמיד מפעיל עיבוד AI על התמלול."
           },
           "assistant": {
-            "name": "Ask Kusema",
-            "description": "Hold or press to ask a spoken question. The reply appears below instead of being pasted."
+            "name": "לשאול את Kusema",
+            "description": "החזק או לחץ כדי לשאול שאלה בקול. התשובה מופיעה למטה במקום להיות מודבקת."
           },
           "assistant_screen": {
-            "name": "Ask About My Screen",
-            "description": "Hold or press to ask a spoken question about the window you're working in. You see the screenshot before anything is sent."
+            "name": "לשאול על המסך שלי",
+            "description": "החזק או לחץ כדי לשאול בקול על החלון שאתה עובד בו. תראה את צילום המסך לפני ששולחים משהו."
           },
           "dictate_continuous": {
-            "name": "Continuous Dictation",
-            "description": "Press to start dictating hands-free, and press again to stop. Text appears each time you pause."
+            "name": "הכתבה רציפה",
+            "description": "לחץ כדי להכתיב בלי ידיים, ולחץ שוב כדי לעצור. הטקסט מופיע בכל הפסקה."
           },
           "toggle_privileged": {
-            "name": "Privileged Mode",
-            "description": "Press to turn Privileged mode on or off."
+            "name": "מצב Privileged",
+            "description": "לחץ כדי להפעיל או לכבות את מצב Privileged."
           }
         },
         "errors": {
@@ -466,7 +468,7 @@
       },
       "preferredLanguages": {
         "title": "שפות מועדפות",
-        "description": "השפות שאתה מדבר. Handy משתמש בהן כדי להמליץ על מודלים.",
+        "description": "השפות שאתה מדבר. Kusema משתמש בהן כדי להמליץ על מודלים.",
         "noMatch": "אין שפה שתואמת ל„{{query}}”",
         "weak": "עדיין אין מודל שמזהה היטב את {{languages}}."
       },
@@ -493,17 +495,18 @@
         "fits": "עבור השפות שלך",
         "untested": "לא נבדקו"
       },
-      "untestedNote": "לא נבדקו עם Handy. ייתכן שהם איטיים יותר או שיעשו יותר טעויות.",
+      "untestedNote": "לא נבדקו עם Kusema. ייתכן שהם איטיים יותר או שיעשו יותר טעויות.",
       "untestedHidden_one": "עוד מודל {{count}} לא מותאם להכתבה. חפש כדי למצוא אותו.",
       "untestedHidden_other": "עוד {{count}} מודלים לא מותאמים להכתבה. חפש כדי למצוא אותם.",
-      "emptyYours": "עדיין אין מודלים. בחר אחד למטה: הוא יורד, ואז Handy משתמש בו.",
+      "untestedHidden_two": "עוד {{count}} מודלים לא מותאמים להכתבה. חפש כדי למצוא אותם.",
+      "emptyYours": "עדיין אין מודלים. בחר אחד למטה: הוא יורד, ואז Kusema משתמש בו.",
       "showMore": "הצג עוד {{count}}",
       "showFewer": "הצג פחות",
       "download": "הורד והשתמש",
       "downloadingThenUse": "{{percent}}% מתוך {{total}}, ואז עובר אליו",
       "loading": "טוען…",
       "deleteAsk": "למחוק את {{name}}? זה ישחרר {{size}}.",
-      "deleteAskActive": "למחוק את {{name}}? Handy לא יוכל לתמלל עד שתבחר מודל אחר.",
+      "deleteAskActive": "למחוק את {{name}}? Kusema לא יוכל לתמלל עד שתבחר מודל אחר.",
       "cancel": "ביטול",
       "deleteModel": "מחק את {{name}}",
       "cancelDownload": "הפסק להוריד את {{name}}",
@@ -517,7 +520,7 @@
         "marks": "? עדיין לא נמדד. — לא שומע את השפה הזו."
       },
       "retiredNotice": {
-        "title": "מודלים ישנים כבר לא עובדים עם Handy",
+        "title": "מודלים ישנים כבר לא עובדים עם Kusema",
         "description": "הם תופסים {{size}} במחשב שלך.",
         "delete": "מחיקת מודלים",
         "deleted": "המודלים הישנים נמחקו",
@@ -525,37 +528,37 @@
       },
       "rescan": {
         "label": "סריקה מחדש",
-        "tooltip": "סריקה מחדש לאיתור מודלים שנוספו לתיקיית המודלים או למטמון של Hugging Face מחוץ ל-Handy"
+        "tooltip": "סריקה מחדש לאיתור מודלים שנוספו לתיקיית המודלים או למטמון של Hugging Face מחוץ ל-Kusema"
       },
       "curated": {
-        "inUse": "In use",
-        "gettingReady": "Getting ready...",
-        "downloading": "Downloading: {{percent}}%",
-        "cancel": "Cancel",
-        "cancelLabel": "Cancel downloading {{name}}",
-        "use": "Use",
-        "useLabel": "Use {{name}}",
-        "download": "Download ({{size}})",
-        "downloadLabel": "Download {{name}}",
-        "recommended": "Recommended",
-        "others": "Also on this computer",
-        "showAllHint": "More models are available: turn on Show all models under Advanced.",
+        "inUse": "בשימוש",
+        "gettingReady": "מתכונן...",
+        "downloading": "מוריד: {{percent}}%",
+        "cancel": "ביטול",
+        "cancelLabel": "לבטל את ההורדה של {{name}}",
+        "use": "להשתמש",
+        "useLabel": "להשתמש ב-{{name}}",
+        "download": "להוריד ({{size}})",
+        "downloadLabel": "להוריד את {{name}}",
+        "recommended": "מומלץ",
+        "others": "נמצא גם במחשב הזה",
+        "showAllHint": "יש עוד מודלים: הפעל את \"להציג את כל המודלים\" במתקדם.",
         "rows": {
           "parakeetUnified": {
             "name": "Parakeet Unified English",
-            "description": "The best choice for English. Chosen automatically."
+            "description": "הבחירה הטובה ביותר לאנגלית. נבחר אוטומטית."
           },
           "parakeetV3": {
             "name": "Parakeet TDT v3",
-            "description": "For dictating in other languages, including Spanish, French and German."
+            "description": "להכתבה בשפות אחרות, כולל ספרדית, צרפתית וגרמנית."
           },
           "canary": {
             "name": "Canary 180M Flash",
-            "description": "A small download, for older computers or when disk space is low."
+            "description": "הורדה קטנה, למחשבים ישנים יותר או כשיש מעט מקום בדיסק."
           },
           "nemotron": {
             "name": "Nemotron 3.5 Streaming",
-            "description": "Shows live text as you speak, but makes more mistakes."
+            "description": "מציג טקסט חי בזמן שאתה מדבר, אבל טועה יותר."
           }
         }
       }
@@ -564,26 +567,26 @@
       "title": "שפות"
     },
     "dictation": {
-      "title": "Continuous Dictation",
-      "description": "Keep talking, and the text is typed into your window each time you pause. Speech recognition stays on this computer, and AI cleanup never runs in this mode.",
+      "title": "הכתבה רציפה",
+      "description": "המשך לדבר, והטקסט מוקלד בחלון שלך בכל הפסקה. זיהוי הדיבור נשאר במחשב הזה, וניקוי AI אף פעם לא פועל במצב הזה.",
       "dragonKey": {
-        "title": "Dragon's Key",
-        "description": "Use Numpad + to start and stop, as Dragon does. While it's set, that key no longer types a plus sign.",
-        "button": "Use Dragon's key (Numpad +)"
+        "title": "המקש של Dragon",
+        "description": "השתמש במקש + של המקלדת הנומרית כדי להתחיל ולעצור, כמו ב-Dragon. כל עוד זה מוגדר, המקש הזה כבר לא מקליד סימן פלוס.",
+        "button": "להשתמש במקש של Dragon (+ במקלדת הנומרית)"
       },
       "pause": {
-        "title": "Pause Length",
-        "description": "How long you pause before what you said is typed. Longer pauses keep sentences together; shorter ones show text sooner.",
+        "title": "אורך ההפסקה",
+        "description": "כמה זמן אתה עוצר לפני שמה שאמרת מוקלד. הפסקות ארוכות שומרות על משפטים יחד; קצרות מציגות טקסט מוקדם יותר.",
         "seconds": "{{seconds}} s"
       },
       "autoStop": {
-        "title": "Stop After Silence",
-        "description": "Dictation stops by itself after this long without speech, so the microphone is never left on by accident.",
-        "minutes": "{{minutes}} min"
+        "title": "לעצור אחרי שקט",
+        "description": "ההכתבה נעצרת מעצמה אחרי זמן כזה בלי דיבור, כדי שהמיקרופון לעולם לא יישאר פתוח בטעות.",
+        "minutes": "{{minutes}} דק'"
       },
       "voiceCommands": {
-        "label": "Voice Commands",
-        "description": "Say \"new paragraph\" or \"new line\" as you talk, or \"scratch that\" or \"stop dictation\" on its own between pauses, and it acts instead of being typed. Normal sentences with these words are typed as usual."
+        "label": "פקודות קוליות",
+        "description": "אמור \"new paragraph\" או \"new line\" תוך כדי דיבור, או \"scratch that\" או \"stop dictation\" לבד בין הפסקות, והפקודה מתבצעת במקום להיות מוקלדת. משפטים רגילים עם המילים האלה מוקלדים כרגיל."
       }
     },
     "sound": {
@@ -646,11 +649,11 @@
       },
       "autostart": {
         "label": "הפעל עם עליית המערכת",
-        "description": "הפעל את Handy אוטומטית כשאתה מתחבר למחשב."
+        "description": "הפעל את Kusema אוטומטית כשאתה מתחבר למחשב."
       },
       "showTrayIcon": {
         "label": "הצג אייקון במגש",
-        "description": "הצג את האייקון של Handy במגש המערכת."
+        "description": "הצג את האייקון של Kusema במגש המערכת."
       },
       "overlay": {
         "style": {
@@ -773,90 +776,90 @@
         }
       },
       "showAllModels": {
-        "label": "Show all models",
-        "description": "List every model on the Models page, with accuracy and speed details, instead of the short list."
+        "label": "להציג את כל המודלים",
+        "description": "להציג בדף המודלים כל מודל, עם פרטי דיוק ומהירות, במקום הרשימה הקצרה."
       }
     },
     "assistant": {
-      "title": "Assistant",
-      "description": "Hold the shortcut, ask a question out loud, and Kusema answers.",
+      "title": "עוזר",
+      "description": "החזק את קיצור הדרך, שאל שאלה בקול, ו-Kusema עונה.",
       "provider": {
-        "title": "AI Provider",
-        "provider": "Provider",
-        "description": "Assistant mode uses the same provider and API key as Post Process.",
-        "model": "Model",
-        "modelDescription": "The model that answers your questions. Change it on the Post Process page.",
-        "notSet": "Not chosen",
-        "open": "Open Post Process settings",
-        "disabled": "Assistant mode needs an AI provider (such as Anthropic, OpenAI or a local Ollama model) to answer questions. Providers are set up on the Post Process page, which appears once Post Processing is turned on. Turning it on doesn't change how normal dictation works.",
-        "enable": "Turn on Post Processing",
-        "noProvider": "Choose a provider on the Post Process page.",
-        "noKey": "No API key is set for {{provider}}. Add one on the Post Process page.",
-        "noModel": "Choose a model on the Post Process page."
+        "title": "ספק AI",
+        "provider": "ספק",
+        "description": "העוזר משתמש באותו ספק ובאותו מפתח API כמו עיבוד משלים.",
+        "model": "מודל",
+        "modelDescription": "המודל שעונה על השאלות שלך. אפשר לשנות אותו בדף עיבוד משלים.",
+        "notSet": "לא נבחר",
+        "open": "לפתוח את הגדרות העיבוד המשלים",
+        "disabled": "כדי לענות על שאלות, העוזר צריך ספק AI (למשל Anthropic,‏ OpenAI או מודל Ollama מקומי). ספקים מוגדרים בדף עיבוד משלים, שמופיע אחרי שמפעילים עיבוד משלים. ההפעלה לא משנה את ההכתבה הרגילה.",
+        "enable": "להפעיל עיבוד משלים",
+        "noProvider": "בחר ספק בדף עיבוד משלים.",
+        "noKey": "לא הוגדר מפתח API עבור {{provider}}. הוסף מפתח בדף עיבוד משלים.",
+        "noModel": "בחר מודל בדף עיבוד משלים."
       },
       "screen": {
-        "title": "Ask About My Screen",
-        "description": "Ask about the window you're working in, like “What do you think of this document?” Only that window is captured, and it stays on this computer until you press Send.",
+        "title": "לשאול על המסך שלי",
+        "description": "שאל על החלון שאתה עובד בו, למשל \"מה דעתך על המסמך הזה?\" רק החלון הזה מצולם, והוא נשאר במחשב הזה עד שתלחץ על שליחה.",
         "confirm": {
-          "label": "Confirm Before Sending Screenshots",
-          "description": "Show the screenshot, your question and where it will go, then wait for Send (Enter) or Cancel (Escape). Unanswered, it cancels after 30 seconds.",
-          "offWarning": "Screenshots will be sent to {{provider}} as soon as you finish speaking, without showing you first. Everything visible in the window goes with them, including private or confidential information."
+          "label": "לאשר לפני שליחת צילומי מסך",
+          "description": "מציג את צילום המסך, את השאלה שלך ולאן היא תישלח, ואז מחכה לשליחה (Enter) או לביטול (Esc). אם אין תגובה, מבוטל אחרי 30 שניות.",
+          "offWarning": "צילומי מסך יישלחו אל {{provider}} מיד כשתסיים לדבר, בלי שתראה אותם קודם. כל מה שגלוי בחלון נשלח איתם, כולל מידע פרטי או חסוי."
         },
         "provider": {
-          "label": "Use for Screen Questions",
-          "description": "Send screenshots to a different provider than normal questions, for example a local vision model in Ollama (the Custom provider) for confidential documents. Follow-up questions go to the same provider until you start a new conversation.",
-          "same": "Same as Assistant",
-          "sameNamed": "Same as Assistant ({{provider}})",
-          "yourProvider": "your AI provider"
+          "label": "להשתמש לשאלות על המסך",
+          "description": "לשלוח צילומי מסך לספק אחר מזה של שאלות רגילות, למשל מודל ראייה מקומי ב-Ollama (הספק המותאם אישית) למסמכים חסויים. שאלות המשך נשלחות לאותו ספק עד שתתחיל שיחה חדשה.",
+          "same": "כמו העוזר",
+          "sameNamed": "כמו העוזר ({{provider}})",
+          "yourProvider": "ספק ה-AI שלך"
         },
         "model": {
-          "label": "Model for Screen Questions",
-          "description": "A model that can see images. Leave empty to use the model chosen for this provider on the Post Process page.",
-          "placeholder": "e.g. qwen2.5vl"
+          "label": "מודל לשאלות על המסך",
+          "description": "מודל שיכול לראות תמונות. השאר ריק כדי להשתמש במודל שנבחר עבור הספק הזה בדף עיבוד משלים.",
+          "placeholder": "למשל qwen2.5vl"
         }
       },
       "conversation": {
-        "empty": "Ask a question with the Ask Kusema shortcut. The conversation will appear here.",
-        "new": "New conversation",
-        "screenshot": "Screenshot",
-        "noProvider": "Ask Kusema needs an AI model to answer. Choose one in Settings.",
-        "openSettings": "Open Settings"
+        "empty": "שאל שאלה עם קיצור הדרך \"לשאול את Kusema\". השיחה תופיע כאן.",
+        "new": "שיחה חדשה",
+        "screenshot": "צילום מסך",
+        "noProvider": "\"לשאול את Kusema\" צריך מודל AI כדי לענות. בחר מודל בהגדרות.",
+        "openSettings": "לפתוח את ההגדרות"
       },
       "voice": {
-        "title": "Voice",
-        "systemDefault": "System default",
-        "previewText": "Hi, I'm Kusema. This is how I'll sound when I answer your questions.",
+        "title": "קול",
+        "systemDefault": "ברירת המחדל של המערכת",
+        "previewText": "שלום, אני Kusema. כך אשמע כשאענה על השאלות שלך.",
         "speakReplies": {
-          "label": "Speak Replies",
-          "description": "Read replies aloud as they arrive. Press Cancel (Escape), start a new recording, or start a new conversation to stop."
+          "label": "להקריא תשובות",
+          "description": "מקריא תשובות בקול ברגע שהן מגיעות. כדי לעצור, לחץ על ביטול (Esc), התחל הקלטה חדשה או שיחה חדשה."
         },
         "voice": {
-          "label": "Voice",
-          "description": "Kokoro voices sound the most natural; download them above. The other voices come with your computer (on Windows, add more under Settings > Time & language > Speech)."
+          "label": "קול",
+          "description": "קולות Kokoro נשמעים הכי טבעיים; הורד אותם למעלה. הקולות האחרים מגיעים עם המחשב (ב-Windows אפשר להוסיף עוד בהגדרות > שעה ושפה > דיבור)."
         },
         "kokoro": {
-          "label": "Kokoro Voices",
-          "description": "28 natural-sounding English voices (US and UK) generated on this computer. A one-time download.",
-          "installed": "Installed. Pick a Kokoro voice below. Removing them frees the disk space; replies then use the system voice.",
-          "download": "Download ({{size}} MB)",
-          "downloading": "Downloading… {{percentage}}%",
-          "cancel": "Cancel",
-          "delete": "Remove"
+          "label": "קולות Kokoro",
+          "description": "28 קולות באנגלית שנשמעים טבעיים (ארה\"ב ובריטניה), שנוצרים במחשב הזה. הורדה חד-פעמית.",
+          "installed": "מותקנים. בחר קול Kokoro למטה. הסרתם מפנה מקום בדיסק; התשובות יוקראו אז בקול המערכת.",
+          "download": "להוריד ({{size}} MB)",
+          "downloading": "מוריד… {{percentage}}%",
+          "cancel": "ביטול",
+          "delete": "הסרה"
         },
         "rate": {
-          "label": "Speaking Rate",
-          "description": "How fast replies are read. 1.00× is the voice's normal speed."
+          "label": "קצב הדיבור",
+          "description": "כמה מהר מוקראות התשובות. ‎1.00×‎ הוא הקצב הרגיל של הקול."
         },
         "preview": {
-          "label": "Preview Voice",
-          "description": "Hear the selected voice at the selected speed.",
-          "button": "Preview"
+          "label": "להאזין לקול",
+          "description": "האזן לקול שנבחר בקצב שנבחר.",
+          "button": "להאזין"
         }
       },
       "tabs": {
-        "label": "Assistant",
-        "conversation": "Conversation",
-        "settings": "Settings"
+        "label": "עוזר",
+        "conversation": "שיחה",
+        "settings": "הגדרות"
       }
     },
     "postProcessing": {
@@ -973,7 +976,7 @@
       },
       "updateChecks": {
         "label": "בדוק עדכונים",
-        "description": "בדוק אוטומטית אם קיימות גרסאות חדשות של Handy",
+        "description": "בדוק אוטומטית אם קיימות גרסאות חדשות של Kusema",
         "lockedDescription": "מושבת על ידי תצורת המערכת (HANDY_DISABLE_UPDATER)"
       },
       "whatsNewPreview": {
@@ -992,9 +995,9 @@
           "welcome": "ברוכים הבאים",
           "permissions": "הרשאות",
           "done": "הכול מוכן",
-          "microphone": "Microphone",
-          "practice": "Practice",
-          "assistant": "AI assistant"
+          "microphone": "מיקרופון",
+          "practice": "תרגול",
+          "assistant": "עוזר AI"
         }
       },
       "onboardingRun": {
@@ -1040,8 +1043,8 @@
         "description": "המיקרופון שישמש כשהמחשב הנייד סגור"
       },
       "postProcessingToggle": {
-        "label": "AI Cleanup",
-        "description": "Optional. Rewrites dictated text with an AI model when you use the AI cleanup shortcut: fixes self-corrections and grammar, keeps your meaning, and never adds facts."
+        "label": "ניקוי AI",
+        "description": "רשות. כותב מחדש טקסט מוכתב בעזרת מודל AI כשאתה משתמש בקיצור הדרך של ניקוי AI: מתקן תיקונים עצמיים ודקדוק, שומר על המשמעות ואף פעם לא מוסיף עובדות."
       },
       "muteWhileRecording": {
         "label": "השתק בזמן הקלטה",
@@ -1057,7 +1060,7 @@
         "bindingsReset": "קיצורי המקלדת לא היו תואמים ואופסו לברירות המחדל",
         "options": {
           "tauri": "Tauri Global Shortcut",
-          "builtIn": "Built-in (recommended)"
+          "builtIn": "מובנה (מומלץ)"
         }
       },
       "pasteDelay": {
@@ -1086,7 +1089,7 @@
       },
       "keyboardDiagnostic": {
         "title": "אבחון מקלדת",
-        "description": "בודק אם אירועי מקלדת מגיעים ל-Handy. נרשם רק מספר האירועים — לעולם לא אילו מקשים הקשת.",
+        "description": "בודק אם אירועי מקלדת מגיעים ל-Kusema. נרשם רק מספר האירועים — לעולם לא אילו מקשים הקשת.",
         "run": "הרצת אבחון של 10 שניות",
         "running": "מאזין… הקש על קיצור המקשים שלך כמה פעמים (למשל Option+Space)",
         "secureInputLabel": "Secure Input",
@@ -1100,7 +1103,7 @@
         "mouse": "עכבר",
         "verdictBlocked": "Secure Input חוסם אירועי מקשים — קיצורים הכוללים מקש רגיל לא יוכלו לפעול עד שהבעיה תיפתר.",
         "verdictSuspicious": "הגיעו אירועים של מקשי החלפה אך לא אירועי מקשים — משהו מדכא מקשים למרות ש-Secure Input מדווח כמושבת. אנא דווח על כך ב-GitHub.",
-        "verdictOk": "אירועי מקשים מגיעים ל-Handy כרגיל.",
+        "verdictOk": "אירועי מקשים מגיעים ל-Kusema כרגיל.",
         "verdictNoEvents": "לא נקלטו אירועים — האם הקשת על מקשים במהלך הבדיקה?",
         "failed": "האבחון נכשל: {{error}}"
       }
@@ -1109,203 +1112,206 @@
       "title": "אודות",
       "version": {
         "title": "גרסה",
-        "description": "הגרסה הנוכחית של Handy"
+        "description": "הגרסה הנוכחית של Kusema"
       },
       "whatsNewUpdates": {
         "label": "הצג מה חדש",
-        "description": "הצג הערות גרסה לאחר עדכוני Handy"
+        "description": "הצג הערות גרסה לאחר עדכוני Kusema"
       },
       "appDataDirectory": {
         "title": "תיקיית נתוני אפליקציה",
-        "description": "המיקום שבו Handy שומר את הנתונים שלו"
+        "description": "המיקום שבו Kusema שומר את הנתונים שלו"
       },
       "sourceCode": {
         "title": "קוד מקור",
-        "description": "View Kusema's source code",
+        "description": "לצפות בקוד המקור של Kusema",
         "button": "צפה ב-GitHub"
       },
       "acknowledgments": {
         "ggml": {
           "title": "ggml",
           "description": "הסקה מהירה לביצועים גבוהים עבור מודל זיהוי הדיבור Whisper של OpenAI",
-          "details": "Handy משתמש ב-ggml לתמלול מהיר ומקומי. תודה לעבודה המדהימה של Georgi Gerganov וכל התורמים."
+          "details": "Kusema משתמש ב-ggml לתמלול מהיר ומקומי. תודה לעבודה המדהימה של Georgi Gerganov וכל התורמים."
         }
       },
       "organizations": {
-        "title": "Kusema for organizations",
-        "description": "Setup, support and options for firms",
-        "button": "Learn more"
+        "title": "Kusema לארגונים",
+        "description": "התקנה, תמיכה ואפשרויות למשרדים",
+        "button": "מידע נוסף"
       },
       "report": {
-        "title": "Report a problem or suggest a feature",
-        "description": "Tell us on GitHub what went wrong or what you'd like",
-        "button": "Open GitHub"
+        "title": "לדווח על בעיה או להציע תכונה",
+        "description": "ספר לנו ב-GitHub מה השתבש או מה היית רוצה",
+        "button": "לפתוח את GitHub"
       },
       "credits": {
-        "title": "Credits and licenses",
+        "title": "תודות ורישיונות",
         "handy": {
-          "title": "Built on Handy",
-          "description": "Kusema is built on Handy by CJ Pais, used under the MIT License.",
-          "button": "View Handy"
+          "title": "מבוסס על Handy",
+          "description": "Kusema מבוסס על Handy של CJ Pais, ומשמש לפי רישיון MIT.",
+          "button": "לצפות ב-Handy"
         },
         "nvidiaLicense": "NVIDIA Open Model License",
-        "models": "Speech and voice models ({{count}})",
-        "components": "Open-source components ({{count}})",
-        "notices": "Full license texts",
-        "loading": "Loading..."
+        "models": "מודלי דיבור וקול ({{count}})",
+        "components": "רכיבי קוד פתוח ({{count}})",
+        "notices": "הנוסח המלא של הרישיונות",
+        "loading": "טוען..."
       }
     },
     "privacy": {
-      "thisComputer": "This computer ({{host}})",
-      "nothingSent": "Nothing to show yet.",
-      "updateBlocked": "Update checks are blocked in Privileged mode.",
+      "thisComputer": "המחשב הזה ({{host}})",
+      "nothingSent": "עדיין אין מה להציג.",
+      "updateBlocked": "בדיקת עדכונים חסומה במצב Privileged.",
       "audio": {
-        "title": "Audio sent off this computer: 0 bytes",
-        "description": "Speech recognition runs on this computer, and nothing in Kusema can upload your voice. Only the text of what you say, and only for features you choose, ever goes to an AI provider."
+        "title": "שמע שנשלח מהמחשב הזה: 0 בתים",
+        "description": "זיהוי הדיבור פועל במחשב הזה, ושום דבר ב-Kusema לא יכול להעלות את הקול שלך. רק הטקסט של מה שאתה אומר, ורק עבור תכונות שבחרת, נשלח אי פעם לספק AI."
       },
       "privileged": {
-        "title": "Privileged Mode",
-        "description": "For confidential matters. While it's on, nothing you say, type or show goes to a cloud AI service. Ask Kusema and AI cleanup only work with a model running on this computer.",
+        "title": "מצב Privileged",
+        "description": "לעניינים חסויים. כל עוד הוא פעיל, שום דבר שאתה אומר, מקליד או מציג לא נשלח לשירות AI בענן. \"לשאול את Kusema\" וניקוי AI עובדים רק עם מודל במחשב הזה.",
         "chip": "Privileged",
         "toggle": {
-          "label": "Privileged Mode",
-          "description": "Blocks every request to cloud AI providers, including ones already set up. Dictation keeps working, because it never uses the cloud."
+          "label": "מצב Privileged",
+          "description": "חוסם כל בקשה לספקי AI בענן, כולל ספקים שכבר הוגדרו. ההכתבה ממשיכה לעבוד, כי היא אף פעם לא משתמשת בענן."
         },
         "allowLan": {
-          "label": "Allow Local Network AI Servers",
-          "description": "Also allows AI servers on your office network, by private address (like 192.168.1.20). Models on this computer are always allowed."
+          "label": "לאפשר שרתי AI ברשת המקומית",
+          "description": "מאפשר גם שרתי AI ברשת המשרד, לפי כתובת פרטית (כמו 192.168.1.20). מודלים במחשב הזה תמיד מותרים."
         },
         "blockDownloads": {
-          "label": "Also Block Downloads and Update Checks",
-          "description": "For offline offices. Model and voice downloads and update checks carry none of your content, so they normally stay allowed and are listed below. Turn this on to stop them too while Privileged mode is on."
+          "label": "לחסום גם הורדות ובדיקות עדכונים",
+          "description": "למשרדים לא מקוונים. הורדות של מודלים וקולות ובדיקות עדכונים לא מכילות שום תוכן שלך, ולכן בדרך כלל הן נשארות מותרות ומופיעות למטה. הפעל את זה כדי לעצור גם אותן כל עוד מצב Privileged פעיל."
         },
         "hotkey": {
-          "label": "Privileged Mode Shortcut",
-          "description": "Adds a keyboard shortcut that turns Privileged mode on or off. Off by default, so it can't be pressed by accident."
+          "label": "קיצור דרך למצב Privileged",
+          "description": "מוסיף קיצור מקשים שמפעיל או מכבה את מצב Privileged. כבוי כברירת מחדל, כדי שלא יילחץ בטעות."
         }
       },
       "counts": {
-        "title": "Where Requests Went",
-        "today": "Today",
-        "week": "Last 7 days"
+        "title": "לאן הלכו הבקשות",
+        "today": "היום",
+        "week": "7 הימים האחרונים"
       },
       "columns": {
-        "time": "Time",
-        "destination": "Destination",
-        "purpose": "Why",
-        "data": "Data",
-        "size": "Size",
-        "result": "Result"
+        "time": "זמן",
+        "destination": "יעד",
+        "purpose": "למה",
+        "data": "נתונים",
+        "size": "גודל",
+        "result": "תוצאה"
       },
       "purposes": {
-        "assistant_question": "Question to Kusema",
-        "screen_question": "Question about the screen",
-        "post_processing": "AI cleanup",
-        "provider_models": "Listing a provider's models",
-        "model_download": "Speech model download",
-        "voice_download": "Voice download",
-        "update_check": "Update check"
+        "assistant_question": "שאלה ל-Kusema",
+        "screen_question": "שאלה על המסך",
+        "post_processing": "ניקוי AI",
+        "provider_models": "קבלת רשימת המודלים של ספק",
+        "model_download": "הורדת מודל דיבור",
+        "voice_download": "הורדת קול",
+        "update_check": "בדיקת עדכונים"
       },
       "data": {
-        "text": "Text",
-        "image": "Screenshot",
-        "none": "None of yours"
+        "text": "טקסט",
+        "image": "צילום מסך",
+        "none": "שום דבר שלך"
       },
       "results": {
-        "sent": "Sent",
-        "blocked": "Blocked",
-        "failed": "Failed"
+        "sent": "נשלחה",
+        "blocked": "נחסמה",
+        "failed": "נכשלה"
       },
       "list": {
-        "title": "Every Request",
-        "description": "Each request Kusema has made: when, where, why, what kind of data and how large. What was in it is never recorded. Shows the latest 500; the export has them all.",
-        "all": "All",
-        "allPurposes": "Any reason",
-        "allResults": "Any result",
-        "allDestinations": "Any destination",
-        "anyTime": "Any time",
-        "lastDays_one": "Last {{count}} day",
-        "lastDays_other": "Last {{count}} days",
-        "export": "Export CSV",
-        "exported_one": "Exported {{count}} request.",
-        "exported_other": "Exported {{count}} requests.",
-        "clear": "Clear",
+        "title": "כל הבקשות",
+        "description": "כל בקשה ש-Kusema שלח: מתי, לאן, למה, איזה סוג נתונים ובאיזה גודל. התוכן אף פעם לא נרשם. מוצגות 500 האחרונות; הייצוא כולל את כולן.",
+        "all": "הכול",
+        "allPurposes": "כל סיבה",
+        "allResults": "כל תוצאה",
+        "allDestinations": "כל יעד",
+        "anyTime": "כל זמן",
+        "lastDays_one": "היום האחרון",
+        "lastDays_other": "{{count}} הימים האחרונים",
+        "lastDays_two": "היומיים האחרונים",
+        "export": "ייצוא CSV",
+        "exported_one": "בקשה אחת יוצאה.",
+        "exported_other": "יוצאו {{count}} בקשות.",
+        "exported_two": "יוצאו שתי בקשות.",
+        "clear": "ניקוי",
         "retention": {
-          "title": "Keep This List For",
-          "description": "Older entries are deleted from this computer automatically.",
-          "days_one": "{{count}} day",
-          "days_other": "{{count}} days"
+          "title": "לשמור את הרשימה למשך",
+          "description": "רשומות ישנות יותר נמחקות מהמחשב הזה באופן אוטומטי.",
+          "days_one": "יום אחד",
+          "days_other": "{{count}} ימים",
+          "days_two": "יומיים"
         }
       }
     },
     "cleanup": {
-      "title": "Cleanup",
-      "description": "Dictated text should need little editing. Local cleanup runs on this computer and sends nothing anywhere.",
+      "title": "ניקוי",
+      "description": "טקסט מוכתב אמור לדרוש מעט עריכה. ניקוי מקומי פועל במחשב הזה ולא שולח שום דבר לשום מקום.",
       "local": {
-        "label": "Local Cleanup",
-        "description": "Removes filler words, adds missing periods between phrases in continuous dictation, and handles spoken punctuation, all on this computer. Off, your words are typed as transcribed."
+        "label": "ניקוי מקומי",
+        "description": "מסיר מילות מילוי, מוסיף נקודות חסרות בין משפטים בהכתבה רציפה ומטפל בפיסוק שנאמר בקול, הכול במחשב הזה. כשכבוי, המילים שלך מוקלדות כפי שתומללו."
       },
       "spokenPunctuation": {
-        "label": "Spoken Punctuation",
-        "description": "Say \"comma\", \"period\", \"question mark\", \"colon\", \"open quote\", \"close paren\", \"dash\", \"section symbol\" and more, as in Dragon. \"Period\" only counts at the end of a phrase, so \"the limitations period expired\" stays as words. Say \"literal period\" to type the word."
+        "label": "פיסוק בקול",
+        "description": "אמור \"comma\", \"period\", \"question mark\", \"colon\", \"open quote\", \"close paren\", \"dash\", \"section symbol\" ועוד, כמו ב-Dragon. \"Period\" נחשב רק בסוף צירוף, ולכן \"the limitations period expired\" נשאר מילים. אמור \"literal period\" כדי להקליד את המילה עצמה. הפקודות האלה עובדות באנגלית."
       },
       "ai": {
         "status": {
-          "noProvider": "No AI provider is set up yet.",
-          "noKey": "{{provider}} needs an API key.",
-          "noModel": "{{provider}} needs a model chosen.",
-          "local": "Using {{model}} on this computer through {{provider}}. Nothing leaves this computer.",
-          "cloud": "Using {{model}} from {{provider}}, a cloud service. Text you clean up goes to {{provider}}.",
-          "blocked": "Privileged mode is on, so nothing will be sent to {{provider}}. Use a local model or turn off Privileged mode."
+          "noProvider": "עדיין לא הוגדר ספק AI.",
+          "noKey": "{{provider}} צריך מפתח API.",
+          "noModel": "צריך לבחור מודל עבור {{provider}}.",
+          "local": "משתמש ב-{{model}} במחשב הזה דרך {{provider}}. שום דבר לא יוצא מהמחשב הזה.",
+          "cloud": "משתמש ב-{{model}} של {{provider}}, שירות ענן. טקסט שאתה מנקה נשלח אל {{provider}}.",
+          "blocked": "מצב Privileged פעיל, ולכן שום דבר לא יישלח אל {{provider}}. השתמש במודל מקומי או כבה את מצב Privileged."
         },
-        "recommendLocal": "We recommend a model that runs on this computer, such as one in Ollama, so confidential text stays here. AI cleanup runs when you dictate with its own shortcut, and never during continuous dictation.",
-        "setUp": "Set Up AI Cleanup"
+        "recommendLocal": "אנחנו ממליצים על מודל שפועל במחשב הזה, למשל מודל ב-Ollama, כדי שטקסט חסוי יישאר כאן. ניקוי AI פועל כשאתה מכתיב עם קיצור הדרך שלו, ואף פעם לא בזמן הכתבה רציפה.",
+        "setUp": "להגדיר ניקוי AI"
       }
     },
     "firstWins": {
-      "title": "First three wins",
-      "dismiss": "Dismiss",
-      "dictated": "Dictate an email",
-      "newParagraph": "Use continuous dictation and say \"new paragraph\"",
-      "asked": "Ask Kusema a question",
-      "done": "Done",
-      "notDone": "Not done yet",
-      "progress": "{{done}} of {{count}} done",
-      "allDone": "All three done. Nice work."
+      "title": "שלושת ההישגים הראשונים",
+      "dismiss": "לסגור",
+      "dictated": "להכתיב אימייל",
+      "newParagraph": "להשתמש בהכתבה רציפה ולומר \"new paragraph\"",
+      "asked": "לשאול את Kusema שאלה",
+      "done": "בוצע",
+      "notDone": "עדיין לא",
+      "progress": "{{done}} מתוך {{count}} בוצעו",
+      "allDone": "כל השלושה בוצעו. כל הכבוד."
     },
     "glow": {
-      "title": "Recording indicator",
-      "description": "A glow around the edges of your screen shows that Kusema is listening. Only you see it: it stays out of screenshots and screen shares.",
+      "title": "מחוון הקלטה",
+      "description": "זוהר בשולי המסך מראה ש-Kusema מקשיב. רק אתה רואה אותו: הוא לא מופיע בצילומי מסך או בשיתוף מסך.",
       "enabled": {
-        "label": "Screen glow",
-        "description": "Show a colored glow around the screen you're working on while Kusema is listening. You can still click and type through it."
+        "label": "זוהר המסך",
+        "description": "להציג זוהר צבעוני סביב המסך שאתה עובד בו בזמן ש-Kusema מקשיב. עדיין אפשר ללחוץ ולהקליד דרכו."
       },
       "thickness": {
-        "label": "Thickness",
-        "description": "How far the glow reaches in from the edge of the screen."
+        "label": "עובי",
+        "description": "כמה עמוק הזוהר נכנס משולי המסך."
       },
       "intensity": {
-        "label": "Intensity",
-        "description": "How strong the glow is."
+        "label": "עוצמה",
+        "description": "כמה חזק הזוהר."
       },
       "palette": {
-        "label": "Colors",
-        "description": "The color-blind friendly set keeps the modes easy to tell apart with every common kind of color blindness.",
-        "standard": "Standard",
-        "color_blind": "Color-blind friendly"
+        "label": "צבעים",
+        "description": "הצבעים המותאמים לעיוורון צבעים מאפשרים להבחין בקלות בין המצבים בכל סוגי עיוורון הצבעים הנפוצים.",
+        "standard": "רגיל",
+        "color_blind": "מותאם לעיוורון צבעים"
       },
       "modes": {
-        "dictation": "Dictation",
-        "continuous": "Continuous dictation",
-        "ask": "Ask Kusema",
-        "ask_screen": "Ask about my screen",
-        "paused": "Continuous dictation paused (window changed)"
+        "dictation": "הכתבה",
+        "continuous": "הכתבה רציפה",
+        "ask": "לשאול את Kusema",
+        "ask_screen": "לשאול על המסך שלי",
+        "paused": "הכתבה רציפה מושהית (החלון התחלף)"
       },
-      "preview": "Preview",
-      "previewLabel": "Preview the glow for {{mode}}",
+      "preview": "תצוגה מקדימה",
+      "previewLabel": "תצוגה מקדימה של הזוהר עבור {{mode}}",
       "sounds": {
-        "label": "Continuous dictation sounds",
-        "description": "Play a short sound when continuous dictation starts and stops. Sounds for other dictation are under Sound below."
+        "label": "צלילי הכתבה רציפה",
+        "description": "להשמיע צליל קצר כשהכתבה רציפה מתחילה ונעצרת. צלילים להכתבה אחרת נמצאים בשמע, למטה."
       }
     }
   },
@@ -1325,7 +1331,7 @@
     "portableUpdateBrowseButton": "פתח את GitHub Releases"
   },
   "whatsNew": {
-    "title": "חדש ב-Handy v{{version}}"
+    "title": "חדש ב-Kusema v{{version}}"
   },
   "common": {
     "loading": "טוען...",
@@ -1356,11 +1362,11 @@
   },
   "appLanguage": {
     "title": "שפת האפליקציה",
-    "description": "שנה את שפת הממשק של Handy"
+    "description": "שנה את שפת הממשק של Kusema"
   },
   "theme": {
     "title": "ערכת נושא של האפליקציה",
-    "description": "בחר אם Handy יעקוב אחר ערכת הנושא של המערכת או יישאר בהיר או כהה",
+    "description": "בחר אם Kusema יעקוב אחר ערכת הנושא של המערכת או יישאר בהיר או כהה",
     "options": {
       "system": "מערכת",
       "light": "בהיר",
@@ -1371,44 +1377,46 @@
     "transcribing": "מתמלל...",
     "processing": "מעבד...",
     "loadingModel": "טוען מודל...",
-    "speaking": "Speaking...",
+    "speaking": "מדבר...",
     "dictation": {
-      "dictating": "Dictating",
-      "paused": "Paused, window changed",
-      "noTarget": "Click where the text should go",
-      "finishing": "Finishing...",
-      "stop": "Stop",
-      "nothingToScratch": "Nothing to scratch",
-      "scratchWindowChanged": "Can't scratch: the window changed",
-      "scratchOtherInput": "Can't scratch: keyboard or mouse used",
-      "savedToHistory": "Said while paused: saved in History",
-      "stoppedSilence": "Stopped after silence",
-      "microphoneLost": "Stopped: microphone lost",
-      "cantKeepUp": "Stopped: this computer couldn't keep up",
-      "transcriptionFailed": "Couldn't transcribe that",
-      "pasteFailed": "Couldn't type that; it's in History"
+      "dictating": "מכתיב",
+      "paused": "מושהה, החלון התחלף",
+      "noTarget": "לחץ במקום שבו הטקסט צריך להופיע",
+      "finishing": "מסיים...",
+      "stop": "עצור",
+      "nothingToScratch": "אין מה למחוק",
+      "scratchWindowChanged": "אי אפשר למחוק: החלון התחלף",
+      "scratchOtherInput": "אי אפשר למחוק: נעשה שימוש במקלדת או בעכבר",
+      "savedToHistory": "נאמר בזמן ההשהיה: נשמר בהיסטוריה",
+      "stoppedSilence": "נעצר אחרי שקט",
+      "microphoneLost": "נעצר: המיקרופון אבד",
+      "cantKeepUp": "נעצר: המחשב הזה לא עמד בקצב",
+      "transcriptionFailed": "לא ניתן היה לתמלל את זה",
+      "pasteFailed": "לא ניתן היה להקליד את זה; זה נמצא בהיסטוריה"
     },
     "privileged": "Privileged"
   },
   "screenCard": {
-    "title": "Send this screenshot?",
-    "autoCancel": "Cancels in {{seconds}} s",
-    "enlarge": "Click to enlarge",
-    "shrink": "Click to make smaller",
-    "imageAlt": "Screenshot of the window you asked about",
+    "title": "לשלוח את צילום המסך הזה?",
+    "autoCancel": "מתבטל בעוד {{seconds}} שנ'",
+    "enlarge": "לחץ להגדלה",
+    "shrink": "לחץ להקטנה",
+    "imageAlt": "צילום מסך של החלון ששאלת עליו",
     "question": "“{{question}}”",
-    "sendsTo": "Goes to {{provider}} · {{model}}",
-    "onlyThis": "Only this window. Nothing is sent until you press Send.",
-    "send": "Send",
-    "cancel": "Cancel",
+    "sendsTo": "נשלח אל {{provider}} · {{model}}",
+    "onlyThis": "רק החלון הזה. שום דבר לא נשלח עד שתלחץ על שליחה.",
+    "send": "שליחה",
+    "cancel": "ביטול",
     "noticeTitle": "Kusema",
-    "close": "Close"
+    "close": "סגירה"
   },
   "secureInput": {
     "blockedWithCulprit_one": "ייתכן ש-{{name}} חוסם קיצור דרך אחד",
     "blockedWithCulprit_other": "ייתכן ש-{{name}} חוסם {{count}} קיצורי דרך",
+    "blockedWithCulprit_two": "ייתכן ש-{{name}} חוסם שני קיצורי דרך",
     "blockedNoCulprit_one": "macOS חוסם זמנית קיצור דרך אחד",
     "blockedNoCulprit_other": "macOS חוסם זמנית {{count}} קיצורי דרך",
+    "blockedNoCulprit_two": "macOS חוסם זמנית שני קיצורי דרך",
     "recorderBlockedWithCulprit": "ייתכן ש-{{name}} חוסם שינויים בקיצורי דרך",
     "recorderBlockedNoCulprit": "macOS חוסם זמנית שינויים בקיצורי דרך",
     "learnMore": "איך לתקן את זה",

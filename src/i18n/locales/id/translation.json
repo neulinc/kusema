@@ -8,25 +8,25 @@
     "quit": "Keluar",
     "cancel": "Batal",
     "secureInputWarning": "⚠ Pintasan diblokir oleh Secure Input",
-    "privilegedMode": "Privileged Mode",
-    "privilegedOn": "Privileged mode on"
+    "privilegedMode": "Mode Privileged",
+    "privilegedOn": "Mode Privileged aktif"
   },
   "sidebar": {
     "general": "Umum",
-    "assistant": "Assistant",
+    "assistant": "Asisten",
     "models": "Model",
     "advanced": "Lanjutan",
     "postProcessing": "Pascaproses",
     "history": "Riwayat",
     "debug": "Debug",
     "about": "Tentang",
-    "privacy": "Privacy"
+    "privacy": "Privasi"
   },
   "onboarding": {
     "customModelDescription": "Tidak didukung secara resmi",
     "migration": {
       "title": "Model Anda perlu diperbarui",
-      "description": "Handy kini menggunakan jenis model yang lebih baru. Unduh versi baru untuk terus mentranskripsi. Versi lama akan dihapus.",
+      "description": "Kusema kini menggunakan jenis model yang lebih baru. Unduh versi baru untuk terus mentranskripsi. Versi lama akan dihapus.",
       "replaces": "Menggantikan {{name}}",
       "oldFormat": "Format lama",
       "failed": "Unduhan gagal",
@@ -63,11 +63,11 @@
     "permissions": {
       "microphone": {
         "name": "Mikrofon",
-        "why": "Agar Handy dapat mendengar Anda. Audio diubah menjadi teks di komputer ini dan tidak pernah diunggah."
+        "why": "Agar Kusema dapat mendengar Anda. Audio diubah menjadi teks di komputer ini dan tidak pernah diunggah."
       },
       "accessibility": {
         "name": "Aksesibilitas",
-        "why": "Agar pintasan Anda berfungsi di semua aplikasi, dan Handy dapat mengetik teks di tempat kursor Anda berada."
+        "why": "Agar pintasan Anda berfungsi di semua aplikasi, dan Kusema dapat mengetik teks di tempat kursor Anda berada."
       },
       "errors": {
         "checkFailed": "Gagal memeriksa izin. Silakan coba lagi.",
@@ -81,12 +81,12 @@
       "openSettings": "Buka pengaturan",
       "allowed": "Diizinkan",
       "waiting": "Menunggu",
-      "turnOnMac": "Aktifkan Handy di Pengaturan Sistem, lalu kembali ke sini.",
+      "turnOnMac": "Aktifkan Kusema di Pengaturan Sistem, lalu kembali ke sini.",
       "turnOnWindows": "Aktifkan akses mikrofon di Setelan Windows, lalu kembali ke sini.",
       "hintBoth": "Izinkan keduanya untuk melanjutkan",
       "hintMicrophone": "Izinkan mikrofon untuk melanjutkan",
       "welcomeBack": "Selamat datang kembali. Kita lanjutkan dari tadi.",
-      "relaunch": "Pintasan tidak merespons setelah ini? <relaunch>Luncurkan ulang Handy</relaunch> dan Anda akan kembali tepat ke sini."
+      "relaunch": "Pintasan tidak merespons setelah ini? <relaunch>Luncurkan ulang Kusema</relaunch> dan Anda akan kembali tepat ke sini."
     },
     "shell": {
       "back": "Kembali",
@@ -97,11 +97,11 @@
       "title": "Bicara, bukan mengetik, di aplikasi apa pun",
       "subtitle": "Pilih bahasa yang akan Anda gunakan untuk mendikte",
       "languagesLabel": "Bahasa",
-      "noMatch": "Tidak ada bahasa yang cocok dengan “{{query}}”. Model Handy mencakup sekitar 100 bahasa; sisanya ada di pengaturan.",
+      "noMatch": "Tidak ada bahasa yang cocok dengan “{{query}}”. Model Kusema mencakup sekitar 100 bahasa; sisanya ada di pengaturan.",
       "appLanguage": "Bahasa aplikasi",
       "menusIn": "Menu dalam <b>{{language}}</b>",
       "chinese": {
-        "question": "Anda berbicara {{languages}}. Aksara mana yang harus ditulis Handy?",
+        "question": "Anda berbicara {{languages}}. Aksara mana yang harus ditulis Kusema?",
         "label": "Aksara Mandarin",
         "zh-Hans": "Sederhana",
         "zh-Hant": "Taiwan",
@@ -171,7 +171,7 @@
     },
     "try": {
       "title": "Coba sekarang!",
-      "subtitle": "Handy ada di pojok untuk memandu Anda",
+      "subtitle": "Kusema ada di pojok untuk memandu Anda",
       "noteLabel": "Catatan",
       "placeholder": "Catatan baru",
       "hold": "Tahan <keys/> dan bicara.",
@@ -199,14 +199,14 @@
     },
     "done": {
       "title": "Semua siap",
-      "subMac": "Handy kini ada di bilah menu Anda. Tahan atau ketuk <keys/> di aplikasi apa pun untuk bicara.",
-      "subTray": "Handy kini ada di baki sistem Anda. Tahan atau ketuk <keys/> di aplikasi apa pun untuk bicara.",
+      "subMac": "Kusema kini ada di bilah menu Anda. Tahan atau ketuk <keys/> di aplikasi apa pun untuk bicara.",
+      "subTray": "Kusema kini ada di baki sistem Anda. Tahan atau ketuk <keys/> di aplikasi apa pun untuk bicara.",
       "hint": "Anda dapat mengubahnya nanti di Pengaturan",
       "highFiveLabel": "Tos",
-      "atLogin": "Jalankan Handy saat saya masuk",
+      "atLogin": "Jalankan Kusema saat saya masuk",
       "finish": "Selesai",
       "panel": {
-        "name": "Handy",
+        "name": "Kusema",
         "ready": "Siap",
         "languages": "Bahasa",
         "model": "Model ucapan",
@@ -220,79 +220,79 @@
       "done": "Tidak berfungsi di aplikasi lain? <guide>Panduan penyiapan Linux</guide>"
     },
     "setup": {
-      "retryDownload": "Try again",
+      "retryDownload": "Coba lagi",
       "welcome": {
-        "title": "Kusema turns your voice into text on this computer.",
-        "privacy": "Your voice never leaves it.",
-        "language": "Language you'll dictate in"
+        "title": "Kusema mengubah suara Anda menjadi teks di komputer ini.",
+        "privacy": "Suara Anda tidak pernah meninggalkan komputer ini.",
+        "language": "Bahasa yang akan Anda diktekan"
       },
       "microphone": {
-        "title": "Choose your microphone",
-        "sub": "Say something. The bar should move as you speak.",
-        "label": "Microphone",
-        "meter": "Microphone level",
-        "heard": "Kusema can hear you.",
-        "quiet": "No sound yet. Check that this microphone isn't muted, or choose another one.",
-        "failed": "Kusema couldn't open this microphone. Choose another one.",
-        "tip": "Tip: a headset gives the best accuracy and fewer stray words."
+        "title": "Pilih mikrofon Anda",
+        "sub": "Ucapkan sesuatu. Bilah seharusnya bergerak saat Anda berbicara.",
+        "label": "Mikrofon",
+        "meter": "Level mikrofon",
+        "heard": "Kusema dapat mendengar Anda.",
+        "quiet": "Belum ada suara. Pastikan mikrofon ini tidak dibisukan, atau pilih yang lain.",
+        "failed": "Kusema tidak dapat membuka mikrofon ini. Pilih yang lain.",
+        "tip": "Tips: headset memberikan akurasi terbaik dan lebih sedikit kata nyasar."
       },
       "practice": {
-        "title": "Dictate your first sentence",
-        "how": "Hold <keys/>, say this sentence, then let go:",
+        "title": "Diktekan kalimat pertama Anda",
+        "how": "Tahan <keys/>, ucapkan kalimat ini, lalu lepaskan:",
         "sentence": "Dear Mr. Smith comma thank you for your letter period",
-        "box": "Practice box: your words appear here",
-        "placeholder": "Your words appear here",
-        "listening": "Listening...",
-        "typing": "Typing...",
-        "success": "That's it. Saying \"comma\" and \"period\" types the marks.",
-        "waiting": "Your speech model is still downloading. This box will work as soon as it's ready.",
-        "continuous": "For longer dictation, press <keys/> to keep listening until you press it again. Used to Dragon? You can set this to Numpad + under General.",
-        "continuousRunning": "Continuous dictation is on. Your words appear in the box each time you pause. Press {{stop}} to stop it.",
-        "continuousEnded": "That's continuous dictation. In your other apps, your words are typed at the cursor."
+        "box": "Kotak latihan: kata-kata Anda muncul di sini",
+        "placeholder": "Kata-kata Anda muncul di sini",
+        "listening": "Mendengarkan...",
+        "typing": "Mengetik...",
+        "success": "Begitulah. Mengucapkan \"comma\" dan \"period\" akan mengetik tandanya.",
+        "waiting": "Model ucapan Anda masih diunduh. Kotak ini akan berfungsi begitu model siap.",
+        "continuous": "Untuk dikte yang lebih panjang, tekan <keys/> dan Kusema akan mendengarkan sampai Anda menekannya lagi. Terbiasa dengan Dragon? Anda bisa memakai Numpad + di Umum.",
+        "continuousRunning": "Dikte berkelanjutan aktif. Kata-kata Anda muncul di kotak setiap kali Anda jeda. Tekan {{stop}} untuk menghentikannya.",
+        "continuousEnded": "Itulah dikte berkelanjutan. Di aplikasi lain, kata-kata Anda diketik di posisi kursor."
       },
       "assistant": {
-        "title": "Set up the AI assistant (optional)",
-        "sub": "Ask Kusema answers questions you speak. Dictation doesn't need it.",
+        "title": "Siapkan asisten AI (opsional)",
+        "sub": "\"Tanya Kusema\" menjawab pertanyaan yang Anda ucapkan. Dikte tidak membutuhkannya.",
         "model": "Model",
-        "continueWithout": "Continue without AI",
-        "privileged": "Privileged mode blocks all cloud AI with one switch, for matters that must stay on this computer.",
+        "continueWithout": "Lanjutkan tanpa AI",
+        "privileged": "Mode Privileged memblokir semua AI cloud dengan satu sakelar, untuk urusan yang harus tetap di komputer ini.",
         "local": {
-          "title": "Private: use a local AI on this computer",
-          "description": "Your questions stay here. Uses Ollama, a free app.",
-          "checking": "Looking for Ollama on this computer...",
-          "found": "Found Ollama. Choose a model to use.",
-          "notFound": "Ollama isn't running on this computer.",
-          "noModels": "Ollama is running, but has no models yet. Run \"ollama pull llama3.2\", then check again.",
-          "instructions": "How to set up Ollama",
-          "again": "Check again"
+          "title": "Privat: gunakan AI lokal di komputer ini",
+          "description": "Pertanyaan Anda tetap di sini. Menggunakan Ollama, aplikasi gratis.",
+          "checking": "Mencari Ollama di komputer ini...",
+          "found": "Ollama ditemukan. Pilih model.",
+          "notFound": "Ollama tidak berjalan di komputer ini.",
+          "noModels": "Ollama berjalan, tetapi belum memiliki model. Jalankan \"ollama pull llama3.2\", lalu periksa lagi.",
+          "instructions": "Cara memasang Ollama",
+          "again": "Periksa lagi"
         },
         "cloud": {
-          "title": "Use a cloud AI provider",
-          "description": "Your questions go to the provider you choose, using your own API key.",
-          "provider": "Provider",
-          "key": "API key",
-          "check": "Save and check",
-          "checking": "Checking the key...",
-          "saved": "Key saved in Windows Credential Manager. Choose a model to use.",
-          "where": "The key is stored in Windows Credential Manager, not in a file.",
-          "keyFailed": "The key was saved, but the provider didn't list any models. Check the key and try again."
+          "title": "Gunakan penyedia AI cloud",
+          "description": "Pertanyaan Anda dikirim ke penyedia yang Anda pilih, dengan kunci API Anda sendiri.",
+          "provider": "Penyedia",
+          "key": "Kunci API",
+          "check": "Simpan dan periksa",
+          "checking": "Memeriksa kunci...",
+          "saved": "Kunci disimpan di Pengelola Kredensial Windows. Pilih model.",
+          "where": "Kunci disimpan di Pengelola Kredensial Windows, bukan di file.",
+          "keyFailed": "Kunci sudah disimpan, tetapi penyedia tidak menampilkan model apa pun. Periksa kunci dan coba lagi."
         },
         "skip": {
-          "title": "Skip for now",
-          "description": "You can set this up later on the Assistant page."
+          "title": "Lewati dulu",
+          "description": "Anda bisa menyiapkannya nanti di halaman Asisten."
         }
       },
       "done": {
-        "title": "You're all set",
-        "sub": "Kusema keeps running in the system tray and works in any app.",
-        "finish": "Start using Kusema",
-        "wins": "Your first three wins are waiting on the main page.",
-        "atLogin": "Start Kusema when I sign in",
+        "title": "Semua siap",
+        "sub": "Kusema tetap berjalan di baki sistem dan berfungsi di aplikasi apa pun.",
+        "finish": "Mulai gunakan Kusema",
+        "wins": "Tiga keberhasilan pertama Anda menunggu di halaman utama.",
+        "atLogin": "Jalankan Kusema saat saya masuk",
         "keys": {
-          "dictate": "Dictate: hold",
-          "continuous": "Continuous dictation: press to start and stop",
-          "ask": "Ask Kusema",
-          "askScreen": "Ask about my screen"
+          "dictate": "Dikte: tahan",
+          "continuous": "Dikte berkelanjutan: tekan untuk mulai dan berhenti",
+          "ask": "Tanya Kusema",
+          "askScreen": "Tanya tentang layar saya"
         }
       }
     }
@@ -408,7 +408,7 @@
     "general": {
       "title": "Umum",
       "shortcut": {
-        "title": "Pintasan Handy",
+        "title": "Pintasan Kusema",
         "description": "Atur pintasan keyboard untuk memulai perekaman ucapan-ke-teks",
         "loading": "Memuat pintasan...",
         "none": "Belum ada pintasan yang diatur",
@@ -428,20 +428,20 @@
             "description": "Opsional: pintasan khusus yang selalu menerapkan pascaproses AI pada transkripsi Anda."
           },
           "assistant": {
-            "name": "Ask Kusema",
-            "description": "Hold or press to ask a spoken question. The reply appears below instead of being pasted."
+            "name": "Tanya Kusema",
+            "description": "Tahan atau tekan untuk mengajukan pertanyaan lisan. Jawaban muncul di bawah alih-alih ditempelkan."
           },
           "assistant_screen": {
-            "name": "Ask About My Screen",
-            "description": "Hold or press to ask a spoken question about the window you're working in. You see the screenshot before anything is sent."
+            "name": "Tanya Tentang Layar Saya",
+            "description": "Tahan atau tekan untuk bertanya secara lisan tentang jendela yang sedang Anda kerjakan. Anda melihat tangkapan layar sebelum apa pun dikirim."
           },
           "dictate_continuous": {
-            "name": "Continuous Dictation",
-            "description": "Press to start dictating hands-free, and press again to stop. Text appears each time you pause."
+            "name": "Dikte Berkelanjutan",
+            "description": "Tekan untuk mendikte tanpa tangan, dan tekan lagi untuk berhenti. Teks muncul setiap kali Anda jeda."
           },
           "toggle_privileged": {
-            "name": "Privileged Mode",
-            "description": "Press to turn Privileged mode on or off."
+            "name": "Mode Privileged",
+            "description": "Tekan untuk mengaktifkan atau menonaktifkan mode Privileged."
           }
         },
         "errors": {
@@ -466,7 +466,7 @@
       },
       "preferredLanguages": {
         "title": "Bahasa Pilihan",
-        "description": "Bahasa yang Anda gunakan. Handy memakainya untuk merekomendasikan model.",
+        "description": "Bahasa yang Anda gunakan. Kusema memakainya untuk merekomendasikan model.",
         "noMatch": "Tidak ada bahasa yang cocok dengan “{{query}}”",
         "weak": "Belum ada model yang mengenali {{languages}} dengan baik."
       },
@@ -493,17 +493,17 @@
         "fits": "Untuk bahasa Anda",
         "untested": "Belum diuji"
       },
-      "untestedNote": "Belum diuji dengan Handy. Mungkin lebih lambat atau lebih banyak salah.",
+      "untestedNote": "Belum diuji dengan Kusema. Mungkin lebih lambat atau lebih banyak salah.",
       "untestedHidden_one": "{{count}} model lagi tidak disetel untuk dikte. Cari untuk menemukannya.",
       "untestedHidden_other": "{{count}} model lagi tidak disetel untuk dikte. Cari untuk menemukannya.",
-      "emptyYours": "Belum ada model. Pilih satu di bawah: model diunduh, lalu Handy menggunakannya.",
+      "emptyYours": "Belum ada model. Pilih satu di bawah: model diunduh, lalu Kusema menggunakannya.",
       "showMore": "Tampilkan {{count}} lagi",
       "showFewer": "Tampilkan lebih sedikit",
       "download": "Unduh dan gunakan",
       "downloadingThenUse": "{{percent}}% dari {{total}}, lalu beralih",
       "loading": "Memuat…",
       "deleteAsk": "Hapus {{name}}? Ini membebaskan {{size}}.",
-      "deleteAskActive": "Hapus {{name}}? Handy tidak dapat mentranskripsi sampai Anda memilih model lain.",
+      "deleteAskActive": "Hapus {{name}}? Kusema tidak dapat mentranskripsi sampai Anda memilih model lain.",
       "cancel": "Batal",
       "deleteModel": "Hapus {{name}}",
       "cancelDownload": "Hentikan unduhan {{name}}",
@@ -517,7 +517,7 @@
         "marks": "? belum diukur. — tidak mengenali bahasa itu."
       },
       "retiredNotice": {
-        "title": "Model lama tidak lagi berfungsi dengan Handy",
+        "title": "Model lama tidak lagi berfungsi dengan Kusema",
         "description": "Model tersebut memakan {{size}} di komputer Anda.",
         "delete": "Hapus model",
         "deleted": "Model lama telah dihapus",
@@ -525,37 +525,37 @@
       },
       "rescan": {
         "label": "Pindai Ulang",
-        "tooltip": "Pindai ulang model yang ditambahkan ke folder model atau cache Hugging Face dari luar Handy"
+        "tooltip": "Pindai ulang model yang ditambahkan ke folder model atau cache Hugging Face dari luar Kusema"
       },
       "curated": {
-        "inUse": "In use",
-        "gettingReady": "Getting ready...",
-        "downloading": "Downloading: {{percent}}%",
-        "cancel": "Cancel",
-        "cancelLabel": "Cancel downloading {{name}}",
-        "use": "Use",
-        "useLabel": "Use {{name}}",
-        "download": "Download ({{size}})",
-        "downloadLabel": "Download {{name}}",
-        "recommended": "Recommended",
-        "others": "Also on this computer",
-        "showAllHint": "More models are available: turn on Show all models under Advanced.",
+        "inUse": "Sedang dipakai",
+        "gettingReady": "Menyiapkan...",
+        "downloading": "Mengunduh: {{percent}}%",
+        "cancel": "Batal",
+        "cancelLabel": "Batalkan unduhan {{name}}",
+        "use": "Gunakan",
+        "useLabel": "Gunakan {{name}}",
+        "download": "Unduh ({{size}})",
+        "downloadLabel": "Unduh {{name}}",
+        "recommended": "Disarankan",
+        "others": "Juga ada di komputer ini",
+        "showAllHint": "Masih ada model lain: aktifkan \"Tampilkan semua model\" di Lanjutan.",
         "rows": {
           "parakeetUnified": {
             "name": "Parakeet Unified English",
-            "description": "The best choice for English. Chosen automatically."
+            "description": "Pilihan terbaik untuk bahasa Inggris. Dipilih otomatis."
           },
           "parakeetV3": {
             "name": "Parakeet TDT v3",
-            "description": "For dictating in other languages, including Spanish, French and German."
+            "description": "Untuk mendikte dalam bahasa lain, termasuk Spanyol, Prancis, dan Jerman."
           },
           "canary": {
             "name": "Canary 180M Flash",
-            "description": "A small download, for older computers or when disk space is low."
+            "description": "Unduhan kecil, untuk komputer lama atau saat ruang disk sedikit."
           },
           "nemotron": {
             "name": "Nemotron 3.5 Streaming",
-            "description": "Shows live text as you speak, but makes more mistakes."
+            "description": "Menampilkan teks langsung saat Anda berbicara, tetapi lebih sering salah."
           }
         }
       }
@@ -564,26 +564,26 @@
       "title": "Bahasa"
     },
     "dictation": {
-      "title": "Continuous Dictation",
-      "description": "Keep talking, and the text is typed into your window each time you pause. Speech recognition stays on this computer, and AI cleanup never runs in this mode.",
+      "title": "Dikte Berkelanjutan",
+      "description": "Terus berbicara, dan teks diketik ke jendela Anda setiap kali Anda jeda. Pengenalan suara tetap di komputer ini, dan pembersihan AI tidak pernah berjalan di mode ini.",
       "dragonKey": {
-        "title": "Dragon's Key",
-        "description": "Use Numpad + to start and stop, as Dragon does. While it's set, that key no longer types a plus sign.",
-        "button": "Use Dragon's key (Numpad +)"
+        "title": "Tombol Dragon",
+        "description": "Gunakan Numpad + untuk mulai dan berhenti, seperti di Dragon. Selama diatur, tombol itu tidak lagi mengetik tanda plus.",
+        "button": "Gunakan tombol Dragon (Numpad +)"
       },
       "pause": {
-        "title": "Pause Length",
-        "description": "How long you pause before what you said is typed. Longer pauses keep sentences together; shorter ones show text sooner.",
+        "title": "Lama Jeda",
+        "description": "Berapa lama Anda jeda sebelum ucapan Anda diketik. Jeda lebih panjang menjaga kalimat tetap utuh; jeda lebih pendek menampilkan teks lebih cepat.",
         "seconds": "{{seconds}} s"
       },
       "autoStop": {
-        "title": "Stop After Silence",
-        "description": "Dictation stops by itself after this long without speech, so the microphone is never left on by accident.",
-        "minutes": "{{minutes}} min"
+        "title": "Berhenti Setelah Hening",
+        "description": "Dikte berhenti sendiri setelah selama ini tanpa ucapan, agar mikrofon tidak pernah tertinggal menyala.",
+        "minutes": "{{minutes}} mnt"
       },
       "voiceCommands": {
-        "label": "Voice Commands",
-        "description": "Say \"new paragraph\" or \"new line\" as you talk, or \"scratch that\" or \"stop dictation\" on its own between pauses, and it acts instead of being typed. Normal sentences with these words are typed as usual."
+        "label": "Perintah Suara",
+        "description": "Ucapkan \"new paragraph\" atau \"new line\" sambil berbicara, atau \"scratch that\" atau \"stop dictation\" sendiri di antara jeda, dan perintah dijalankan alih-alih diketik. Kalimat biasa yang memuat kata-kata ini tetap diketik seperti biasa."
       }
     },
     "sound": {
@@ -646,11 +646,11 @@
       },
       "autostart": {
         "label": "Jalankan saat Komputer Dinyalakan",
-        "description": "Mulai Handy secara otomatis saat Anda masuk ke komputer."
+        "description": "Mulai Kusema secara otomatis saat Anda masuk ke komputer."
       },
       "showTrayIcon": {
         "label": "Tampilkan Ikon Baki Sistem",
-        "description": "Tampilkan ikon Handy di baki sistem."
+        "description": "Tampilkan ikon Kusema di baki sistem."
       },
       "overlay": {
         "style": {
@@ -773,90 +773,90 @@
         }
       },
       "showAllModels": {
-        "label": "Show all models",
-        "description": "List every model on the Models page, with accuracy and speed details, instead of the short list."
+        "label": "Tampilkan semua model",
+        "description": "Tampilkan setiap model di halaman Model, beserta rincian akurasi dan kecepatan, alih-alih daftar singkat."
       }
     },
     "assistant": {
-      "title": "Assistant",
-      "description": "Hold the shortcut, ask a question out loud, and Kusema answers.",
+      "title": "Asisten",
+      "description": "Tahan pintasan, ajukan pertanyaan dengan suara, dan Kusema menjawab.",
       "provider": {
-        "title": "AI Provider",
-        "provider": "Provider",
-        "description": "Assistant mode uses the same provider and API key as Post Process.",
+        "title": "Penyedia AI",
+        "provider": "Penyedia",
+        "description": "Asisten memakai penyedia dan kunci API yang sama dengan Pascaproses.",
         "model": "Model",
-        "modelDescription": "The model that answers your questions. Change it on the Post Process page.",
-        "notSet": "Not chosen",
-        "open": "Open Post Process settings",
-        "disabled": "Assistant mode needs an AI provider (such as Anthropic, OpenAI or a local Ollama model) to answer questions. Providers are set up on the Post Process page, which appears once Post Processing is turned on. Turning it on doesn't change how normal dictation works.",
-        "enable": "Turn on Post Processing",
-        "noProvider": "Choose a provider on the Post Process page.",
-        "noKey": "No API key is set for {{provider}}. Add one on the Post Process page.",
-        "noModel": "Choose a model on the Post Process page."
+        "modelDescription": "Model yang menjawab pertanyaan Anda. Ubah di halaman Pascaproses.",
+        "notSet": "Belum dipilih",
+        "open": "Buka pengaturan Pascaproses",
+        "disabled": "Asisten memerlukan penyedia AI (seperti Anthropic, OpenAI, atau model Ollama lokal) untuk menjawab. Penyedia diatur di halaman Pascaproses, yang muncul setelah pascaproses diaktifkan. Mengaktifkannya tidak mengubah dikte biasa.",
+        "enable": "Aktifkan pascaproses",
+        "noProvider": "Pilih penyedia di halaman Pascaproses.",
+        "noKey": "Belum ada kunci API untuk {{provider}}. Tambahkan di halaman Pascaproses.",
+        "noModel": "Pilih model di halaman Pascaproses."
       },
       "screen": {
-        "title": "Ask About My Screen",
-        "description": "Ask about the window you're working in, like “What do you think of this document?” Only that window is captured, and it stays on this computer until you press Send.",
+        "title": "Tanya Tentang Layar Saya",
+        "description": "Tanyakan tentang jendela yang sedang Anda kerjakan, misalnya \"Apa pendapatmu tentang dokumen ini?\" Hanya jendela itu yang ditangkap, dan tetap di komputer ini sampai Anda menekan Kirim.",
         "confirm": {
-          "label": "Confirm Before Sending Screenshots",
-          "description": "Show the screenshot, your question and where it will go, then wait for Send (Enter) or Cancel (Escape). Unanswered, it cancels after 30 seconds.",
-          "offWarning": "Screenshots will be sent to {{provider}} as soon as you finish speaking, without showing you first. Everything visible in the window goes with them, including private or confidential information."
+          "label": "Konfirmasi Sebelum Mengirim Tangkapan Layar",
+          "description": "Menampilkan tangkapan layar, pertanyaan Anda, dan tujuannya, lalu menunggu Kirim (Enter) atau Batal (Esc). Jika tidak dijawab, dibatalkan setelah 30 detik.",
+          "offWarning": "Tangkapan layar akan dikirim ke {{provider}} begitu Anda selesai berbicara, tanpa ditampilkan dulu. Semua yang terlihat di jendela ikut terkirim, termasuk informasi pribadi atau rahasia."
         },
         "provider": {
-          "label": "Use for Screen Questions",
-          "description": "Send screenshots to a different provider than normal questions, for example a local vision model in Ollama (the Custom provider) for confidential documents. Follow-up questions go to the same provider until you start a new conversation.",
-          "same": "Same as Assistant",
-          "sameNamed": "Same as Assistant ({{provider}})",
-          "yourProvider": "your AI provider"
+          "label": "Gunakan untuk Pertanyaan Layar",
+          "description": "Kirim tangkapan layar ke penyedia yang berbeda dari pertanyaan biasa, misalnya model visi lokal di Ollama (penyedia Kustom) untuk dokumen rahasia. Pertanyaan lanjutan dikirim ke penyedia yang sama sampai Anda memulai percakapan baru.",
+          "same": "Sama dengan Asisten",
+          "sameNamed": "Sama dengan Asisten ({{provider}})",
+          "yourProvider": "penyedia AI Anda"
         },
         "model": {
-          "label": "Model for Screen Questions",
-          "description": "A model that can see images. Leave empty to use the model chosen for this provider on the Post Process page.",
-          "placeholder": "e.g. qwen2.5vl"
+          "label": "Model untuk Pertanyaan Layar",
+          "description": "Model yang dapat melihat gambar. Biarkan kosong untuk memakai model yang dipilih untuk penyedia ini di halaman Pascaproses.",
+          "placeholder": "mis. qwen2.5vl"
         }
       },
       "conversation": {
-        "empty": "Ask a question with the Ask Kusema shortcut. The conversation will appear here.",
-        "new": "New conversation",
-        "screenshot": "Screenshot",
-        "noProvider": "Ask Kusema needs an AI model to answer. Choose one in Settings.",
-        "openSettings": "Open Settings"
+        "empty": "Ajukan pertanyaan dengan pintasan Tanya Kusema. Percakapan akan muncul di sini.",
+        "new": "Percakapan baru",
+        "screenshot": "Tangkapan layar",
+        "noProvider": "Tanya Kusema memerlukan model AI untuk menjawab. Pilih satu di Pengaturan.",
+        "openSettings": "Buka Pengaturan"
       },
       "voice": {
-        "title": "Voice",
-        "systemDefault": "System default",
-        "previewText": "Hi, I'm Kusema. This is how I'll sound when I answer your questions.",
+        "title": "Suara",
+        "systemDefault": "Bawaan sistem",
+        "previewText": "Halo, saya Kusema. Beginilah suara saya saat menjawab pertanyaan Anda.",
         "speakReplies": {
-          "label": "Speak Replies",
-          "description": "Read replies aloud as they arrive. Press Cancel (Escape), start a new recording, or start a new conversation to stop."
+          "label": "Bacakan Jawaban",
+          "description": "Membacakan jawaban begitu tiba. Tekan Batal (Esc), mulai rekaman baru, atau mulai percakapan baru untuk berhenti."
         },
         "voice": {
-          "label": "Voice",
-          "description": "Kokoro voices sound the most natural; download them above. The other voices come with your computer (on Windows, add more under Settings > Time & language > Speech)."
+          "label": "Suara",
+          "description": "Suara Kokoro terdengar paling alami; unduh di atas. Suara lainnya bawaan komputer Anda (di Windows, tambahkan lagi di Pengaturan > Waktu & bahasa > Ucapan)."
         },
         "kokoro": {
-          "label": "Kokoro Voices",
-          "description": "28 natural-sounding English voices (US and UK) generated on this computer. A one-time download.",
-          "installed": "Installed. Pick a Kokoro voice below. Removing them frees the disk space; replies then use the system voice.",
-          "download": "Download ({{size}} MB)",
-          "downloading": "Downloading… {{percentage}}%",
-          "cancel": "Cancel",
-          "delete": "Remove"
+          "label": "Suara Kokoro",
+          "description": "28 suara bahasa Inggris yang terdengar alami (AS dan Inggris), dibuat di komputer ini. Unduhan satu kali.",
+          "installed": "Terpasang. Pilih suara Kokoro di bawah. Menghapusnya mengosongkan ruang disk; jawaban lalu memakai suara sistem.",
+          "download": "Unduh ({{size}} MB)",
+          "downloading": "Mengunduh… {{percentage}}%",
+          "cancel": "Batal",
+          "delete": "Hapus"
         },
         "rate": {
-          "label": "Speaking Rate",
-          "description": "How fast replies are read. 1.00× is the voice's normal speed."
+          "label": "Kecepatan Bicara",
+          "description": "Seberapa cepat jawaban dibacakan. 1,00× adalah kecepatan normal suara."
         },
         "preview": {
-          "label": "Preview Voice",
-          "description": "Hear the selected voice at the selected speed.",
-          "button": "Preview"
+          "label": "Dengarkan Suara",
+          "description": "Dengarkan suara yang dipilih pada kecepatan yang dipilih.",
+          "button": "Dengarkan"
         }
       },
       "tabs": {
-        "label": "Assistant",
-        "conversation": "Conversation",
-        "settings": "Settings"
+        "label": "Asisten",
+        "conversation": "Percakapan",
+        "settings": "Pengaturan"
       }
     },
     "postProcessing": {
@@ -973,7 +973,7 @@
       },
       "updateChecks": {
         "label": "Periksa Pembaruan",
-        "description": "Periksa versi baru Handy secara otomatis",
+        "description": "Periksa versi baru Kusema secara otomatis",
         "lockedDescription": "Dinonaktifkan oleh konfigurasi sistem (HANDY_DISABLE_UPDATER)"
       },
       "whatsNewPreview": {
@@ -992,9 +992,9 @@
           "welcome": "Selamat datang",
           "permissions": "Izin",
           "done": "Selesai",
-          "microphone": "Microphone",
-          "practice": "Practice",
-          "assistant": "AI assistant"
+          "microphone": "Mikrofon",
+          "practice": "Latihan",
+          "assistant": "Asisten AI"
         }
       },
       "onboardingRun": {
@@ -1040,8 +1040,8 @@
         "description": "Mikrofon yang digunakan saat laptop ditutup"
       },
       "postProcessingToggle": {
-        "label": "AI Cleanup",
-        "description": "Optional. Rewrites dictated text with an AI model when you use the AI cleanup shortcut: fixes self-corrections and grammar, keeps your meaning, and never adds facts."
+        "label": "Pembersihan AI",
+        "description": "Opsional. Menulis ulang teks yang didiktekan dengan model AI saat Anda memakai pintasan pembersihan AI: memperbaiki ralat diri dan tata bahasa, mempertahankan maksud Anda, dan tidak pernah menambahkan fakta."
       },
       "muteWhileRecording": {
         "label": "Bisukan Saat Merekam",
@@ -1057,7 +1057,7 @@
         "bindingsReset": "Pintasan keyboard tidak kompatibel dan telah dikembalikan ke nilai awal",
         "options": {
           "tauri": "Tauri Global Shortcut",
-          "builtIn": "Built-in (recommended)"
+          "builtIn": "Bawaan (disarankan)"
         }
       },
       "pasteDelay": {
@@ -1086,7 +1086,7 @@
       },
       "keyboardDiagnostic": {
         "title": "Diagnostik Keyboard",
-        "description": "Memeriksa apakah peristiwa keyboard mencapai Handy. Hanya jumlah peristiwa yang dicatat — bukan tombol yang Anda tekan.",
+        "description": "Memeriksa apakah peristiwa keyboard mencapai Kusema. Hanya jumlah peristiwa yang dicatat — bukan tombol yang Anda tekan.",
         "run": "Jalankan diagnostik 10 dtk",
         "running": "Mendengarkan… tekan pintasan Anda beberapa kali (mis. Option+Space)",
         "secureInputLabel": "Secure Input",
@@ -1100,7 +1100,7 @@
         "mouse": "Mouse",
         "verdictBlocked": "Secure Input memblokir peristiwa tombol — pintasan keyboard tidak dapat berfungsi sampai masalah ini diselesaikan.",
         "verdictSuspicious": "Peristiwa tombol pengubah diterima, tetapi tidak ada peristiwa tombol — sesuatu memblokir input tombol meskipun Secure Input dilaporkan nonaktif. Harap laporkan ini di GitHub.",
-        "verdictOk": "Peristiwa tombol mencapai Handy secara normal.",
+        "verdictOk": "Peristiwa tombol mencapai Kusema secara normal.",
         "verdictNoEvents": "Tidak ada peristiwa yang tertangkap — apakah Anda menekan tombol selama pengujian?",
         "failed": "Diagnostik gagal: {{error}}"
       }
@@ -1109,203 +1109,203 @@
       "title": "Tentang",
       "version": {
         "title": "Versi",
-        "description": "Versi Handy saat ini"
+        "description": "Versi Kusema saat ini"
       },
       "whatsNewUpdates": {
         "label": "Tampilkan Yang Baru",
-        "description": "Tampilkan catatan rilis setelah Handy diperbarui"
+        "description": "Tampilkan catatan rilis setelah Kusema diperbarui"
       },
       "appDataDirectory": {
         "title": "Direktori Data Aplikasi",
-        "description": "Lokasi Handy menyimpan datanya"
+        "description": "Lokasi Kusema menyimpan datanya"
       },
       "sourceCode": {
         "title": "Kode Sumber",
-        "description": "View Kusema's source code",
+        "description": "Lihat kode sumber Kusema",
         "button": "Lihat di GitHub"
       },
       "acknowledgments": {
         "ggml": {
           "title": "ggml",
           "description": "Pustaka tensor berkinerja tinggi untuk inferensi pembelajaran mesin di perangkat",
-          "details": "Fitur ucapan-ke-teks lokal Handy dibangun menggunakan transcribe.cpp dan ggml. Terima kasih kepada Georgi Gerganov dan para kontributor atas karya luar biasa mereka."
+          "details": "Fitur ucapan-ke-teks lokal Kusema dibangun menggunakan transcribe.cpp dan ggml. Terima kasih kepada Georgi Gerganov dan para kontributor atas karya luar biasa mereka."
         }
       },
       "organizations": {
-        "title": "Kusema for organizations",
-        "description": "Setup, support and options for firms",
-        "button": "Learn more"
+        "title": "Kusema untuk organisasi",
+        "description": "Penyiapan, dukungan, dan opsi untuk kantor hukum",
+        "button": "Pelajari lebih lanjut"
       },
       "report": {
-        "title": "Report a problem or suggest a feature",
-        "description": "Tell us on GitHub what went wrong or what you'd like",
-        "button": "Open GitHub"
+        "title": "Laporkan masalah atau sarankan fitur",
+        "description": "Ceritakan di GitHub apa yang salah atau apa yang Anda inginkan",
+        "button": "Buka GitHub"
       },
       "credits": {
-        "title": "Credits and licenses",
+        "title": "Kredit dan lisensi",
         "handy": {
-          "title": "Built on Handy",
-          "description": "Kusema is built on Handy by CJ Pais, used under the MIT License.",
-          "button": "View Handy"
+          "title": "Dibangun di atas Handy",
+          "description": "Kusema dibangun di atas Handy karya CJ Pais, digunakan di bawah Lisensi MIT.",
+          "button": "Lihat Handy"
         },
         "nvidiaLicense": "NVIDIA Open Model License",
-        "models": "Speech and voice models ({{count}})",
-        "components": "Open-source components ({{count}})",
-        "notices": "Full license texts",
-        "loading": "Loading..."
+        "models": "Model ucapan dan suara ({{count}})",
+        "components": "Komponen sumber terbuka ({{count}})",
+        "notices": "Teks lisensi lengkap",
+        "loading": "Memuat..."
       }
     },
     "privacy": {
-      "thisComputer": "This computer ({{host}})",
-      "nothingSent": "Nothing to show yet.",
-      "updateBlocked": "Update checks are blocked in Privileged mode.",
+      "thisComputer": "Komputer ini ({{host}})",
+      "nothingSent": "Belum ada yang ditampilkan.",
+      "updateBlocked": "Pemeriksaan pembaruan diblokir dalam mode Privileged.",
       "audio": {
-        "title": "Audio sent off this computer: 0 bytes",
-        "description": "Speech recognition runs on this computer, and nothing in Kusema can upload your voice. Only the text of what you say, and only for features you choose, ever goes to an AI provider."
+        "title": "Audio yang dikirim dari komputer ini: 0 byte",
+        "description": "Pengenalan suara berjalan di komputer ini, dan tidak ada apa pun di Kusema yang dapat mengunggah suara Anda. Hanya teks dari ucapan Anda, dan hanya untuk fitur yang Anda pilih, yang pernah dikirim ke penyedia AI."
       },
       "privileged": {
-        "title": "Privileged Mode",
-        "description": "For confidential matters. While it's on, nothing you say, type or show goes to a cloud AI service. Ask Kusema and AI cleanup only work with a model running on this computer.",
+        "title": "Mode Privileged",
+        "description": "Untuk urusan rahasia. Selama aktif, tidak ada yang Anda ucapkan, ketik, atau tampilkan yang dikirim ke layanan AI cloud. Tanya Kusema dan pembersihan AI hanya berfungsi dengan model di komputer ini.",
         "chip": "Privileged",
         "toggle": {
-          "label": "Privileged Mode",
-          "description": "Blocks every request to cloud AI providers, including ones already set up. Dictation keeps working, because it never uses the cloud."
+          "label": "Mode Privileged",
+          "description": "Memblokir setiap permintaan ke penyedia AI cloud, termasuk yang sudah disiapkan. Dikte tetap berfungsi, karena tidak pernah memakai cloud."
         },
         "allowLan": {
-          "label": "Allow Local Network AI Servers",
-          "description": "Also allows AI servers on your office network, by private address (like 192.168.1.20). Models on this computer are always allowed."
+          "label": "Izinkan Server AI di Jaringan Lokal",
+          "description": "Juga mengizinkan server AI di jaringan kantor Anda, melalui alamat pribadi (seperti 192.168.1.20). Model di komputer ini selalu diizinkan."
         },
         "blockDownloads": {
-          "label": "Also Block Downloads and Update Checks",
-          "description": "For offline offices. Model and voice downloads and update checks carry none of your content, so they normally stay allowed and are listed below. Turn this on to stop them too while Privileged mode is on."
+          "label": "Blokir Juga Unduhan dan Pemeriksaan Pembaruan",
+          "description": "Untuk kantor tanpa internet. Unduhan model dan suara serta pemeriksaan pembaruan tidak membawa konten Anda, jadi biasanya tetap diizinkan dan tercantum di bawah. Aktifkan ini untuk menghentikannya juga selama mode Privileged aktif."
         },
         "hotkey": {
-          "label": "Privileged Mode Shortcut",
-          "description": "Adds a keyboard shortcut that turns Privileged mode on or off. Off by default, so it can't be pressed by accident."
+          "label": "Pintasan Mode Privileged",
+          "description": "Menambahkan pintasan keyboard yang mengaktifkan atau menonaktifkan mode Privileged. Nonaktif secara bawaan, agar tidak tertekan tanpa sengaja."
         }
       },
       "counts": {
-        "title": "Where Requests Went",
-        "today": "Today",
-        "week": "Last 7 days"
+        "title": "Ke Mana Permintaan Dikirim",
+        "today": "Hari ini",
+        "week": "7 hari terakhir"
       },
       "columns": {
-        "time": "Time",
-        "destination": "Destination",
-        "purpose": "Why",
+        "time": "Waktu",
+        "destination": "Tujuan",
+        "purpose": "Alasan",
         "data": "Data",
-        "size": "Size",
-        "result": "Result"
+        "size": "Ukuran",
+        "result": "Hasil"
       },
       "purposes": {
-        "assistant_question": "Question to Kusema",
-        "screen_question": "Question about the screen",
-        "post_processing": "AI cleanup",
-        "provider_models": "Listing a provider's models",
-        "model_download": "Speech model download",
-        "voice_download": "Voice download",
-        "update_check": "Update check"
+        "assistant_question": "Pertanyaan untuk Kusema",
+        "screen_question": "Pertanyaan tentang layar",
+        "post_processing": "Pembersihan AI",
+        "provider_models": "Mengambil daftar model penyedia",
+        "model_download": "Unduhan model ucapan",
+        "voice_download": "Unduhan suara",
+        "update_check": "Pemeriksaan pembaruan"
       },
       "data": {
-        "text": "Text",
-        "image": "Screenshot",
-        "none": "None of yours"
+        "text": "Teks",
+        "image": "Tangkapan layar",
+        "none": "Tidak ada milik Anda"
       },
       "results": {
-        "sent": "Sent",
-        "blocked": "Blocked",
-        "failed": "Failed"
+        "sent": "Terkirim",
+        "blocked": "Diblokir",
+        "failed": "Gagal"
       },
       "list": {
-        "title": "Every Request",
-        "description": "Each request Kusema has made: when, where, why, what kind of data and how large. What was in it is never recorded. Shows the latest 500; the export has them all.",
-        "all": "All",
-        "allPurposes": "Any reason",
-        "allResults": "Any result",
-        "allDestinations": "Any destination",
-        "anyTime": "Any time",
-        "lastDays_one": "Last {{count}} day",
-        "lastDays_other": "Last {{count}} days",
-        "export": "Export CSV",
-        "exported_one": "Exported {{count}} request.",
-        "exported_other": "Exported {{count}} requests.",
-        "clear": "Clear",
+        "title": "Semua Permintaan",
+        "description": "Setiap permintaan yang dibuat Kusema: kapan, ke mana, untuk apa, jenis data apa, dan seberapa besar. Isinya tidak pernah dicatat. Menampilkan 500 terbaru; ekspor berisi semuanya.",
+        "all": "Semua",
+        "allPurposes": "Alasan apa pun",
+        "allResults": "Hasil apa pun",
+        "allDestinations": "Tujuan apa pun",
+        "anyTime": "Kapan pun",
+        "lastDays_one": "{{count}} hari terakhir",
+        "lastDays_other": "{{count}} hari terakhir",
+        "export": "Ekspor CSV",
+        "exported_one": "{{count}} permintaan diekspor.",
+        "exported_other": "{{count}} permintaan diekspor.",
+        "clear": "Hapus",
         "retention": {
-          "title": "Keep This List For",
-          "description": "Older entries are deleted from this computer automatically.",
-          "days_one": "{{count}} day",
-          "days_other": "{{count}} days"
+          "title": "Simpan Daftar Ini Selama",
+          "description": "Entri lama dihapus dari komputer ini secara otomatis.",
+          "days_one": "{{count}} hari",
+          "days_other": "{{count}} hari"
         }
       }
     },
     "cleanup": {
-      "title": "Cleanup",
-      "description": "Dictated text should need little editing. Local cleanup runs on this computer and sends nothing anywhere.",
+      "title": "Pembersihan",
+      "description": "Teks hasil dikte seharusnya hanya perlu sedikit penyuntingan. Pembersihan lokal berjalan di komputer ini dan tidak mengirim apa pun.",
       "local": {
-        "label": "Local Cleanup",
-        "description": "Removes filler words, adds missing periods between phrases in continuous dictation, and handles spoken punctuation, all on this computer. Off, your words are typed as transcribed."
+        "label": "Pembersihan Lokal",
+        "description": "Menghapus kata pengisi, menambahkan titik yang hilang antarfrasa dalam dikte berkelanjutan, dan menangani tanda baca yang diucapkan, semuanya di komputer ini. Jika nonaktif, kata-kata Anda diketik sesuai transkripsinya."
       },
       "spokenPunctuation": {
-        "label": "Spoken Punctuation",
-        "description": "Say \"comma\", \"period\", \"question mark\", \"colon\", \"open quote\", \"close paren\", \"dash\", \"section symbol\" and more, as in Dragon. \"Period\" only counts at the end of a phrase, so \"the limitations period expired\" stays as words. Say \"literal period\" to type the word."
+        "label": "Tanda Baca Lisan",
+        "description": "Ucapkan \"comma\", \"period\", \"question mark\", \"colon\", \"open quote\", \"close paren\", \"dash\", \"section symbol\", dan lainnya, seperti di Dragon. \"Period\" hanya dihitung di akhir frasa, jadi \"the limitations period expired\" tetap berupa kata. Ucapkan \"literal period\" untuk mengetik katanya. Perintah ini berfungsi dalam bahasa Inggris."
       },
       "ai": {
         "status": {
-          "noProvider": "No AI provider is set up yet.",
-          "noKey": "{{provider}} needs an API key.",
-          "noModel": "{{provider}} needs a model chosen.",
-          "local": "Using {{model}} on this computer through {{provider}}. Nothing leaves this computer.",
-          "cloud": "Using {{model}} from {{provider}}, a cloud service. Text you clean up goes to {{provider}}.",
-          "blocked": "Privileged mode is on, so nothing will be sent to {{provider}}. Use a local model or turn off Privileged mode."
+          "noProvider": "Belum ada penyedia AI yang disiapkan.",
+          "noKey": "{{provider}} memerlukan kunci API.",
+          "noModel": "{{provider}} perlu dipilihkan model.",
+          "local": "Menggunakan {{model}} di komputer ini melalui {{provider}}. Tidak ada yang meninggalkan komputer ini.",
+          "cloud": "Menggunakan {{model}} dari {{provider}}, layanan cloud. Teks yang Anda bersihkan dikirim ke {{provider}}.",
+          "blocked": "Mode Privileged aktif, jadi tidak ada yang akan dikirim ke {{provider}}. Gunakan model lokal atau nonaktifkan mode Privileged."
         },
-        "recommendLocal": "We recommend a model that runs on this computer, such as one in Ollama, so confidential text stays here. AI cleanup runs when you dictate with its own shortcut, and never during continuous dictation.",
-        "setUp": "Set Up AI Cleanup"
+        "recommendLocal": "Kami menyarankan model yang berjalan di komputer ini, seperti model di Ollama, agar teks rahasia tetap di sini. Pembersihan AI berjalan saat Anda mendikte dengan pintasannya sendiri, dan tidak pernah selama dikte berkelanjutan.",
+        "setUp": "Siapkan Pembersihan AI"
       }
     },
     "firstWins": {
-      "title": "First three wins",
-      "dismiss": "Dismiss",
-      "dictated": "Dictate an email",
-      "newParagraph": "Use continuous dictation and say \"new paragraph\"",
-      "asked": "Ask Kusema a question",
-      "done": "Done",
-      "notDone": "Not done yet",
-      "progress": "{{done}} of {{count}} done",
-      "allDone": "All three done. Nice work."
+      "title": "Tiga keberhasilan pertama",
+      "dismiss": "Tutup",
+      "dictated": "Diktekan email",
+      "newParagraph": "Gunakan dikte berkelanjutan dan ucapkan \"new paragraph\"",
+      "asked": "Ajukan pertanyaan ke Kusema",
+      "done": "Selesai",
+      "notDone": "Belum selesai",
+      "progress": "{{done}} dari {{count}} selesai",
+      "allDone": "Ketiganya selesai. Kerja bagus."
     },
     "glow": {
-      "title": "Recording indicator",
-      "description": "A glow around the edges of your screen shows that Kusema is listening. Only you see it: it stays out of screenshots and screen shares.",
+      "title": "Indikator perekaman",
+      "description": "Cahaya di tepi layar menunjukkan bahwa Kusema sedang mendengarkan. Hanya Anda yang melihatnya: cahaya ini tidak muncul di tangkapan layar atau saat berbagi layar.",
       "enabled": {
-        "label": "Screen glow",
-        "description": "Show a colored glow around the screen you're working on while Kusema is listening. You can still click and type through it."
+        "label": "Cahaya layar",
+        "description": "Tampilkan cahaya berwarna di sekeliling layar yang sedang Anda kerjakan selama Kusema mendengarkan. Anda tetap bisa mengklik dan mengetik melewatinya."
       },
       "thickness": {
-        "label": "Thickness",
-        "description": "How far the glow reaches in from the edge of the screen."
+        "label": "Ketebalan",
+        "description": "Seberapa jauh cahaya menjangkau dari tepi layar."
       },
       "intensity": {
-        "label": "Intensity",
-        "description": "How strong the glow is."
+        "label": "Intensitas",
+        "description": "Seberapa kuat cahayanya."
       },
       "palette": {
-        "label": "Colors",
-        "description": "The color-blind friendly set keeps the modes easy to tell apart with every common kind of color blindness.",
-        "standard": "Standard",
-        "color_blind": "Color-blind friendly"
+        "label": "Warna",
+        "description": "Warna yang ramah buta warna membuat mode tetap mudah dibedakan untuk semua jenis buta warna yang umum.",
+        "standard": "Standar",
+        "color_blind": "Ramah buta warna"
       },
       "modes": {
-        "dictation": "Dictation",
-        "continuous": "Continuous dictation",
-        "ask": "Ask Kusema",
-        "ask_screen": "Ask about my screen",
-        "paused": "Continuous dictation paused (window changed)"
+        "dictation": "Dikte",
+        "continuous": "Dikte berkelanjutan",
+        "ask": "Tanya Kusema",
+        "ask_screen": "Tanya tentang layar saya",
+        "paused": "Dikte berkelanjutan dijeda (jendela berganti)"
       },
-      "preview": "Preview",
-      "previewLabel": "Preview the glow for {{mode}}",
+      "preview": "Pratinjau",
+      "previewLabel": "Pratinjau cahaya untuk {{mode}}",
       "sounds": {
-        "label": "Continuous dictation sounds",
-        "description": "Play a short sound when continuous dictation starts and stops. Sounds for other dictation are under Sound below."
+        "label": "Suara dikte berkelanjutan",
+        "description": "Putar suara singkat saat dikte berkelanjutan dimulai dan berhenti. Suara untuk dikte lainnya ada di bagian Suara di bawah."
       }
     }
   },
@@ -1325,7 +1325,7 @@
     "portableUpdateBrowseButton": "Buka GitHub Releases"
   },
   "whatsNew": {
-    "title": "Baru di Handy v{{version}}"
+    "title": "Baru di Kusema v{{version}}"
   },
   "common": {
     "loading": "Memuat...",
@@ -1356,11 +1356,11 @@
   },
   "appLanguage": {
     "title": "Bahasa Aplikasi",
-    "description": "Ubah bahasa antarmuka Handy"
+    "description": "Ubah bahasa antarmuka Kusema"
   },
   "theme": {
     "title": "Tema Aplikasi",
-    "description": "Pilih apakah Handy mengikuti tema sistem atau selalu menggunakan tema terang atau gelap",
+    "description": "Pilih apakah Kusema mengikuti tema sistem atau selalu menggunakan tema terang atau gelap",
     "options": {
       "system": "Sistem",
       "light": "Terang",
@@ -1371,38 +1371,38 @@
     "transcribing": "Mentranskripsikan...",
     "processing": "Memproses...",
     "loadingModel": "Memuat model...",
-    "speaking": "Speaking...",
+    "speaking": "Berbicara...",
     "dictation": {
-      "dictating": "Dictating",
-      "paused": "Paused, window changed",
-      "noTarget": "Click where the text should go",
-      "finishing": "Finishing...",
-      "stop": "Stop",
-      "nothingToScratch": "Nothing to scratch",
-      "scratchWindowChanged": "Can't scratch: the window changed",
-      "scratchOtherInput": "Can't scratch: keyboard or mouse used",
-      "savedToHistory": "Said while paused: saved in History",
-      "stoppedSilence": "Stopped after silence",
-      "microphoneLost": "Stopped: microphone lost",
-      "cantKeepUp": "Stopped: this computer couldn't keep up",
-      "transcriptionFailed": "Couldn't transcribe that",
-      "pasteFailed": "Couldn't type that; it's in History"
+      "dictating": "Mendikte",
+      "paused": "Dijeda, jendela berganti",
+      "noTarget": "Klik tempat teks akan dimasukkan",
+      "finishing": "Menyelesaikan...",
+      "stop": "Berhenti",
+      "nothingToScratch": "Tidak ada yang bisa dihapus",
+      "scratchWindowChanged": "Tidak bisa menghapus: jendela berganti",
+      "scratchOtherInput": "Tidak bisa menghapus: keyboard atau mouse digunakan",
+      "savedToHistory": "Diucapkan saat jeda: disimpan di Riwayat",
+      "stoppedSilence": "Berhenti setelah hening",
+      "microphoneLost": "Berhenti: mikrofon terputus",
+      "cantKeepUp": "Berhenti: komputer ini tidak sanggup mengikuti",
+      "transcriptionFailed": "Tidak dapat mentranskripsikan itu",
+      "pasteFailed": "Tidak dapat mengetik itu; tersimpan di Riwayat"
     },
     "privileged": "Privileged"
   },
   "screenCard": {
-    "title": "Send this screenshot?",
-    "autoCancel": "Cancels in {{seconds}} s",
-    "enlarge": "Click to enlarge",
-    "shrink": "Click to make smaller",
-    "imageAlt": "Screenshot of the window you asked about",
+    "title": "Kirim tangkapan layar ini?",
+    "autoCancel": "Dibatalkan dalam {{seconds}} dtk",
+    "enlarge": "Klik untuk memperbesar",
+    "shrink": "Klik untuk memperkecil",
+    "imageAlt": "Tangkapan layar jendela yang Anda tanyakan",
     "question": "“{{question}}”",
-    "sendsTo": "Goes to {{provider}} · {{model}}",
-    "onlyThis": "Only this window. Nothing is sent until you press Send.",
-    "send": "Send",
-    "cancel": "Cancel",
+    "sendsTo": "Dikirim ke {{provider}} · {{model}}",
+    "onlyThis": "Hanya jendela ini. Tidak ada yang dikirim sampai Anda menekan Kirim.",
+    "send": "Kirim",
+    "cancel": "Batal",
     "noticeTitle": "Kusema",
-    "close": "Close"
+    "close": "Tutup"
   },
   "secureInput": {
     "blockedWithCulprit_one": "{{name}} mungkin memblokir 1 pintasan",

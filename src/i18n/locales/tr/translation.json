@@ -8,25 +8,25 @@
     "quit": "Çıkış",
     "cancel": "İptal",
     "secureInputWarning": "⚠ Kısayollar Secure Input tarafından engelleniyor",
-    "privilegedMode": "Privileged Mode",
-    "privilegedOn": "Privileged mode on"
+    "privilegedMode": "Privileged Modu",
+    "privilegedOn": "Privileged modu açık"
   },
   "sidebar": {
     "general": "Genel",
-    "assistant": "Assistant",
+    "assistant": "Asistan",
     "models": "Modeller",
     "advanced": "Gelişmiş",
     "postProcessing": "Son İşlem",
     "history": "Geçmiş",
     "debug": "Hata Ayıklama",
     "about": "Hakkında",
-    "privacy": "Privacy"
+    "privacy": "Gizlilik"
   },
   "onboarding": {
     "customModelDescription": "Resmi olarak desteklenmiyor",
     "migration": {
       "title": "Modellerinizin güncellenmesi gerekiyor",
-      "description": "Handy artık daha yeni bir model türü kullanıyor. Transkripsiyona devam etmek için yeni sürümü indirin. Eski sürümler kaldırılacak.",
+      "description": "Kusema artık daha yeni bir model türü kullanıyor. Transkripsiyona devam etmek için yeni sürümü indirin. Eski sürümler kaldırılacak.",
       "replaces": "{{name}} yerine geçer",
       "oldFormat": "Eski format",
       "failed": "İndirme başarısız oldu",
@@ -63,11 +63,11 @@
     "permissions": {
       "microphone": {
         "name": "Mikrofon",
-        "why": "Handy sizi duyabilsin diye. Ses bu bilgisayarda metne dönüştürülür, hiçbir yere yüklenmez."
+        "why": "Kusema sizi duyabilsin diye. Ses bu bilgisayarda metne dönüştürülür, hiçbir yere yüklenmez."
       },
       "accessibility": {
         "name": "Erişilebilirlik",
-        "why": "Kısayolunuz her uygulamada çalışsın ve Handy metni imlecinizin bulunduğu yere yazabilsin diye."
+        "why": "Kısayolunuz her uygulamada çalışsın ve Kusema metni imlecinizin bulunduğu yere yazabilsin diye."
       },
       "errors": {
         "checkFailed": "İzinler kontrol edilemedi. Lütfen tekrar deneyin.",
@@ -81,12 +81,12 @@
       "openSettings": "Ayarları aç",
       "allowed": "İzin verildi",
       "waiting": "Bekleniyor",
-      "turnOnMac": "Sistem Ayarları'nda Handy'yi açın, sonra buraya dönün.",
+      "turnOnMac": "Sistem Ayarları'nda Kusema'yi açın, sonra buraya dönün.",
       "turnOnWindows": "Windows Ayarları'nda mikrofon erişimini açın, sonra buraya dönün.",
       "hintBoth": "Devam etmek için ikisine de izin verin",
       "hintMicrophone": "Devam etmek için mikrofona izin verin",
       "welcomeBack": "Tekrar hoş geldiniz. Kaldığınız yerden devam ediyoruz.",
-      "relaunch": "Bundan sonra kısayol yanıt vermiyor mu? <relaunch>Handy'yi yeniden başlatın</relaunch>, doğrudan buraya döneceksiniz."
+      "relaunch": "Bundan sonra kısayol yanıt vermiyor mu? <relaunch>Kusema'yi yeniden başlatın</relaunch>, doğrudan buraya döneceksiniz."
     },
     "shell": {
       "back": "Geri",
@@ -97,11 +97,11 @@
       "title": "Yazmak yerine konuşun, her uygulamada",
       "subtitle": "Konuşacağınız dilleri seçin",
       "languagesLabel": "Diller",
-      "noMatch": "“{{query}}” ile eşleşen dil yok. Handy'nin modelleri yaklaşık 100 dili kapsıyor; daha fazlası ayarlarda.",
+      "noMatch": "“{{query}}” ile eşleşen dil yok. Kusema'nin modelleri yaklaşık 100 dili kapsıyor; daha fazlası ayarlarda.",
       "appLanguage": "Uygulama dili",
       "menusIn": "Menüler <b>{{language}}</b> dilinde",
       "chinese": {
-        "question": "{{languages}} konuşuyorsunuz. Handy hangi karakterleri yazsın?",
+        "question": "{{languages}} konuşuyorsunuz. Kusema hangi karakterleri yazsın?",
         "label": "Çince karakterler",
         "zh-Hans": "Basitleştirilmiş",
         "zh-Hant": "Tayvan",
@@ -171,7 +171,7 @@
     },
     "try": {
       "title": "Bir deneyin!",
-      "subtitle": "Handy köşede, size yol göstermek için hazır",
+      "subtitle": "Kusema köşede, size yol göstermek için hazır",
       "noteLabel": "Not",
       "placeholder": "Yeni not",
       "hold": "<keys/> tuşlarını basılı tutun ve konuşun.",
@@ -199,14 +199,14 @@
     },
     "done": {
       "title": "Hazırsınız",
-      "subMac": "Handy artık menü çubuğunuzda. Konuşmak için herhangi bir uygulamada <keys/> tuşlarını basılı tutun veya dokunun.",
-      "subTray": "Handy artık sistem tepsinizde. Konuşmak için herhangi bir uygulamada <keys/> tuşlarını basılı tutun veya dokunun.",
+      "subMac": "Kusema artık menü çubuğunuzda. Konuşmak için herhangi bir uygulamada <keys/> tuşlarını basılı tutun veya dokunun.",
+      "subTray": "Kusema artık sistem tepsinizde. Konuşmak için herhangi bir uygulamada <keys/> tuşlarını basılı tutun veya dokunun.",
       "hint": "Bunları daha sonra Ayarlar'dan değiştirebilirsiniz",
       "highFiveLabel": "Çak bir beşlik",
-      "atLogin": "Oturum açtığımda Handy'yi başlat",
+      "atLogin": "Oturum açtığımda Kusema'yi başlat",
       "finish": "Bitti",
       "panel": {
-        "name": "Handy",
+        "name": "Kusema",
         "ready": "Hazır",
         "languages": "Diller",
         "model": "Konuşma modeli",
@@ -220,79 +220,79 @@
       "done": "Diğer uygulamalarda çalışmıyor mu? <guide>Linux kurulum rehberi</guide>"
     },
     "setup": {
-      "retryDownload": "Try again",
+      "retryDownload": "Tekrar dene",
       "welcome": {
-        "title": "Kusema turns your voice into text on this computer.",
-        "privacy": "Your voice never leaves it.",
-        "language": "Language you'll dictate in"
+        "title": "Kusema sesinizi bu bilgisayarda metne dönüştürür.",
+        "privacy": "Sesiniz bilgisayardan hiç çıkmaz.",
+        "language": "Dikte edeceğiniz dil"
       },
       "microphone": {
-        "title": "Choose your microphone",
-        "sub": "Say something. The bar should move as you speak.",
-        "label": "Microphone",
-        "meter": "Microphone level",
-        "heard": "Kusema can hear you.",
-        "quiet": "No sound yet. Check that this microphone isn't muted, or choose another one.",
-        "failed": "Kusema couldn't open this microphone. Choose another one.",
-        "tip": "Tip: a headset gives the best accuracy and fewer stray words."
+        "title": "Mikrofonunuzu seçin",
+        "sub": "Bir şey söyleyin. Siz konuşurken çubuk hareket etmeli.",
+        "label": "Mikrofon",
+        "meter": "Mikrofon seviyesi",
+        "heard": "Kusema sizi duyuyor.",
+        "quiet": "Henüz ses yok. Bu mikrofonun sessize alınmadığını kontrol edin ya da başka birini seçin.",
+        "failed": "Kusema bu mikrofonu açamadı. Başka birini seçin.",
+        "tip": "İpucu: kulaklıklı mikrofon en iyi doğruluğu ve daha az fazladan kelimeyi sağlar."
       },
       "practice": {
-        "title": "Dictate your first sentence",
-        "how": "Hold <keys/>, say this sentence, then let go:",
+        "title": "İlk cümlenizi dikte edin",
+        "how": "<keys/> tuşunu basılı tutun, bu cümleyi söyleyin ve bırakın:",
         "sentence": "Dear Mr. Smith comma thank you for your letter period",
-        "box": "Practice box: your words appear here",
-        "placeholder": "Your words appear here",
-        "listening": "Listening...",
-        "typing": "Typing...",
-        "success": "That's it. Saying \"comma\" and \"period\" types the marks.",
-        "waiting": "Your speech model is still downloading. This box will work as soon as it's ready.",
-        "continuous": "For longer dictation, press <keys/> to keep listening until you press it again. Used to Dragon? You can set this to Numpad + under General.",
-        "continuousRunning": "Continuous dictation is on. Your words appear in the box each time you pause. Press {{stop}} to stop it.",
-        "continuousEnded": "That's continuous dictation. In your other apps, your words are typed at the cursor."
+        "box": "Deneme kutusu: kelimeleriniz burada görünür",
+        "placeholder": "Kelimeleriniz burada görünür",
+        "listening": "Dinleniyor...",
+        "typing": "Yazılıyor...",
+        "success": "İşte bu kadar. \"comma\" ve \"period\" demek işaretleri yazar.",
+        "waiting": "Konuşma modeliniz hâlâ indiriliyor. Bu kutu, model hazır olur olmaz çalışacak.",
+        "continuous": "Uzun dikteler için <keys/> tuşuna basın; Kusema siz tekrar basana kadar dinler. Dragon'a mı alışkınsınız? Genel bölümünden Num + tuşunu ayarlayabilirsiniz.",
+        "continuousRunning": "Sürekli dikte açık. Kelimeleriniz her duraklamada kutuda görünür. Durdurmak için {{stop}} tuşuna basın.",
+        "continuousEnded": "Sürekli dikte budur. Diğer uygulamalarınızda kelimeler imlecin olduğu yere yazılır."
       },
       "assistant": {
-        "title": "Set up the AI assistant (optional)",
-        "sub": "Ask Kusema answers questions you speak. Dictation doesn't need it.",
+        "title": "Yapay zekâ asistanını kurun (isteğe bağlı)",
+        "sub": "\"Kusema'ya sor\", sesli sorduğunuz sorulara yanıt verir. Dikte için gerekmez.",
         "model": "Model",
-        "continueWithout": "Continue without AI",
-        "privileged": "Privileged mode blocks all cloud AI with one switch, for matters that must stay on this computer.",
+        "continueWithout": "Yapay zekâ olmadan devam et",
+        "privileged": "Privileged modu, bu bilgisayarda kalması gereken işler için tek bir düğmeyle tüm bulut yapay zekâsını engeller.",
         "local": {
-          "title": "Private: use a local AI on this computer",
-          "description": "Your questions stay here. Uses Ollama, a free app.",
-          "checking": "Looking for Ollama on this computer...",
-          "found": "Found Ollama. Choose a model to use.",
-          "notFound": "Ollama isn't running on this computer.",
-          "noModels": "Ollama is running, but has no models yet. Run \"ollama pull llama3.2\", then check again.",
-          "instructions": "How to set up Ollama",
-          "again": "Check again"
+          "title": "Gizli: bu bilgisayarda yerel bir yapay zekâ kullan",
+          "description": "Sorularınız burada kalır. Ücretsiz bir uygulama olan Ollama'yı kullanır.",
+          "checking": "Bu bilgisayarda Ollama aranıyor...",
+          "found": "Ollama bulundu. Bir model seçin.",
+          "notFound": "Ollama bu bilgisayarda çalışmıyor.",
+          "noModels": "Ollama çalışıyor ama henüz hiç modeli yok. \"ollama pull llama3.2\" komutunu çalıştırıp tekrar kontrol edin.",
+          "instructions": "Ollama nasıl kurulur",
+          "again": "Tekrar kontrol et"
         },
         "cloud": {
-          "title": "Use a cloud AI provider",
-          "description": "Your questions go to the provider you choose, using your own API key.",
-          "provider": "Provider",
-          "key": "API key",
-          "check": "Save and check",
-          "checking": "Checking the key...",
-          "saved": "Key saved in Windows Credential Manager. Choose a model to use.",
-          "where": "The key is stored in Windows Credential Manager, not in a file.",
-          "keyFailed": "The key was saved, but the provider didn't list any models. Check the key and try again."
+          "title": "Bulut yapay zekâ sağlayıcısı kullan",
+          "description": "Sorularınız, kendi API anahtarınızla seçtiğiniz sağlayıcıya gider.",
+          "provider": "Sağlayıcı",
+          "key": "API anahtarı",
+          "check": "Kaydet ve kontrol et",
+          "checking": "Anahtar kontrol ediliyor...",
+          "saved": "Anahtar Windows Kimlik Bilgileri Yöneticisi'ne kaydedildi. Bir model seçin.",
+          "where": "Anahtar bir dosyada değil, Windows Kimlik Bilgileri Yöneticisi'nde saklanır.",
+          "keyFailed": "Anahtar kaydedildi ama sağlayıcı hiç model listelemedi. Anahtarı kontrol edip tekrar deneyin."
         },
         "skip": {
-          "title": "Skip for now",
-          "description": "You can set this up later on the Assistant page."
+          "title": "Şimdilik atla",
+          "description": "Bunu daha sonra Asistan sayfasında ayarlayabilirsiniz."
         }
       },
       "done": {
-        "title": "You're all set",
-        "sub": "Kusema keeps running in the system tray and works in any app.",
-        "finish": "Start using Kusema",
-        "wins": "Your first three wins are waiting on the main page.",
-        "atLogin": "Start Kusema when I sign in",
+        "title": "Her şey hazır",
+        "sub": "Kusema sistem tepsisinde çalışmaya devam eder ve her uygulamada çalışır.",
+        "finish": "Kusema'yı kullanmaya başla",
+        "wins": "İlk üç başarınız ana sayfada sizi bekliyor.",
+        "atLogin": "Oturum açtığımda Kusema'yı başlat",
         "keys": {
-          "dictate": "Dictate: hold",
-          "continuous": "Continuous dictation: press to start and stop",
-          "ask": "Ask Kusema",
-          "askScreen": "Ask about my screen"
+          "dictate": "Dikte: basılı tutun",
+          "continuous": "Sürekli dikte: başlatmak ve durdurmak için basın",
+          "ask": "Kusema'ya sor",
+          "askScreen": "Ekranım hakkında sor"
         }
       }
     }
@@ -408,7 +408,7 @@
     "general": {
       "title": "Genel",
       "shortcut": {
-        "title": "Handy Kısayolları",
+        "title": "Kusema Kısayolları",
         "description": "Sesle yazma kaydını başlatmak için klavye kısayollarını yapılandırın",
         "loading": "Kısayollar yükleniyor...",
         "none": "Kısayol yapılandırılmadı",
@@ -428,20 +428,20 @@
             "description": "İsteğe bağlı: Transkripsiyonunuza her zaman yapay zekâ ile son işlem uygulayan özel bir kısayol tuşu."
           },
           "assistant": {
-            "name": "Ask Kusema",
-            "description": "Hold or press to ask a spoken question. The reply appears below instead of being pasted."
+            "name": "Kusema'ya sor",
+            "description": "Sesli soru sormak için basılı tutun veya basın. Yanıt yapıştırılmak yerine aşağıda görünür."
           },
           "assistant_screen": {
-            "name": "Ask About My Screen",
-            "description": "Hold or press to ask a spoken question about the window you're working in. You see the screenshot before anything is sent."
+            "name": "Ekranım hakkında sor",
+            "description": "Çalıştığınız pencere hakkında sesli soru sormak için basılı tutun veya basın. Bir şey gönderilmeden önce ekran görüntüsünü görürsünüz."
           },
           "dictate_continuous": {
-            "name": "Continuous Dictation",
-            "description": "Press to start dictating hands-free, and press again to stop. Text appears each time you pause."
+            "name": "Sürekli Dikte",
+            "description": "Elleriniz serbest dikte etmek için basın, durdurmak için tekrar basın. Metin her duraklamada görünür."
           },
           "toggle_privileged": {
-            "name": "Privileged Mode",
-            "description": "Press to turn Privileged mode on or off."
+            "name": "Privileged Modu",
+            "description": "Privileged modunu açmak veya kapatmak için basın."
           }
         },
         "errors": {
@@ -466,7 +466,7 @@
       },
       "preferredLanguages": {
         "title": "Tercih Edilen Diller",
-        "description": "Konuştuğunuz diller. Handy bunları model önermek için kullanır.",
+        "description": "Konuştuğunuz diller. Kusema bunları model önermek için kullanır.",
         "noMatch": "“{{query}}” ile eşleşen dil yok",
         "weak": "Henüz hiçbir model {{languages}} dilini iyi tanımıyor."
       },
@@ -493,17 +493,17 @@
         "fits": "Dilleriniz için",
         "untested": "Test edilmemiş"
       },
-      "untestedNote": "Handy ile test edilmedi. Daha yavaş olabilir veya daha fazla hata yapabilir.",
+      "untestedNote": "Kusema ile test edilmedi. Daha yavaş olabilir veya daha fazla hata yapabilir.",
       "untestedHidden_one": "{{count}} model daha yazdırma için ayarlanmamış. Bulmak için arama yapın.",
       "untestedHidden_other": "{{count}} model daha yazdırma için ayarlanmamış. Bulmak için arama yapın.",
-      "emptyYours": "Henüz model yok. Aşağıdan birini seçin: iner, sonra Handy onu kullanır.",
+      "emptyYours": "Henüz model yok. Aşağıdan birini seçin: iner, sonra Kusema onu kullanır.",
       "showMore": "{{count}} tane daha göster",
       "showFewer": "Daha az göster",
       "download": "İndir ve kullan",
       "downloadingThenUse": "{{total}} içinden %{{percent}}, sonra geçilir",
       "loading": "Yükleniyor…",
       "deleteAsk": "{{name}} silinsin mi? {{size}} yer açılır.",
-      "deleteAskActive": "{{name}} silinsin mi? Başka bir model seçene kadar Handy transkripsiyon yapamaz.",
+      "deleteAskActive": "{{name}} silinsin mi? Başka bir model seçene kadar Kusema transkripsiyon yapamaz.",
       "cancel": "İptal",
       "deleteModel": "{{name}} modelini sil",
       "cancelDownload": "{{name}} indirmesini durdur",
@@ -517,7 +517,7 @@
         "marks": "? henüz ölçülmedi. — o dili duymaz."
       },
       "retiredNotice": {
-        "title": "Eski modeller artık Handy ile çalışmıyor",
+        "title": "Eski modeller artık Kusema ile çalışmıyor",
         "description": "Bilgisayarınızda {{size}} yer kaplıyorlar.",
         "delete": "Modelleri sil",
         "deleted": "Eski modeller silindi",
@@ -525,37 +525,37 @@
       },
       "rescan": {
         "label": "Yeniden Tara",
-        "tooltip": "Handy dışında modeller klasörüne veya Hugging Face önbelleğine eklenen modelleri yeniden tara"
+        "tooltip": "Kusema dışında modeller klasörüne veya Hugging Face önbelleğine eklenen modelleri yeniden tara"
       },
       "curated": {
-        "inUse": "In use",
-        "gettingReady": "Getting ready...",
-        "downloading": "Downloading: {{percent}}%",
-        "cancel": "Cancel",
-        "cancelLabel": "Cancel downloading {{name}}",
-        "use": "Use",
-        "useLabel": "Use {{name}}",
-        "download": "Download ({{size}})",
-        "downloadLabel": "Download {{name}}",
-        "recommended": "Recommended",
-        "others": "Also on this computer",
-        "showAllHint": "More models are available: turn on Show all models under Advanced.",
+        "inUse": "Kullanımda",
+        "gettingReady": "Hazırlanıyor...",
+        "downloading": "İndiriliyor: %{{percent}}",
+        "cancel": "İptal",
+        "cancelLabel": "{{name}} indirmesini iptal et",
+        "use": "Kullan",
+        "useLabel": "{{name}} kullan",
+        "download": "İndir ({{size}})",
+        "downloadLabel": "{{name}} indir",
+        "recommended": "Önerilen",
+        "others": "Bu bilgisayarda da var",
+        "showAllHint": "Daha fazla model var: Gelişmiş bölümünde \"Tüm modelleri göster\"i açın.",
         "rows": {
           "parakeetUnified": {
             "name": "Parakeet Unified English",
-            "description": "The best choice for English. Chosen automatically."
+            "description": "İngilizce için en iyi seçim. Otomatik olarak seçilir."
           },
           "parakeetV3": {
             "name": "Parakeet TDT v3",
-            "description": "For dictating in other languages, including Spanish, French and German."
+            "description": "İspanyolca, Fransızca ve Almanca dahil başka dillerde dikte için."
           },
           "canary": {
             "name": "Canary 180M Flash",
-            "description": "A small download, for older computers or when disk space is low."
+            "description": "Küçük bir indirme; eski bilgisayarlar veya disk alanı az olduğunda."
           },
           "nemotron": {
             "name": "Nemotron 3.5 Streaming",
-            "description": "Shows live text as you speak, but makes more mistakes."
+            "description": "Siz konuşurken metni canlı gösterir ama daha çok hata yapar."
           }
         }
       }
@@ -564,26 +564,26 @@
       "title": "Diller"
     },
     "dictation": {
-      "title": "Continuous Dictation",
-      "description": "Keep talking, and the text is typed into your window each time you pause. Speech recognition stays on this computer, and AI cleanup never runs in this mode.",
+      "title": "Sürekli Dikte",
+      "description": "Konuşmaya devam edin, metin her duraklamada pencerenize yazılır. Konuşma tanıma bu bilgisayarda kalır ve yapay zekâ temizliği bu modda hiç çalışmaz.",
       "dragonKey": {
-        "title": "Dragon's Key",
-        "description": "Use Numpad + to start and stop, as Dragon does. While it's set, that key no longer types a plus sign.",
-        "button": "Use Dragon's key (Numpad +)"
+        "title": "Dragon Tuşu",
+        "description": "Dragon'da olduğu gibi, başlatıp durdurmak için Num + kullanın. Bu ayar açıkken o tuş artı işareti yazmaz.",
+        "button": "Dragon tuşunu kullan (Num +)"
       },
       "pause": {
-        "title": "Pause Length",
-        "description": "How long you pause before what you said is typed. Longer pauses keep sentences together; shorter ones show text sooner.",
+        "title": "Duraklama Süresi",
+        "description": "Söyledikleriniz yazılmadan önce ne kadar duraklayacağınız. Uzun duraklamalar cümleleri bir arada tutar; kısa olanlar metni daha erken gösterir.",
         "seconds": "{{seconds}} s"
       },
       "autoStop": {
-        "title": "Stop After Silence",
-        "description": "Dictation stops by itself after this long without speech, so the microphone is never left on by accident.",
-        "minutes": "{{minutes}} min"
+        "title": "Sessizlikten Sonra Durdur",
+        "description": "Dikte, bu kadar süre konuşma olmazsa kendiliğinden durur; böylece mikrofon yanlışlıkla açık kalmaz.",
+        "minutes": "{{minutes}} dk"
       },
       "voiceCommands": {
-        "label": "Voice Commands",
-        "description": "Say \"new paragraph\" or \"new line\" as you talk, or \"scratch that\" or \"stop dictation\" on its own between pauses, and it acts instead of being typed. Normal sentences with these words are typed as usual."
+        "label": "Sesli Komutlar",
+        "description": "Konuşurken \"new paragraph\" ya da \"new line\" deyin veya duraklamaların arasında tek başına \"scratch that\" ya da \"stop dictation\" deyin; komut yazılmak yerine uygulanır. Bu kelimeleri içeren normal cümleler her zamanki gibi yazılır."
       }
     },
     "sound": {
@@ -646,11 +646,11 @@
       },
       "autostart": {
         "label": "Başlangıçta Çalıştır",
-        "description": "Bilgisayara giriş yaptığınızda Handy otomatik olarak başlatılır."
+        "description": "Bilgisayara giriş yaptığınızda Kusema otomatik olarak başlatılır."
       },
       "showTrayIcon": {
         "label": "Tepsi Simgesini Göster",
-        "description": "Handy simgesini sistem tepsisinde göster."
+        "description": "Kusema simgesini sistem tepsisinde göster."
       },
       "overlay": {
         "style": {
@@ -773,90 +773,90 @@
         }
       },
       "showAllModels": {
-        "label": "Show all models",
-        "description": "List every model on the Models page, with accuracy and speed details, instead of the short list."
+        "label": "Tüm modelleri göster",
+        "description": "Kısa liste yerine Modeller sayfasında her modeli doğruluk ve hız bilgileriyle listeler."
       }
     },
     "assistant": {
-      "title": "Assistant",
-      "description": "Hold the shortcut, ask a question out loud, and Kusema answers.",
+      "title": "Asistan",
+      "description": "Kısayolu basılı tutun, sesli bir soru sorun, Kusema yanıtlasın.",
       "provider": {
-        "title": "AI Provider",
-        "provider": "Provider",
-        "description": "Assistant mode uses the same provider and API key as Post Process.",
+        "title": "Yapay Zekâ Sağlayıcısı",
+        "provider": "Sağlayıcı",
+        "description": "Asistan, Son İşlem ile aynı sağlayıcıyı ve API anahtarını kullanır.",
         "model": "Model",
-        "modelDescription": "The model that answers your questions. Change it on the Post Process page.",
-        "notSet": "Not chosen",
-        "open": "Open Post Process settings",
-        "disabled": "Assistant mode needs an AI provider (such as Anthropic, OpenAI or a local Ollama model) to answer questions. Providers are set up on the Post Process page, which appears once Post Processing is turned on. Turning it on doesn't change how normal dictation works.",
-        "enable": "Turn on Post Processing",
-        "noProvider": "Choose a provider on the Post Process page.",
-        "noKey": "No API key is set for {{provider}}. Add one on the Post Process page.",
-        "noModel": "Choose a model on the Post Process page."
+        "modelDescription": "Sorularınızı yanıtlayan model. Son İşlem sayfasından değiştirin.",
+        "notSet": "Seçilmedi",
+        "open": "Son İşlem ayarlarını aç",
+        "disabled": "Asistanın soruları yanıtlamak için bir yapay zekâ sağlayıcısına (Anthropic, OpenAI veya yerel bir Ollama modeli gibi) ihtiyacı vardır. Sağlayıcılar, son işlem açıldığında görünen Son İşlem sayfasında ayarlanır. Açmak normal dikteyi değiştirmez.",
+        "enable": "Son işlemi aç",
+        "noProvider": "Son İşlem sayfasında bir sağlayıcı seçin.",
+        "noKey": "{{provider}} için API anahtarı yok. Son İşlem sayfasında bir tane ekleyin.",
+        "noModel": "Son İşlem sayfasında bir model seçin."
       },
       "screen": {
-        "title": "Ask About My Screen",
-        "description": "Ask about the window you're working in, like “What do you think of this document?” Only that window is captured, and it stays on this computer until you press Send.",
+        "title": "Ekranım Hakkında Sor",
+        "description": "Çalıştığınız pencere hakkında, örneğin \"Bu belge hakkında ne düşünüyorsun?\" diye sorun. Yalnızca o pencere yakalanır ve siz Gönder'e basana kadar bu bilgisayarda kalır.",
         "confirm": {
-          "label": "Confirm Before Sending Screenshots",
-          "description": "Show the screenshot, your question and where it will go, then wait for Send (Enter) or Cancel (Escape). Unanswered, it cancels after 30 seconds.",
-          "offWarning": "Screenshots will be sent to {{provider}} as soon as you finish speaking, without showing you first. Everything visible in the window goes with them, including private or confidential information."
+          "label": "Ekran Görüntülerini Göndermeden Önce Onayla",
+          "description": "Ekran görüntüsünü, sorunuzu ve nereye gideceğini gösterip Gönder (Enter) veya İptal (Esc) bekler. Yanıt gelmezse 30 saniye sonra iptal eder.",
+          "offWarning": "Ekran görüntüleri, konuşmanız biter bitmez size önce gösterilmeden {{provider}} sağlayıcısına gönderilecek. Pencerede görünen her şey, özel veya gizli bilgiler dahil, onlarla birlikte gider."
         },
         "provider": {
-          "label": "Use for Screen Questions",
-          "description": "Send screenshots to a different provider than normal questions, for example a local vision model in Ollama (the Custom provider) for confidential documents. Follow-up questions go to the same provider until you start a new conversation.",
-          "same": "Same as Assistant",
-          "sameNamed": "Same as Assistant ({{provider}})",
-          "yourProvider": "your AI provider"
+          "label": "Ekran Soruları İçin Kullan",
+          "description": "Ekran görüntülerini normal sorulardan farklı bir sağlayıcıya gönderin; örneğin gizli belgeler için Ollama'daki yerel bir görüntü modeline (Özel sağlayıcı). Yeni bir konuşma başlatana kadar devam soruları aynı sağlayıcıya gider.",
+          "same": "Asistanla aynı",
+          "sameNamed": "Asistanla aynı ({{provider}})",
+          "yourProvider": "yapay zekâ sağlayıcınız"
         },
         "model": {
-          "label": "Model for Screen Questions",
-          "description": "A model that can see images. Leave empty to use the model chosen for this provider on the Post Process page.",
-          "placeholder": "e.g. qwen2.5vl"
+          "label": "Ekran Soruları İçin Model",
+          "description": "Görüntüleri görebilen bir model. Son İşlem sayfasında bu sağlayıcı için seçilen modeli kullanmak için boş bırakın.",
+          "placeholder": "ör. qwen2.5vl"
         }
       },
       "conversation": {
-        "empty": "Ask a question with the Ask Kusema shortcut. The conversation will appear here.",
-        "new": "New conversation",
-        "screenshot": "Screenshot",
-        "noProvider": "Ask Kusema needs an AI model to answer. Choose one in Settings.",
-        "openSettings": "Open Settings"
+        "empty": "\"Kusema'ya sor\" kısayoluyla bir soru sorun. Konuşma burada görünecek.",
+        "new": "Yeni konuşma",
+        "screenshot": "Ekran görüntüsü",
+        "noProvider": "\"Kusema'ya sor\" yanıt vermek için bir yapay zekâ modeline ihtiyaç duyar. Ayarlar'dan bir tane seçin.",
+        "openSettings": "Ayarları aç"
       },
       "voice": {
-        "title": "Voice",
-        "systemDefault": "System default",
-        "previewText": "Hi, I'm Kusema. This is how I'll sound when I answer your questions.",
+        "title": "Ses",
+        "systemDefault": "Sistem varsayılanı",
+        "previewText": "Merhaba, ben Kusema. Sorularınızı yanıtlarken sesim böyle olacak.",
         "speakReplies": {
-          "label": "Speak Replies",
-          "description": "Read replies aloud as they arrive. Press Cancel (Escape), start a new recording, or start a new conversation to stop."
+          "label": "Yanıtları Seslendir",
+          "description": "Yanıtları geldikçe sesli okur. Durdurmak için İptal'e (Esc) basın, yeni bir kayıt veya yeni bir konuşma başlatın."
         },
         "voice": {
-          "label": "Voice",
-          "description": "Kokoro voices sound the most natural; download them above. The other voices come with your computer (on Windows, add more under Settings > Time & language > Speech)."
+          "label": "Ses",
+          "description": "Kokoro sesleri en doğal olanlardır; yukarıdan indirin. Diğer sesler bilgisayarınızla gelir (Windows'ta Ayarlar > Zaman ve dil > Konuşma bölümünden daha fazlasını ekleyin)."
         },
         "kokoro": {
-          "label": "Kokoro Voices",
-          "description": "28 natural-sounding English voices (US and UK) generated on this computer. A one-time download.",
-          "installed": "Installed. Pick a Kokoro voice below. Removing them frees the disk space; replies then use the system voice.",
-          "download": "Download ({{size}} MB)",
-          "downloading": "Downloading… {{percentage}}%",
-          "cancel": "Cancel",
-          "delete": "Remove"
+          "label": "Kokoro Sesleri",
+          "description": "Bu bilgisayarda üretilen, doğal sesli 28 İngilizce ses (ABD ve Birleşik Krallık). Tek seferlik indirme.",
+          "installed": "Yüklendi. Aşağıdan bir Kokoro sesi seçin. Kaldırmak disk alanı açar; yanıtlar o zaman sistem sesini kullanır.",
+          "download": "İndir ({{size}} MB)",
+          "downloading": "İndiriliyor… %{{percentage}}",
+          "cancel": "İptal",
+          "delete": "Kaldır"
         },
         "rate": {
-          "label": "Speaking Rate",
-          "description": "How fast replies are read. 1.00× is the voice's normal speed."
+          "label": "Konuşma Hızı",
+          "description": "Yanıtların ne kadar hızlı okunduğu. 1,00×, sesin normal hızıdır."
         },
         "preview": {
-          "label": "Preview Voice",
-          "description": "Hear the selected voice at the selected speed.",
-          "button": "Preview"
+          "label": "Sesi Dinle",
+          "description": "Seçilen sesi seçilen hızda dinleyin.",
+          "button": "Dinle"
         }
       },
       "tabs": {
-        "label": "Assistant",
-        "conversation": "Conversation",
-        "settings": "Settings"
+        "label": "Asistan",
+        "conversation": "Konuşma",
+        "settings": "Ayarlar"
       }
     },
     "postProcessing": {
@@ -973,7 +973,7 @@
       },
       "updateChecks": {
         "label": "Güncellemeleri Kontrol Et",
-        "description": "Handy için yeni sürümleri otomatik olarak kontrol eder",
+        "description": "Kusema için yeni sürümleri otomatik olarak kontrol eder",
         "lockedDescription": "Sistem yapılandırması tarafından devre dışı bırakıldı (HANDY_DISABLE_UPDATER)"
       },
       "whatsNewPreview": {
@@ -992,9 +992,9 @@
           "welcome": "Hoş geldiniz",
           "permissions": "İzinler",
           "done": "Hazır",
-          "microphone": "Microphone",
-          "practice": "Practice",
-          "assistant": "AI assistant"
+          "microphone": "Mikrofon",
+          "practice": "Deneme",
+          "assistant": "Yapay zekâ asistanı"
         }
       },
       "onboardingRun": {
@@ -1040,8 +1040,8 @@
         "description": "Dizüstü bilgisayar kapağı kapalıyken kullanılacak mikrofon"
       },
       "postProcessingToggle": {
-        "label": "AI Cleanup",
-        "description": "Optional. Rewrites dictated text with an AI model when you use the AI cleanup shortcut: fixes self-corrections and grammar, keeps your meaning, and never adds facts."
+        "label": "Yapay Zekâ Temizliği",
+        "description": "İsteğe bağlı. Yapay zekâ temizliği kısayolunu kullandığınızda dikte edilen metni bir yapay zekâ modeliyle yeniden yazar: kendi düzeltmelerinizi ve dil bilgisini düzeltir, anlamı korur ve asla bilgi eklemez."
       },
       "muteWhileRecording": {
         "label": "Kayıt Sırasında Sessize Al",
@@ -1057,7 +1057,7 @@
         "bindingsReset": "Klavye kısayolları uyumsuzdu ve varsayılan ayarlara sıfırlandı",
         "options": {
           "tauri": "Tauri Global Shortcut",
-          "builtIn": "Built-in (recommended)"
+          "builtIn": "Yerleşik (önerilen)"
         }
       },
       "pasteDelay": {
@@ -1086,7 +1086,7 @@
       },
       "keyboardDiagnostic": {
         "title": "Klavye Tanılaması",
-        "description": "Klavye olaylarının Handy'ye ulaşıp ulaşmadığını denetler. Yalnızca olay sayıları kaydedilir — hangi tuşlara bastığınız asla kaydedilmez.",
+        "description": "Klavye olaylarının Kusema'ye ulaşıp ulaşmadığını denetler. Yalnızca olay sayıları kaydedilir — hangi tuşlara bastığınız asla kaydedilmez.",
         "run": "10 sn'lik tanılamayı çalıştır",
         "running": "Dinleniyor… kısayolunuza birkaç kez basın (ör. Option+Space)",
         "secureInputLabel": "Secure Input",
@@ -1100,7 +1100,7 @@
         "mouse": "Fare",
         "verdictBlocked": "Secure Input tuş olaylarını engelliyor — normal tuş içeren kısayollar bu sorun çözülene kadar çalışamaz.",
         "verdictSuspicious": "Değiştirici olayları geldi ancak hiç tuş olayı gelmedi — Secure Input devre dışı görünmesine rağmen bir şey tuşları bastırıyor. Lütfen bunu GitHub'da bildirin.",
-        "verdictOk": "Tuş olayları Handy'ye normal şekilde ulaşıyor.",
+        "verdictOk": "Tuş olayları Kusema'ye normal şekilde ulaşıyor.",
         "verdictNoEvents": "Hiç olay yakalanmadı — test sırasında herhangi bir tuşa bastınız mı?",
         "failed": "Tanılama başarısız: {{error}}"
       }
@@ -1109,203 +1109,203 @@
       "title": "Hakkında",
       "version": {
         "title": "Sürüm",
-        "description": "Handy'nin mevcut sürümü"
+        "description": "Kusema'nin mevcut sürümü"
       },
       "whatsNewUpdates": {
         "label": "Yenilikleri Göster",
-        "description": "Handy güncellemelerinden sonra sürüm notlarını göster"
+        "description": "Kusema güncellemelerinden sonra sürüm notlarını göster"
       },
       "appDataDirectory": {
         "title": "Uygulama Veri Dizini",
-        "description": "Handy'nin verilerini sakladığı konum"
+        "description": "Kusema'nin verilerini sakladığı konum"
       },
       "sourceCode": {
         "title": "Kaynak Kodu",
-        "description": "View Kusema's source code",
+        "description": "Kusema'nın kaynak kodunu görüntüle",
         "button": "GitHub'da Görüntüle"
       },
       "acknowledgments": {
         "ggml": {
           "title": "ggml",
           "description": "Cihaz üzerinde makine öğrenmesi çıkarımı için yüksek performanslı tensör kütüphanesi",
-          "details": "Handy'nin yerel konuşmadan metne dönüştürme özelliği transcribe.cpp ve ggml üzerine kuruludur. Georgi Gerganov'a ve katkıda bulunanlara harika çalışmaları için teşekkür ederiz."
+          "details": "Kusema'nin yerel konuşmadan metne dönüştürme özelliği transcribe.cpp ve ggml üzerine kuruludur. Georgi Gerganov'a ve katkıda bulunanlara harika çalışmaları için teşekkür ederiz."
         }
       },
       "organizations": {
-        "title": "Kusema for organizations",
-        "description": "Setup, support and options for firms",
-        "button": "Learn more"
+        "title": "Kurumlar için Kusema",
+        "description": "Bürolar için kurulum, destek ve seçenekler",
+        "button": "Daha fazla bilgi"
       },
       "report": {
-        "title": "Report a problem or suggest a feature",
-        "description": "Tell us on GitHub what went wrong or what you'd like",
-        "button": "Open GitHub"
+        "title": "Sorun bildir veya özellik öner",
+        "description": "GitHub'da neyin ters gittiğini veya ne istediğinizi bize anlatın",
+        "button": "GitHub'ı aç"
       },
       "credits": {
-        "title": "Credits and licenses",
+        "title": "Teşekkürler ve lisanslar",
         "handy": {
-          "title": "Built on Handy",
-          "description": "Kusema is built on Handy by CJ Pais, used under the MIT License.",
-          "button": "View Handy"
+          "title": "Handy üzerine kuruldu",
+          "description": "Kusema, CJ Pais'in Handy uygulaması üzerine kuruludur ve MIT Lisansı ile kullanılır.",
+          "button": "Handy'yi görüntüle"
         },
         "nvidiaLicense": "NVIDIA Open Model License",
-        "models": "Speech and voice models ({{count}})",
-        "components": "Open-source components ({{count}})",
-        "notices": "Full license texts",
-        "loading": "Loading..."
+        "models": "Konuşma ve ses modelleri ({{count}})",
+        "components": "Açık kaynak bileşenler ({{count}})",
+        "notices": "Lisansların tam metinleri",
+        "loading": "Yükleniyor..."
       }
     },
     "privacy": {
-      "thisComputer": "This computer ({{host}})",
-      "nothingSent": "Nothing to show yet.",
-      "updateBlocked": "Update checks are blocked in Privileged mode.",
+      "thisComputer": "Bu bilgisayar ({{host}})",
+      "nothingSent": "Henüz gösterilecek bir şey yok.",
+      "updateBlocked": "Güncelleme denetimleri Privileged modunda engellenir.",
       "audio": {
-        "title": "Audio sent off this computer: 0 bytes",
-        "description": "Speech recognition runs on this computer, and nothing in Kusema can upload your voice. Only the text of what you say, and only for features you choose, ever goes to an AI provider."
+        "title": "Bu bilgisayardan gönderilen ses: 0 bayt",
+        "description": "Konuşma tanıma bu bilgisayarda çalışır ve Kusema'daki hiçbir şey sesinizi yükleyemez. Bir yapay zekâ sağlayıcısına yalnızca söylediklerinizin metni ve yalnızca seçtiğiniz özellikler için gider."
       },
       "privileged": {
-        "title": "Privileged Mode",
-        "description": "For confidential matters. While it's on, nothing you say, type or show goes to a cloud AI service. Ask Kusema and AI cleanup only work with a model running on this computer.",
+        "title": "Privileged Modu",
+        "description": "Gizli işler için. Açıkken söylediğiniz, yazdığınız veya gösterdiğiniz hiçbir şey bulut yapay zekâ hizmetine gitmez. \"Kusema'ya sor\" ve yapay zekâ temizliği yalnızca bu bilgisayardaki bir modelle çalışır.",
         "chip": "Privileged",
         "toggle": {
-          "label": "Privileged Mode",
-          "description": "Blocks every request to cloud AI providers, including ones already set up. Dictation keeps working, because it never uses the cloud."
+          "label": "Privileged Modu",
+          "description": "Daha önce ayarlananlar dahil, bulut yapay zekâ sağlayıcılarına giden her isteği engeller. Dikte çalışmaya devam eder, çünkü hiçbir zaman bulutu kullanmaz."
         },
         "allowLan": {
-          "label": "Allow Local Network AI Servers",
-          "description": "Also allows AI servers on your office network, by private address (like 192.168.1.20). Models on this computer are always allowed."
+          "label": "Yerel Ağdaki Yapay Zekâ Sunucularına İzin Ver",
+          "description": "Ofis ağınızdaki yapay zekâ sunucularına da özel adresle (192.168.1.20 gibi) izin verir. Bu bilgisayardaki modellere her zaman izin verilir."
         },
         "blockDownloads": {
-          "label": "Also Block Downloads and Update Checks",
-          "description": "For offline offices. Model and voice downloads and update checks carry none of your content, so they normally stay allowed and are listed below. Turn this on to stop them too while Privileged mode is on."
+          "label": "İndirmeleri ve Güncelleme Denetimlerini de Engelle",
+          "description": "Çevrim dışı ofisler için. Model ve ses indirmeleri ile güncelleme denetimleri içeriğinizden hiçbir şey taşımaz; bu yüzden normalde izinli kalır ve aşağıda listelenir. Privileged modu açıkken bunları da durdurmak için bunu açın."
         },
         "hotkey": {
-          "label": "Privileged Mode Shortcut",
-          "description": "Adds a keyboard shortcut that turns Privileged mode on or off. Off by default, so it can't be pressed by accident."
+          "label": "Privileged Modu Kısayolu",
+          "description": "Privileged modunu açıp kapatan bir klavye kısayolu ekler. Yanlışlıkla basılmasın diye varsayılan olarak kapalıdır."
         }
       },
       "counts": {
-        "title": "Where Requests Went",
-        "today": "Today",
-        "week": "Last 7 days"
+        "title": "İstekler Nereye Gitti",
+        "today": "Bugün",
+        "week": "Son 7 gün"
       },
       "columns": {
-        "time": "Time",
-        "destination": "Destination",
-        "purpose": "Why",
-        "data": "Data",
-        "size": "Size",
-        "result": "Result"
+        "time": "Zaman",
+        "destination": "Hedef",
+        "purpose": "Neden",
+        "data": "Veri",
+        "size": "Boyut",
+        "result": "Sonuç"
       },
       "purposes": {
-        "assistant_question": "Question to Kusema",
-        "screen_question": "Question about the screen",
-        "post_processing": "AI cleanup",
-        "provider_models": "Listing a provider's models",
-        "model_download": "Speech model download",
-        "voice_download": "Voice download",
-        "update_check": "Update check"
+        "assistant_question": "Kusema'ya soru",
+        "screen_question": "Ekran hakkında soru",
+        "post_processing": "Yapay zekâ temizliği",
+        "provider_models": "Bir sağlayıcının modellerini listeleme",
+        "model_download": "Konuşma modeli indirme",
+        "voice_download": "Ses indirme",
+        "update_check": "Güncelleme denetimi"
       },
       "data": {
-        "text": "Text",
-        "image": "Screenshot",
-        "none": "None of yours"
+        "text": "Metin",
+        "image": "Ekran görüntüsü",
+        "none": "Size ait hiçbir şey"
       },
       "results": {
-        "sent": "Sent",
-        "blocked": "Blocked",
-        "failed": "Failed"
+        "sent": "Gönderildi",
+        "blocked": "Engellendi",
+        "failed": "Başarısız"
       },
       "list": {
-        "title": "Every Request",
-        "description": "Each request Kusema has made: when, where, why, what kind of data and how large. What was in it is never recorded. Shows the latest 500; the export has them all.",
-        "all": "All",
-        "allPurposes": "Any reason",
-        "allResults": "Any result",
-        "allDestinations": "Any destination",
-        "anyTime": "Any time",
-        "lastDays_one": "Last {{count}} day",
-        "lastDays_other": "Last {{count}} days",
-        "export": "Export CSV",
-        "exported_one": "Exported {{count}} request.",
-        "exported_other": "Exported {{count}} requests.",
-        "clear": "Clear",
+        "title": "Tüm İstekler",
+        "description": "Kusema'nın yaptığı her istek: ne zaman, nereye, neden, ne tür veri ve ne büyüklükte. İçeriği asla kaydedilmez. Son 500'ü gösterir; dışa aktarma hepsini içerir.",
+        "all": "Tümü",
+        "allPurposes": "Herhangi bir neden",
+        "allResults": "Herhangi bir sonuç",
+        "allDestinations": "Herhangi bir hedef",
+        "anyTime": "Herhangi bir zaman",
+        "lastDays_one": "Son {{count}} gün",
+        "lastDays_other": "Son {{count}} gün",
+        "export": "CSV olarak dışa aktar",
+        "exported_one": "{{count}} istek dışa aktarıldı.",
+        "exported_other": "{{count}} istek dışa aktarıldı.",
+        "clear": "Temizle",
         "retention": {
-          "title": "Keep This List For",
-          "description": "Older entries are deleted from this computer automatically.",
-          "days_one": "{{count}} day",
-          "days_other": "{{count}} days"
+          "title": "Bu Listeyi Sakla",
+          "description": "Daha eski kayıtlar bu bilgisayardan otomatik olarak silinir.",
+          "days_one": "{{count}} gün",
+          "days_other": "{{count}} gün"
         }
       }
     },
     "cleanup": {
-      "title": "Cleanup",
-      "description": "Dictated text should need little editing. Local cleanup runs on this computer and sends nothing anywhere.",
+      "title": "Temizlik",
+      "description": "Dikte edilen metin az düzenleme gerektirmeli. Yerel temizlik bu bilgisayarda çalışır ve hiçbir yere bir şey göndermez.",
       "local": {
-        "label": "Local Cleanup",
-        "description": "Removes filler words, adds missing periods between phrases in continuous dictation, and handles spoken punctuation, all on this computer. Off, your words are typed as transcribed."
+        "label": "Yerel Temizlik",
+        "description": "Dolgu kelimelerini kaldırır, sürekli diktede ifadeler arasındaki eksik noktaları ekler ve söylenen noktalama işaretlerini işler; hepsi bu bilgisayarda. Kapalıyken kelimeleriniz yazıya döküldüğü gibi yazılır."
       },
       "spokenPunctuation": {
-        "label": "Spoken Punctuation",
-        "description": "Say \"comma\", \"period\", \"question mark\", \"colon\", \"open quote\", \"close paren\", \"dash\", \"section symbol\" and more, as in Dragon. \"Period\" only counts at the end of a phrase, so \"the limitations period expired\" stays as words. Say \"literal period\" to type the word."
+        "label": "Söylenen Noktalama",
+        "description": "Dragon'daki gibi \"comma\", \"period\", \"question mark\", \"colon\", \"open quote\", \"close paren\", \"dash\", \"section symbol\" ve daha fazlasını söyleyin. \"Period\" yalnızca bir ifadenin sonunda sayılır; bu yüzden \"the limitations period expired\" kelime olarak kalır. Kelimenin kendisini yazmak için \"literal period\" deyin. Bu komutlar İngilizcede çalışır."
       },
       "ai": {
         "status": {
-          "noProvider": "No AI provider is set up yet.",
-          "noKey": "{{provider}} needs an API key.",
-          "noModel": "{{provider}} needs a model chosen.",
-          "local": "Using {{model}} on this computer through {{provider}}. Nothing leaves this computer.",
-          "cloud": "Using {{model}} from {{provider}}, a cloud service. Text you clean up goes to {{provider}}.",
-          "blocked": "Privileged mode is on, so nothing will be sent to {{provider}}. Use a local model or turn off Privileged mode."
+          "noProvider": "Henüz bir yapay zekâ sağlayıcısı ayarlanmadı.",
+          "noKey": "{{provider}} için bir API anahtarı gerekiyor.",
+          "noModel": "{{provider}} için bir model seçilmesi gerekiyor.",
+          "local": "{{model}} bu bilgisayarda {{provider}} aracılığıyla kullanılıyor. Bu bilgisayardan hiçbir şey çıkmaz.",
+          "cloud": "Bir bulut hizmeti olan {{provider}} üzerinden {{model}} kullanılıyor. Temizlediğiniz metin {{provider}} sağlayıcısına gider.",
+          "blocked": "Privileged modu açık, bu yüzden {{provider}} sağlayıcısına hiçbir şey gönderilmeyecek. Yerel bir model kullanın veya Privileged modunu kapatın."
         },
-        "recommendLocal": "We recommend a model that runs on this computer, such as one in Ollama, so confidential text stays here. AI cleanup runs when you dictate with its own shortcut, and never during continuous dictation.",
-        "setUp": "Set Up AI Cleanup"
+        "recommendLocal": "Gizli metinlerin burada kalması için bu bilgisayarda çalışan bir model, örneğin Ollama'daki bir model öneriyoruz. Yapay zekâ temizliği, kendi kısayoluyla dikte ettiğinizde çalışır; sürekli dikte sırasında asla çalışmaz.",
+        "setUp": "Yapay Zekâ Temizliğini Kur"
       }
     },
     "firstWins": {
-      "title": "First three wins",
-      "dismiss": "Dismiss",
-      "dictated": "Dictate an email",
-      "newParagraph": "Use continuous dictation and say \"new paragraph\"",
-      "asked": "Ask Kusema a question",
-      "done": "Done",
-      "notDone": "Not done yet",
-      "progress": "{{done}} of {{count}} done",
-      "allDone": "All three done. Nice work."
+      "title": "İlk üç başarı",
+      "dismiss": "Kapat",
+      "dictated": "Bir e-posta dikte edin",
+      "newParagraph": "Sürekli dikteyi kullanın ve \"new paragraph\" deyin",
+      "asked": "Kusema'ya bir soru sorun",
+      "done": "Tamam",
+      "notDone": "Henüz değil",
+      "progress": "{{count}} görevden {{done}} tanesi tamam",
+      "allDone": "Üçü de tamam. Harika iş."
     },
     "glow": {
-      "title": "Recording indicator",
-      "description": "A glow around the edges of your screen shows that Kusema is listening. Only you see it: it stays out of screenshots and screen shares.",
+      "title": "Kayıt göstergesi",
+      "description": "Ekranınızın kenarlarındaki ışıltı Kusema'nın dinlediğini gösterir. Yalnızca siz görürsünüz: ekran görüntülerinde ve ekran paylaşımında görünmez.",
       "enabled": {
-        "label": "Screen glow",
-        "description": "Show a colored glow around the screen you're working on while Kusema is listening. You can still click and type through it."
+        "label": "Ekran ışıltısı",
+        "description": "Kusema dinlerken çalıştığınız ekranın çevresinde renkli bir ışıltı gösterir. Yine de içinden tıklayıp yazabilirsiniz."
       },
       "thickness": {
-        "label": "Thickness",
-        "description": "How far the glow reaches in from the edge of the screen."
+        "label": "Kalınlık",
+        "description": "Işıltının ekranın kenarından ne kadar içeri uzandığı."
       },
       "intensity": {
-        "label": "Intensity",
-        "description": "How strong the glow is."
+        "label": "Yoğunluk",
+        "description": "Işıltının ne kadar güçlü olduğu."
       },
       "palette": {
-        "label": "Colors",
-        "description": "The color-blind friendly set keeps the modes easy to tell apart with every common kind of color blindness.",
-        "standard": "Standard",
-        "color_blind": "Color-blind friendly"
+        "label": "Renkler",
+        "description": "Renk körlüğüne uygun renkler, yaygın tüm renk körlüğü türlerinde modların kolayca ayırt edilmesini sağlar.",
+        "standard": "Standart",
+        "color_blind": "Renk körlüğüne uygun"
       },
       "modes": {
-        "dictation": "Dictation",
-        "continuous": "Continuous dictation",
-        "ask": "Ask Kusema",
-        "ask_screen": "Ask about my screen",
-        "paused": "Continuous dictation paused (window changed)"
+        "dictation": "Dikte",
+        "continuous": "Sürekli dikte",
+        "ask": "Kusema'ya sor",
+        "ask_screen": "Ekranım hakkında sor",
+        "paused": "Sürekli dikte duraklatıldı (pencere değişti)"
       },
-      "preview": "Preview",
-      "previewLabel": "Preview the glow for {{mode}}",
+      "preview": "Önizle",
+      "previewLabel": "{{mode}} için ışıltıyı önizle",
       "sounds": {
-        "label": "Continuous dictation sounds",
-        "description": "Play a short sound when continuous dictation starts and stops. Sounds for other dictation are under Sound below."
+        "label": "Sürekli dikte sesleri",
+        "description": "Sürekli dikte başlayıp durduğunda kısa bir ses çalar. Diğer dikteler için sesler aşağıda Ses bölümündedir."
       }
     }
   },
@@ -1325,7 +1325,7 @@
     "portableUpdateBrowseButton": "GitHub Releases’i aç"
   },
   "whatsNew": {
-    "title": "Handy v{{version}} yenilikleri"
+    "title": "Kusema v{{version}} yenilikleri"
   },
   "common": {
     "loading": "Yükleniyor...",
@@ -1356,11 +1356,11 @@
   },
   "appLanguage": {
     "title": "Uygulama Dili",
-    "description": "Handy arayüzünün dilini değiştirin"
+    "description": "Kusema arayüzünün dilini değiştirin"
   },
   "theme": {
     "title": "Uygulama Teması",
-    "description": "Handy'nin sistem temasını izlemesini ya da açık veya koyu kalmasını seçin",
+    "description": "Kusema'nin sistem temasını izlemesini ya da açık veya koyu kalmasını seçin",
     "options": {
       "system": "Sistem",
       "light": "Açık",
@@ -1371,38 +1371,38 @@
     "transcribing": "Transkribe ediliyor...",
     "processing": "İşleniyor...",
     "loadingModel": "Model yükleniyor...",
-    "speaking": "Speaking...",
+    "speaking": "Konuşuyor...",
     "dictation": {
-      "dictating": "Dictating",
-      "paused": "Paused, window changed",
-      "noTarget": "Click where the text should go",
-      "finishing": "Finishing...",
-      "stop": "Stop",
-      "nothingToScratch": "Nothing to scratch",
-      "scratchWindowChanged": "Can't scratch: the window changed",
-      "scratchOtherInput": "Can't scratch: keyboard or mouse used",
-      "savedToHistory": "Said while paused: saved in History",
-      "stoppedSilence": "Stopped after silence",
-      "microphoneLost": "Stopped: microphone lost",
-      "cantKeepUp": "Stopped: this computer couldn't keep up",
-      "transcriptionFailed": "Couldn't transcribe that",
-      "pasteFailed": "Couldn't type that; it's in History"
+      "dictating": "Dikte ediliyor",
+      "paused": "Duraklatıldı, pencere değişti",
+      "noTarget": "Metnin gideceği yere tıklayın",
+      "finishing": "Bitiriliyor...",
+      "stop": "Durdur",
+      "nothingToScratch": "Silinecek bir şey yok",
+      "scratchWindowChanged": "Silinemiyor: pencere değişti",
+      "scratchOtherInput": "Silinemiyor: klavye veya fare kullanıldı",
+      "savedToHistory": "Duraklamada söylendi: Geçmiş'e kaydedildi",
+      "stoppedSilence": "Sessizlikten sonra durduruldu",
+      "microphoneLost": "Durduruldu: mikrofon kayboldu",
+      "cantKeepUp": "Durduruldu: bu bilgisayar yetişemedi",
+      "transcriptionFailed": "Bu yazıya dökülemedi",
+      "pasteFailed": "Bu yazılamadı; Geçmiş'te duruyor"
     },
     "privileged": "Privileged"
   },
   "screenCard": {
-    "title": "Send this screenshot?",
-    "autoCancel": "Cancels in {{seconds}} s",
-    "enlarge": "Click to enlarge",
-    "shrink": "Click to make smaller",
-    "imageAlt": "Screenshot of the window you asked about",
+    "title": "Bu ekran görüntüsü gönderilsin mi?",
+    "autoCancel": "{{seconds}} sn içinde iptal edilecek",
+    "enlarge": "Büyütmek için tıklayın",
+    "shrink": "Küçültmek için tıklayın",
+    "imageAlt": "Sorduğunuz pencerenin ekran görüntüsü",
     "question": "“{{question}}”",
-    "sendsTo": "Goes to {{provider}} · {{model}}",
-    "onlyThis": "Only this window. Nothing is sent until you press Send.",
-    "send": "Send",
-    "cancel": "Cancel",
+    "sendsTo": "Gideceği yer: {{provider}} · {{model}}",
+    "onlyThis": "Yalnızca bu pencere. Gönder'e basana kadar hiçbir şey gönderilmez.",
+    "send": "Gönder",
+    "cancel": "İptal",
     "noticeTitle": "Kusema",
-    "close": "Close"
+    "close": "Kapat"
   },
   "secureInput": {
     "blockedWithCulprit_one": "{{name}} 1 kısayolu engelliyor olabilir",

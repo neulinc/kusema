@@ -8,25 +8,25 @@
     "quit": "Afslut",
     "cancel": "Annuller",
     "secureInputWarning": "⚠ Genveje blokeret af Secure Input",
-    "privilegedMode": "Privileged Mode",
-    "privilegedOn": "Privileged mode on"
+    "privilegedMode": "Privileged-tilstand",
+    "privilegedOn": "Privileged-tilstand til"
   },
   "sidebar": {
     "general": "Generelt",
-    "assistant": "Assistant",
+    "assistant": "Assistent",
     "models": "Modeller",
     "advanced": "Avanceret",
     "postProcessing": "Efterbehandling",
     "history": "Historik",
     "debug": "Fejlfinding",
     "about": "Om",
-    "privacy": "Privacy"
+    "privacy": "Privatliv"
   },
   "onboarding": {
     "customModelDescription": "Ikke officielt understøttet",
     "migration": {
       "title": "Dine modeller skal opdateres",
-      "description": "Handy bruger nu en nyere type model. Download den nye version for at fortsætte med at transskribere. Gamle versioner vil blive fjernet.",
+      "description": "Kusema bruger nu en nyere type model. Download den nye version for at fortsætte med at transskribere. Gamle versioner vil blive fjernet.",
       "replaces": "Erstatter {{name}}",
       "oldFormat": "Gammelt format",
       "failed": "Download mislykkedes",
@@ -63,11 +63,11 @@
     "permissions": {
       "microphone": {
         "name": "Mikrofon",
-        "why": "Så Handy kan høre dig. Lyd bliver omdannet til tekst på denne computer og uploades aldrig."
+        "why": "Så Kusema kan høre dig. Lyd bliver omdannet til tekst på denne computer og uploades aldrig."
       },
       "accessibility": {
         "name": "Hjælpemidler",
-        "why": "Så din genvej virker i alle apps, og Handy kan skrive teksten dér, hvor din markør er."
+        "why": "Så din genvej virker i alle apps, og Kusema kan skrive teksten dér, hvor din markør er."
       },
       "errors": {
         "checkFailed": "Kunne ikke tjekke tilladelser. Prøv igen.",
@@ -81,12 +81,12 @@
       "openSettings": "Åbn indstillinger",
       "allowed": "Tilladt",
       "waiting": "Venter",
-      "turnOnMac": "Slå Handy til i Systemindstillinger, og kom så tilbage hertil.",
+      "turnOnMac": "Slå Kusema til i Systemindstillinger, og kom så tilbage hertil.",
       "turnOnWindows": "Slå adgang til mikrofonen til i Windows-indstillinger, og kom så tilbage hertil.",
       "hintBoth": "Tillad begge for at fortsætte",
       "hintMicrophone": "Tillad mikrofonen for at fortsætte",
       "welcomeBack": "Velkommen tilbage. Vi fortsætter, hvor du slap.",
-      "relaunch": "Reagerer genvejen ikke efter dette? <relaunch>Genstart Handy</relaunch>, så lander du lige her igen."
+      "relaunch": "Reagerer genvejen ikke efter dette? <relaunch>Genstart Kusema</relaunch>, så lander du lige her igen."
     },
     "shell": {
       "back": "Tilbage",
@@ -97,11 +97,11 @@
       "title": "Tal i stedet for at skrive, i enhver app",
       "subtitle": "Vælg de sprog, du vil diktere på",
       "languagesLabel": "Sprog",
-      "noMatch": "Intet sprog matcher »{{query}}«. Handys modeller dækker omkring 100 sprog; flere findes i indstillingerne.",
+      "noMatch": "Intet sprog matcher »{{query}}«. Kusemas modeller dækker omkring 100 sprog; flere findes i indstillingerne.",
       "appLanguage": "Appens sprog",
       "menusIn": "Menuer på <b>{{language}}</b>",
       "chinese": {
-        "question": "Du taler {{languages}}. Hvilke tegn skal Handy skrive?",
+        "question": "Du taler {{languages}}. Hvilke tegn skal Kusema skrive?",
         "label": "Kinesiske tegn",
         "zh-Hans": "Forenklet",
         "zh-Hant": "Taiwan",
@@ -171,7 +171,7 @@
     },
     "try": {
       "title": "Giv det et forsøg!",
-      "subtitle": "Handy er i hjørnet og hjælper dig igennem",
+      "subtitle": "Kusema er i hjørnet og hjælper dig igennem",
       "noteLabel": "Note",
       "placeholder": "Ny note",
       "hold": "Hold <keys/> nede, og tal.",
@@ -199,14 +199,14 @@
     },
     "done": {
       "title": "Så er du klar",
-      "subMac": "Handy ligger nu i din menulinje. Hold eller tryk på <keys/> i en vilkårlig app for at tale.",
-      "subTray": "Handy ligger nu i dit meddelelsesområde. Hold eller tryk på <keys/> i en vilkårlig app for at tale.",
+      "subMac": "Kusema ligger nu i din menulinje. Hold eller tryk på <keys/> i en vilkårlig app for at tale.",
+      "subTray": "Kusema ligger nu i dit meddelelsesområde. Hold eller tryk på <keys/> i en vilkårlig app for at tale.",
       "hint": "Du kan ændre disse senere i Indstillinger",
       "highFiveLabel": "Highfive",
-      "atLogin": "Start Handy, når jeg logger ind",
+      "atLogin": "Start Kusema, når jeg logger ind",
       "finish": "Færdig",
       "panel": {
-        "name": "Handy",
+        "name": "Kusema",
         "ready": "Klar",
         "languages": "Sprog",
         "model": "Talemodel",
@@ -220,79 +220,79 @@
       "done": "Virker det ikke i andre apps? <guide>Linux-opsætningsguide</guide>"
     },
     "setup": {
-      "retryDownload": "Try again",
+      "retryDownload": "Prøv igen",
       "welcome": {
-        "title": "Kusema turns your voice into text on this computer.",
-        "privacy": "Your voice never leaves it.",
-        "language": "Language you'll dictate in"
+        "title": "Kusema omdanner din stemme til tekst på denne computer.",
+        "privacy": "Din stemme forlader den aldrig.",
+        "language": "Sprog, du dikterer på"
       },
       "microphone": {
-        "title": "Choose your microphone",
-        "sub": "Say something. The bar should move as you speak.",
-        "label": "Microphone",
-        "meter": "Microphone level",
-        "heard": "Kusema can hear you.",
-        "quiet": "No sound yet. Check that this microphone isn't muted, or choose another one.",
-        "failed": "Kusema couldn't open this microphone. Choose another one.",
-        "tip": "Tip: a headset gives the best accuracy and fewer stray words."
+        "title": "Vælg din mikrofon",
+        "sub": "Sig noget. Bjælken bør bevæge sig, mens du taler.",
+        "label": "Mikrofon",
+        "meter": "Mikrofonniveau",
+        "heard": "Kusema kan høre dig.",
+        "quiet": "Ingen lyd endnu. Tjek, at mikrofonen ikke er slået fra, eller vælg en anden.",
+        "failed": "Kusema kunne ikke åbne denne mikrofon. Vælg en anden.",
+        "tip": "Tip: et headset giver den bedste nøjagtighed og færre forkerte ord."
       },
       "practice": {
-        "title": "Dictate your first sentence",
-        "how": "Hold <keys/>, say this sentence, then let go:",
+        "title": "Diktér din første sætning",
+        "how": "Hold <keys/> nede, sig denne sætning, og slip så:",
         "sentence": "Dear Mr. Smith comma thank you for your letter period",
-        "box": "Practice box: your words appear here",
-        "placeholder": "Your words appear here",
-        "listening": "Listening...",
-        "typing": "Typing...",
-        "success": "That's it. Saying \"comma\" and \"period\" types the marks.",
-        "waiting": "Your speech model is still downloading. This box will work as soon as it's ready.",
-        "continuous": "For longer dictation, press <keys/> to keep listening until you press it again. Used to Dragon? You can set this to Numpad + under General.",
-        "continuousRunning": "Continuous dictation is on. Your words appear in the box each time you pause. Press {{stop}} to stop it.",
-        "continuousEnded": "That's continuous dictation. In your other apps, your words are typed at the cursor."
+        "box": "Øvefelt: her vises dine ord",
+        "placeholder": "Her vises dine ord",
+        "listening": "Lytter...",
+        "typing": "Skriver...",
+        "success": "Sådan. Når du siger \"comma\" og \"period\", indsættes tegnene.",
+        "waiting": "Din talemodel downloades stadig. Feltet virker, så snart den er klar.",
+        "continuous": "Til længere diktat skal du trykke på <keys/>, så lytter Kusema, indtil du trykker igen. Vant til Dragon? Under Generelt kan du bruge Numpad +.",
+        "continuousRunning": "Løbende diktat er slået til. Dine ord vises i feltet ved hver pause. Tryk på {{stop}} for at stoppe.",
+        "continuousEnded": "Det var løbende diktat. I dine andre apps skrives dine ord ved markøren."
       },
       "assistant": {
-        "title": "Set up the AI assistant (optional)",
-        "sub": "Ask Kusema answers questions you speak. Dictation doesn't need it.",
+        "title": "Konfigurer AI-assistenten (valgfrit)",
+        "sub": "\"Spørg Kusema\" svarer på spørgsmål, du siger højt. Diktat kræver det ikke.",
         "model": "Model",
-        "continueWithout": "Continue without AI",
-        "privileged": "Privileged mode blocks all cloud AI with one switch, for matters that must stay on this computer.",
+        "continueWithout": "Fortsæt uden AI",
+        "privileged": "Privileged-tilstand blokerer al cloud-AI med én knap, til sager, der skal blive på denne computer.",
         "local": {
-          "title": "Private: use a local AI on this computer",
-          "description": "Your questions stay here. Uses Ollama, a free app.",
-          "checking": "Looking for Ollama on this computer...",
-          "found": "Found Ollama. Choose a model to use.",
-          "notFound": "Ollama isn't running on this computer.",
-          "noModels": "Ollama is running, but has no models yet. Run \"ollama pull llama3.2\", then check again.",
-          "instructions": "How to set up Ollama",
-          "again": "Check again"
+          "title": "Privat: brug en lokal AI på denne computer",
+          "description": "Dine spørgsmål bliver her. Bruger Ollama, en gratis app.",
+          "checking": "Leder efter Ollama på denne computer...",
+          "found": "Ollama fundet. Vælg en model.",
+          "notFound": "Ollama kører ikke på denne computer.",
+          "noModels": "Ollama kører, men har ingen modeller endnu. Kør \"ollama pull llama3.2\", og tjek igen.",
+          "instructions": "Sådan installerer du Ollama",
+          "again": "Tjek igen"
         },
         "cloud": {
-          "title": "Use a cloud AI provider",
-          "description": "Your questions go to the provider you choose, using your own API key.",
-          "provider": "Provider",
-          "key": "API key",
-          "check": "Save and check",
-          "checking": "Checking the key...",
-          "saved": "Key saved in Windows Credential Manager. Choose a model to use.",
-          "where": "The key is stored in Windows Credential Manager, not in a file.",
-          "keyFailed": "The key was saved, but the provider didn't list any models. Check the key and try again."
+          "title": "Brug en cloud-AI-udbyder",
+          "description": "Dine spørgsmål går til den udbyder, du vælger, med din egen API-nøgle.",
+          "provider": "Udbyder",
+          "key": "API-nøgle",
+          "check": "Gem og tjek",
+          "checking": "Tjekker nøglen...",
+          "saved": "Nøglen er gemt i Windows Legitimationsstyring. Vælg en model.",
+          "where": "Nøglen opbevares i Windows Legitimationsstyring, ikke i en fil.",
+          "keyFailed": "Nøglen blev gemt, men udbyderen viste ingen modeller. Tjek nøglen, og prøv igen."
         },
         "skip": {
-          "title": "Skip for now",
-          "description": "You can set this up later on the Assistant page."
+          "title": "Spring over indtil videre",
+          "description": "Du kan konfigurere det senere på siden Assistent."
         }
       },
       "done": {
-        "title": "You're all set",
-        "sub": "Kusema keeps running in the system tray and works in any app.",
-        "finish": "Start using Kusema",
-        "wins": "Your first three wins are waiting on the main page.",
-        "atLogin": "Start Kusema when I sign in",
+        "title": "Alt er klar",
+        "sub": "Kusema kører videre i meddelelsesområdet og virker i alle apps.",
+        "finish": "Begynd at bruge Kusema",
+        "wins": "Dine første tre sejre venter på hovedsiden.",
+        "atLogin": "Start Kusema, når jeg logger på",
         "keys": {
-          "dictate": "Dictate: hold",
-          "continuous": "Continuous dictation: press to start and stop",
-          "ask": "Ask Kusema",
-          "askScreen": "Ask about my screen"
+          "dictate": "Diktér: hold nede",
+          "continuous": "Løbende diktat: tryk for at starte og stoppe",
+          "ask": "Spørg Kusema",
+          "askScreen": "Spørg om min skærm"
         }
       }
     }
@@ -408,7 +408,7 @@
     "general": {
       "title": "Generelt",
       "shortcut": {
-        "title": "Handy-genveje",
+        "title": "Kusema-genveje",
         "description": "Konfigurer tastaturgenveje til at udløse tale-til-tekst-optagelse",
         "loading": "Indlæser genveje...",
         "none": "Ingen genveje konfigureret",
@@ -428,20 +428,20 @@
             "description": "Valgfrit: En dedikeret genvej, der altid anvender AI-efterbehandling på din transskription."
           },
           "assistant": {
-            "name": "Ask Kusema",
-            "description": "Hold or press to ask a spoken question. The reply appears below instead of being pasted."
+            "name": "Spørg Kusema",
+            "description": "Hold nede eller tryk for at stille et spørgsmål højt. Svaret vises nedenfor i stedet for at blive indsat."
           },
           "assistant_screen": {
-            "name": "Ask About My Screen",
-            "description": "Hold or press to ask a spoken question about the window you're working in. You see the screenshot before anything is sent."
+            "name": "Spørg om min skærm",
+            "description": "Hold nede eller tryk for at stille et spørgsmål højt om det vindue, du arbejder i. Du ser skærmbilledet, før noget sendes."
           },
           "dictate_continuous": {
-            "name": "Continuous Dictation",
-            "description": "Press to start dictating hands-free, and press again to stop. Text appears each time you pause."
+            "name": "Løbende diktat",
+            "description": "Tryk for at diktere håndfrit, og tryk igen for at stoppe. Teksten vises ved hver pause."
           },
           "toggle_privileged": {
-            "name": "Privileged Mode",
-            "description": "Press to turn Privileged mode on or off."
+            "name": "Privileged-tilstand",
+            "description": "Tryk for at slå Privileged-tilstand til eller fra."
           }
         },
         "errors": {
@@ -466,7 +466,7 @@
       },
       "preferredLanguages": {
         "title": "Foretrukne sprog",
-        "description": "De sprog, du taler. Handy bruger dem til at anbefale modeller.",
+        "description": "De sprog, du taler. Kusema bruger dem til at anbefale modeller.",
         "noMatch": "Intet sprog matcher »{{query}}«",
         "weak": "Ingen model genkender {{languages}} godt endnu."
       },
@@ -493,17 +493,17 @@
         "fits": "Til dine sprog",
         "untested": "Ikke testet"
       },
-      "untestedNote": "Ikke testet med Handy. De kan være langsommere eller lave flere fejl.",
+      "untestedNote": "Ikke testet med Kusema. De kan være langsommere eller lave flere fejl.",
       "untestedHidden_one": "{{count}} model mere er ikke tilpasset diktering. Søg for at finde den.",
       "untestedHidden_other": "{{count}} modeller mere er ikke tilpasset diktering. Søg for at finde dem.",
-      "emptyYours": "Ingen modeller endnu. Vælg en nedenfor: den downloades, og så bruger Handy den.",
+      "emptyYours": "Ingen modeller endnu. Vælg en nedenfor: den downloades, og så bruger Kusema den.",
       "showMore": "Vis {{count}} flere",
       "showFewer": "Vis færre",
       "download": "Download og brug",
       "downloadingThenUse": "{{percent}} % af {{total}}, så skiftes der",
       "loading": "Indlæser…",
       "deleteAsk": "Slet {{name}}? Det frigør {{size}}.",
-      "deleteAskActive": "Slet {{name}}? Handy kan ikke transskribere, før du vælger en anden.",
+      "deleteAskActive": "Slet {{name}}? Kusema kan ikke transskribere, før du vælger en anden.",
       "cancel": "Annuller",
       "deleteModel": "Slet {{name}}",
       "cancelDownload": "Stop download af {{name}}",
@@ -517,7 +517,7 @@
         "marks": "? er ikke målt endnu. — forstår ikke det sprog."
       },
       "retiredNotice": {
-        "title": "Gamle modeller virker ikke længere med Handy",
+        "title": "Gamle modeller virker ikke længere med Kusema",
         "description": "De fylder {{size}} på din computer.",
         "delete": "Slet modeller",
         "deleted": "Gamle modeller er slettet",
@@ -525,37 +525,37 @@
       },
       "rescan": {
         "label": "Søg igen",
-        "tooltip": "Søg igen efter modeller, der er tilføjet til modelmappen eller Hugging Face-cachen uden for Handy"
+        "tooltip": "Søg igen efter modeller, der er tilføjet til modelmappen eller Hugging Face-cachen uden for Kusema"
       },
       "curated": {
-        "inUse": "In use",
-        "gettingReady": "Getting ready...",
-        "downloading": "Downloading: {{percent}}%",
-        "cancel": "Cancel",
-        "cancelLabel": "Cancel downloading {{name}}",
-        "use": "Use",
-        "useLabel": "Use {{name}}",
+        "inUse": "I brug",
+        "gettingReady": "Gør klar...",
+        "downloading": "Downloader: {{percent}} %",
+        "cancel": "Annuller",
+        "cancelLabel": "Annuller download af {{name}}",
+        "use": "Brug",
+        "useLabel": "Brug {{name}}",
         "download": "Download ({{size}})",
         "downloadLabel": "Download {{name}}",
-        "recommended": "Recommended",
-        "others": "Also on this computer",
-        "showAllHint": "More models are available: turn on Show all models under Advanced.",
+        "recommended": "Anbefalet",
+        "others": "Også på denne computer",
+        "showAllHint": "Der findes flere modeller: slå \"Vis alle modeller\" til under Avanceret.",
         "rows": {
           "parakeetUnified": {
             "name": "Parakeet Unified English",
-            "description": "The best choice for English. Chosen automatically."
+            "description": "Det bedste valg til engelsk. Vælges automatisk."
           },
           "parakeetV3": {
             "name": "Parakeet TDT v3",
-            "description": "For dictating in other languages, including Spanish, French and German."
+            "description": "Til diktat på andre sprog, blandt andet spansk, fransk og tysk."
           },
           "canary": {
             "name": "Canary 180M Flash",
-            "description": "A small download, for older computers or when disk space is low."
+            "description": "En lille download, til ældre computere eller når der er lidt diskplads."
           },
           "nemotron": {
             "name": "Nemotron 3.5 Streaming",
-            "description": "Shows live text as you speak, but makes more mistakes."
+            "description": "Viser tekst live, mens du taler, men laver flere fejl."
           }
         }
       }
@@ -564,26 +564,26 @@
       "title": "Sprog"
     },
     "dictation": {
-      "title": "Continuous Dictation",
-      "description": "Keep talking, and the text is typed into your window each time you pause. Speech recognition stays on this computer, and AI cleanup never runs in this mode.",
+      "title": "Løbende diktat",
+      "description": "Bliv ved med at tale, så skrives teksten i dit vindue ved hver pause. Talegenkendelsen bliver på denne computer, og AI-oprydning kører aldrig i denne tilstand.",
       "dragonKey": {
-        "title": "Dragon's Key",
-        "description": "Use Numpad + to start and stop, as Dragon does. While it's set, that key no longer types a plus sign.",
-        "button": "Use Dragon's key (Numpad +)"
+        "title": "Dragon-tast",
+        "description": "Brug Numpad + til at starte og stoppe, som i Dragon. Så længe det er valgt, skriver tasten ikke længere et plus.",
+        "button": "Brug Dragon-tasten (Numpad +)"
       },
       "pause": {
-        "title": "Pause Length",
-        "description": "How long you pause before what you said is typed. Longer pauses keep sentences together; shorter ones show text sooner.",
+        "title": "Pauselængde",
+        "description": "Hvor længe du holder pause, før det, du sagde, skrives. Længere pauser holder sætninger samlet; kortere viser tekst hurtigere.",
         "seconds": "{{seconds}} s"
       },
       "autoStop": {
-        "title": "Stop After Silence",
-        "description": "Dictation stops by itself after this long without speech, so the microphone is never left on by accident.",
-        "minutes": "{{minutes}} min"
+        "title": "Stop efter stilhed",
+        "description": "Diktatet stopper af sig selv efter så lang tid uden tale, så mikrofonen aldrig står tændt ved en fejl.",
+        "minutes": "{{minutes}} min."
       },
       "voiceCommands": {
-        "label": "Voice Commands",
-        "description": "Say \"new paragraph\" or \"new line\" as you talk, or \"scratch that\" or \"stop dictation\" on its own between pauses, and it acts instead of being typed. Normal sentences with these words are typed as usual."
+        "label": "Talekommandoer",
+        "description": "Sig \"new paragraph\" eller \"new line\", mens du taler, eller \"scratch that\" eller \"stop dictation\" alene mellem pauser, så udføres kommandoen i stedet for at blive skrevet. Almindelige sætninger med disse ord skrives som normalt."
       }
     },
     "sound": {
@@ -646,11 +646,11 @@
       },
       "autostart": {
         "label": "Start ved opstart",
-        "description": "Start Handy automatisk, når du logger ind på din computer."
+        "description": "Start Kusema automatisk, når du logger ind på din computer."
       },
       "showTrayIcon": {
         "label": "Vis proceslinjeikon",
-        "description": "Vis Handy-ikonet i meddelelsesområdet."
+        "description": "Vis Kusema-ikonet i meddelelsesområdet."
       },
       "overlay": {
         "style": {
@@ -773,90 +773,90 @@
         }
       },
       "showAllModels": {
-        "label": "Show all models",
-        "description": "List every model on the Models page, with accuracy and speed details, instead of the short list."
+        "label": "Vis alle modeller",
+        "description": "Vis alle modeller på siden Modeller med oplysninger om nøjagtighed og hastighed i stedet for den korte liste."
       }
     },
     "assistant": {
-      "title": "Assistant",
-      "description": "Hold the shortcut, ask a question out loud, and Kusema answers.",
+      "title": "Assistent",
+      "description": "Hold genvejen nede, stil et spørgsmål højt, og Kusema svarer.",
       "provider": {
-        "title": "AI Provider",
-        "provider": "Provider",
-        "description": "Assistant mode uses the same provider and API key as Post Process.",
+        "title": "AI-udbyder",
+        "provider": "Udbyder",
+        "description": "Assistenten bruger samme udbyder og API-nøgle som Efterbehandling.",
         "model": "Model",
-        "modelDescription": "The model that answers your questions. Change it on the Post Process page.",
-        "notSet": "Not chosen",
-        "open": "Open Post Process settings",
-        "disabled": "Assistant mode needs an AI provider (such as Anthropic, OpenAI or a local Ollama model) to answer questions. Providers are set up on the Post Process page, which appears once Post Processing is turned on. Turning it on doesn't change how normal dictation works.",
-        "enable": "Turn on Post Processing",
-        "noProvider": "Choose a provider on the Post Process page.",
-        "noKey": "No API key is set for {{provider}}. Add one on the Post Process page.",
-        "noModel": "Choose a model on the Post Process page."
+        "modelDescription": "Den model, der svarer på dine spørgsmål. Skift den på siden Efterbehandling.",
+        "notSet": "Ikke valgt",
+        "open": "Åbn indstillinger for Efterbehandling",
+        "disabled": "Assistenten skal bruge en AI-udbyder (fx Anthropic, OpenAI eller en lokal Ollama-model) for at svare. Udbydere konfigureres på siden Efterbehandling, som vises, når efterbehandling er slået til. At slå den til ændrer ikke almindelig diktat.",
+        "enable": "Slå efterbehandling til",
+        "noProvider": "Vælg en udbyder på siden Efterbehandling.",
+        "noKey": "Der er ingen API-nøgle til {{provider}}. Tilføj en på siden Efterbehandling.",
+        "noModel": "Vælg en model på siden Efterbehandling."
       },
       "screen": {
-        "title": "Ask About My Screen",
-        "description": "Ask about the window you're working in, like “What do you think of this document?” Only that window is captured, and it stays on this computer until you press Send.",
+        "title": "Spørg om min skærm",
+        "description": "Spørg om det vindue, du arbejder i, fx \"Hvad synes du om dette dokument?\" Kun det vindue tages med, og det bliver på denne computer, indtil du trykker på Send.",
         "confirm": {
-          "label": "Confirm Before Sending Screenshots",
-          "description": "Show the screenshot, your question and where it will go, then wait for Send (Enter) or Cancel (Escape). Unanswered, it cancels after 30 seconds.",
-          "offWarning": "Screenshots will be sent to {{provider}} as soon as you finish speaking, without showing you first. Everything visible in the window goes with them, including private or confidential information."
+          "label": "Bekræft før skærmbilleder sendes",
+          "description": "Viser skærmbilledet, dit spørgsmål og hvor det skal hen, og venter på Send (Enter) eller Annuller (Esc). Uden svar annulleres det efter 30 sekunder.",
+          "offWarning": "Skærmbilleder sendes til {{provider}}, så snart du er færdig med at tale, uden at du ser dem først. Alt, hvad der er synligt i vinduet, kommer med, også private eller fortrolige oplysninger."
         },
         "provider": {
-          "label": "Use for Screen Questions",
-          "description": "Send screenshots to a different provider than normal questions, for example a local vision model in Ollama (the Custom provider) for confidential documents. Follow-up questions go to the same provider until you start a new conversation.",
-          "same": "Same as Assistant",
-          "sameNamed": "Same as Assistant ({{provider}})",
-          "yourProvider": "your AI provider"
+          "label": "Brug til skærmspørgsmål",
+          "description": "Send skærmbilleder til en anden udbyder end almindelige spørgsmål, fx en lokal billedmodel i Ollama (udbyderen Brugerdefineret) til fortrolige dokumenter. Opfølgende spørgsmål går til samme udbyder, indtil du starter en ny samtale.",
+          "same": "Samme som assistenten",
+          "sameNamed": "Samme som assistenten ({{provider}})",
+          "yourProvider": "din AI-udbyder"
         },
         "model": {
-          "label": "Model for Screen Questions",
-          "description": "A model that can see images. Leave empty to use the model chosen for this provider on the Post Process page.",
-          "placeholder": "e.g. qwen2.5vl"
+          "label": "Model til skærmspørgsmål",
+          "description": "En model, der kan se billeder. Lad feltet stå tomt for at bruge den model, der er valgt til denne udbyder på siden Efterbehandling.",
+          "placeholder": "fx qwen2.5vl"
         }
       },
       "conversation": {
-        "empty": "Ask a question with the Ask Kusema shortcut. The conversation will appear here.",
-        "new": "New conversation",
-        "screenshot": "Screenshot",
-        "noProvider": "Ask Kusema needs an AI model to answer. Choose one in Settings.",
-        "openSettings": "Open Settings"
+        "empty": "Stil et spørgsmål med genvejen \"Spørg Kusema\". Samtalen vises her.",
+        "new": "Ny samtale",
+        "screenshot": "Skærmbillede",
+        "noProvider": "\"Spørg Kusema\" skal bruge en AI-model for at svare. Vælg en under Indstillinger.",
+        "openSettings": "Åbn indstillinger"
       },
       "voice": {
-        "title": "Voice",
-        "systemDefault": "System default",
-        "previewText": "Hi, I'm Kusema. This is how I'll sound when I answer your questions.",
+        "title": "Stemme",
+        "systemDefault": "Systemstandard",
+        "previewText": "Hej, jeg er Kusema. Sådan lyder jeg, når jeg svarer på dine spørgsmål.",
         "speakReplies": {
-          "label": "Speak Replies",
-          "description": "Read replies aloud as they arrive. Press Cancel (Escape), start a new recording, or start a new conversation to stop."
+          "label": "Læs svar højt",
+          "description": "Læser svar højt, efterhånden som de kommer. Tryk på Annuller (Esc), start en ny optagelse eller en ny samtale for at stoppe."
         },
         "voice": {
-          "label": "Voice",
-          "description": "Kokoro voices sound the most natural; download them above. The other voices come with your computer (on Windows, add more under Settings > Time & language > Speech)."
+          "label": "Stemme",
+          "description": "Kokoro-stemmer lyder mest naturligt; download dem ovenfor. De andre stemmer følger med din computer (i Windows kan du tilføje flere under Indstillinger > Klokkeslæt og sprog > Tale)."
         },
         "kokoro": {
-          "label": "Kokoro Voices",
-          "description": "28 natural-sounding English voices (US and UK) generated on this computer. A one-time download.",
-          "installed": "Installed. Pick a Kokoro voice below. Removing them frees the disk space; replies then use the system voice.",
+          "label": "Kokoro-stemmer",
+          "description": "28 naturligt klingende engelske stemmer (USA og Storbritannien), skabt på denne computer. En download én gang.",
+          "installed": "Installeret. Vælg en Kokoro-stemme nedenfor. Fjerner du dem, frigøres diskplads; svar bruger så systemstemmen.",
           "download": "Download ({{size}} MB)",
-          "downloading": "Downloading… {{percentage}}%",
-          "cancel": "Cancel",
-          "delete": "Remove"
+          "downloading": "Downloader… {{percentage}} %",
+          "cancel": "Annuller",
+          "delete": "Fjern"
         },
         "rate": {
-          "label": "Speaking Rate",
-          "description": "How fast replies are read. 1.00× is the voice's normal speed."
+          "label": "Talehastighed",
+          "description": "Hvor hurtigt svar læses op. 1,00× er stemmens normale hastighed."
         },
         "preview": {
-          "label": "Preview Voice",
-          "description": "Hear the selected voice at the selected speed.",
-          "button": "Preview"
+          "label": "Hør stemmen",
+          "description": "Hør den valgte stemme i den valgte hastighed.",
+          "button": "Hør"
         }
       },
       "tabs": {
-        "label": "Assistant",
-        "conversation": "Conversation",
-        "settings": "Settings"
+        "label": "Assistent",
+        "conversation": "Samtale",
+        "settings": "Indstillinger"
       }
     },
     "postProcessing": {
@@ -973,7 +973,7 @@
       },
       "updateChecks": {
         "label": "Tjek for opdateringer",
-        "description": "Tjek automatisk for nye versioner af Handy",
+        "description": "Tjek automatisk for nye versioner af Kusema",
         "lockedDescription": "Deaktiveret af systemkonfiguration (HANDY_DISABLE_UPDATER)"
       },
       "whatsNewPreview": {
@@ -992,9 +992,9 @@
           "welcome": "Velkommen",
           "permissions": "Tilladelser",
           "done": "Klar",
-          "microphone": "Microphone",
-          "practice": "Practice",
-          "assistant": "AI assistant"
+          "microphone": "Mikrofon",
+          "practice": "Øvelse",
+          "assistant": "AI-assistent"
         }
       },
       "onboardingRun": {
@@ -1040,8 +1040,8 @@
         "description": "Mikrofon, der skal bruges, når den bærbares låg er lukket"
       },
       "postProcessingToggle": {
-        "label": "AI Cleanup",
-        "description": "Optional. Rewrites dictated text with an AI model when you use the AI cleanup shortcut: fixes self-corrections and grammar, keeps your meaning, and never adds facts."
+        "label": "AI-oprydning",
+        "description": "Valgfri. Omskriver dikteret tekst med en AI-model, når du bruger genvejen til AI-oprydning: retter selvkorrektioner og grammatik, bevarer det, du mener, og tilføjer aldrig fakta."
       },
       "muteWhileRecording": {
         "label": "Mute under optagelse",
@@ -1057,7 +1057,7 @@
         "bindingsReset": "Tastaturgenveje var inkompatible og blev nulstillet til standard",
         "options": {
           "tauri": "Tauri Global Shortcut",
-          "builtIn": "Built-in (recommended)"
+          "builtIn": "Indbygget (anbefalet)"
         }
       },
       "pasteDelay": {
@@ -1086,7 +1086,7 @@
       },
       "keyboardDiagnostic": {
         "title": "Tastaturdiagnostik",
-        "description": "Kontrollerer, om tastaturhændelser når frem til Handy. Kun antallet af hændelser registreres — aldrig hvilke taster du trykker på.",
+        "description": "Kontrollerer, om tastaturhændelser når frem til Kusema. Kun antallet af hændelser registreres — aldrig hvilke taster du trykker på.",
         "run": "Kør 10 s diagnostik",
         "running": "Lytter… tryk på din genvej et par gange (f.eks. Option+Space)",
         "secureInputLabel": "Secure Input",
@@ -1100,7 +1100,7 @@
         "mouse": "Mus",
         "verdictBlocked": "Secure Input blokerer tastehændelser — genveje med en almindelig tast kan ikke fungere, før det er løst.",
         "verdictSuspicious": "Der kom modifikatorhændelser, men ingen tastehændelser — noget undertrykker taster, selvom Secure Input rapporteres som deaktiveret. Rapportér det gerne på GitHub.",
-        "verdictOk": "Tastehændelser når frem til Handy som normalt.",
+        "verdictOk": "Tastehændelser når frem til Kusema som normalt.",
         "verdictNoEvents": "Ingen hændelser registreret — trykkede du på nogen taster under testen?",
         "failed": "Diagnostik mislykkedes: {{error}}"
       }
@@ -1109,203 +1109,203 @@
       "title": "Om",
       "version": {
         "title": "Version",
-        "description": "Nuværende version af Handy"
+        "description": "Nuværende version af Kusema"
       },
       "whatsNewUpdates": {
         "label": "Vis nyheder",
-        "description": "Vis udgivelsesnoter, efter Handy opdateres"
+        "description": "Vis udgivelsesnoter, efter Kusema opdateres"
       },
       "appDataDirectory": {
         "title": "Appdatamappe",
-        "description": "Placering, hvor Handy gemmer sine data"
+        "description": "Placering, hvor Kusema gemmer sine data"
       },
       "sourceCode": {
         "title": "Kildekode",
-        "description": "View Kusema's source code",
+        "description": "Se Kusemas kildekode",
         "button": "Vis på GitHub"
       },
       "acknowledgments": {
         "ggml": {
           "title": "ggml",
           "description": "Højtydende tensor-bibliotek til maskinlæringsinferens på enheden",
-          "details": "Handys lokale tale-til-tekst funktionalitet er bygget på transcribe.cpp og ggml. Tak for det fantastiske arbejde af Georgi Gerganov og bidragyderne."
+          "details": "Kusemas lokale tale-til-tekst funktionalitet er bygget på transcribe.cpp og ggml. Tak for det fantastiske arbejde af Georgi Gerganov og bidragyderne."
         }
       },
       "organizations": {
-        "title": "Kusema for organizations",
-        "description": "Setup, support and options for firms",
-        "button": "Learn more"
+        "title": "Kusema til organisationer",
+        "description": "Installation, support og muligheder for kontorer",
+        "button": "Læs mere"
       },
       "report": {
-        "title": "Report a problem or suggest a feature",
-        "description": "Tell us on GitHub what went wrong or what you'd like",
-        "button": "Open GitHub"
+        "title": "Rapportér et problem, eller foreslå en funktion",
+        "description": "Fortæl os på GitHub, hvad der gik galt, eller hvad du ønsker dig",
+        "button": "Åbn GitHub"
       },
       "credits": {
-        "title": "Credits and licenses",
+        "title": "Kreditering og licenser",
         "handy": {
-          "title": "Built on Handy",
-          "description": "Kusema is built on Handy by CJ Pais, used under the MIT License.",
-          "button": "View Handy"
+          "title": "Bygget på Handy",
+          "description": "Kusema er bygget på Handy af CJ Pais, brugt under MIT-licensen.",
+          "button": "Se Handy"
         },
         "nvidiaLicense": "NVIDIA Open Model License",
-        "models": "Speech and voice models ({{count}})",
-        "components": "Open-source components ({{count}})",
-        "notices": "Full license texts",
-        "loading": "Loading..."
+        "models": "Tale- og stemmemodeller ({{count}})",
+        "components": "Open source-komponenter ({{count}})",
+        "notices": "Fulde licenstekster",
+        "loading": "Indlæser..."
       }
     },
     "privacy": {
-      "thisComputer": "This computer ({{host}})",
-      "nothingSent": "Nothing to show yet.",
-      "updateBlocked": "Update checks are blocked in Privileged mode.",
+      "thisComputer": "Denne computer ({{host}})",
+      "nothingSent": "Intet at vise endnu.",
+      "updateBlocked": "Søgning efter opdateringer er blokeret i Privileged-tilstand.",
       "audio": {
-        "title": "Audio sent off this computer: 0 bytes",
-        "description": "Speech recognition runs on this computer, and nothing in Kusema can upload your voice. Only the text of what you say, and only for features you choose, ever goes to an AI provider."
+        "title": "Lyd sendt fra denne computer: 0 byte",
+        "description": "Talegenkendelsen kører på denne computer, og intet i Kusema kan uploade din stemme. Kun teksten af det, du siger, og kun til funktioner, du vælger, sendes nogensinde til en AI-udbyder."
       },
       "privileged": {
-        "title": "Privileged Mode",
-        "description": "For confidential matters. While it's on, nothing you say, type or show goes to a cloud AI service. Ask Kusema and AI cleanup only work with a model running on this computer.",
+        "title": "Privileged-tilstand",
+        "description": "Til fortrolige sager. Mens den er slået til, går intet af det, du siger, skriver eller viser, til en cloud-AI-tjeneste. \"Spørg Kusema\" og AI-oprydning virker kun med en model på denne computer.",
         "chip": "Privileged",
         "toggle": {
-          "label": "Privileged Mode",
-          "description": "Blocks every request to cloud AI providers, including ones already set up. Dictation keeps working, because it never uses the cloud."
+          "label": "Privileged-tilstand",
+          "description": "Blokerer alle anmodninger til cloud-AI-udbydere, også dem, der allerede er konfigureret. Diktat virker stadig, fordi den aldrig bruger skyen."
         },
         "allowLan": {
-          "label": "Allow Local Network AI Servers",
-          "description": "Also allows AI servers on your office network, by private address (like 192.168.1.20). Models on this computer are always allowed."
+          "label": "Tillad AI-servere på det lokale netværk",
+          "description": "Tillader også AI-servere på kontorets netværk via privat adresse (fx 192.168.1.20). Modeller på denne computer er altid tilladt."
         },
         "blockDownloads": {
-          "label": "Also Block Downloads and Update Checks",
-          "description": "For offline offices. Model and voice downloads and update checks carry none of your content, so they normally stay allowed and are listed below. Turn this on to stop them too while Privileged mode is on."
+          "label": "Bloker også downloads og opdateringer",
+          "description": "Til kontorer uden internet. Downloads af modeller og stemmer og søgning efter opdateringer indeholder intet af dit indhold, så de er normalt tilladt og vises nedenfor. Slå dette til for også at stoppe dem, mens Privileged-tilstand er slået til."
         },
         "hotkey": {
-          "label": "Privileged Mode Shortcut",
-          "description": "Adds a keyboard shortcut that turns Privileged mode on or off. Off by default, so it can't be pressed by accident."
+          "label": "Genvej til Privileged-tilstand",
+          "description": "Tilføjer en tastaturgenvej, der slår Privileged-tilstand til eller fra. Slået fra som standard, så den ikke trykkes ved et uheld."
         }
       },
       "counts": {
-        "title": "Where Requests Went",
-        "today": "Today",
-        "week": "Last 7 days"
+        "title": "Hvor anmodningerne gik hen",
+        "today": "I dag",
+        "week": "Seneste 7 dage"
       },
       "columns": {
-        "time": "Time",
+        "time": "Tid",
         "destination": "Destination",
-        "purpose": "Why",
+        "purpose": "Hvorfor",
         "data": "Data",
-        "size": "Size",
-        "result": "Result"
+        "size": "Størrelse",
+        "result": "Resultat"
       },
       "purposes": {
-        "assistant_question": "Question to Kusema",
-        "screen_question": "Question about the screen",
-        "post_processing": "AI cleanup",
-        "provider_models": "Listing a provider's models",
-        "model_download": "Speech model download",
-        "voice_download": "Voice download",
-        "update_check": "Update check"
+        "assistant_question": "Spørgsmål til Kusema",
+        "screen_question": "Spørgsmål om skærmen",
+        "post_processing": "AI-oprydning",
+        "provider_models": "Hentning af en udbyders modeller",
+        "model_download": "Download af talemodel",
+        "voice_download": "Download af stemme",
+        "update_check": "Søgning efter opdatering"
       },
       "data": {
-        "text": "Text",
-        "image": "Screenshot",
-        "none": "None of yours"
+        "text": "Tekst",
+        "image": "Skærmbillede",
+        "none": "Intet af dit"
       },
       "results": {
-        "sent": "Sent",
-        "blocked": "Blocked",
-        "failed": "Failed"
+        "sent": "Sendt",
+        "blocked": "Blokeret",
+        "failed": "Mislykkedes"
       },
       "list": {
-        "title": "Every Request",
-        "description": "Each request Kusema has made: when, where, why, what kind of data and how large. What was in it is never recorded. Shows the latest 500; the export has them all.",
-        "all": "All",
-        "allPurposes": "Any reason",
-        "allResults": "Any result",
-        "allDestinations": "Any destination",
-        "anyTime": "Any time",
-        "lastDays_one": "Last {{count}} day",
-        "lastDays_other": "Last {{count}} days",
-        "export": "Export CSV",
-        "exported_one": "Exported {{count}} request.",
-        "exported_other": "Exported {{count}} requests.",
-        "clear": "Clear",
+        "title": "Alle anmodninger",
+        "description": "Hver anmodning, Kusema har lavet: hvornår, hvorhen, hvorfor, hvilken slags data og hvor stor. Indholdet registreres aldrig. Viser de seneste 500; eksporten indeholder dem alle.",
+        "all": "Alle",
+        "allPurposes": "Enhver årsag",
+        "allResults": "Ethvert resultat",
+        "allDestinations": "Enhver destination",
+        "anyTime": "Når som helst",
+        "lastDays_one": "Seneste {{count}} dag",
+        "lastDays_other": "Seneste {{count}} dage",
+        "export": "Eksportér CSV",
+        "exported_one": "{{count}} anmodning eksporteret.",
+        "exported_other": "{{count}} anmodninger eksporteret.",
+        "clear": "Ryd",
         "retention": {
-          "title": "Keep This List For",
-          "description": "Older entries are deleted from this computer automatically.",
-          "days_one": "{{count}} day",
-          "days_other": "{{count}} days"
+          "title": "Gem listen i",
+          "description": "Ældre poster slettes automatisk fra denne computer.",
+          "days_one": "{{count}} dag",
+          "days_other": "{{count}} dage"
         }
       }
     },
     "cleanup": {
-      "title": "Cleanup",
-      "description": "Dictated text should need little editing. Local cleanup runs on this computer and sends nothing anywhere.",
+      "title": "Oprydning",
+      "description": "Dikteret tekst bør kun kræve lidt redigering. Lokal oprydning kører på denne computer og sender intet.",
       "local": {
-        "label": "Local Cleanup",
-        "description": "Removes filler words, adds missing periods between phrases in continuous dictation, and handles spoken punctuation, all on this computer. Off, your words are typed as transcribed."
+        "label": "Lokal oprydning",
+        "description": "Fjerner fyldord, tilføjer manglende punktummer mellem sætninger i løbende diktat og håndterer talt tegnsætning, alt sammen på denne computer. Slået fra skrives dine ord, som de blev transskriberet."
       },
       "spokenPunctuation": {
-        "label": "Spoken Punctuation",
-        "description": "Say \"comma\", \"period\", \"question mark\", \"colon\", \"open quote\", \"close paren\", \"dash\", \"section symbol\" and more, as in Dragon. \"Period\" only counts at the end of a phrase, so \"the limitations period expired\" stays as words. Say \"literal period\" to type the word."
+        "label": "Talt tegnsætning",
+        "description": "Sig \"comma\", \"period\", \"question mark\", \"colon\", \"open quote\", \"close paren\", \"dash\", \"section symbol\" og mere, som i Dragon. \"Period\" tæller kun i slutningen af en sætningsdel, så \"the limitations period expired\" bliver stående som ord. Sig \"literal period\" for at skrive ordet. Kommandoerne virker på engelsk."
       },
       "ai": {
         "status": {
-          "noProvider": "No AI provider is set up yet.",
-          "noKey": "{{provider}} needs an API key.",
-          "noModel": "{{provider}} needs a model chosen.",
-          "local": "Using {{model}} on this computer through {{provider}}. Nothing leaves this computer.",
-          "cloud": "Using {{model}} from {{provider}}, a cloud service. Text you clean up goes to {{provider}}.",
-          "blocked": "Privileged mode is on, so nothing will be sent to {{provider}}. Use a local model or turn off Privileged mode."
+          "noProvider": "Ingen AI-udbyder er konfigureret endnu.",
+          "noKey": "{{provider}} skal have en API-nøgle.",
+          "noModel": "Der skal vælges en model til {{provider}}.",
+          "local": "Bruger {{model}} på denne computer via {{provider}}. Intet forlader denne computer.",
+          "cloud": "Bruger {{model}} fra {{provider}}, en cloudtjeneste. Tekst, du rydder op i, sendes til {{provider}}.",
+          "blocked": "Privileged-tilstand er slået til, så intet sendes til {{provider}}. Brug en lokal model, eller slå Privileged-tilstand fra."
         },
-        "recommendLocal": "We recommend a model that runs on this computer, such as one in Ollama, so confidential text stays here. AI cleanup runs when you dictate with its own shortcut, and never during continuous dictation.",
-        "setUp": "Set Up AI Cleanup"
+        "recommendLocal": "Vi anbefaler en model, der kører på denne computer, fx en i Ollama, så fortrolig tekst bliver her. AI-oprydning kører, når du dikterer med dens egen genvej, og aldrig under løbende diktat.",
+        "setUp": "Konfigurer AI-oprydning"
       }
     },
     "firstWins": {
-      "title": "First three wins",
-      "dismiss": "Dismiss",
-      "dictated": "Dictate an email",
-      "newParagraph": "Use continuous dictation and say \"new paragraph\"",
-      "asked": "Ask Kusema a question",
-      "done": "Done",
-      "notDone": "Not done yet",
-      "progress": "{{done}} of {{count}} done",
-      "allDone": "All three done. Nice work."
+      "title": "De første tre sejre",
+      "dismiss": "Skjul",
+      "dictated": "Diktér en e-mail",
+      "newParagraph": "Brug løbende diktat, og sig \"new paragraph\"",
+      "asked": "Stil Kusema et spørgsmål",
+      "done": "Klaret",
+      "notDone": "Ikke endnu",
+      "progress": "{{done}} af {{count}} klaret",
+      "allDone": "Alle tre klaret. Godt gået."
     },
     "glow": {
-      "title": "Recording indicator",
-      "description": "A glow around the edges of your screen shows that Kusema is listening. Only you see it: it stays out of screenshots and screen shares.",
+      "title": "Optagelsesindikator",
+      "description": "Et lysskær langs skærmens kanter viser, at Kusema lytter. Kun du ser det: det kommer ikke med på skærmbilleder eller ved skærmdeling.",
       "enabled": {
-        "label": "Screen glow",
-        "description": "Show a colored glow around the screen you're working on while Kusema is listening. You can still click and type through it."
+        "label": "Lysskær på skærmen",
+        "description": "Vis et farvet lysskær rundt om den skærm, du arbejder på, mens Kusema lytter. Du kan stadig klikke og skrive igennem det."
       },
       "thickness": {
-        "label": "Thickness",
-        "description": "How far the glow reaches in from the edge of the screen."
+        "label": "Tykkelse",
+        "description": "Hvor langt lysskæret går ind fra skærmens kant."
       },
       "intensity": {
-        "label": "Intensity",
-        "description": "How strong the glow is."
+        "label": "Styrke",
+        "description": "Hvor kraftigt lysskæret er."
       },
       "palette": {
-        "label": "Colors",
-        "description": "The color-blind friendly set keeps the modes easy to tell apart with every common kind of color blindness.",
+        "label": "Farver",
+        "description": "Farverne til farveblinde holder tilstandene lette at skelne ved alle almindelige former for farveblindhed.",
         "standard": "Standard",
-        "color_blind": "Color-blind friendly"
+        "color_blind": "Til farveblinde"
       },
       "modes": {
-        "dictation": "Dictation",
-        "continuous": "Continuous dictation",
-        "ask": "Ask Kusema",
-        "ask_screen": "Ask about my screen",
-        "paused": "Continuous dictation paused (window changed)"
+        "dictation": "Diktat",
+        "continuous": "Løbende diktat",
+        "ask": "Spørg Kusema",
+        "ask_screen": "Spørg om min skærm",
+        "paused": "Løbende diktat på pause (vindue skiftet)"
       },
-      "preview": "Preview",
-      "previewLabel": "Preview the glow for {{mode}}",
+      "preview": "Forhåndsvis",
+      "previewLabel": "Forhåndsvis lysskæret for {{mode}}",
       "sounds": {
-        "label": "Continuous dictation sounds",
-        "description": "Play a short sound when continuous dictation starts and stops. Sounds for other dictation are under Sound below."
+        "label": "Lyde ved løbende diktat",
+        "description": "Afspil en kort lyd, når løbende diktat starter og stopper. Lyde for anden diktat finder du under Lyd længere nede."
       }
     }
   },
@@ -1325,7 +1325,7 @@
     "portableUpdateBrowseButton": "Åbn GitHub Releases"
   },
   "whatsNew": {
-    "title": "Nyt i Handy v{{version}}"
+    "title": "Nyt i Kusema v{{version}}"
   },
   "common": {
     "loading": "Indlæser...",
@@ -1356,11 +1356,11 @@
   },
   "appLanguage": {
     "title": "Applikationssprog",
-    "description": "Skift sproget for Handy-grænsefladen"
+    "description": "Skift sproget for Kusema-grænsefladen"
   },
   "theme": {
     "title": "Applikationstema",
-    "description": "Vælg om Handy skal følge dit systemtema eller forblive lyst eller mørkt",
+    "description": "Vælg om Kusema skal følge dit systemtema eller forblive lyst eller mørkt",
     "options": {
       "system": "System",
       "light": "Lys",
@@ -1371,38 +1371,38 @@
     "transcribing": "Transskriberer...",
     "processing": "Behandler...",
     "loadingModel": "Indlæser model...",
-    "speaking": "Speaking...",
+    "speaking": "Taler...",
     "dictation": {
-      "dictating": "Dictating",
-      "paused": "Paused, window changed",
-      "noTarget": "Click where the text should go",
-      "finishing": "Finishing...",
+      "dictating": "Dikterer",
+      "paused": "På pause, vindue skiftet",
+      "noTarget": "Klik, hvor teksten skal stå",
+      "finishing": "Afslutter...",
       "stop": "Stop",
-      "nothingToScratch": "Nothing to scratch",
-      "scratchWindowChanged": "Can't scratch: the window changed",
-      "scratchOtherInput": "Can't scratch: keyboard or mouse used",
-      "savedToHistory": "Said while paused: saved in History",
-      "stoppedSilence": "Stopped after silence",
-      "microphoneLost": "Stopped: microphone lost",
-      "cantKeepUp": "Stopped: this computer couldn't keep up",
-      "transcriptionFailed": "Couldn't transcribe that",
-      "pasteFailed": "Couldn't type that; it's in History"
+      "nothingToScratch": "Intet at slette",
+      "scratchWindowChanged": "Kan ikke slette: vinduet er skiftet",
+      "scratchOtherInput": "Kan ikke slette: tastatur eller mus brugt",
+      "savedToHistory": "Sagt under pausen: gemt i Historik",
+      "stoppedSilence": "Stoppet efter stilhed",
+      "microphoneLost": "Stoppet: mikrofonen forsvandt",
+      "cantKeepUp": "Stoppet: computeren kunne ikke følge med",
+      "transcriptionFailed": "Kunne ikke transskribere det",
+      "pasteFailed": "Kunne ikke skrive det; det ligger i Historik"
     },
     "privileged": "Privileged"
   },
   "screenCard": {
-    "title": "Send this screenshot?",
-    "autoCancel": "Cancels in {{seconds}} s",
-    "enlarge": "Click to enlarge",
-    "shrink": "Click to make smaller",
-    "imageAlt": "Screenshot of the window you asked about",
+    "title": "Send dette skærmbillede?",
+    "autoCancel": "Annulleres om {{seconds}} s",
+    "enlarge": "Klik for at forstørre",
+    "shrink": "Klik for at gøre mindre",
+    "imageAlt": "Skærmbillede af det vindue, du spurgte om",
     "question": "“{{question}}”",
-    "sendsTo": "Goes to {{provider}} · {{model}}",
-    "onlyThis": "Only this window. Nothing is sent until you press Send.",
+    "sendsTo": "Går til {{provider}} · {{model}}",
+    "onlyThis": "Kun dette vindue. Intet sendes, før du trykker på Send.",
     "send": "Send",
-    "cancel": "Cancel",
+    "cancel": "Annuller",
     "noticeTitle": "Kusema",
-    "close": "Close"
+    "close": "Luk"
   },
   "secureInput": {
     "blockedWithCulprit_one": "{{name}} blokerer muligvis 1 genvej",

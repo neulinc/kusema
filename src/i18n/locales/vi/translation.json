@@ -8,25 +8,25 @@
     "quit": "Thoát",
     "cancel": "Hủy",
     "secureInputWarning": "⚠ Phím tắt bị Secure Input chặn",
-    "privilegedMode": "Privileged Mode",
-    "privilegedOn": "Privileged mode on"
+    "privilegedMode": "Chế độ Privileged",
+    "privilegedOn": "Đã bật chế độ Privileged"
   },
   "sidebar": {
     "general": "Chung",
-    "assistant": "Assistant",
+    "assistant": "Trợ lý",
     "models": "Mô hình",
     "advanced": "Nâng cao",
     "postProcessing": "Xử lý sau",
     "history": "Lịch sử",
     "debug": "Gỡ lỗi",
     "about": "Giới thiệu",
-    "privacy": "Privacy"
+    "privacy": "Quyền riêng tư"
   },
   "onboarding": {
     "customModelDescription": "Không được hỗ trợ chính thức",
     "migration": {
       "title": "Các mô hình của bạn cần được cập nhật",
-      "description": "Handy hiện sử dụng loại mô hình mới hơn. Hãy tải phiên bản mới để tiếp tục chuyển đổi giọng nói. Các phiên bản cũ sẽ bị xóa.",
+      "description": "Kusema hiện sử dụng loại mô hình mới hơn. Hãy tải phiên bản mới để tiếp tục chuyển đổi giọng nói. Các phiên bản cũ sẽ bị xóa.",
       "replaces": "Thay thế {{name}}",
       "oldFormat": "Định dạng cũ",
       "failed": "Tải xuống thất bại",
@@ -63,11 +63,11 @@
     "permissions": {
       "microphone": {
         "name": "Micrô",
-        "why": "Để Handy nghe được bạn. Âm thanh được chuyển thành văn bản ngay trên máy tính này và không bao giờ được tải lên."
+        "why": "Để Kusema nghe được bạn. Âm thanh được chuyển thành văn bản ngay trên máy tính này và không bao giờ được tải lên."
       },
       "accessibility": {
         "name": "Trợ năng",
-        "why": "Để phím tắt của bạn hoạt động trong mọi ứng dụng, và Handy có thể gõ văn bản vào nơi con trỏ của bạn đang đứng."
+        "why": "Để phím tắt của bạn hoạt động trong mọi ứng dụng, và Kusema có thể gõ văn bản vào nơi con trỏ của bạn đang đứng."
       },
       "errors": {
         "checkFailed": "Không thể kiểm tra quyền. Vui lòng thử lại.",
@@ -81,12 +81,12 @@
       "openSettings": "Mở cài đặt",
       "allowed": "Đã cho phép",
       "waiting": "Đang chờ",
-      "turnOnMac": "Bật Handy trong Cài đặt Hệ thống, rồi quay lại đây.",
+      "turnOnMac": "Bật Kusema trong Cài đặt Hệ thống, rồi quay lại đây.",
       "turnOnWindows": "Bật quyền truy cập micrô trong Cài đặt Windows, rồi quay lại đây.",
       "hintBoth": "Hãy cho phép cả hai để tiếp tục",
       "hintMicrophone": "Hãy cho phép micrô để tiếp tục",
       "welcomeBack": "Chào mừng bạn quay lại. Tiếp tục từ chỗ bạn đã dừng.",
-      "relaunch": "Phím tắt không phản hồi sau bước này? <relaunch>Khởi chạy lại Handy</relaunch> và bạn sẽ quay lại đúng chỗ này."
+      "relaunch": "Phím tắt không phản hồi sau bước này? <relaunch>Khởi chạy lại Kusema</relaunch> và bạn sẽ quay lại đúng chỗ này."
     },
     "shell": {
       "back": "Quay lại",
@@ -97,11 +97,11 @@
       "title": "Nói thay vì gõ, trong mọi ứng dụng",
       "subtitle": "Chọn các ngôn ngữ bạn sẽ dùng để đọc chính tả",
       "languagesLabel": "Ngôn ngữ",
-      "noMatch": "Không có ngôn ngữ nào khớp với “{{query}}”. Các mô hình của Handy hỗ trợ khoảng 100 ngôn ngữ; còn nhiều ngôn ngữ khác trong cài đặt.",
+      "noMatch": "Không có ngôn ngữ nào khớp với “{{query}}”. Các mô hình của Kusema hỗ trợ khoảng 100 ngôn ngữ; còn nhiều ngôn ngữ khác trong cài đặt.",
       "appLanguage": "Ngôn ngữ ứng dụng",
       "menusIn": "Menu bằng <b>{{language}}</b>",
       "chinese": {
-        "question": "Bạn nói {{languages}}. Handy nên viết bằng chữ nào?",
+        "question": "Bạn nói {{languages}}. Kusema nên viết bằng chữ nào?",
         "label": "Chữ Hán",
         "zh-Hans": "Giản thể",
         "zh-Hant": "Đài Loan",
@@ -171,7 +171,7 @@
     },
     "try": {
       "title": "Thử xem nào!",
-      "subtitle": "Handy ở ngay góc màn hình để hướng dẫn bạn",
+      "subtitle": "Kusema ở ngay góc màn hình để hướng dẫn bạn",
       "noteLabel": "Ghi chú",
       "placeholder": "Ghi chú mới",
       "hold": "Giữ <keys/> và nói.",
@@ -199,14 +199,14 @@
     },
     "done": {
       "title": "Mọi thứ đã sẵn sàng",
-      "subMac": "Handy giờ đã ở trên thanh menu. Giữ hoặc nhấn <keys/> trong bất kỳ ứng dụng nào để nói.",
-      "subTray": "Handy giờ đã ở trong khay hệ thống. Giữ hoặc nhấn <keys/> trong bất kỳ ứng dụng nào để nói.",
+      "subMac": "Kusema giờ đã ở trên thanh menu. Giữ hoặc nhấn <keys/> trong bất kỳ ứng dụng nào để nói.",
+      "subTray": "Kusema giờ đã ở trong khay hệ thống. Giữ hoặc nhấn <keys/> trong bất kỳ ứng dụng nào để nói.",
       "hint": "Bạn có thể thay đổi những mục này sau trong Cài đặt",
       "highFiveLabel": "Đập tay",
-      "atLogin": "Khởi động Handy khi tôi đăng nhập",
+      "atLogin": "Khởi động Kusema khi tôi đăng nhập",
       "finish": "Xong",
       "panel": {
-        "name": "Handy",
+        "name": "Kusema",
         "ready": "Sẵn sàng",
         "languages": "Ngôn ngữ",
         "model": "Mô hình giọng nói",
@@ -220,79 +220,79 @@
       "done": "Không hoạt động trong các ứng dụng khác? <guide>Hướng dẫn thiết lập Linux</guide>"
     },
     "setup": {
-      "retryDownload": "Try again",
+      "retryDownload": "Thử lại",
       "welcome": {
-        "title": "Kusema turns your voice into text on this computer.",
-        "privacy": "Your voice never leaves it.",
-        "language": "Language you'll dictate in"
+        "title": "Kusema chuyển giọng nói của bạn thành văn bản ngay trên máy tính này.",
+        "privacy": "Giọng nói của bạn không bao giờ rời khỏi máy.",
+        "language": "Ngôn ngữ bạn sẽ đọc chính tả"
       },
       "microphone": {
-        "title": "Choose your microphone",
-        "sub": "Say something. The bar should move as you speak.",
-        "label": "Microphone",
-        "meter": "Microphone level",
-        "heard": "Kusema can hear you.",
-        "quiet": "No sound yet. Check that this microphone isn't muted, or choose another one.",
-        "failed": "Kusema couldn't open this microphone. Choose another one.",
-        "tip": "Tip: a headset gives the best accuracy and fewer stray words."
+        "title": "Chọn micrô của bạn",
+        "sub": "Hãy nói gì đó. Thanh mức sẽ chuyển động khi bạn nói.",
+        "label": "Micrô",
+        "meter": "Mức micrô",
+        "heard": "Kusema nghe thấy bạn.",
+        "quiet": "Chưa có âm thanh. Hãy kiểm tra micrô này có bị tắt tiếng không, hoặc chọn micrô khác.",
+        "failed": "Kusema không mở được micrô này. Hãy chọn micrô khác.",
+        "tip": "Mẹo: tai nghe có micrô cho độ chính xác tốt nhất và ít từ thừa hơn."
       },
       "practice": {
-        "title": "Dictate your first sentence",
-        "how": "Hold <keys/>, say this sentence, then let go:",
+        "title": "Đọc câu đầu tiên của bạn",
+        "how": "Giữ <keys/>, đọc câu này rồi thả ra:",
         "sentence": "Dear Mr. Smith comma thank you for your letter period",
-        "box": "Practice box: your words appear here",
-        "placeholder": "Your words appear here",
-        "listening": "Listening...",
-        "typing": "Typing...",
-        "success": "That's it. Saying \"comma\" and \"period\" types the marks.",
-        "waiting": "Your speech model is still downloading. This box will work as soon as it's ready.",
-        "continuous": "For longer dictation, press <keys/> to keep listening until you press it again. Used to Dragon? You can set this to Numpad + under General.",
-        "continuousRunning": "Continuous dictation is on. Your words appear in the box each time you pause. Press {{stop}} to stop it.",
-        "continuousEnded": "That's continuous dictation. In your other apps, your words are typed at the cursor."
+        "box": "Ô luyện tập: chữ của bạn sẽ hiện ở đây",
+        "placeholder": "Chữ của bạn sẽ hiện ở đây",
+        "listening": "Đang nghe...",
+        "typing": "Đang gõ...",
+        "success": "Đúng vậy. Nói \"comma\" và \"period\" sẽ gõ ra dấu câu.",
+        "waiting": "Mô hình giọng nói vẫn đang tải xuống. Ô này sẽ hoạt động ngay khi mô hình sẵn sàng.",
+        "continuous": "Để đọc chính tả lâu hơn, nhấn <keys/> và Kusema sẽ nghe cho đến khi bạn nhấn lại. Quen dùng Dragon? Bạn có thể đặt phím Numpad + trong mục Chung.",
+        "continuousRunning": "Đang bật đọc chính tả liên tục. Chữ của bạn hiện trong ô mỗi lần bạn ngừng. Nhấn {{stop}} để dừng.",
+        "continuousEnded": "Đó là đọc chính tả liên tục. Trong các ứng dụng khác, chữ được gõ tại vị trí con trỏ."
       },
       "assistant": {
-        "title": "Set up the AI assistant (optional)",
-        "sub": "Ask Kusema answers questions you speak. Dictation doesn't need it.",
-        "model": "Model",
-        "continueWithout": "Continue without AI",
-        "privileged": "Privileged mode blocks all cloud AI with one switch, for matters that must stay on this computer.",
+        "title": "Thiết lập trợ lý AI (tùy chọn)",
+        "sub": "\"Hỏi Kusema\" trả lời các câu hỏi bạn nói ra. Đọc chính tả không cần đến nó.",
+        "model": "Mô hình",
+        "continueWithout": "Tiếp tục không dùng AI",
+        "privileged": "Chế độ Privileged chặn mọi AI đám mây chỉ bằng một nút gạt, cho những việc cần ở lại trên máy tính này.",
         "local": {
-          "title": "Private: use a local AI on this computer",
-          "description": "Your questions stay here. Uses Ollama, a free app.",
-          "checking": "Looking for Ollama on this computer...",
-          "found": "Found Ollama. Choose a model to use.",
-          "notFound": "Ollama isn't running on this computer.",
-          "noModels": "Ollama is running, but has no models yet. Run \"ollama pull llama3.2\", then check again.",
-          "instructions": "How to set up Ollama",
-          "again": "Check again"
+          "title": "Riêng tư: dùng AI cục bộ trên máy tính này",
+          "description": "Câu hỏi của bạn ở lại đây. Dùng Ollama, một ứng dụng miễn phí.",
+          "checking": "Đang tìm Ollama trên máy tính này...",
+          "found": "Đã tìm thấy Ollama. Hãy chọn một mô hình.",
+          "notFound": "Ollama không chạy trên máy tính này.",
+          "noModels": "Ollama đang chạy nhưng chưa có mô hình nào. Hãy chạy \"ollama pull llama3.2\" rồi kiểm tra lại.",
+          "instructions": "Cách cài đặt Ollama",
+          "again": "Kiểm tra lại"
         },
         "cloud": {
-          "title": "Use a cloud AI provider",
-          "description": "Your questions go to the provider you choose, using your own API key.",
-          "provider": "Provider",
-          "key": "API key",
-          "check": "Save and check",
-          "checking": "Checking the key...",
-          "saved": "Key saved in Windows Credential Manager. Choose a model to use.",
-          "where": "The key is stored in Windows Credential Manager, not in a file.",
-          "keyFailed": "The key was saved, but the provider didn't list any models. Check the key and try again."
+          "title": "Dùng nhà cung cấp AI đám mây",
+          "description": "Câu hỏi của bạn được gửi đến nhà cung cấp bạn chọn, bằng khóa API của chính bạn.",
+          "provider": "Nhà cung cấp",
+          "key": "Khóa API",
+          "check": "Lưu và kiểm tra",
+          "checking": "Đang kiểm tra khóa...",
+          "saved": "Đã lưu khóa trong Trình quản lý thông tin xác thực Windows. Hãy chọn một mô hình.",
+          "where": "Khóa được lưu trong Trình quản lý thông tin xác thực Windows, không phải trong tệp.",
+          "keyFailed": "Đã lưu khóa nhưng nhà cung cấp không liệt kê mô hình nào. Hãy kiểm tra khóa rồi thử lại."
         },
         "skip": {
-          "title": "Skip for now",
-          "description": "You can set this up later on the Assistant page."
+          "title": "Bỏ qua lúc này",
+          "description": "Bạn có thể thiết lập sau ở trang Trợ lý."
         }
       },
       "done": {
-        "title": "You're all set",
-        "sub": "Kusema keeps running in the system tray and works in any app.",
-        "finish": "Start using Kusema",
-        "wins": "Your first three wins are waiting on the main page.",
-        "atLogin": "Start Kusema when I sign in",
+        "title": "Đã sẵn sàng",
+        "sub": "Kusema tiếp tục chạy trong khay hệ thống và hoạt động trong mọi ứng dụng.",
+        "finish": "Bắt đầu dùng Kusema",
+        "wins": "Ba thành tích đầu tiên đang chờ bạn ở trang chính.",
+        "atLogin": "Khởi động Kusema khi tôi đăng nhập",
         "keys": {
-          "dictate": "Dictate: hold",
-          "continuous": "Continuous dictation: press to start and stop",
-          "ask": "Ask Kusema",
-          "askScreen": "Ask about my screen"
+          "dictate": "Đọc chính tả: giữ phím",
+          "continuous": "Đọc chính tả liên tục: nhấn để bắt đầu và dừng",
+          "ask": "Hỏi Kusema",
+          "askScreen": "Hỏi về màn hình của tôi"
         }
       }
     }
@@ -408,7 +408,7 @@
     "general": {
       "title": "Chung",
       "shortcut": {
-        "title": "Phím tắt Handy",
+        "title": "Phím tắt Kusema",
         "description": "Cấu hình phím tắt để kích hoạt ghi âm chuyển đổi giọng nói thành văn bản",
         "loading": "Đang tải phím tắt...",
         "none": "Chưa cấu hình phím tắt",
@@ -428,20 +428,20 @@
             "description": "Tùy chọn: Phím tắt chuyên dụng luôn áp dụng xử lý sau bằng AI cho bản chuyển đổi của bạn."
           },
           "assistant": {
-            "name": "Ask Kusema",
-            "description": "Hold or press to ask a spoken question. The reply appears below instead of being pasted."
+            "name": "Hỏi Kusema",
+            "description": "Giữ hoặc nhấn để hỏi bằng giọng nói. Câu trả lời hiện bên dưới thay vì được dán vào."
           },
           "assistant_screen": {
-            "name": "Ask About My Screen",
-            "description": "Hold or press to ask a spoken question about the window you're working in. You see the screenshot before anything is sent."
+            "name": "Hỏi Về Màn Hình Của Tôi",
+            "description": "Giữ hoặc nhấn để hỏi bằng giọng nói về cửa sổ bạn đang làm việc. Bạn sẽ thấy ảnh chụp màn hình trước khi bất cứ thứ gì được gửi đi."
           },
           "dictate_continuous": {
-            "name": "Continuous Dictation",
-            "description": "Press to start dictating hands-free, and press again to stop. Text appears each time you pause."
+            "name": "Đọc Chính Tả Liên Tục",
+            "description": "Nhấn để đọc chính tả rảnh tay, nhấn lại để dừng. Văn bản hiện ra mỗi lần bạn ngừng."
           },
           "toggle_privileged": {
-            "name": "Privileged Mode",
-            "description": "Press to turn Privileged mode on or off."
+            "name": "Chế độ Privileged",
+            "description": "Nhấn để bật hoặc tắt chế độ Privileged."
           }
         },
         "errors": {
@@ -466,7 +466,7 @@
       },
       "preferredLanguages": {
         "title": "Ngôn ngữ ưa thích",
-        "description": "Các ngôn ngữ bạn nói. Handy dùng chúng để đề xuất mô hình.",
+        "description": "Các ngôn ngữ bạn nói. Kusema dùng chúng để đề xuất mô hình.",
         "noMatch": "Không có ngôn ngữ nào khớp với “{{query}}”",
         "weak": "Chưa có mô hình nào nhận dạng tốt {{languages}}."
       },
@@ -493,17 +493,17 @@
         "fits": "Cho các ngôn ngữ của bạn",
         "untested": "Chưa kiểm thử"
       },
-      "untestedNote": "Chưa được kiểm thử với Handy. Chúng có thể chậm hơn hoặc mắc nhiều lỗi hơn.",
+      "untestedNote": "Chưa được kiểm thử với Kusema. Chúng có thể chậm hơn hoặc mắc nhiều lỗi hơn.",
       "untestedHidden_one": "{{count}} mô hình khác chưa được tinh chỉnh cho việc đọc chính tả. Hãy tìm kiếm để thấy nó.",
       "untestedHidden_other": "{{count}} mô hình khác chưa được tinh chỉnh cho việc đọc chính tả. Hãy tìm kiếm để thấy chúng.",
-      "emptyYours": "Chưa có mô hình nào. Hãy chọn một mô hình bên dưới: nó sẽ được tải xuống, rồi Handy sẽ dùng nó.",
+      "emptyYours": "Chưa có mô hình nào. Hãy chọn một mô hình bên dưới: nó sẽ được tải xuống, rồi Kusema sẽ dùng nó.",
       "showMore": "Hiển thị thêm {{count}}",
       "showFewer": "Hiển thị ít hơn",
       "download": "Tải xuống và dùng",
       "downloadingThenUse": "{{percent}}% của {{total}}, rồi tự chuyển sang",
       "loading": "Đang tải…",
       "deleteAsk": "Xóa {{name}}? Việc này giải phóng {{size}}.",
-      "deleteAskActive": "Xóa {{name}}? Handy không thể chuyển đổi giọng nói cho đến khi bạn chọn mô hình khác.",
+      "deleteAskActive": "Xóa {{name}}? Kusema không thể chuyển đổi giọng nói cho đến khi bạn chọn mô hình khác.",
       "cancel": "Hủy",
       "deleteModel": "Xóa {{name}}",
       "cancelDownload": "Dừng tải xuống {{name}}",
@@ -517,7 +517,7 @@
         "marks": "? chưa được đo. — không nghe được ngôn ngữ đó."
       },
       "retiredNotice": {
-        "title": "Các mô hình cũ không còn hoạt động với Handy",
+        "title": "Các mô hình cũ không còn hoạt động với Kusema",
         "description": "Chúng đang chiếm {{size}} trên máy tính của bạn.",
         "delete": "Xóa mô hình",
         "deleted": "Đã xóa các mô hình cũ",
@@ -525,37 +525,37 @@
       },
       "rescan": {
         "label": "Quét lại",
-        "tooltip": "Quét lại các mô hình được thêm vào thư mục mô hình hoặc bộ nhớ đệm Hugging Face bên ngoài Handy"
+        "tooltip": "Quét lại các mô hình được thêm vào thư mục mô hình hoặc bộ nhớ đệm Hugging Face bên ngoài Kusema"
       },
       "curated": {
-        "inUse": "In use",
-        "gettingReady": "Getting ready...",
-        "downloading": "Downloading: {{percent}}%",
-        "cancel": "Cancel",
-        "cancelLabel": "Cancel downloading {{name}}",
-        "use": "Use",
-        "useLabel": "Use {{name}}",
-        "download": "Download ({{size}})",
-        "downloadLabel": "Download {{name}}",
-        "recommended": "Recommended",
-        "others": "Also on this computer",
-        "showAllHint": "More models are available: turn on Show all models under Advanced.",
+        "inUse": "Đang dùng",
+        "gettingReady": "Đang chuẩn bị...",
+        "downloading": "Đang tải xuống: {{percent}}%",
+        "cancel": "Hủy",
+        "cancelLabel": "Hủy tải xuống {{name}}",
+        "use": "Dùng",
+        "useLabel": "Dùng {{name}}",
+        "download": "Tải xuống ({{size}})",
+        "downloadLabel": "Tải xuống {{name}}",
+        "recommended": "Đề xuất",
+        "others": "Cũng có trên máy tính này",
+        "showAllHint": "Còn nhiều mô hình khác: bật \"Hiển thị tất cả mô hình\" trong mục Nâng cao.",
         "rows": {
           "parakeetUnified": {
             "name": "Parakeet Unified English",
-            "description": "The best choice for English. Chosen automatically."
+            "description": "Lựa chọn tốt nhất cho tiếng Anh. Được chọn tự động."
           },
           "parakeetV3": {
             "name": "Parakeet TDT v3",
-            "description": "For dictating in other languages, including Spanish, French and German."
+            "description": "Để đọc chính tả bằng ngôn ngữ khác, gồm tiếng Tây Ban Nha, tiếng Pháp và tiếng Đức."
           },
           "canary": {
             "name": "Canary 180M Flash",
-            "description": "A small download, for older computers or when disk space is low."
+            "description": "Tải xuống nhỏ, cho máy tính cũ hoặc khi dung lượng ổ đĩa thấp."
           },
           "nemotron": {
             "name": "Nemotron 3.5 Streaming",
-            "description": "Shows live text as you speak, but makes more mistakes."
+            "description": "Hiển thị chữ trực tiếp khi bạn nói, nhưng sai nhiều hơn."
           }
         }
       }
@@ -564,26 +564,26 @@
       "title": "Ngôn ngữ"
     },
     "dictation": {
-      "title": "Continuous Dictation",
-      "description": "Keep talking, and the text is typed into your window each time you pause. Speech recognition stays on this computer, and AI cleanup never runs in this mode.",
+      "title": "Đọc Chính Tả Liên Tục",
+      "description": "Cứ tiếp tục nói, văn bản sẽ được gõ vào cửa sổ của bạn mỗi lần bạn ngừng. Nhận dạng giọng nói ở lại trên máy tính này, và tính năng dọn dẹp bằng AI không bao giờ chạy trong chế độ này.",
       "dragonKey": {
-        "title": "Dragon's Key",
-        "description": "Use Numpad + to start and stop, as Dragon does. While it's set, that key no longer types a plus sign.",
-        "button": "Use Dragon's key (Numpad +)"
+        "title": "Phím của Dragon",
+        "description": "Dùng Numpad + để bắt đầu và dừng, giống Dragon. Khi đã đặt, phím đó không gõ dấu cộng nữa.",
+        "button": "Dùng phím của Dragon (Numpad +)"
       },
       "pause": {
-        "title": "Pause Length",
-        "description": "How long you pause before what you said is typed. Longer pauses keep sentences together; shorter ones show text sooner.",
+        "title": "Độ dài khoảng ngừng",
+        "description": "Bạn ngừng bao lâu thì điều bạn nói được gõ ra. Khoảng ngừng dài giữ câu liền mạch; ngắn hơn thì chữ hiện sớm hơn.",
         "seconds": "{{seconds}} s"
       },
       "autoStop": {
-        "title": "Stop After Silence",
-        "description": "Dictation stops by itself after this long without speech, so the microphone is never left on by accident.",
-        "minutes": "{{minutes}} min"
+        "title": "Dừng Sau Khoảng Lặng",
+        "description": "Đọc chính tả tự dừng sau khoảng thời gian không có tiếng nói này, để micrô không bao giờ vô tình bật mãi.",
+        "minutes": "{{minutes}} phút"
       },
       "voiceCommands": {
-        "label": "Voice Commands",
-        "description": "Say \"new paragraph\" or \"new line\" as you talk, or \"scratch that\" or \"stop dictation\" on its own between pauses, and it acts instead of being typed. Normal sentences with these words are typed as usual."
+        "label": "Lệnh Giọng Nói",
+        "description": "Nói \"new paragraph\" hoặc \"new line\" trong khi nói, hoặc nói riêng \"scratch that\" hay \"stop dictation\" giữa các khoảng ngừng, lệnh sẽ được thực hiện thay vì gõ ra. Câu bình thường có những từ này vẫn được gõ như thường."
       }
     },
     "sound": {
@@ -646,11 +646,11 @@
       },
       "autostart": {
         "label": "Khởi động cùng hệ thống",
-        "description": "Tự động khởi động Handy khi bạn đăng nhập vào máy tính."
+        "description": "Tự động khởi động Kusema khi bạn đăng nhập vào máy tính."
       },
       "showTrayIcon": {
         "label": "Hiển thị biểu tượng khay",
-        "description": "Hiển thị biểu tượng Handy trong khay hệ thống."
+        "description": "Hiển thị biểu tượng Kusema trong khay hệ thống."
       },
       "overlay": {
         "style": {
@@ -773,90 +773,90 @@
         }
       },
       "showAllModels": {
-        "label": "Show all models",
-        "description": "List every model on the Models page, with accuracy and speed details, instead of the short list."
+        "label": "Hiển thị tất cả mô hình",
+        "description": "Liệt kê mọi mô hình trên trang Mô hình, kèm thông tin độ chính xác và tốc độ, thay vì danh sách ngắn."
       }
     },
     "assistant": {
-      "title": "Assistant",
-      "description": "Hold the shortcut, ask a question out loud, and Kusema answers.",
+      "title": "Trợ lý",
+      "description": "Giữ phím tắt, hỏi thành tiếng, và Kusema sẽ trả lời.",
       "provider": {
-        "title": "AI Provider",
-        "provider": "Provider",
-        "description": "Assistant mode uses the same provider and API key as Post Process.",
-        "model": "Model",
-        "modelDescription": "The model that answers your questions. Change it on the Post Process page.",
-        "notSet": "Not chosen",
-        "open": "Open Post Process settings",
-        "disabled": "Assistant mode needs an AI provider (such as Anthropic, OpenAI or a local Ollama model) to answer questions. Providers are set up on the Post Process page, which appears once Post Processing is turned on. Turning it on doesn't change how normal dictation works.",
-        "enable": "Turn on Post Processing",
-        "noProvider": "Choose a provider on the Post Process page.",
-        "noKey": "No API key is set for {{provider}}. Add one on the Post Process page.",
-        "noModel": "Choose a model on the Post Process page."
+        "title": "Nhà Cung Cấp AI",
+        "provider": "Nhà cung cấp",
+        "description": "Trợ lý dùng cùng nhà cung cấp và khóa API với Xử lý sau.",
+        "model": "Mô hình",
+        "modelDescription": "Mô hình trả lời câu hỏi của bạn. Đổi ở trang Xử lý sau.",
+        "notSet": "Chưa chọn",
+        "open": "Mở cài đặt Xử lý sau",
+        "disabled": "Trợ lý cần một nhà cung cấp AI (như Anthropic, OpenAI hoặc một mô hình Ollama cục bộ) để trả lời. Nhà cung cấp được thiết lập ở trang Xử lý sau, trang này xuất hiện khi bật xử lý sau. Bật nó không thay đổi cách đọc chính tả thông thường.",
+        "enable": "Bật xử lý sau",
+        "noProvider": "Chọn nhà cung cấp ở trang Xử lý sau.",
+        "noKey": "Chưa có khóa API cho {{provider}}. Hãy thêm một khóa ở trang Xử lý sau.",
+        "noModel": "Chọn mô hình ở trang Xử lý sau."
       },
       "screen": {
-        "title": "Ask About My Screen",
-        "description": "Ask about the window you're working in, like “What do you think of this document?” Only that window is captured, and it stays on this computer until you press Send.",
+        "title": "Hỏi Về Màn Hình Của Tôi",
+        "description": "Hỏi về cửa sổ bạn đang làm việc, chẳng hạn \"Bạn nghĩ gì về tài liệu này?\" Chỉ cửa sổ đó được chụp, và nó ở lại trên máy tính này cho đến khi bạn nhấn Gửi.",
         "confirm": {
-          "label": "Confirm Before Sending Screenshots",
-          "description": "Show the screenshot, your question and where it will go, then wait for Send (Enter) or Cancel (Escape). Unanswered, it cancels after 30 seconds.",
-          "offWarning": "Screenshots will be sent to {{provider}} as soon as you finish speaking, without showing you first. Everything visible in the window goes with them, including private or confidential information."
+          "label": "Xác Nhận Trước Khi Gửi Ảnh Chụp Màn Hình",
+          "description": "Hiển thị ảnh chụp, câu hỏi và nơi nó sẽ đến, rồi chờ Gửi (Enter) hoặc Hủy (Esc). Nếu không có phản hồi, sẽ hủy sau 30 giây.",
+          "offWarning": "Ảnh chụp màn hình sẽ được gửi đến {{provider}} ngay khi bạn nói xong mà không hiển thị trước. Mọi thứ hiện trong cửa sổ đều đi kèm, kể cả thông tin riêng tư hoặc bảo mật."
         },
         "provider": {
-          "label": "Use for Screen Questions",
-          "description": "Send screenshots to a different provider than normal questions, for example a local vision model in Ollama (the Custom provider) for confidential documents. Follow-up questions go to the same provider until you start a new conversation.",
-          "same": "Same as Assistant",
-          "sameNamed": "Same as Assistant ({{provider}})",
-          "yourProvider": "your AI provider"
+          "label": "Dùng Cho Câu Hỏi Về Màn Hình",
+          "description": "Gửi ảnh chụp màn hình đến nhà cung cấp khác với câu hỏi thông thường, ví dụ một mô hình thị giác cục bộ trong Ollama (nhà cung cấp Tùy chỉnh) cho tài liệu bảo mật. Câu hỏi tiếp theo đi đến cùng nhà cung cấp cho đến khi bạn bắt đầu cuộc trò chuyện mới.",
+          "same": "Giống Trợ lý",
+          "sameNamed": "Giống Trợ lý ({{provider}})",
+          "yourProvider": "nhà cung cấp AI của bạn"
         },
         "model": {
-          "label": "Model for Screen Questions",
-          "description": "A model that can see images. Leave empty to use the model chosen for this provider on the Post Process page.",
-          "placeholder": "e.g. qwen2.5vl"
+          "label": "Mô Hình Cho Câu Hỏi Về Màn Hình",
+          "description": "Một mô hình có thể nhìn hình ảnh. Để trống để dùng mô hình đã chọn cho nhà cung cấp này ở trang Xử lý sau.",
+          "placeholder": "vd: qwen2.5vl"
         }
       },
       "conversation": {
-        "empty": "Ask a question with the Ask Kusema shortcut. The conversation will appear here.",
-        "new": "New conversation",
-        "screenshot": "Screenshot",
-        "noProvider": "Ask Kusema needs an AI model to answer. Choose one in Settings.",
-        "openSettings": "Open Settings"
+        "empty": "Đặt câu hỏi bằng phím tắt Hỏi Kusema. Cuộc trò chuyện sẽ hiện ở đây.",
+        "new": "Cuộc trò chuyện mới",
+        "screenshot": "Ảnh chụp màn hình",
+        "noProvider": "Hỏi Kusema cần một mô hình AI để trả lời. Hãy chọn một mô hình trong Cài đặt.",
+        "openSettings": "Mở Cài đặt"
       },
       "voice": {
-        "title": "Voice",
-        "systemDefault": "System default",
-        "previewText": "Hi, I'm Kusema. This is how I'll sound when I answer your questions.",
+        "title": "Giọng nói",
+        "systemDefault": "Mặc định hệ thống",
+        "previewText": "Xin chào, tôi là Kusema. Đây là giọng của tôi khi trả lời câu hỏi của bạn.",
         "speakReplies": {
-          "label": "Speak Replies",
-          "description": "Read replies aloud as they arrive. Press Cancel (Escape), start a new recording, or start a new conversation to stop."
+          "label": "Đọc Câu Trả Lời",
+          "description": "Đọc to câu trả lời ngay khi nhận được. Nhấn Hủy (Esc), bắt đầu bản ghi mới hoặc cuộc trò chuyện mới để dừng."
         },
         "voice": {
-          "label": "Voice",
-          "description": "Kokoro voices sound the most natural; download them above. The other voices come with your computer (on Windows, add more under Settings > Time & language > Speech)."
+          "label": "Giọng nói",
+          "description": "Giọng Kokoro nghe tự nhiên nhất; hãy tải xuống ở trên. Các giọng khác có sẵn trên máy tính (trên Windows, thêm giọng trong Cài đặt > Thời gian & ngôn ngữ > Giọng nói)."
         },
         "kokoro": {
-          "label": "Kokoro Voices",
-          "description": "28 natural-sounding English voices (US and UK) generated on this computer. A one-time download.",
-          "installed": "Installed. Pick a Kokoro voice below. Removing them frees the disk space; replies then use the system voice.",
-          "download": "Download ({{size}} MB)",
-          "downloading": "Downloading… {{percentage}}%",
-          "cancel": "Cancel",
-          "delete": "Remove"
+          "label": "Giọng Kokoro",
+          "description": "28 giọng tiếng Anh tự nhiên (Mỹ và Anh) được tạo trên máy tính này. Tải xuống một lần.",
+          "installed": "Đã cài đặt. Chọn một giọng Kokoro bên dưới. Gỡ bỏ sẽ giải phóng dung lượng ổ đĩa; khi đó câu trả lời dùng giọng hệ thống.",
+          "download": "Tải xuống ({{size}} MB)",
+          "downloading": "Đang tải xuống… {{percentage}}%",
+          "cancel": "Hủy",
+          "delete": "Gỡ bỏ"
         },
         "rate": {
-          "label": "Speaking Rate",
-          "description": "How fast replies are read. 1.00× is the voice's normal speed."
+          "label": "Tốc Độ Đọc",
+          "description": "Tốc độ đọc câu trả lời. 1,00× là tốc độ bình thường của giọng."
         },
         "preview": {
-          "label": "Preview Voice",
-          "description": "Hear the selected voice at the selected speed.",
-          "button": "Preview"
+          "label": "Nghe Thử Giọng",
+          "description": "Nghe giọng đã chọn ở tốc độ đã chọn.",
+          "button": "Nghe thử"
         }
       },
       "tabs": {
-        "label": "Assistant",
-        "conversation": "Conversation",
-        "settings": "Settings"
+        "label": "Trợ lý",
+        "conversation": "Cuộc trò chuyện",
+        "settings": "Cài đặt"
       }
     },
     "postProcessing": {
@@ -973,7 +973,7 @@
       },
       "updateChecks": {
         "label": "Kiểm tra cập nhật",
-        "description": "Tự động kiểm tra phiên bản mới của Handy",
+        "description": "Tự động kiểm tra phiên bản mới của Kusema",
         "lockedDescription": "Đã bị vô hiệu hóa bởi cấu hình hệ thống (HANDY_DISABLE_UPDATER)"
       },
       "whatsNewPreview": {
@@ -992,9 +992,9 @@
           "welcome": "Chào mừng",
           "permissions": "Quyền",
           "done": "Hoàn tất",
-          "microphone": "Microphone",
-          "practice": "Practice",
-          "assistant": "AI assistant"
+          "microphone": "Micrô",
+          "practice": "Luyện tập",
+          "assistant": "Trợ lý AI"
         }
       },
       "onboardingRun": {
@@ -1040,8 +1040,8 @@
         "description": "Micrô sử dụng khi nắp laptop được đóng"
       },
       "postProcessingToggle": {
-        "label": "AI Cleanup",
-        "description": "Optional. Rewrites dictated text with an AI model when you use the AI cleanup shortcut: fixes self-corrections and grammar, keeps your meaning, and never adds facts."
+        "label": "Dọn Dẹp Bằng AI",
+        "description": "Tùy chọn. Viết lại văn bản đọc chính tả bằng mô hình AI khi bạn dùng phím tắt dọn dẹp bằng AI: sửa chỗ tự đính chính và ngữ pháp, giữ nguyên ý bạn và không bao giờ thêm thông tin."
       },
       "muteWhileRecording": {
         "label": "Tắt tiếng khi ghi âm",
@@ -1057,7 +1057,7 @@
         "bindingsReset": "Các phím tắt không tương thích và đã được đặt lại về mặc định",
         "options": {
           "tauri": "Tauri Global Shortcut",
-          "builtIn": "Built-in (recommended)"
+          "builtIn": "Tích hợp sẵn (khuyên dùng)"
         }
       },
       "pasteDelay": {
@@ -1086,7 +1086,7 @@
       },
       "keyboardDiagnostic": {
         "title": "Chẩn đoán bàn phím",
-        "description": "Kiểm tra xem các sự kiện bàn phím có đến được Handy hay không. Chỉ số lượng sự kiện được ghi lại — không bao giờ ghi lại bạn bấm phím nào.",
+        "description": "Kiểm tra xem các sự kiện bàn phím có đến được Kusema hay không. Chỉ số lượng sự kiện được ghi lại — không bao giờ ghi lại bạn bấm phím nào.",
         "run": "Chạy chẩn đoán 10 giây",
         "running": "Đang lắng nghe… hãy bấm phím tắt của bạn vài lần (ví dụ: Option+Space)",
         "secureInputLabel": "Secure Input",
@@ -1100,7 +1100,7 @@
         "mouse": "Chuột",
         "verdictBlocked": "Secure Input đang chặn các sự kiện phím — phím tắt có chứa phím thường không thể hoạt động cho đến khi vấn đề này được xử lý.",
         "verdictSuspicious": "Có sự kiện phím bổ trợ nhưng không có sự kiện phím nào — thứ gì đó đang chặn phím dù Secure Input báo là đang tắt. Vui lòng báo cáo việc này trên GitHub.",
-        "verdictOk": "Các sự kiện phím đang đến Handy bình thường.",
+        "verdictOk": "Các sự kiện phím đang đến Kusema bình thường.",
         "verdictNoEvents": "Không ghi nhận sự kiện nào — bạn có bấm phím nào trong lúc kiểm tra không?",
         "failed": "Chẩn đoán thất bại: {{error}}"
       }
@@ -1109,203 +1109,203 @@
       "title": "Giới thiệu",
       "version": {
         "title": "Phiên bản",
-        "description": "Phiên bản hiện tại của Handy"
+        "description": "Phiên bản hiện tại của Kusema"
       },
       "whatsNewUpdates": {
         "label": "Hiển thị điểm mới",
-        "description": "Hiển thị ghi chú phát hành sau khi Handy cập nhật"
+        "description": "Hiển thị ghi chú phát hành sau khi Kusema cập nhật"
       },
       "appDataDirectory": {
         "title": "Thư mục dữ liệu ứng dụng",
-        "description": "Vị trí Handy lưu trữ dữ liệu"
+        "description": "Vị trí Kusema lưu trữ dữ liệu"
       },
       "sourceCode": {
         "title": "Mã nguồn",
-        "description": "View Kusema's source code",
+        "description": "Xem mã nguồn của Kusema",
         "button": "Xem trên GitHub"
       },
       "acknowledgments": {
         "ggml": {
           "title": "ggml",
           "description": "Suy luận hiệu suất cao của mô hình nhận dạng giọng nói tự động Whisper của OpenAI",
-          "details": "Handy sử dụng ggml để xử lý chuyển đổi giọng nói thành văn bản nhanh, cục bộ. Cảm ơn công việc tuyệt vời của Georgi Gerganov và các cộng tác viên."
+          "details": "Kusema sử dụng ggml để xử lý chuyển đổi giọng nói thành văn bản nhanh, cục bộ. Cảm ơn công việc tuyệt vời của Georgi Gerganov và các cộng tác viên."
         }
       },
       "organizations": {
-        "title": "Kusema for organizations",
-        "description": "Setup, support and options for firms",
-        "button": "Learn more"
+        "title": "Kusema cho tổ chức",
+        "description": "Thiết lập, hỗ trợ và các lựa chọn cho văn phòng luật",
+        "button": "Tìm hiểu thêm"
       },
       "report": {
-        "title": "Report a problem or suggest a feature",
-        "description": "Tell us on GitHub what went wrong or what you'd like",
-        "button": "Open GitHub"
+        "title": "Báo lỗi hoặc đề xuất tính năng",
+        "description": "Cho chúng tôi biết trên GitHub điều gì không ổn hoặc bạn muốn gì",
+        "button": "Mở GitHub"
       },
       "credits": {
-        "title": "Credits and licenses",
+        "title": "Ghi công và giấy phép",
         "handy": {
-          "title": "Built on Handy",
-          "description": "Kusema is built on Handy by CJ Pais, used under the MIT License.",
-          "button": "View Handy"
+          "title": "Xây dựng trên Handy",
+          "description": "Kusema được xây dựng trên Handy của CJ Pais, sử dụng theo Giấy phép MIT.",
+          "button": "Xem Handy"
         },
         "nvidiaLicense": "NVIDIA Open Model License",
-        "models": "Speech and voice models ({{count}})",
-        "components": "Open-source components ({{count}})",
-        "notices": "Full license texts",
-        "loading": "Loading..."
+        "models": "Mô hình giọng nói và nhận dạng ({{count}})",
+        "components": "Thành phần mã nguồn mở ({{count}})",
+        "notices": "Toàn văn giấy phép",
+        "loading": "Đang tải..."
       }
     },
     "privacy": {
-      "thisComputer": "This computer ({{host}})",
-      "nothingSent": "Nothing to show yet.",
-      "updateBlocked": "Update checks are blocked in Privileged mode.",
+      "thisComputer": "Máy tính này ({{host}})",
+      "nothingSent": "Chưa có gì để hiển thị.",
+      "updateBlocked": "Kiểm tra cập nhật bị chặn ở chế độ Privileged.",
       "audio": {
-        "title": "Audio sent off this computer: 0 bytes",
-        "description": "Speech recognition runs on this computer, and nothing in Kusema can upload your voice. Only the text of what you say, and only for features you choose, ever goes to an AI provider."
+        "title": "Âm thanh gửi ra khỏi máy tính này: 0 byte",
+        "description": "Nhận dạng giọng nói chạy trên máy tính này, và không gì trong Kusema có thể tải giọng của bạn lên. Chỉ văn bản của những gì bạn nói, và chỉ cho tính năng bạn chọn, mới được gửi đến nhà cung cấp AI."
       },
       "privileged": {
-        "title": "Privileged Mode",
-        "description": "For confidential matters. While it's on, nothing you say, type or show goes to a cloud AI service. Ask Kusema and AI cleanup only work with a model running on this computer.",
+        "title": "Chế độ Privileged",
+        "description": "Dành cho việc bảo mật. Khi bật, không gì bạn nói, gõ hay hiển thị được gửi đến dịch vụ AI đám mây. Hỏi Kusema và dọn dẹp bằng AI chỉ hoạt động với mô hình chạy trên máy tính này.",
         "chip": "Privileged",
         "toggle": {
-          "label": "Privileged Mode",
-          "description": "Blocks every request to cloud AI providers, including ones already set up. Dictation keeps working, because it never uses the cloud."
+          "label": "Chế độ Privileged",
+          "description": "Chặn mọi yêu cầu đến nhà cung cấp AI đám mây, kể cả những nhà cung cấp đã thiết lập. Đọc chính tả vẫn hoạt động, vì nó không bao giờ dùng đám mây."
         },
         "allowLan": {
-          "label": "Allow Local Network AI Servers",
-          "description": "Also allows AI servers on your office network, by private address (like 192.168.1.20). Models on this computer are always allowed."
+          "label": "Cho Phép Máy Chủ AI Trong Mạng Cục Bộ",
+          "description": "Cũng cho phép máy chủ AI trong mạng văn phòng, qua địa chỉ riêng (như 192.168.1.20). Mô hình trên máy tính này luôn được phép."
         },
         "blockDownloads": {
-          "label": "Also Block Downloads and Update Checks",
-          "description": "For offline offices. Model and voice downloads and update checks carry none of your content, so they normally stay allowed and are listed below. Turn this on to stop them too while Privileged mode is on."
+          "label": "Chặn Cả Tải Xuống Và Kiểm Tra Cập Nhật",
+          "description": "Cho văn phòng không có internet. Tải xuống mô hình, giọng nói và kiểm tra cập nhật không mang nội dung nào của bạn, nên thường vẫn được phép và được liệt kê bên dưới. Bật mục này để chặn cả chúng khi chế độ Privileged đang bật."
         },
         "hotkey": {
-          "label": "Privileged Mode Shortcut",
-          "description": "Adds a keyboard shortcut that turns Privileged mode on or off. Off by default, so it can't be pressed by accident."
+          "label": "Phím Tắt Chế Độ Privileged",
+          "description": "Thêm phím tắt để bật hoặc tắt chế độ Privileged. Mặc định tắt, để không bị nhấn nhầm."
         }
       },
       "counts": {
-        "title": "Where Requests Went",
-        "today": "Today",
-        "week": "Last 7 days"
+        "title": "Yêu Cầu Đã Đi Đâu",
+        "today": "Hôm nay",
+        "week": "7 ngày qua"
       },
       "columns": {
-        "time": "Time",
-        "destination": "Destination",
-        "purpose": "Why",
-        "data": "Data",
-        "size": "Size",
-        "result": "Result"
+        "time": "Thời gian",
+        "destination": "Đích đến",
+        "purpose": "Lý do",
+        "data": "Dữ liệu",
+        "size": "Kích thước",
+        "result": "Kết quả"
       },
       "purposes": {
-        "assistant_question": "Question to Kusema",
-        "screen_question": "Question about the screen",
-        "post_processing": "AI cleanup",
-        "provider_models": "Listing a provider's models",
-        "model_download": "Speech model download",
-        "voice_download": "Voice download",
-        "update_check": "Update check"
+        "assistant_question": "Câu hỏi cho Kusema",
+        "screen_question": "Câu hỏi về màn hình",
+        "post_processing": "Dọn dẹp bằng AI",
+        "provider_models": "Lấy danh sách mô hình của nhà cung cấp",
+        "model_download": "Tải mô hình giọng nói",
+        "voice_download": "Tải giọng đọc",
+        "update_check": "Kiểm tra cập nhật"
       },
       "data": {
-        "text": "Text",
-        "image": "Screenshot",
-        "none": "None of yours"
+        "text": "Văn bản",
+        "image": "Ảnh chụp màn hình",
+        "none": "Không có gì của bạn"
       },
       "results": {
-        "sent": "Sent",
-        "blocked": "Blocked",
-        "failed": "Failed"
+        "sent": "Đã gửi",
+        "blocked": "Đã chặn",
+        "failed": "Thất bại"
       },
       "list": {
-        "title": "Every Request",
-        "description": "Each request Kusema has made: when, where, why, what kind of data and how large. What was in it is never recorded. Shows the latest 500; the export has them all.",
-        "all": "All",
-        "allPurposes": "Any reason",
-        "allResults": "Any result",
-        "allDestinations": "Any destination",
-        "anyTime": "Any time",
-        "lastDays_one": "Last {{count}} day",
-        "lastDays_other": "Last {{count}} days",
-        "export": "Export CSV",
-        "exported_one": "Exported {{count}} request.",
-        "exported_other": "Exported {{count}} requests.",
-        "clear": "Clear",
+        "title": "Mọi Yêu Cầu",
+        "description": "Mỗi yêu cầu Kusema đã thực hiện: khi nào, đến đâu, vì sao, loại dữ liệu gì và lớn bao nhiêu. Nội dung không bao giờ được ghi lại. Hiển thị 500 yêu cầu mới nhất; bản xuất có tất cả.",
+        "all": "Tất cả",
+        "allPurposes": "Lý do bất kỳ",
+        "allResults": "Kết quả bất kỳ",
+        "allDestinations": "Đích đến bất kỳ",
+        "anyTime": "Mọi lúc",
+        "lastDays_one": "{{count}} ngày qua",
+        "lastDays_other": "{{count}} ngày qua",
+        "export": "Xuất CSV",
+        "exported_one": "Đã xuất {{count}} yêu cầu.",
+        "exported_other": "Đã xuất {{count}} yêu cầu.",
+        "clear": "Xóa",
         "retention": {
-          "title": "Keep This List For",
-          "description": "Older entries are deleted from this computer automatically.",
-          "days_one": "{{count}} day",
-          "days_other": "{{count}} days"
+          "title": "Giữ Danh Sách Này Trong",
+          "description": "Các mục cũ hơn được tự động xóa khỏi máy tính này.",
+          "days_one": "{{count}} ngày",
+          "days_other": "{{count}} ngày"
         }
       }
     },
     "cleanup": {
-      "title": "Cleanup",
-      "description": "Dictated text should need little editing. Local cleanup runs on this computer and sends nothing anywhere.",
+      "title": "Dọn dẹp",
+      "description": "Văn bản đọc chính tả nên cần ít chỉnh sửa. Dọn dẹp cục bộ chạy trên máy tính này và không gửi gì đi đâu.",
       "local": {
-        "label": "Local Cleanup",
-        "description": "Removes filler words, adds missing periods between phrases in continuous dictation, and handles spoken punctuation, all on this computer. Off, your words are typed as transcribed."
+        "label": "Dọn Dẹp Cục Bộ",
+        "description": "Bỏ từ đệm, thêm dấu chấm còn thiếu giữa các cụm câu khi đọc chính tả liên tục và xử lý dấu câu đọc ra, tất cả trên máy tính này. Khi tắt, chữ của bạn được gõ đúng như bản chép."
       },
       "spokenPunctuation": {
-        "label": "Spoken Punctuation",
-        "description": "Say \"comma\", \"period\", \"question mark\", \"colon\", \"open quote\", \"close paren\", \"dash\", \"section symbol\" and more, as in Dragon. \"Period\" only counts at the end of a phrase, so \"the limitations period expired\" stays as words. Say \"literal period\" to type the word."
+        "label": "Dấu Câu Đọc Ra",
+        "description": "Nói \"comma\", \"period\", \"question mark\", \"colon\", \"open quote\", \"close paren\", \"dash\", \"section symbol\" và nhiều hơn nữa, giống trong Dragon. \"Period\" chỉ được tính ở cuối cụm câu, nên \"the limitations period expired\" vẫn giữ nguyên là chữ. Nói \"literal period\" để gõ chính từ đó. Các lệnh này hoạt động bằng tiếng Anh."
       },
       "ai": {
         "status": {
-          "noProvider": "No AI provider is set up yet.",
-          "noKey": "{{provider}} needs an API key.",
-          "noModel": "{{provider}} needs a model chosen.",
-          "local": "Using {{model}} on this computer through {{provider}}. Nothing leaves this computer.",
-          "cloud": "Using {{model}} from {{provider}}, a cloud service. Text you clean up goes to {{provider}}.",
-          "blocked": "Privileged mode is on, so nothing will be sent to {{provider}}. Use a local model or turn off Privileged mode."
+          "noProvider": "Chưa thiết lập nhà cung cấp AI nào.",
+          "noKey": "{{provider}} cần khóa API.",
+          "noModel": "Cần chọn mô hình cho {{provider}}.",
+          "local": "Đang dùng {{model}} trên máy tính này qua {{provider}}. Không gì rời khỏi máy tính này.",
+          "cloud": "Đang dùng {{model}} từ {{provider}}, một dịch vụ đám mây. Văn bản bạn dọn dẹp được gửi đến {{provider}}.",
+          "blocked": "Chế độ Privileged đang bật nên sẽ không gửi gì đến {{provider}}. Hãy dùng mô hình cục bộ hoặc tắt chế độ Privileged."
         },
-        "recommendLocal": "We recommend a model that runs on this computer, such as one in Ollama, so confidential text stays here. AI cleanup runs when you dictate with its own shortcut, and never during continuous dictation.",
-        "setUp": "Set Up AI Cleanup"
+        "recommendLocal": "Chúng tôi khuyên dùng mô hình chạy trên máy tính này, chẳng hạn một mô hình trong Ollama, để văn bản bảo mật ở lại đây. Dọn dẹp bằng AI chạy khi bạn đọc chính tả bằng phím tắt riêng của nó, và không bao giờ trong lúc đọc chính tả liên tục.",
+        "setUp": "Thiết Lập Dọn Dẹp Bằng AI"
       }
     },
     "firstWins": {
-      "title": "First three wins",
-      "dismiss": "Dismiss",
-      "dictated": "Dictate an email",
-      "newParagraph": "Use continuous dictation and say \"new paragraph\"",
-      "asked": "Ask Kusema a question",
-      "done": "Done",
-      "notDone": "Not done yet",
-      "progress": "{{done}} of {{count}} done",
-      "allDone": "All three done. Nice work."
+      "title": "Ba thành tích đầu tiên",
+      "dismiss": "Bỏ qua",
+      "dictated": "Đọc chính tả một email",
+      "newParagraph": "Dùng đọc chính tả liên tục và nói \"new paragraph\"",
+      "asked": "Hỏi Kusema một câu",
+      "done": "Xong",
+      "notDone": "Chưa xong",
+      "progress": "Đã xong {{done}}/{{count}}",
+      "allDone": "Đã xong cả ba. Làm tốt lắm."
     },
     "glow": {
-      "title": "Recording indicator",
-      "description": "A glow around the edges of your screen shows that Kusema is listening. Only you see it: it stays out of screenshots and screen shares.",
+      "title": "Chỉ báo ghi âm",
+      "description": "Một vầng sáng quanh viền màn hình cho thấy Kusema đang nghe. Chỉ bạn nhìn thấy: nó không xuất hiện trong ảnh chụp màn hình hay khi chia sẻ màn hình.",
       "enabled": {
-        "label": "Screen glow",
-        "description": "Show a colored glow around the screen you're working on while Kusema is listening. You can still click and type through it."
+        "label": "Vầng sáng màn hình",
+        "description": "Hiện vầng sáng màu quanh màn hình bạn đang làm việc trong khi Kusema nghe. Bạn vẫn có thể nhấp và gõ xuyên qua nó."
       },
       "thickness": {
-        "label": "Thickness",
-        "description": "How far the glow reaches in from the edge of the screen."
+        "label": "Độ dày",
+        "description": "Vầng sáng vào sâu bao nhiêu từ mép màn hình."
       },
       "intensity": {
-        "label": "Intensity",
-        "description": "How strong the glow is."
+        "label": "Cường độ",
+        "description": "Vầng sáng mạnh đến mức nào."
       },
       "palette": {
-        "label": "Colors",
-        "description": "The color-blind friendly set keeps the modes easy to tell apart with every common kind of color blindness.",
-        "standard": "Standard",
-        "color_blind": "Color-blind friendly"
+        "label": "Màu sắc",
+        "description": "Bộ màu thân thiện với người mù màu giúp dễ phân biệt các chế độ với mọi dạng mù màu phổ biến.",
+        "standard": "Tiêu chuẩn",
+        "color_blind": "Thân thiện với người mù màu"
       },
       "modes": {
-        "dictation": "Dictation",
-        "continuous": "Continuous dictation",
-        "ask": "Ask Kusema",
-        "ask_screen": "Ask about my screen",
-        "paused": "Continuous dictation paused (window changed)"
+        "dictation": "Đọc chính tả",
+        "continuous": "Đọc chính tả liên tục",
+        "ask": "Hỏi Kusema",
+        "ask_screen": "Hỏi về màn hình của tôi",
+        "paused": "Đọc chính tả liên tục tạm dừng (đã đổi cửa sổ)"
       },
-      "preview": "Preview",
-      "previewLabel": "Preview the glow for {{mode}}",
+      "preview": "Xem trước",
+      "previewLabel": "Xem trước vầng sáng cho {{mode}}",
       "sounds": {
-        "label": "Continuous dictation sounds",
-        "description": "Play a short sound when continuous dictation starts and stops. Sounds for other dictation are under Sound below."
+        "label": "Âm thanh đọc chính tả liên tục",
+        "description": "Phát một âm thanh ngắn khi đọc chính tả liên tục bắt đầu và dừng. Âm thanh cho kiểu đọc chính tả khác nằm ở mục Âm thanh bên dưới."
       }
     }
   },
@@ -1325,7 +1325,7 @@
     "portableUpdateBrowseButton": "Mở GitHub Releases"
   },
   "whatsNew": {
-    "title": "Điểm mới trong Handy v{{version}}"
+    "title": "Điểm mới trong Kusema v{{version}}"
   },
   "common": {
     "loading": "Đang tải...",
@@ -1356,11 +1356,11 @@
   },
   "appLanguage": {
     "title": "Ngôn ngữ ứng dụng",
-    "description": "Thay đổi ngôn ngữ giao diện của Handy"
+    "description": "Thay đổi ngôn ngữ giao diện của Kusema"
   },
   "theme": {
     "title": "Giao diện ứng dụng",
-    "description": "Chọn xem Handy theo chủ đề hệ thống hay giữ ở chế độ sáng hoặc tối",
+    "description": "Chọn xem Kusema theo chủ đề hệ thống hay giữ ở chế độ sáng hoặc tối",
     "options": {
       "system": "Hệ thống",
       "light": "Sáng",
@@ -1371,38 +1371,38 @@
     "transcribing": "Đang chuyển đổi...",
     "processing": "Đang xử lý...",
     "loadingModel": "Đang tải mô hình...",
-    "speaking": "Speaking...",
+    "speaking": "Đang nói...",
     "dictation": {
-      "dictating": "Dictating",
-      "paused": "Paused, window changed",
-      "noTarget": "Click where the text should go",
-      "finishing": "Finishing...",
-      "stop": "Stop",
-      "nothingToScratch": "Nothing to scratch",
-      "scratchWindowChanged": "Can't scratch: the window changed",
-      "scratchOtherInput": "Can't scratch: keyboard or mouse used",
-      "savedToHistory": "Said while paused: saved in History",
-      "stoppedSilence": "Stopped after silence",
-      "microphoneLost": "Stopped: microphone lost",
-      "cantKeepUp": "Stopped: this computer couldn't keep up",
-      "transcriptionFailed": "Couldn't transcribe that",
-      "pasteFailed": "Couldn't type that; it's in History"
+      "dictating": "Đang đọc chính tả",
+      "paused": "Tạm dừng, đã đổi cửa sổ",
+      "noTarget": "Nhấp vào nơi cần nhập chữ",
+      "finishing": "Đang hoàn tất...",
+      "stop": "Dừng",
+      "nothingToScratch": "Không có gì để xóa",
+      "scratchWindowChanged": "Không xóa được: cửa sổ đã đổi",
+      "scratchOtherInput": "Không xóa được: đã dùng bàn phím hoặc chuột",
+      "savedToHistory": "Nói khi tạm dừng: đã lưu vào Lịch sử",
+      "stoppedSilence": "Đã dừng sau khoảng lặng",
+      "microphoneLost": "Đã dừng: mất micrô",
+      "cantKeepUp": "Đã dừng: máy tính này không theo kịp",
+      "transcriptionFailed": "Không thể chép lại đoạn đó",
+      "pasteFailed": "Không thể gõ đoạn đó; nó có trong Lịch sử"
     },
     "privileged": "Privileged"
   },
   "screenCard": {
-    "title": "Send this screenshot?",
-    "autoCancel": "Cancels in {{seconds}} s",
-    "enlarge": "Click to enlarge",
-    "shrink": "Click to make smaller",
-    "imageAlt": "Screenshot of the window you asked about",
+    "title": "Gửi ảnh chụp màn hình này?",
+    "autoCancel": "Sẽ hủy sau {{seconds}} giây",
+    "enlarge": "Nhấp để phóng to",
+    "shrink": "Nhấp để thu nhỏ",
+    "imageAlt": "Ảnh chụp cửa sổ bạn đã hỏi",
     "question": "“{{question}}”",
-    "sendsTo": "Goes to {{provider}} · {{model}}",
-    "onlyThis": "Only this window. Nothing is sent until you press Send.",
-    "send": "Send",
-    "cancel": "Cancel",
+    "sendsTo": "Gửi đến {{provider}} · {{model}}",
+    "onlyThis": "Chỉ cửa sổ này. Không gì được gửi cho đến khi bạn nhấn Gửi.",
+    "send": "Gửi",
+    "cancel": "Hủy",
     "noticeTitle": "Kusema",
-    "close": "Close"
+    "close": "Đóng"
   },
   "secureInput": {
     "blockedWithCulprit_one": "{{name}} có thể đang chặn 1 phím tắt",

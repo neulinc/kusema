@@ -8,25 +8,25 @@
     "quit": "Ukončit",
     "cancel": "Zrušit",
     "secureInputWarning": "⚠ Zkratky blokuje Secure Input",
-    "privilegedMode": "Privileged Mode",
-    "privilegedOn": "Privileged mode on"
+    "privilegedMode": "Režim Privileged",
+    "privilegedOn": "Režim Privileged zapnut"
   },
   "sidebar": {
     "general": "Obecné",
-    "assistant": "Assistant",
+    "assistant": "Asistent",
     "models": "Modely",
     "advanced": "Pokročilé",
     "postProcessing": "Následné zpracování",
     "history": "Historie",
     "debug": "Ladění",
     "about": "O aplikaci",
-    "privacy": "Privacy"
+    "privacy": "Soukromí"
   },
   "onboarding": {
     "customModelDescription": "Oficiálně nepodporováno",
     "migration": {
       "title": "Vaše modely potřebují aktualizaci",
-      "description": "Handy nyní používá novější typ modelů. Stáhněte si novou verzi, abyste mohli dál přepisovat. Staré verze budou odstraněny.",
+      "description": "Kusema nyní používá novější typ modelů. Stáhněte si novou verzi, abyste mohli dál přepisovat. Staré verze budou odstraněny.",
       "replaces": "Nahrazuje {{name}}",
       "oldFormat": "Starý formát",
       "failed": "Stahování selhalo",
@@ -63,11 +63,11 @@
     "permissions": {
       "microphone": {
         "name": "Mikrofon",
-        "why": "Aby vás Handy slyšel. Zvuk se mění na text přímo v tomto počítači a nikam se neodesílá."
+        "why": "Aby vás Kusema slyšel. Zvuk se mění na text přímo v tomto počítači a nikam se neodesílá."
       },
       "accessibility": {
         "name": "Zpřístupnění",
-        "why": "Aby vaše zkratka fungovala v každé aplikaci a Handy mohl psát text tam, kde máte kurzor."
+        "why": "Aby vaše zkratka fungovala v každé aplikaci a Kusema mohl psát text tam, kde máte kurzor."
       },
       "errors": {
         "checkFailed": "Nepodařilo se zkontrolovat oprávnění. Zkuste to prosím znovu.",
@@ -81,12 +81,12 @@
       "openSettings": "Otevřít nastavení",
       "allowed": "Povoleno",
       "waiting": "Čeká se",
-      "turnOnMac": "Zapněte Handy v Nastavení systému a pak se vraťte sem.",
+      "turnOnMac": "Zapněte Kusema v Nastavení systému a pak se vraťte sem.",
       "turnOnWindows": "Zapněte přístup k mikrofonu v Nastavení Windows a pak se vraťte sem.",
       "hintBoth": "Pro pokračování povolte obojí",
       "hintMicrophone": "Pro pokračování povolte mikrofon",
       "welcomeBack": "Vítejte zpět. Pokračujeme tam, kde jste skončili.",
-      "relaunch": "Zkratka po tomhle nereaguje? <relaunch>Restartujte Handy</relaunch> a skončíte hned zase tady."
+      "relaunch": "Zkratka po tomhle nereaguje? <relaunch>Restartujte Kusema</relaunch> a skončíte hned zase tady."
     },
     "shell": {
       "back": "Zpět",
@@ -97,11 +97,11 @@
       "title": "Mluvte místo psaní, v jakékoli aplikaci",
       "subtitle": "Vyberte jazyky, ve kterých budete diktovat",
       "languagesLabel": "Jazyky",
-      "noMatch": "Žádný jazyk neodpovídá „{{query}}“. Modely Handy pokrývají zhruba 100 jazyků, další najdete v nastavení.",
+      "noMatch": "Žádný jazyk neodpovídá „{{query}}“. Modely Kusema pokrývají zhruba 100 jazyků, další najdete v nastavení.",
       "appLanguage": "Jazyk aplikace",
       "menusIn": "Nabídky v jazyce: <b>{{language}}</b>",
       "chinese": {
-        "question": "Mluvíte jazykem: {{languages}}. Jaké znaky má Handy psát?",
+        "question": "Mluvíte jazykem: {{languages}}. Jaké znaky má Kusema psát?",
         "label": "Čínské znaky",
         "zh-Hans": "Zjednodušené",
         "zh-Hant": "Tchaj-wan",
@@ -110,7 +110,9 @@
       "hint": {
         "pickOne": "Vyberte alespoň jeden jazyk",
         "weak_one": "{{languages}}: zatím ho žádný model dobře neslyší",
-        "weak_other": "{{languages}}: zatím je žádný model dobře neslyší"
+        "weak_other": "{{languages}}: zatím je žádný model dobře neslyší",
+        "weak_many": "{{languages}}: zatím je žádný model dobře neslyší",
+        "weak_few": "{{languages}}: zatím je žádný model dobře neslyší"
       }
     },
     "download": {
@@ -171,7 +173,7 @@
     },
     "try": {
       "title": "Zkuste to!",
-      "subtitle": "Handy je v rohu a provede vás tím",
+      "subtitle": "Kusema je v rohu a provede vás tím",
       "noteLabel": "Poznámka",
       "placeholder": "Nová poznámka",
       "hold": "Podržte <keys/> a mluvte.",
@@ -199,14 +201,14 @@
     },
     "done": {
       "title": "Hotovo",
-      "subMac": "Handy je teď na řádku nabídek. Podržte nebo klepněte na <keys/> v jakékoli aplikaci a mluvte.",
-      "subTray": "Handy je teď v oznamovací oblasti. Podržte nebo klepněte na <keys/> v jakékoli aplikaci a mluvte.",
+      "subMac": "Kusema je teď na řádku nabídek. Podržte nebo klepněte na <keys/> v jakékoli aplikaci a mluvte.",
+      "subTray": "Kusema je teď v oznamovací oblasti. Podržte nebo klepněte na <keys/> v jakékoli aplikaci a mluvte.",
       "hint": "Tohle můžete později změnit v Nastavení",
       "highFiveLabel": "Plácnout si",
-      "atLogin": "Spustit Handy po přihlášení",
+      "atLogin": "Spustit Kusema po přihlášení",
       "finish": "Hotovo",
       "panel": {
-        "name": "Handy",
+        "name": "Kusema",
         "ready": "Připraveno",
         "languages": "Jazyky",
         "model": "Model řeči",
@@ -220,79 +222,79 @@
       "done": "Nefunguje to v jiných aplikacích? <guide>Průvodce nastavením pro Linux</guide>"
     },
     "setup": {
-      "retryDownload": "Try again",
+      "retryDownload": "Zkusit znovu",
       "welcome": {
-        "title": "Kusema turns your voice into text on this computer.",
-        "privacy": "Your voice never leaves it.",
-        "language": "Language you'll dictate in"
+        "title": "Kusema převádí váš hlas na text přímo v tomto počítači.",
+        "privacy": "Váš hlas ho nikdy neopustí.",
+        "language": "Jazyk, ve kterém budete diktovat"
       },
       "microphone": {
-        "title": "Choose your microphone",
-        "sub": "Say something. The bar should move as you speak.",
-        "label": "Microphone",
-        "meter": "Microphone level",
-        "heard": "Kusema can hear you.",
-        "quiet": "No sound yet. Check that this microphone isn't muted, or choose another one.",
-        "failed": "Kusema couldn't open this microphone. Choose another one.",
-        "tip": "Tip: a headset gives the best accuracy and fewer stray words."
+        "title": "Vyberte mikrofon",
+        "sub": "Řekněte něco. Ukazatel by se měl při mluvení pohybovat.",
+        "label": "Mikrofon",
+        "meter": "Úroveň mikrofonu",
+        "heard": "Kusema vás slyší.",
+        "quiet": "Zatím žádný zvuk. Zkontrolujte, zda mikrofon není ztlumený, nebo vyberte jiný.",
+        "failed": "Kusema nemohl otevřít tento mikrofon. Vyberte jiný.",
+        "tip": "Tip: s náhlavní soupravou je rozpoznávání nejpřesnější a vznikne méně nechtěných slov."
       },
       "practice": {
-        "title": "Dictate your first sentence",
-        "how": "Hold <keys/>, say this sentence, then let go:",
+        "title": "Nadiktujte první větu",
+        "how": "Podržte <keys/>, řekněte tuto větu a pak pusťte:",
         "sentence": "Dear Mr. Smith comma thank you for your letter period",
-        "box": "Practice box: your words appear here",
-        "placeholder": "Your words appear here",
-        "listening": "Listening...",
-        "typing": "Typing...",
-        "success": "That's it. Saying \"comma\" and \"period\" types the marks.",
-        "waiting": "Your speech model is still downloading. This box will work as soon as it's ready.",
-        "continuous": "For longer dictation, press <keys/> to keep listening until you press it again. Used to Dragon? You can set this to Numpad + under General.",
-        "continuousRunning": "Continuous dictation is on. Your words appear in the box each time you pause. Press {{stop}} to stop it.",
-        "continuousEnded": "That's continuous dictation. In your other apps, your words are typed at the cursor."
+        "box": "Cvičné pole: zde se objeví vaše slova",
+        "placeholder": "Zde se objeví vaše slova",
+        "listening": "Poslouchám...",
+        "typing": "Píšu...",
+        "success": "Přesně tak. Když řeknete \"comma\" a \"period\", vloží se znaménka.",
+        "waiting": "Váš model řeči se stále stahuje. Toto pole začne fungovat, jakmile bude připraven.",
+        "continuous": "Pro delší diktování stiskněte <keys/> a Kusema bude poslouchat, dokud klávesu nestisknete znovu. Zvyklí na Dragon? V sekci Obecné můžete nastavit Num +.",
+        "continuousRunning": "Souvislé diktování je zapnuté. Vaše slova se objeví v poli po každé pauze. Ukončíte ho klávesou {{stop}}.",
+        "continuousEnded": "To bylo souvislé diktování. V ostatních aplikacích se slova píší na místo kurzoru."
       },
       "assistant": {
-        "title": "Set up the AI assistant (optional)",
-        "sub": "Ask Kusema answers questions you speak. Dictation doesn't need it.",
+        "title": "Nastavte asistenta AI (volitelné)",
+        "sub": "„Zeptat se Kusemy“ odpovídá na vyslovené otázky. Diktování ho nepotřebuje.",
         "model": "Model",
-        "continueWithout": "Continue without AI",
-        "privileged": "Privileged mode blocks all cloud AI with one switch, for matters that must stay on this computer.",
+        "continueWithout": "Pokračovat bez AI",
+        "privileged": "Režim Privileged jedním přepínačem zablokuje veškerou cloudovou AI, pro záležitosti, které musí zůstat v tomto počítači.",
         "local": {
-          "title": "Private: use a local AI on this computer",
-          "description": "Your questions stay here. Uses Ollama, a free app.",
-          "checking": "Looking for Ollama on this computer...",
-          "found": "Found Ollama. Choose a model to use.",
-          "notFound": "Ollama isn't running on this computer.",
-          "noModels": "Ollama is running, but has no models yet. Run \"ollama pull llama3.2\", then check again.",
-          "instructions": "How to set up Ollama",
-          "again": "Check again"
+          "title": "Soukromě: použít místní AI v tomto počítači",
+          "description": "Vaše otázky zůstanou zde. Používá Ollamu, bezplatnou aplikaci.",
+          "checking": "Hledám Ollamu v tomto počítači...",
+          "found": "Ollama nalezena. Vyberte model.",
+          "notFound": "Ollama v tomto počítači neběží.",
+          "noModels": "Ollama běží, ale zatím nemá žádné modely. Spusťte \"ollama pull llama3.2\" a zkontrolujte to znovu.",
+          "instructions": "Jak nainstalovat Ollamu",
+          "again": "Zkontrolovat znovu"
         },
         "cloud": {
-          "title": "Use a cloud AI provider",
-          "description": "Your questions go to the provider you choose, using your own API key.",
-          "provider": "Provider",
-          "key": "API key",
-          "check": "Save and check",
-          "checking": "Checking the key...",
-          "saved": "Key saved in Windows Credential Manager. Choose a model to use.",
-          "where": "The key is stored in Windows Credential Manager, not in a file.",
-          "keyFailed": "The key was saved, but the provider didn't list any models. Check the key and try again."
+          "title": "Použít poskytovatele cloudové AI",
+          "description": "Vaše otázky půjdou k poskytovateli, kterého vyberete, s vaším vlastním klíčem API.",
+          "provider": "Poskytovatel",
+          "key": "Klíč API",
+          "check": "Uložit a ověřit",
+          "checking": "Ověřuji klíč...",
+          "saved": "Klíč je uložen ve Správci pověření systému Windows. Vyberte model.",
+          "where": "Klíč se ukládá ve Správci pověření systému Windows, ne v souboru.",
+          "keyFailed": "Klíč byl uložen, ale poskytovatel nevrátil žádné modely. Zkontrolujte klíč a zkuste to znovu."
         },
         "skip": {
-          "title": "Skip for now",
-          "description": "You can set this up later on the Assistant page."
+          "title": "Zatím přeskočit",
+          "description": "Můžete to nastavit později na stránce Asistent."
         }
       },
       "done": {
-        "title": "You're all set",
-        "sub": "Kusema keeps running in the system tray and works in any app.",
-        "finish": "Start using Kusema",
-        "wins": "Your first three wins are waiting on the main page.",
-        "atLogin": "Start Kusema when I sign in",
+        "title": "Vše je připraveno",
+        "sub": "Kusema dál běží v oznamovací oblasti a funguje v každé aplikaci.",
+        "finish": "Začít používat Kusemu",
+        "wins": "Vaše první tři úspěchy čekají na hlavní stránce.",
+        "atLogin": "Spouštět Kusemu po přihlášení",
         "keys": {
-          "dictate": "Dictate: hold",
-          "continuous": "Continuous dictation: press to start and stop",
-          "ask": "Ask Kusema",
-          "askScreen": "Ask about my screen"
+          "dictate": "Diktování: podržet",
+          "continuous": "Souvislé diktování: stisknutím spustit a ukončit",
+          "ask": "Zeptat se Kusemy",
+          "askScreen": "Zeptat se na obrazovku"
         }
       }
     }
@@ -381,7 +383,9 @@
     "addAnother": "Přidat další",
     "remove": "Odebrat: {{language}}",
     "alreadyAdded_one": "{{languages}} je již přidán.",
-    "alreadyAdded_other": "{{languages}} jsou již přidány."
+    "alreadyAdded_other": "{{languages}} jsou již přidány.",
+    "alreadyAdded_many": "{{languages}} jsou již přidány.",
+    "alreadyAdded_few": "{{languages}} jsou již přidány."
   },
   "modelSelector": {
     "custom": "Vlastní",
@@ -408,7 +412,7 @@
     "general": {
       "title": "Obecné",
       "shortcut": {
-        "title": "Zkratky Handy",
+        "title": "Zkratky Kusema",
         "description": "Nastavte klávesové zkratky pro spuštění nahrávání řeči na text",
         "loading": "Načítám zkratky...",
         "none": "Žádné zkratky nejsou nastavené",
@@ -428,20 +432,20 @@
             "description": "Volitelné: Vyhrazená klávesová zkratka, která vždy použije AI následné zpracování na váš přepis."
           },
           "assistant": {
-            "name": "Ask Kusema",
-            "description": "Hold or press to ask a spoken question. The reply appears below instead of being pasted."
+            "name": "Zeptat se Kusemy",
+            "description": "Podržte nebo stiskněte a vyslovte otázku. Odpověď se zobrazí níže, místo aby se vložila."
           },
           "assistant_screen": {
-            "name": "Ask About My Screen",
-            "description": "Hold or press to ask a spoken question about the window you're working in. You see the screenshot before anything is sent."
+            "name": "Zeptat se na obrazovku",
+            "description": "Podržte nebo stiskněte a vyslovte otázku k oknu, ve kterém pracujete. Snímek obrazovky uvidíte dřív, než se cokoli odešle."
           },
           "dictate_continuous": {
-            "name": "Continuous Dictation",
-            "description": "Press to start dictating hands-free, and press again to stop. Text appears each time you pause."
+            "name": "Souvislé diktování",
+            "description": "Stisknutím spustíte diktování bez rukou, dalším stisknutím ho ukončíte. Text se objeví po každé pauze."
           },
           "toggle_privileged": {
-            "name": "Privileged Mode",
-            "description": "Press to turn Privileged mode on or off."
+            "name": "Režim Privileged",
+            "description": "Stisknutím zapnete nebo vypnete režim Privileged."
           }
         },
         "errors": {
@@ -466,7 +470,7 @@
       },
       "preferredLanguages": {
         "title": "Preferované jazyky",
-        "description": "Jazyky, kterými mluvíte. Handy podle nich doporučuje modely.",
+        "description": "Jazyky, kterými mluvíte. Kusema podle nich doporučuje modely.",
         "noMatch": "Žádný jazyk neodpovídá „{{query}}“",
         "weak": "Zatím žádný model dobře nerozpoznává: {{languages}}."
       },
@@ -493,17 +497,19 @@
         "fits": "Pro vaše jazyky",
         "untested": "Netestováno"
       },
-      "untestedNote": "Netestováno s Handy. Mohou být pomalejší nebo dělat více chyb.",
+      "untestedNote": "Netestováno s Kusema. Mohou být pomalejší nebo dělat více chyb.",
       "untestedHidden_one": "Další {{count}} model není vyladěn pro diktování. Najdete ho hledáním.",
       "untestedHidden_other": "Dalších {{count}} modelů není vyladěno pro diktování. Najdete je hledáním.",
-      "emptyYours": "Zatím žádné modely. Vyberte některý níže: stáhne se a Handy ho začne používat.",
+      "untestedHidden_many": "Dalších {{count}} modelů není vyladěno pro diktování. Najdete je hledáním.",
+      "untestedHidden_few": "Další {{count}} modely nejsou vyladěné pro diktování. Najdete je hledáním.",
+      "emptyYours": "Zatím žádné modely. Vyberte některý níže: stáhne se a Kusema ho začne používat.",
       "showMore": "Zobrazit další ({{count}})",
       "showFewer": "Zobrazit méně",
       "download": "Stáhnout a použít",
       "downloadingThenUse": "{{percent}} % z {{total}}, poté se přepne",
       "loading": "Načítání…",
       "deleteAsk": "Smazat {{name}}? Uvolní se {{size}}.",
-      "deleteAskActive": "Smazat {{name}}? Handy nebude moci přepisovat, dokud nevyberete jiný model.",
+      "deleteAskActive": "Smazat {{name}}? Kusema nebude moci přepisovat, dokud nevyberete jiný model.",
       "cancel": "Zrušit",
       "deleteModel": "Smazat {{name}}",
       "cancelDownload": "Zastavit stahování {{name}}",
@@ -517,7 +523,7 @@
         "marks": "? zatím nebylo změřeno. — tomuto jazyku nerozumí."
       },
       "retiredNotice": {
-        "title": "Staré modely už s Handy nefungují",
+        "title": "Staré modely už s Kusema nefungují",
         "description": "Zabírají {{size}} na vašem počítači.",
         "delete": "Smazat modely",
         "deleted": "Staré modely byly smazány",
@@ -525,37 +531,37 @@
       },
       "rescan": {
         "label": "Znovu prohledat",
-        "tooltip": "Znovu prohledat modely přidané do složky modelů nebo mezipaměti Hugging Face mimo Handy"
+        "tooltip": "Znovu prohledat modely přidané do složky modelů nebo mezipaměti Hugging Face mimo Kusema"
       },
       "curated": {
-        "inUse": "In use",
-        "gettingReady": "Getting ready...",
-        "downloading": "Downloading: {{percent}}%",
-        "cancel": "Cancel",
-        "cancelLabel": "Cancel downloading {{name}}",
-        "use": "Use",
-        "useLabel": "Use {{name}}",
-        "download": "Download ({{size}})",
-        "downloadLabel": "Download {{name}}",
-        "recommended": "Recommended",
-        "others": "Also on this computer",
-        "showAllHint": "More models are available: turn on Show all models under Advanced.",
+        "inUse": "Používá se",
+        "gettingReady": "Připravuji...",
+        "downloading": "Stahování: {{percent}} %",
+        "cancel": "Zrušit",
+        "cancelLabel": "Zrušit stahování {{name}}",
+        "use": "Použít",
+        "useLabel": "Použít {{name}}",
+        "download": "Stáhnout ({{size}})",
+        "downloadLabel": "Stáhnout {{name}}",
+        "recommended": "Doporučeno",
+        "others": "Také v tomto počítači",
+        "showAllHint": "Další modely jsou k dispozici: zapněte „Zobrazit všechny modely“ v sekci Pokročilé.",
         "rows": {
           "parakeetUnified": {
             "name": "Parakeet Unified English",
-            "description": "The best choice for English. Chosen automatically."
+            "description": "Nejlepší volba pro angličtinu. Vybírá se automaticky."
           },
           "parakeetV3": {
             "name": "Parakeet TDT v3",
-            "description": "For dictating in other languages, including Spanish, French and German."
+            "description": "Pro diktování v jiných jazycích, mimo jiné ve španělštině, francouzštině a němčině."
           },
           "canary": {
             "name": "Canary 180M Flash",
-            "description": "A small download, for older computers or when disk space is low."
+            "description": "Malé stažení, pro starší počítače nebo při nedostatku místa na disku."
           },
           "nemotron": {
             "name": "Nemotron 3.5 Streaming",
-            "description": "Shows live text as you speak, but makes more mistakes."
+            "description": "Zobrazuje text živě během mluvení, ale dělá více chyb."
           }
         }
       }
@@ -564,26 +570,26 @@
       "title": "Jazyky"
     },
     "dictation": {
-      "title": "Continuous Dictation",
-      "description": "Keep talking, and the text is typed into your window each time you pause. Speech recognition stays on this computer, and AI cleanup never runs in this mode.",
+      "title": "Souvislé diktování",
+      "description": "Mluvte dál a text se po každé pauze napíše do okna. Rozpoznávání řeči zůstává v tomto počítači a úprava pomocí AI v tomto režimu nikdy neběží.",
       "dragonKey": {
-        "title": "Dragon's Key",
-        "description": "Use Numpad + to start and stop, as Dragon does. While it's set, that key no longer types a plus sign.",
-        "button": "Use Dragon's key (Numpad +)"
+        "title": "Klávesa Dragonu",
+        "description": "Spouštějte a ukončujte klávesou Num +, jako v Dragonu. Dokud je to nastavené, tato klávesa už nepíše znaménko plus.",
+        "button": "Použít klávesu Dragonu (Num +)"
       },
       "pause": {
-        "title": "Pause Length",
-        "description": "How long you pause before what you said is typed. Longer pauses keep sentences together; shorter ones show text sooner.",
+        "title": "Délka pauzy",
+        "description": "Jak dlouho se odmlčíte, než se to, co jste řekli, napíše. Delší pauzy drží věty pohromadě, kratší zobrazí text dřív.",
         "seconds": "{{seconds}} s"
       },
       "autoStop": {
-        "title": "Stop After Silence",
-        "description": "Dictation stops by itself after this long without speech, so the microphone is never left on by accident.",
+        "title": "Ukončit po tichu",
+        "description": "Diktování se samo ukončí po této době bez řeči, aby mikrofon nikdy omylem nezůstal zapnutý.",
         "minutes": "{{minutes}} min"
       },
       "voiceCommands": {
-        "label": "Voice Commands",
-        "description": "Say \"new paragraph\" or \"new line\" as you talk, or \"scratch that\" or \"stop dictation\" on its own between pauses, and it acts instead of being typed. Normal sentences with these words are typed as usual."
+        "label": "Hlasové příkazy",
+        "description": "Během mluvení řekněte \"new paragraph\" nebo \"new line\", nebo samostatně mezi pauzami \"scratch that\" či \"stop dictation\", a příkaz se provede místo napsání. Běžné věty s těmito slovy se píší normálně."
       }
     },
     "sound": {
@@ -646,11 +652,11 @@
       },
       "autostart": {
         "label": "Spouštět při startu",
-        "description": "Automaticky spustit Handy po přihlášení do počítače."
+        "description": "Automaticky spustit Kusema po přihlášení do počítače."
       },
       "showTrayIcon": {
         "label": "Zobrazit ikonu v systémové liště",
-        "description": "Zobrazit ikonu Handy v systémové liště."
+        "description": "Zobrazit ikonu Kusema v systémové liště."
       },
       "overlay": {
         "style": {
@@ -773,90 +779,90 @@
         }
       },
       "showAllModels": {
-        "label": "Show all models",
-        "description": "List every model on the Models page, with accuracy and speed details, instead of the short list."
+        "label": "Zobrazit všechny modely",
+        "description": "Zobrazí na stránce Modely každý model s údaji o přesnosti a rychlosti místo krátkého seznamu."
       }
     },
     "assistant": {
-      "title": "Assistant",
-      "description": "Hold the shortcut, ask a question out loud, and Kusema answers.",
+      "title": "Asistent",
+      "description": "Podržte zkratku, položte nahlas otázku a Kusema odpoví.",
       "provider": {
-        "title": "AI Provider",
-        "provider": "Provider",
-        "description": "Assistant mode uses the same provider and API key as Post Process.",
+        "title": "Poskytovatel AI",
+        "provider": "Poskytovatel",
+        "description": "Asistent používá stejného poskytovatele a klíč API jako Následné zpracování.",
         "model": "Model",
-        "modelDescription": "The model that answers your questions. Change it on the Post Process page.",
-        "notSet": "Not chosen",
-        "open": "Open Post Process settings",
-        "disabled": "Assistant mode needs an AI provider (such as Anthropic, OpenAI or a local Ollama model) to answer questions. Providers are set up on the Post Process page, which appears once Post Processing is turned on. Turning it on doesn't change how normal dictation works.",
-        "enable": "Turn on Post Processing",
-        "noProvider": "Choose a provider on the Post Process page.",
-        "noKey": "No API key is set for {{provider}}. Add one on the Post Process page.",
-        "noModel": "Choose a model on the Post Process page."
+        "modelDescription": "Model, který odpovídá na vaše otázky. Změníte ho na stránce Následné zpracování.",
+        "notSet": "Nevybráno",
+        "open": "Otevřít nastavení Následného zpracování",
+        "disabled": "Asistent potřebuje poskytovatele AI (například Anthropic, OpenAI nebo místní model v Ollamě), aby mohl odpovídat. Poskytovatelé se nastavují na stránce Následné zpracování, která se objeví po zapnutí následného zpracování. Zapnutí nemění běžné diktování.",
+        "enable": "Zapnout následné zpracování",
+        "noProvider": "Vyberte poskytovatele na stránce Následné zpracování.",
+        "noKey": "Pro {{provider}} není nastaven žádný klíč API. Přidejte ho na stránce Následné zpracování.",
+        "noModel": "Vyberte model na stránce Následné zpracování."
       },
       "screen": {
-        "title": "Ask About My Screen",
-        "description": "Ask about the window you're working in, like “What do you think of this document?” Only that window is captured, and it stays on this computer until you press Send.",
+        "title": "Zeptat se na obrazovku",
+        "description": "Zeptejte se na okno, ve kterém pracujete, třeba „Co říkáte na tento dokument?“ Zachytí se jen to okno a zůstane v tomto počítači, dokud nestisknete Odeslat.",
         "confirm": {
-          "label": "Confirm Before Sending Screenshots",
-          "description": "Show the screenshot, your question and where it will go, then wait for Send (Enter) or Cancel (Escape). Unanswered, it cancels after 30 seconds.",
-          "offWarning": "Screenshots will be sent to {{provider}} as soon as you finish speaking, without showing you first. Everything visible in the window goes with them, including private or confidential information."
+          "label": "Před odesláním snímků obrazovky potvrdit",
+          "description": "Zobrazí snímek, vaši otázku a kam půjde, a pak čeká na Odeslat (Enter) nebo Zrušit (Esc). Bez odpovědi se po 30 sekundách zruší.",
+          "offWarning": "Snímky obrazovky se odešlou poskytovateli {{provider}}, jakmile domluvíte, aniž byste je předtím viděli. Spolu s nimi odejde vše, co je v okně vidět, včetně soukromých či důvěrných informací."
         },
         "provider": {
-          "label": "Use for Screen Questions",
-          "description": "Send screenshots to a different provider than normal questions, for example a local vision model in Ollama (the Custom provider) for confidential documents. Follow-up questions go to the same provider until you start a new conversation.",
-          "same": "Same as Assistant",
-          "sameNamed": "Same as Assistant ({{provider}})",
-          "yourProvider": "your AI provider"
+          "label": "Použít pro otázky na obrazovku",
+          "description": "Posílat snímky obrazovky jinému poskytovateli než běžné otázky, například místnímu vizuálnímu modelu v Ollamě (poskytovatel Vlastní) pro důvěrné dokumenty. Doplňující otázky jdou stejnému poskytovateli, dokud nezačnete novou konverzaci.",
+          "same": "Stejně jako asistent",
+          "sameNamed": "Stejně jako asistent ({{provider}})",
+          "yourProvider": "vašemu poskytovateli AI"
         },
         "model": {
-          "label": "Model for Screen Questions",
-          "description": "A model that can see images. Leave empty to use the model chosen for this provider on the Post Process page.",
-          "placeholder": "e.g. qwen2.5vl"
+          "label": "Model pro otázky na obrazovku",
+          "description": "Model, který vidí obrázky. Ponechte prázdné, chcete-li použít model vybraný pro tohoto poskytovatele na stránce Následné zpracování.",
+          "placeholder": "např. qwen2.5vl"
         }
       },
       "conversation": {
-        "empty": "Ask a question with the Ask Kusema shortcut. The conversation will appear here.",
-        "new": "New conversation",
-        "screenshot": "Screenshot",
-        "noProvider": "Ask Kusema needs an AI model to answer. Choose one in Settings.",
-        "openSettings": "Open Settings"
+        "empty": "Položte otázku zkratkou „Zeptat se Kusemy“. Konverzace se zobrazí zde.",
+        "new": "Nová konverzace",
+        "screenshot": "Snímek obrazovky",
+        "noProvider": "„Zeptat se Kusemy“ potřebuje k odpovědi model AI. Vyberte ho v Nastavení.",
+        "openSettings": "Otevřít nastavení"
       },
       "voice": {
-        "title": "Voice",
-        "systemDefault": "System default",
-        "previewText": "Hi, I'm Kusema. This is how I'll sound when I answer your questions.",
+        "title": "Hlas",
+        "systemDefault": "Výchozí systémový",
+        "previewText": "Dobrý den, jsem Kusema. Takhle budu znít, když budu odpovídat na vaše otázky.",
         "speakReplies": {
-          "label": "Speak Replies",
-          "description": "Read replies aloud as they arrive. Press Cancel (Escape), start a new recording, or start a new conversation to stop."
+          "label": "Číst odpovědi nahlas",
+          "description": "Čte odpovědi nahlas, jakmile přijdou. Zastavíte je klávesou Zrušit (Esc), novým nahráváním nebo novou konverzací."
         },
         "voice": {
-          "label": "Voice",
-          "description": "Kokoro voices sound the most natural; download them above. The other voices come with your computer (on Windows, add more under Settings > Time & language > Speech)."
+          "label": "Hlas",
+          "description": "Hlasy Kokoro znějí nejpřirozeněji; stáhněte je výše. Ostatní hlasy jsou součástí počítače (ve Windows přidáte další v Nastavení > Čas a jazyk > Řeč)."
         },
         "kokoro": {
-          "label": "Kokoro Voices",
-          "description": "28 natural-sounding English voices (US and UK) generated on this computer. A one-time download.",
-          "installed": "Installed. Pick a Kokoro voice below. Removing them frees the disk space; replies then use the system voice.",
-          "download": "Download ({{size}} MB)",
-          "downloading": "Downloading… {{percentage}}%",
-          "cancel": "Cancel",
-          "delete": "Remove"
+          "label": "Hlasy Kokoro",
+          "description": "28 přirozeně znějících anglických hlasů (USA a Spojené království) generovaných v tomto počítači. Jednorázové stažení.",
+          "installed": "Nainstalováno. Níže vyberte hlas Kokoro. Odebráním uvolníte místo na disku; odpovědi pak použijí systémový hlas.",
+          "download": "Stáhnout ({{size}} MB)",
+          "downloading": "Stahování… {{percentage}} %",
+          "cancel": "Zrušit",
+          "delete": "Odebrat"
         },
         "rate": {
-          "label": "Speaking Rate",
-          "description": "How fast replies are read. 1.00× is the voice's normal speed."
+          "label": "Rychlost řeči",
+          "description": "Jak rychle se odpovědi čtou. 1,00× je normální rychlost hlasu."
         },
         "preview": {
-          "label": "Preview Voice",
-          "description": "Hear the selected voice at the selected speed.",
-          "button": "Preview"
+          "label": "Poslechnout hlas",
+          "description": "Poslechněte si vybraný hlas ve vybrané rychlosti.",
+          "button": "Poslechnout"
         }
       },
       "tabs": {
-        "label": "Assistant",
-        "conversation": "Conversation",
-        "settings": "Settings"
+        "label": "Asistent",
+        "conversation": "Konverzace",
+        "settings": "Nastavení"
       }
     },
     "postProcessing": {
@@ -973,7 +979,7 @@
       },
       "updateChecks": {
         "label": "Kontrolovat aktualizace",
-        "description": "Automaticky kontrolovat nové verze Handy",
+        "description": "Automaticky kontrolovat nové verze Kusema",
         "lockedDescription": "Zakázáno systémovou konfigurací (HANDY_DISABLE_UPDATER)"
       },
       "whatsNewPreview": {
@@ -992,9 +998,9 @@
           "welcome": "Vítejte",
           "permissions": "Oprávnění",
           "done": "Hotovo",
-          "microphone": "Microphone",
-          "practice": "Practice",
-          "assistant": "AI assistant"
+          "microphone": "Mikrofon",
+          "practice": "Cvičení",
+          "assistant": "Asistent AI"
         }
       },
       "onboardingRun": {
@@ -1040,8 +1046,8 @@
         "description": "Mikrofon, který se použije při zavřeném víku notebooku"
       },
       "postProcessingToggle": {
-        "label": "AI Cleanup",
-        "description": "Optional. Rewrites dictated text with an AI model when you use the AI cleanup shortcut: fixes self-corrections and grammar, keeps your meaning, and never adds facts."
+        "label": "Úprava pomocí AI",
+        "description": "Volitelné. Přepíše diktovaný text modelem AI, když použijete zkratku úpravy pomocí AI: opraví přeřeknutí a gramatiku, zachová smysl a nikdy nepřidá fakta."
       },
       "muteWhileRecording": {
         "label": "Ztlumit při nahrávání",
@@ -1057,7 +1063,7 @@
         "bindingsReset": "Klávesové zkratky byly nekompatibilní a byly obnoveny na výchozí hodnoty",
         "options": {
           "tauri": "Tauri Global Shortcut",
-          "builtIn": "Built-in (recommended)"
+          "builtIn": "Vestavěná (doporučeno)"
         }
       },
       "pasteDelay": {
@@ -1086,7 +1092,7 @@
       },
       "keyboardDiagnostic": {
         "title": "Diagnostika klávesnice",
-        "description": "Ověří, zda události klávesnice dorazí do Handy. Zaznamenává se pouze počet událostí — nikdy to, které klávesy stisknete.",
+        "description": "Ověří, zda události klávesnice dorazí do Kusema. Zaznamenává se pouze počet událostí — nikdy to, které klávesy stisknete.",
         "run": "Spustit 10s diagnostiku",
         "running": "Naslouchání… několikrát stiskněte svou zkratku (např. Option+Space)",
         "secureInputLabel": "Secure Input",
@@ -1100,7 +1106,7 @@
         "mouse": "Myš",
         "verdictBlocked": "Secure Input blokuje události kláves — zkratky obsahující běžnou klávesu nemohou fungovat, dokud se to nevyřeší.",
         "verdictSuspicious": "Dorazily události modifikátorů, ale žádné události kláves — něco klávesy potlačuje, přestože Secure Input hlásí, že je vypnutý. Nahlaste to prosím na GitHubu.",
-        "verdictOk": "Události kláves dorazí do Handy normálně.",
+        "verdictOk": "Události kláves dorazí do Kusema normálně.",
         "verdictNoEvents": "Nebyly zachyceny žádné události — stiskli jste během testu nějaké klávesy?",
         "failed": "Diagnostika selhala: {{error}}"
       }
@@ -1109,203 +1115,209 @@
       "title": "O aplikaci",
       "version": {
         "title": "Verze",
-        "description": "Aktuální verze Handy"
+        "description": "Aktuální verze Kusema"
       },
       "whatsNewUpdates": {
         "label": "Zobrazovat novinky",
-        "description": "Zobrazovat poznámky k vydání po aktualizacích Handy"
+        "description": "Zobrazovat poznámky k vydání po aktualizacích Kusema"
       },
       "appDataDirectory": {
         "title": "Adresář dat aplikace",
-        "description": "Umístění, kde Handy ukládá data"
+        "description": "Umístění, kde Kusema ukládá data"
       },
       "sourceCode": {
         "title": "Zdrojový kód",
-        "description": "View Kusema's source code",
+        "description": "Zobrazit zdrojový kód Kusemy",
         "button": "Zobrazit na GitHubu"
       },
       "acknowledgments": {
         "ggml": {
           "title": "ggml",
           "description": "Vysoce výkonné inferenční zpracování modelu automatického rozpoznávání řeči Whisper od OpenAI",
-          "details": "Handy používá ggml pro rychlé lokální zpracování řeči na text. Díky skvělé práci Georgiho Gerganova a přispěvatelů."
+          "details": "Kusema používá ggml pro rychlé lokální zpracování řeči na text. Díky skvělé práci Georgiho Gerganova a přispěvatelů."
         }
       },
       "organizations": {
-        "title": "Kusema for organizations",
-        "description": "Setup, support and options for firms",
-        "button": "Learn more"
+        "title": "Kusema pro organizace",
+        "description": "Nasazení, podpora a možnosti pro kanceláře",
+        "button": "Další informace"
       },
       "report": {
-        "title": "Report a problem or suggest a feature",
-        "description": "Tell us on GitHub what went wrong or what you'd like",
-        "button": "Open GitHub"
+        "title": "Nahlásit problém nebo navrhnout funkci",
+        "description": "Napište nám na GitHubu, co se pokazilo nebo co byste chtěli",
+        "button": "Otevřít GitHub"
       },
       "credits": {
-        "title": "Credits and licenses",
+        "title": "Poděkování a licence",
         "handy": {
-          "title": "Built on Handy",
-          "description": "Kusema is built on Handy by CJ Pais, used under the MIT License.",
-          "button": "View Handy"
+          "title": "Postaveno na Handy",
+          "description": "Kusema je postavena na aplikaci Handy od CJ Paise, používané podle licence MIT.",
+          "button": "Zobrazit Handy"
         },
         "nvidiaLicense": "NVIDIA Open Model License",
-        "models": "Speech and voice models ({{count}})",
-        "components": "Open-source components ({{count}})",
-        "notices": "Full license texts",
-        "loading": "Loading..."
+        "models": "Modely řeči a hlasu ({{count}})",
+        "components": "Open-source komponenty ({{count}})",
+        "notices": "Úplná znění licencí",
+        "loading": "Načítání..."
       }
     },
     "privacy": {
-      "thisComputer": "This computer ({{host}})",
-      "nothingSent": "Nothing to show yet.",
-      "updateBlocked": "Update checks are blocked in Privileged mode.",
+      "thisComputer": "Tento počítač ({{host}})",
+      "nothingSent": "Zatím není co zobrazit.",
+      "updateBlocked": "Kontroly aktualizací jsou v režimu Privileged blokovány.",
       "audio": {
-        "title": "Audio sent off this computer: 0 bytes",
-        "description": "Speech recognition runs on this computer, and nothing in Kusema can upload your voice. Only the text of what you say, and only for features you choose, ever goes to an AI provider."
+        "title": "Zvuk odeslaný z tohoto počítače: 0 bajtů",
+        "description": "Rozpoznávání řeči běží v tomto počítači a nic v Kusemě nemůže váš hlas odeslat. K poskytovateli AI se kdy dostane jen text toho, co řeknete, a jen pro funkce, které si vyberete."
       },
       "privileged": {
-        "title": "Privileged Mode",
-        "description": "For confidential matters. While it's on, nothing you say, type or show goes to a cloud AI service. Ask Kusema and AI cleanup only work with a model running on this computer.",
+        "title": "Režim Privileged",
+        "description": "Pro důvěrné záležitosti. Když je zapnutý, nic z toho, co řeknete, napíšete nebo ukážete, nejde do cloudové služby AI. „Zeptat se Kusemy“ a úprava pomocí AI pak fungují jen s modelem v tomto počítači.",
         "chip": "Privileged",
         "toggle": {
-          "label": "Privileged Mode",
-          "description": "Blocks every request to cloud AI providers, including ones already set up. Dictation keeps working, because it never uses the cloud."
+          "label": "Režim Privileged",
+          "description": "Blokuje každý požadavek na poskytovatele cloudové AI, včetně již nastavených. Diktování funguje dál, protože cloud nikdy nepoužívá."
         },
         "allowLan": {
-          "label": "Allow Local Network AI Servers",
-          "description": "Also allows AI servers on your office network, by private address (like 192.168.1.20). Models on this computer are always allowed."
+          "label": "Povolit servery AI v místní síti",
+          "description": "Povolí také servery AI v síti kanceláře podle soukromé adresy (např. 192.168.1.20). Modely v tomto počítači jsou povoleny vždy."
         },
         "blockDownloads": {
-          "label": "Also Block Downloads and Update Checks",
-          "description": "For offline offices. Model and voice downloads and update checks carry none of your content, so they normally stay allowed and are listed below. Turn this on to stop them too while Privileged mode is on."
+          "label": "Blokovat také stahování a kontroly aktualizací",
+          "description": "Pro kanceláře bez internetu. Stahování modelů a hlasů a kontroly aktualizací neobsahují nic z vašeho obsahu, takže jsou obvykle povolené a uvedené níže. Zapněte tuto volbu, chcete-li zastavit i je, dokud je zapnutý režim Privileged."
         },
         "hotkey": {
-          "label": "Privileged Mode Shortcut",
-          "description": "Adds a keyboard shortcut that turns Privileged mode on or off. Off by default, so it can't be pressed by accident."
+          "label": "Zkratka režimu Privileged",
+          "description": "Přidá klávesovou zkratku, která zapíná a vypíná režim Privileged. Ve výchozím stavu vypnuta, aby ji nikdo nestiskl omylem."
         }
       },
       "counts": {
-        "title": "Where Requests Went",
-        "today": "Today",
-        "week": "Last 7 days"
+        "title": "Kam šly požadavky",
+        "today": "Dnes",
+        "week": "Posledních 7 dní"
       },
       "columns": {
-        "time": "Time",
-        "destination": "Destination",
-        "purpose": "Why",
+        "time": "Čas",
+        "destination": "Cíl",
+        "purpose": "Proč",
         "data": "Data",
-        "size": "Size",
-        "result": "Result"
+        "size": "Velikost",
+        "result": "Výsledek"
       },
       "purposes": {
-        "assistant_question": "Question to Kusema",
-        "screen_question": "Question about the screen",
-        "post_processing": "AI cleanup",
-        "provider_models": "Listing a provider's models",
-        "model_download": "Speech model download",
-        "voice_download": "Voice download",
-        "update_check": "Update check"
+        "assistant_question": "Otázka pro Kusemu",
+        "screen_question": "Otázka na obrazovku",
+        "post_processing": "Úprava pomocí AI",
+        "provider_models": "Načtení modelů poskytovatele",
+        "model_download": "Stažení modelu řeči",
+        "voice_download": "Stažení hlasu",
+        "update_check": "Kontrola aktualizací"
       },
       "data": {
         "text": "Text",
-        "image": "Screenshot",
-        "none": "None of yours"
+        "image": "Snímek obrazovky",
+        "none": "Nic vašeho"
       },
       "results": {
-        "sent": "Sent",
-        "blocked": "Blocked",
-        "failed": "Failed"
+        "sent": "Odesláno",
+        "blocked": "Blokováno",
+        "failed": "Selhalo"
       },
       "list": {
-        "title": "Every Request",
-        "description": "Each request Kusema has made: when, where, why, what kind of data and how large. What was in it is never recorded. Shows the latest 500; the export has them all.",
-        "all": "All",
-        "allPurposes": "Any reason",
-        "allResults": "Any result",
-        "allDestinations": "Any destination",
-        "anyTime": "Any time",
-        "lastDays_one": "Last {{count}} day",
-        "lastDays_other": "Last {{count}} days",
-        "export": "Export CSV",
-        "exported_one": "Exported {{count}} request.",
-        "exported_other": "Exported {{count}} requests.",
-        "clear": "Clear",
+        "title": "Všechny požadavky",
+        "description": "Každý požadavek, který Kusema odeslala: kdy, kam, proč, jaký druh dat a jak velký. Obsah se nikdy nezaznamenává. Zobrazuje posledních 500; export obsahuje všechny.",
+        "all": "Vše",
+        "allPurposes": "Jakýkoli důvod",
+        "allResults": "Jakýkoli výsledek",
+        "allDestinations": "Jakýkoli cíl",
+        "anyTime": "Kdykoli",
+        "lastDays_one": "Poslední den",
+        "lastDays_other": "Posledních {{count}} dne",
+        "lastDays_many": "Posledních {{count}} dní",
+        "lastDays_few": "Poslední {{count}} dny",
+        "export": "Exportovat CSV",
+        "exported_one": "Exportován {{count}} požadavek.",
+        "exported_other": "Exportováno {{count}} požadavku.",
+        "exported_many": "Exportováno {{count}} požadavků.",
+        "exported_few": "Exportovány {{count}} požadavky.",
+        "clear": "Vymazat",
         "retention": {
-          "title": "Keep This List For",
-          "description": "Older entries are deleted from this computer automatically.",
-          "days_one": "{{count}} day",
-          "days_other": "{{count}} days"
+          "title": "Uchovávat tento seznam",
+          "description": "Starší záznamy se z tohoto počítače mažou automaticky.",
+          "days_one": "{{count}} den",
+          "days_other": "{{count}} dne",
+          "days_many": "{{count}} dní",
+          "days_few": "{{count}} dny"
         }
       }
     },
     "cleanup": {
-      "title": "Cleanup",
-      "description": "Dictated text should need little editing. Local cleanup runs on this computer and sends nothing anywhere.",
+      "title": "Úprava",
+      "description": "Diktovaný text by měl potřebovat jen málo úprav. Místní úprava běží v tomto počítači a nic neodesílá.",
       "local": {
-        "label": "Local Cleanup",
-        "description": "Removes filler words, adds missing periods between phrases in continuous dictation, and handles spoken punctuation, all on this computer. Off, your words are typed as transcribed."
+        "label": "Místní úprava",
+        "description": "Odstraní vycpávková slova, při souvislém diktování doplní chybějící tečky mezi větami a zpracuje vyslovenou interpunkci, vše v tomto počítači. Když je vypnutá, slova se napíší tak, jak byla přepsána."
       },
       "spokenPunctuation": {
-        "label": "Spoken Punctuation",
-        "description": "Say \"comma\", \"period\", \"question mark\", \"colon\", \"open quote\", \"close paren\", \"dash\", \"section symbol\" and more, as in Dragon. \"Period\" only counts at the end of a phrase, so \"the limitations period expired\" stays as words. Say \"literal period\" to type the word."
+        "label": "Vyslovená interpunkce",
+        "description": "Říkejte \"comma\", \"period\", \"question mark\", \"colon\", \"open quote\", \"close paren\", \"dash\", \"section symbol\" a další, jako v Dragonu. \"Period\" platí jen na konci fráze, takže \"the limitations period expired\" zůstane slovy. Řekněte \"literal period\", chcete-li napsat samotné slovo. Tyto příkazy fungují v angličtině."
       },
       "ai": {
         "status": {
-          "noProvider": "No AI provider is set up yet.",
-          "noKey": "{{provider}} needs an API key.",
-          "noModel": "{{provider}} needs a model chosen.",
-          "local": "Using {{model}} on this computer through {{provider}}. Nothing leaves this computer.",
-          "cloud": "Using {{model}} from {{provider}}, a cloud service. Text you clean up goes to {{provider}}.",
-          "blocked": "Privileged mode is on, so nothing will be sent to {{provider}}. Use a local model or turn off Privileged mode."
+          "noProvider": "Zatím není nastaven žádný poskytovatel AI.",
+          "noKey": "{{provider}} potřebuje klíč API.",
+          "noModel": "Pro {{provider}} je potřeba vybrat model.",
+          "local": "Používá {{model}} v tomto počítači přes {{provider}}. Nic tento počítač neopustí.",
+          "cloud": "Používá {{model}} od {{provider}}, cloudové služby. Text, který upravujete, se odesílá do {{provider}}.",
+          "blocked": "Režim Privileged je zapnutý, takže do {{provider}} se nic neodešle. Použijte místní model nebo režim Privileged vypněte."
         },
-        "recommendLocal": "We recommend a model that runs on this computer, such as one in Ollama, so confidential text stays here. AI cleanup runs when you dictate with its own shortcut, and never during continuous dictation.",
-        "setUp": "Set Up AI Cleanup"
+        "recommendLocal": "Doporučujeme model, který běží v tomto počítači, například v Ollamě, aby důvěrný text zůstal tady. Úprava pomocí AI běží, když diktujete její vlastní zkratkou, a nikdy při souvislém diktování.",
+        "setUp": "Nastavit úpravu pomocí AI"
       }
     },
     "firstWins": {
-      "title": "First three wins",
-      "dismiss": "Dismiss",
-      "dictated": "Dictate an email",
-      "newParagraph": "Use continuous dictation and say \"new paragraph\"",
-      "asked": "Ask Kusema a question",
-      "done": "Done",
-      "notDone": "Not done yet",
-      "progress": "{{done}} of {{count}} done",
-      "allDone": "All three done. Nice work."
+      "title": "První tři úspěchy",
+      "dismiss": "Skrýt",
+      "dictated": "Nadiktujte e-mail",
+      "newParagraph": "Použijte souvislé diktování a řekněte \"new paragraph\"",
+      "asked": "Zeptejte se na něco Kusemy",
+      "done": "Hotovo",
+      "notDone": "Ještě ne",
+      "progress": "Hotovo {{done}} z {{count}}",
+      "allDone": "Všechny tři hotové. Výborně."
     },
     "glow": {
-      "title": "Recording indicator",
-      "description": "A glow around the edges of your screen shows that Kusema is listening. Only you see it: it stays out of screenshots and screen shares.",
+      "title": "Indikátor nahrávání",
+      "description": "Záře na okrajích obrazovky ukazuje, že Kusema poslouchá. Vidíte ji jen vy: neobjeví se na snímcích obrazovky ani při sdílení obrazovky.",
       "enabled": {
-        "label": "Screen glow",
-        "description": "Show a colored glow around the screen you're working on while Kusema is listening. You can still click and type through it."
+        "label": "Záře obrazovky",
+        "description": "Zobrazit barevnou záři kolem obrazovky, na které pracujete, když Kusema poslouchá. Stále přes ni můžete klikat a psát."
       },
       "thickness": {
-        "label": "Thickness",
-        "description": "How far the glow reaches in from the edge of the screen."
+        "label": "Šířka",
+        "description": "Jak daleko od okraje obrazovky záře sahá."
       },
       "intensity": {
-        "label": "Intensity",
-        "description": "How strong the glow is."
+        "label": "Intenzita",
+        "description": "Jak silná je záře."
       },
       "palette": {
-        "label": "Colors",
-        "description": "The color-blind friendly set keeps the modes easy to tell apart with every common kind of color blindness.",
-        "standard": "Standard",
-        "color_blind": "Color-blind friendly"
+        "label": "Barvy",
+        "description": "Barvy pro barvoslepé udrží režimy snadno rozlišitelné u všech běžných druhů barvosleposti.",
+        "standard": "Standardní",
+        "color_blind": "Pro barvoslepé"
       },
       "modes": {
-        "dictation": "Dictation",
-        "continuous": "Continuous dictation",
-        "ask": "Ask Kusema",
-        "ask_screen": "Ask about my screen",
-        "paused": "Continuous dictation paused (window changed)"
+        "dictation": "Diktování",
+        "continuous": "Souvislé diktování",
+        "ask": "Zeptat se Kusemy",
+        "ask_screen": "Zeptat se na obrazovku",
+        "paused": "Souvislé diktování pozastaveno (změna okna)"
       },
-      "preview": "Preview",
-      "previewLabel": "Preview the glow for {{mode}}",
+      "preview": "Náhled",
+      "previewLabel": "Náhled záře pro {{mode}}",
       "sounds": {
-        "label": "Continuous dictation sounds",
-        "description": "Play a short sound when continuous dictation starts and stops. Sounds for other dictation are under Sound below."
+        "label": "Zvuky souvislého diktování",
+        "description": "Přehrát krátký zvuk, když souvislé diktování začne a skončí. Zvuky pro jiné diktování najdete níže v sekci Zvuk."
       }
     }
   },
@@ -1325,7 +1337,7 @@
     "portableUpdateBrowseButton": "Otevřít GitHub Releases"
   },
   "whatsNew": {
-    "title": "Novinky v Handy v{{version}}"
+    "title": "Novinky v Kusema v{{version}}"
   },
   "common": {
     "loading": "Načítání...",
@@ -1356,11 +1368,11 @@
   },
   "appLanguage": {
     "title": "Jazyk aplikace",
-    "description": "Změňte jazyk rozhraní Handy"
+    "description": "Změňte jazyk rozhraní Kusema"
   },
   "theme": {
     "title": "Motiv aplikace",
-    "description": "Zvolte, zda má Handy sledovat motiv systému, nebo zůstat světlý či tmavý",
+    "description": "Zvolte, zda má Kusema sledovat motiv systému, nebo zůstat světlý či tmavý",
     "options": {
       "system": "Systém",
       "light": "Světlý",
@@ -1371,44 +1383,48 @@
     "transcribing": "Přepisuji...",
     "processing": "Zpracovávám...",
     "loadingModel": "Načítání modelu...",
-    "speaking": "Speaking...",
+    "speaking": "Mluvím...",
     "dictation": {
-      "dictating": "Dictating",
-      "paused": "Paused, window changed",
-      "noTarget": "Click where the text should go",
-      "finishing": "Finishing...",
-      "stop": "Stop",
-      "nothingToScratch": "Nothing to scratch",
-      "scratchWindowChanged": "Can't scratch: the window changed",
-      "scratchOtherInput": "Can't scratch: keyboard or mouse used",
-      "savedToHistory": "Said while paused: saved in History",
-      "stoppedSilence": "Stopped after silence",
-      "microphoneLost": "Stopped: microphone lost",
-      "cantKeepUp": "Stopped: this computer couldn't keep up",
-      "transcriptionFailed": "Couldn't transcribe that",
-      "pasteFailed": "Couldn't type that; it's in History"
+      "dictating": "Diktování",
+      "paused": "Pozastaveno, změna okna",
+      "noTarget": "Klikněte tam, kam má jít text",
+      "finishing": "Dokončuji...",
+      "stop": "Zastavit",
+      "nothingToScratch": "Není co smazat",
+      "scratchWindowChanged": "Nelze smazat: okno se změnilo",
+      "scratchOtherInput": "Nelze smazat: byla použita klávesnice nebo myš",
+      "savedToHistory": "Řečeno během pauzy: uloženo do Historie",
+      "stoppedSilence": "Ukončeno po tichu",
+      "microphoneLost": "Ukončeno: mikrofon odpojen",
+      "cantKeepUp": "Ukončeno: tento počítač nestíhal",
+      "transcriptionFailed": "Nepodařilo se to přepsat",
+      "pasteFailed": "Nepodařilo se to napsat; je to v Historii"
     },
     "privileged": "Privileged"
   },
   "screenCard": {
-    "title": "Send this screenshot?",
-    "autoCancel": "Cancels in {{seconds}} s",
-    "enlarge": "Click to enlarge",
-    "shrink": "Click to make smaller",
-    "imageAlt": "Screenshot of the window you asked about",
+    "title": "Odeslat tento snímek obrazovky?",
+    "autoCancel": "Zruší se za {{seconds}} s",
+    "enlarge": "Klikněte pro zvětšení",
+    "shrink": "Klikněte pro zmenšení",
+    "imageAlt": "Snímek okna, na které jste se ptali",
     "question": "“{{question}}”",
-    "sendsTo": "Goes to {{provider}} · {{model}}",
-    "onlyThis": "Only this window. Nothing is sent until you press Send.",
-    "send": "Send",
-    "cancel": "Cancel",
+    "sendsTo": "Půjde do {{provider}} · {{model}}",
+    "onlyThis": "Jen toto okno. Nic se neodešle, dokud nestisknete Odeslat.",
+    "send": "Odeslat",
+    "cancel": "Zrušit",
     "noticeTitle": "Kusema",
-    "close": "Close"
+    "close": "Zavřít"
   },
   "secureInput": {
     "blockedWithCulprit_one": "{{name}} může blokovat 1 zkratku",
     "blockedWithCulprit_other": "{{name}} může blokovat {{count}} zkratek",
+    "blockedWithCulprit_many": "{{name}} může blokovat {{count}} zkratek",
+    "blockedWithCulprit_few": "{{name}} může blokovat {{count}} zkratky",
     "blockedNoCulprit_one": "macOS dočasně blokuje 1 zkratku",
     "blockedNoCulprit_other": "macOS dočasně blokuje {{count}} zkratek",
+    "blockedNoCulprit_many": "macOS dočasně blokuje {{count}} zkratek",
+    "blockedNoCulprit_few": "macOS dočasně blokuje {{count}} zkratky",
     "recorderBlockedWithCulprit": "{{name}} může blokovat změny zkratek",
     "recorderBlockedNoCulprit": "macOS dočasně blokuje změny zkratek",
     "learnMore": "Jak to vyřešit",

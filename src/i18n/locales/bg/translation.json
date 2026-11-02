@@ -8,25 +8,25 @@
     "quit": "Изход",
     "cancel": "Отказ",
     "secureInputWarning": "⚠ Бързите клавиши са блокирани от Secure Input",
-    "privilegedMode": "Privileged Mode",
-    "privilegedOn": "Privileged mode on"
+    "privilegedMode": "Режим Privileged",
+    "privilegedOn": "Режимът Privileged е включен"
   },
   "sidebar": {
     "general": "Общи",
-    "assistant": "Assistant",
+    "assistant": "Асистент",
     "models": "Модели",
     "advanced": "Разширени",
     "postProcessing": "Постобработка",
     "history": "История",
     "debug": "Отстраняване",
     "about": "За приложението",
-    "privacy": "Privacy"
+    "privacy": "Поверителност"
   },
   "onboarding": {
     "customModelDescription": "Не се поддържа официално",
     "migration": {
       "title": "Моделите ви се нуждаят от обновяване",
-      "description": "Handy вече използва по-нов вид модели. Изтеглете новата версия, за да продължите да транскрибирате. Старите версии ще бъдат премахнати.",
+      "description": "Kusema вече използва по-нов вид модели. Изтеглете новата версия, за да продължите да транскрибирате. Старите версии ще бъдат премахнати.",
       "replaces": "Заменя {{name}}",
       "oldFormat": "Стар формат",
       "failed": "Изтеглянето е неуспешно",
@@ -63,11 +63,11 @@
     "permissions": {
       "microphone": {
         "name": "Микрофон",
-        "why": "За да може Handy да ви чува. Звукът се превръща в текст на този компютър и никога не се качва никъде."
+        "why": "За да може Kusema да ви чува. Звукът се превръща в текст на този компютър и никога не се качва никъде."
       },
       "accessibility": {
         "name": "Достъпност",
-        "why": "За да работи бързият ви клавиш във всяко приложение и Handy да въвежда текста там, където е курсорът ви."
+        "why": "За да работи бързият ви клавиш във всяко приложение и Kusema да въвежда текста там, където е курсорът ви."
       },
       "errors": {
         "checkFailed": "Проверката на разрешенията не бе успешна. Опитайте отново.",
@@ -81,12 +81,12 @@
       "openSettings": "Отвори настройките",
       "allowed": "Разрешено",
       "waiting": "Изчакване",
-      "turnOnMac": "Включете Handy в Системни настройки, после се върнете тук.",
+      "turnOnMac": "Включете Kusema в Системни настройки, после се върнете тук.",
       "turnOnWindows": "Включете достъпа до микрофона в Настройки на Windows, после се върнете тук.",
       "hintBoth": "Разрешете и двете, за да продължите",
       "hintMicrophone": "Разрешете микрофона, за да продължите",
       "welcomeBack": "Добре дошли отново. Продължаваме от където спряхте.",
-      "relaunch": "Бързият клавиш не реагира след това? <relaunch>Рестартирайте Handy</relaunch> и ще се озовете точно тук."
+      "relaunch": "Бързият клавиш не реагира след това? <relaunch>Рестартирайте Kusema</relaunch> и ще се озовете точно тук."
     },
     "shell": {
       "back": "Назад",
@@ -97,11 +97,11 @@
       "title": "Говорете вместо да пишете, във всяко приложение",
       "subtitle": "Изберете езиците, на които ще диктувате",
       "languagesLabel": "Езици",
-      "noMatch": "Няма език, който съвпада с „{{query}}“. Моделите на Handy покриват около 100 езика; още има в настройките.",
+      "noMatch": "Няма език, който съвпада с „{{query}}“. Моделите на Kusema покриват около 100 езика; още има в настройките.",
       "appLanguage": "Език на приложението",
       "menusIn": "Менюта на <b>{{language}}</b>",
       "chinese": {
-        "question": "Говорите {{languages}}. Кои йероглифи да пише Handy?",
+        "question": "Говорите {{languages}}. Кои йероглифи да пише Kusema?",
         "label": "Китайски йероглифи",
         "zh-Hans": "Опростени",
         "zh-Hant": "Тайван",
@@ -171,7 +171,7 @@
     },
     "try": {
       "title": "Пробвайте!",
-      "subtitle": "Handy е в ъгъла, за да ви води стъпка по стъпка",
+      "subtitle": "Kusema е в ъгъла, за да ви води стъпка по стъпка",
       "noteLabel": "Бележка",
       "placeholder": "Нова бележка",
       "hold": "Задръжте <keys/> и говорете.",
@@ -199,14 +199,14 @@
     },
     "done": {
       "title": "Всичко е готово",
-      "subMac": "Handy вече е в лентата с менюта. Задръжте или натиснете <keys/> във всяко приложение, за да говорите.",
-      "subTray": "Handy вече е в системната област. Задръжте или натиснете <keys/> във всяко приложение, за да говорите.",
+      "subMac": "Kusema вече е в лентата с менюта. Задръжте или натиснете <keys/> във всяко приложение, за да говорите.",
+      "subTray": "Kusema вече е в системната област. Задръжте или натиснете <keys/> във всяко приложение, за да говорите.",
       "hint": "Можете да промените това по-късно в Настройки",
       "highFiveLabel": "Дай пет",
-      "atLogin": "Стартирай Handy при влизане в системата",
+      "atLogin": "Стартирай Kusema при влизане в системата",
       "finish": "Готово",
       "panel": {
-        "name": "Handy",
+        "name": "Kusema",
         "ready": "Готов",
         "languages": "Езици",
         "model": "Модел за реч",
@@ -220,79 +220,79 @@
       "done": "Не работи в други приложения? <guide>Ръководство за настройка на Linux</guide>"
     },
     "setup": {
-      "retryDownload": "Try again",
+      "retryDownload": "Опитайте отново",
       "welcome": {
-        "title": "Kusema turns your voice into text on this computer.",
-        "privacy": "Your voice never leaves it.",
-        "language": "Language you'll dictate in"
+        "title": "Kusema превръща гласа ви в текст на този компютър.",
+        "privacy": "Гласът ви никога не го напуска.",
+        "language": "Език, на който ще диктувате"
       },
       "microphone": {
-        "title": "Choose your microphone",
-        "sub": "Say something. The bar should move as you speak.",
-        "label": "Microphone",
-        "meter": "Microphone level",
-        "heard": "Kusema can hear you.",
-        "quiet": "No sound yet. Check that this microphone isn't muted, or choose another one.",
-        "failed": "Kusema couldn't open this microphone. Choose another one.",
-        "tip": "Tip: a headset gives the best accuracy and fewer stray words."
+        "title": "Изберете микрофон",
+        "sub": "Кажете нещо. Лентата трябва да се движи, докато говорите.",
+        "label": "Микрофон",
+        "meter": "Ниво на микрофона",
+        "heard": "Kusema ви чува.",
+        "quiet": "Все още няма звук. Проверете дали микрофонът не е заглушен или изберете друг.",
+        "failed": "Kusema не успя да отвори този микрофон. Изберете друг.",
+        "tip": "Съвет: със слушалки с микрофон разпознаването е най-точно и има по-малко излишни думи."
       },
       "practice": {
-        "title": "Dictate your first sentence",
-        "how": "Hold <keys/>, say this sentence, then let go:",
+        "title": "Продиктувайте първото си изречение",
+        "how": "Задръжте <keys/>, кажете това изречение и пуснете:",
         "sentence": "Dear Mr. Smith comma thank you for your letter period",
-        "box": "Practice box: your words appear here",
-        "placeholder": "Your words appear here",
-        "listening": "Listening...",
-        "typing": "Typing...",
-        "success": "That's it. Saying \"comma\" and \"period\" types the marks.",
-        "waiting": "Your speech model is still downloading. This box will work as soon as it's ready.",
-        "continuous": "For longer dictation, press <keys/> to keep listening until you press it again. Used to Dragon? You can set this to Numpad + under General.",
-        "continuousRunning": "Continuous dictation is on. Your words appear in the box each time you pause. Press {{stop}} to stop it.",
-        "continuousEnded": "That's continuous dictation. In your other apps, your words are typed at the cursor."
+        "box": "Поле за упражнение: тук ще се появят думите ви",
+        "placeholder": "Тук ще се появят думите ви",
+        "listening": "Слуша...",
+        "typing": "Пише...",
+        "success": "Точно така. Ако кажете \"comma\" и \"period\", се поставят знаците.",
+        "waiting": "Речевият ви модел още се изтегля. Полето ще заработи веднага щом е готов.",
+        "continuous": "За по-дълго диктуване натиснете <keys/> и Kusema ще слуша, докато не натиснете отново. Свикнали сте с Dragon? В „Общи“ можете да изберете Num +.",
+        "continuousRunning": "Непрекъснатото диктуване е включено. Думите ви се появяват в полето при всяка пауза. Натиснете {{stop}}, за да спрете.",
+        "continuousEnded": "Това е непрекъснато диктуване. В другите ви приложения думите се въвеждат там, където е курсорът."
       },
       "assistant": {
-        "title": "Set up the AI assistant (optional)",
-        "sub": "Ask Kusema answers questions you speak. Dictation doesn't need it.",
-        "model": "Model",
-        "continueWithout": "Continue without AI",
-        "privileged": "Privileged mode blocks all cloud AI with one switch, for matters that must stay on this computer.",
+        "title": "Настройте ИИ асистента (по желание)",
+        "sub": "„Попитай Kusema“ отговаря на въпроси, които задавате на глас. За диктуване не е нужен.",
+        "model": "Модел",
+        "continueWithout": "Продължаване без ИИ",
+        "privileged": "Режимът Privileged спира всеки облачен ИИ с един превключвател, за въпроси, които трябва да останат на този компютър.",
         "local": {
-          "title": "Private: use a local AI on this computer",
-          "description": "Your questions stay here. Uses Ollama, a free app.",
-          "checking": "Looking for Ollama on this computer...",
-          "found": "Found Ollama. Choose a model to use.",
-          "notFound": "Ollama isn't running on this computer.",
-          "noModels": "Ollama is running, but has no models yet. Run \"ollama pull llama3.2\", then check again.",
-          "instructions": "How to set up Ollama",
-          "again": "Check again"
+          "title": "Поверително: локален ИИ на този компютър",
+          "description": "Въпросите ви остават тук. Използва Ollama, безплатно приложение.",
+          "checking": "Търся Ollama на този компютър...",
+          "found": "Ollama е намерен. Изберете модел.",
+          "notFound": "Ollama не работи на този компютър.",
+          "noModels": "Ollama работи, но още няма модели. Изпълнете \"ollama pull llama3.2\" и проверете отново.",
+          "instructions": "Как да инсталирате Ollama",
+          "again": "Проверка отново"
         },
         "cloud": {
-          "title": "Use a cloud AI provider",
-          "description": "Your questions go to the provider you choose, using your own API key.",
-          "provider": "Provider",
-          "key": "API key",
-          "check": "Save and check",
-          "checking": "Checking the key...",
-          "saved": "Key saved in Windows Credential Manager. Choose a model to use.",
-          "where": "The key is stored in Windows Credential Manager, not in a file.",
-          "keyFailed": "The key was saved, but the provider didn't list any models. Check the key and try again."
+          "title": "Облачен доставчик на ИИ",
+          "description": "Въпросите ви отиват при избрания от вас доставчик, с вашия собствен API ключ.",
+          "provider": "Доставчик",
+          "key": "API ключ",
+          "check": "Запазване и проверка",
+          "checking": "Проверка на ключа...",
+          "saved": "Ключът е запазен в Диспечера на идентификационни данни на Windows. Изберете модел.",
+          "where": "Ключът се пази в Диспечера на идентификационни данни на Windows, а не във файл.",
+          "keyFailed": "Ключът е запазен, но доставчикът не показа модели. Проверете ключа и опитайте отново."
         },
         "skip": {
-          "title": "Skip for now",
-          "description": "You can set this up later on the Assistant page."
+          "title": "Пропускане засега",
+          "description": "Можете да го настроите по-късно на страницата „Асистент“."
         }
       },
       "done": {
-        "title": "You're all set",
-        "sub": "Kusema keeps running in the system tray and works in any app.",
-        "finish": "Start using Kusema",
-        "wins": "Your first three wins are waiting on the main page.",
-        "atLogin": "Start Kusema when I sign in",
+        "title": "Всичко е готово",
+        "sub": "Kusema продължава да работи в системната област и работи във всяко приложение.",
+        "finish": "Започнете да използвате Kusema",
+        "wins": "Първите ви три успеха ви чакат на главната страница.",
+        "atLogin": "Стартиране на Kusema при влизане",
         "keys": {
-          "dictate": "Dictate: hold",
-          "continuous": "Continuous dictation: press to start and stop",
-          "ask": "Ask Kusema",
-          "askScreen": "Ask about my screen"
+          "dictate": "Диктуване: задръжте",
+          "continuous": "Непрекъснато диктуване: натиснете за старт и стоп",
+          "ask": "Попитай Kusema",
+          "askScreen": "Попитай за екрана ми"
         }
       }
     }
@@ -408,7 +408,7 @@
     "general": {
       "title": "Общи",
       "shortcut": {
-        "title": "Бързи клавиши на Handy",
+        "title": "Бързи клавиши на Kusema",
         "description": "Настройте клавишни комбинации за стартиране на запис за реч към текст",
         "loading": "Зареждане на бързите клавиши...",
         "none": "Няма настроени бързи клавиши",
@@ -428,20 +428,20 @@
             "description": "По избор: отделна комбинация, която винаги прилага ИИ постобработка върху транскрипцията."
           },
           "assistant": {
-            "name": "Ask Kusema",
-            "description": "Hold or press to ask a spoken question. The reply appears below instead of being pasted."
+            "name": "Попитай Kusema",
+            "description": "Задръжте или натиснете, за да зададете въпрос на глас. Отговорът се появява отдолу, вместо да се постави."
           },
           "assistant_screen": {
-            "name": "Ask About My Screen",
-            "description": "Hold or press to ask a spoken question about the window you're working in. You see the screenshot before anything is sent."
+            "name": "Попитай за екрана ми",
+            "description": "Задръжте или натиснете, за да зададете въпрос на глас за прозореца, в който работите. Виждате екранната снимка, преди да се изпрати каквото и да е."
           },
           "dictate_continuous": {
-            "name": "Continuous Dictation",
-            "description": "Press to start dictating hands-free, and press again to stop. Text appears each time you pause."
+            "name": "Непрекъснато диктуване",
+            "description": "Натиснете, за да диктувате без ръце, и натиснете отново, за да спрете. Текстът се появява при всяка пауза."
           },
           "toggle_privileged": {
-            "name": "Privileged Mode",
-            "description": "Press to turn Privileged mode on or off."
+            "name": "Режим Privileged",
+            "description": "Натиснете, за да включите или изключите режима Privileged."
           }
         },
         "errors": {
@@ -466,7 +466,7 @@
       },
       "preferredLanguages": {
         "title": "Предпочитани езици",
-        "description": "Езиците, на които говорите. Handy ги използва, за да препоръчва модели.",
+        "description": "Езиците, на които говорите. Kusema ги използва, за да препоръчва модели.",
         "noMatch": "Няма език, който съвпада с „{{query}}“",
         "weak": "Все още няма модел, който разпознава добре {{languages}}."
       },
@@ -493,17 +493,17 @@
         "fits": "За вашите езици",
         "untested": "Нетествани"
       },
-      "untestedNote": "Не са тествани с Handy. Може да са по-бавни или да правят повече грешки.",
+      "untestedNote": "Не са тествани с Kusema. Може да са по-бавни или да правят повече грешки.",
       "untestedHidden_one": "{{count}} друг модел не е пригоден за диктуване. Потърсете, за да го намерите.",
       "untestedHidden_other": "{{count}} други модела не са пригодени за диктуване. Потърсете, за да намерите някой.",
-      "emptyYours": "Още няма модели. Изберете един по-долу: изтегля се и Handy го използва.",
+      "emptyYours": "Още няма модели. Изберете един по-долу: изтегля се и Kusema го използва.",
       "showMore": "Покажи още {{count}}",
       "showFewer": "Покажи по-малко",
       "download": "Изтегли и използвай",
       "downloadingThenUse": "{{percent}}% от {{total}}, после превключва",
       "loading": "Зареждане…",
       "deleteAsk": "Да се изтрие ли {{name}}? Освобождава {{size}}.",
-      "deleteAskActive": "Да се изтрие ли {{name}}? Handy не може да транскрибира, докато не изберете друг.",
+      "deleteAskActive": "Да се изтрие ли {{name}}? Kusema не може да транскрибира, докато не изберете друг.",
       "cancel": "Отказ",
       "deleteModel": "Изтрий {{name}}",
       "cancelDownload": "Спри изтеглянето на {{name}}",
@@ -517,7 +517,7 @@
         "marks": "? още не е измерено. — не разбира този език."
       },
       "retiredNotice": {
-        "title": "Старите модели вече не работят с Handy",
+        "title": "Старите модели вече не работят с Kusema",
         "description": "Заемат {{size}} на компютъра ви.",
         "delete": "Изтрий моделите",
         "deleted": "Старите модели са изтрити",
@@ -525,37 +525,37 @@
       },
       "rescan": {
         "label": "Сканиране отново",
-        "tooltip": "Сканиране отново за модели, добавени в папката с модели или кеша на Hugging Face извън Handy"
+        "tooltip": "Сканиране отново за модели, добавени в папката с модели или кеша на Hugging Face извън Kusema"
       },
       "curated": {
-        "inUse": "In use",
-        "gettingReady": "Getting ready...",
-        "downloading": "Downloading: {{percent}}%",
-        "cancel": "Cancel",
-        "cancelLabel": "Cancel downloading {{name}}",
-        "use": "Use",
-        "useLabel": "Use {{name}}",
-        "download": "Download ({{size}})",
-        "downloadLabel": "Download {{name}}",
-        "recommended": "Recommended",
-        "others": "Also on this computer",
-        "showAllHint": "More models are available: turn on Show all models under Advanced.",
+        "inUse": "Използва се",
+        "gettingReady": "Подготовка...",
+        "downloading": "Изтегляне: {{percent}}%",
+        "cancel": "Отказ",
+        "cancelLabel": "Отказ от изтеглянето на {{name}}",
+        "use": "Използване",
+        "useLabel": "Използване на {{name}}",
+        "download": "Изтегляне ({{size}})",
+        "downloadLabel": "Изтегляне на {{name}}",
+        "recommended": "Препоръчва се",
+        "others": "Също на този компютър",
+        "showAllHint": "Има още модели: включете „Показване на всички модели“ в „Разширени“.",
         "rows": {
           "parakeetUnified": {
             "name": "Parakeet Unified English",
-            "description": "The best choice for English. Chosen automatically."
+            "description": "Най-добрият избор за английски. Избира се автоматично."
           },
           "parakeetV3": {
             "name": "Parakeet TDT v3",
-            "description": "For dictating in other languages, including Spanish, French and German."
+            "description": "За диктуване на други езици, включително испански, френски и немски."
           },
           "canary": {
             "name": "Canary 180M Flash",
-            "description": "A small download, for older computers or when disk space is low."
+            "description": "Малко изтегляне, за по-стари компютри или при малко място на диска."
           },
           "nemotron": {
             "name": "Nemotron 3.5 Streaming",
-            "description": "Shows live text as you speak, but makes more mistakes."
+            "description": "Показва текста на живо, докато говорите, но греши повече."
           }
         }
       }
@@ -564,26 +564,26 @@
       "title": "Езици"
     },
     "dictation": {
-      "title": "Continuous Dictation",
-      "description": "Keep talking, and the text is typed into your window each time you pause. Speech recognition stays on this computer, and AI cleanup never runs in this mode.",
+      "title": "Непрекъснато диктуване",
+      "description": "Продължавайте да говорите и текстът се въвежда в прозореца ви при всяка пауза. Разпознаването на реч остава на този компютър, а изчистването с ИИ никога не работи в този режим.",
       "dragonKey": {
-        "title": "Dragon's Key",
-        "description": "Use Numpad + to start and stop, as Dragon does. While it's set, that key no longer types a plus sign.",
-        "button": "Use Dragon's key (Numpad +)"
+        "title": "Клавиш на Dragon",
+        "description": "Използвайте Num + за старт и стоп, както в Dragon. Докато е зададено, този клавиш вече не въвежда знак плюс.",
+        "button": "Използване на клавиша на Dragon (Num +)"
       },
       "pause": {
-        "title": "Pause Length",
-        "description": "How long you pause before what you said is typed. Longer pauses keep sentences together; shorter ones show text sooner.",
+        "title": "Дължина на паузата",
+        "description": "Колко дълго правите пауза, преди казаното да се въведе. По-дългите паузи държат изреченията заедно, по-кратките показват текста по-рано.",
         "seconds": "{{seconds}} s"
       },
       "autoStop": {
-        "title": "Stop After Silence",
-        "description": "Dictation stops by itself after this long without speech, so the microphone is never left on by accident.",
-        "minutes": "{{minutes}} min"
+        "title": "Спиране след тишина",
+        "description": "Диктуването спира само след толкова време без реч, за да не остане микрофонът включен по погрешка.",
+        "minutes": "{{minutes}} мин"
       },
       "voiceCommands": {
-        "label": "Voice Commands",
-        "description": "Say \"new paragraph\" or \"new line\" as you talk, or \"scratch that\" or \"stop dictation\" on its own between pauses, and it acts instead of being typed. Normal sentences with these words are typed as usual."
+        "label": "Гласови команди",
+        "description": "Кажете \"new paragraph\" или \"new line\", докато говорите, или \"scratch that\" или \"stop dictation\" самостоятелно между паузите, и командата се изпълнява, вместо да се въведе. Обикновените изречения с тези думи се въвеждат както обикновено."
       }
     },
     "sound": {
@@ -646,11 +646,11 @@
       },
       "autostart": {
         "label": "Стартиране със системата",
-        "description": "Автоматично стартиране на Handy при влизане в профила ви."
+        "description": "Автоматично стартиране на Kusema при влизане в профила ви."
       },
       "showTrayIcon": {
         "label": "Икона в системната област",
-        "description": "Показване на иконата на Handy в системната област."
+        "description": "Показване на иконата на Kusema в системната област."
       },
       "overlay": {
         "style": {
@@ -773,90 +773,90 @@
         }
       },
       "showAllModels": {
-        "label": "Show all models",
-        "description": "List every model on the Models page, with accuracy and speed details, instead of the short list."
+        "label": "Показване на всички модели",
+        "description": "Показва всеки модел на страницата „Модели“ с данни за точност и скорост вместо краткия списък."
       }
     },
     "assistant": {
-      "title": "Assistant",
-      "description": "Hold the shortcut, ask a question out loud, and Kusema answers.",
+      "title": "Асистент",
+      "description": "Задръжте клавишната комбинация, задайте въпрос на глас и Kusema отговаря.",
       "provider": {
-        "title": "AI Provider",
-        "provider": "Provider",
-        "description": "Assistant mode uses the same provider and API key as Post Process.",
-        "model": "Model",
-        "modelDescription": "The model that answers your questions. Change it on the Post Process page.",
-        "notSet": "Not chosen",
-        "open": "Open Post Process settings",
-        "disabled": "Assistant mode needs an AI provider (such as Anthropic, OpenAI or a local Ollama model) to answer questions. Providers are set up on the Post Process page, which appears once Post Processing is turned on. Turning it on doesn't change how normal dictation works.",
-        "enable": "Turn on Post Processing",
-        "noProvider": "Choose a provider on the Post Process page.",
-        "noKey": "No API key is set for {{provider}}. Add one on the Post Process page.",
-        "noModel": "Choose a model on the Post Process page."
+        "title": "Доставчик на ИИ",
+        "provider": "Доставчик",
+        "description": "Асистентът използва същия доставчик и API ключ като постобработката.",
+        "model": "Модел",
+        "modelDescription": "Моделът, който отговаря на въпросите ви. Сменете го на страницата „Постобработка“.",
+        "notSet": "Не е избран",
+        "open": "Отваряне на настройките на постобработката",
+        "disabled": "Асистентът се нуждае от доставчик на ИИ (например Anthropic, OpenAI или локален модел на Ollama), за да отговаря. Доставчиците се настройват на страницата „Постобработка“, която се появява, когато постобработката е включена. Включването ѝ не променя обикновеното диктуване.",
+        "enable": "Включване на постобработката",
+        "noProvider": "Изберете доставчик на страницата „Постобработка“.",
+        "noKey": "Няма API ключ за {{provider}}. Добавете такъв на страницата „Постобработка“.",
+        "noModel": "Изберете модел на страницата „Постобработка“."
       },
       "screen": {
-        "title": "Ask About My Screen",
-        "description": "Ask about the window you're working in, like “What do you think of this document?” Only that window is captured, and it stays on this computer until you press Send.",
+        "title": "Попитай за екрана ми",
+        "description": "Попитайте за прозореца, в който работите, например „Какво мислиш за този документ?“ Заснема се само този прозорец и той остава на този компютър, докато не натиснете „Изпрати“.",
         "confirm": {
-          "label": "Confirm Before Sending Screenshots",
-          "description": "Show the screenshot, your question and where it will go, then wait for Send (Enter) or Cancel (Escape). Unanswered, it cancels after 30 seconds.",
-          "offWarning": "Screenshots will be sent to {{provider}} as soon as you finish speaking, without showing you first. Everything visible in the window goes with them, including private or confidential information."
+          "label": "Потвърждение преди изпращане на екранни снимки",
+          "description": "Показва снимката, въпроса ви и къде ще отиде, след което чака „Изпрати“ (Enter) или „Отказ“ (Esc). Без отговор се отказва след 30 секунди.",
+          "offWarning": "Екранните снимки ще се изпращат до {{provider}} веднага щом спрете да говорите, без да ви се показват първо. С тях отива всичко видимо в прозореца, включително лична или поверителна информация."
         },
         "provider": {
-          "label": "Use for Screen Questions",
-          "description": "Send screenshots to a different provider than normal questions, for example a local vision model in Ollama (the Custom provider) for confidential documents. Follow-up questions go to the same provider until you start a new conversation.",
-          "same": "Same as Assistant",
-          "sameNamed": "Same as Assistant ({{provider}})",
-          "yourProvider": "your AI provider"
+          "label": "Използване за въпроси за екрана",
+          "description": "Изпращайте екранните снимки до различен доставчик от обикновените въпроси, например локален модел за изображения в Ollama (доставчикът „Персонализиран“) за поверителни документи. Последващите въпроси отиват при същия доставчик, докато не започнете нов разговор.",
+          "same": "Като при асистента",
+          "sameNamed": "Като при асистента ({{provider}})",
+          "yourProvider": "вашия доставчик на ИИ"
         },
         "model": {
-          "label": "Model for Screen Questions",
-          "description": "A model that can see images. Leave empty to use the model chosen for this provider on the Post Process page.",
-          "placeholder": "e.g. qwen2.5vl"
+          "label": "Модел за въпроси за екрана",
+          "description": "Модел, който може да вижда изображения. Оставете празно, за да се използва моделът, избран за този доставчик на страницата „Постобработка“.",
+          "placeholder": "напр. qwen2.5vl"
         }
       },
       "conversation": {
-        "empty": "Ask a question with the Ask Kusema shortcut. The conversation will appear here.",
-        "new": "New conversation",
-        "screenshot": "Screenshot",
-        "noProvider": "Ask Kusema needs an AI model to answer. Choose one in Settings.",
-        "openSettings": "Open Settings"
+        "empty": "Задайте въпрос с клавишната комбинация „Попитай Kusema“. Разговорът ще се появи тук.",
+        "new": "Нов разговор",
+        "screenshot": "Екранна снимка",
+        "noProvider": "„Попитай Kusema“ се нуждае от ИИ модел, за да отговаря. Изберете такъв в „Настройки“.",
+        "openSettings": "Отваряне на настройките"
       },
       "voice": {
-        "title": "Voice",
-        "systemDefault": "System default",
-        "previewText": "Hi, I'm Kusema. This is how I'll sound when I answer your questions.",
+        "title": "Глас",
+        "systemDefault": "Системен по подразбиране",
+        "previewText": "Здравейте, аз съм Kusema. Така ще звуча, когато отговарям на въпросите ви.",
         "speakReplies": {
-          "label": "Speak Replies",
-          "description": "Read replies aloud as they arrive. Press Cancel (Escape), start a new recording, or start a new conversation to stop."
+          "label": "Четене на отговорите",
+          "description": "Чете отговорите на глас веднага щом пристигнат. За да спрете, натиснете „Отказ“ (Esc), започнете нов запис или нов разговор."
         },
         "voice": {
-          "label": "Voice",
-          "description": "Kokoro voices sound the most natural; download them above. The other voices come with your computer (on Windows, add more under Settings > Time & language > Speech)."
+          "label": "Глас",
+          "description": "Гласовете Kokoro звучат най-естествено; изтеглете ги по-горе. Другите гласове идват с компютъра (в Windows добавете още в Настройки > Час и език > Говор)."
         },
         "kokoro": {
-          "label": "Kokoro Voices",
-          "description": "28 natural-sounding English voices (US and UK) generated on this computer. A one-time download.",
-          "installed": "Installed. Pick a Kokoro voice below. Removing them frees the disk space; replies then use the system voice.",
-          "download": "Download ({{size}} MB)",
-          "downloading": "Downloading… {{percentage}}%",
-          "cancel": "Cancel",
-          "delete": "Remove"
+          "label": "Гласове Kokoro",
+          "description": "28 естествено звучащи английски гласа (САЩ и Великобритания), създавани на този компютър. Еднократно изтегляне.",
+          "installed": "Инсталирани. Изберете глас Kokoro по-долу. Премахването им освобождава място на диска; тогава отговорите използват системния глас.",
+          "download": "Изтегляне ({{size}} MB)",
+          "downloading": "Изтегляне… {{percentage}}%",
+          "cancel": "Отказ",
+          "delete": "Премахване"
         },
         "rate": {
-          "label": "Speaking Rate",
-          "description": "How fast replies are read. 1.00× is the voice's normal speed."
+          "label": "Скорост на говорене",
+          "description": "Колко бързо се четат отговорите. 1,00× е нормалната скорост на гласа."
         },
         "preview": {
-          "label": "Preview Voice",
-          "description": "Hear the selected voice at the selected speed.",
-          "button": "Preview"
+          "label": "Прослушване на гласа",
+          "description": "Чуйте избрания глас с избраната скорост.",
+          "button": "Прослушване"
         }
       },
       "tabs": {
-        "label": "Assistant",
-        "conversation": "Conversation",
-        "settings": "Settings"
+        "label": "Асистент",
+        "conversation": "Разговор",
+        "settings": "Настройки"
       }
     },
     "postProcessing": {
@@ -973,7 +973,7 @@
       },
       "updateChecks": {
         "label": "Проверка за актуализации",
-        "description": "Автоматична проверка за нови версии на Handy",
+        "description": "Автоматична проверка за нови версии на Kusema",
         "lockedDescription": "Деактивирано от системната конфигурация (HANDY_DISABLE_UPDATER)"
       },
       "whatsNewPreview": {
@@ -992,9 +992,9 @@
           "welcome": "Добре дошли",
           "permissions": "Разрешения",
           "done": "Готово",
-          "microphone": "Microphone",
-          "practice": "Practice",
-          "assistant": "AI assistant"
+          "microphone": "Микрофон",
+          "practice": "Упражнение",
+          "assistant": "ИИ асистент"
         }
       },
       "onboardingRun": {
@@ -1040,8 +1040,8 @@
         "description": "Микрофон за използване, когато капакът на лаптопа е затворен"
       },
       "postProcessingToggle": {
-        "label": "AI Cleanup",
-        "description": "Optional. Rewrites dictated text with an AI model when you use the AI cleanup shortcut: fixes self-corrections and grammar, keeps your meaning, and never adds facts."
+        "label": "Изчистване с ИИ",
+        "description": "По желание. Пренаписва диктувания текст с ИИ модел, когато използвате клавишната комбинация за изчистване с ИИ: поправя самопоправки и граматика, запазва смисъла и никога не добавя факти."
       },
       "muteWhileRecording": {
         "label": "Заглушаване при запис",
@@ -1057,7 +1057,7 @@
         "bindingsReset": "Бързите клавиши бяха несъвместими и са нулирани към подразбираните",
         "options": {
           "tauri": "Tauri Global Shortcut",
-          "builtIn": "Built-in (recommended)"
+          "builtIn": "Вграден (препоръчва се)"
         }
       },
       "pasteDelay": {
@@ -1086,7 +1086,7 @@
       },
       "keyboardDiagnostic": {
         "title": "Диагностика на клавиатурата",
-        "description": "Проверява дали клавиатурните събития достигат до Handy. Записва се само броят на събитията — никога кои клавиши натискате.",
+        "description": "Проверява дали клавиатурните събития достигат до Kusema. Записва се само броят на събитията — никога кои клавиши натискате.",
         "run": "Стартиране на 10-секундна диагностика",
         "running": "Слушане… натиснете бързия си клавиш няколко пъти (напр. Option+Space)",
         "secureInputLabel": "Secure Input",
@@ -1100,7 +1100,7 @@
         "mouse": "Мишка",
         "verdictBlocked": "Secure Input блокира клавишните събития — бързите клавиши с обикновен клавиш не могат да работят, докато това не бъде решено.",
         "verdictSuspicious": "Пристигнаха събития от модификатори, но нито едно клавишно събитие — нещо потиска клавишите, въпреки че Secure Input се отчита като изключен. Моля, съобщете за това в GitHub.",
-        "verdictOk": "Клавишните събития достигат до Handy нормално.",
+        "verdictOk": "Клавишните събития достигат до Kusema нормално.",
         "verdictNoEvents": "Не са уловени събития — натиснахте ли някакви клавиши по време на теста?",
         "failed": "Диагностиката е неуспешна: {{error}}"
       }
@@ -1109,203 +1109,203 @@
       "title": "За приложението",
       "version": {
         "title": "Версия",
-        "description": "Текуща версия на Handy"
+        "description": "Текуща версия на Kusema"
       },
       "whatsNewUpdates": {
         "label": "Показвай новостите",
-        "description": "Показвай бележки към изданието след актуализации на Handy"
+        "description": "Показвай бележки към изданието след актуализации на Kusema"
       },
       "appDataDirectory": {
         "title": "Папка с данни на приложението",
-        "description": "Мястото, където Handy съхранява данните си"
+        "description": "Мястото, където Kusema съхранява данните си"
       },
       "sourceCode": {
         "title": "Изходен код",
-        "description": "View Kusema's source code",
+        "description": "Преглед на изходния код на Kusema",
         "button": "Вижте в GitHub"
       },
       "acknowledgments": {
         "ggml": {
           "title": "ggml",
           "description": "Високопроизводително изпълнение на автоматичния модел за разпознаване на реч Whisper на OpenAI",
-          "details": "Handy използва ggml за бързо локално реч-към-текст. Благодарности на Georgi Gerganov и сътрудниците за отличната работа."
+          "details": "Kusema използва ggml за бързо локално реч-към-текст. Благодарности на Georgi Gerganov и сътрудниците за отличната работа."
         }
       },
       "organizations": {
-        "title": "Kusema for organizations",
-        "description": "Setup, support and options for firms",
-        "button": "Learn more"
+        "title": "Kusema за организации",
+        "description": "Внедряване, поддръжка и възможности за кантори",
+        "button": "Научете повече"
       },
       "report": {
-        "title": "Report a problem or suggest a feature",
-        "description": "Tell us on GitHub what went wrong or what you'd like",
-        "button": "Open GitHub"
+        "title": "Съобщете за проблем или предложете функция",
+        "description": "Кажете ни в GitHub какво се обърка или какво бихте искали",
+        "button": "Отваряне на GitHub"
       },
       "credits": {
-        "title": "Credits and licenses",
+        "title": "Благодарности и лицензи",
         "handy": {
-          "title": "Built on Handy",
-          "description": "Kusema is built on Handy by CJ Pais, used under the MIT License.",
-          "button": "View Handy"
+          "title": "Изграден върху Handy",
+          "description": "Kusema е изграден върху Handy от CJ Pais и се използва под лиценза MIT.",
+          "button": "Преглед на Handy"
         },
         "nvidiaLicense": "NVIDIA Open Model License",
-        "models": "Speech and voice models ({{count}})",
-        "components": "Open-source components ({{count}})",
-        "notices": "Full license texts",
-        "loading": "Loading..."
+        "models": "Модели за реч и глас ({{count}})",
+        "components": "Компоненти с отворен код ({{count}})",
+        "notices": "Пълни текстове на лицензите",
+        "loading": "Зареждане..."
       }
     },
     "privacy": {
-      "thisComputer": "This computer ({{host}})",
-      "nothingSent": "Nothing to show yet.",
-      "updateBlocked": "Update checks are blocked in Privileged mode.",
+      "thisComputer": "Този компютър ({{host}})",
+      "nothingSent": "Все още няма нищо за показване.",
+      "updateBlocked": "Проверките за актуализации са блокирани в режим Privileged.",
       "audio": {
-        "title": "Audio sent off this computer: 0 bytes",
-        "description": "Speech recognition runs on this computer, and nothing in Kusema can upload your voice. Only the text of what you say, and only for features you choose, ever goes to an AI provider."
+        "title": "Аудио, изпратено от този компютър: 0 байта",
+        "description": "Разпознаването на реч работи на този компютър и нищо в Kusema не може да качи гласа ви. До доставчик на ИИ отива само текстът на казаното и само за функциите, които изберете."
       },
       "privileged": {
-        "title": "Privileged Mode",
-        "description": "For confidential matters. While it's on, nothing you say, type or show goes to a cloud AI service. Ask Kusema and AI cleanup only work with a model running on this computer.",
+        "title": "Режим Privileged",
+        "description": "За поверителни въпроси. Докато е включен, нищо от казаното, написаното или показаното от вас не отива към облачна ИИ услуга. „Попитай Kusema“ и изчистването с ИИ работят само с модел на този компютър.",
         "chip": "Privileged",
         "toggle": {
-          "label": "Privileged Mode",
-          "description": "Blocks every request to cloud AI providers, including ones already set up. Dictation keeps working, because it never uses the cloud."
+          "label": "Режим Privileged",
+          "description": "Блокира всяка заявка към облачни доставчици на ИИ, включително вече настроените. Диктуването продължава да работи, защото никога не използва облака."
         },
         "allowLan": {
-          "label": "Allow Local Network AI Servers",
-          "description": "Also allows AI servers on your office network, by private address (like 192.168.1.20). Models on this computer are always allowed."
+          "label": "Разрешаване на ИИ сървъри в локалната мрежа",
+          "description": "Разрешава и ИИ сървъри в мрежата на офиса по частен адрес (например 192.168.1.20). Моделите на този компютър са разрешени винаги."
         },
         "blockDownloads": {
-          "label": "Also Block Downloads and Update Checks",
-          "description": "For offline offices. Model and voice downloads and update checks carry none of your content, so they normally stay allowed and are listed below. Turn this on to stop them too while Privileged mode is on."
+          "label": "Блокиране и на изтеглянията и актуализациите",
+          "description": "За офиси без интернет. Изтеглянията на модели и гласове и проверките за актуализации не съдържат нищо от вашето съдържание, затова обикновено остават разрешени и са показани по-долу. Включете това, за да ги спрете и тях, докато режимът Privileged е включен."
         },
         "hotkey": {
-          "label": "Privileged Mode Shortcut",
-          "description": "Adds a keyboard shortcut that turns Privileged mode on or off. Off by default, so it can't be pressed by accident."
+          "label": "Клавишна комбинация за режим Privileged",
+          "description": "Добавя клавишна комбинация, която включва или изключва режима Privileged. Изключена по подразбиране, за да не се натисне случайно."
         }
       },
       "counts": {
-        "title": "Where Requests Went",
-        "today": "Today",
-        "week": "Last 7 days"
+        "title": "Накъде отидоха заявките",
+        "today": "Днес",
+        "week": "Последните 7 дни"
       },
       "columns": {
-        "time": "Time",
-        "destination": "Destination",
-        "purpose": "Why",
-        "data": "Data",
-        "size": "Size",
-        "result": "Result"
+        "time": "Час",
+        "destination": "Местоназначение",
+        "purpose": "Причина",
+        "data": "Данни",
+        "size": "Размер",
+        "result": "Резултат"
       },
       "purposes": {
-        "assistant_question": "Question to Kusema",
-        "screen_question": "Question about the screen",
-        "post_processing": "AI cleanup",
-        "provider_models": "Listing a provider's models",
-        "model_download": "Speech model download",
-        "voice_download": "Voice download",
-        "update_check": "Update check"
+        "assistant_question": "Въпрос към Kusema",
+        "screen_question": "Въпрос за екрана",
+        "post_processing": "Изчистване с ИИ",
+        "provider_models": "Списък с модели на доставчик",
+        "model_download": "Изтегляне на речев модел",
+        "voice_download": "Изтегляне на глас",
+        "update_check": "Проверка за актуализации"
       },
       "data": {
-        "text": "Text",
-        "image": "Screenshot",
-        "none": "None of yours"
+        "text": "Текст",
+        "image": "Екранна снимка",
+        "none": "Нищо ваше"
       },
       "results": {
-        "sent": "Sent",
-        "blocked": "Blocked",
-        "failed": "Failed"
+        "sent": "Изпратена",
+        "blocked": "Блокирана",
+        "failed": "Неуспешна"
       },
       "list": {
-        "title": "Every Request",
-        "description": "Each request Kusema has made: when, where, why, what kind of data and how large. What was in it is never recorded. Shows the latest 500; the export has them all.",
-        "all": "All",
-        "allPurposes": "Any reason",
-        "allResults": "Any result",
-        "allDestinations": "Any destination",
-        "anyTime": "Any time",
-        "lastDays_one": "Last {{count}} day",
-        "lastDays_other": "Last {{count}} days",
-        "export": "Export CSV",
-        "exported_one": "Exported {{count}} request.",
-        "exported_other": "Exported {{count}} requests.",
-        "clear": "Clear",
+        "title": "Всички заявки",
+        "description": "Всяка заявка на Kusema: кога, накъде, защо, какъв вид данни и колко големи. Съдържанието никога не се записва. Показва последните 500; експортът съдържа всички.",
+        "all": "Всички",
+        "allPurposes": "Всяка причина",
+        "allResults": "Всеки резултат",
+        "allDestinations": "Всяко местоназначение",
+        "anyTime": "По всяко време",
+        "lastDays_one": "Последния {{count}} ден",
+        "lastDays_other": "Последните {{count}} дни",
+        "export": "Експортиране на CSV",
+        "exported_one": "Експортирана е {{count}} заявка.",
+        "exported_other": "Експортирани са {{count}} заявки.",
+        "clear": "Изчистване",
         "retention": {
-          "title": "Keep This List For",
-          "description": "Older entries are deleted from this computer automatically.",
-          "days_one": "{{count}} day",
-          "days_other": "{{count}} days"
+          "title": "Пазене на списъка за",
+          "description": "По-старите записи се изтриват от този компютър автоматично.",
+          "days_one": "{{count}} ден",
+          "days_other": "{{count}} дни"
         }
       }
     },
     "cleanup": {
-      "title": "Cleanup",
-      "description": "Dictated text should need little editing. Local cleanup runs on this computer and sends nothing anywhere.",
+      "title": "Изчистване",
+      "description": "Диктуваният текст трябва да изисква малко редакции. Локалното изчистване работи на този компютър и не изпраща нищо.",
       "local": {
-        "label": "Local Cleanup",
-        "description": "Removes filler words, adds missing periods between phrases in continuous dictation, and handles spoken punctuation, all on this computer. Off, your words are typed as transcribed."
+        "label": "Локално изчистване",
+        "description": "Премахва думи паразити, добавя липсващи точки между изреченията при непрекъснато диктуване и обработва изговорената пунктуация, всичко на този компютър. Изключено, думите ви се въвеждат така, както са разпознати."
       },
       "spokenPunctuation": {
-        "label": "Spoken Punctuation",
-        "description": "Say \"comma\", \"period\", \"question mark\", \"colon\", \"open quote\", \"close paren\", \"dash\", \"section symbol\" and more, as in Dragon. \"Period\" only counts at the end of a phrase, so \"the limitations period expired\" stays as words. Say \"literal period\" to type the word."
+        "label": "Изговорена пунктуация",
+        "description": "Кажете \"comma\", \"period\", \"question mark\", \"colon\", \"open quote\", \"close paren\", \"dash\", \"section symbol\" и други, както в Dragon. \"Period\" се брои само в края на фраза, затова \"the limitations period expired\" остава думи. Кажете \"literal period\", за да въведете самата дума. Тези команди работят на английски."
       },
       "ai": {
         "status": {
-          "noProvider": "No AI provider is set up yet.",
-          "noKey": "{{provider}} needs an API key.",
-          "noModel": "{{provider}} needs a model chosen.",
-          "local": "Using {{model}} on this computer through {{provider}}. Nothing leaves this computer.",
-          "cloud": "Using {{model}} from {{provider}}, a cloud service. Text you clean up goes to {{provider}}.",
-          "blocked": "Privileged mode is on, so nothing will be sent to {{provider}}. Use a local model or turn off Privileged mode."
+          "noProvider": "Все още няма настроен доставчик на ИИ.",
+          "noKey": "{{provider}} се нуждае от API ключ.",
+          "noModel": "За {{provider}} трябва да се избере модел.",
+          "local": "Използва се {{model}} на този компютър чрез {{provider}}. Нищо не напуска този компютър.",
+          "cloud": "Използва се {{model}} от {{provider}}, облачна услуга. Текстът, който изчиствате, отива до {{provider}}.",
+          "blocked": "Режимът Privileged е включен, затова нищо няма да бъде изпратено до {{provider}}. Използвайте локален модел или изключете режима Privileged."
         },
-        "recommendLocal": "We recommend a model that runs on this computer, such as one in Ollama, so confidential text stays here. AI cleanup runs when you dictate with its own shortcut, and never during continuous dictation.",
-        "setUp": "Set Up AI Cleanup"
+        "recommendLocal": "Препоръчваме модел, който работи на този компютър, например в Ollama, за да остане поверителният текст тук. Изчистването с ИИ работи, когато диктувате със собствената му клавишна комбинация, и никога по време на непрекъснато диктуване.",
+        "setUp": "Настройване на изчистване с ИИ"
       }
     },
     "firstWins": {
-      "title": "First three wins",
-      "dismiss": "Dismiss",
-      "dictated": "Dictate an email",
-      "newParagraph": "Use continuous dictation and say \"new paragraph\"",
-      "asked": "Ask Kusema a question",
-      "done": "Done",
-      "notDone": "Not done yet",
-      "progress": "{{done}} of {{count}} done",
-      "allDone": "All three done. Nice work."
+      "title": "Първите три успеха",
+      "dismiss": "Скриване",
+      "dictated": "Продиктувайте имейл",
+      "newParagraph": "Използвайте непрекъснато диктуване и кажете \"new paragraph\"",
+      "asked": "Задайте въпрос на Kusema",
+      "done": "Готово",
+      "notDone": "Още не",
+      "progress": "Готови {{done}} от {{count}}",
+      "allDone": "И трите са готови. Браво."
     },
     "glow": {
-      "title": "Recording indicator",
-      "description": "A glow around the edges of your screen shows that Kusema is listening. Only you see it: it stays out of screenshots and screen shares.",
+      "title": "Индикатор за запис",
+      "description": "Сияние по краищата на екрана показва, че Kusema слуша. Виждате го само вие: не се появява на екранни снимки и при споделяне на екрана.",
       "enabled": {
-        "label": "Screen glow",
-        "description": "Show a colored glow around the screen you're working on while Kusema is listening. You can still click and type through it."
+        "label": "Сияние на екрана",
+        "description": "Показване на цветно сияние около екрана, на който работите, докато Kusema слуша. Пак можете да щраквате и пишете през него."
       },
       "thickness": {
-        "label": "Thickness",
-        "description": "How far the glow reaches in from the edge of the screen."
+        "label": "Дебелина",
+        "description": "Колко навътре от ръба на екрана стига сиянието."
       },
       "intensity": {
-        "label": "Intensity",
-        "description": "How strong the glow is."
+        "label": "Интензитет",
+        "description": "Колко силно е сиянието."
       },
       "palette": {
-        "label": "Colors",
-        "description": "The color-blind friendly set keeps the modes easy to tell apart with every common kind of color blindness.",
-        "standard": "Standard",
-        "color_blind": "Color-blind friendly"
+        "label": "Цветове",
+        "description": "Цветовете за далтонисти правят режимите лесни за различаване при всички често срещани видове цветна слепота.",
+        "standard": "Стандартни",
+        "color_blind": "За далтонисти"
       },
       "modes": {
-        "dictation": "Dictation",
-        "continuous": "Continuous dictation",
-        "ask": "Ask Kusema",
-        "ask_screen": "Ask about my screen",
-        "paused": "Continuous dictation paused (window changed)"
+        "dictation": "Диктуване",
+        "continuous": "Непрекъснато диктуване",
+        "ask": "Попитай Kusema",
+        "ask_screen": "Попитай за екрана ми",
+        "paused": "Непрекъснатото диктуване е на пауза (сменен прозорец)"
       },
-      "preview": "Preview",
-      "previewLabel": "Preview the glow for {{mode}}",
+      "preview": "Преглед",
+      "previewLabel": "Преглед на сиянието за {{mode}}",
       "sounds": {
-        "label": "Continuous dictation sounds",
-        "description": "Play a short sound when continuous dictation starts and stops. Sounds for other dictation are under Sound below."
+        "label": "Звуци при непрекъснато диктуване",
+        "description": "Пускане на кратък звук, когато непрекъснатото диктуване започва и спира. Звуците за другото диктуване са в „Звук“ по-долу."
       }
     }
   },
@@ -1325,7 +1325,7 @@
     "portableUpdateBrowseButton": "Отвори GitHub Releases"
   },
   "whatsNew": {
-    "title": "Ново в Handy v{{version}}"
+    "title": "Ново в Kusema v{{version}}"
   },
   "common": {
     "loading": "Зареждане...",
@@ -1356,11 +1356,11 @@
   },
   "appLanguage": {
     "title": "Език на приложението",
-    "description": "Промяна на езика на интерфейса на Handy"
+    "description": "Промяна на езика на интерфейса на Kusema"
   },
   "theme": {
     "title": "Тема на приложението",
-    "description": "Изберете дали Handy да следва системната тема, или да остане светла или тъмна",
+    "description": "Изберете дали Kusema да следва системната тема, или да остане светла или тъмна",
     "options": {
       "system": "Системна",
       "light": "Светла",
@@ -1371,38 +1371,38 @@
     "transcribing": "Транскрибиране...",
     "processing": "Обработка...",
     "loadingModel": "Зареждане на модела...",
-    "speaking": "Speaking...",
+    "speaking": "Говори...",
     "dictation": {
-      "dictating": "Dictating",
-      "paused": "Paused, window changed",
-      "noTarget": "Click where the text should go",
-      "finishing": "Finishing...",
-      "stop": "Stop",
-      "nothingToScratch": "Nothing to scratch",
-      "scratchWindowChanged": "Can't scratch: the window changed",
-      "scratchOtherInput": "Can't scratch: keyboard or mouse used",
-      "savedToHistory": "Said while paused: saved in History",
-      "stoppedSilence": "Stopped after silence",
-      "microphoneLost": "Stopped: microphone lost",
-      "cantKeepUp": "Stopped: this computer couldn't keep up",
-      "transcriptionFailed": "Couldn't transcribe that",
-      "pasteFailed": "Couldn't type that; it's in History"
+      "dictating": "Диктуване",
+      "paused": "На пауза, сменен прозорец",
+      "noTarget": "Щракнете там, където трябва да е текстът",
+      "finishing": "Завършване...",
+      "stop": "Стоп",
+      "nothingToScratch": "Няма какво да се изтрие",
+      "scratchWindowChanged": "Не може да се изтрие: прозорецът е сменен",
+      "scratchOtherInput": "Не може да се изтрие: използвана е клавиатура или мишка",
+      "savedToHistory": "Казано по време на паузата: запазено в „История“",
+      "stoppedSilence": "Спряно след тишина",
+      "microphoneLost": "Спряно: микрофонът е изгубен",
+      "cantKeepUp": "Спряно: компютърът не смогваше",
+      "transcriptionFailed": "Не можа да се разпознае",
+      "pasteFailed": "Не можа да се въведе; текстът е в „История“"
     },
     "privileged": "Privileged"
   },
   "screenCard": {
-    "title": "Send this screenshot?",
-    "autoCancel": "Cancels in {{seconds}} s",
-    "enlarge": "Click to enlarge",
-    "shrink": "Click to make smaller",
-    "imageAlt": "Screenshot of the window you asked about",
+    "title": "Да се изпрати ли тази екранна снимка?",
+    "autoCancel": "Отказ след {{seconds}} с",
+    "enlarge": "Щракнете за увеличаване",
+    "shrink": "Щракнете за намаляване",
+    "imageAlt": "Екранна снимка на прозореца, за който попитахте",
     "question": "“{{question}}”",
-    "sendsTo": "Goes to {{provider}} · {{model}}",
-    "onlyThis": "Only this window. Nothing is sent until you press Send.",
-    "send": "Send",
-    "cancel": "Cancel",
+    "sendsTo": "Отива до {{provider}} · {{model}}",
+    "onlyThis": "Само този прозорец. Нищо не се изпраща, докато не натиснете „Изпрати“.",
+    "send": "Изпрати",
+    "cancel": "Отказ",
     "noticeTitle": "Kusema",
-    "close": "Close"
+    "close": "Затваряне"
   },
   "secureInput": {
     "blockedWithCulprit_one": "{{name}} може да блокира 1 бърз клавиш",

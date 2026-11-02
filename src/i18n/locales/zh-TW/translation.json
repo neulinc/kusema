@@ -8,25 +8,25 @@
     "quit": "結束",
     "cancel": "取消",
     "secureInputWarning": "⚠ 快捷鍵被 Secure Input 阻擋",
-    "privilegedMode": "Privileged Mode",
-    "privilegedOn": "Privileged mode on"
+    "privilegedMode": "Privileged 模式",
+    "privilegedOn": "Privileged 模式已開啟"
   },
   "sidebar": {
     "general": "一般",
-    "assistant": "Assistant",
+    "assistant": "助理",
     "models": "模型",
     "advanced": "進階",
     "postProcessing": "後處理",
     "history": "歷史紀錄",
     "debug": "偵錯",
     "about": "關於",
-    "privacy": "Privacy"
+    "privacy": "隱私"
   },
   "onboarding": {
     "customModelDescription": "官方不支援",
     "migration": {
       "title": "您的模型需要更新",
-      "description": "Handy 現在使用更新的模型類型。請下載新版本以繼續轉錄。舊版本將會移除。",
+      "description": "Kusema 現在使用更新的模型類型。請下載新版本以繼續轉錄。舊版本將會移除。",
       "replaces": "取代 {{name}}",
       "oldFormat": "舊格式",
       "failed": "下載失敗",
@@ -63,11 +63,11 @@
     "permissions": {
       "microphone": {
         "name": "麥克風",
-        "why": "讓 Handy 聽得到您說話。音訊只會在這台電腦上轉成文字，絕不會上傳。"
+        "why": "讓 Kusema 聽得到您說話。音訊只會在這台電腦上轉成文字，絕不會上傳。"
       },
       "accessibility": {
         "name": "輔助使用",
-        "why": "讓快捷鍵在每個應用程式中都能使用，也讓 Handy 能把文字打在游標所在的位置。"
+        "why": "讓快捷鍵在每個應用程式中都能使用，也讓 Kusema 能把文字打在游標所在的位置。"
       },
       "errors": {
         "checkFailed": "檢查權限失敗，請重試",
@@ -81,12 +81,12 @@
       "openSettings": "開啟設定",
       "allowed": "已允許",
       "waiting": "等待中",
-      "turnOnMac": "請在「系統設定」中開啟 Handy，然後回到這裡。",
+      "turnOnMac": "請在「系統設定」中開啟 Kusema，然後回到這裡。",
       "turnOnWindows": "請在「Windows 設定」中開啟麥克風存取權，然後回到這裡。",
       "hintBoth": "請允許兩項權限以繼續",
       "hintMicrophone": "請允許麥克風以繼續",
       "welcomeBack": "歡迎回來，我們從上次中斷的地方繼續。",
-      "relaunch": "之後快捷鍵沒有反應嗎？<relaunch>重新啟動 Handy</relaunch>，就會直接回到這裡。"
+      "relaunch": "之後快捷鍵沒有反應嗎？<relaunch>重新啟動 Kusema</relaunch>，就會直接回到這裡。"
     },
     "shell": {
       "back": "返回",
@@ -97,11 +97,11 @@
       "title": "在任何應用程式中，用說的取代打字",
       "subtitle": "選擇您要用來聽寫的語言",
       "languagesLabel": "語言",
-      "noMatch": "找不到符合「{{query}}」的語言。Handy 的模型涵蓋約 100 種語言，更多語言可在設定中找到。",
+      "noMatch": "找不到符合「{{query}}」的語言。Kusema 的模型涵蓋約 100 種語言，更多語言可在設定中找到。",
       "appLanguage": "應用程式語言",
       "menusIn": "選單使用<b>{{language}}</b>",
       "chinese": {
-        "question": "您說{{languages}}。Handy 該使用哪種字體書寫？",
+        "question": "您說{{languages}}。Kusema 該使用哪種字體書寫？",
         "label": "中文字體",
         "zh-Hans": "簡體",
         "zh-Hant": "臺灣",
@@ -171,7 +171,7 @@
     },
     "try": {
       "title": "來試試看吧！",
-      "subtitle": "Handy 就在角落，陪您一步步操作",
+      "subtitle": "Kusema 就在角落，陪您一步步操作",
       "noteLabel": "備忘錄",
       "placeholder": "新增備忘錄",
       "hold": "按住 <keys/> 並開始說話。",
@@ -199,14 +199,14 @@
     },
     "done": {
       "title": "全部設定完成",
-      "subMac": "Handy 現在位於選單列中。在任何應用程式中按住或輕按 <keys/> 即可開口說話。",
-      "subTray": "Handy 現在位於系統匣中。在任何應用程式中按住或輕按 <keys/> 即可開口說話。",
+      "subMac": "Kusema 現在位於選單列中。在任何應用程式中按住或輕按 <keys/> 即可開口說話。",
+      "subTray": "Kusema 現在位於系統匣中。在任何應用程式中按住或輕按 <keys/> 即可開口說話。",
       "hint": "之後可以隨時在「設定」中變更",
       "highFiveLabel": "擊掌",
-      "atLogin": "登入時啟動 Handy",
+      "atLogin": "登入時啟動 Kusema",
       "finish": "完成",
       "panel": {
-        "name": "Handy",
+        "name": "Kusema",
         "ready": "已就緒",
         "languages": "語言",
         "model": "語音模型",
@@ -220,79 +220,79 @@
       "done": "在其他應用程式中沒有作用嗎？<guide>Linux 設定指南</guide>"
     },
     "setup": {
-      "retryDownload": "Try again",
+      "retryDownload": "重試",
       "welcome": {
-        "title": "Kusema turns your voice into text on this computer.",
-        "privacy": "Your voice never leaves it.",
-        "language": "Language you'll dictate in"
+        "title": "Kusema 會在這台電腦上把您的語音轉成文字。",
+        "privacy": "您的語音絕不會離開這台電腦。",
+        "language": "您要聽寫的語言"
       },
       "microphone": {
-        "title": "Choose your microphone",
-        "sub": "Say something. The bar should move as you speak.",
-        "label": "Microphone",
-        "meter": "Microphone level",
-        "heard": "Kusema can hear you.",
-        "quiet": "No sound yet. Check that this microphone isn't muted, or choose another one.",
-        "failed": "Kusema couldn't open this microphone. Choose another one.",
-        "tip": "Tip: a headset gives the best accuracy and fewer stray words."
+        "title": "選擇麥克風",
+        "sub": "說點什麼。您說話時，音量列應該會動。",
+        "label": "麥克風",
+        "meter": "麥克風音量",
+        "heard": "Kusema 聽得到您。",
+        "quiet": "還沒有聲音。請檢查這支麥克風是否已靜音，或換一支。",
+        "failed": "Kusema 無法開啟這支麥克風。請換一支。",
+        "tip": "提示：使用耳麥的準確度最高，多餘的字也較少。"
       },
       "practice": {
-        "title": "Dictate your first sentence",
-        "how": "Hold <keys/>, say this sentence, then let go:",
+        "title": "聽寫第一句話",
+        "how": "按住 <keys/>，說出這句話，然後放開：",
         "sentence": "Dear Mr. Smith comma thank you for your letter period",
-        "box": "Practice box: your words appear here",
-        "placeholder": "Your words appear here",
-        "listening": "Listening...",
-        "typing": "Typing...",
-        "success": "That's it. Saying \"comma\" and \"period\" types the marks.",
-        "waiting": "Your speech model is still downloading. This box will work as soon as it's ready.",
-        "continuous": "For longer dictation, press <keys/> to keep listening until you press it again. Used to Dragon? You can set this to Numpad + under General.",
-        "continuousRunning": "Continuous dictation is on. Your words appear in the box each time you pause. Press {{stop}} to stop it.",
-        "continuousEnded": "That's continuous dictation. In your other apps, your words are typed at the cursor."
+        "box": "練習框：您說的話會顯示在這裡",
+        "placeholder": "您說的話會顯示在這裡",
+        "listening": "正在聆聽...",
+        "typing": "正在輸入...",
+        "success": "就是這樣。說 \"comma\" 和 \"period\" 會輸入對應的標點。",
+        "waiting": "語音模型仍在下載。準備好後這個框就能使用。",
+        "continuous": "要長時間聽寫，請按 <keys/>，Kusema 會一直聽，直到您再按一次。用過 Dragon？可以在「一般」中設為數字鍵台 +。",
+        "continuousRunning": "連續聽寫已開啟。每次停頓時，您說的話會出現在框中。按 {{stop}} 結束。",
+        "continuousEnded": "這就是連續聽寫。在其他應用程式中，文字會輸入到游標所在位置。"
       },
       "assistant": {
-        "title": "Set up the AI assistant (optional)",
-        "sub": "Ask Kusema answers questions you speak. Dictation doesn't need it.",
-        "model": "Model",
-        "continueWithout": "Continue without AI",
-        "privileged": "Privileged mode blocks all cloud AI with one switch, for matters that must stay on this computer.",
+        "title": "設定 AI 助理（選用）",
+        "sub": "「問 Kusema」會回答您說出的問題。聽寫不需要它。",
+        "model": "模型",
+        "continueWithout": "不使用 AI 繼續",
+        "privileged": "Privileged 模式一鍵封鎖所有雲端 AI，適用於必須留在這台電腦上的事務。",
         "local": {
-          "title": "Private: use a local AI on this computer",
-          "description": "Your questions stay here. Uses Ollama, a free app.",
-          "checking": "Looking for Ollama on this computer...",
-          "found": "Found Ollama. Choose a model to use.",
-          "notFound": "Ollama isn't running on this computer.",
-          "noModels": "Ollama is running, but has no models yet. Run \"ollama pull llama3.2\", then check again.",
-          "instructions": "How to set up Ollama",
-          "again": "Check again"
+          "title": "私密：使用這台電腦上的本機 AI",
+          "description": "您的問題會留在這裡。使用免費應用程式 Ollama。",
+          "checking": "正在這台電腦上尋找 Ollama...",
+          "found": "已找到 Ollama。請選擇要使用的模型。",
+          "notFound": "這台電腦上沒有執行 Ollama。",
+          "noModels": "Ollama 正在執行，但還沒有模型。請執行 \"ollama pull llama3.2\"，然後再檢查一次。",
+          "instructions": "如何安裝 Ollama",
+          "again": "再檢查一次"
         },
         "cloud": {
-          "title": "Use a cloud AI provider",
-          "description": "Your questions go to the provider you choose, using your own API key.",
-          "provider": "Provider",
-          "key": "API key",
-          "check": "Save and check",
-          "checking": "Checking the key...",
-          "saved": "Key saved in Windows Credential Manager. Choose a model to use.",
-          "where": "The key is stored in Windows Credential Manager, not in a file.",
-          "keyFailed": "The key was saved, but the provider didn't list any models. Check the key and try again."
+          "title": "使用雲端 AI 供應商",
+          "description": "您的問題會以您自己的 API 金鑰傳送給您選擇的供應商。",
+          "provider": "供應商",
+          "key": "API 金鑰",
+          "check": "儲存並檢查",
+          "checking": "正在檢查金鑰...",
+          "saved": "金鑰已儲存到 Windows 認證管理員。請選擇要使用的模型。",
+          "where": "金鑰儲存在 Windows 認證管理員中，而不是檔案裡。",
+          "keyFailed": "金鑰已儲存，但供應商沒有列出任何模型。請檢查金鑰後再試一次。"
         },
         "skip": {
-          "title": "Skip for now",
-          "description": "You can set this up later on the Assistant page."
+          "title": "暫時略過",
+          "description": "您可以稍後在「助理」頁面設定。"
         }
       },
       "done": {
-        "title": "You're all set",
-        "sub": "Kusema keeps running in the system tray and works in any app.",
-        "finish": "Start using Kusema",
-        "wins": "Your first three wins are waiting on the main page.",
-        "atLogin": "Start Kusema when I sign in",
+        "title": "一切就緒",
+        "sub": "Kusema 會在系統匣中繼續執行，並可在任何應用程式中使用。",
+        "finish": "開始使用 Kusema",
+        "wins": "您的前三個目標正在主頁上等著您。",
+        "atLogin": "登入時啟動 Kusema",
         "keys": {
-          "dictate": "Dictate: hold",
-          "continuous": "Continuous dictation: press to start and stop",
-          "ask": "Ask Kusema",
-          "askScreen": "Ask about my screen"
+          "dictate": "聽寫：按住",
+          "continuous": "連續聽寫：按一下開始或停止",
+          "ask": "問 Kusema",
+          "askScreen": "詢問我的螢幕"
         }
       }
     }
@@ -408,7 +408,7 @@
     "general": {
       "title": "一般",
       "shortcut": {
-        "title": "Handy 快捷鍵",
+        "title": "Kusema 快捷鍵",
         "description": "設定啟動語音轉文字錄製的鍵盤快捷鍵",
         "loading": "載入快捷鍵中...",
         "none": "未設定快捷鍵",
@@ -428,20 +428,20 @@
             "description": "可選：專用快捷鍵，使用時一律對轉錄結果套用 AI 後處理"
           },
           "assistant": {
-            "name": "Ask Kusema",
-            "description": "Hold or press to ask a spoken question. The reply appears below instead of being pasted."
+            "name": "問 Kusema",
+            "description": "按住或按一下即可口頭提問。回答會顯示在下方，而不會被貼上。"
           },
           "assistant_screen": {
-            "name": "Ask About My Screen",
-            "description": "Hold or press to ask a spoken question about the window you're working in. You see the screenshot before anything is sent."
+            "name": "詢問我的螢幕",
+            "description": "按住或按一下，口頭詢問您正在使用的視窗。傳送任何內容之前，您都會先看到螢幕擷圖。"
           },
           "dictate_continuous": {
-            "name": "Continuous Dictation",
-            "description": "Press to start dictating hands-free, and press again to stop. Text appears each time you pause."
+            "name": "連續聽寫",
+            "description": "按一下開始免持聽寫，再按一下停止。每次停頓時都會出現文字。"
           },
           "toggle_privileged": {
-            "name": "Privileged Mode",
-            "description": "Press to turn Privileged mode on or off."
+            "name": "Privileged 模式",
+            "description": "按下可開啟或關閉 Privileged 模式。"
           }
         },
         "errors": {
@@ -466,7 +466,7 @@
       },
       "preferredLanguages": {
         "title": "偏好語言",
-        "description": "您所說的語言。Handy 會依據這些語言推薦模型。",
+        "description": "您所說的語言。Kusema 會依據這些語言推薦模型。",
         "noMatch": "找不到符合「{{query}}」的語言",
         "weak": "目前還沒有模型能把{{languages}}辨識得很準。"
       },
@@ -493,17 +493,17 @@
         "fits": "適用於您的語言",
         "untested": "未測試"
       },
-      "untestedNote": "尚未經過 Handy 測試，可能較慢或錯誤較多。",
+      "untestedNote": "尚未經過 Kusema 測試，可能較慢或錯誤較多。",
       "untestedHidden_one": "另有 {{count}} 個模型並未針對聽寫調校，請搜尋以找到它。",
       "untestedHidden_other": "另有 {{count}} 個模型並未針對聽寫調校，請搜尋以找到它們。",
-      "emptyYours": "尚無模型。請從下方選擇一個：下載完成後 Handy 就會使用它。",
+      "emptyYours": "尚無模型。請從下方選擇一個：下載完成後 Kusema 就會使用它。",
       "showMore": "再顯示 {{count}} 個",
       "showFewer": "顯示較少",
       "download": "下載並使用",
       "downloadingThenUse": "{{percent}}%（共 {{total}}），完成後自動切換",
       "loading": "載入中…",
       "deleteAsk": "要刪除 {{name}} 嗎？這會釋出 {{size}} 的空間。",
-      "deleteAskActive": "要刪除 {{name}} 嗎？在您選擇其他模型之前，Handy 無法進行轉錄。",
+      "deleteAskActive": "要刪除 {{name}} 嗎？在您選擇其他模型之前，Kusema 無法進行轉錄。",
       "cancel": "取消",
       "deleteModel": "刪除 {{name}}",
       "cancelDownload": "停止下載 {{name}}",
@@ -517,7 +517,7 @@
         "marks": "? 表示尚未測量。— 表示聽不懂該語言。"
       },
       "retiredNotice": {
-        "title": "舊模型已無法在 Handy 中使用",
+        "title": "舊模型已無法在 Kusema 中使用",
         "description": "它們佔用了您電腦上 {{size}} 的空間。",
         "delete": "刪除模型",
         "deleted": "已刪除舊模型",
@@ -525,37 +525,37 @@
       },
       "rescan": {
         "label": "重新掃描",
-        "tooltip": "重新掃描在 Handy 之外新增到模型資料夾或 Hugging Face 快取中的模型"
+        "tooltip": "重新掃描在 Kusema 之外新增到模型資料夾或 Hugging Face 快取中的模型"
       },
       "curated": {
-        "inUse": "In use",
-        "gettingReady": "Getting ready...",
-        "downloading": "Downloading: {{percent}}%",
-        "cancel": "Cancel",
-        "cancelLabel": "Cancel downloading {{name}}",
-        "use": "Use",
-        "useLabel": "Use {{name}}",
-        "download": "Download ({{size}})",
-        "downloadLabel": "Download {{name}}",
-        "recommended": "Recommended",
-        "others": "Also on this computer",
-        "showAllHint": "More models are available: turn on Show all models under Advanced.",
+        "inUse": "使用中",
+        "gettingReady": "正在準備...",
+        "downloading": "正在下載：{{percent}}%",
+        "cancel": "取消",
+        "cancelLabel": "取消下載 {{name}}",
+        "use": "使用",
+        "useLabel": "使用 {{name}}",
+        "download": "下載（{{size}}）",
+        "downloadLabel": "下載 {{name}}",
+        "recommended": "建議",
+        "others": "這台電腦上也有",
+        "showAllHint": "還有更多模型：在「進階」中開啟「顯示所有模型」。",
         "rows": {
           "parakeetUnified": {
             "name": "Parakeet Unified English",
-            "description": "The best choice for English. Chosen automatically."
+            "description": "英文的最佳選擇。會自動選取。"
           },
           "parakeetV3": {
             "name": "Parakeet TDT v3",
-            "description": "For dictating in other languages, including Spanish, French and German."
+            "description": "用於聽寫其他語言，包括西班牙文、法文和德文。"
           },
           "canary": {
             "name": "Canary 180M Flash",
-            "description": "A small download, for older computers or when disk space is low."
+            "description": "下載量小，適合較舊的電腦或磁碟空間不足時使用。"
           },
           "nemotron": {
             "name": "Nemotron 3.5 Streaming",
-            "description": "Shows live text as you speak, but makes more mistakes."
+            "description": "說話時即時顯示文字，但錯誤較多。"
           }
         }
       }
@@ -564,26 +564,26 @@
       "title": "語言"
     },
     "dictation": {
-      "title": "Continuous Dictation",
-      "description": "Keep talking, and the text is typed into your window each time you pause. Speech recognition stays on this computer, and AI cleanup never runs in this mode.",
+      "title": "連續聽寫",
+      "description": "只要繼續說，每次停頓時文字都會輸入到視窗中。語音辨識留在這台電腦上，在此模式下絕不會執行 AI 整理。",
       "dragonKey": {
-        "title": "Dragon's Key",
-        "description": "Use Numpad + to start and stop, as Dragon does. While it's set, that key no longer types a plus sign.",
-        "button": "Use Dragon's key (Numpad +)"
+        "title": "Dragon 按鍵",
+        "description": "像 Dragon 一樣用數字鍵台 + 開始和停止。設定後，這個鍵不再輸入加號。",
+        "button": "使用 Dragon 按鍵（數字鍵台 +）"
       },
       "pause": {
-        "title": "Pause Length",
-        "description": "How long you pause before what you said is typed. Longer pauses keep sentences together; shorter ones show text sooner.",
+        "title": "停頓長度",
+        "description": "停頓多久後輸入您說的話。停頓越長，句子越完整；越短，文字出現得越快。",
         "seconds": "{{seconds}} s"
       },
       "autoStop": {
-        "title": "Stop After Silence",
-        "description": "Dictation stops by itself after this long without speech, so the microphone is never left on by accident.",
-        "minutes": "{{minutes}} min"
+        "title": "靜音後停止",
+        "description": "超過這段時間沒有說話，聽寫會自動停止，避免麥克風意外一直開著。",
+        "minutes": "{{minutes}} 分鐘"
       },
       "voiceCommands": {
-        "label": "Voice Commands",
-        "description": "Say \"new paragraph\" or \"new line\" as you talk, or \"scratch that\" or \"stop dictation\" on its own between pauses, and it acts instead of being typed. Normal sentences with these words are typed as usual."
+        "label": "語音命令",
+        "description": "說話時說 \"new paragraph\" 或 \"new line\"，或在停頓之間單獨說 \"scratch that\" 或 \"stop dictation\"，就會執行命令而不是輸入文字。包含這些字詞的一般句子會照常輸入。"
       }
     },
     "sound": {
@@ -646,11 +646,11 @@
       },
       "autostart": {
         "label": "開機啟動",
-        "description": "登入電腦時自動啟動 Handy"
+        "description": "登入電腦時自動啟動 Kusema"
       },
       "showTrayIcon": {
         "label": "顯示系統匣圖示",
-        "description": "在系統匣中顯示 Handy 圖示"
+        "description": "在系統匣中顯示 Kusema 圖示"
       },
       "overlay": {
         "style": {
@@ -773,90 +773,90 @@
         }
       },
       "showAllModels": {
-        "label": "Show all models",
-        "description": "List every model on the Models page, with accuracy and speed details, instead of the short list."
+        "label": "顯示所有模型",
+        "description": "在「模型」頁面列出所有模型及其準確度與速度資訊，而不是精簡清單。"
       }
     },
     "assistant": {
-      "title": "Assistant",
-      "description": "Hold the shortcut, ask a question out loud, and Kusema answers.",
+      "title": "助理",
+      "description": "按住快速鍵，大聲提出問題，Kusema 就會回答。",
       "provider": {
-        "title": "AI Provider",
-        "provider": "Provider",
-        "description": "Assistant mode uses the same provider and API key as Post Process.",
-        "model": "Model",
-        "modelDescription": "The model that answers your questions. Change it on the Post Process page.",
-        "notSet": "Not chosen",
-        "open": "Open Post Process settings",
-        "disabled": "Assistant mode needs an AI provider (such as Anthropic, OpenAI or a local Ollama model) to answer questions. Providers are set up on the Post Process page, which appears once Post Processing is turned on. Turning it on doesn't change how normal dictation works.",
-        "enable": "Turn on Post Processing",
-        "noProvider": "Choose a provider on the Post Process page.",
-        "noKey": "No API key is set for {{provider}}. Add one on the Post Process page.",
-        "noModel": "Choose a model on the Post Process page."
+        "title": "AI 供應商",
+        "provider": "供應商",
+        "description": "助理使用與「後處理」相同的供應商和 API 金鑰。",
+        "model": "模型",
+        "modelDescription": "回答您問題的模型。可在「後處理」頁面變更。",
+        "notSet": "未選擇",
+        "open": "開啟「後處理」設定",
+        "disabled": "助理需要一個 AI 供應商（例如 Anthropic、OpenAI 或本機 Ollama 模型）才能回答問題。供應商在「後處理」頁面設定，開啟後處理後該頁面才會出現。開啟它不會改變一般聽寫。",
+        "enable": "開啟後處理",
+        "noProvider": "請在「後處理」頁面選擇供應商。",
+        "noKey": "{{provider}} 尚未設定 API 金鑰。請在「後處理」頁面新增。",
+        "noModel": "請在「後處理」頁面選擇模型。"
       },
       "screen": {
-        "title": "Ask About My Screen",
-        "description": "Ask about the window you're working in, like “What do you think of this document?” Only that window is captured, and it stays on this computer until you press Send.",
+        "title": "詢問我的螢幕",
+        "description": "詢問您正在使用的視窗，例如「你覺得這份文件怎麼樣？」只會擷取該視窗，在您按「傳送」之前它都會留在這台電腦上。",
         "confirm": {
-          "label": "Confirm Before Sending Screenshots",
-          "description": "Show the screenshot, your question and where it will go, then wait for Send (Enter) or Cancel (Escape). Unanswered, it cancels after 30 seconds.",
-          "offWarning": "Screenshots will be sent to {{provider}} as soon as you finish speaking, without showing you first. Everything visible in the window goes with them, including private or confidential information."
+          "label": "傳送螢幕擷圖前確認",
+          "description": "顯示擷圖、您的問題和傳送對象，然後等待「傳送」(Enter) 或「取消」(Esc)。無人回應時，30 秒後取消。",
+          "offWarning": "您一說完，螢幕擷圖就會直接傳送給 {{provider}}，不會先給您看。視窗中可見的所有內容都會一併傳送，包括私人或機密資訊。"
         },
         "provider": {
-          "label": "Use for Screen Questions",
-          "description": "Send screenshots to a different provider than normal questions, for example a local vision model in Ollama (the Custom provider) for confidential documents. Follow-up questions go to the same provider until you start a new conversation.",
-          "same": "Same as Assistant",
-          "sameNamed": "Same as Assistant ({{provider}})",
-          "yourProvider": "your AI provider"
+          "label": "用於螢幕提問",
+          "description": "將螢幕擷圖傳送給與一般問題不同的供應商，例如對機密文件使用 Ollama 中的本機視覺模型（「自訂」供應商）。在您開始新對話之前，後續問題都會傳送給同一個供應商。",
+          "same": "與助理相同",
+          "sameNamed": "與助理相同（{{provider}}）",
+          "yourProvider": "您的 AI 供應商"
         },
         "model": {
-          "label": "Model for Screen Questions",
-          "description": "A model that can see images. Leave empty to use the model chosen for this provider on the Post Process page.",
-          "placeholder": "e.g. qwen2.5vl"
+          "label": "螢幕提問使用的模型",
+          "description": "能看懂圖片的模型。留空則使用在「後處理」頁面為該供應商選擇的模型。",
+          "placeholder": "例如 qwen2.5vl"
         }
       },
       "conversation": {
-        "empty": "Ask a question with the Ask Kusema shortcut. The conversation will appear here.",
-        "new": "New conversation",
-        "screenshot": "Screenshot",
-        "noProvider": "Ask Kusema needs an AI model to answer. Choose one in Settings.",
-        "openSettings": "Open Settings"
+        "empty": "用「問 Kusema」快速鍵提問。對話會顯示在這裡。",
+        "new": "新對話",
+        "screenshot": "螢幕擷圖",
+        "noProvider": "「問 Kusema」需要 AI 模型才能回答。請在「設定」中選擇一個。",
+        "openSettings": "開啟設定"
       },
       "voice": {
-        "title": "Voice",
-        "systemDefault": "System default",
-        "previewText": "Hi, I'm Kusema. This is how I'll sound when I answer your questions.",
+        "title": "語音",
+        "systemDefault": "系統預設",
+        "previewText": "您好，我是 Kusema。我回答您的問題時就是這個聲音。",
         "speakReplies": {
-          "label": "Speak Replies",
-          "description": "Read replies aloud as they arrive. Press Cancel (Escape), start a new recording, or start a new conversation to stop."
+          "label": "朗讀回答",
+          "description": "回答一到就朗讀出來。要停止，請按「取消」(Esc)、開始新錄音或開始新對話。"
         },
         "voice": {
-          "label": "Voice",
-          "description": "Kokoro voices sound the most natural; download them above. The other voices come with your computer (on Windows, add more under Settings > Time & language > Speech)."
+          "label": "語音",
+          "description": "Kokoro 語音聽起來最自然；請在上方下載。其他語音是電腦內建的（在 Windows 中，可在「設定 > 時間與語言 > 語音」中新增更多）。"
         },
         "kokoro": {
-          "label": "Kokoro Voices",
-          "description": "28 natural-sounding English voices (US and UK) generated on this computer. A one-time download.",
-          "installed": "Installed. Pick a Kokoro voice below. Removing them frees the disk space; replies then use the system voice.",
-          "download": "Download ({{size}} MB)",
-          "downloading": "Downloading… {{percentage}}%",
-          "cancel": "Cancel",
-          "delete": "Remove"
+          "label": "Kokoro 語音",
+          "description": "在這台電腦上產生的 28 種自然英文語音（美式與英式）。只需下載一次。",
+          "installed": "已安裝。請在下方選擇一種 Kokoro 語音。移除後可釋出磁碟空間，回答會改用系統語音。",
+          "download": "下載（{{size}} MB）",
+          "downloading": "正在下載… {{percentage}}%",
+          "cancel": "取消",
+          "delete": "移除"
         },
         "rate": {
-          "label": "Speaking Rate",
-          "description": "How fast replies are read. 1.00× is the voice's normal speed."
+          "label": "語速",
+          "description": "朗讀回答的速度。1.00× 是該語音的正常速度。"
         },
         "preview": {
-          "label": "Preview Voice",
-          "description": "Hear the selected voice at the selected speed.",
-          "button": "Preview"
+          "label": "試聽語音",
+          "description": "以所選速度試聽所選語音。",
+          "button": "試聽"
         }
       },
       "tabs": {
-        "label": "Assistant",
-        "conversation": "Conversation",
-        "settings": "Settings"
+        "label": "助理",
+        "conversation": "對話",
+        "settings": "設定"
       }
     },
     "postProcessing": {
@@ -973,7 +973,7 @@
       },
       "updateChecks": {
         "label": "檢查更新",
-        "description": "自動檢查 Handy 的新版本",
+        "description": "自動檢查 Kusema 的新版本",
         "lockedDescription": "已被系統設定停用 (HANDY_DISABLE_UPDATER)"
       },
       "whatsNewPreview": {
@@ -992,9 +992,9 @@
           "welcome": "歡迎",
           "permissions": "權限",
           "done": "設定完成",
-          "microphone": "Microphone",
-          "practice": "Practice",
-          "assistant": "AI assistant"
+          "microphone": "麥克風",
+          "practice": "練習",
+          "assistant": "AI 助理"
         }
       },
       "onboardingRun": {
@@ -1040,8 +1040,8 @@
         "description": "筆記型電腦闔蓋時使用的麥克風"
       },
       "postProcessingToggle": {
-        "label": "AI Cleanup",
-        "description": "Optional. Rewrites dictated text with an AI model when you use the AI cleanup shortcut: fixes self-corrections and grammar, keeps your meaning, and never adds facts."
+        "label": "AI 整理",
+        "description": "選用。使用 AI 整理快速鍵時，以 AI 模型改寫聽寫的文字：修正口誤和文法，保留原意，絕不加入事實。"
       },
       "muteWhileRecording": {
         "label": "錄製時靜音",
@@ -1057,7 +1057,7 @@
         "bindingsReset": "鍵盤快捷鍵不相容，已重設為預設值",
         "options": {
           "tauri": "Tauri Global Shortcut",
-          "builtIn": "Built-in (recommended)"
+          "builtIn": "內建（建議）"
         }
       },
       "pasteDelay": {
@@ -1086,7 +1086,7 @@
       },
       "keyboardDiagnostic": {
         "title": "鍵盤診斷",
-        "description": "檢查鍵盤事件是否能送達 Handy。只會記錄事件數量，絕不記錄您按了哪些按鍵。",
+        "description": "檢查鍵盤事件是否能送達 Kusema。只會記錄事件數量，絕不記錄您按了哪些按鍵。",
         "run": "執行 10 秒診斷",
         "running": "正在監聽… 請按幾次您的快捷鍵（例如 Option+Space）",
         "secureInputLabel": "Secure Input",
@@ -1100,7 +1100,7 @@
         "mouse": "滑鼠",
         "verdictBlocked": "Secure Input 正在阻擋按鍵事件——在問題解決前，包含一般按鍵的快捷鍵無法運作。",
         "verdictSuspicious": "收到了修飾鍵事件，但沒有按鍵事件——即使 Secure Input 回報為已停用，仍有程式在抑制按鍵。請在 GitHub 上回報此問題。",
-        "verdictOk": "按鍵事件正常送達 Handy。",
+        "verdictOk": "按鍵事件正常送達 Kusema。",
         "verdictNoEvents": "未擷取到任何事件——測試期間您有按鍵嗎？",
         "failed": "診斷失敗：{{error}}"
       }
@@ -1109,203 +1109,203 @@
       "title": "關於",
       "version": {
         "title": "版本",
-        "description": "Handy 的目前版本"
+        "description": "Kusema 的目前版本"
       },
       "whatsNewUpdates": {
         "label": "顯示新功能",
-        "description": "Handy 更新後顯示版本資訊"
+        "description": "Kusema 更新後顯示版本資訊"
       },
       "appDataDirectory": {
         "title": "應用程式資料目錄",
-        "description": "Handy 儲存資料的位置"
+        "description": "Kusema 儲存資料的位置"
       },
       "sourceCode": {
         "title": "原始碼",
-        "description": "View Kusema's source code",
+        "description": "檢視 Kusema 原始碼",
         "button": "在 GitHub 上檢視"
       },
       "acknowledgments": {
         "ggml": {
           "title": "ggml",
           "description": "針對 OpenAI Whisper 自動語音辨識模型的高效能推理引擎",
-          "details": "Handy 使用 ggml 進行快速的本機語音轉文字處理。感謝 Georgi Gerganov 和貢獻者們的傑出工作"
+          "details": "Kusema 使用 ggml 進行快速的本機語音轉文字處理。感謝 Georgi Gerganov 和貢獻者們的傑出工作"
         }
       },
       "organizations": {
-        "title": "Kusema for organizations",
-        "description": "Setup, support and options for firms",
-        "button": "Learn more"
+        "title": "組織適用的 Kusema",
+        "description": "事務所的部署、支援與選項",
+        "button": "深入瞭解"
       },
       "report": {
-        "title": "Report a problem or suggest a feature",
-        "description": "Tell us on GitHub what went wrong or what you'd like",
-        "button": "Open GitHub"
+        "title": "回報問題或建議功能",
+        "description": "在 GitHub 上告訴我們哪裡出了問題，或您想要什麼",
+        "button": "開啟 GitHub"
       },
       "credits": {
-        "title": "Credits and licenses",
+        "title": "致謝與授權",
         "handy": {
-          "title": "Built on Handy",
-          "description": "Kusema is built on Handy by CJ Pais, used under the MIT License.",
-          "button": "View Handy"
+          "title": "以 Handy 為基礎打造",
+          "description": "Kusema 以 CJ Pais 的 Handy 為基礎打造，依 MIT 授權使用。",
+          "button": "檢視 Handy"
         },
         "nvidiaLicense": "NVIDIA Open Model License",
-        "models": "Speech and voice models ({{count}})",
-        "components": "Open-source components ({{count}})",
-        "notices": "Full license texts",
-        "loading": "Loading..."
+        "models": "語音辨識與語音模型（{{count}}）",
+        "components": "開放原始碼元件（{{count}}）",
+        "notices": "完整授權條款",
+        "loading": "正在載入..."
       }
     },
     "privacy": {
-      "thisComputer": "This computer ({{host}})",
-      "nothingSent": "Nothing to show yet.",
-      "updateBlocked": "Update checks are blocked in Privileged mode.",
+      "thisComputer": "這台電腦（{{host}}）",
+      "nothingSent": "目前沒有可顯示的內容。",
+      "updateBlocked": "在 Privileged 模式下，檢查更新會被封鎖。",
       "audio": {
-        "title": "Audio sent off this computer: 0 bytes",
-        "description": "Speech recognition runs on this computer, and nothing in Kusema can upload your voice. Only the text of what you say, and only for features you choose, ever goes to an AI provider."
+        "title": "從這台電腦傳出的音訊：0 位元組",
+        "description": "語音辨識在這台電腦上執行，Kusema 中沒有任何功能能上傳您的聲音。只有您所說內容的文字，且僅限您選擇的功能，才會傳送給 AI 供應商。"
       },
       "privileged": {
-        "title": "Privileged Mode",
-        "description": "For confidential matters. While it's on, nothing you say, type or show goes to a cloud AI service. Ask Kusema and AI cleanup only work with a model running on this computer.",
+        "title": "Privileged 模式",
+        "description": "適用於機密事務。開啟時，您說的、輸入的或顯示的任何內容都不會傳送到雲端 AI 服務。「問 Kusema」和 AI 整理只能使用這台電腦上的模型。",
         "chip": "Privileged",
         "toggle": {
-          "label": "Privileged Mode",
-          "description": "Blocks every request to cloud AI providers, including ones already set up. Dictation keeps working, because it never uses the cloud."
+          "label": "Privileged 模式",
+          "description": "封鎖所有傳送給雲端 AI 供應商的要求，包括已設定好的供應商。聽寫不受影響，因為它從不使用雲端。"
         },
         "allowLan": {
-          "label": "Allow Local Network AI Servers",
-          "description": "Also allows AI servers on your office network, by private address (like 192.168.1.20). Models on this computer are always allowed."
+          "label": "允許區域網路中的 AI 伺服器",
+          "description": "也允許透過私人位址（例如 192.168.1.20）存取辦公室網路中的 AI 伺服器。這台電腦上的模型一律允許。"
         },
         "blockDownloads": {
-          "label": "Also Block Downloads and Update Checks",
-          "description": "For offline offices. Model and voice downloads and update checks carry none of your content, so they normally stay allowed and are listed below. Turn this on to stop them too while Privileged mode is on."
+          "label": "同時封鎖下載和檢查更新",
+          "description": "適用於離線辦公室。模型與語音下載以及檢查更新不包含您的任何內容，因此通常仍會允許，並列在下方。開啟後，在 Privileged 模式開啟期間也會封鎖它們。"
         },
         "hotkey": {
-          "label": "Privileged Mode Shortcut",
-          "description": "Adds a keyboard shortcut that turns Privileged mode on or off. Off by default, so it can't be pressed by accident."
+          "label": "Privileged 模式快速鍵",
+          "description": "新增一個開啟或關閉 Privileged 模式的鍵盤快速鍵。預設為關閉，以免誤按。"
         }
       },
       "counts": {
-        "title": "Where Requests Went",
-        "today": "Today",
-        "week": "Last 7 days"
+        "title": "要求去向",
+        "today": "今天",
+        "week": "過去 7 天"
       },
       "columns": {
-        "time": "Time",
-        "destination": "Destination",
-        "purpose": "Why",
-        "data": "Data",
-        "size": "Size",
-        "result": "Result"
+        "time": "時間",
+        "destination": "目的地",
+        "purpose": "原因",
+        "data": "資料",
+        "size": "大小",
+        "result": "結果"
       },
       "purposes": {
-        "assistant_question": "Question to Kusema",
-        "screen_question": "Question about the screen",
-        "post_processing": "AI cleanup",
-        "provider_models": "Listing a provider's models",
-        "model_download": "Speech model download",
-        "voice_download": "Voice download",
-        "update_check": "Update check"
+        "assistant_question": "向 Kusema 提問",
+        "screen_question": "關於螢幕的提問",
+        "post_processing": "AI 整理",
+        "provider_models": "取得供應商的模型清單",
+        "model_download": "下載語音辨識模型",
+        "voice_download": "下載語音",
+        "update_check": "檢查更新"
       },
       "data": {
-        "text": "Text",
-        "image": "Screenshot",
-        "none": "None of yours"
+        "text": "文字",
+        "image": "螢幕擷圖",
+        "none": "不含您的內容"
       },
       "results": {
-        "sent": "Sent",
-        "blocked": "Blocked",
-        "failed": "Failed"
+        "sent": "已傳送",
+        "blocked": "已封鎖",
+        "failed": "失敗"
       },
       "list": {
-        "title": "Every Request",
-        "description": "Each request Kusema has made: when, where, why, what kind of data and how large. What was in it is never recorded. Shows the latest 500; the export has them all.",
-        "all": "All",
-        "allPurposes": "Any reason",
-        "allResults": "Any result",
-        "allDestinations": "Any destination",
-        "anyTime": "Any time",
-        "lastDays_one": "Last {{count}} day",
-        "lastDays_other": "Last {{count}} days",
-        "export": "Export CSV",
-        "exported_one": "Exported {{count}} request.",
-        "exported_other": "Exported {{count}} requests.",
-        "clear": "Clear",
+        "title": "所有要求",
+        "description": "Kusema 發出的每個要求：時間、目的地、原因、資料類型和大小。內容從不記錄。顯示最近 500 筆；匯出檔包含全部。",
+        "all": "全部",
+        "allPurposes": "任何原因",
+        "allResults": "任何結果",
+        "allDestinations": "任何目的地",
+        "anyTime": "任何時間",
+        "lastDays_one": "過去 {{count}} 天",
+        "lastDays_other": "過去 {{count}} 天",
+        "export": "匯出 CSV",
+        "exported_one": "已匯出 {{count}} 個要求。",
+        "exported_other": "已匯出 {{count}} 個要求。",
+        "clear": "清除",
         "retention": {
-          "title": "Keep This List For",
-          "description": "Older entries are deleted from this computer automatically.",
-          "days_one": "{{count}} day",
-          "days_other": "{{count}} days"
+          "title": "此清單保留時間",
+          "description": "較舊的項目會自動從這台電腦刪除。",
+          "days_one": "{{count}} 天",
+          "days_other": "{{count}} 天"
         }
       }
     },
     "cleanup": {
-      "title": "Cleanup",
-      "description": "Dictated text should need little editing. Local cleanup runs on this computer and sends nothing anywhere.",
+      "title": "整理",
+      "description": "聽寫的文字應該只需少量修改。本機整理在這台電腦上執行，不會傳送任何內容。",
       "local": {
-        "label": "Local Cleanup",
-        "description": "Removes filler words, adds missing periods between phrases in continuous dictation, and handles spoken punctuation, all on this computer. Off, your words are typed as transcribed."
+        "label": "本機整理",
+        "description": "移除贅詞，在連續聽寫中補上句子之間漏掉的句號，並處理說出的標點，全部在這台電腦上完成。關閉時，文字會依轉寫結果原樣輸入。"
       },
       "spokenPunctuation": {
-        "label": "Spoken Punctuation",
-        "description": "Say \"comma\", \"period\", \"question mark\", \"colon\", \"open quote\", \"close paren\", \"dash\", \"section symbol\" and more, as in Dragon. \"Period\" only counts at the end of a phrase, so \"the limitations period expired\" stays as words. Say \"literal period\" to type the word."
+        "label": "口述標點",
+        "description": "像在 Dragon 中一樣，說 \"comma\"、\"period\"、\"question mark\"、\"colon\"、\"open quote\"、\"close paren\"、\"dash\"、\"section symbol\" 等。\"Period\" 只在片語結尾才算標點，所以 \"the limitations period expired\" 會保留為文字。說 \"literal period\" 可輸入這個字本身。這些命令以英文使用。"
       },
       "ai": {
         "status": {
-          "noProvider": "No AI provider is set up yet.",
-          "noKey": "{{provider}} needs an API key.",
-          "noModel": "{{provider}} needs a model chosen.",
-          "local": "Using {{model}} on this computer through {{provider}}. Nothing leaves this computer.",
-          "cloud": "Using {{model}} from {{provider}}, a cloud service. Text you clean up goes to {{provider}}.",
-          "blocked": "Privileged mode is on, so nothing will be sent to {{provider}}. Use a local model or turn off Privileged mode."
+          "noProvider": "尚未設定 AI 供應商。",
+          "noKey": "{{provider}} 需要 API 金鑰。",
+          "noModel": "需要為 {{provider}} 選擇模型。",
+          "local": "正透過 {{provider}} 使用這台電腦上的 {{model}}。沒有任何內容離開這台電腦。",
+          "cloud": "正在使用雲端服務 {{provider}} 的 {{model}}。您整理的文字會傳送給 {{provider}}。",
+          "blocked": "Privileged 模式已開啟，因此不會傳送任何內容給 {{provider}}。請使用本機模型或關閉 Privileged 模式。"
         },
-        "recommendLocal": "We recommend a model that runs on this computer, such as one in Ollama, so confidential text stays here. AI cleanup runs when you dictate with its own shortcut, and never during continuous dictation.",
-        "setUp": "Set Up AI Cleanup"
+        "recommendLocal": "我們建議使用在這台電腦上執行的模型，例如 Ollama 中的模型，讓機密文字留在這裡。AI 整理會在您用它自己的快速鍵聽寫時執行，連續聽寫時絕不執行。",
+        "setUp": "設定 AI 整理"
       }
     },
     "firstWins": {
-      "title": "First three wins",
-      "dismiss": "Dismiss",
-      "dictated": "Dictate an email",
-      "newParagraph": "Use continuous dictation and say \"new paragraph\"",
-      "asked": "Ask Kusema a question",
-      "done": "Done",
-      "notDone": "Not done yet",
-      "progress": "{{done}} of {{count}} done",
-      "allDone": "All three done. Nice work."
+      "title": "前三個目標",
+      "dismiss": "關閉",
+      "dictated": "聽寫一封電子郵件",
+      "newParagraph": "使用連續聽寫並說 \"new paragraph\"",
+      "asked": "向 Kusema 提一個問題",
+      "done": "已完成",
+      "notDone": "尚未完成",
+      "progress": "已完成 {{done}}/{{count}}",
+      "allDone": "三個都完成了。做得好。"
     },
     "glow": {
-      "title": "Recording indicator",
-      "description": "A glow around the edges of your screen shows that Kusema is listening. Only you see it: it stays out of screenshots and screen shares.",
+      "title": "錄音指示",
+      "description": "螢幕邊緣的光暈表示 Kusema 正在聆聽。只有您看得到：它不會出現在螢幕擷圖或螢幕分享中。",
       "enabled": {
-        "label": "Screen glow",
-        "description": "Show a colored glow around the screen you're working on while Kusema is listening. You can still click and type through it."
+        "label": "螢幕光暈",
+        "description": "Kusema 聆聽時，在您使用的螢幕周圍顯示彩色光暈。您仍可透過它點選和輸入。"
       },
       "thickness": {
-        "label": "Thickness",
-        "description": "How far the glow reaches in from the edge of the screen."
+        "label": "粗細",
+        "description": "光暈從螢幕邊緣向內延伸的距離。"
       },
       "intensity": {
-        "label": "Intensity",
-        "description": "How strong the glow is."
+        "label": "強度",
+        "description": "光暈的強弱。"
       },
       "palette": {
-        "label": "Colors",
-        "description": "The color-blind friendly set keeps the modes easy to tell apart with every common kind of color blindness.",
-        "standard": "Standard",
-        "color_blind": "Color-blind friendly"
+        "label": "色彩",
+        "description": "色盲友善配色讓各種常見色盲類型都能輕鬆分辨各模式。",
+        "standard": "標準",
+        "color_blind": "色盲友善"
       },
       "modes": {
-        "dictation": "Dictation",
-        "continuous": "Continuous dictation",
-        "ask": "Ask Kusema",
-        "ask_screen": "Ask about my screen",
-        "paused": "Continuous dictation paused (window changed)"
+        "dictation": "聽寫",
+        "continuous": "連續聽寫",
+        "ask": "問 Kusema",
+        "ask_screen": "詢問我的螢幕",
+        "paused": "連續聽寫已暫停（視窗已切換）"
       },
-      "preview": "Preview",
-      "previewLabel": "Preview the glow for {{mode}}",
+      "preview": "預覽",
+      "previewLabel": "預覽 {{mode}} 的光暈",
       "sounds": {
-        "label": "Continuous dictation sounds",
-        "description": "Play a short sound when continuous dictation starts and stops. Sounds for other dictation are under Sound below."
+        "label": "連續聽寫提示音",
+        "description": "連續聽寫開始和停止時播放簡短提示音。其他聽寫的提示音在下方的「聲音」中。"
       }
     }
   },
@@ -1325,7 +1325,7 @@
     "portableUpdateBrowseButton": "開啟 GitHub Releases"
   },
   "whatsNew": {
-    "title": "Handy v{{version}} 新功能"
+    "title": "Kusema v{{version}} 新功能"
   },
   "common": {
     "loading": "載入中...",
@@ -1356,11 +1356,11 @@
   },
   "appLanguage": {
     "title": "應用程式語言",
-    "description": "變更 Handy 介面的語言"
+    "description": "變更 Kusema 介面的語言"
   },
   "theme": {
     "title": "應用程式主題",
-    "description": "選擇 Handy 跟隨系統主題，或維持淺色或深色",
+    "description": "選擇 Kusema 跟隨系統主題，或維持淺色或深色",
     "options": {
       "system": "跟隨系統",
       "light": "淺色",
@@ -1371,38 +1371,38 @@
     "transcribing": "正在轉錄...",
     "processing": "處理中...",
     "loadingModel": "正在載入模型...",
-    "speaking": "Speaking...",
+    "speaking": "正在朗讀...",
     "dictation": {
-      "dictating": "Dictating",
-      "paused": "Paused, window changed",
-      "noTarget": "Click where the text should go",
-      "finishing": "Finishing...",
-      "stop": "Stop",
-      "nothingToScratch": "Nothing to scratch",
-      "scratchWindowChanged": "Can't scratch: the window changed",
-      "scratchOtherInput": "Can't scratch: keyboard or mouse used",
-      "savedToHistory": "Said while paused: saved in History",
-      "stoppedSilence": "Stopped after silence",
-      "microphoneLost": "Stopped: microphone lost",
-      "cantKeepUp": "Stopped: this computer couldn't keep up",
-      "transcriptionFailed": "Couldn't transcribe that",
-      "pasteFailed": "Couldn't type that; it's in History"
+      "dictating": "正在聽寫",
+      "paused": "已暫停，視窗已切換",
+      "noTarget": "點選文字要輸入的位置",
+      "finishing": "正在收尾...",
+      "stop": "停止",
+      "nothingToScratch": "沒有可刪除的內容",
+      "scratchWindowChanged": "無法刪除：視窗已切換",
+      "scratchOtherInput": "無法刪除：曾使用鍵盤或滑鼠",
+      "savedToHistory": "暫停時說的話：已儲存到歷史紀錄",
+      "stoppedSilence": "靜音後已停止",
+      "microphoneLost": "已停止：麥克風中斷",
+      "cantKeepUp": "已停止：這台電腦跟不上",
+      "transcriptionFailed": "無法轉寫這段話",
+      "pasteFailed": "無法輸入這段話；已在歷史紀錄中"
     },
     "privileged": "Privileged"
   },
   "screenCard": {
-    "title": "Send this screenshot?",
-    "autoCancel": "Cancels in {{seconds}} s",
-    "enlarge": "Click to enlarge",
-    "shrink": "Click to make smaller",
-    "imageAlt": "Screenshot of the window you asked about",
+    "title": "要傳送這張螢幕擷圖嗎？",
+    "autoCancel": "{{seconds}} 秒後取消",
+    "enlarge": "點選以放大",
+    "shrink": "點選以縮小",
+    "imageAlt": "您所詢問視窗的螢幕擷圖",
     "question": "“{{question}}”",
-    "sendsTo": "Goes to {{provider}} · {{model}}",
-    "onlyThis": "Only this window. Nothing is sent until you press Send.",
-    "send": "Send",
-    "cancel": "Cancel",
+    "sendsTo": "傳送至 {{provider}} · {{model}}",
+    "onlyThis": "僅此視窗。在您按「傳送」之前不會傳送任何內容。",
+    "send": "傳送",
+    "cancel": "取消",
     "noticeTitle": "Kusema",
-    "close": "Close"
+    "close": "關閉"
   },
   "secureInput": {
     "blockedWithCulprit_one": "{{name}} 可能正在阻擋 1 個快捷鍵",

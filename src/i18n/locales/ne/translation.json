@@ -8,25 +8,25 @@
     "quit": "बाहिर निस्कनुहोस्",
     "cancel": "रद्द गर्नुहोस्",
     "secureInputWarning": "⚠ Secure Input ले सर्टकटहरू रोकेको छ",
-    "privilegedMode": "Privileged Mode",
-    "privilegedOn": "Privileged mode on"
+    "privilegedMode": "Privileged मोड",
+    "privilegedOn": "Privileged मोड अन छ"
   },
   "sidebar": {
     "general": "सामान्य",
-    "assistant": "Assistant",
+    "assistant": "सहायक",
     "models": "मोडेलहरू",
     "advanced": "उन्नत",
     "postProcessing": "पोस्ट प्रोसेस",
     "history": "हिस्ट्री",
     "debug": "डिबग",
     "about": "बारेमा",
-    "privacy": "Privacy"
+    "privacy": "गोपनीयता"
   },
   "onboarding": {
     "customModelDescription": "आधिकारिक रूपमा समर्थित छैन",
     "migration": {
       "title": "तपाईंका मोडेलहरू अपडेट गर्नुपर्छ",
-      "description": "Handy ले अब नयाँ प्रकारको मोडेल प्रयोग गर्छ। ट्रान्सक्राइब गर्न जारी राख्न नयाँ संस्करण डाउनलोड गर्नुहोस्। पुराना संस्करणहरू हटाइनेछन्।",
+      "description": "Kusema ले अब नयाँ प्रकारको मोडेल प्रयोग गर्छ। ट्रान्सक्राइब गर्न जारी राख्न नयाँ संस्करण डाउनलोड गर्नुहोस्। पुराना संस्करणहरू हटाइनेछन्।",
       "replaces": "{{name}} को सट्टा",
       "oldFormat": "पुरानो ढाँचा",
       "failed": "डाउनलोड असफल भयो",
@@ -63,11 +63,11 @@
     "permissions": {
       "microphone": {
         "name": "माइक्रोफोन",
-        "why": "ताकि Handy ले तपाईंलाई सुन्न सकोस्। अडियो यही कम्प्युटरमा टेक्स्टमा बदलिन्छ र कहिल्यै अपलोड गरिँदैन।"
+        "why": "ताकि Kusema ले तपाईंलाई सुन्न सकोस्। अडियो यही कम्प्युटरमा टेक्स्टमा बदलिन्छ र कहिल्यै अपलोड गरिँदैन।"
       },
       "accessibility": {
         "name": "एक्सेसिबिलिटी",
-        "why": "ताकि तपाईंको सर्टकट हरेक एपमा चलोस्, र Handy ले कर्सर भएको ठाउँमा टेक्स्ट टाइप गर्न सकोस्।"
+        "why": "ताकि तपाईंको सर्टकट हरेक एपमा चलोस्, र Kusema ले कर्सर भएको ठाउँमा टेक्स्ट टाइप गर्न सकोस्।"
       },
       "errors": {
         "checkFailed": "अनुमतिहरू जाँच गर्न सकिएन। कृपया फेरि प्रयास गर्नुहोस्।",
@@ -81,12 +81,12 @@
       "openSettings": "सेटिङहरू खोल्नुहोस्",
       "allowed": "अनुमति दिइयो",
       "waiting": "प्रतीक्षामा",
-      "turnOnMac": "System Settings मा Handy अन गर्नुहोस्, अनि यहाँ फर्कनुहोस्।",
+      "turnOnMac": "System Settings मा Kusema अन गर्नुहोस्, अनि यहाँ फर्कनुहोस्।",
       "turnOnWindows": "Windows Settings मा माइक्रोफोन पहुँच अन गर्नुहोस्, अनि यहाँ फर्कनुहोस्।",
       "hintBoth": "जारी राख्न दुवैलाई अनुमति दिनुहोस्",
       "hintMicrophone": "जारी राख्न माइक्रोफोनलाई अनुमति दिनुहोस्",
       "welcomeBack": "फेरि स्वागत छ। जहाँ छोड्नुभएको थियो, त्यहीँबाट सुरु गरौँ।",
-      "relaunch": "यसपछि सर्टकटले काम गरेन? <relaunch>Handy फेरि सुरु गर्नुहोस्</relaunch> र तपाईं ठ्याक्कै यहीँ फर्कनुहुनेछ।"
+      "relaunch": "यसपछि सर्टकटले काम गरेन? <relaunch>Kusema फेरि सुरु गर्नुहोस्</relaunch> र तपाईं ठ्याक्कै यहीँ फर्कनुहुनेछ।"
     },
     "shell": {
       "back": "पछाडि",
@@ -97,11 +97,11 @@
       "title": "टाइप गर्नुको सट्टा बोल्नुहोस्, जुनसुकै एपमा",
       "subtitle": "तपाईंले बोल्ने भाषाहरू छान्नुहोस्",
       "languagesLabel": "भाषाहरू",
-      "noMatch": "“{{query}}” सँग मिल्ने कुनै भाषा छैन। Handy का मोडेलहरूले करिब १०० भाषा समेट्छन्; थप भाषाहरू सेटिङमा छन्।",
+      "noMatch": "“{{query}}” सँग मिल्ने कुनै भाषा छैन। Kusema का मोडेलहरूले करिब १०० भाषा समेट्छन्; थप भाषाहरू सेटिङमा छन्।",
       "appLanguage": "एपको भाषा",
       "menusIn": "मेनुहरू <b>{{language}}</b> मा",
       "chinese": {
-        "question": "तपाईं {{languages}} बोल्नुहुन्छ। Handy ले कुन अक्षर लेखोस्?",
+        "question": "तपाईं {{languages}} बोल्नुहुन्छ। Kusema ले कुन अक्षर लेखोस्?",
         "label": "चिनियाँ अक्षर",
         "zh-Hans": "सरलीकृत",
         "zh-Hant": "ताइवान",
@@ -171,7 +171,7 @@
     },
     "try": {
       "title": "एकपटक प्रयास गरेर हेरौँ!",
-      "subtitle": "Handy कुनामा छ, तपाईंलाई बाटो देखाउन",
+      "subtitle": "Kusema कुनामा छ, तपाईंलाई बाटो देखाउन",
       "noteLabel": "नोट",
       "placeholder": "नयाँ नोट",
       "hold": "<keys/> थिचिराखेर बोल्नुहोस्।",
@@ -199,14 +199,14 @@
     },
     "done": {
       "title": "सबै तयार छ",
-      "subMac": "Handy अब तपाईंको मेनु बारमा छ। जुनसुकै एपमा बोल्न <keys/> थिचिराख्नुहोस् वा थिच्नुहोस्।",
-      "subTray": "Handy अब तपाईंको सिस्टम ट्रेमा छ। जुनसुकै एपमा बोल्न <keys/> थिचिराख्नुहोस् वा थिच्नुहोस्।",
+      "subMac": "Kusema अब तपाईंको मेनु बारमा छ। जुनसुकै एपमा बोल्न <keys/> थिचिराख्नुहोस् वा थिच्नुहोस्।",
+      "subTray": "Kusema अब तपाईंको सिस्टम ट्रेमा छ। जुनसुकै एपमा बोल्न <keys/> थिचिराख्नुहोस् वा थिच्नुहोस्।",
       "hint": "यी कुरा पछि सेटिङमा परिवर्तन गर्न सकिन्छ",
       "highFiveLabel": "हाई फाइभ",
-      "atLogin": "लग इन गर्दा Handy सुरु गर्नुहोस्",
+      "atLogin": "लग इन गर्दा Kusema सुरु गर्नुहोस्",
       "finish": "सम्पन्न",
       "panel": {
-        "name": "Handy",
+        "name": "Kusema",
         "ready": "तयार",
         "languages": "भाषाहरू",
         "model": "स्पिच मोडेल",
@@ -220,79 +220,79 @@
       "done": "अन्य एपहरूमा काम गरेन? <guide>Linux सेटअप गाइड</guide>"
     },
     "setup": {
-      "retryDownload": "Try again",
+      "retryDownload": "फेरि प्रयास गर्नुहोस्",
       "welcome": {
-        "title": "Kusema turns your voice into text on this computer.",
-        "privacy": "Your voice never leaves it.",
-        "language": "Language you'll dictate in"
+        "title": "Kusema ले यही कम्प्युटरमा तपाईंको आवाजलाई टेक्स्टमा बदल्छ।",
+        "privacy": "तपाईंको आवाज कहिल्यै यो कम्प्युटरबाट बाहिर जाँदैन।",
+        "language": "तपाईंले डिक्टेट गर्ने भाषा"
       },
       "microphone": {
-        "title": "Choose your microphone",
-        "sub": "Say something. The bar should move as you speak.",
-        "label": "Microphone",
-        "meter": "Microphone level",
-        "heard": "Kusema can hear you.",
-        "quiet": "No sound yet. Check that this microphone isn't muted, or choose another one.",
-        "failed": "Kusema couldn't open this microphone. Choose another one.",
-        "tip": "Tip: a headset gives the best accuracy and fewer stray words."
+        "title": "आफ्नो माइक्रोफोन छान्नुहोस्",
+        "sub": "केही बोल्नुहोस्। बोल्दा बार चल्नुपर्छ।",
+        "label": "माइक्रोफोन",
+        "meter": "माइक्रोफोन स्तर",
+        "heard": "Kusema ले तपाईंलाई सुनिरहेको छ।",
+        "quiet": "अहिलेसम्म आवाज छैन। यो माइक्रोफोन म्युट त छैन जाँच्नुहोस्, वा अर्को छान्नुहोस्।",
+        "failed": "Kusema ले यो माइक्रोफोन खोल्न सकेन। अर्को छान्नुहोस्।",
+        "tip": "सुझाव: हेडसेटले सबैभन्दा राम्रो शुद्धता दिन्छ र फालतु शब्द कम आउँछन्।"
       },
       "practice": {
-        "title": "Dictate your first sentence",
-        "how": "Hold <keys/>, say this sentence, then let go:",
+        "title": "आफ्नो पहिलो वाक्य डिक्टेट गर्नुहोस्",
+        "how": "<keys/> थिचिराख्नुहोस्, यो वाक्य बोल्नुहोस्, अनि छोड्नुहोस्:",
         "sentence": "Dear Mr. Smith comma thank you for your letter period",
-        "box": "Practice box: your words appear here",
-        "placeholder": "Your words appear here",
-        "listening": "Listening...",
-        "typing": "Typing...",
-        "success": "That's it. Saying \"comma\" and \"period\" types the marks.",
-        "waiting": "Your speech model is still downloading. This box will work as soon as it's ready.",
-        "continuous": "For longer dictation, press <keys/> to keep listening until you press it again. Used to Dragon? You can set this to Numpad + under General.",
-        "continuousRunning": "Continuous dictation is on. Your words appear in the box each time you pause. Press {{stop}} to stop it.",
-        "continuousEnded": "That's continuous dictation. In your other apps, your words are typed at the cursor."
+        "box": "अभ्यास बाकस: तपाईंका शब्द यहाँ देखिन्छन्",
+        "placeholder": "तपाईंका शब्द यहाँ देखिन्छन्",
+        "listening": "सुन्दै...",
+        "typing": "टाइप गर्दै...",
+        "success": "यसरी नै। \"comma\" र \"period\" भन्दा चिह्न टाइप हुन्छन्।",
+        "waiting": "तपाईंको स्पिच मोडेल अझै डाउनलोड हुँदैछ। तयार हुनेबित्तिकै यो बाकसले काम गर्छ।",
+        "continuous": "लामो डिक्टेसनका लागि <keys/> थिच्नुहोस्; तपाईंले फेरि नथिचेसम्म Kusema सुनिरहन्छ। Dragon को बानी छ? सामान्यमा Numpad + सेट गर्न सक्नुहुन्छ।",
+        "continuousRunning": "निरन्तर डिक्टेसन अन छ। हरेक पटक रोकिँदा तपाईंका शब्द बाकसमा देखिन्छन्। रोक्न {{stop}} थिच्नुहोस्।",
+        "continuousEnded": "यही हो निरन्तर डिक्टेसन। अरू एपहरूमा शब्दहरू कर्सर भएको ठाउँमा टाइप हुन्छन्।"
       },
       "assistant": {
-        "title": "Set up the AI assistant (optional)",
-        "sub": "Ask Kusema answers questions you speak. Dictation doesn't need it.",
-        "model": "Model",
-        "continueWithout": "Continue without AI",
-        "privileged": "Privileged mode blocks all cloud AI with one switch, for matters that must stay on this computer.",
+        "title": "AI सहायक सेट गर्नुहोस् (वैकल्पिक)",
+        "sub": "\"Kusema लाई सोध्नुहोस्\" ले बोलेर सोधेका प्रश्नको जवाफ दिन्छ। डिक्टेसनलाई यसको आवश्यकता पर्दैन।",
+        "model": "मोडेल",
+        "continueWithout": "AI बिना जारी राख्नुहोस्",
+        "privileged": "Privileged मोडले एउटै स्विचबाट सबै क्लाउड AI रोक्छ, यही कम्प्युटरमा रहनुपर्ने कामहरूका लागि।",
         "local": {
-          "title": "Private: use a local AI on this computer",
-          "description": "Your questions stay here. Uses Ollama, a free app.",
-          "checking": "Looking for Ollama on this computer...",
-          "found": "Found Ollama. Choose a model to use.",
-          "notFound": "Ollama isn't running on this computer.",
-          "noModels": "Ollama is running, but has no models yet. Run \"ollama pull llama3.2\", then check again.",
-          "instructions": "How to set up Ollama",
-          "again": "Check again"
+          "title": "निजी: यही कम्प्युटरमा लोकल AI प्रयोग गर्नुहोस्",
+          "description": "तपाईंका प्रश्न यहीँ रहन्छन्। निःशुल्क एप Ollama प्रयोग गर्छ।",
+          "checking": "यो कम्प्युटरमा Ollama खोज्दै...",
+          "found": "Ollama भेटियो। प्रयोग गर्ने मोडेल छान्नुहोस्।",
+          "notFound": "यो कम्प्युटरमा Ollama चलिरहेको छैन।",
+          "noModels": "Ollama चलिरहेको छ, तर अझै कुनै मोडेल छैन। \"ollama pull llama3.2\" चलाउनुहोस्, अनि फेरि जाँच्नुहोस्।",
+          "instructions": "Ollama कसरी सेट गर्ने",
+          "again": "फेरि जाँच्नुहोस्"
         },
         "cloud": {
-          "title": "Use a cloud AI provider",
-          "description": "Your questions go to the provider you choose, using your own API key.",
-          "provider": "Provider",
-          "key": "API key",
-          "check": "Save and check",
-          "checking": "Checking the key...",
-          "saved": "Key saved in Windows Credential Manager. Choose a model to use.",
-          "where": "The key is stored in Windows Credential Manager, not in a file.",
-          "keyFailed": "The key was saved, but the provider didn't list any models. Check the key and try again."
+          "title": "क्लाउड AI प्रदायक प्रयोग गर्नुहोस्",
+          "description": "तपाईंका प्रश्न तपाईंकै API कुञ्जीसहित तपाईंले छानेको प्रदायकलाई जान्छन्।",
+          "provider": "प्रदायक",
+          "key": "API कुञ्जी",
+          "check": "सेभ गरेर जाँच्नुहोस्",
+          "checking": "कुञ्जी जाँच्दै...",
+          "saved": "कुञ्जी Windows क्रेडेन्सियल म्यानेजरमा सेभ भयो। प्रयोग गर्ने मोडेल छान्नुहोस्।",
+          "where": "कुञ्जी फाइलमा होइन, Windows क्रेडेन्सियल म्यानेजरमा राखिन्छ।",
+          "keyFailed": "कुञ्जी सेभ भयो, तर प्रदायकले कुनै मोडेल देखाएन। कुञ्जी जाँचेर फेरि प्रयास गर्नुहोस्।"
         },
         "skip": {
-          "title": "Skip for now",
-          "description": "You can set this up later on the Assistant page."
+          "title": "अहिलेलाई छोड्नुहोस्",
+          "description": "यसलाई पछि सहायक पेजमा सेट गर्न सक्नुहुन्छ।"
         }
       },
       "done": {
-        "title": "You're all set",
-        "sub": "Kusema keeps running in the system tray and works in any app.",
-        "finish": "Start using Kusema",
-        "wins": "Your first three wins are waiting on the main page.",
-        "atLogin": "Start Kusema when I sign in",
+        "title": "सबै तयार छ",
+        "sub": "Kusema सिस्टम ट्रेमा चलिरहन्छ र कुनै पनि एपमा काम गर्छ।",
+        "finish": "Kusema प्रयोग गर्न सुरु गर्नुहोस्",
+        "wins": "तपाईंका पहिला तीन उपलब्धि मुख्य पेजमा पर्खिरहेका छन्।",
+        "atLogin": "साइन इन गर्दा Kusema सुरु गर्नुहोस्",
         "keys": {
-          "dictate": "Dictate: hold",
-          "continuous": "Continuous dictation: press to start and stop",
-          "ask": "Ask Kusema",
-          "askScreen": "Ask about my screen"
+          "dictate": "डिक्टेट: थिचिराख्नुहोस्",
+          "continuous": "निरन्तर डिक्टेसन: सुरु र बन्द गर्न थिच्नुहोस्",
+          "ask": "Kusema लाई सोध्नुहोस्",
+          "askScreen": "मेरो स्क्रिनबारे सोध्नुहोस्"
         }
       }
     }
@@ -408,7 +408,7 @@
     "general": {
       "title": "सामान्य",
       "shortcut": {
-        "title": "Handy सर्टकटहरू",
+        "title": "Kusema सर्टकटहरू",
         "description": "स्पिच-टु-टेक्स्ट रेकर्डिङ सुरु गर्न किबोर्ड सर्टकटहरू सेट अप गर्नुहोस्",
         "loading": "सर्टकटहरू लोड गरिँदैछन्...",
         "none": "कुनै सर्टकट सेट गरिएको छैन",
@@ -428,20 +428,20 @@
             "description": "वैकल्पिक: तपाईंको ट्रान्सक्रिप्सनमा सधैँ AI पोस्ट-प्रोसेसिङ लागू गर्ने छुट्टै हटकी।"
           },
           "assistant": {
-            "name": "Ask Kusema",
-            "description": "Hold or press to ask a spoken question. The reply appears below instead of being pasted."
+            "name": "Kusema लाई सोध्नुहोस्",
+            "description": "बोलेर प्रश्न सोध्न थिचिराख्नुहोस् वा थिच्नुहोस्। जवाफ पेस्ट हुनुको सट्टा तल देखिन्छ।"
           },
           "assistant_screen": {
-            "name": "Ask About My Screen",
-            "description": "Hold or press to ask a spoken question about the window you're working in. You see the screenshot before anything is sent."
+            "name": "मेरो स्क्रिनबारे सोध्नुहोस्",
+            "description": "तपाईंले काम गरिरहेको विन्डोबारे बोलेर प्रश्न सोध्न थिचिराख्नुहोस् वा थिच्नुहोस्। केही पठाउनुअघि तपाईंले स्क्रिनसट देख्नुहुन्छ।"
           },
           "dictate_continuous": {
-            "name": "Continuous Dictation",
-            "description": "Press to start dictating hands-free, and press again to stop. Text appears each time you pause."
+            "name": "निरन्तर डिक्टेसन",
+            "description": "हात नचलाई डिक्टेट गर्न थिच्नुहोस्, र रोक्न फेरि थिच्नुहोस्। हरेक पटक रोकिँदा टेक्स्ट देखिन्छ।"
           },
           "toggle_privileged": {
-            "name": "Privileged Mode",
-            "description": "Press to turn Privileged mode on or off."
+            "name": "Privileged मोड",
+            "description": "Privileged मोड अन वा अफ गर्न थिच्नुहोस्।"
           }
         },
         "errors": {
@@ -466,7 +466,7 @@
       },
       "preferredLanguages": {
         "title": "मनपर्ने भाषाहरू",
-        "description": "तपाईंले बोल्ने भाषाहरू। Handy ले यिनको आधारमा मोडेल सिफारिस गर्छ।",
+        "description": "तपाईंले बोल्ने भाषाहरू। Kusema ले यिनको आधारमा मोडेल सिफारिस गर्छ।",
         "noMatch": "“{{query}}” सँग मिल्ने कुनै भाषा छैन",
         "weak": "कुनै मोडेलले अहिलेसम्म {{languages}} राम्ररी चिन्दैन।"
       },
@@ -493,17 +493,17 @@
         "fits": "तपाईंका भाषाहरूका लागि",
         "untested": "परीक्षण नगरिएको"
       },
-      "untestedNote": "Handy मा परीक्षण गरिएको छैन। यिनी ढिलो हुन सक्छन् वा बढी गल्ती गर्न सक्छन्।",
+      "untestedNote": "Kusema मा परीक्षण गरिएको छैन। यिनी ढिलो हुन सक्छन् वा बढी गल्ती गर्न सक्छन्।",
       "untestedHidden_one": "थप {{count}} मोडेल डिक्टेसनका लागि ट्युन गरिएको छैन। भेट्न खोज्नुहोस्।",
       "untestedHidden_other": "थप {{count}} मोडेलहरू डिक्टेसनका लागि ट्युन गरिएका छैनन्। भेट्न खोज्नुहोस्।",
-      "emptyYours": "अहिलेसम्म कुनै मोडेल छैन। तल एउटा छान्नुहोस्: त्यो डाउनलोड हुन्छ, अनि Handy ले प्रयोग गर्छ।",
+      "emptyYours": "अहिलेसम्म कुनै मोडेल छैन। तल एउटा छान्नुहोस्: त्यो डाउनलोड हुन्छ, अनि Kusema ले प्रयोग गर्छ।",
       "showMore": "थप {{count}} देखाउनुहोस्",
       "showFewer": "कम देखाउनुहोस्",
       "download": "डाउनलोड गरी प्रयोग गर्नुहोस्",
       "downloadingThenUse": "{{total}} को {{percent}}%, त्यसपछि बदलिन्छ",
       "loading": "लोड गरिँदैछ…",
       "deleteAsk": "{{name}} मेटाउने? {{size}} खाली हुन्छ।",
-      "deleteAskActive": "{{name}} मेटाउने? अर्को मोडेल नछान्दासम्म Handy ले ट्रान्सक्राइब गर्न सक्दैन।",
+      "deleteAskActive": "{{name}} मेटाउने? अर्को मोडेल नछान्दासम्म Kusema ले ट्रान्सक्राइब गर्न सक्दैन।",
       "cancel": "रद्द गर्नुहोस्",
       "deleteModel": "{{name}} मेटाउनुहोस्",
       "cancelDownload": "{{name}} को डाउनलोड रोक्नुहोस्",
@@ -517,7 +517,7 @@
         "marks": "? अहिलेसम्म नापिएको छैन। — ले त्यो भाषा सुन्दैन।"
       },
       "retiredNotice": {
-        "title": "पुराना मोडेलहरूले अब Handy सँग काम गर्दैनन्",
+        "title": "पुराना मोडेलहरूले अब Kusema सँग काम गर्दैनन्",
         "description": "तिनीहरूले तपाईंको कम्प्युटरमा {{size}} ठाउँ ओगटेका छन्।",
         "delete": "मोडेलहरू मेटाउनुहोस्",
         "deleted": "पुराना मोडेलहरू मेटाइए",
@@ -525,37 +525,37 @@
       },
       "rescan": {
         "label": "फेरि स्क्यान गर्नुहोस्",
-        "tooltip": "Handy बाहिरबाट मोडेल फोल्डर वा Hugging Face क्यासमा थपिएका मोडेलहरू फेरि स्क्यान गर्नुहोस्"
+        "tooltip": "Kusema बाहिरबाट मोडेल फोल्डर वा Hugging Face क्यासमा थपिएका मोडेलहरू फेरि स्क्यान गर्नुहोस्"
       },
       "curated": {
-        "inUse": "In use",
-        "gettingReady": "Getting ready...",
-        "downloading": "Downloading: {{percent}}%",
-        "cancel": "Cancel",
-        "cancelLabel": "Cancel downloading {{name}}",
-        "use": "Use",
-        "useLabel": "Use {{name}}",
-        "download": "Download ({{size}})",
-        "downloadLabel": "Download {{name}}",
-        "recommended": "Recommended",
-        "others": "Also on this computer",
-        "showAllHint": "More models are available: turn on Show all models under Advanced.",
+        "inUse": "प्रयोगमा",
+        "gettingReady": "तयार हुँदै...",
+        "downloading": "डाउनलोड हुँदै: {{percent}}%",
+        "cancel": "रद्द गर्नुहोस्",
+        "cancelLabel": "{{name}} को डाउनलोड रद्द गर्नुहोस्",
+        "use": "प्रयोग गर्नुहोस्",
+        "useLabel": "{{name}} प्रयोग गर्नुहोस्",
+        "download": "डाउनलोड गर्नुहोस् ({{size}})",
+        "downloadLabel": "{{name}} डाउनलोड गर्नुहोस्",
+        "recommended": "सिफारिस गरिएको",
+        "others": "यो कम्प्युटरमा पनि छ",
+        "showAllHint": "अरू मोडेल पनि छन्: उन्नतमा \"सबै मोडेल देखाउनुहोस्\" अन गर्नुहोस्।",
         "rows": {
           "parakeetUnified": {
             "name": "Parakeet Unified English",
-            "description": "The best choice for English. Chosen automatically."
+            "description": "अङ्ग्रेजीका लागि सबैभन्दा राम्रो छनोट। आफैँ छानिन्छ।"
           },
           "parakeetV3": {
             "name": "Parakeet TDT v3",
-            "description": "For dictating in other languages, including Spanish, French and German."
+            "description": "अरू भाषामा डिक्टेसनका लागि, जसमा स्पेनिस, फ्रेन्च र जर्मन पर्छन्।"
           },
           "canary": {
             "name": "Canary 180M Flash",
-            "description": "A small download, for older computers or when disk space is low."
+            "description": "सानो डाउनलोड, पुराना कम्प्युटर वा डिस्कमा ठाउँ कम हुँदाका लागि।"
           },
           "nemotron": {
             "name": "Nemotron 3.5 Streaming",
-            "description": "Shows live text as you speak, but makes more mistakes."
+            "description": "बोल्दा टेक्स्ट लाइभ देखाउँछ, तर बढी गल्ती गर्छ।"
           }
         }
       }
@@ -564,26 +564,26 @@
       "title": "भाषाहरू"
     },
     "dictation": {
-      "title": "Continuous Dictation",
-      "description": "Keep talking, and the text is typed into your window each time you pause. Speech recognition stays on this computer, and AI cleanup never runs in this mode.",
+      "title": "निरन्तर डिक्टेसन",
+      "description": "बोलिरहनुहोस्, हरेक पटक रोकिँदा टेक्स्ट तपाईंको विन्डोमा टाइप हुन्छ। स्पिच रिकग्निसन यही कम्प्युटरमा रहन्छ, र यो मोडमा AI सफाइ कहिल्यै चल्दैन।",
       "dragonKey": {
-        "title": "Dragon's Key",
-        "description": "Use Numpad + to start and stop, as Dragon does. While it's set, that key no longer types a plus sign.",
-        "button": "Use Dragon's key (Numpad +)"
+        "title": "Dragon को कुञ्जी",
+        "description": "Dragon जस्तै सुरु र बन्द गर्न Numpad + प्रयोग गर्नुहोस्। यो सेट रहुन्जेल त्यो कुञ्जीले प्लस चिह्न टाइप गर्दैन।",
+        "button": "Dragon को कुञ्जी प्रयोग गर्नुहोस् (Numpad +)"
       },
       "pause": {
-        "title": "Pause Length",
-        "description": "How long you pause before what you said is typed. Longer pauses keep sentences together; shorter ones show text sooner.",
+        "title": "विरामको लम्बाइ",
+        "description": "तपाईंले भनेको टाइप हुनुअघि कति बेर रोकिनुहुन्छ। लामो विरामले वाक्यहरू सँगै राख्छ; छोटोले टेक्स्ट छिटो देखाउँछ।",
         "seconds": "{{seconds}} s"
       },
       "autoStop": {
-        "title": "Stop After Silence",
-        "description": "Dictation stops by itself after this long without speech, so the microphone is never left on by accident.",
-        "minutes": "{{minutes}} min"
+        "title": "मौनतापछि रोक्नुहोस्",
+        "description": "यति बेर कुनै बोली नभए डिक्टेसन आफैँ रोकिन्छ, ताकि माइक्रोफोन गल्तीले अन नरहोस्।",
+        "minutes": "{{minutes}} मिनेट"
       },
       "voiceCommands": {
-        "label": "Voice Commands",
-        "description": "Say \"new paragraph\" or \"new line\" as you talk, or \"scratch that\" or \"stop dictation\" on its own between pauses, and it acts instead of being typed. Normal sentences with these words are typed as usual."
+        "label": "आवाज आदेशहरू",
+        "description": "बोल्दाबोल्दै \"new paragraph\" वा \"new line\" भन्नुहोस्, वा विरामहरूबीच छुट्टै \"scratch that\" वा \"stop dictation\" भन्नुहोस्, अनि टाइप हुनुको सट्टा आदेश चल्छ। यी शब्द भएका सामान्य वाक्य सधैँझैँ टाइप हुन्छन्।"
       }
     },
     "sound": {
@@ -646,11 +646,11 @@
       },
       "autostart": {
         "label": "स्टार्टअपमा सुरु गर्नुहोस्",
-        "description": "कम्प्युटरमा लगइन गर्दा Handy स्वतः सुरु गर्नुहोस्।"
+        "description": "कम्प्युटरमा लगइन गर्दा Kusema स्वतः सुरु गर्नुहोस्।"
       },
       "showTrayIcon": {
         "label": "ट्रे आइकन देखाउनुहोस्",
-        "description": "सिस्टम ट्रेमा Handy आइकन देखाउनुहोस्।"
+        "description": "सिस्टम ट्रेमा Kusema आइकन देखाउनुहोस्।"
       },
       "overlay": {
         "style": {
@@ -773,90 +773,90 @@
         }
       },
       "showAllModels": {
-        "label": "Show all models",
-        "description": "List every model on the Models page, with accuracy and speed details, instead of the short list."
+        "label": "सबै मोडेल देखाउनुहोस्",
+        "description": "छोटो सूचीको सट्टा मोडेल पेजमा हरेक मोडेल शुद्धता र गतिको विवरणसहित देखाउनुहोस्।"
       }
     },
     "assistant": {
-      "title": "Assistant",
-      "description": "Hold the shortcut, ask a question out loud, and Kusema answers.",
+      "title": "सहायक",
+      "description": "सर्टकट थिचिराख्नुहोस्, ठूलो स्वरमा प्रश्न सोध्नुहोस्, र Kusema ले जवाफ दिन्छ।",
       "provider": {
-        "title": "AI Provider",
-        "provider": "Provider",
-        "description": "Assistant mode uses the same provider and API key as Post Process.",
-        "model": "Model",
-        "modelDescription": "The model that answers your questions. Change it on the Post Process page.",
-        "notSet": "Not chosen",
-        "open": "Open Post Process settings",
-        "disabled": "Assistant mode needs an AI provider (such as Anthropic, OpenAI or a local Ollama model) to answer questions. Providers are set up on the Post Process page, which appears once Post Processing is turned on. Turning it on doesn't change how normal dictation works.",
-        "enable": "Turn on Post Processing",
-        "noProvider": "Choose a provider on the Post Process page.",
-        "noKey": "No API key is set for {{provider}}. Add one on the Post Process page.",
-        "noModel": "Choose a model on the Post Process page."
+        "title": "AI प्रदायक",
+        "provider": "प्रदायक",
+        "description": "सहायकले पोस्ट प्रोसेसकै प्रदायक र API कुञ्जी प्रयोग गर्छ।",
+        "model": "मोडेल",
+        "modelDescription": "तपाईंका प्रश्नको जवाफ दिने मोडेल। यसलाई पोस्ट प्रोसेस पेजमा बदल्नुहोस्।",
+        "notSet": "छानिएको छैन",
+        "open": "पोस्ट प्रोसेस सेटिङहरू खोल्नुहोस्",
+        "disabled": "प्रश्नको जवाफ दिन सहायकलाई AI प्रदायक चाहिन्छ (जस्तै Anthropic, OpenAI वा लोकल Ollama मोडेल)। प्रदायकहरू पोस्ट प्रोसेस पेजमा सेट गरिन्छन्, जुन पोस्ट प्रोसेसिङ अन गरेपछि देखिन्छ। यसलाई अन गर्दा सामान्य डिक्टेसन बदलिँदैन।",
+        "enable": "पोस्ट प्रोसेसिङ अन गर्नुहोस्",
+        "noProvider": "पोस्ट प्रोसेस पेजमा प्रदायक छान्नुहोस्।",
+        "noKey": "{{provider}} का लागि API कुञ्जी सेट छैन। पोस्ट प्रोसेस पेजमा एउटा थप्नुहोस्।",
+        "noModel": "पोस्ट प्रोसेस पेजमा मोडेल छान्नुहोस्।"
       },
       "screen": {
-        "title": "Ask About My Screen",
-        "description": "Ask about the window you're working in, like “What do you think of this document?” Only that window is captured, and it stays on this computer until you press Send.",
+        "title": "मेरो स्क्रिनबारे सोध्नुहोस्",
+        "description": "तपाईंले काम गरिरहेको विन्डोबारे सोध्नुहोस्, जस्तै \"यो कागजातबारे तिम्रो के विचार छ?\" त्यही विन्डो मात्र क्याप्चर हुन्छ, र तपाईंले पठाउनुहोस् नथिचेसम्म यही कम्प्युटरमा रहन्छ।",
         "confirm": {
-          "label": "Confirm Before Sending Screenshots",
-          "description": "Show the screenshot, your question and where it will go, then wait for Send (Enter) or Cancel (Escape). Unanswered, it cancels after 30 seconds.",
-          "offWarning": "Screenshots will be sent to {{provider}} as soon as you finish speaking, without showing you first. Everything visible in the window goes with them, including private or confidential information."
+          "label": "स्क्रिनसट पठाउनुअघि पुष्टि गर्नुहोस्",
+          "description": "स्क्रिनसट, तपाईंको प्रश्न र यो कहाँ जान्छ भनेर देखाउँछ, अनि पठाउनुहोस् (Enter) वा रद्द गर्नुहोस् (Esc) को प्रतीक्षा गर्छ। जवाफ नआए ३० सेकेन्डपछि रद्द हुन्छ।",
+          "offWarning": "तपाईंले बोलिसक्नेबित्तिकै स्क्रिनसट पहिले नदेखाई {{provider}} लाई पठाइन्छ। विन्डोमा देखिने सबै कुरा, निजी वा गोप्य जानकारीसमेत, सँगै जान्छ।"
         },
         "provider": {
-          "label": "Use for Screen Questions",
-          "description": "Send screenshots to a different provider than normal questions, for example a local vision model in Ollama (the Custom provider) for confidential documents. Follow-up questions go to the same provider until you start a new conversation.",
-          "same": "Same as Assistant",
-          "sameNamed": "Same as Assistant ({{provider}})",
-          "yourProvider": "your AI provider"
+          "label": "स्क्रिनका प्रश्नका लागि प्रयोग गर्नुहोस्",
+          "description": "स्क्रिनसटलाई सामान्य प्रश्नभन्दा फरक प्रदायकलाई पठाउनुहोस्, जस्तै गोप्य कागजातका लागि Ollama को लोकल भिजन मोडेल (कस्टम प्रदायक)। नयाँ कुराकानी सुरु नगरेसम्म पछिका प्रश्न उही प्रदायकलाई जान्छन्।",
+          "same": "सहायककै जस्तो",
+          "sameNamed": "सहायककै जस्तो ({{provider}})",
+          "yourProvider": "तपाईंको AI प्रदायक"
         },
         "model": {
-          "label": "Model for Screen Questions",
-          "description": "A model that can see images. Leave empty to use the model chosen for this provider on the Post Process page.",
-          "placeholder": "e.g. qwen2.5vl"
+          "label": "स्क्रिनका प्रश्नका लागि मोडेल",
+          "description": "तस्बिर हेर्न सक्ने मोडेल। पोस्ट प्रोसेस पेजमा यो प्रदायकका लागि छानिएको मोडेल प्रयोग गर्न खाली छोड्नुहोस्।",
+          "placeholder": "जस्तै qwen2.5vl"
         }
       },
       "conversation": {
-        "empty": "Ask a question with the Ask Kusema shortcut. The conversation will appear here.",
-        "new": "New conversation",
-        "screenshot": "Screenshot",
-        "noProvider": "Ask Kusema needs an AI model to answer. Choose one in Settings.",
-        "openSettings": "Open Settings"
+        "empty": "\"Kusema लाई सोध्नुहोस्\" सर्टकटबाट प्रश्न सोध्नुहोस्। कुराकानी यहाँ देखिन्छ।",
+        "new": "नयाँ कुराकानी",
+        "screenshot": "स्क्रिनसट",
+        "noProvider": "\"Kusema लाई सोध्नुहोस्\" लाई जवाफ दिन AI मोडेल चाहिन्छ। सेटिङहरूमा एउटा छान्नुहोस्।",
+        "openSettings": "सेटिङहरू खोल्नुहोस्"
       },
       "voice": {
-        "title": "Voice",
-        "systemDefault": "System default",
-        "previewText": "Hi, I'm Kusema. This is how I'll sound when I answer your questions.",
+        "title": "आवाज",
+        "systemDefault": "सिस्टम पूर्वनिर्धारित",
+        "previewText": "नमस्ते, म Kusema हुँ। तपाईंका प्रश्नको जवाफ दिँदा मेरो आवाज यस्तो हुन्छ।",
         "speakReplies": {
-          "label": "Speak Replies",
-          "description": "Read replies aloud as they arrive. Press Cancel (Escape), start a new recording, or start a new conversation to stop."
+          "label": "जवाफ पढेर सुनाउनुहोस्",
+          "description": "जवाफ आउनेबित्तिकै ठूलो स्वरमा पढ्छ। रोक्न रद्द गर्नुहोस् (Esc) थिच्नुहोस्, नयाँ रेकर्डिङ वा नयाँ कुराकानी सुरु गर्नुहोस्।"
         },
         "voice": {
-          "label": "Voice",
-          "description": "Kokoro voices sound the most natural; download them above. The other voices come with your computer (on Windows, add more under Settings > Time & language > Speech)."
+          "label": "आवाज",
+          "description": "Kokoro आवाजहरू सबैभन्दा स्वाभाविक सुनिन्छन्; माथि डाउनलोड गर्नुहोस्। अरू आवाजहरू कम्प्युटरसँगै आउँछन् (Windows मा, सेटिङ > समय र भाषा > स्पिचमा थप्नुहोस्)।"
         },
         "kokoro": {
-          "label": "Kokoro Voices",
-          "description": "28 natural-sounding English voices (US and UK) generated on this computer. A one-time download.",
-          "installed": "Installed. Pick a Kokoro voice below. Removing them frees the disk space; replies then use the system voice.",
-          "download": "Download ({{size}} MB)",
-          "downloading": "Downloading… {{percentage}}%",
-          "cancel": "Cancel",
-          "delete": "Remove"
+          "label": "Kokoro आवाजहरू",
+          "description": "यही कम्प्युटरमा बन्ने २८ वटा स्वाभाविक अङ्ग्रेजी आवाज (अमेरिका र बेलायत)। एक पटकको डाउनलोड।",
+          "installed": "इन्स्टल भयो। तल Kokoro आवाज छान्नुहोस्। हटाउँदा डिस्कमा ठाउँ खाली हुन्छ; त्यसपछि जवाफ सिस्टम आवाजमा पढिन्छन्।",
+          "download": "डाउनलोड गर्नुहोस् ({{size}} MB)",
+          "downloading": "डाउनलोड हुँदै… {{percentage}}%",
+          "cancel": "रद्द गर्नुहोस्",
+          "delete": "हटाउनुहोस्"
         },
         "rate": {
-          "label": "Speaking Rate",
-          "description": "How fast replies are read. 1.00× is the voice's normal speed."
+          "label": "बोल्ने गति",
+          "description": "जवाफ कति छिटो पढिन्छ। 1.00× आवाजको सामान्य गति हो।"
         },
         "preview": {
-          "label": "Preview Voice",
-          "description": "Hear the selected voice at the selected speed.",
-          "button": "Preview"
+          "label": "आवाज सुन्नुहोस्",
+          "description": "छानिएको आवाज छानिएको गतिमा सुन्नुहोस्।",
+          "button": "सुन्नुहोस्"
         }
       },
       "tabs": {
-        "label": "Assistant",
-        "conversation": "Conversation",
-        "settings": "Settings"
+        "label": "सहायक",
+        "conversation": "कुराकानी",
+        "settings": "सेटिङहरू"
       }
     },
     "postProcessing": {
@@ -973,7 +973,7 @@
       },
       "updateChecks": {
         "label": "अपडेटहरू जाँच गर्नुहोस्",
-        "description": "Handy को नयाँ संस्करण स्वतः जाँच गर्नुहोस्",
+        "description": "Kusema को नयाँ संस्करण स्वतः जाँच गर्नुहोस्",
         "lockedDescription": "प्रणाली कन्फिगरेसनद्वारा असक्षम पारिएको (HANDY_DISABLE_UPDATER)"
       },
       "whatsNewPreview": {
@@ -992,9 +992,9 @@
           "welcome": "स्वागत",
           "permissions": "अनुमतिहरू",
           "done": "सबै तयार",
-          "microphone": "Microphone",
-          "practice": "Practice",
-          "assistant": "AI assistant"
+          "microphone": "माइक्रोफोन",
+          "practice": "अभ्यास",
+          "assistant": "AI सहायक"
         }
       },
       "onboardingRun": {
@@ -1040,8 +1040,8 @@
         "description": "ल्यापटपको ढकनी बन्द हुँदा प्रयोग गर्ने माइक्रोफोन"
       },
       "postProcessingToggle": {
-        "label": "AI Cleanup",
-        "description": "Optional. Rewrites dictated text with an AI model when you use the AI cleanup shortcut: fixes self-corrections and grammar, keeps your meaning, and never adds facts."
+        "label": "AI सफाइ",
+        "description": "वैकल्पिक। AI सफाइ सर्टकट प्रयोग गर्दा डिक्टेट गरिएको टेक्स्टलाई AI मोडेलले फेरि लेख्छ: आफैँ गरेका सुधार र व्याकरण ठीक गर्छ, तपाईंको अर्थ राख्छ, र कहिल्यै तथ्य थप्दैन।"
       },
       "muteWhileRecording": {
         "label": "रेकर्डिङ गर्दा म्युट गर्नुहोस्",
@@ -1057,7 +1057,7 @@
         "bindingsReset": "किबोर्ड सर्टकटहरू असंगत भएकाले डिफल्टमा रिसेट गरियो",
         "options": {
           "tauri": "Tauri Global Shortcut",
-          "builtIn": "Built-in (recommended)"
+          "builtIn": "बिल्ट-इन (सिफारिस गरिएको)"
         }
       },
       "pasteDelay": {
@@ -1086,7 +1086,7 @@
       },
       "keyboardDiagnostic": {
         "title": "किबोर्ड डायग्नोस्टिक",
-        "description": "किबोर्ड इभेन्टहरू Handy सम्म पुग्छन् कि पुग्दैनन् भनी जाँच्छ। इभेन्टको संख्या मात्र रेकर्ड हुन्छ — तपाईंले कुन कुञ्जी थिच्नुभयो भन्ने कहिल्यै होइन।",
+        "description": "किबोर्ड इभेन्टहरू Kusema सम्म पुग्छन् कि पुग्दैनन् भनी जाँच्छ। इभेन्टको संख्या मात्र रेकर्ड हुन्छ — तपाईंले कुन कुञ्जी थिच्नुभयो भन्ने कहिल्यै होइन।",
         "run": "१० सेकेन्डको डायग्नोस्टिक चलाउनुहोस्",
         "running": "सुनिरहेको छ… आफ्नो सर्टकट केही पटक थिच्नुहोस् (जस्तै Option+Space)",
         "secureInputLabel": "Secure Input",
@@ -1100,7 +1100,7 @@
         "mouse": "माउस",
         "verdictBlocked": "Secure Input ले कुञ्जी इभेन्टहरू रोकिरहेको छ — यो समाधान नभएसम्म सामान्य कुञ्जी भएका सर्टकटहरूले काम गर्न सक्दैनन्।",
         "verdictSuspicious": "मोडिफायर इभेन्टहरू आए तर कुञ्जी इभेन्ट आएनन् — Secure Input अक्षम देखिए पनि केहीले कुञ्जीहरू दबाइरहेको छ। कृपया यसको रिपोर्ट GitHub मा गर्नुहोस्।",
-        "verdictOk": "कुञ्जी इभेन्टहरू Handy सम्म सामान्य रूपमा पुगिरहेका छन्।",
+        "verdictOk": "कुञ्जी इभेन्टहरू Kusema सम्म सामान्य रूपमा पुगिरहेका छन्।",
         "verdictNoEvents": "कुनै इभेन्ट कैद भएन — के तपाईंले परीक्षणको क्रममा कुनै कुञ्जी थिच्नुभयो?",
         "failed": "डायग्नोस्टिक असफल: {{error}}"
       }
@@ -1109,203 +1109,203 @@
       "title": "बारेमा",
       "version": {
         "title": "संस्करण",
-        "description": "Handy को हालको संस्करण"
+        "description": "Kusema को हालको संस्करण"
       },
       "whatsNewUpdates": {
         "label": "नयाँ के छ देखाउनुहोस्",
-        "description": "Handy अपडेट भएपछि रिलिज नोटहरू देखाउनुहोस्"
+        "description": "Kusema अपडेट भएपछि रिलिज नोटहरू देखाउनुहोस्"
       },
       "appDataDirectory": {
         "title": "एप डेटा डाइरेक्टरी",
-        "description": "Handy ले आफ्नो डेटा भण्डारण गर्ने स्थान"
+        "description": "Kusema ले आफ्नो डेटा भण्डारण गर्ने स्थान"
       },
       "sourceCode": {
         "title": "स्रोत कोड",
-        "description": "View Kusema's source code",
+        "description": "Kusema को सोर्स कोड हेर्नुहोस्",
         "button": "GitHub मा हेर्नुहोस्"
       },
       "acknowledgments": {
         "ggml": {
           "title": "ggml",
           "description": "अन-डिभाइस मेसिन लर्निङ अनुमानका लागि उच्च-प्रदर्शन टेन्सर लाइब्रेरी",
-          "details": "Handy को स्थानीय स्पिच-टु-टेक्स्ट transcribe.cpp र ggml मा आधारित छ। Georgi Gerganov र योगदानकर्ताहरूको उत्कृष्ट कामका लागि धन्यवाद।"
+          "details": "Kusema को स्थानीय स्पिच-टु-टेक्स्ट transcribe.cpp र ggml मा आधारित छ। Georgi Gerganov र योगदानकर्ताहरूको उत्कृष्ट कामका लागि धन्यवाद।"
         }
       },
       "organizations": {
-        "title": "Kusema for organizations",
-        "description": "Setup, support and options for firms",
-        "button": "Learn more"
+        "title": "संस्थाहरूका लागि Kusema",
+        "description": "फर्महरूका लागि सेटअप, सहायता र विकल्पहरू",
+        "button": "थप जान्नुहोस्"
       },
       "report": {
-        "title": "Report a problem or suggest a feature",
-        "description": "Tell us on GitHub what went wrong or what you'd like",
-        "button": "Open GitHub"
+        "title": "समस्या रिपोर्ट गर्नुहोस् वा सुविधा सुझाउनुहोस्",
+        "description": "के बिग्रियो वा तपाईं के चाहनुहुन्छ, GitHub मा हामीलाई भन्नुहोस्",
+        "button": "GitHub खोल्नुहोस्"
       },
       "credits": {
-        "title": "Credits and licenses",
+        "title": "श्रेय र लाइसेन्सहरू",
         "handy": {
-          "title": "Built on Handy",
-          "description": "Kusema is built on Handy by CJ Pais, used under the MIT License.",
-          "button": "View Handy"
+          "title": "Handy मा आधारित",
+          "description": "Kusema, CJ Pais को Handy मा आधारित छ, जुन MIT लाइसेन्स अन्तर्गत प्रयोग गरिएको छ।",
+          "button": "Handy हेर्नुहोस्"
         },
         "nvidiaLicense": "NVIDIA Open Model License",
-        "models": "Speech and voice models ({{count}})",
-        "components": "Open-source components ({{count}})",
-        "notices": "Full license texts",
-        "loading": "Loading..."
+        "models": "स्पिच र आवाज मोडेलहरू ({{count}})",
+        "components": "खुला स्रोत कम्पोनेन्टहरू ({{count}})",
+        "notices": "लाइसेन्सका पूरा पाठहरू",
+        "loading": "लोड हुँदै..."
       }
     },
     "privacy": {
-      "thisComputer": "This computer ({{host}})",
-      "nothingSent": "Nothing to show yet.",
-      "updateBlocked": "Update checks are blocked in Privileged mode.",
+      "thisComputer": "यो कम्प्युटर ({{host}})",
+      "nothingSent": "अहिलेसम्म देखाउनुपर्ने केही छैन।",
+      "updateBlocked": "Privileged मोडमा अपडेट जाँच रोकिएको छ।",
       "audio": {
-        "title": "Audio sent off this computer: 0 bytes",
-        "description": "Speech recognition runs on this computer, and nothing in Kusema can upload your voice. Only the text of what you say, and only for features you choose, ever goes to an AI provider."
+        "title": "यो कम्प्युटरबाट पठाइएको अडियो: 0 बाइट",
+        "description": "स्पिच रिकग्निसन यही कम्प्युटरमा चल्छ, र Kusema मा कुनै पनि कुराले तपाईंको आवाज अपलोड गर्न सक्दैन। AI प्रदायकलाई तपाईंले भनेको कुराको टेक्स्ट मात्र, र तपाईंले छानेका सुविधाका लागि मात्र जान्छ।"
       },
       "privileged": {
-        "title": "Privileged Mode",
-        "description": "For confidential matters. While it's on, nothing you say, type or show goes to a cloud AI service. Ask Kusema and AI cleanup only work with a model running on this computer.",
+        "title": "Privileged मोड",
+        "description": "गोप्य कामका लागि। अन रहुन्जेल तपाईंले बोलेको, टाइप गरेको वा देखाएको कुनै कुरा क्लाउड AI सेवामा जाँदैन। \"Kusema लाई सोध्नुहोस्\" र AI सफाइले यही कम्प्युटरको मोडेलसँग मात्र काम गर्छन्।",
         "chip": "Privileged",
         "toggle": {
-          "label": "Privileged Mode",
-          "description": "Blocks every request to cloud AI providers, including ones already set up. Dictation keeps working, because it never uses the cloud."
+          "label": "Privileged मोड",
+          "description": "पहिल्यै सेट गरिएकासमेत क्लाउड AI प्रदायकहरूलाई जाने हरेक अनुरोध रोक्छ। डिक्टेसनले काम गरिरहन्छ, किनभने यसले कहिल्यै क्लाउड प्रयोग गर्दैन।"
         },
         "allowLan": {
-          "label": "Allow Local Network AI Servers",
-          "description": "Also allows AI servers on your office network, by private address (like 192.168.1.20). Models on this computer are always allowed."
+          "label": "लोकल नेटवर्कका AI सर्भरलाई अनुमति दिनुहोस्",
+          "description": "निजी ठेगाना (जस्तै 192.168.1.20) बाट तपाईंको कार्यालय नेटवर्कका AI सर्भरलाई पनि अनुमति दिन्छ। यो कम्प्युटरका मोडेललाई सधैँ अनुमति हुन्छ।"
         },
         "blockDownloads": {
-          "label": "Also Block Downloads and Update Checks",
-          "description": "For offline offices. Model and voice downloads and update checks carry none of your content, so they normally stay allowed and are listed below. Turn this on to stop them too while Privileged mode is on."
+          "label": "डाउनलोड र अपडेट जाँच पनि रोक्नुहोस्",
+          "description": "अफलाइन कार्यालयहरूका लागि। मोडेल र आवाज डाउनलोड तथा अपडेट जाँचमा तपाईंको कुनै सामग्री हुँदैन, त्यसैले सामान्यतया अनुमति रहन्छ र तल देखिन्छ। Privileged मोड अन रहुन्जेल यिनलाई पनि रोक्न यो अन गर्नुहोस्।"
         },
         "hotkey": {
-          "label": "Privileged Mode Shortcut",
-          "description": "Adds a keyboard shortcut that turns Privileged mode on or off. Off by default, so it can't be pressed by accident."
+          "label": "Privileged मोड सर्टकट",
+          "description": "Privileged मोड अन वा अफ गर्ने किबोर्ड सर्टकट थप्छ। गल्तीले नथिचियोस् भनेर पूर्वनिर्धारित रूपमा अफ हुन्छ।"
         }
       },
       "counts": {
-        "title": "Where Requests Went",
-        "today": "Today",
-        "week": "Last 7 days"
+        "title": "अनुरोधहरू कहाँ गए",
+        "today": "आज",
+        "week": "पछिल्ला ७ दिन"
       },
       "columns": {
-        "time": "Time",
-        "destination": "Destination",
-        "purpose": "Why",
-        "data": "Data",
-        "size": "Size",
-        "result": "Result"
+        "time": "समय",
+        "destination": "गन्तव्य",
+        "purpose": "किन",
+        "data": "डेटा",
+        "size": "आकार",
+        "result": "नतिजा"
       },
       "purposes": {
-        "assistant_question": "Question to Kusema",
-        "screen_question": "Question about the screen",
-        "post_processing": "AI cleanup",
-        "provider_models": "Listing a provider's models",
-        "model_download": "Speech model download",
-        "voice_download": "Voice download",
-        "update_check": "Update check"
+        "assistant_question": "Kusema लाई प्रश्न",
+        "screen_question": "स्क्रिनबारे प्रश्न",
+        "post_processing": "AI सफाइ",
+        "provider_models": "प्रदायकका मोडेलको सूची लिने",
+        "model_download": "स्पिच मोडेल डाउनलोड",
+        "voice_download": "आवाज डाउनलोड",
+        "update_check": "अपडेट जाँच"
       },
       "data": {
-        "text": "Text",
-        "image": "Screenshot",
-        "none": "None of yours"
+        "text": "टेक्स्ट",
+        "image": "स्क्रिनसट",
+        "none": "तपाईंको केही छैन"
       },
       "results": {
-        "sent": "Sent",
-        "blocked": "Blocked",
-        "failed": "Failed"
+        "sent": "पठाइयो",
+        "blocked": "रोकियो",
+        "failed": "असफल"
       },
       "list": {
-        "title": "Every Request",
-        "description": "Each request Kusema has made: when, where, why, what kind of data and how large. What was in it is never recorded. Shows the latest 500; the export has them all.",
-        "all": "All",
-        "allPurposes": "Any reason",
-        "allResults": "Any result",
-        "allDestinations": "Any destination",
-        "anyTime": "Any time",
-        "lastDays_one": "Last {{count}} day",
-        "lastDays_other": "Last {{count}} days",
-        "export": "Export CSV",
-        "exported_one": "Exported {{count}} request.",
-        "exported_other": "Exported {{count}} requests.",
-        "clear": "Clear",
+        "title": "हरेक अनुरोध",
+        "description": "Kusema ले गरेको हरेक अनुरोध: कहिले, कहाँ, किन, कस्तो डेटा र कति ठूलो। त्यसमा के थियो कहिल्यै रेकर्ड हुँदैन। पछिल्ला ५०० देखाउँछ; एक्सपोर्टमा सबै हुन्छन्।",
+        "all": "सबै",
+        "allPurposes": "जुनसुकै कारण",
+        "allResults": "जुनसुकै नतिजा",
+        "allDestinations": "जुनसुकै गन्तव्य",
+        "anyTime": "जुनसुकै समय",
+        "lastDays_one": "पछिल्लो {{count}} दिन",
+        "lastDays_other": "पछिल्ला {{count}} दिन",
+        "export": "CSV एक्सपोर्ट गर्नुहोस्",
+        "exported_one": "{{count}} अनुरोध एक्सपोर्ट गरियो।",
+        "exported_other": "{{count}} अनुरोधहरू एक्सपोर्ट गरिए।",
+        "clear": "खाली गर्नुहोस्",
         "retention": {
-          "title": "Keep This List For",
-          "description": "Older entries are deleted from this computer automatically.",
-          "days_one": "{{count}} day",
-          "days_other": "{{count}} days"
+          "title": "यो सूची कति समय राख्ने",
+          "description": "पुराना प्रविष्टिहरू यो कम्प्युटरबाट आफैँ मेटिन्छन्।",
+          "days_one": "{{count}} दिन",
+          "days_other": "{{count}} दिन"
         }
       }
     },
     "cleanup": {
-      "title": "Cleanup",
-      "description": "Dictated text should need little editing. Local cleanup runs on this computer and sends nothing anywhere.",
+      "title": "सफाइ",
+      "description": "डिक्टेट गरिएको टेक्स्टमा थोरै सम्पादन चाहिनुपर्छ। लोकल सफाइ यही कम्प्युटरमा चल्छ र कतै केही पठाउँदैन।",
       "local": {
-        "label": "Local Cleanup",
-        "description": "Removes filler words, adds missing periods between phrases in continuous dictation, and handles spoken punctuation, all on this computer. Off, your words are typed as transcribed."
+        "label": "लोकल सफाइ",
+        "description": "भराइका शब्द हटाउँछ, निरन्तर डिक्टेसनमा वाक्यांशबीच छुटेका पूर्णविराम थप्छ, र बोलिएका विराम चिह्न सम्हाल्छ, सबै यही कम्प्युटरमा। अफ हुँदा तपाईंका शब्द ट्रान्सक्राइब भएजस्तै टाइप हुन्छन्।"
       },
       "spokenPunctuation": {
-        "label": "Spoken Punctuation",
-        "description": "Say \"comma\", \"period\", \"question mark\", \"colon\", \"open quote\", \"close paren\", \"dash\", \"section symbol\" and more, as in Dragon. \"Period\" only counts at the end of a phrase, so \"the limitations period expired\" stays as words. Say \"literal period\" to type the word."
+        "label": "बोलिएका विराम चिह्न",
+        "description": "Dragon मा जस्तै \"comma\", \"period\", \"question mark\", \"colon\", \"open quote\", \"close paren\", \"dash\", \"section symbol\" र अरू भन्नुहोस्। \"Period\" वाक्यांशको अन्त्यमा मात्र गनिन्छ, त्यसैले \"the limitations period expired\" शब्दकै रूपमा रहन्छ। शब्द नै टाइप गर्न \"literal period\" भन्नुहोस्। यी आदेशहरू अङ्ग्रेजीमा काम गर्छन्।"
       },
       "ai": {
         "status": {
-          "noProvider": "No AI provider is set up yet.",
-          "noKey": "{{provider}} needs an API key.",
-          "noModel": "{{provider}} needs a model chosen.",
-          "local": "Using {{model}} on this computer through {{provider}}. Nothing leaves this computer.",
-          "cloud": "Using {{model}} from {{provider}}, a cloud service. Text you clean up goes to {{provider}}.",
-          "blocked": "Privileged mode is on, so nothing will be sent to {{provider}}. Use a local model or turn off Privileged mode."
+          "noProvider": "अहिलेसम्म कुनै AI प्रदायक सेट गरिएको छैन।",
+          "noKey": "{{provider}} लाई API कुञ्जी चाहिन्छ।",
+          "noModel": "{{provider}} का लागि मोडेल छान्नुपर्छ।",
+          "local": "{{provider}} मार्फत यही कम्प्युटरमा {{model}} प्रयोग हुँदैछ। केही पनि यो कम्प्युटरबाट बाहिर जाँदैन।",
+          "cloud": "क्लाउड सेवा {{provider}} को {{model}} प्रयोग हुँदैछ। तपाईंले सफा गर्ने टेक्स्ट {{provider}} लाई जान्छ।",
+          "blocked": "Privileged मोड अन छ, त्यसैले {{provider}} लाई केही पठाइँदैन। लोकल मोडेल प्रयोग गर्नुहोस् वा Privileged मोड अफ गर्नुहोस्।"
         },
-        "recommendLocal": "We recommend a model that runs on this computer, such as one in Ollama, so confidential text stays here. AI cleanup runs when you dictate with its own shortcut, and never during continuous dictation.",
-        "setUp": "Set Up AI Cleanup"
+        "recommendLocal": "गोप्य टेक्स्ट यहीँ रहोस् भनेर हामी यही कम्प्युटरमा चल्ने मोडेल सिफारिस गर्छौं, जस्तै Ollama को मोडेल। AI सफाइ तपाईंले यसैको सर्टकटले डिक्टेट गर्दा चल्छ, र निरन्तर डिक्टेसनका बेला कहिल्यै चल्दैन।",
+        "setUp": "AI सफाइ सेट गर्नुहोस्"
       }
     },
     "firstWins": {
-      "title": "First three wins",
-      "dismiss": "Dismiss",
-      "dictated": "Dictate an email",
-      "newParagraph": "Use continuous dictation and say \"new paragraph\"",
-      "asked": "Ask Kusema a question",
-      "done": "Done",
-      "notDone": "Not done yet",
-      "progress": "{{done}} of {{count}} done",
-      "allDone": "All three done. Nice work."
+      "title": "पहिला तीन उपलब्धि",
+      "dismiss": "हटाउनुहोस्",
+      "dictated": "एउटा इमेल डिक्टेट गर्नुहोस्",
+      "newParagraph": "निरन्तर डिक्टेसन प्रयोग गरेर \"new paragraph\" भन्नुहोस्",
+      "asked": "Kusema लाई एउटा प्रश्न सोध्नुहोस्",
+      "done": "पूरा भयो",
+      "notDone": "अझै बाँकी",
+      "progress": "{{count}} मध्ये {{done}} पूरा",
+      "allDone": "तीनै पूरा भए। स्याबास।"
     },
     "glow": {
-      "title": "Recording indicator",
-      "description": "A glow around the edges of your screen shows that Kusema is listening. Only you see it: it stays out of screenshots and screen shares.",
+      "title": "रेकर्डिङ सूचक",
+      "description": "स्क्रिनका किनारामा चमकले Kusema सुनिरहेको देखाउँछ। यो तपाईं मात्र देख्नुहुन्छ: स्क्रिनसट र स्क्रिन सेयरमा देखिँदैन।",
       "enabled": {
-        "label": "Screen glow",
-        "description": "Show a colored glow around the screen you're working on while Kusema is listening. You can still click and type through it."
+        "label": "स्क्रिन चमक",
+        "description": "Kusema सुनिरहँदा तपाईंले काम गरिरहेको स्क्रिनवरिपरि रङ्गीन चमक देखाउनुहोस्। तपाईं अझै पनि यसको आरपार क्लिक र टाइप गर्न सक्नुहुन्छ।"
       },
       "thickness": {
-        "label": "Thickness",
-        "description": "How far the glow reaches in from the edge of the screen."
+        "label": "मोटाइ",
+        "description": "चमक स्क्रिनको किनाराबाट कति भित्रसम्म पुग्छ।"
       },
       "intensity": {
-        "label": "Intensity",
-        "description": "How strong the glow is."
+        "label": "तीव्रता",
+        "description": "चमक कति बलियो छ।"
       },
       "palette": {
-        "label": "Colors",
-        "description": "The color-blind friendly set keeps the modes easy to tell apart with every common kind of color blindness.",
-        "standard": "Standard",
-        "color_blind": "Color-blind friendly"
+        "label": "रङहरू",
+        "description": "रङअन्धता अनुकूल रङहरूले रङअन्धताका सबै सामान्य प्रकारमा मोडहरू सजिलै छुट्याउन दिन्छन्।",
+        "standard": "मानक",
+        "color_blind": "रङअन्धता अनुकूल"
       },
       "modes": {
-        "dictation": "Dictation",
-        "continuous": "Continuous dictation",
-        "ask": "Ask Kusema",
-        "ask_screen": "Ask about my screen",
-        "paused": "Continuous dictation paused (window changed)"
+        "dictation": "डिक्टेसन",
+        "continuous": "निरन्तर डिक्टेसन",
+        "ask": "Kusema लाई सोध्नुहोस्",
+        "ask_screen": "मेरो स्क्रिनबारे सोध्नुहोस्",
+        "paused": "निरन्तर डिक्टेसन रोकिएको छ (विन्डो बदलियो)"
       },
-      "preview": "Preview",
-      "previewLabel": "Preview the glow for {{mode}}",
+      "preview": "पूर्वावलोकन",
+      "previewLabel": "{{mode}} का लागि चमकको पूर्वावलोकन",
       "sounds": {
-        "label": "Continuous dictation sounds",
-        "description": "Play a short sound when continuous dictation starts and stops. Sounds for other dictation are under Sound below."
+        "label": "निरन्तर डिक्टेसनका आवाजहरू",
+        "description": "निरन्तर डिक्टेसन सुरु र बन्द हुँदा छोटो आवाज बजाउनुहोस्। अरू डिक्टेसनका आवाज तल साउन्डमा छन्।"
       }
     }
   },
@@ -1325,7 +1325,7 @@
     "portableUpdateBrowseButton": "GitHub Releases खोल्नुहोस्"
   },
   "whatsNew": {
-    "title": "Handy v{{version}} मा नयाँ"
+    "title": "Kusema v{{version}} मा नयाँ"
   },
   "common": {
     "loading": "लोड गरिँदैछ...",
@@ -1356,11 +1356,11 @@
   },
   "appLanguage": {
     "title": "एपको भाषा",
-    "description": "Handy इन्टरफेसको भाषा परिवर्तन गर्नुहोस्"
+    "description": "Kusema इन्टरफेसको भाषा परिवर्तन गर्नुहोस्"
   },
   "theme": {
     "title": "अनुप्रयोगको थिम",
-    "description": "Handy ले तपाईंको सिस्टम थिम अनुसरण गर्ने वा उज्यालो वा अँध्यारो रहने छान्नुहोस्",
+    "description": "Kusema ले तपाईंको सिस्टम थिम अनुसरण गर्ने वा उज्यालो वा अँध्यारो रहने छान्नुहोस्",
     "options": {
       "system": "सिस्टम",
       "light": "उज्यालो",
@@ -1371,38 +1371,38 @@
     "transcribing": "ट्रान्सक्राइब गरिँदैछ...",
     "processing": "प्रशोधन गरिँदैछ...",
     "loadingModel": "मोडेल लोड गरिँदैछ...",
-    "speaking": "Speaking...",
+    "speaking": "बोल्दै...",
     "dictation": {
-      "dictating": "Dictating",
-      "paused": "Paused, window changed",
-      "noTarget": "Click where the text should go",
-      "finishing": "Finishing...",
-      "stop": "Stop",
-      "nothingToScratch": "Nothing to scratch",
-      "scratchWindowChanged": "Can't scratch: the window changed",
-      "scratchOtherInput": "Can't scratch: keyboard or mouse used",
-      "savedToHistory": "Said while paused: saved in History",
-      "stoppedSilence": "Stopped after silence",
-      "microphoneLost": "Stopped: microphone lost",
-      "cantKeepUp": "Stopped: this computer couldn't keep up",
-      "transcriptionFailed": "Couldn't transcribe that",
-      "pasteFailed": "Couldn't type that; it's in History"
+      "dictating": "डिक्टेट हुँदै",
+      "paused": "रोकिएको, विन्डो बदलियो",
+      "noTarget": "टेक्स्ट जानुपर्ने ठाउँमा क्लिक गर्नुहोस्",
+      "finishing": "सक्दै...",
+      "stop": "रोक्नुहोस्",
+      "nothingToScratch": "मेटाउनुपर्ने केही छैन",
+      "scratchWindowChanged": "मेटाउन सकिँदैन: विन्डो बदलियो",
+      "scratchOtherInput": "मेटाउन सकिँदैन: किबोर्ड वा माउस प्रयोग भयो",
+      "savedToHistory": "रोकिँदा भनिएको: हिस्ट्रीमा सेभ भयो",
+      "stoppedSilence": "मौनतापछि रोकियो",
+      "microphoneLost": "रोकियो: माइक्रोफोन हरायो",
+      "cantKeepUp": "रोकियो: यो कम्प्युटरले भ्याउन सकेन",
+      "transcriptionFailed": "यसलाई ट्रान्सक्राइब गर्न सकिएन",
+      "pasteFailed": "यसलाई टाइप गर्न सकिएन; यो हिस्ट्रीमा छ"
     },
     "privileged": "Privileged"
   },
   "screenCard": {
-    "title": "Send this screenshot?",
-    "autoCancel": "Cancels in {{seconds}} s",
-    "enlarge": "Click to enlarge",
-    "shrink": "Click to make smaller",
-    "imageAlt": "Screenshot of the window you asked about",
+    "title": "यो स्क्रिनसट पठाउने?",
+    "autoCancel": "{{seconds}} सेकेन्डमा रद्द हुन्छ",
+    "enlarge": "ठूलो बनाउन क्लिक गर्नुहोस्",
+    "shrink": "सानो बनाउन क्लिक गर्नुहोस्",
+    "imageAlt": "तपाईंले सोध्नुभएको विन्डोको स्क्रिनसट",
     "question": "“{{question}}”",
-    "sendsTo": "Goes to {{provider}} · {{model}}",
-    "onlyThis": "Only this window. Nothing is sent until you press Send.",
-    "send": "Send",
-    "cancel": "Cancel",
+    "sendsTo": "{{provider}} · {{model}} मा जान्छ",
+    "onlyThis": "यो विन्डो मात्र। तपाईंले पठाउनुहोस् नथिचेसम्म केही पठाइँदैन।",
+    "send": "पठाउनुहोस्",
+    "cancel": "रद्द गर्नुहोस्",
     "noticeTitle": "Kusema",
-    "close": "Close"
+    "close": "बन्द गर्नुहोस्"
   },
   "secureInput": {
     "blockedWithCulprit_one": "{{name}} ले 1 सर्टकट रोकिरहेको हुन सक्छ",

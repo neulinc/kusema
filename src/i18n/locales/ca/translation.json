@@ -8,25 +8,25 @@
     "quit": "Surt",
     "cancel": "Cancel·la",
     "secureInputWarning": "⚠ Dreceres blocades per l'entrada segura",
-    "privilegedMode": "Privileged Mode",
-    "privilegedOn": "Privileged mode on"
+    "privilegedMode": "Mode Privileged",
+    "privilegedOn": "Mode Privileged activat"
   },
   "sidebar": {
     "general": "General",
-    "assistant": "Assistant",
+    "assistant": "Assistent",
     "models": "Models",
     "advanced": "Avançat",
     "postProcessing": "Postprocessament",
     "history": "Historial",
     "debug": "Depuració",
     "about": "Quant a",
-    "privacy": "Privacy"
+    "privacy": "Privadesa"
   },
   "onboarding": {
     "customModelDescription": "Sense suport oficial",
     "migration": {
       "title": "Cal actualitzar els vostres models",
-      "description": "Handy ara utilitza un tipus de model més nou. Baixeu la versió nova per continuar transcrivint. Les versions antigues s'eliminaran.",
+      "description": "Kusema ara utilitza un tipus de model més nou. Baixeu la versió nova per continuar transcrivint. Les versions antigues s'eliminaran.",
       "replaces": "Substitueix {{name}}",
       "oldFormat": "Format antic",
       "failed": "Ha fallat la baixada",
@@ -63,11 +63,11 @@
     "permissions": {
       "microphone": {
         "name": "Micròfon",
-        "why": "Perquè el Handy us pugui sentir. L'àudio es converteix en text en aquest ordinador i no es puja mai enlloc."
+        "why": "Perquè el Kusema us pugui sentir. L'àudio es converteix en text en aquest ordinador i no es puja mai enlloc."
       },
       "accessibility": {
         "name": "Accessibilitat",
-        "why": "Perquè la drecera funcioni a totes les aplicacions i el Handy pugui escriure el text on tingueu el cursor."
+        "why": "Perquè la drecera funcioni a totes les aplicacions i el Kusema pugui escriure el text on tingueu el cursor."
       },
       "errors": {
         "checkFailed": "No s'han pogut comprovar els permisos. Torneu-ho a provar.",
@@ -81,12 +81,12 @@
       "openSettings": "Obre la configuració",
       "allowed": "Permès",
       "waiting": "En espera",
-      "turnOnMac": "Activeu el Handy a Configuració del Sistema i torneu aquí.",
+      "turnOnMac": "Activeu el Kusema a Configuració del Sistema i torneu aquí.",
       "turnOnWindows": "Activeu l'accés al micròfon a Configuració de Windows i torneu aquí.",
       "hintBoth": "Permeteu-los tots dos per continuar",
       "hintMicrophone": "Permeteu el micròfon per continuar",
       "welcomeBack": "Us donem la benvinguda de nou. Continuem on ho havíeu deixat.",
-      "relaunch": "La drecera no respon després d'això? <relaunch>Reinicieu el Handy</relaunch> i tornareu a aparèixer just aquí."
+      "relaunch": "La drecera no respon després d'això? <relaunch>Reinicieu el Kusema</relaunch> i tornareu a aparèixer just aquí."
     },
     "shell": {
       "back": "Enrere",
@@ -97,11 +97,11 @@
       "title": "Parleu en lloc d'escriure, a qualsevol aplicació",
       "subtitle": "Trieu les llengües en què dictareu",
       "languagesLabel": "Llengües",
-      "noMatch": "Cap llengua coincideix amb «{{query}}». Els models del Handy cobreixen unes 100 llengües; en trobareu més a la configuració.",
+      "noMatch": "Cap llengua coincideix amb «{{query}}». Els models del Kusema cobreixen unes 100 llengües; en trobareu més a la configuració.",
       "appLanguage": "Llengua de l'aplicació",
       "menusIn": "Menús en <b>{{language}}</b>",
       "chinese": {
-        "question": "Parleu {{languages}}. Quins caràcters ha d'escriure el Handy?",
+        "question": "Parleu {{languages}}. Quins caràcters ha d'escriure el Kusema?",
         "label": "Caràcters xinesos",
         "zh-Hans": "Simplificat",
         "zh-Hant": "Taiwan",
@@ -110,7 +110,8 @@
       "hint": {
         "pickOne": "Trieu almenys una llengua",
         "weak_one": "{{languages}}: cap model l'entén bé encara",
-        "weak_other": "{{languages}}: cap model les entén bé encara"
+        "weak_other": "{{languages}}: cap model les entén bé encara",
+        "weak_many": "{{languages}}: cap model les entén bé encara"
       }
     },
     "download": {
@@ -171,7 +172,7 @@
     },
     "try": {
       "title": "Proveu-ho!",
-      "subtitle": "El Handy és a la cantonada per guiar-vos",
+      "subtitle": "El Kusema és a la cantonada per guiar-vos",
       "noteLabel": "Nota",
       "placeholder": "Nota nova",
       "hold": "Manteniu premut <keys/> i parleu.",
@@ -199,14 +200,14 @@
     },
     "done": {
       "title": "Tot a punt",
-      "subMac": "El Handy ja és a la barra de menús. Manteniu premut o premeu <keys/> a qualsevol aplicació per parlar.",
-      "subTray": "El Handy ja és a la safata del sistema. Manteniu premut o premeu <keys/> a qualsevol aplicació per parlar.",
+      "subMac": "El Kusema ja és a la barra de menús. Manteniu premut o premeu <keys/> a qualsevol aplicació per parlar.",
+      "subTray": "El Kusema ja és a la safata del sistema. Manteniu premut o premeu <keys/> a qualsevol aplicació per parlar.",
       "hint": "Podeu canviar-ho més tard a la configuració",
       "highFiveLabel": "Xoqueu-la",
-      "atLogin": "Inicia el Handy quan entri a la sessió",
+      "atLogin": "Inicia el Kusema quan entri a la sessió",
       "finish": "Fet",
       "panel": {
-        "name": "Handy",
+        "name": "Kusema",
         "ready": "A punt",
         "languages": "Llengües",
         "model": "Model de veu",
@@ -220,79 +221,79 @@
       "done": "No funciona a altres aplicacions? <guide>Guia de configuració per a Linux</guide>"
     },
     "setup": {
-      "retryDownload": "Try again",
+      "retryDownload": "Torna-ho a provar",
       "welcome": {
-        "title": "Kusema turns your voice into text on this computer.",
-        "privacy": "Your voice never leaves it.",
-        "language": "Language you'll dictate in"
+        "title": "El Kusema converteix la vostra veu en text en aquest ordinador.",
+        "privacy": "La vostra veu no en surt mai.",
+        "language": "Llengua en què dictareu"
       },
       "microphone": {
-        "title": "Choose your microphone",
-        "sub": "Say something. The bar should move as you speak.",
-        "label": "Microphone",
-        "meter": "Microphone level",
-        "heard": "Kusema can hear you.",
-        "quiet": "No sound yet. Check that this microphone isn't muted, or choose another one.",
-        "failed": "Kusema couldn't open this microphone. Choose another one.",
-        "tip": "Tip: a headset gives the best accuracy and fewer stray words."
+        "title": "Trieu el micròfon",
+        "sub": "Digueu alguna cosa. La barra s'hauria de moure mentre parleu.",
+        "label": "Micròfon",
+        "meter": "Nivell del micròfon",
+        "heard": "El Kusema us sent.",
+        "quiet": "Encara no hi ha so. Comproveu que aquest micròfon no estigui silenciat o trieu-ne un altre.",
+        "failed": "El Kusema no ha pogut obrir aquest micròfon. Trieu-ne un altre.",
+        "tip": "Consell: uns auriculars amb micròfon donen la millor precisió i menys paraules soltes."
       },
       "practice": {
-        "title": "Dictate your first sentence",
-        "how": "Hold <keys/>, say this sentence, then let go:",
+        "title": "Dicteu la primera frase",
+        "how": "Manteniu premut <keys/>, digueu aquesta frase i deixeu-lo anar:",
         "sentence": "Dear Mr. Smith comma thank you for your letter period",
-        "box": "Practice box: your words appear here",
-        "placeholder": "Your words appear here",
-        "listening": "Listening...",
-        "typing": "Typing...",
-        "success": "That's it. Saying \"comma\" and \"period\" types the marks.",
-        "waiting": "Your speech model is still downloading. This box will work as soon as it's ready.",
-        "continuous": "For longer dictation, press <keys/> to keep listening until you press it again. Used to Dragon? You can set this to Numpad + under General.",
-        "continuousRunning": "Continuous dictation is on. Your words appear in the box each time you pause. Press {{stop}} to stop it.",
-        "continuousEnded": "That's continuous dictation. In your other apps, your words are typed at the cursor."
+        "box": "Quadre de pràctica: aquí apareixen les vostres paraules",
+        "placeholder": "Aquí apareixen les vostres paraules",
+        "listening": "S'està escoltant...",
+        "typing": "S'està escrivint...",
+        "success": "Això és. Si dieu \"comma\" i \"period\", s'escriuen els signes.",
+        "waiting": "El model de veu encara s'està baixant. Aquest quadre funcionarà tan bon punt estigui a punt.",
+        "continuous": "Per a dictats llargs, premeu <keys/> i el Kusema escoltarà fins que el torneu a prémer. Veniu del Dragon? A General podeu fer servir el + del teclat numèric.",
+        "continuousRunning": "El dictat continu està activat. Les vostres paraules apareixen al quadre a cada pausa. Premeu {{stop}} per aturar-lo.",
+        "continuousEnded": "Això és el dictat continu. A les altres aplicacions, les paraules s'escriuen on hi ha el cursor."
       },
       "assistant": {
-        "title": "Set up the AI assistant (optional)",
-        "sub": "Ask Kusema answers questions you speak. Dictation doesn't need it.",
+        "title": "Configureu l'assistent d'IA (opcional)",
+        "sub": "«Pregunta al Kusema» respon les preguntes que feu en veu alta. El dictat no el necessita.",
         "model": "Model",
-        "continueWithout": "Continue without AI",
-        "privileged": "Privileged mode blocks all cloud AI with one switch, for matters that must stay on this computer.",
+        "continueWithout": "Continua sense IA",
+        "privileged": "El mode Privileged bloqueja tota la IA al núvol amb un sol interruptor, per als assumptes que s'han de quedar en aquest ordinador.",
         "local": {
-          "title": "Private: use a local AI on this computer",
-          "description": "Your questions stay here. Uses Ollama, a free app.",
-          "checking": "Looking for Ollama on this computer...",
-          "found": "Found Ollama. Choose a model to use.",
-          "notFound": "Ollama isn't running on this computer.",
-          "noModels": "Ollama is running, but has no models yet. Run \"ollama pull llama3.2\", then check again.",
-          "instructions": "How to set up Ollama",
-          "again": "Check again"
+          "title": "Privat: fer servir una IA local en aquest ordinador",
+          "description": "Les preguntes es queden aquí. Fa servir l'Ollama, una aplicació gratuïta.",
+          "checking": "S'està cercant l'Ollama en aquest ordinador...",
+          "found": "S'ha trobat l'Ollama. Trieu un model.",
+          "notFound": "L'Ollama no s'està executant en aquest ordinador.",
+          "noModels": "L'Ollama s'està executant, però encara no té cap model. Executeu \"ollama pull llama3.2\" i torneu-ho a comprovar.",
+          "instructions": "Com instal·lar l'Ollama",
+          "again": "Torna-ho a comprovar"
         },
         "cloud": {
-          "title": "Use a cloud AI provider",
-          "description": "Your questions go to the provider you choose, using your own API key.",
-          "provider": "Provider",
-          "key": "API key",
-          "check": "Save and check",
-          "checking": "Checking the key...",
-          "saved": "Key saved in Windows Credential Manager. Choose a model to use.",
-          "where": "The key is stored in Windows Credential Manager, not in a file.",
-          "keyFailed": "The key was saved, but the provider didn't list any models. Check the key and try again."
+          "title": "Fer servir un proveïdor d'IA al núvol",
+          "description": "Les preguntes van al proveïdor que trieu, amb la vostra pròpia clau d'API.",
+          "provider": "Proveïdor",
+          "key": "Clau d'API",
+          "check": "Desa i comprova",
+          "checking": "S'està comprovant la clau...",
+          "saved": "La clau s'ha desat a l'Administrador de credencials del Windows. Trieu un model.",
+          "where": "La clau es guarda a l'Administrador de credencials del Windows, no en un fitxer.",
+          "keyFailed": "La clau s'ha desat, però el proveïdor no ha mostrat cap model. Reviseu la clau i torneu-ho a provar."
         },
         "skip": {
-          "title": "Skip for now",
-          "description": "You can set this up later on the Assistant page."
+          "title": "Omet de moment",
+          "description": "Ho podeu configurar més endavant a la pàgina Assistent."
         }
       },
       "done": {
-        "title": "You're all set",
-        "sub": "Kusema keeps running in the system tray and works in any app.",
-        "finish": "Start using Kusema",
-        "wins": "Your first three wins are waiting on the main page.",
-        "atLogin": "Start Kusema when I sign in",
+        "title": "Tot a punt",
+        "sub": "El Kusema continua funcionant a la safata del sistema i funciona a qualsevol aplicació.",
+        "finish": "Comença a fer servir el Kusema",
+        "wins": "Els vostres tres primers èxits us esperen a la pàgina principal.",
+        "atLogin": "Inicia el Kusema quan inicio la sessió",
         "keys": {
-          "dictate": "Dictate: hold",
-          "continuous": "Continuous dictation: press to start and stop",
-          "ask": "Ask Kusema",
-          "askScreen": "Ask about my screen"
+          "dictate": "Dictar: mantenir premut",
+          "continuous": "Dictat continu: premeu per iniciar i aturar",
+          "ask": "Pregunta al Kusema",
+          "askScreen": "Pregunta sobre la meva pantalla"
         }
       }
     }
@@ -381,7 +382,8 @@
     "addAnother": "Afegeix-ne una altra",
     "remove": "Elimina {{language}}",
     "alreadyAdded_one": "{{languages}} ja està afegida.",
-    "alreadyAdded_other": "{{languages}} ja estan afegides."
+    "alreadyAdded_other": "{{languages}} ja estan afegides.",
+    "alreadyAdded_many": "{{languages}} ja estan afegides."
   },
   "modelSelector": {
     "custom": "Personalitzat",
@@ -408,7 +410,7 @@
     "general": {
       "title": "General",
       "shortcut": {
-        "title": "Dreceres del Handy",
+        "title": "Dreceres del Kusema",
         "description": "Configura les dreceres de teclat per iniciar l'enregistrament de veu per a la transcripció",
         "loading": "S'estan carregant les dreceres...",
         "none": "No hi ha cap drecera configurada",
@@ -428,20 +430,20 @@
             "description": "Opcional: una drecera específica que sempre aplica postprocessament amb IA a la transcripció."
           },
           "assistant": {
-            "name": "Ask Kusema",
-            "description": "Hold or press to ask a spoken question. The reply appears below instead of being pasted."
+            "name": "Pregunta al Kusema",
+            "description": "Manteniu premut o premeu per fer una pregunta en veu alta. La resposta apareix a sota en lloc d'enganxar-se."
           },
           "assistant_screen": {
-            "name": "Ask About My Screen",
-            "description": "Hold or press to ask a spoken question about the window you're working in. You see the screenshot before anything is sent."
+            "name": "Pregunta sobre la meva pantalla",
+            "description": "Manteniu premut o premeu per preguntar en veu alta sobre la finestra on treballeu. Veureu la captura abans que s'enviï res."
           },
           "dictate_continuous": {
-            "name": "Continuous Dictation",
-            "description": "Press to start dictating hands-free, and press again to stop. Text appears each time you pause."
+            "name": "Dictat continu",
+            "description": "Premeu per dictar amb les mans lliures i torneu a prémer per aturar-lo. El text apareix a cada pausa."
           },
           "toggle_privileged": {
-            "name": "Privileged Mode",
-            "description": "Press to turn Privileged mode on or off."
+            "name": "Mode Privileged",
+            "description": "Premeu per activar o desactivar el mode Privileged."
           }
         },
         "errors": {
@@ -466,7 +468,7 @@
       },
       "preferredLanguages": {
         "title": "Llengües preferides",
-        "description": "Les llengües que parleu. El Handy les utilitza per recomanar models.",
+        "description": "Les llengües que parleu. El Kusema les utilitza per recomanar models.",
         "noMatch": "Cap llengua coincideix amb «{{query}}»",
         "weak": "Cap model reconeix bé {{languages}} encara."
       },
@@ -493,17 +495,18 @@
         "fits": "Per a les vostres llengües",
         "untested": "Sense provar"
       },
-      "untestedNote": "No s'han provat amb el Handy. Poden ser més lents o cometre més errors.",
+      "untestedNote": "No s'han provat amb el Kusema. Poden ser més lents o cometre més errors.",
       "untestedHidden_one": "{{count}} model més no està ajustat per al dictat. Cerqueu-lo per trobar-lo.",
       "untestedHidden_other": "{{count}} models més no estan ajustats per al dictat. Cerqueu per trobar-ne algun.",
-      "emptyYours": "Encara no hi ha models. Trieu-ne un a sota: es baixa i el Handy l'utilitza.",
+      "untestedHidden_many": "{{count}} models més no estan ajustats per al dictat. Cerqueu per trobar-ne algun.",
+      "emptyYours": "Encara no hi ha models. Trieu-ne un a sota: es baixa i el Kusema l'utilitza.",
       "showMore": "Mostra'n {{count}} més",
       "showFewer": "Mostra'n menys",
       "download": "Baixa i utilitza",
       "downloadingThenUse": "{{percent}} % de {{total}}, i després canvia",
       "loading": "S'està carregant…",
       "deleteAsk": "Voleu suprimir {{name}}? S'alliberen {{size}}.",
-      "deleteAskActive": "Voleu suprimir {{name}}? El Handy no podrà transcriure fins que en trieu un altre.",
+      "deleteAskActive": "Voleu suprimir {{name}}? El Kusema no podrà transcriure fins que en trieu un altre.",
       "cancel": "Cancel·la",
       "deleteModel": "Suprimeix {{name}}",
       "cancelDownload": "Atura la baixada de {{name}}",
@@ -517,7 +520,7 @@
         "marks": "? encara no s'ha mesurat. — no entén aquesta llengua."
       },
       "retiredNotice": {
-        "title": "Els models antics ja no funcionen amb Handy",
+        "title": "Els models antics ja no funcionen amb Kusema",
         "description": "Ocupen {{size}} a l'ordinador.",
         "delete": "Suprimeix els models",
         "deleted": "S'han suprimit els models antics",
@@ -525,37 +528,37 @@
       },
       "rescan": {
         "label": "Torna a cercar",
-        "tooltip": "Torna a cercar models afegits a la carpeta de models o a la memòria cau de Hugging Face des de fora del Handy"
+        "tooltip": "Torna a cercar models afegits a la carpeta de models o a la memòria cau de Hugging Face des de fora del Kusema"
       },
       "curated": {
-        "inUse": "In use",
-        "gettingReady": "Getting ready...",
-        "downloading": "Downloading: {{percent}}%",
-        "cancel": "Cancel",
-        "cancelLabel": "Cancel downloading {{name}}",
-        "use": "Use",
-        "useLabel": "Use {{name}}",
-        "download": "Download ({{size}})",
-        "downloadLabel": "Download {{name}}",
-        "recommended": "Recommended",
-        "others": "Also on this computer",
-        "showAllHint": "More models are available: turn on Show all models under Advanced.",
+        "inUse": "En ús",
+        "gettingReady": "S'està preparant...",
+        "downloading": "S'està baixant: {{percent}} %",
+        "cancel": "Cancel·la",
+        "cancelLabel": "Cancel·la la baixada de {{name}}",
+        "use": "Fes-lo servir",
+        "useLabel": "Fes servir {{name}}",
+        "download": "Baixa ({{size}})",
+        "downloadLabel": "Baixa {{name}}",
+        "recommended": "Recomanat",
+        "others": "També en aquest ordinador",
+        "showAllHint": "Hi ha més models: activeu «Mostra tots els models» a Avançat.",
         "rows": {
           "parakeetUnified": {
             "name": "Parakeet Unified English",
-            "description": "The best choice for English. Chosen automatically."
+            "description": "La millor opció per a l'anglès. Es tria automàticament."
           },
           "parakeetV3": {
             "name": "Parakeet TDT v3",
-            "description": "For dictating in other languages, including Spanish, French and German."
+            "description": "Per dictar en altres llengües, com ara el castellà, el francès i l'alemany."
           },
           "canary": {
             "name": "Canary 180M Flash",
-            "description": "A small download, for older computers or when disk space is low."
+            "description": "Una baixada petita, per a ordinadors antics o amb poc espai al disc."
           },
           "nemotron": {
             "name": "Nemotron 3.5 Streaming",
-            "description": "Shows live text as you speak, but makes more mistakes."
+            "description": "Mostra el text en directe mentre parleu, però s'equivoca més."
           }
         }
       }
@@ -564,26 +567,26 @@
       "title": "Llengües"
     },
     "dictation": {
-      "title": "Continuous Dictation",
-      "description": "Keep talking, and the text is typed into your window each time you pause. Speech recognition stays on this computer, and AI cleanup never runs in this mode.",
+      "title": "Dictat continu",
+      "description": "Continueu parlant, i el text s'escriu a la finestra a cada pausa. El reconeixement de veu es queda en aquest ordinador, i la neteja amb IA no s'executa mai en aquest mode.",
       "dragonKey": {
-        "title": "Dragon's Key",
-        "description": "Use Numpad + to start and stop, as Dragon does. While it's set, that key no longer types a plus sign.",
-        "button": "Use Dragon's key (Numpad +)"
+        "title": "Tecla del Dragon",
+        "description": "Feu servir el + del teclat numèric per iniciar i aturar, com al Dragon. Mentre estigui activat, aquesta tecla ja no escriu el signe més.",
+        "button": "Fes servir la tecla del Dragon (+ numèric)"
       },
       "pause": {
-        "title": "Pause Length",
-        "description": "How long you pause before what you said is typed. Longer pauses keep sentences together; shorter ones show text sooner.",
+        "title": "Durada de la pausa",
+        "description": "Quanta estona feu pausa abans que s'escrigui el que heu dit. Les pauses llargues mantenen les frases juntes; les curtes mostren el text abans.",
         "seconds": "{{seconds}} s"
       },
       "autoStop": {
-        "title": "Stop After Silence",
-        "description": "Dictation stops by itself after this long without speech, so the microphone is never left on by accident.",
+        "title": "Atura després de silenci",
+        "description": "El dictat s'atura sol després d'aquest temps sense veu, perquè el micròfon no es quedi mai encès per error.",
         "minutes": "{{minutes}} min"
       },
       "voiceCommands": {
-        "label": "Voice Commands",
-        "description": "Say \"new paragraph\" or \"new line\" as you talk, or \"scratch that\" or \"stop dictation\" on its own between pauses, and it acts instead of being typed. Normal sentences with these words are typed as usual."
+        "label": "Ordres de veu",
+        "description": "Digueu \"new paragraph\" o \"new line\" mentre parleu, o \"scratch that\" o \"stop dictation\" sols entre pauses, i l'ordre s'executa en lloc d'escriure's. Les frases normals amb aquestes paraules s'escriuen com sempre."
       }
     },
     "sound": {
@@ -646,11 +649,11 @@
       },
       "autostart": {
         "label": "Inicia en entrar a la sessió",
-        "description": "Inicia automàticament el Handy quan entreu a la sessió de l'ordinador."
+        "description": "Inicia automàticament el Kusema quan entreu a la sessió de l'ordinador."
       },
       "showTrayIcon": {
         "label": "Mostra la icona a la safata",
-        "description": "Mostra la icona del Handy a la safata del sistema."
+        "description": "Mostra la icona del Kusema a la safata del sistema."
       },
       "overlay": {
         "style": {
@@ -773,90 +776,90 @@
         }
       },
       "showAllModels": {
-        "label": "Show all models",
-        "description": "List every model on the Models page, with accuracy and speed details, instead of the short list."
+        "label": "Mostra tots els models",
+        "description": "Mostra tots els models a la pàgina Models, amb dades de precisió i velocitat, en lloc de la llista curta."
       }
     },
     "assistant": {
-      "title": "Assistant",
-      "description": "Hold the shortcut, ask a question out loud, and Kusema answers.",
+      "title": "Assistent",
+      "description": "Manteniu premuda la drecera, feu una pregunta en veu alta i el Kusema respon.",
       "provider": {
-        "title": "AI Provider",
-        "provider": "Provider",
-        "description": "Assistant mode uses the same provider and API key as Post Process.",
+        "title": "Proveïdor d'IA",
+        "provider": "Proveïdor",
+        "description": "L'assistent fa servir el mateix proveïdor i la mateixa clau d'API que el postprocessament.",
         "model": "Model",
-        "modelDescription": "The model that answers your questions. Change it on the Post Process page.",
-        "notSet": "Not chosen",
-        "open": "Open Post Process settings",
-        "disabled": "Assistant mode needs an AI provider (such as Anthropic, OpenAI or a local Ollama model) to answer questions. Providers are set up on the Post Process page, which appears once Post Processing is turned on. Turning it on doesn't change how normal dictation works.",
-        "enable": "Turn on Post Processing",
-        "noProvider": "Choose a provider on the Post Process page.",
-        "noKey": "No API key is set for {{provider}}. Add one on the Post Process page.",
-        "noModel": "Choose a model on the Post Process page."
+        "modelDescription": "El model que respon les preguntes. Canvieu-lo a la pàgina Postprocessament.",
+        "notSet": "Cap triat",
+        "open": "Obre la configuració del postprocessament",
+        "disabled": "L'assistent necessita un proveïdor d'IA (com ara Anthropic, OpenAI o un model local de l'Ollama) per respondre. Els proveïdors es configuren a la pàgina Postprocessament, que apareix quan el postprocessament està activat. Activar-lo no canvia el dictat normal.",
+        "enable": "Activa el postprocessament",
+        "noProvider": "Trieu un proveïdor a la pàgina Postprocessament.",
+        "noKey": "No hi ha cap clau d'API per a {{provider}}. Afegiu-ne una a la pàgina Postprocessament.",
+        "noModel": "Trieu un model a la pàgina Postprocessament."
       },
       "screen": {
-        "title": "Ask About My Screen",
-        "description": "Ask about the window you're working in, like “What do you think of this document?” Only that window is captured, and it stays on this computer until you press Send.",
+        "title": "Pregunta sobre la meva pantalla",
+        "description": "Pregunteu sobre la finestra on treballeu, per exemple «Què et sembla aquest document?». Només es captura aquesta finestra, i no surt d'aquest ordinador fins que premeu Envia.",
         "confirm": {
-          "label": "Confirm Before Sending Screenshots",
-          "description": "Show the screenshot, your question and where it will go, then wait for Send (Enter) or Cancel (Escape). Unanswered, it cancels after 30 seconds.",
-          "offWarning": "Screenshots will be sent to {{provider}} as soon as you finish speaking, without showing you first. Everything visible in the window goes with them, including private or confidential information."
+          "label": "Confirma abans d'enviar captures",
+          "description": "Mostra la captura, la pregunta i on anirà, i espera Envia (Retorn) o Cancel·la (Esc). Si no hi ha resposta, es cancel·la al cap de 30 segons.",
+          "offWarning": "Les captures s'enviaran a {{provider}} tan bon punt acabeu de parlar, sense mostrar-vos-les abans. Tot el que es veu a la finestra hi va inclòs, també la informació privada o confidencial."
         },
         "provider": {
-          "label": "Use for Screen Questions",
-          "description": "Send screenshots to a different provider than normal questions, for example a local vision model in Ollama (the Custom provider) for confidential documents. Follow-up questions go to the same provider until you start a new conversation.",
-          "same": "Same as Assistant",
-          "sameNamed": "Same as Assistant ({{provider}})",
-          "yourProvider": "your AI provider"
+          "label": "Fes servir per a preguntes sobre la pantalla",
+          "description": "Envia les captures a un proveïdor diferent del de les preguntes normals, per exemple un model de visió local a l'Ollama (el proveïdor Personalitzat) per a documents confidencials. Les preguntes de seguiment van al mateix proveïdor fins que comenceu una conversa nova.",
+          "same": "Igual que l'assistent",
+          "sameNamed": "Igual que l'assistent ({{provider}})",
+          "yourProvider": "el vostre proveïdor d'IA"
         },
         "model": {
-          "label": "Model for Screen Questions",
-          "description": "A model that can see images. Leave empty to use the model chosen for this provider on the Post Process page.",
-          "placeholder": "e.g. qwen2.5vl"
+          "label": "Model per a preguntes sobre la pantalla",
+          "description": "Un model que pugui veure imatges. Deixeu-ho buit per fer servir el model triat per a aquest proveïdor a la pàgina Postprocessament.",
+          "placeholder": "p. ex. qwen2.5vl"
         }
       },
       "conversation": {
-        "empty": "Ask a question with the Ask Kusema shortcut. The conversation will appear here.",
-        "new": "New conversation",
-        "screenshot": "Screenshot",
-        "noProvider": "Ask Kusema needs an AI model to answer. Choose one in Settings.",
-        "openSettings": "Open Settings"
+        "empty": "Feu una pregunta amb la drecera «Pregunta al Kusema». La conversa apareixerà aquí.",
+        "new": "Conversa nova",
+        "screenshot": "Captura",
+        "noProvider": "«Pregunta al Kusema» necessita un model d'IA per respondre. Trieu-ne un a Configuració.",
+        "openSettings": "Obre la configuració"
       },
       "voice": {
-        "title": "Voice",
-        "systemDefault": "System default",
-        "previewText": "Hi, I'm Kusema. This is how I'll sound when I answer your questions.",
+        "title": "Veu",
+        "systemDefault": "Predeterminada del sistema",
+        "previewText": "Hola, soc el Kusema. Així sonaré quan respongui les vostres preguntes.",
         "speakReplies": {
-          "label": "Speak Replies",
-          "description": "Read replies aloud as they arrive. Press Cancel (Escape), start a new recording, or start a new conversation to stop."
+          "label": "Llegeix les respostes",
+          "description": "Llegeix les respostes en veu alta a mesura que arriben. Per aturar-ho, premeu Cancel·la (Esc), comenceu una gravació nova o una conversa nova."
         },
         "voice": {
-          "label": "Voice",
-          "description": "Kokoro voices sound the most natural; download them above. The other voices come with your computer (on Windows, add more under Settings > Time & language > Speech)."
+          "label": "Veu",
+          "description": "Les veus Kokoro són les més naturals; baixeu-les a dalt. Les altres veus vénen amb l'ordinador (al Windows, n'hi podeu afegir més a Configuració > Hora i idioma > Veu)."
         },
         "kokoro": {
-          "label": "Kokoro Voices",
-          "description": "28 natural-sounding English voices (US and UK) generated on this computer. A one-time download.",
-          "installed": "Installed. Pick a Kokoro voice below. Removing them frees the disk space; replies then use the system voice.",
-          "download": "Download ({{size}} MB)",
-          "downloading": "Downloading… {{percentage}}%",
-          "cancel": "Cancel",
-          "delete": "Remove"
+          "label": "Veus Kokoro",
+          "description": "28 veus angleses de so natural (EUA i Regne Unit) generades en aquest ordinador. Una sola baixada.",
+          "installed": "Instal·lades. Trieu una veu Kokoro a sota. Si les traieu, s'allibera espai al disc; les respostes faran servir la veu del sistema.",
+          "download": "Baixa ({{size}} MB)",
+          "downloading": "S'està baixant… {{percentage}} %",
+          "cancel": "Cancel·la",
+          "delete": "Treu"
         },
         "rate": {
-          "label": "Speaking Rate",
-          "description": "How fast replies are read. 1.00× is the voice's normal speed."
+          "label": "Velocitat de lectura",
+          "description": "A quina velocitat es llegeixen les respostes. 1,00× és la velocitat normal de la veu."
         },
         "preview": {
-          "label": "Preview Voice",
-          "description": "Hear the selected voice at the selected speed.",
-          "button": "Preview"
+          "label": "Escolta la veu",
+          "description": "Escolteu la veu triada a la velocitat triada.",
+          "button": "Escolta"
         }
       },
       "tabs": {
-        "label": "Assistant",
-        "conversation": "Conversation",
-        "settings": "Settings"
+        "label": "Assistent",
+        "conversation": "Conversa",
+        "settings": "Configuració"
       }
     },
     "postProcessing": {
@@ -973,7 +976,7 @@
       },
       "updateChecks": {
         "label": "Comproveu si hi ha actualitzacions",
-        "description": "Comprova automàticament si hi ha versions noves del Handy",
+        "description": "Comprova automàticament si hi ha versions noves del Kusema",
         "lockedDescription": "Desactivat per la configuració del sistema (HANDY_DISABLE_UPDATER)"
       },
       "whatsNewPreview": {
@@ -992,9 +995,9 @@
           "welcome": "Benvinguda",
           "permissions": "Permisos",
           "done": "Tot a punt",
-          "microphone": "Microphone",
-          "practice": "Practice",
-          "assistant": "AI assistant"
+          "microphone": "Micròfon",
+          "practice": "Pràctica",
+          "assistant": "Assistent d'IA"
         }
       },
       "onboardingRun": {
@@ -1040,8 +1043,8 @@
         "description": "Micròfon que s'utilitzarà quan la tapa del portàtil estigui tancada"
       },
       "postProcessingToggle": {
-        "label": "AI Cleanup",
-        "description": "Optional. Rewrites dictated text with an AI model when you use the AI cleanup shortcut: fixes self-corrections and grammar, keeps your meaning, and never adds facts."
+        "label": "Neteja amb IA",
+        "description": "Opcional. Reescriu el text dictat amb un model d'IA quan feu servir la drecera de neteja amb IA: corregeix les autocorreccions i la gramàtica, manté el que voleu dir i no hi afegeix mai fets."
       },
       "muteWhileRecording": {
         "label": "Silencia durant l'enregistrament",
@@ -1057,7 +1060,7 @@
         "bindingsReset": "Les dreceres de teclat eren incompatibles i s'han restablert als valors per defecte",
         "options": {
           "tauri": "Tauri Global Shortcut",
-          "builtIn": "Built-in (recommended)"
+          "builtIn": "Integrat (recomanat)"
         }
       },
       "pasteDelay": {
@@ -1086,7 +1089,7 @@
       },
       "keyboardDiagnostic": {
         "title": "Diagnòstic del teclat",
-        "description": "Comprova si els esdeveniments del teclat arriben al Handy. Només se'n registra el recompte, mai les tecles que premeu.",
+        "description": "Comprova si els esdeveniments del teclat arriben al Kusema. Només se'n registra el recompte, mai les tecles que premeu.",
         "run": "Executa un diagnòstic de 10 s",
         "running": "S'està escoltant… prema la drecera unes quantes vegades (p. ex., Option+Space)",
         "secureInputLabel": "Entrada segura",
@@ -1100,7 +1103,7 @@
         "mouse": "Ratolí",
         "verdictBlocked": "L'entrada segura bloca els esdeveniments de tecla. Les dreceres amb tecles no poden funcionar fins que es resolgui.",
         "verdictSuspicious": "Han arribat esdeveniments de modificadors, però no de tecles. Alguna cosa suprimeix les tecles tot i que l'entrada segura consta com a desactivada. Informeu-ne al GitHub.",
-        "verdictOk": "Els esdeveniments de tecla arriben al Handy amb normalitat.",
+        "verdictOk": "Els esdeveniments de tecla arriben al Kusema amb normalitat.",
         "verdictNoEvents": "No s'ha capturat cap esdeveniment. Heu premut alguna tecla durant la prova?",
         "failed": "El diagnòstic ha fallat: {{error}}"
       }
@@ -1109,203 +1112,206 @@
       "title": "Quant a",
       "version": {
         "title": "Versió",
-        "description": "Versió actual del Handy"
+        "description": "Versió actual del Kusema"
       },
       "whatsNewUpdates": {
         "label": "Mostra les novetats",
-        "description": "Mostra les notes de la versió després d'actualitzar el Handy"
+        "description": "Mostra les notes de la versió després d'actualitzar el Kusema"
       },
       "appDataDirectory": {
         "title": "Directori de dades de l'aplicació",
-        "description": "Ubicació on el Handy desa les dades"
+        "description": "Ubicació on el Kusema desa les dades"
       },
       "sourceCode": {
         "title": "Codi font",
-        "description": "View Kusema's source code",
+        "description": "Mostra el codi font del Kusema",
         "button": "Mostra al GitHub"
       },
       "acknowledgments": {
         "ggml": {
           "title": "ggml",
           "description": "Biblioteca de tensors d'alt rendiment per a la inferència d'aprenentatge automàtic al dispositiu",
-          "details": "La transcripció local de veu a text del Handy es basa en el transcribe.cpp i el ggml. Gràcies a la gran feina de Georgi Gerganov i dels col·laboradors."
+          "details": "La transcripció local de veu a text del Kusema es basa en el transcribe.cpp i el ggml. Gràcies a la gran feina de Georgi Gerganov i dels col·laboradors."
         }
       },
       "organizations": {
-        "title": "Kusema for organizations",
-        "description": "Setup, support and options for firms",
-        "button": "Learn more"
+        "title": "El Kusema per a organitzacions",
+        "description": "Instal·lació, suport i opcions per a despatxos",
+        "button": "Més informació"
       },
       "report": {
-        "title": "Report a problem or suggest a feature",
-        "description": "Tell us on GitHub what went wrong or what you'd like",
-        "button": "Open GitHub"
+        "title": "Informeu d'un problema o suggeriu una funció",
+        "description": "Expliqueu-nos a GitHub què ha fallat o què us agradaria",
+        "button": "Obre GitHub"
       },
       "credits": {
-        "title": "Credits and licenses",
+        "title": "Crèdits i llicències",
         "handy": {
-          "title": "Built on Handy",
-          "description": "Kusema is built on Handy by CJ Pais, used under the MIT License.",
-          "button": "View Handy"
+          "title": "Basat en el Handy",
+          "description": "El Kusema es basa en el Handy, de CJ Pais, utilitzat sota la llicència MIT.",
+          "button": "Mostra el Handy"
         },
         "nvidiaLicense": "NVIDIA Open Model License",
-        "models": "Speech and voice models ({{count}})",
-        "components": "Open-source components ({{count}})",
-        "notices": "Full license texts",
-        "loading": "Loading..."
+        "models": "Models de reconeixement i de veu ({{count}})",
+        "components": "Components de codi obert ({{count}})",
+        "notices": "Textos complets de les llicències",
+        "loading": "S'està carregant..."
       }
     },
     "privacy": {
-      "thisComputer": "This computer ({{host}})",
-      "nothingSent": "Nothing to show yet.",
-      "updateBlocked": "Update checks are blocked in Privileged mode.",
+      "thisComputer": "Aquest ordinador ({{host}})",
+      "nothingSent": "Encara no hi ha res a mostrar.",
+      "updateBlocked": "Les comprovacions d'actualitzacions estan bloquejades en mode Privileged.",
       "audio": {
-        "title": "Audio sent off this computer: 0 bytes",
-        "description": "Speech recognition runs on this computer, and nothing in Kusema can upload your voice. Only the text of what you say, and only for features you choose, ever goes to an AI provider."
+        "title": "Àudio enviat fora d'aquest ordinador: 0 bytes",
+        "description": "El reconeixement de veu s'executa en aquest ordinador, i res del Kusema no pot pujar la vostra veu. Només el text del que dieu, i només per a les funcions que trieu, arriba mai a un proveïdor d'IA."
       },
       "privileged": {
-        "title": "Privileged Mode",
-        "description": "For confidential matters. While it's on, nothing you say, type or show goes to a cloud AI service. Ask Kusema and AI cleanup only work with a model running on this computer.",
+        "title": "Mode Privileged",
+        "description": "Per als assumptes confidencials. Mentre està activat, res del que dieu, escriviu o mostreu va a un servei d'IA al núvol. «Pregunta al Kusema» i la neteja amb IA només funcionen amb un model en aquest ordinador.",
         "chip": "Privileged",
         "toggle": {
-          "label": "Privileged Mode",
-          "description": "Blocks every request to cloud AI providers, including ones already set up. Dictation keeps working, because it never uses the cloud."
+          "label": "Mode Privileged",
+          "description": "Bloqueja totes les sol·licituds als proveïdors d'IA al núvol, fins i tot els ja configurats. El dictat continua funcionant, perquè no fa servir mai el núvol."
         },
         "allowLan": {
-          "label": "Allow Local Network AI Servers",
-          "description": "Also allows AI servers on your office network, by private address (like 192.168.1.20). Models on this computer are always allowed."
+          "label": "Permet servidors d'IA de la xarxa local",
+          "description": "També permet servidors d'IA de la xarxa de l'oficina, per adreça privada (com ara 192.168.1.20). Els models d'aquest ordinador sempre estan permesos."
         },
         "blockDownloads": {
-          "label": "Also Block Downloads and Update Checks",
-          "description": "For offline offices. Model and voice downloads and update checks carry none of your content, so they normally stay allowed and are listed below. Turn this on to stop them too while Privileged mode is on."
+          "label": "Bloqueja també les baixades i les actualitzacions",
+          "description": "Per a oficines sense connexió. Les baixades de models i veus i les comprovacions d'actualitzacions no contenen res del vostre contingut, així que normalment continuen permeses i es mostren a sota. Activeu-ho per aturar-les també mentre el mode Privileged estigui activat."
         },
         "hotkey": {
-          "label": "Privileged Mode Shortcut",
-          "description": "Adds a keyboard shortcut that turns Privileged mode on or off. Off by default, so it can't be pressed by accident."
+          "label": "Drecera del mode Privileged",
+          "description": "Afegeix una drecera de teclat que activa o desactiva el mode Privileged. Desactivada per defecte, perquè no es premi per error."
         }
       },
       "counts": {
-        "title": "Where Requests Went",
-        "today": "Today",
-        "week": "Last 7 days"
+        "title": "On han anat les sol·licituds",
+        "today": "Avui",
+        "week": "Últims 7 dies"
       },
       "columns": {
-        "time": "Time",
-        "destination": "Destination",
-        "purpose": "Why",
-        "data": "Data",
-        "size": "Size",
-        "result": "Result"
+        "time": "Hora",
+        "destination": "Destinació",
+        "purpose": "Motiu",
+        "data": "Dades",
+        "size": "Mida",
+        "result": "Resultat"
       },
       "purposes": {
-        "assistant_question": "Question to Kusema",
-        "screen_question": "Question about the screen",
-        "post_processing": "AI cleanup",
-        "provider_models": "Listing a provider's models",
-        "model_download": "Speech model download",
-        "voice_download": "Voice download",
-        "update_check": "Update check"
+        "assistant_question": "Pregunta al Kusema",
+        "screen_question": "Pregunta sobre la pantalla",
+        "post_processing": "Neteja amb IA",
+        "provider_models": "Llista de models d'un proveïdor",
+        "model_download": "Baixada d'un model de veu",
+        "voice_download": "Baixada d'una veu",
+        "update_check": "Comprovació d'actualitzacions"
       },
       "data": {
         "text": "Text",
-        "image": "Screenshot",
-        "none": "None of yours"
+        "image": "Captura",
+        "none": "Res vostre"
       },
       "results": {
-        "sent": "Sent",
-        "blocked": "Blocked",
-        "failed": "Failed"
+        "sent": "Enviada",
+        "blocked": "Bloquejada",
+        "failed": "Ha fallat"
       },
       "list": {
-        "title": "Every Request",
-        "description": "Each request Kusema has made: when, where, why, what kind of data and how large. What was in it is never recorded. Shows the latest 500; the export has them all.",
-        "all": "All",
-        "allPurposes": "Any reason",
-        "allResults": "Any result",
-        "allDestinations": "Any destination",
-        "anyTime": "Any time",
-        "lastDays_one": "Last {{count}} day",
-        "lastDays_other": "Last {{count}} days",
-        "export": "Export CSV",
-        "exported_one": "Exported {{count}} request.",
-        "exported_other": "Exported {{count}} requests.",
-        "clear": "Clear",
+        "title": "Totes les sol·licituds",
+        "description": "Cada sol·licitud que ha fet el Kusema: quan, on, per què, quin tipus de dades i de quina mida. El contingut no es desa mai. Mostra les 500 més recents; l'exportació les inclou totes.",
+        "all": "Totes",
+        "allPurposes": "Qualsevol motiu",
+        "allResults": "Qualsevol resultat",
+        "allDestinations": "Qualsevol destinació",
+        "anyTime": "Qualsevol moment",
+        "lastDays_one": "Últim dia",
+        "lastDays_other": "Últims {{count}} dies",
+        "lastDays_many": "Últims {{count}} dies",
+        "export": "Exporta CSV",
+        "exported_one": "S'ha exportat {{count}} sol·licitud.",
+        "exported_other": "S'han exportat {{count}} sol·licituds.",
+        "exported_many": "S'han exportat {{count}} sol·licituds.",
+        "clear": "Esborra",
         "retention": {
-          "title": "Keep This List For",
-          "description": "Older entries are deleted from this computer automatically.",
-          "days_one": "{{count}} day",
-          "days_other": "{{count}} days"
+          "title": "Conserva aquesta llista durant",
+          "description": "Les entrades més antigues s'eliminen automàticament d'aquest ordinador.",
+          "days_one": "{{count}} dia",
+          "days_other": "{{count}} dies",
+          "days_many": "{{count}} dies"
         }
       }
     },
     "cleanup": {
-      "title": "Cleanup",
-      "description": "Dictated text should need little editing. Local cleanup runs on this computer and sends nothing anywhere.",
+      "title": "Neteja",
+      "description": "El text dictat hauria de necessitar pocs retocs. La neteja local s'executa en aquest ordinador i no envia res.",
       "local": {
-        "label": "Local Cleanup",
-        "description": "Removes filler words, adds missing periods between phrases in continuous dictation, and handles spoken punctuation, all on this computer. Off, your words are typed as transcribed."
+        "label": "Neteja local",
+        "description": "Treu les crosses, afegeix els punts que falten entre frases en el dictat continu i aplica la puntuació dictada, tot en aquest ordinador. Desactivada, les paraules s'escriuen tal com s'han transcrit."
       },
       "spokenPunctuation": {
-        "label": "Spoken Punctuation",
-        "description": "Say \"comma\", \"period\", \"question mark\", \"colon\", \"open quote\", \"close paren\", \"dash\", \"section symbol\" and more, as in Dragon. \"Period\" only counts at the end of a phrase, so \"the limitations period expired\" stays as words. Say \"literal period\" to type the word."
+        "label": "Puntuació dictada",
+        "description": "Digueu \"comma\", \"period\", \"question mark\", \"colon\", \"open quote\", \"close paren\", \"dash\", \"section symbol\" i més, com al Dragon. \"Period\" només compta al final d'una frase, així que \"the limitations period expired\" es queda en paraules. Digueu \"literal period\" per escriure la paraula. Aquestes ordres funcionen en anglès."
       },
       "ai": {
         "status": {
-          "noProvider": "No AI provider is set up yet.",
-          "noKey": "{{provider}} needs an API key.",
-          "noModel": "{{provider}} needs a model chosen.",
-          "local": "Using {{model}} on this computer through {{provider}}. Nothing leaves this computer.",
-          "cloud": "Using {{model}} from {{provider}}, a cloud service. Text you clean up goes to {{provider}}.",
-          "blocked": "Privileged mode is on, so nothing will be sent to {{provider}}. Use a local model or turn off Privileged mode."
+          "noProvider": "Encara no hi ha cap proveïdor d'IA configurat.",
+          "noKey": "{{provider}} necessita una clau d'API.",
+          "noModel": "{{provider}} necessita que trieu un model.",
+          "local": "S'està fent servir {{model}} en aquest ordinador mitjançant {{provider}}. Res no surt d'aquest ordinador.",
+          "cloud": "S'està fent servir {{model}} de {{provider}}, un servei al núvol. El text que netegeu s'envia a {{provider}}.",
+          "blocked": "El mode Privileged està activat, així que no s'enviarà res a {{provider}}. Feu servir un model local o desactiveu el mode Privileged."
         },
-        "recommendLocal": "We recommend a model that runs on this computer, such as one in Ollama, so confidential text stays here. AI cleanup runs when you dictate with its own shortcut, and never during continuous dictation.",
-        "setUp": "Set Up AI Cleanup"
+        "recommendLocal": "Us recomanem un model que funcioni en aquest ordinador, com ara un a l'Ollama, perquè el text confidencial es quedi aquí. La neteja amb IA s'executa quan dicteu amb la seva pròpia drecera, i mai durant el dictat continu.",
+        "setUp": "Configura la neteja amb IA"
       }
     },
     "firstWins": {
-      "title": "First three wins",
-      "dismiss": "Dismiss",
-      "dictated": "Dictate an email",
-      "newParagraph": "Use continuous dictation and say \"new paragraph\"",
-      "asked": "Ask Kusema a question",
-      "done": "Done",
-      "notDone": "Not done yet",
-      "progress": "{{done}} of {{count}} done",
-      "allDone": "All three done. Nice work."
+      "title": "Els tres primers èxits",
+      "dismiss": "Descarta",
+      "dictated": "Dicteu un correu",
+      "newParagraph": "Feu servir el dictat continu i digueu \"new paragraph\"",
+      "asked": "Feu una pregunta al Kusema",
+      "done": "Fet",
+      "notDone": "Encara no",
+      "progress": "{{done}} de {{count}} fets",
+      "allDone": "Tots tres fets. Bona feina."
     },
     "glow": {
-      "title": "Recording indicator",
-      "description": "A glow around the edges of your screen shows that Kusema is listening. Only you see it: it stays out of screenshots and screen shares.",
+      "title": "Indicador d'enregistrament",
+      "description": "Una lluïssor a les vores de la pantalla mostra que el Kusema escolta. Només la veieu vosaltres: no apareix a les captures ni quan compartiu la pantalla.",
       "enabled": {
-        "label": "Screen glow",
-        "description": "Show a colored glow around the screen you're working on while Kusema is listening. You can still click and type through it."
+        "label": "Lluïssor de pantalla",
+        "description": "Mostra una lluïssor de color al voltant de la pantalla on treballeu mentre el Kusema escolta. Podeu continuar fent clic i escrivint a través seu."
       },
       "thickness": {
-        "label": "Thickness",
-        "description": "How far the glow reaches in from the edge of the screen."
+        "label": "Gruix",
+        "description": "Fins on arriba la lluïssor des de la vora de la pantalla."
       },
       "intensity": {
-        "label": "Intensity",
-        "description": "How strong the glow is."
+        "label": "Intensitat",
+        "description": "La força de la lluïssor."
       },
       "palette": {
         "label": "Colors",
-        "description": "The color-blind friendly set keeps the modes easy to tell apart with every common kind of color blindness.",
-        "standard": "Standard",
-        "color_blind": "Color-blind friendly"
+        "description": "Els colors aptes per a daltònics mantenen els modes fàcils de distingir amb tots els tipus habituals de daltonisme.",
+        "standard": "Estàndard",
+        "color_blind": "Aptes per a daltònics"
       },
       "modes": {
-        "dictation": "Dictation",
-        "continuous": "Continuous dictation",
-        "ask": "Ask Kusema",
-        "ask_screen": "Ask about my screen",
-        "paused": "Continuous dictation paused (window changed)"
+        "dictation": "Dictat",
+        "continuous": "Dictat continu",
+        "ask": "Pregunta al Kusema",
+        "ask_screen": "Pregunta sobre la meva pantalla",
+        "paused": "Dictat continu en pausa (canvi de finestra)"
       },
-      "preview": "Preview",
-      "previewLabel": "Preview the glow for {{mode}}",
+      "preview": "Previsualització",
+      "previewLabel": "Previsualitza la lluïssor per a {{mode}}",
       "sounds": {
-        "label": "Continuous dictation sounds",
-        "description": "Play a short sound when continuous dictation starts and stops. Sounds for other dictation are under Sound below."
+        "label": "Sons del dictat continu",
+        "description": "Reprodueix un so curt quan el dictat continu comença i s'atura. Els sons dels altres dictats són a So, més avall."
       }
     }
   },
@@ -1325,7 +1331,7 @@
     "portableUpdateBrowseButton": "Obriu GitHub Releases"
   },
   "whatsNew": {
-    "title": "Novetats del Handy v{{version}}"
+    "title": "Novetats del Kusema v{{version}}"
   },
   "common": {
     "loading": "S'està carregant...",
@@ -1356,11 +1362,11 @@
   },
   "appLanguage": {
     "title": "Llengua de l'aplicació",
-    "description": "Canvia la llengua de la interfície del Handy"
+    "description": "Canvia la llengua de la interfície del Kusema"
   },
   "theme": {
     "title": "Tema de l'aplicació",
-    "description": "Tria si el Handy segueix el tema del sistema o es manté en mode clar o fosc",
+    "description": "Tria si el Kusema segueix el tema del sistema o es manté en mode clar o fosc",
     "options": {
       "system": "Sistema",
       "light": "Clar",
@@ -1371,44 +1377,46 @@
     "transcribing": "S'està transcrivint...",
     "processing": "S'està processant...",
     "loadingModel": "S'està carregant el model...",
-    "speaking": "Speaking...",
+    "speaking": "Parlant...",
     "dictation": {
-      "dictating": "Dictating",
-      "paused": "Paused, window changed",
-      "noTarget": "Click where the text should go",
-      "finishing": "Finishing...",
-      "stop": "Stop",
-      "nothingToScratch": "Nothing to scratch",
-      "scratchWindowChanged": "Can't scratch: the window changed",
-      "scratchOtherInput": "Can't scratch: keyboard or mouse used",
-      "savedToHistory": "Said while paused: saved in History",
-      "stoppedSilence": "Stopped after silence",
-      "microphoneLost": "Stopped: microphone lost",
-      "cantKeepUp": "Stopped: this computer couldn't keep up",
-      "transcriptionFailed": "Couldn't transcribe that",
-      "pasteFailed": "Couldn't type that; it's in History"
+      "dictating": "Dictant",
+      "paused": "En pausa, canvi de finestra",
+      "noTarget": "Feu clic on ha d'anar el text",
+      "finishing": "S'està acabant...",
+      "stop": "Atura",
+      "nothingToScratch": "No hi ha res a esborrar",
+      "scratchWindowChanged": "No es pot esborrar: ha canviat la finestra",
+      "scratchOtherInput": "No es pot esborrar: s'ha fet servir el teclat o el ratolí",
+      "savedToHistory": "Dit en pausa: desat a l'Historial",
+      "stoppedSilence": "Aturat després de silenci",
+      "microphoneLost": "Aturat: s'ha perdut el micròfon",
+      "cantKeepUp": "Aturat: aquest ordinador no podia seguir el ritme",
+      "transcriptionFailed": "No s'ha pogut transcriure",
+      "pasteFailed": "No s'ha pogut escriure; és a l'Historial"
     },
     "privileged": "Privileged"
   },
   "screenCard": {
-    "title": "Send this screenshot?",
-    "autoCancel": "Cancels in {{seconds}} s",
-    "enlarge": "Click to enlarge",
-    "shrink": "Click to make smaller",
-    "imageAlt": "Screenshot of the window you asked about",
+    "title": "Voleu enviar aquesta captura?",
+    "autoCancel": "Es cancel·la d'aquí a {{seconds}} s",
+    "enlarge": "Feu clic per ampliar",
+    "shrink": "Feu clic per reduir",
+    "imageAlt": "Captura de la finestra sobre la qual heu preguntat",
     "question": "“{{question}}”",
-    "sendsTo": "Goes to {{provider}} · {{model}}",
-    "onlyThis": "Only this window. Nothing is sent until you press Send.",
-    "send": "Send",
-    "cancel": "Cancel",
+    "sendsTo": "Va a {{provider}} · {{model}}",
+    "onlyThis": "Només aquesta finestra. No s'envia res fins que premeu Envia.",
+    "send": "Envia",
+    "cancel": "Cancel·la",
     "noticeTitle": "Kusema",
-    "close": "Close"
+    "close": "Tanca"
   },
   "secureInput": {
     "blockedWithCulprit_one": "{{name}} pot estar blocant 1 drecera",
     "blockedWithCulprit_other": "{{name}} pot estar blocant {{count}} dreceres",
+    "blockedWithCulprit_many": "{{name}} pot estar blocant {{count}} dreceres",
     "blockedNoCulprit_one": "El macOS està blocant temporalment 1 drecera",
     "blockedNoCulprit_other": "El macOS està blocant temporalment {{count}} dreceres",
+    "blockedNoCulprit_many": "El macOS està blocant temporalment {{count}} dreceres",
     "recorderBlockedWithCulprit": "{{name}} pot estar blocant els canvis de dreceres",
     "recorderBlockedNoCulprit": "El macOS està blocant temporalment els canvis de dreceres",
     "learnMore": "Com es resol",

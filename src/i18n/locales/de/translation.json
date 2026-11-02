@@ -8,25 +8,25 @@
     "quit": "Beenden",
     "cancel": "Abbrechen",
     "secureInputWarning": "⚠ Tastenkürzel durch Secure Input blockiert",
-    "privilegedMode": "Privileged Mode",
-    "privilegedOn": "Privileged mode on"
+    "privilegedMode": "Privileged-Modus",
+    "privilegedOn": "Privileged-Modus an"
   },
   "sidebar": {
     "general": "Allgemein",
-    "assistant": "Assistant",
+    "assistant": "Assistent",
     "models": "Modelle",
     "advanced": "Erweitert",
     "postProcessing": "Nachbearbeitung",
     "history": "Verlauf",
     "debug": "Debug",
     "about": "Info",
-    "privacy": "Privacy"
+    "privacy": "Datenschutz"
   },
   "onboarding": {
     "customModelDescription": "Nicht offiziell unterstützt",
     "migration": {
       "title": "Deine Modelle brauchen ein Update",
-      "description": "Handy verwendet jetzt eine neuere Art von Modellen. Lade die neue Version herunter, um weiter zu transkribieren. Alte Versionen werden entfernt.",
+      "description": "Kusema verwendet jetzt eine neuere Art von Modellen. Lade die neue Version herunter, um weiter zu transkribieren. Alte Versionen werden entfernt.",
       "replaces": "Ersetzt {{name}}",
       "oldFormat": "Altes Format",
       "failed": "Download fehlgeschlagen",
@@ -63,11 +63,11 @@
     "permissions": {
       "microphone": {
         "name": "Mikrofon",
-        "why": "Damit Handy dich hören kann. Audio wird auf diesem Computer in Text umgewandelt und nie hochgeladen."
+        "why": "Damit Kusema dich hören kann. Audio wird auf diesem Computer in Text umgewandelt und nie hochgeladen."
       },
       "accessibility": {
         "name": "Bedienungshilfen",
-        "why": "Damit dein Tastenkürzel in jeder App funktioniert und Handy den Text dort eintippen kann, wo dein Cursor steht."
+        "why": "Damit dein Tastenkürzel in jeder App funktioniert und Kusema den Text dort eintippen kann, wo dein Cursor steht."
       },
       "errors": {
         "checkFailed": "Berechtigungsprüfung fehlgeschlagen. Bitte erneut versuchen.",
@@ -81,12 +81,12 @@
       "openSettings": "Einstellungen öffnen",
       "allowed": "Erlaubt",
       "waiting": "Warten",
-      "turnOnMac": "Aktiviere Handy in den Systemeinstellungen und komm dann hierher zurück.",
+      "turnOnMac": "Aktiviere Kusema in den Systemeinstellungen und komm dann hierher zurück.",
       "turnOnWindows": "Aktiviere den Mikrofonzugriff in den Windows-Einstellungen und komm dann hierher zurück.",
       "hintBoth": "Erlaube beides, um fortzufahren",
       "hintMicrophone": "Erlaube das Mikrofon, um fortzufahren",
       "welcomeBack": "Willkommen zurück. Es geht dort weiter, wo du aufgehört hast.",
-      "relaunch": "Tastenkürzel reagiert danach nicht? <relaunch>Handy neu starten</relaunch> und du landest direkt wieder hier."
+      "relaunch": "Tastenkürzel reagiert danach nicht? <relaunch>Kusema neu starten</relaunch> und du landest direkt wieder hier."
     },
     "shell": {
       "back": "Zurück",
@@ -97,11 +97,11 @@
       "title": "Sprechen statt tippen, in jeder App",
       "subtitle": "Wähle die Sprachen, in denen du diktierst",
       "languagesLabel": "Sprachen",
-      "noMatch": "Keine Sprache passt zu „{{query}}“. Die Modelle von Handy decken etwa 100 Sprachen ab; weitere findest du in den Einstellungen.",
+      "noMatch": "Keine Sprache passt zu „{{query}}“. Die Modelle von Kusema decken etwa 100 Sprachen ab; weitere findest du in den Einstellungen.",
       "appLanguage": "App-Sprache",
       "menusIn": "Menüs auf <b>{{language}}</b>",
       "chinese": {
-        "question": "Du sprichst {{languages}}. Welche Schriftzeichen soll Handy schreiben?",
+        "question": "Du sprichst {{languages}}. Welche Schriftzeichen soll Kusema schreiben?",
         "label": "Chinesische Schriftzeichen",
         "zh-Hans": "Vereinfacht",
         "zh-Hant": "Taiwan",
@@ -171,7 +171,7 @@
     },
     "try": {
       "title": "Probier es aus!",
-      "subtitle": "Handy ist in der Ecke und führt dich durch",
+      "subtitle": "Kusema ist in der Ecke und führt dich durch",
       "noteLabel": "Notiz",
       "placeholder": "Neue Notiz",
       "hold": "Halte <keys/> gedrückt und sprich.",
@@ -199,14 +199,14 @@
     },
     "done": {
       "title": "Alles bereit",
-      "subMac": "Handy ist jetzt in deiner Menüleiste. Halte <keys/> gedrückt oder tippe darauf, um in jeder App zu sprechen.",
-      "subTray": "Handy ist jetzt in deinem Infobereich. Halte <keys/> gedrückt oder tippe darauf, um in jeder App zu sprechen.",
+      "subMac": "Kusema ist jetzt in deiner Menüleiste. Halte <keys/> gedrückt oder tippe darauf, um in jeder App zu sprechen.",
+      "subTray": "Kusema ist jetzt in deinem Infobereich. Halte <keys/> gedrückt oder tippe darauf, um in jeder App zu sprechen.",
       "hint": "Du kannst das später in den Einstellungen ändern",
       "highFiveLabel": "High Five",
-      "atLogin": "Handy beim Anmelden starten",
+      "atLogin": "Kusema beim Anmelden starten",
       "finish": "Fertig",
       "panel": {
-        "name": "Handy",
+        "name": "Kusema",
         "ready": "Bereit",
         "languages": "Sprachen",
         "model": "Sprachmodell",
@@ -220,79 +220,79 @@
       "done": "Funktioniert in anderen Apps nicht? <guide>Linux-Einrichtungsanleitung</guide>"
     },
     "setup": {
-      "retryDownload": "Try again",
+      "retryDownload": "Erneut versuchen",
       "welcome": {
-        "title": "Kusema turns your voice into text on this computer.",
-        "privacy": "Your voice never leaves it.",
-        "language": "Language you'll dictate in"
+        "title": "Kusema wandelt deine Stimme auf diesem Computer in Text um.",
+        "privacy": "Deine Stimme verlässt ihn nie.",
+        "language": "Sprache, in der du diktierst"
       },
       "microphone": {
-        "title": "Choose your microphone",
-        "sub": "Say something. The bar should move as you speak.",
-        "label": "Microphone",
-        "meter": "Microphone level",
-        "heard": "Kusema can hear you.",
-        "quiet": "No sound yet. Check that this microphone isn't muted, or choose another one.",
-        "failed": "Kusema couldn't open this microphone. Choose another one.",
-        "tip": "Tip: a headset gives the best accuracy and fewer stray words."
+        "title": "Mikrofon auswählen",
+        "sub": "Sag etwas. Der Balken sollte sich beim Sprechen bewegen.",
+        "label": "Mikrofon",
+        "meter": "Mikrofonpegel",
+        "heard": "Kusema kann dich hören.",
+        "quiet": "Noch kein Ton. Prüfe, ob dieses Mikrofon stummgeschaltet ist, oder wähle ein anderes.",
+        "failed": "Kusema konnte dieses Mikrofon nicht öffnen. Wähle ein anderes.",
+        "tip": "Tipp: Mit einem Headset ist die Erkennung am genauesten, und es gibt weniger falsche Wörter."
       },
       "practice": {
-        "title": "Dictate your first sentence",
-        "how": "Hold <keys/>, say this sentence, then let go:",
+        "title": "Diktiere deinen ersten Satz",
+        "how": "Halte <keys/> gedrückt, sprich diesen Satz und lass dann los:",
         "sentence": "Dear Mr. Smith comma thank you for your letter period",
-        "box": "Practice box: your words appear here",
-        "placeholder": "Your words appear here",
-        "listening": "Listening...",
-        "typing": "Typing...",
-        "success": "That's it. Saying \"comma\" and \"period\" types the marks.",
-        "waiting": "Your speech model is still downloading. This box will work as soon as it's ready.",
-        "continuous": "For longer dictation, press <keys/> to keep listening until you press it again. Used to Dragon? You can set this to Numpad + under General.",
-        "continuousRunning": "Continuous dictation is on. Your words appear in the box each time you pause. Press {{stop}} to stop it.",
-        "continuousEnded": "That's continuous dictation. In your other apps, your words are typed at the cursor."
+        "box": "Übungsfeld: Hier erscheinen deine Wörter",
+        "placeholder": "Hier erscheinen deine Wörter",
+        "listening": "Hört zu...",
+        "typing": "Schreibt...",
+        "success": "Genau so. Wenn du \"comma\" und \"period\" sagst, werden die Zeichen gesetzt.",
+        "waiting": "Dein Sprachmodell wird noch heruntergeladen. Dieses Feld funktioniert, sobald es bereit ist.",
+        "continuous": "Für längeres Diktieren drücke <keys/>: Kusema hört zu, bis du die Taste erneut drückst. Von Dragon gewohnt? Unter Allgemein kannst du dafür Num + einstellen.",
+        "continuousRunning": "Fortlaufendes Diktieren ist an. Deine Wörter erscheinen bei jeder Pause im Feld. Drücke {{stop}}, um es zu beenden.",
+        "continuousEnded": "Das war fortlaufendes Diktieren. In deinen anderen Apps wird an der Cursorposition geschrieben."
       },
       "assistant": {
-        "title": "Set up the AI assistant (optional)",
-        "sub": "Ask Kusema answers questions you speak. Dictation doesn't need it.",
-        "model": "Model",
-        "continueWithout": "Continue without AI",
-        "privileged": "Privileged mode blocks all cloud AI with one switch, for matters that must stay on this computer.",
+        "title": "KI-Assistent einrichten (optional)",
+        "sub": "\"Kusema fragen\" beantwortet gesprochene Fragen. Zum Diktieren brauchst du ihn nicht.",
+        "model": "Modell",
+        "continueWithout": "Ohne KI fortfahren",
+        "privileged": "Der Privileged-Modus sperrt mit einem Schalter jede Cloud-KI, für Angelegenheiten, die auf diesem Computer bleiben müssen.",
         "local": {
-          "title": "Private: use a local AI on this computer",
-          "description": "Your questions stay here. Uses Ollama, a free app.",
-          "checking": "Looking for Ollama on this computer...",
-          "found": "Found Ollama. Choose a model to use.",
-          "notFound": "Ollama isn't running on this computer.",
-          "noModels": "Ollama is running, but has no models yet. Run \"ollama pull llama3.2\", then check again.",
-          "instructions": "How to set up Ollama",
-          "again": "Check again"
+          "title": "Privat: eine lokale KI auf diesem Computer nutzen",
+          "description": "Deine Fragen bleiben hier. Nutzt Ollama, eine kostenlose App.",
+          "checking": "Suche nach Ollama auf diesem Computer...",
+          "found": "Ollama gefunden. Wähle ein Modell aus.",
+          "notFound": "Ollama läuft nicht auf diesem Computer.",
+          "noModels": "Ollama läuft, hat aber noch keine Modelle. Führe \"ollama pull llama3.2\" aus und prüfe dann erneut.",
+          "instructions": "So richtest du Ollama ein",
+          "again": "Erneut prüfen"
         },
         "cloud": {
-          "title": "Use a cloud AI provider",
-          "description": "Your questions go to the provider you choose, using your own API key.",
-          "provider": "Provider",
-          "key": "API key",
-          "check": "Save and check",
-          "checking": "Checking the key...",
-          "saved": "Key saved in Windows Credential Manager. Choose a model to use.",
-          "where": "The key is stored in Windows Credential Manager, not in a file.",
-          "keyFailed": "The key was saved, but the provider didn't list any models. Check the key and try again."
+          "title": "Einen Cloud-KI-Anbieter nutzen",
+          "description": "Deine Fragen gehen an den Anbieter, den du wählst, mit deinem eigenen API-Schlüssel.",
+          "provider": "Anbieter",
+          "key": "API-Schlüssel",
+          "check": "Speichern und prüfen",
+          "checking": "Schlüssel wird geprüft...",
+          "saved": "Schlüssel in der Windows-Anmeldeinformationsverwaltung gespeichert. Wähle ein Modell aus.",
+          "where": "Der Schlüssel wird in der Windows-Anmeldeinformationsverwaltung gespeichert, nicht in einer Datei.",
+          "keyFailed": "Der Schlüssel wurde gespeichert, aber der Anbieter hat keine Modelle aufgelistet. Prüfe den Schlüssel und versuche es erneut."
         },
         "skip": {
-          "title": "Skip for now",
-          "description": "You can set this up later on the Assistant page."
+          "title": "Vorerst überspringen",
+          "description": "Du kannst das später auf der Seite Assistent einrichten."
         }
       },
       "done": {
-        "title": "You're all set",
-        "sub": "Kusema keeps running in the system tray and works in any app.",
-        "finish": "Start using Kusema",
-        "wins": "Your first three wins are waiting on the main page.",
-        "atLogin": "Start Kusema when I sign in",
+        "title": "Alles bereit",
+        "sub": "Kusema läuft im Infobereich weiter und funktioniert in jeder App.",
+        "finish": "Kusema verwenden",
+        "wins": "Deine ersten drei Erfolge warten auf der Hauptseite.",
+        "atLogin": "Kusema beim Anmelden starten",
         "keys": {
-          "dictate": "Dictate: hold",
-          "continuous": "Continuous dictation: press to start and stop",
-          "ask": "Ask Kusema",
-          "askScreen": "Ask about my screen"
+          "dictate": "Diktieren: gedrückt halten",
+          "continuous": "Fortlaufendes Diktieren: zum Starten und Beenden drücken",
+          "ask": "Kusema fragen",
+          "askScreen": "Zu meinem Bildschirm fragen"
         }
       }
     }
@@ -408,7 +408,7 @@
     "general": {
       "title": "Allgemein",
       "shortcut": {
-        "title": "Handy-Tastenkürzel",
+        "title": "Kusema-Tastenkürzel",
         "description": "Tastenkürzel für die Sprachaufnahme konfigurieren",
         "loading": "Tastenkürzel werden geladen...",
         "none": "Keine Tastenkürzel konfiguriert",
@@ -428,20 +428,20 @@
             "description": "Optional: Ein dediziertes Tastenkürzel, das immer die KI-Nachbearbeitung auf deine Transkription anwendet."
           },
           "assistant": {
-            "name": "Ask Kusema",
-            "description": "Hold or press to ask a spoken question. The reply appears below instead of being pasted."
+            "name": "Kusema fragen",
+            "description": "Gedrückt halten oder drücken, um eine Frage zu sprechen. Die Antwort erscheint unten, statt eingefügt zu werden."
           },
           "assistant_screen": {
-            "name": "Ask About My Screen",
-            "description": "Hold or press to ask a spoken question about the window you're working in. You see the screenshot before anything is sent."
+            "name": "Zu meinem Bildschirm fragen",
+            "description": "Gedrückt halten oder drücken, um eine Frage zum Fenster zu sprechen, in dem du arbeitest. Du siehst den Screenshot, bevor etwas gesendet wird."
           },
           "dictate_continuous": {
-            "name": "Continuous Dictation",
-            "description": "Press to start dictating hands-free, and press again to stop. Text appears each time you pause."
+            "name": "Fortlaufendes Diktieren",
+            "description": "Drücken, um freihändig zu diktieren, erneut drücken zum Beenden. Text erscheint bei jeder Pause."
           },
           "toggle_privileged": {
-            "name": "Privileged Mode",
-            "description": "Press to turn Privileged mode on or off."
+            "name": "Privileged-Modus",
+            "description": "Drücken, um den Privileged-Modus ein- oder auszuschalten."
           }
         },
         "errors": {
@@ -466,7 +466,7 @@
       },
       "preferredLanguages": {
         "title": "Bevorzugte Sprachen",
-        "description": "Die Sprachen, die du sprichst. Handy nutzt sie, um Modelle zu empfehlen.",
+        "description": "Die Sprachen, die du sprichst. Kusema nutzt sie, um Modelle zu empfehlen.",
         "noMatch": "Keine Sprache passt zu „{{query}}“",
         "weak": "Noch kein Modell erkennt {{languages}} gut."
       },
@@ -493,17 +493,17 @@
         "fits": "Für deine Sprachen",
         "untested": "Ungetestet"
       },
-      "untestedNote": "Nicht mit Handy getestet. Sie könnten langsamer sein oder mehr Fehler machen.",
+      "untestedNote": "Nicht mit Kusema getestet. Sie könnten langsamer sein oder mehr Fehler machen.",
       "untestedHidden_one": "{{count}} weiteres Modell ist nicht für Diktat optimiert. Suche danach, um es zu finden.",
       "untestedHidden_other": "{{count}} weitere Modelle sind nicht für Diktat optimiert. Suche danach, um eines zu finden.",
-      "emptyYours": "Noch keine Modelle. Wähle unten eines aus: Es wird heruntergeladen, dann nutzt Handy es.",
+      "emptyYours": "Noch keine Modelle. Wähle unten eines aus: Es wird heruntergeladen, dann nutzt Kusema es.",
       "showMore": "{{count}} weitere anzeigen",
       "showFewer": "Weniger anzeigen",
       "download": "Herunterladen und verwenden",
       "downloadingThenUse": "{{percent}} % von {{total}}, dann wird gewechselt",
       "loading": "Wird geladen…",
       "deleteAsk": "{{name}} löschen? Das gibt {{size}} frei.",
-      "deleteAskActive": "{{name}} löschen? Handy kann erst wieder transkribieren, wenn du ein anderes wählst.",
+      "deleteAskActive": "{{name}} löschen? Kusema kann erst wieder transkribieren, wenn du ein anderes wählst.",
       "cancel": "Abbrechen",
       "deleteModel": "{{name}} löschen",
       "cancelDownload": "Download von {{name}} abbrechen",
@@ -517,7 +517,7 @@
         "marks": "? wurde noch nicht gemessen. — versteht diese Sprache nicht."
       },
       "retiredNotice": {
-        "title": "Alte Modelle funktionieren nicht mehr mit Handy",
+        "title": "Alte Modelle funktionieren nicht mehr mit Kusema",
         "description": "Sie belegen {{size}} auf deinem Computer.",
         "delete": "Modelle löschen",
         "deleted": "Alte Modelle gelöscht",
@@ -525,37 +525,37 @@
       },
       "rescan": {
         "label": "Neu scannen",
-        "tooltip": "Erneut nach Modellen scannen, die außerhalb von Handy zum Modellordner oder Hugging-Face-Cache hinzugefügt wurden"
+        "tooltip": "Erneut nach Modellen scannen, die außerhalb von Kusema zum Modellordner oder Hugging-Face-Cache hinzugefügt wurden"
       },
       "curated": {
-        "inUse": "In use",
-        "gettingReady": "Getting ready...",
-        "downloading": "Downloading: {{percent}}%",
-        "cancel": "Cancel",
-        "cancelLabel": "Cancel downloading {{name}}",
-        "use": "Use",
-        "useLabel": "Use {{name}}",
-        "download": "Download ({{size}})",
-        "downloadLabel": "Download {{name}}",
-        "recommended": "Recommended",
-        "others": "Also on this computer",
-        "showAllHint": "More models are available: turn on Show all models under Advanced.",
+        "inUse": "In Verwendung",
+        "gettingReady": "Wird vorbereitet...",
+        "downloading": "Wird heruntergeladen: {{percent}} %",
+        "cancel": "Abbrechen",
+        "cancelLabel": "Herunterladen von {{name}} abbrechen",
+        "use": "Verwenden",
+        "useLabel": "{{name}} verwenden",
+        "download": "Herunterladen ({{size}})",
+        "downloadLabel": "{{name}} herunterladen",
+        "recommended": "Empfohlen",
+        "others": "Ebenfalls auf diesem Computer",
+        "showAllHint": "Weitere Modelle gibt es: Schalte unter Erweitert \"Alle Modelle anzeigen\" ein.",
         "rows": {
           "parakeetUnified": {
             "name": "Parakeet Unified English",
-            "description": "The best choice for English. Chosen automatically."
+            "description": "Die beste Wahl für Englisch. Wird automatisch gewählt."
           },
           "parakeetV3": {
             "name": "Parakeet TDT v3",
-            "description": "For dictating in other languages, including Spanish, French and German."
+            "description": "Zum Diktieren in anderen Sprachen, darunter Spanisch, Französisch und Deutsch."
           },
           "canary": {
             "name": "Canary 180M Flash",
-            "description": "A small download, for older computers or when disk space is low."
+            "description": "Ein kleiner Download, für ältere Computer oder wenig freien Speicherplatz."
           },
           "nemotron": {
             "name": "Nemotron 3.5 Streaming",
-            "description": "Shows live text as you speak, but makes more mistakes."
+            "description": "Zeigt beim Sprechen Live-Text, macht aber mehr Fehler."
           }
         }
       }
@@ -564,26 +564,26 @@
       "title": "Sprachen"
     },
     "dictation": {
-      "title": "Continuous Dictation",
-      "description": "Keep talking, and the text is typed into your window each time you pause. Speech recognition stays on this computer, and AI cleanup never runs in this mode.",
+      "title": "Fortlaufendes Diktieren",
+      "description": "Sprich einfach weiter: Bei jeder Pause wird der Text in dein Fenster geschrieben. Die Spracherkennung bleibt auf diesem Computer, und die KI-Bereinigung läuft in diesem Modus nie.",
       "dragonKey": {
-        "title": "Dragon's Key",
-        "description": "Use Numpad + to start and stop, as Dragon does. While it's set, that key no longer types a plus sign.",
-        "button": "Use Dragon's key (Numpad +)"
+        "title": "Dragon-Taste",
+        "description": "Num + zum Starten und Beenden verwenden, wie bei Dragon. Solange das eingestellt ist, schreibt diese Taste kein Pluszeichen mehr.",
+        "button": "Dragon-Taste verwenden (Num +)"
       },
       "pause": {
-        "title": "Pause Length",
-        "description": "How long you pause before what you said is typed. Longer pauses keep sentences together; shorter ones show text sooner.",
+        "title": "Pausenlänge",
+        "description": "Wie lange du pausierst, bevor das Gesagte geschrieben wird. Längere Pausen halten Sätze zusammen, kürzere zeigen den Text früher.",
         "seconds": "{{seconds}} s"
       },
       "autoStop": {
-        "title": "Stop After Silence",
-        "description": "Dictation stops by itself after this long without speech, so the microphone is never left on by accident.",
-        "minutes": "{{minutes}} min"
+        "title": "Nach Stille beenden",
+        "description": "Das Diktieren endet von selbst, wenn so lange nicht gesprochen wird, damit das Mikrofon nie versehentlich an bleibt.",
+        "minutes": "{{minutes}} Min."
       },
       "voiceCommands": {
-        "label": "Voice Commands",
-        "description": "Say \"new paragraph\" or \"new line\" as you talk, or \"scratch that\" or \"stop dictation\" on its own between pauses, and it acts instead of being typed. Normal sentences with these words are typed as usual."
+        "label": "Sprachbefehle",
+        "description": "Sag beim Sprechen \"new paragraph\" oder \"new line\", oder \"scratch that\" oder \"stop dictation\" für sich allein zwischen Pausen, und der Befehl wird ausgeführt statt geschrieben. Normale Sätze mit diesen Wörtern werden wie gewohnt geschrieben."
       }
     },
     "sound": {
@@ -646,11 +646,11 @@
       },
       "autostart": {
         "label": "Beim Start ausführen",
-        "description": "Handy automatisch beim Anmelden starten."
+        "description": "Kusema automatisch beim Anmelden starten."
       },
       "showTrayIcon": {
         "label": "Taskleistensymbol anzeigen",
-        "description": "Das Handy-Symbol in der Taskleiste anzeigen."
+        "description": "Das Kusema-Symbol in der Taskleiste anzeigen."
       },
       "overlay": {
         "style": {
@@ -773,90 +773,90 @@
         }
       },
       "showAllModels": {
-        "label": "Show all models",
-        "description": "List every model on the Models page, with accuracy and speed details, instead of the short list."
+        "label": "Alle Modelle anzeigen",
+        "description": "Auf der Seite Modelle jedes Modell mit Angaben zu Genauigkeit und Geschwindigkeit auflisten, statt der kurzen Liste."
       }
     },
     "assistant": {
-      "title": "Assistant",
-      "description": "Hold the shortcut, ask a question out loud, and Kusema answers.",
+      "title": "Assistent",
+      "description": "Halte die Tastenkombination gedrückt, stell laut eine Frage, und Kusema antwortet.",
       "provider": {
-        "title": "AI Provider",
-        "provider": "Provider",
-        "description": "Assistant mode uses the same provider and API key as Post Process.",
-        "model": "Model",
-        "modelDescription": "The model that answers your questions. Change it on the Post Process page.",
-        "notSet": "Not chosen",
-        "open": "Open Post Process settings",
-        "disabled": "Assistant mode needs an AI provider (such as Anthropic, OpenAI or a local Ollama model) to answer questions. Providers are set up on the Post Process page, which appears once Post Processing is turned on. Turning it on doesn't change how normal dictation works.",
-        "enable": "Turn on Post Processing",
-        "noProvider": "Choose a provider on the Post Process page.",
-        "noKey": "No API key is set for {{provider}}. Add one on the Post Process page.",
-        "noModel": "Choose a model on the Post Process page."
+        "title": "KI-Anbieter",
+        "provider": "Anbieter",
+        "description": "Der Assistent nutzt denselben Anbieter und API-Schlüssel wie die Nachbearbeitung.",
+        "model": "Modell",
+        "modelDescription": "Das Modell, das deine Fragen beantwortet. Du änderst es auf der Seite Nachbearbeitung.",
+        "notSet": "Nicht gewählt",
+        "open": "Einstellungen der Nachbearbeitung öffnen",
+        "disabled": "Der Assistent braucht einen KI-Anbieter (zum Beispiel Anthropic, OpenAI oder ein lokales Ollama-Modell), um Fragen zu beantworten. Anbieter richtest du auf der Seite Nachbearbeitung ein, die erscheint, sobald die Nachbearbeitung eingeschaltet ist. Das Einschalten ändert nichts am normalen Diktieren.",
+        "enable": "Nachbearbeitung einschalten",
+        "noProvider": "Wähle auf der Seite Nachbearbeitung einen Anbieter.",
+        "noKey": "Für {{provider}} ist kein API-Schlüssel hinterlegt. Füge auf der Seite Nachbearbeitung einen hinzu.",
+        "noModel": "Wähle auf der Seite Nachbearbeitung ein Modell."
       },
       "screen": {
-        "title": "Ask About My Screen",
-        "description": "Ask about the window you're working in, like “What do you think of this document?” Only that window is captured, and it stays on this computer until you press Send.",
+        "title": "Zu meinem Bildschirm fragen",
+        "description": "Frag zum Fenster, in dem du arbeitest, etwa „Was hältst du von diesem Dokument?“ Nur dieses Fenster wird erfasst, und es bleibt auf diesem Computer, bis du auf Senden drückst.",
         "confirm": {
-          "label": "Confirm Before Sending Screenshots",
-          "description": "Show the screenshot, your question and where it will go, then wait for Send (Enter) or Cancel (Escape). Unanswered, it cancels after 30 seconds.",
-          "offWarning": "Screenshots will be sent to {{provider}} as soon as you finish speaking, without showing you first. Everything visible in the window goes with them, including private or confidential information."
+          "label": "Vor dem Senden von Screenshots bestätigen",
+          "description": "Zeigt den Screenshot, deine Frage und wohin sie geht, und wartet dann auf Senden (Eingabe) oder Abbrechen (Esc). Ohne Antwort wird nach 30 Sekunden abgebrochen.",
+          "offWarning": "Screenshots werden an {{provider}} gesendet, sobald du fertig gesprochen hast, ohne dass du sie vorher siehst. Alles, was im Fenster sichtbar ist, geht mit, auch private oder vertrauliche Informationen."
         },
         "provider": {
-          "label": "Use for Screen Questions",
-          "description": "Send screenshots to a different provider than normal questions, for example a local vision model in Ollama (the Custom provider) for confidential documents. Follow-up questions go to the same provider until you start a new conversation.",
-          "same": "Same as Assistant",
-          "sameNamed": "Same as Assistant ({{provider}})",
-          "yourProvider": "your AI provider"
+          "label": "Für Bildschirmfragen verwenden",
+          "description": "Screenshots an einen anderen Anbieter senden als normale Fragen, zum Beispiel an ein lokales Bildmodell in Ollama (der Anbieter \"Benutzerdefiniert\") für vertrauliche Dokumente. Folgefragen gehen an denselben Anbieter, bis du ein neues Gespräch beginnst.",
+          "same": "Wie beim Assistenten",
+          "sameNamed": "Wie beim Assistenten ({{provider}})",
+          "yourProvider": "deinen KI-Anbieter"
         },
         "model": {
-          "label": "Model for Screen Questions",
-          "description": "A model that can see images. Leave empty to use the model chosen for this provider on the Post Process page.",
-          "placeholder": "e.g. qwen2.5vl"
+          "label": "Modell für Bildschirmfragen",
+          "description": "Ein Modell, das Bilder sehen kann. Leer lassen, um das Modell zu verwenden, das auf der Seite Nachbearbeitung für diesen Anbieter gewählt ist.",
+          "placeholder": "z. B. qwen2.5vl"
         }
       },
       "conversation": {
-        "empty": "Ask a question with the Ask Kusema shortcut. The conversation will appear here.",
-        "new": "New conversation",
+        "empty": "Stell eine Frage mit der Tastenkombination \"Kusema fragen\". Das Gespräch erscheint hier.",
+        "new": "Neues Gespräch",
         "screenshot": "Screenshot",
-        "noProvider": "Ask Kusema needs an AI model to answer. Choose one in Settings.",
-        "openSettings": "Open Settings"
+        "noProvider": "\"Kusema fragen\" braucht ein KI-Modell, um zu antworten. Wähle eines unter Einstellungen.",
+        "openSettings": "Einstellungen öffnen"
       },
       "voice": {
-        "title": "Voice",
-        "systemDefault": "System default",
-        "previewText": "Hi, I'm Kusema. This is how I'll sound when I answer your questions.",
+        "title": "Stimme",
+        "systemDefault": "Systemstandard",
+        "previewText": "Hallo, ich bin Kusema. So klinge ich, wenn ich deine Fragen beantworte.",
         "speakReplies": {
-          "label": "Speak Replies",
-          "description": "Read replies aloud as they arrive. Press Cancel (Escape), start a new recording, or start a new conversation to stop."
+          "label": "Antworten vorlesen",
+          "description": "Antworten vorlesen, sobald sie eintreffen. Zum Stoppen Abbrechen (Esc) drücken, eine neue Aufnahme oder ein neues Gespräch beginnen."
         },
         "voice": {
-          "label": "Voice",
-          "description": "Kokoro voices sound the most natural; download them above. The other voices come with your computer (on Windows, add more under Settings > Time & language > Speech)."
+          "label": "Stimme",
+          "description": "Kokoro-Stimmen klingen am natürlichsten; lade sie oben herunter. Die anderen Stimmen gehören zu deinem Computer (unter Windows fügst du weitere unter Einstellungen > Zeit und Sprache > Sprache hinzu)."
         },
         "kokoro": {
-          "label": "Kokoro Voices",
-          "description": "28 natural-sounding English voices (US and UK) generated on this computer. A one-time download.",
-          "installed": "Installed. Pick a Kokoro voice below. Removing them frees the disk space; replies then use the system voice.",
-          "download": "Download ({{size}} MB)",
-          "downloading": "Downloading… {{percentage}}%",
-          "cancel": "Cancel",
-          "delete": "Remove"
+          "label": "Kokoro-Stimmen",
+          "description": "28 natürlich klingende englische Stimmen (USA und Großbritannien), auf diesem Computer erzeugt. Ein einmaliger Download.",
+          "installed": "Installiert. Wähle unten eine Kokoro-Stimme. Wenn du sie entfernst, wird Speicherplatz frei; Antworten nutzen dann die Systemstimme.",
+          "download": "Herunterladen ({{size}} MB)",
+          "downloading": "Wird heruntergeladen… {{percentage}} %",
+          "cancel": "Abbrechen",
+          "delete": "Entfernen"
         },
         "rate": {
-          "label": "Speaking Rate",
-          "description": "How fast replies are read. 1.00× is the voice's normal speed."
+          "label": "Sprechtempo",
+          "description": "Wie schnell Antworten vorgelesen werden. 1,00× ist das normale Tempo der Stimme."
         },
         "preview": {
-          "label": "Preview Voice",
-          "description": "Hear the selected voice at the selected speed.",
-          "button": "Preview"
+          "label": "Stimme anhören",
+          "description": "Die gewählte Stimme im gewählten Tempo anhören.",
+          "button": "Anhören"
         }
       },
       "tabs": {
-        "label": "Assistant",
-        "conversation": "Conversation",
-        "settings": "Settings"
+        "label": "Assistent",
+        "conversation": "Gespräch",
+        "settings": "Einstellungen"
       }
     },
     "postProcessing": {
@@ -973,7 +973,7 @@
       },
       "updateChecks": {
         "label": "Nach Updates suchen",
-        "description": "Automatisch nach neuen Versionen von Handy suchen",
+        "description": "Automatisch nach neuen Versionen von Kusema suchen",
         "lockedDescription": "Durch Systemkonfiguration deaktiviert (HANDY_DISABLE_UPDATER)"
       },
       "whatsNewPreview": {
@@ -992,9 +992,9 @@
           "welcome": "Willkommen",
           "permissions": "Berechtigungen",
           "done": "Alles bereit",
-          "microphone": "Microphone",
-          "practice": "Practice",
-          "assistant": "AI assistant"
+          "microphone": "Mikrofon",
+          "practice": "Übung",
+          "assistant": "KI-Assistent"
         }
       },
       "onboardingRun": {
@@ -1040,8 +1040,8 @@
         "description": "Mikrofon bei geschlossenem Laptop-Deckel"
       },
       "postProcessingToggle": {
-        "label": "AI Cleanup",
-        "description": "Optional. Rewrites dictated text with an AI model when you use the AI cleanup shortcut: fixes self-corrections and grammar, keeps your meaning, and never adds facts."
+        "label": "KI-Bereinigung",
+        "description": "Optional. Überarbeitet diktierten Text mit einem KI-Modell, wenn du die Tastenkombination für die KI-Bereinigung verwendest: korrigiert Selbstkorrekturen und Grammatik, behält deine Aussage bei und fügt nie Fakten hinzu."
       },
       "muteWhileRecording": {
         "label": "Während Aufnahme stummschalten",
@@ -1057,7 +1057,7 @@
         "bindingsReset": "Tastaturkürzel waren inkompatibel und wurden auf die Standardwerte zurückgesetzt",
         "options": {
           "tauri": "Tauri Global Shortcut",
-          "builtIn": "Built-in (recommended)"
+          "builtIn": "Integriert (empfohlen)"
         }
       },
       "pasteDelay": {
@@ -1086,7 +1086,7 @@
       },
       "keyboardDiagnostic": {
         "title": "Tastatur-Diagnose",
-        "description": "Prüft, ob Tastaturereignisse Handy erreichen. Es wird nur die Anzahl der Ereignisse erfasst — niemals, welche Tasten du drückst.",
+        "description": "Prüft, ob Tastaturereignisse Kusema erreichen. Es wird nur die Anzahl der Ereignisse erfasst — niemals, welche Tasten du drückst.",
         "run": "10-Sekunden-Diagnose starten",
         "running": "Lauscht… drücke dein Tastenkürzel ein paar Mal (z. B. Option+Space)",
         "secureInputLabel": "Secure Input",
@@ -1100,7 +1100,7 @@
         "mouse": "Maus",
         "verdictBlocked": "Secure Input blockiert Tastenereignisse — Tastenkürzel mit einer normalen Taste können erst wieder funktionieren, wenn das behoben ist.",
         "verdictSuspicious": "Es kamen Modifikator-Ereignisse an, aber keine Tastenereignisse — irgendetwas unterdrückt Tasten, obwohl Secure Input als deaktiviert gemeldet wird. Bitte melde das auf GitHub.",
-        "verdictOk": "Tastenereignisse erreichen Handy normal.",
+        "verdictOk": "Tastenereignisse erreichen Kusema normal.",
         "verdictNoEvents": "Keine Ereignisse erfasst — hast du während des Tests Tasten gedrückt?",
         "failed": "Diagnose fehlgeschlagen: {{error}}"
       }
@@ -1109,203 +1109,203 @@
       "title": "Info",
       "version": {
         "title": "Version",
-        "description": "Aktuelle Version von Handy"
+        "description": "Aktuelle Version von Kusema"
       },
       "whatsNewUpdates": {
         "label": "Neuerungen anzeigen",
-        "description": "Versionshinweise nach Handy-Updates anzeigen"
+        "description": "Versionshinweise nach Kusema-Updates anzeigen"
       },
       "appDataDirectory": {
         "title": "App-Datenverzeichnis",
-        "description": "Speicherort der Handy-Daten"
+        "description": "Speicherort der Kusema-Daten"
       },
       "sourceCode": {
         "title": "Quellcode",
-        "description": "View Kusema's source code",
+        "description": "Quellcode von Kusema ansehen",
         "button": "Auf GitHub ansehen"
       },
       "acknowledgments": {
         "ggml": {
           "title": "ggml",
           "description": "Hochleistungs-Inferenz des Whisper-Spracherkennungsmodells von OpenAI",
-          "details": "Handy verwendet ggml für schnelle, lokale Sprach-zu-Text-Verarbeitung. Dank an Georgi Gerganov und die Mitwirkenden für ihre großartige Arbeit."
+          "details": "Kusema verwendet ggml für schnelle, lokale Sprach-zu-Text-Verarbeitung. Dank an Georgi Gerganov und die Mitwirkenden für ihre großartige Arbeit."
         }
       },
       "organizations": {
-        "title": "Kusema for organizations",
-        "description": "Setup, support and options for firms",
-        "button": "Learn more"
+        "title": "Kusema für Organisationen",
+        "description": "Einrichtung, Support und Optionen für Kanzleien",
+        "button": "Mehr erfahren"
       },
       "report": {
-        "title": "Report a problem or suggest a feature",
-        "description": "Tell us on GitHub what went wrong or what you'd like",
-        "button": "Open GitHub"
+        "title": "Problem melden oder Funktion vorschlagen",
+        "description": "Sag uns auf GitHub, was schiefging oder was du dir wünschst",
+        "button": "GitHub öffnen"
       },
       "credits": {
-        "title": "Credits and licenses",
+        "title": "Danksagungen und Lizenzen",
         "handy": {
-          "title": "Built on Handy",
-          "description": "Kusema is built on Handy by CJ Pais, used under the MIT License.",
-          "button": "View Handy"
+          "title": "Basiert auf Handy",
+          "description": "Kusema basiert auf Handy von CJ Pais, verwendet unter der MIT-Lizenz.",
+          "button": "Handy ansehen"
         },
         "nvidiaLicense": "NVIDIA Open Model License",
-        "models": "Speech and voice models ({{count}})",
-        "components": "Open-source components ({{count}})",
-        "notices": "Full license texts",
-        "loading": "Loading..."
+        "models": "Sprach- und Stimmmodelle ({{count}})",
+        "components": "Open-Source-Komponenten ({{count}})",
+        "notices": "Vollständige Lizenztexte",
+        "loading": "Wird geladen..."
       }
     },
     "privacy": {
-      "thisComputer": "This computer ({{host}})",
-      "nothingSent": "Nothing to show yet.",
-      "updateBlocked": "Update checks are blocked in Privileged mode.",
+      "thisComputer": "Dieser Computer ({{host}})",
+      "nothingSent": "Noch nichts anzuzeigen.",
+      "updateBlocked": "Updateprüfungen sind im Privileged-Modus gesperrt.",
       "audio": {
-        "title": "Audio sent off this computer: 0 bytes",
-        "description": "Speech recognition runs on this computer, and nothing in Kusema can upload your voice. Only the text of what you say, and only for features you choose, ever goes to an AI provider."
+        "title": "Von diesem Computer gesendetes Audio: 0 Byte",
+        "description": "Die Spracherkennung läuft auf diesem Computer, und nichts in Kusema kann deine Stimme hochladen. Nur der Text dessen, was du sagst, und nur für Funktionen, die du wählst, geht jemals an einen KI-Anbieter."
       },
       "privileged": {
-        "title": "Privileged Mode",
-        "description": "For confidential matters. While it's on, nothing you say, type or show goes to a cloud AI service. Ask Kusema and AI cleanup only work with a model running on this computer.",
+        "title": "Privileged-Modus",
+        "description": "Für vertrauliche Angelegenheiten. Solange er an ist, geht nichts, was du sagst, schreibst oder zeigst, an einen Cloud-KI-Dienst. \"Kusema fragen\" und die KI-Bereinigung funktionieren dann nur mit einem Modell auf diesem Computer.",
         "chip": "Privileged",
         "toggle": {
-          "label": "Privileged Mode",
-          "description": "Blocks every request to cloud AI providers, including ones already set up. Dictation keeps working, because it never uses the cloud."
+          "label": "Privileged-Modus",
+          "description": "Sperrt jede Anfrage an Cloud-KI-Anbieter, auch an bereits eingerichtete. Das Diktieren funktioniert weiter, weil es nie die Cloud nutzt."
         },
         "allowLan": {
-          "label": "Allow Local Network AI Servers",
-          "description": "Also allows AI servers on your office network, by private address (like 192.168.1.20). Models on this computer are always allowed."
+          "label": "KI-Server im lokalen Netzwerk erlauben",
+          "description": "Erlaubt auch KI-Server in deinem Büronetzwerk über eine private Adresse (etwa 192.168.1.20). Modelle auf diesem Computer sind immer erlaubt."
         },
         "blockDownloads": {
-          "label": "Also Block Downloads and Update Checks",
-          "description": "For offline offices. Model and voice downloads and update checks carry none of your content, so they normally stay allowed and are listed below. Turn this on to stop them too while Privileged mode is on."
+          "label": "Auch Downloads und Updateprüfungen sperren",
+          "description": "Für Büros ohne Internet. Modell- und Stimmdownloads und Updateprüfungen enthalten nichts von deinen Inhalten, deshalb bleiben sie normalerweise erlaubt und werden unten aufgeführt. Schalte dies ein, um auch sie zu stoppen, solange der Privileged-Modus an ist."
         },
         "hotkey": {
-          "label": "Privileged Mode Shortcut",
-          "description": "Adds a keyboard shortcut that turns Privileged mode on or off. Off by default, so it can't be pressed by accident."
+          "label": "Tastenkombination für den Privileged-Modus",
+          "description": "Fügt eine Tastenkombination hinzu, die den Privileged-Modus ein- oder ausschaltet. Standardmäßig aus, damit sie nicht versehentlich gedrückt wird."
         }
       },
       "counts": {
-        "title": "Where Requests Went",
-        "today": "Today",
-        "week": "Last 7 days"
+        "title": "Wohin Anfragen gingen",
+        "today": "Heute",
+        "week": "Letzte 7 Tage"
       },
       "columns": {
-        "time": "Time",
-        "destination": "Destination",
-        "purpose": "Why",
-        "data": "Data",
-        "size": "Size",
-        "result": "Result"
+        "time": "Zeit",
+        "destination": "Ziel",
+        "purpose": "Warum",
+        "data": "Daten",
+        "size": "Größe",
+        "result": "Ergebnis"
       },
       "purposes": {
-        "assistant_question": "Question to Kusema",
-        "screen_question": "Question about the screen",
-        "post_processing": "AI cleanup",
-        "provider_models": "Listing a provider's models",
-        "model_download": "Speech model download",
-        "voice_download": "Voice download",
-        "update_check": "Update check"
+        "assistant_question": "Frage an Kusema",
+        "screen_question": "Frage zum Bildschirm",
+        "post_processing": "KI-Bereinigung",
+        "provider_models": "Modelle eines Anbieters abrufen",
+        "model_download": "Download eines Sprachmodells",
+        "voice_download": "Download einer Stimme",
+        "update_check": "Updateprüfung"
       },
       "data": {
         "text": "Text",
         "image": "Screenshot",
-        "none": "None of yours"
+        "none": "Nichts von dir"
       },
       "results": {
-        "sent": "Sent",
-        "blocked": "Blocked",
-        "failed": "Failed"
+        "sent": "Gesendet",
+        "blocked": "Gesperrt",
+        "failed": "Fehlgeschlagen"
       },
       "list": {
-        "title": "Every Request",
-        "description": "Each request Kusema has made: when, where, why, what kind of data and how large. What was in it is never recorded. Shows the latest 500; the export has them all.",
-        "all": "All",
-        "allPurposes": "Any reason",
-        "allResults": "Any result",
-        "allDestinations": "Any destination",
-        "anyTime": "Any time",
-        "lastDays_one": "Last {{count}} day",
-        "lastDays_other": "Last {{count}} days",
-        "export": "Export CSV",
-        "exported_one": "Exported {{count}} request.",
-        "exported_other": "Exported {{count}} requests.",
-        "clear": "Clear",
+        "title": "Alle Anfragen",
+        "description": "Jede Anfrage, die Kusema gestellt hat: wann, wohin, warum, welche Art von Daten und wie groß. Was darin stand, wird nie gespeichert. Zeigt die letzten 500; der Export enthält alle.",
+        "all": "Alle",
+        "allPurposes": "Jeder Grund",
+        "allResults": "Jedes Ergebnis",
+        "allDestinations": "Jedes Ziel",
+        "anyTime": "Jederzeit",
+        "lastDays_one": "Letzter {{count}} Tag",
+        "lastDays_other": "Letzte {{count}} Tage",
+        "export": "CSV exportieren",
+        "exported_one": "{{count}} Anfrage exportiert.",
+        "exported_other": "{{count}} Anfragen exportiert.",
+        "clear": "Leeren",
         "retention": {
-          "title": "Keep This List For",
-          "description": "Older entries are deleted from this computer automatically.",
-          "days_one": "{{count}} day",
-          "days_other": "{{count}} days"
+          "title": "Diese Liste behalten für",
+          "description": "Ältere Einträge werden automatisch von diesem Computer gelöscht.",
+          "days_one": "{{count}} Tag",
+          "days_other": "{{count}} Tage"
         }
       }
     },
     "cleanup": {
-      "title": "Cleanup",
-      "description": "Dictated text should need little editing. Local cleanup runs on this computer and sends nothing anywhere.",
+      "title": "Bereinigung",
+      "description": "Diktierter Text sollte kaum Nacharbeit brauchen. Die lokale Bereinigung läuft auf diesem Computer und sendet nichts.",
       "local": {
-        "label": "Local Cleanup",
-        "description": "Removes filler words, adds missing periods between phrases in continuous dictation, and handles spoken punctuation, all on this computer. Off, your words are typed as transcribed."
+        "label": "Lokale Bereinigung",
+        "description": "Entfernt Füllwörter, ergänzt beim fortlaufenden Diktieren fehlende Punkte zwischen Sätzen und setzt gesprochene Satzzeichen, alles auf diesem Computer. Ausgeschaltet wird dein Text so geschrieben, wie er erkannt wurde."
       },
       "spokenPunctuation": {
-        "label": "Spoken Punctuation",
-        "description": "Say \"comma\", \"period\", \"question mark\", \"colon\", \"open quote\", \"close paren\", \"dash\", \"section symbol\" and more, as in Dragon. \"Period\" only counts at the end of a phrase, so \"the limitations period expired\" stays as words. Say \"literal period\" to type the word."
+        "label": "Gesprochene Satzzeichen",
+        "description": "Sag \"comma\", \"period\", \"question mark\", \"colon\", \"open quote\", \"close paren\", \"dash\", \"section symbol\" und mehr, wie bei Dragon. \"Period\" zählt nur am Ende eines Satzteils, daher bleibt \"the limitations period expired\" als Wörter stehen. Sag \"literal period\", um das Wort selbst zu schreiben. Diese Befehle funktionieren auf Englisch."
       },
       "ai": {
         "status": {
-          "noProvider": "No AI provider is set up yet.",
-          "noKey": "{{provider}} needs an API key.",
-          "noModel": "{{provider}} needs a model chosen.",
-          "local": "Using {{model}} on this computer through {{provider}}. Nothing leaves this computer.",
-          "cloud": "Using {{model}} from {{provider}}, a cloud service. Text you clean up goes to {{provider}}.",
-          "blocked": "Privileged mode is on, so nothing will be sent to {{provider}}. Use a local model or turn off Privileged mode."
+          "noProvider": "Noch kein KI-Anbieter eingerichtet.",
+          "noKey": "{{provider}} braucht einen API-Schlüssel.",
+          "noModel": "Für {{provider}} muss ein Modell gewählt werden.",
+          "local": "Verwendet {{model}} auf diesem Computer über {{provider}}. Nichts verlässt diesen Computer.",
+          "cloud": "Verwendet {{model}} von {{provider}}, einem Cloud-Dienst. Text, den du bereinigst, geht an {{provider}}.",
+          "blocked": "Der Privileged-Modus ist an, daher wird nichts an {{provider}} gesendet. Verwende ein lokales Modell oder schalte den Privileged-Modus aus."
         },
-        "recommendLocal": "We recommend a model that runs on this computer, such as one in Ollama, so confidential text stays here. AI cleanup runs when you dictate with its own shortcut, and never during continuous dictation.",
-        "setUp": "Set Up AI Cleanup"
+        "recommendLocal": "Wir empfehlen ein Modell, das auf diesem Computer läuft, etwa eines in Ollama, damit vertraulicher Text hier bleibt. Die KI-Bereinigung läuft, wenn du mit ihrer eigenen Tastenkombination diktierst, und nie beim fortlaufenden Diktieren.",
+        "setUp": "KI-Bereinigung einrichten"
       }
     },
     "firstWins": {
-      "title": "First three wins",
-      "dismiss": "Dismiss",
-      "dictated": "Dictate an email",
-      "newParagraph": "Use continuous dictation and say \"new paragraph\"",
-      "asked": "Ask Kusema a question",
-      "done": "Done",
-      "notDone": "Not done yet",
-      "progress": "{{done}} of {{count}} done",
-      "allDone": "All three done. Nice work."
+      "title": "Deine ersten drei Erfolge",
+      "dismiss": "Ausblenden",
+      "dictated": "Eine E-Mail diktieren",
+      "newParagraph": "Fortlaufend diktieren und \"new paragraph\" sagen",
+      "asked": "Kusema eine Frage stellen",
+      "done": "Erledigt",
+      "notDone": "Noch offen",
+      "progress": "{{done}} von {{count}} erledigt",
+      "allDone": "Alle drei erledigt. Gut gemacht."
     },
     "glow": {
-      "title": "Recording indicator",
-      "description": "A glow around the edges of your screen shows that Kusema is listening. Only you see it: it stays out of screenshots and screen shares.",
+      "title": "Aufnahmeanzeige",
+      "description": "Ein Leuchten an den Bildschirmrändern zeigt, dass Kusema zuhört. Nur du siehst es: Auf Screenshots und bei der Bildschirmfreigabe erscheint es nicht.",
       "enabled": {
-        "label": "Screen glow",
-        "description": "Show a colored glow around the screen you're working on while Kusema is listening. You can still click and type through it."
+        "label": "Bildschirmleuchten",
+        "description": "Ein farbiges Leuchten um den Bildschirm zeigen, an dem du arbeitest, solange Kusema zuhört. Du kannst weiterhin hindurchklicken und tippen."
       },
       "thickness": {
-        "label": "Thickness",
-        "description": "How far the glow reaches in from the edge of the screen."
+        "label": "Breite",
+        "description": "Wie weit das Leuchten vom Bildschirmrand hineinreicht."
       },
       "intensity": {
-        "label": "Intensity",
-        "description": "How strong the glow is."
+        "label": "Stärke",
+        "description": "Wie kräftig das Leuchten ist."
       },
       "palette": {
-        "label": "Colors",
-        "description": "The color-blind friendly set keeps the modes easy to tell apart with every common kind of color blindness.",
+        "label": "Farben",
+        "description": "Die farbenblindenfreundlichen Farben halten die Modi bei allen häufigen Formen von Farbenblindheit gut unterscheidbar.",
         "standard": "Standard",
-        "color_blind": "Color-blind friendly"
+        "color_blind": "Farbenblindenfreundlich"
       },
       "modes": {
-        "dictation": "Dictation",
-        "continuous": "Continuous dictation",
-        "ask": "Ask Kusema",
-        "ask_screen": "Ask about my screen",
-        "paused": "Continuous dictation paused (window changed)"
+        "dictation": "Diktieren",
+        "continuous": "Fortlaufendes Diktieren",
+        "ask": "Kusema fragen",
+        "ask_screen": "Zu meinem Bildschirm fragen",
+        "paused": "Fortlaufendes Diktieren pausiert (Fenster gewechselt)"
       },
-      "preview": "Preview",
-      "previewLabel": "Preview the glow for {{mode}}",
+      "preview": "Vorschau",
+      "previewLabel": "Vorschau des Leuchtens für {{mode}}",
       "sounds": {
-        "label": "Continuous dictation sounds",
-        "description": "Play a short sound when continuous dictation starts and stops. Sounds for other dictation are under Sound below."
+        "label": "Töne beim fortlaufenden Diktieren",
+        "description": "Einen kurzen Ton abspielen, wenn das fortlaufende Diktieren beginnt und endet. Töne für anderes Diktieren findest du unten unter Ton."
       }
     }
   },
@@ -1325,7 +1325,7 @@
     "portableUpdateBrowseButton": "GitHub Releases öffnen"
   },
   "whatsNew": {
-    "title": "Neu in Handy v{{version}}"
+    "title": "Neu in Kusema v{{version}}"
   },
   "common": {
     "loading": "Wird geladen...",
@@ -1356,11 +1356,11 @@
   },
   "appLanguage": {
     "title": "Anwendungssprache",
-    "description": "Sprache der Handy-Oberfläche ändern"
+    "description": "Sprache der Kusema-Oberfläche ändern"
   },
   "theme": {
     "title": "Anwendungsdesign",
-    "description": "Wählen Sie, ob Handy dem Systemthema folgt oder hell bzw. dunkel bleibt",
+    "description": "Wählen Sie, ob Kusema dem Systemthema folgt oder hell bzw. dunkel bleibt",
     "options": {
       "system": "System",
       "light": "Hell",
@@ -1371,38 +1371,38 @@
     "transcribing": "Transkribiere...",
     "processing": "Verarbeite...",
     "loadingModel": "Modell wird geladen...",
-    "speaking": "Speaking...",
+    "speaking": "Spricht...",
     "dictation": {
-      "dictating": "Dictating",
-      "paused": "Paused, window changed",
-      "noTarget": "Click where the text should go",
-      "finishing": "Finishing...",
-      "stop": "Stop",
-      "nothingToScratch": "Nothing to scratch",
-      "scratchWindowChanged": "Can't scratch: the window changed",
-      "scratchOtherInput": "Can't scratch: keyboard or mouse used",
-      "savedToHistory": "Said while paused: saved in History",
-      "stoppedSilence": "Stopped after silence",
-      "microphoneLost": "Stopped: microphone lost",
-      "cantKeepUp": "Stopped: this computer couldn't keep up",
-      "transcriptionFailed": "Couldn't transcribe that",
-      "pasteFailed": "Couldn't type that; it's in History"
+      "dictating": "Diktiert",
+      "paused": "Pausiert, Fenster gewechselt",
+      "noTarget": "Klicke dorthin, wo der Text hin soll",
+      "finishing": "Wird abgeschlossen...",
+      "stop": "Stopp",
+      "nothingToScratch": "Nichts zu löschen",
+      "scratchWindowChanged": "Löschen nicht möglich: Das Fenster hat gewechselt",
+      "scratchOtherInput": "Löschen nicht möglich: Tastatur oder Maus wurde benutzt",
+      "savedToHistory": "In der Pause gesagt: im Verlauf gespeichert",
+      "stoppedSilence": "Nach Stille beendet",
+      "microphoneLost": "Beendet: Mikrofon getrennt",
+      "cantKeepUp": "Beendet: Dieser Computer kam nicht hinterher",
+      "transcriptionFailed": "Konnte das nicht transkribieren",
+      "pasteFailed": "Konnte das nicht schreiben; es steht im Verlauf"
     },
     "privileged": "Privileged"
   },
   "screenCard": {
-    "title": "Send this screenshot?",
-    "autoCancel": "Cancels in {{seconds}} s",
-    "enlarge": "Click to enlarge",
-    "shrink": "Click to make smaller",
-    "imageAlt": "Screenshot of the window you asked about",
+    "title": "Diesen Screenshot senden?",
+    "autoCancel": "Wird in {{seconds}} s abgebrochen",
+    "enlarge": "Zum Vergrößern klicken",
+    "shrink": "Zum Verkleinern klicken",
+    "imageAlt": "Screenshot des Fensters, zu dem du gefragt hast",
     "question": "“{{question}}”",
-    "sendsTo": "Goes to {{provider}} · {{model}}",
-    "onlyThis": "Only this window. Nothing is sent until you press Send.",
-    "send": "Send",
-    "cancel": "Cancel",
+    "sendsTo": "Geht an {{provider}} · {{model}}",
+    "onlyThis": "Nur dieses Fenster. Nichts wird gesendet, bis du auf Senden drückst.",
+    "send": "Senden",
+    "cancel": "Abbrechen",
     "noticeTitle": "Kusema",
-    "close": "Close"
+    "close": "Schließen"
   },
   "secureInput": {
     "blockedWithCulprit_one": "{{name}} blockiert möglicherweise 1 Tastenkürzel",
