@@ -271,12 +271,13 @@ If the build fails, open Claude Code in the folder and paste:
 
 ## Roadmap
 
-| Version | Steps                                                                                                                                       |
-| ------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| v0.4    | Step 7 continuous dictation; Step 8 privacy ledger and Local-only mode; Step 9 smart cleanup by default; Step 10 two-minute first-run setup |
-| v0.5    | Step 11 voice editing, dictionary, legal vocabulary, Dragon import, styles per app, type-to-ask, paste-the-answer                           |
-| v0.6    | Step 12 legal templates and snippets, foot pedal and dictation mics, transcribing recordings, personal stats                                |
-| Launch  | Launch gate: model hosting ✅, Windows code signing, product page, launch                                                                   |
+| Version | Steps                                                                                                                                               |
+| ------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| v0.4    | Step 7 continuous dictation; Step 8 privacy ledger and Local-only mode; Step 9 smart cleanup by default; Step 10 two-minute first-run setup         |
+| v0.4.1  | Step 10b recording indicator, About page cleanup, Assistant page tabs                                                                               |
+| v0.5    | Step 11 voice editing, dictionary, legal vocabulary, Dragon import, styles per app, type-to-ask, paste-the-answer, voice navigation, personal stats |
+| v0.6    | Step 12 legal templates and snippets, foot pedal and dictation mics, transcribing recordings, ramble then structure, voice-called snippets          |
+| Launch  | Launch gate: model hosting ✅, Windows code signing, product page, launch                                                                           |
 
 ---
 
@@ -380,12 +381,24 @@ Everything else moves behind a "Show all models" link under Advanced, including 
 
 ---
 
+## Step 10b (v0.4.1) — Recording indicator, About page cleanup, Assistant page tabs
+
+**Goal:** answer what Dragon users complain about that doesn't need new features: not knowing whether it's listening, and an app that still points at someone else's project.
+
+- **Unmistakable recording indicator:** a coloured glow around the edges of the active monitor while recording, with a colour for each mode and a different look when continuous dictation is paused. Click-through, never takes focus. Optional start and stop sounds. Settings for on/off, thickness and intensity, a colour-blind-friendly preset and sounds. Respects Windows "reduce animations". No noticeable CPU or GPU use.
+- **About page and remaining Handy links:** source code, "Kusema for organizations" and "Report a problem" links, no donation button, a "Credits and licenses" section generated from the real dependencies, and a sweep for leftover Handy links.
+- **Assistant page tabs:** "Conversation" and "Settings", keyboard and screen-reader accessible, with room for v0.5's type-to-ask box.
+
+---
+
 ## Step 11 (v0.5) — Voice editing, dictionary, styles and more ways to ask
 
 **Goal:** fix and shape text by voice, and have Kusema learn how the user's practice talks.
 
 - **Voice editing:** change text by voice ("change Tuesday to Thursday").
+- **Voice navigation:** alongside voice editing: "select the last sentence", "go to the end of the paragraph", "select <phrase>".
 - **Learning personal dictionary:** picks up names and terms from the user's corrections.
+- **Learn from corrections:** when I fix a misheard word, remember it for my voice.
 - **Legal vocabulary pack:** legal terms, Latin and citation forms recognized correctly out of the box.
 - **Medical vocabulary pack:** medical terms and drug names recognized correctly out of the box.
 - **Dragon custom-word import:** bring over the word list from Dragon.
@@ -395,6 +408,9 @@ Everything else moves behind a "Show all models" link under Advanced, including 
 - **Keyboard access to the settings sidebar:** reach every settings page without a mouse. Found in Step 10; the setup flow already works by keyboard.
 - **Paste-the-answer:** type the assistant's reply into the active app instead of speaking it ("draft a reply declining this meeting").
 - **"Clean up this dictation session":** AI cleanup of a whole continuous session, with a preview, at its end. Deferred from Step 9 because replacing text already in the document isn't safe: clicking the preview loses the caret, the app can't see the document, and deleting thousands of characters by count could eat other text, the same risk "scratch that" refuses. A version that replaces only the History entry, for the user to copy, is safe if that's enough.
+- **Microphone quality check in setup:** with reassurance that any USB mic or headset works, and a short recommended list.
+- **Beta update channel:** opt-in; testers get new versions a week early.
+- **Personal stats:** words dictated and time saved, kept on the computer. Moved from Step 12.
 - **Live preview while dictating:** show words in the overlay as they're spoken (like Dragon's results box) while still typing into the document only at pauses. Evaluate periodic re-transcription vs. a streaming engine (Moonshine).
 
 ---
@@ -408,8 +424,9 @@ Everything else moves behind a "Show all models" link under Advanced, including 
 - **Medical setup preset:** one choice that sets Privileged mode on, local AI only and short History retention.
 - **Foot pedal and dictation mic support:** start and stop from the hardware legal staff already own.
 - **Transcribing recordings:** turn recorded dictation into text.
-- **Personal stats:** words dictated and time saved, kept on the computer.
-- **Watch folder:** automatically transcribe audio files saved by a dictation recorder into a chosen folder (local only, results saved as text/Word alongside).
+- **Watch folder:** automatically transcribe audio files saved by a dictation recorder into a chosen folder (local only, results saved as text/Word alongside). This also covers phone voice memos synced to a folder.
+- **"Ramble, then structure":** dictate freely, then Kusema turns it into a structured document (file note, letter, SOAP or therapy note) using a chosen template, with a local AI option and respecting Privileged mode. It never records clients or patients.
+- **Voice-called snippets:** "insert my standard disclaimer".
 
 ---
 
@@ -431,6 +448,19 @@ Nothing is sold until all of these are done.
 - **How downloads work now:** legacy models come only from Kusema's repos. Catalog models come from their `handy-computer/*` repo on Hugging Face at the pinned revision; the four above fall back to Kusema's copy, and everything else, including the language detector, has no fallback. Size and SHA-256 checks are unchanged.
 - **What still isn't ours:** the primary source of every catalog model is still Handy's organization on Hugging Face. If those repos go away, the four mirrored models keep working through the fallback and the rest can't be downloaded. Kokoro voices still come from `huggingface.co/onnx-community`, `raw.githubusercontent.com` and `github.com`.
 - **Privacy ledger:** direct downloads go through `network::send` and `hf_hub` through `network::announce`, so both list `huggingface.co`, not the CDN hosts it redirects to.
+
+### Messaging notes
+
+From real Dragon user feedback: cursor jumping, dictation limited to certain apps, a hard-to-see listening icon, microphone quality, proofreading burden, broken updates, IT headaches and price. Say these plainly on the product page:
+
+- "Never moves your cursor or types in the wrong place"
+- "Dictate anywhere, not just inside one app"
+- "You always know when it's listening"
+- "Works offline"
+
+### Competitor notes
+
+- **Dictura:** offline dictation for Mac and Windows.
 
 ---
 
