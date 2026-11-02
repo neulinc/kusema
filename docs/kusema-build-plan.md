@@ -381,13 +381,27 @@ Everything else moves behind a "Show all models" link under Advanced, including 
 
 ---
 
-## Step 10b (v0.4.1) — Recording indicator, About page cleanup, Assistant page tabs
+## Step 10b (v0.4.1) — Recording indicator, About page cleanup, Assistant page tabs ✅ Done (2026-11-01)
 
 **Goal:** answer what Dragon users complain about that doesn't need new features: not knowing whether it's listening, and an app that still points at someone else's project.
 
 - **Unmistakable recording indicator:** a coloured glow around the edges of the active monitor while recording, with a colour for each mode and a different look when continuous dictation is paused. Click-through, never takes focus. Optional start and stop sounds. Settings for on/off, thickness and intensity, a colour-blind-friendly preset and sounds. Respects Windows "reduce animations". No noticeable CPU or GPU use.
 - **About page and remaining Handy links:** source code, "Kusema for organizations" and "Report a problem" links, no donation button, a "Credits and licenses" section generated from the real dependencies, and a sweep for leftover Handy links.
 - **Assistant page tabs:** "Conversation" and "Settings", keyboard and screen-reader accessible, with room for v0.5's type-to-ask box.
+
+### Notes from Step 10b
+
+- **Glow, code:** `src-tauri/src/glow/`. It follows `AudioRecordingManager::set_state`, the one place every recording starts and stops, so it can't disagree with the microphone. Pause comes from continuous dictation's status. Windows only for now; elsewhere the settings are hidden.
+- **Glow, why native:** four thin layered windows, drawn once, with a thread that sleeps until told something changed. A webview over the whole screen would hold memory and GPU all the time. It sits on the monitor of the foreground window, and follows it.
+- **Out of capture on purpose:** `WDA_EXCLUDEFROMCAPTURE`, because Ask about my screen copies from the screen, and a client shouldn't see it in a screen share. `KUSEMA_DEBUG_GLOW_CAPTURABLE`, in debug builds only, lets a test photograph it.
+- **Paused doesn't rely on colour:** it's dashed and doesn't pulse. The colour-blind preset is the Okabe-Ito palette.
+- **Cost, measured in a debug build on one 1920x1080 monitor, 20 s each, continuous dictation listening:** Kusema's CPU 1.26% of all cores with the glow on and 1.35% with it off, compositor GPU 1.67% and 1.51%: no difference above noise. Idle, 0.03% CPU and 0% GPU. The compositor's own CPU couldn't be read.
+- **Not tested on real hardware:** a second monitor or a second scale (the placement has unit tests, and it was right at this machine's 125%), and turning Windows animations off, which is a real system setting.
+- **Sounds:** `dictation_sounds`, on by default, plays Handy's start and stop sounds for continuous dictation even with `audio_feedback` off. Normal dictation still follows `audio_feedback`.
+- **Credits:** `bun run credits` (`scripts/generate-credits.ts`, instead of cargo-about, which also has to be installed) walks `cargo metadata` for Windows, normal dependencies only, and `node_modules`, and writes `src/content/credits.json` and `third-party-notices.txt`. It fails on a catalog model whose license isn't recognized, so someone has to read it. `bun run credits --check` is in the release steps. Licenses the catalog gets wrong are corrected in the script, as listed under "Licenses to re-check". 60 packages ship no license file: they're listed with the license they declare, for the license review.
+- **NVIDIA:** the notice and a copy of the agreement are in the app and in `NOTICE`. **Still to do for the license review:** the agreement asks for them to go with copies of the model, and the mirror repos at huggingface.co/kusema don't have a `Notice` file yet.
+- **Sweep:** Handy's FUNDING file and its 0.9.0 and 0.9.7 release notes are removed (the notes would have shown when Kusema reached 0.9). Issue template, nix homepage, Linux and Secure Input help now point to Kusema, with a new Troubleshooting section in the README. Kept: credits, CONTRIBUTING and the PR template's upstream guidance, AGENTS.md, a BUILD.md issue reference, the cjpais git dependencies and the mirror script's source.
+- **Assistant tabs:** the last tab is kept in `localStorage`, a per-window convenience. The type-to-ask box goes at the end of the Conversation panel, marked with a comment.
 
 ---
 
