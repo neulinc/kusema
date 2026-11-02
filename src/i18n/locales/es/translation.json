@@ -807,7 +807,7 @@
         },
         "provider": {
           "label": "Usar para preguntas sobre la pantalla",
-          "description": "Envía las capturas a un proveedor distinto del de las preguntas normales, por ejemplo un modelo de visión local en Ollama (el proveedor Personalizado) para documentos confidenciales. Las preguntas de seguimiento van al mismo proveedor hasta que empieces una conversación nueva.",
+          "description": "Envía las capturas a un proveedor distinto del de las preguntas normales, por ejemplo un modelo de visión local en Ollama para documentos confidenciales. Las preguntas de seguimiento van al mismo proveedor hasta que empieces una conversación nueva.",
           "same": "Igual que el asistente",
           "sameNamed": "Igual que el asistente ({{provider}})",
           "yourProvider": "tu proveedor de IA"
@@ -870,7 +870,9 @@
         "title": "API",
         "provider": {
           "title": "Proveedor",
-          "description": "Selecciona un proveedor compatible con OpenAI o Anthropic."
+          "description": "Selecciona un proveedor compatible con OpenAI o Anthropic.",
+          "localName": "{{name}} (en este ordenador)",
+          "private": "Privado: se queda en este ordenador"
         },
         "apiFormat": {
           "title": "Formato de API",
@@ -901,6 +903,11 @@
           "placeholderWithOptions": "Buscar o seleccionar un modelo",
           "placeholderNoOptions": "Escribe un nombre de modelo",
           "refreshModels": "Actualizar modelos"
+        },
+        "local": {
+          "notRunning": "{{name}} no se está ejecutando en este ordenador. Ábrelo y luego actualiza la lista de modelos.",
+          "noModels": "{{name}} se está ejecutando, pero aún no tiene modelos instalados.",
+          "howTo": "Cómo configurar {{name}}"
         }
       },
       "prompts": {

@@ -1340,7 +1340,7 @@ pub async fn fetch_post_process_models(
 
     // Skip fetching if no API key for providers that typically need one
     if api_key.trim().is_empty()
-        && provider.id != "custom"
+        && !crate::local_providers::key_optional(&provider.id)
         && !crate::network::would_block(crate::network::Purpose::ProviderModels, &provider.base_url)
     {
         return Err(format!(

@@ -804,7 +804,7 @@
         },
         "provider": {
           "label": "Use for Screen Questions",
-          "description": "Send screenshots to a different provider than normal questions, for example a local vision model in Ollama (the Custom provider) for confidential documents. Follow-up questions go to the same provider until you start a new conversation.",
+          "description": "Send screenshots to a different provider than normal questions, for example a local vision model in Ollama for confidential documents. Follow-up questions go to the same provider until you start a new conversation.",
           "same": "Same as Assistant",
           "sameNamed": "Same as Assistant ({{provider}})",
           "yourProvider": "your AI provider"
@@ -867,7 +867,9 @@
         "title": "API",
         "provider": {
           "title": "Provider",
-          "description": "Select an OpenAI-compatible or Anthropic-compatible provider."
+          "description": "Select an OpenAI-compatible or Anthropic-compatible provider.",
+          "localName": "{{name}} (on this computer)",
+          "private": "Private: stays on this computer"
         },
         "apiFormat": {
           "title": "API Format",
@@ -898,6 +900,11 @@
           "placeholderWithOptions": "Search or select a model",
           "placeholderNoOptions": "Type a model name",
           "refreshModels": "Refresh models"
+        },
+        "local": {
+          "notRunning": "{{name}} isn't running on this computer. Start it, then refresh the model list.",
+          "noModels": "{{name}} is running, but has no models installed yet.",
+          "howTo": "How to set up {{name}}"
         }
       },
       "prompts": {

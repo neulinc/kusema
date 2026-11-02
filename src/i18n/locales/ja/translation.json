@@ -804,7 +804,7 @@
         },
         "provider": {
           "label": "画面についての質問に使う",
-          "description": "スクリーンショットを通常の質問とは別のプロバイダーに送ります。たとえば機密文書には、Ollama のローカル画像モデル (「カスタム」プロバイダー) を使えます。新しい会話を始めるまで、続けての質問も同じプロバイダーに送られます。",
+          "description": "スクリーンショットを通常の質問とは別のプロバイダーに送ります。たとえば機密文書には、Ollama のローカル画像モデル を使えます。新しい会話を始めるまで、続けての質問も同じプロバイダーに送られます。",
           "same": "アシスタントと同じ",
           "sameNamed": "アシスタントと同じ ({{provider}})",
           "yourProvider": "お使いの AI プロバイダー"
@@ -867,7 +867,9 @@
         "title": "API",
         "provider": {
           "title": "プロバイダー",
-          "description": "OpenAI 互換または Anthropic 互換のプロバイダーを選択。"
+          "description": "OpenAI 互換または Anthropic 互換のプロバイダーを選択。",
+          "localName": "{{name}}（このコンピューター）",
+          "private": "プライベート: このコンピューターの外に出ません"
         },
         "apiFormat": {
           "title": "API 形式",
@@ -898,6 +900,11 @@
           "placeholderWithOptions": "モデルを検索または選択",
           "placeholderNoOptions": "モデル名を入力",
           "refreshModels": "モデルを更新"
+        },
+        "local": {
+          "notRunning": "このコンピューターで {{name}} が起動していません。起動してから、モデルの一覧を更新してください。",
+          "noModels": "{{name}} は起動していますが、まだモデルがインストールされていません。",
+          "howTo": "{{name}} の設定方法"
         }
       },
       "prompts": {

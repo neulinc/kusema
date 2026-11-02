@@ -804,7 +804,7 @@
         },
         "provider": {
           "label": "Gunakan untuk Pertanyaan Layar",
-          "description": "Kirim tangkapan layar ke penyedia yang berbeda dari pertanyaan biasa, misalnya model visi lokal di Ollama (penyedia Kustom) untuk dokumen rahasia. Pertanyaan lanjutan dikirim ke penyedia yang sama sampai Anda memulai percakapan baru.",
+          "description": "Kirim tangkapan layar ke penyedia yang berbeda dari pertanyaan biasa, misalnya model visi lokal di Ollama untuk dokumen rahasia. Pertanyaan lanjutan dikirim ke penyedia yang sama sampai Anda memulai percakapan baru.",
           "same": "Sama dengan Asisten",
           "sameNamed": "Sama dengan Asisten ({{provider}})",
           "yourProvider": "penyedia AI Anda"
@@ -867,7 +867,9 @@
         "title": "API",
         "provider": {
           "title": "Penyedia",
-          "description": "Pilih penyedia yang kompatibel dengan OpenAI atau Anthropic."
+          "description": "Pilih penyedia yang kompatibel dengan OpenAI atau Anthropic.",
+          "localName": "{{name}} (di komputer ini)",
+          "private": "Pribadi: tetap di komputer ini"
         },
         "apiFormat": {
           "title": "Format API",
@@ -898,6 +900,11 @@
           "placeholderWithOptions": "Cari atau pilih model",
           "placeholderNoOptions": "Ketik nama model",
           "refreshModels": "Segarkan model"
+        },
+        "local": {
+          "notRunning": "{{name}} tidak berjalan di komputer ini. Jalankan, lalu segarkan daftar model.",
+          "noModels": "{{name}} berjalan, tetapi belum ada model yang terpasang.",
+          "howTo": "Cara menyiapkan {{name}}"
         }
       },
       "prompts": {

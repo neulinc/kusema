@@ -810,7 +810,7 @@
         },
         "provider": {
           "label": "Używaj do pytań o ekran",
-          "description": "Wysyłaj zrzuty ekranu do innego dostawcy niż zwykłe pytania, np. do lokalnego modelu wizyjnego w Ollamie (dostawca Niestandardowy) w przypadku poufnych dokumentów. Pytania uzupełniające trafiają do tego samego dostawcy, dopóki nie zaczniesz nowej rozmowy.",
+          "description": "Wysyłaj zrzuty ekranu do innego dostawcy niż zwykłe pytania, np. do lokalnego modelu wizyjnego w Ollamie w przypadku poufnych dokumentów. Pytania uzupełniające trafiają do tego samego dostawcy, dopóki nie zaczniesz nowej rozmowy.",
           "same": "Jak w asystencie",
           "sameNamed": "Jak w asystencie ({{provider}})",
           "yourProvider": "Twojego dostawcy AI"
@@ -873,7 +873,9 @@
         "title": "API",
         "provider": {
           "title": "Dostawca",
-          "description": "Wybierz dostawcę zgodnego z OpenAI lub Anthropic."
+          "description": "Wybierz dostawcę zgodnego z OpenAI lub Anthropic.",
+          "localName": "{{name}} (na tym komputerze)",
+          "private": "Prywatne: zostaje na tym komputerze"
         },
         "apiFormat": {
           "title": "Format API",
@@ -904,6 +906,11 @@
           "placeholderWithOptions": "Wyszukaj lub wybierz model",
           "placeholderNoOptions": "Wpisz nazwę modelu",
           "refreshModels": "Odśwież modele"
+        },
+        "local": {
+          "notRunning": "{{name}} nie działa na tym komputerze. Uruchom go, a potem odśwież listę modeli.",
+          "noModels": "{{name}} działa, ale nie ma jeszcze zainstalowanych modeli.",
+          "howTo": "Jak skonfigurować {{name}}"
         }
       },
       "prompts": {

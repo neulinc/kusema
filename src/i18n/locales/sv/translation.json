@@ -804,7 +804,7 @@
         },
         "provider": {
           "label": "Använd för skärmfrågor",
-          "description": "Skicka skärmbilder till en annan leverantör än vanliga frågor, till exempel en lokal bildmodell i Ollama (leverantören Anpassad) för konfidentiella dokument. Följdfrågor går till samma leverantör tills du startar en ny konversation.",
+          "description": "Skicka skärmbilder till en annan leverantör än vanliga frågor, till exempel en lokal bildmodell i Ollama för konfidentiella dokument. Följdfrågor går till samma leverantör tills du startar en ny konversation.",
           "same": "Samma som assistenten",
           "sameNamed": "Samma som assistenten ({{provider}})",
           "yourProvider": "din AI-leverantör"
@@ -867,7 +867,9 @@
         "title": "API",
         "provider": {
           "title": "Leverantör",
-          "description": "Välj en OpenAI- eller Anthropic-kompatibel leverantör."
+          "description": "Välj en OpenAI- eller Anthropic-kompatibel leverantör.",
+          "localName": "{{name}} (på den här datorn)",
+          "private": "Privat: stannar på den här datorn"
         },
         "apiFormat": {
           "title": "API-format",
@@ -898,6 +900,11 @@
           "placeholderWithOptions": "Sök eller välj en modell",
           "placeholderNoOptions": "Ange ett modellnamn",
           "refreshModels": "Uppdatera modeller"
+        },
+        "local": {
+          "notRunning": "{{name}} körs inte på den här datorn. Starta det och uppdatera sedan modellistan.",
+          "noModels": "{{name}} körs, men har inga modeller installerade än.",
+          "howTo": "Så konfigurerar du {{name}}"
         }
       },
       "prompts": {

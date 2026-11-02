@@ -931,6 +931,8 @@ fn default_post_process_providers() -> Vec<PostProcessProvider> {
         api_format: PostProcessApiFormat::OpenAi,
     });
 
+    // Kusema: Ollama and LM Studio on this computer, listed first.
+    providers.splice(0..0, crate::local_providers::providers());
     providers
 }
 
@@ -1000,6 +1002,11 @@ where
 
 fn default_typing_tool() -> TypingTool {
     TypingTool::Auto
+}
+
+#[cfg(test)]
+pub fn ensure_post_process_defaults_for_test(settings: &mut AppSettings) -> bool {
+    ensure_post_process_defaults(settings)
 }
 
 fn ensure_post_process_defaults(settings: &mut AppSettings) -> bool {
@@ -1373,7 +1380,9 @@ pub fn get_settings(app: &AppHandle) -> AppSettings {
         default_settings
     };
 
-    if ensure_post_process_defaults(&mut settings) {
+    // Kusema: then move a Custom provider on Ollama or LM Studio to the built-in one.
+    if ensure_post_process_defaults(&mut settings) | crate::local_providers::migrate(&mut settings)
+    {
         crate::secrets::load_keys(&mut settings);
         store.set("settings", crate::secrets::for_disk(&settings));
     }

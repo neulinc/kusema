@@ -18,6 +18,7 @@ mod helpers;
 mod input;
 mod language_detection;
 mod llm_client;
+mod local_providers;
 mod managers;
 mod memory;
 mod network;
@@ -705,6 +706,7 @@ pub fn run(cli_args: CliArgs) {
             setup::first_wins::activate_first_wins,
             setup::first_wins::dismiss_first_wins,
             setup::local_ai::detect_local_ai,
+            setup::local_ai::detect_local_provider,
             setup::mic_test::start_mic_test,
             setup::mic_test::stop_mic_test,
             shortcut::change_autostart_setting,

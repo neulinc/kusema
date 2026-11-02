@@ -804,7 +804,7 @@
         },
         "provider": {
           "label": "Brug til skærmspørgsmål",
-          "description": "Send skærmbilleder til en anden udbyder end almindelige spørgsmål, fx en lokal billedmodel i Ollama (udbyderen Brugerdefineret) til fortrolige dokumenter. Opfølgende spørgsmål går til samme udbyder, indtil du starter en ny samtale.",
+          "description": "Send skærmbilleder til en anden udbyder end almindelige spørgsmål, fx en lokal billedmodel i Ollama til fortrolige dokumenter. Opfølgende spørgsmål går til samme udbyder, indtil du starter en ny samtale.",
           "same": "Samme som assistenten",
           "sameNamed": "Samme som assistenten ({{provider}})",
           "yourProvider": "din AI-udbyder"
@@ -867,7 +867,9 @@
         "title": "API",
         "provider": {
           "title": "Udbyder",
-          "description": "Vælg en OpenAI- eller Anthropic-kompatibel udbyder."
+          "description": "Vælg en OpenAI- eller Anthropic-kompatibel udbyder.",
+          "localName": "{{name}} (på denne computer)",
+          "private": "Privat: bliver på denne computer"
         },
         "apiFormat": {
           "title": "API-format",
@@ -898,6 +900,11 @@
           "placeholderWithOptions": "Søg eller vælg en model",
           "placeholderNoOptions": "Skriv et modelnavn",
           "refreshModels": "Opdater modeller"
+        },
+        "local": {
+          "notRunning": "{{name}} kører ikke på denne computer. Start det, og opdater derefter listen over modeller.",
+          "noModels": "{{name}} kører, men har endnu ingen modeller installeret.",
+          "howTo": "Sådan konfigurerer du {{name}}"
         }
       },
       "prompts": {

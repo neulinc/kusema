@@ -810,7 +810,7 @@
         },
         "provider": {
           "label": "Použít pro otázky na obrazovku",
-          "description": "Posílat snímky obrazovky jinému poskytovateli než běžné otázky, například místnímu vizuálnímu modelu v Ollamě (poskytovatel Vlastní) pro důvěrné dokumenty. Doplňující otázky jdou stejnému poskytovateli, dokud nezačnete novou konverzaci.",
+          "description": "Posílat snímky obrazovky jinému poskytovateli než běžné otázky, například místnímu vizuálnímu modelu v Ollamě pro důvěrné dokumenty. Doplňující otázky jdou stejnému poskytovateli, dokud nezačnete novou konverzaci.",
           "same": "Stejně jako asistent",
           "sameNamed": "Stejně jako asistent ({{provider}})",
           "yourProvider": "vašemu poskytovateli AI"
@@ -873,7 +873,9 @@
         "title": "API",
         "provider": {
           "title": "Poskytovatel",
-          "description": "Vyberte poskytovatele kompatibilního s OpenAI nebo Anthropic."
+          "description": "Vyberte poskytovatele kompatibilního s OpenAI nebo Anthropic.",
+          "localName": "{{name}} (v tomto počítači)",
+          "private": "Soukromé: zůstává v tomto počítači"
         },
         "apiFormat": {
           "title": "Formát API",
@@ -904,6 +906,11 @@
           "placeholderWithOptions": "Vyhledejte nebo vyberte model",
           "placeholderNoOptions": "Zadejte název modelu",
           "refreshModels": "Obnovit modely"
+        },
+        "local": {
+          "notRunning": "{{name}} v tomto počítači neběží. Spusťte ho a pak obnovte seznam modelů.",
+          "noModels": "{{name}} běží, ale zatím nemá nainstalované žádné modely.",
+          "howTo": "Jak nastavit {{name}}"
         }
       },
       "prompts": {

@@ -804,7 +804,7 @@
         },
         "provider": {
           "label": "Für Bildschirmfragen verwenden",
-          "description": "Screenshots an einen anderen Anbieter senden als normale Fragen, zum Beispiel an ein lokales Bildmodell in Ollama (der Anbieter \"Benutzerdefiniert\") für vertrauliche Dokumente. Folgefragen gehen an denselben Anbieter, bis du ein neues Gespräch beginnst.",
+          "description": "Screenshots an einen anderen Anbieter senden als normale Fragen, zum Beispiel an ein lokales Bildmodell in Ollama für vertrauliche Dokumente. Folgefragen gehen an denselben Anbieter, bis du ein neues Gespräch beginnst.",
           "same": "Wie beim Assistenten",
           "sameNamed": "Wie beim Assistenten ({{provider}})",
           "yourProvider": "deinen KI-Anbieter"
@@ -867,7 +867,9 @@
         "title": "API",
         "provider": {
           "title": "Anbieter",
-          "description": "Wähle einen OpenAI- oder Anthropic-kompatiblen Anbieter."
+          "description": "Wähle einen OpenAI- oder Anthropic-kompatiblen Anbieter.",
+          "localName": "{{name}} (auf diesem Computer)",
+          "private": "Privat: bleibt auf diesem Computer"
         },
         "apiFormat": {
           "title": "API-Format",
@@ -898,6 +900,11 @@
           "placeholderWithOptions": "Modell suchen oder auswählen",
           "placeholderNoOptions": "Modellnamen eingeben",
           "refreshModels": "Modelle aktualisieren"
+        },
+        "local": {
+          "notRunning": "{{name}} läuft nicht auf diesem Computer. Starte es und aktualisiere dann die Modellliste.",
+          "noModels": "{{name}} läuft, hat aber noch keine Modelle installiert.",
+          "howTo": "So richtest du {{name}} ein"
         }
       },
       "prompts": {

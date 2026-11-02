@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { isKeyOptional } from "@/lib/localProviders";
 import { useSettings } from "../../../hooks/useSettings";
 import { SettingsGroup } from "../../ui/SettingsGroup";
 import { SettingContainer } from "../../ui/SettingContainer";
@@ -9,8 +10,6 @@ import { Input } from "../../ui/Input";
 import { Alert } from "../../ui/Alert";
 import { ShortcutInput } from "../ShortcutInput";
 
-/** Providers that run locally or behind a gateway and may not need a key. */
-const KEY_OPTIONAL_PROVIDERS = ["custom"];
 /** Can't take images (or run Assistant mode at all). */
 const UNSUPPORTED_PROVIDERS = ["apple_intelligence"];
 const SAME_AS_ASSISTANT = "";
@@ -52,7 +51,7 @@ export const AssistantScreenSettings: React.FC = () => {
 
   const missingKey =
     screenProvider &&
-    !KEY_OPTIONAL_PROVIDERS.includes(screenProvider.id) &&
+    !isKeyOptional(screenProvider.id) &&
     !keys[screenProvider.id];
 
   const saveModel = () => {

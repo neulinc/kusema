@@ -1,5 +1,11 @@
 import { useCallback, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useSettings } from "../../../hooks/useSettings";
+import {
+  isKeyOptional,
+  isLocalProvider,
+  localFirst,
+} from "@/lib/localProviders";
 import {
   commands,
   type PostProcessApiFormat,
@@ -13,6 +19,10 @@ type PostProcessProviderState = {
   selectedProviderId: string;
   selectedProvider: PostProcessProvider | undefined;
   isCustomProvider: boolean;
+  /** Ollama or LM Studio on this computer: no key, and a running check. */
+  isLocalProvider: boolean;
+  /** Bumped to check a local provider again. */
+  localCheck: number;
   isAppleProvider: boolean;
   appleIntelligenceUnavailable: boolean;
   baseUrl: string;
@@ -38,6 +48,8 @@ type PostProcessProviderState = {
 const APPLE_PROVIDER_ID = "apple_intelligence";
 
 export const usePostProcessProviderState = (): PostProcessProviderState => {
+  const { t } = useTranslation();
+  const [localCheck, setLocalCheck] = useState(0);
   const {
     settings,
     isUpdating,
@@ -74,12 +86,20 @@ export const usePostProcessProviderState = (): PostProcessProviderState => {
   const apiKey = settings?.post_process_api_keys?.[selectedProviderId] ?? "";
   const model = settings?.post_process_models?.[selectedProviderId] ?? "";
 
+  // Kusema: the private ones first, and labelled so.
   const providerOptions = useMemo<DropdownOption[]>(() => {
-    return providers.map((provider) => ({
-      value: provider.id,
-      label: provider.label,
-    }));
-  }, [providers]);
+    return localFirst(providers).map((provider) =>
+      isLocalProvider(provider.id)
+        ? {
+            value: provider.id,
+            label: t("settings.postProcessing.api.provider.localName", {
+              name: provider.label,
+            }),
+            description: t("settings.postProcessing.api.provider.private"),
+          }
+        : { value: provider.id, label: provider.label },
+    );
+  }, [providers, t]);
 
   const handleProviderSelect = useCallback(
     async (providerId: string) => {
@@ -111,7 +131,9 @@ export const usePostProcessProviderState = (): PostProcessProviderState => {
         const hasBaseUrl = (provider?.base_url ?? "").trim() !== "";
         const hasApiKey = apiKey.trim() !== "";
 
-        if (provider?.id === "custom" ? hasBaseUrl : hasApiKey) {
+        // A local provider is checked by LocalProviderStatus instead.
+        if (isLocalProvider(provider?.id)) return;
+        if (isKeyOptional(provider?.id) ? hasBaseUrl : hasApiKey) {
           void fetchPostProcessModels(providerId);
         }
       }
@@ -183,6 +205,10 @@ export const usePostProcessProviderState = (): PostProcessProviderState => {
 
   const handleRefreshModels = useCallback(() => {
     if (isAppleProvider) return;
+    if (isLocalProvider(selectedProviderId)) {
+      setLocalCheck((n) => n + 1);
+      return;
+    }
     void fetchPostProcessModels(selectedProviderId);
   }, [fetchPostProcessModels, isAppleProvider, selectedProviderId]);
 
@@ -235,6 +261,8 @@ export const usePostProcessProviderState = (): PostProcessProviderState => {
     selectedProviderId,
     selectedProvider,
     isCustomProvider,
+    isLocalProvider: isLocalProvider(selectedProvider?.id),
+    localCheck,
     isAppleProvider,
     appleIntelligenceUnavailable,
     baseUrl,

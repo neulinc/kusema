@@ -804,7 +804,7 @@
         },
         "provider": {
           "label": "Ekran Soruları İçin Kullan",
-          "description": "Ekran görüntülerini normal sorulardan farklı bir sağlayıcıya gönderin; örneğin gizli belgeler için Ollama'daki yerel bir görüntü modeline (Özel sağlayıcı). Yeni bir konuşma başlatana kadar devam soruları aynı sağlayıcıya gider.",
+          "description": "Ekran görüntülerini normal sorulardan farklı bir sağlayıcıya gönderin; örneğin gizli belgeler için Ollama'daki yerel bir görüntü modeline. Yeni bir konuşma başlatana kadar devam soruları aynı sağlayıcıya gider.",
           "same": "Asistanla aynı",
           "sameNamed": "Asistanla aynı ({{provider}})",
           "yourProvider": "yapay zekâ sağlayıcınız"
@@ -867,7 +867,9 @@
         "title": "API",
         "provider": {
           "title": "Sağlayıcı",
-          "description": "OpenAI veya Anthropic uyumlu bir sağlayıcı seçin."
+          "description": "OpenAI veya Anthropic uyumlu bir sağlayıcı seçin.",
+          "localName": "{{name}} (bu bilgisayarda)",
+          "private": "Gizli: bu bilgisayarda kalır"
         },
         "apiFormat": {
           "title": "API Biçimi",
@@ -898,6 +900,11 @@
           "placeholderWithOptions": "Model ara veya seç",
           "placeholderNoOptions": "Model adı yazın",
           "refreshModels": "Modelleri Yenile"
+        },
+        "local": {
+          "notRunning": "{{name}} bu bilgisayarda çalışmıyor. Başlatın, ardından model listesini yenileyin.",
+          "noModels": "{{name}} çalışıyor ancak henüz yüklü bir model yok.",
+          "howTo": "{{name}} nasıl kurulur"
         }
       },
       "prompts": {

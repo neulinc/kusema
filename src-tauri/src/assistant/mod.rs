@@ -167,7 +167,7 @@ fn resolve_provider(
         .map(|key| key.trim().to_string())
         .unwrap_or_default();
     // A custom endpoint (e.g. a local Ollama server) may not need a key.
-    if api_key.is_empty() && provider.id != "custom" && !refused {
+    if api_key.is_empty() && !crate::local_providers::key_optional(&provider.id) && !refused {
         return Err(format!("No API key set for {}", provider.label));
     }
 

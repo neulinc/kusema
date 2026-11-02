@@ -804,7 +804,7 @@
         },
         "provider": {
           "label": "화면 질문에 사용",
-          "description": "스크린샷을 일반 질문과 다른 제공업체로 보냅니다. 예를 들어 기밀 문서에는 Ollama의 로컬 비전 모델(사용자 지정 제공업체)을 쓸 수 있습니다. 새 대화를 시작할 때까지 이어지는 질문도 같은 제공업체로 갑니다.",
+          "description": "스크린샷을 일반 질문과 다른 제공업체로 보냅니다. 예를 들어 기밀 문서에는 Ollama의 로컬 비전 모델을 쓸 수 있습니다. 새 대화를 시작할 때까지 이어지는 질문도 같은 제공업체로 갑니다.",
           "same": "어시스턴트와 동일",
           "sameNamed": "어시스턴트와 동일({{provider}})",
           "yourProvider": "사용 중인 AI 제공업체"
@@ -867,7 +867,9 @@
         "title": "API",
         "provider": {
           "title": "제공자",
-          "description": "OpenAI 또는 Anthropic 호환 제공자를 선택하세요."
+          "description": "OpenAI 또는 Anthropic 호환 제공자를 선택하세요.",
+          "localName": "{{name}} (이 컴퓨터)",
+          "private": "비공개: 이 컴퓨터 밖으로 나가지 않습니다"
         },
         "apiFormat": {
           "title": "API 형식",
@@ -898,6 +900,11 @@
           "placeholderWithOptions": "모델 검색 또는 선택",
           "placeholderNoOptions": "모델 이름 입력",
           "refreshModels": "모델 새로고침"
+        },
+        "local": {
+          "notRunning": "이 컴퓨터에서 {{name}}이(가) 실행되고 있지 않습니다. 실행한 다음 모델 목록을 새로 고치세요.",
+          "noModels": "{{name}}이(가) 실행 중이지만 아직 설치된 모델이 없습니다.",
+          "howTo": "{{name}} 설정 방법"
         }
       },
       "prompts": {

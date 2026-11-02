@@ -10,10 +10,10 @@ import { FIELD_CLASS, SetupScreen } from "./SetupScreen";
 import { assistantPlan } from "./flow";
 
 const OLLAMA_SETUP_URL = "https://ollama.com/download";
-/** The provider that points at a server on this computer. */
-const LOCAL_PROVIDER = "custom";
-/** Set up here by the local choice, or only available on a Mac. */
-const NOT_CLOUD = [LOCAL_PROVIDER, "apple_intelligence"];
+/** The built-in provider for Ollama on this computer. */
+const LOCAL_PROVIDER = "ollama";
+/** Not cloud providers: on this computer, a server of your own, or a Mac's. */
+const NOT_CLOUD = ["ollama", "lmstudio", "custom", "apple_intelligence"];
 
 type Choice = "local" | "cloud" | "skip";
 
@@ -63,7 +63,6 @@ export const SetupAssistant: React.FC<SetupAssistantProps> = ({
   const {
     getSetting,
     setPostProcessProvider,
-    updatePostProcessBaseUrl,
     updatePostProcessApiKey,
     updatePostProcessModel,
   } = useSettings();
@@ -149,7 +148,6 @@ export const SetupAssistant: React.FC<SetupAssistantProps> = ({
     if (!preview && plan.kind !== "none") {
       setSaving(true);
       if (plan.kind === "local") {
-        await updatePostProcessBaseUrl(LOCAL_PROVIDER, local?.base_url ?? "");
         await updatePostProcessModel(LOCAL_PROVIDER, plan.model);
         await setPostProcessProvider(LOCAL_PROVIDER);
       } else {

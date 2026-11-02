@@ -49,16 +49,33 @@ async fn detect_at(provider: PostProcessProvider, base_url: &str) -> LocalAiStat
     }
 }
 
+fn provider(app: &AppHandle, id: &str) -> Result<PostProcessProvider, String> {
+    settings::get_settings(app)
+        .post_process_providers
+        .into_iter()
+        .find(|p| p.id == id)
+        .ok_or(format!("The {id} provider is missing from the settings."))
+}
+
 /// Is Ollama running on this computer, and with which models?
 #[tauri::command]
 #[specta::specta]
 pub async fn detect_local_ai(app: AppHandle) -> Result<LocalAiStatus, String> {
-    let provider = settings::get_settings(&app)
-        .post_process_providers
-        .into_iter()
-        .find(|p| p.id == "custom")
-        .ok_or("The local AI provider is missing from the settings.")?;
-    Ok(detect_at(provider, OLLAMA_BASE_URL).await)
+    let ollama = provider(&app, crate::local_providers::OLLAMA_ID)?;
+    Ok(detect_at(ollama, OLLAMA_BASE_URL).await)
+}
+
+/// Is this local provider's server running, and with which models? "Not
+/// running" is an answer here, not an error.
+#[tauri::command]
+#[specta::specta]
+pub async fn detect_local_provider(
+    app: AppHandle,
+    provider_id: String,
+) -> Result<LocalAiStatus, String> {
+    let local = provider(&app, &provider_id)?;
+    let base_url = local.base_url.clone();
+    Ok(detect_at(local, &base_url).await)
 }
 
 #[cfg(test)]
@@ -75,7 +92,7 @@ mod tests {
         settings::get_default_settings()
             .post_process_providers
             .into_iter()
-            .find(|p| p.id == "custom")
+            .find(|p| p.id == crate::local_providers::OLLAMA_ID)
             .unwrap()
     }
 

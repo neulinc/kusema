@@ -158,6 +158,18 @@ async detectLocalAi() : Promise<Result<LocalAiStatus, string>> {
 }
 },
 /**
+ * Is this local provider's server running, and with which models? "Not
+ * running" is an answer here, not an error.
+ */
+async detectLocalProvider(providerId: string) : Promise<Result<LocalAiStatus, string>> {
+    try {
+    return { status: "ok", data: await TAURI_INVOKE("detect_local_provider", { providerId }) };
+} catch (e) {
+    if(e instanceof Error) throw e;
+    else return { status: "error", error: e  as any };
+}
+},
+/**
  * Starts the meter on the selected microphone, replacing any meter running.
  */
 async startMicTest() : Promise<Result<null, string>> {

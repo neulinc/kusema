@@ -807,7 +807,7 @@
         },
         "provider": {
           "label": "Fes servir per a preguntes sobre la pantalla",
-          "description": "Envia les captures a un proveïdor diferent del de les preguntes normals, per exemple un model de visió local a l'Ollama (el proveïdor Personalitzat) per a documents confidencials. Les preguntes de seguiment van al mateix proveïdor fins que comenceu una conversa nova.",
+          "description": "Envia les captures a un proveïdor diferent del de les preguntes normals, per exemple un model de visió local a l'Ollama per a documents confidencials. Les preguntes de seguiment van al mateix proveïdor fins que comenceu una conversa nova.",
           "same": "Igual que l'assistent",
           "sameNamed": "Igual que l'assistent ({{provider}})",
           "yourProvider": "el vostre proveïdor d'IA"
@@ -870,7 +870,9 @@
         "title": "API",
         "provider": {
           "title": "Proveïdor",
-          "description": "Seleccioneu un proveïdor compatible amb OpenAI o Anthropic."
+          "description": "Seleccioneu un proveïdor compatible amb OpenAI o Anthropic.",
+          "localName": "{{name}} (en aquest ordinador)",
+          "private": "Privat: es queda en aquest ordinador"
         },
         "apiFormat": {
           "title": "Format de l'API",
@@ -901,6 +903,11 @@
           "placeholderWithOptions": "Cerqueu o seleccioneu un model",
           "placeholderNoOptions": "Escriviu el nom d'un model",
           "refreshModels": "Actualitzeu els models"
+        },
+        "local": {
+          "notRunning": "{{name}} no s'està executant en aquest ordinador. Inicieu-lo i després actualitzeu la llista de models.",
+          "noModels": "{{name}} s'està executant, però encara no té cap model instal·lat.",
+          "howTo": "Com configurar {{name}}"
         }
       },
       "prompts": {

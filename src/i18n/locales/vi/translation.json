@@ -804,7 +804,7 @@
         },
         "provider": {
           "label": "Dùng Cho Câu Hỏi Về Màn Hình",
-          "description": "Gửi ảnh chụp màn hình đến nhà cung cấp khác với câu hỏi thông thường, ví dụ một mô hình thị giác cục bộ trong Ollama (nhà cung cấp Tùy chỉnh) cho tài liệu bảo mật. Câu hỏi tiếp theo đi đến cùng nhà cung cấp cho đến khi bạn bắt đầu cuộc trò chuyện mới.",
+          "description": "Gửi ảnh chụp màn hình đến nhà cung cấp khác với câu hỏi thông thường, ví dụ một mô hình thị giác cục bộ trong Ollama cho tài liệu bảo mật. Câu hỏi tiếp theo đi đến cùng nhà cung cấp cho đến khi bạn bắt đầu cuộc trò chuyện mới.",
           "same": "Giống Trợ lý",
           "sameNamed": "Giống Trợ lý ({{provider}})",
           "yourProvider": "nhà cung cấp AI của bạn"
@@ -867,7 +867,9 @@
         "title": "API",
         "provider": {
           "title": "Nhà cung cấp",
-          "description": "Chọn một nhà cung cấp tương thích OpenAI hoặc Anthropic."
+          "description": "Chọn một nhà cung cấp tương thích OpenAI hoặc Anthropic.",
+          "localName": "{{name}} (trên máy tính này)",
+          "private": "Riêng tư: ở lại trên máy tính này"
         },
         "apiFormat": {
           "title": "Định dạng API",
@@ -898,6 +900,11 @@
           "placeholderWithOptions": "Tìm kiếm hoặc chọn một mô hình",
           "placeholderNoOptions": "Nhập tên mô hình",
           "refreshModels": "Làm mới mô hình"
+        },
+        "local": {
+          "notRunning": "{{name}} không chạy trên máy tính này. Hãy khởi động nó, rồi làm mới danh sách mô hình.",
+          "noModels": "{{name}} đang chạy nhưng chưa cài mô hình nào.",
+          "howTo": "Cách thiết lập {{name}}"
         }
       },
       "prompts": {

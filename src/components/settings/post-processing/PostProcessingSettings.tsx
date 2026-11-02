@@ -19,6 +19,7 @@ import { BaseUrlField } from "../PostProcessingSettingsApi/BaseUrlField";
 import { ApiKeyField } from "../PostProcessingSettingsApi/ApiKeyField";
 import { ModelSelect } from "../PostProcessingSettingsApi/ModelSelect";
 import { usePostProcessProviderState } from "../PostProcessingSettingsApi/usePostProcessProviderState";
+import { LocalProviderStatus } from "../PostProcessingSettingsApi/LocalProviderStatus";
 import { ShortcutInput } from "../ShortcutInput";
 import { useSettings } from "../../../hooks/useSettings";
 
@@ -112,25 +113,27 @@ const PostProcessingSettingsApiComponent: React.FC = () => {
             </SettingContainer>
           )}
 
-          <SettingContainer
-            title={t("settings.postProcessing.api.apiKey.title")}
-            description={t("settings.postProcessing.api.apiKey.description")}
-            descriptionMode="tooltip"
-            layout="horizontal"
-            grouped={true}
-          >
-            <div className="flex items-center gap-2">
-              <ApiKeyField
-                value={state.apiKey}
-                onBlur={state.handleApiKeyChange}
-                placeholder={t(
-                  "settings.postProcessing.api.apiKey.placeholder",
-                )}
-                disabled={state.isApiKeyUpdating}
-                className="min-w-[320px]"
-              />
-            </div>
-          </SettingContainer>
+          {!state.isLocalProvider && (
+            <SettingContainer
+              title={t("settings.postProcessing.api.apiKey.title")}
+              description={t("settings.postProcessing.api.apiKey.description")}
+              descriptionMode="tooltip"
+              layout="horizontal"
+              grouped={true}
+            >
+              <div className="flex items-center gap-2">
+                <ApiKeyField
+                  value={state.apiKey}
+                  onBlur={state.handleApiKeyChange}
+                  placeholder={t(
+                    "settings.postProcessing.api.apiKey.placeholder",
+                  )}
+                  disabled={state.isApiKeyUpdating}
+                  className="min-w-[320px]"
+                />
+              </div>
+            </SettingContainer>
+          )}
         </>
       )}
 
@@ -176,6 +179,12 @@ const PostProcessingSettingsApiComponent: React.FC = () => {
             </ResetButton>
           </div>
         </SettingContainer>
+      )}
+      {state.isLocalProvider && state.selectedProvider && (
+        <LocalProviderStatus
+          provider={state.selectedProvider}
+          check={state.localCheck}
+        />
       )}
     </>
   );

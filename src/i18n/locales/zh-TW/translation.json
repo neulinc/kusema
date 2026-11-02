@@ -804,7 +804,7 @@
         },
         "provider": {
           "label": "用於螢幕提問",
-          "description": "將螢幕擷圖傳送給與一般問題不同的供應商，例如對機密文件使用 Ollama 中的本機視覺模型（「自訂」供應商）。在您開始新對話之前，後續問題都會傳送給同一個供應商。",
+          "description": "將螢幕擷圖傳送給與一般問題不同的供應商，例如對機密文件使用 Ollama 中的本機視覺模型。在您開始新對話之前，後續問題都會傳送給同一個供應商。",
           "same": "與助理相同",
           "sameNamed": "與助理相同（{{provider}}）",
           "yourProvider": "您的 AI 供應商"
@@ -867,7 +867,9 @@
         "title": "API",
         "provider": {
           "title": "供應商",
-          "description": "選擇一個相容 OpenAI 或 Anthropic 的供應商"
+          "description": "選擇一個相容 OpenAI 或 Anthropic 的供應商",
+          "localName": "{{name}}（本機）",
+          "private": "私密：不會離開這台電腦"
         },
         "apiFormat": {
           "title": "API 格式",
@@ -898,6 +900,11 @@
           "placeholderWithOptions": "搜尋或選擇模型",
           "placeholderNoOptions": "輸入模型名稱",
           "refreshModels": "重新整理模型"
+        },
+        "local": {
+          "notRunning": "{{name}} 沒有在這台電腦上執行。請啟動它，然後重新整理模型清單。",
+          "noModels": "{{name}} 正在執行，但尚未安裝任何模型。",
+          "howTo": "如何設定 {{name}}"
         }
       },
       "prompts": {

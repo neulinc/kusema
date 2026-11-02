@@ -1,13 +1,11 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { isKeyOptional } from "@/lib/localProviders";
 import { useSettings } from "../../../hooks/useSettings";
 import { SettingsGroup } from "../../ui/SettingsGroup";
 import { SettingContainer } from "../../ui/SettingContainer";
 import { Button } from "../../ui/Button";
 import { Alert } from "../../ui/Alert";
-
-/** Providers that run locally or behind a gateway and may not need a key. */
-const KEY_OPTIONAL_PROVIDERS = ["custom"];
 
 /** The provider and model Assistant mode uses (shared with Post Process),
  * with a shortcut to where they're configured. */
@@ -24,7 +22,7 @@ export const AssistantProviderSettings: React.FC<{
   );
   const model = getSetting("post_process_models")?.[providerId] ?? "";
   const hasKey = !!getSetting("post_process_api_keys")?.[providerId];
-  const needsKey = !KEY_OPTIONAL_PROVIDERS.includes(providerId);
+  const needsKey = !isKeyOptional(providerId);
 
   // A model chosen in setup answers questions; AI cleanup can stay off.
   if (!enabled && !model) {

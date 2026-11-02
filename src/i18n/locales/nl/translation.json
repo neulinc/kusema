@@ -804,7 +804,7 @@
         },
         "provider": {
           "label": "Gebruiken voor schermvragen",
-          "description": "Stuur schermafbeeldingen naar een andere aanbieder dan gewone vragen, bijvoorbeeld een lokaal beeldmodel in Ollama (de aanbieder Aangepast) voor vertrouwelijke documenten. Vervolgvragen gaan naar dezelfde aanbieder tot je een nieuw gesprek begint.",
+          "description": "Stuur schermafbeeldingen naar een andere aanbieder dan gewone vragen, bijvoorbeeld een lokaal beeldmodel in Ollama voor vertrouwelijke documenten. Vervolgvragen gaan naar dezelfde aanbieder tot je een nieuw gesprek begint.",
           "same": "Zelfde als assistent",
           "sameNamed": "Zelfde als assistent ({{provider}})",
           "yourProvider": "je AI-aanbieder"
@@ -867,7 +867,9 @@
         "title": "API",
         "provider": {
           "title": "Provider",
-          "description": "Selecteer een OpenAI- of Anthropic-compatibele provider."
+          "description": "Selecteer een OpenAI- of Anthropic-compatibele provider.",
+          "localName": "{{name}} (op deze computer)",
+          "private": "Privé: blijft op deze computer"
         },
         "apiFormat": {
           "title": "API-indeling",
@@ -898,6 +900,11 @@
           "placeholderWithOptions": "Zoek of selecteer een model",
           "placeholderNoOptions": "Typ een modelnaam",
           "refreshModels": "Modellen verversen"
+        },
+        "local": {
+          "notRunning": "{{name}} draait niet op deze computer. Start het en vernieuw daarna de lijst met modellen.",
+          "noModels": "{{name}} draait, maar heeft nog geen modellen geïnstalleerd.",
+          "howTo": "{{name}} instellen"
         }
       },
       "prompts": {
