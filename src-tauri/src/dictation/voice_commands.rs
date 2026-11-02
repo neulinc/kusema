@@ -1,5 +1,7 @@
-//! Spoken commands. A command counts only when a whole segment is nothing but
-//! its phrase, so normal sentences containing these words are always typed.
+//! Spoken commands that act on a whole segment. A command counts only when the
+//! segment is nothing but its phrase, so normal sentences containing these words
+//! are always typed. "new paragraph" and "new line" also work mid-flow, and in
+//! normal dictation, through `cleanup`.
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum VoiceCommand {

@@ -394,10 +394,16 @@ fn handle_text(shared: &Shared, text: &str, started_at: Instant) {
         None => {
             // Local only. AI cleanup never runs per segment.
             let settings = get_settings(&shared.app);
-            let cleaned = crate::cleanup::apply(&settings, text, None);
-            let cleaned = cleaned.trim();
+            let cleaned = crate::cleanup::apply_to_segment(&settings, text, shared.voice_commands);
+            let cleaned = cleaned.trim_matches(' ');
             if !cleaned.is_empty() {
                 write(shared, Piece::Words(cleaned.to_string()), started_at);
+                if cleaned.contains(PARAGRAPH_BREAK) {
+                    crate::setup::first_wins::record(
+                        &shared.app,
+                        crate::setup::first_wins::Win::NewParagraph,
+                    );
+                }
                 crate::setup::first_wins::record(
                     &shared.app,
                     crate::setup::first_wins::Win::Dictated,
@@ -954,6 +960,220 @@ pub fn change_dictation_voice_commands_setting(
     settings.dictation_voice_commands = enabled;
     write_settings(&app, settings);
     Ok(())
+}
+
+#[cfg(test)]
+mod line_command_tests {
+    //! "new paragraph" and "new line" from what the model wrote to what's typed,
+    //! in both kinds of dictation.
+    use super::join::JoinState;
+    use super::voice_commands::{self, VoiceCommand};
+    use super::{LINE_BREAK, PARAGRAPH_BREAK};
+    use crate::cleanup;
+    use crate::settings::get_default_settings;
+
+    fn normal(said: &str) -> String {
+        cleanup::apply(&get_default_settings(), said, Some("en"))
+    }
+
+    /// What `handle_text` writes for these segments.
+    fn continuous_with(segments: &[&str], voice_commands_on: bool) -> String {
+        let settings = get_default_settings();
+        let mut state = JoinState::with_period_insertion();
+        let mut typed = String::new();
+        for segment in segments {
+            let command = voice_commands_on
+                .then(|| voice_commands::parse(segment))
+                .flatten();
+            let (out, next) = match command {
+                Some(VoiceCommand::NewParagraph) => state.join_break(PARAGRAPH_BREAK),
+                Some(VoiceCommand::NewLine) => state.join_break(LINE_BREAK),
+                _ => state.join(&cleanup::apply_to_segment(
+                    &settings,
+                    segment,
+                    voice_commands_on,
+                )),
+            };
+            typed.push_str(&out);
+            state = next;
+        }
+        typed
+    }
+
+    fn continuous(segments: &[&str]) -> String {
+        continuous_with(segments, true)
+    }
+
+    #[test]
+    fn every_variant_said_alone_in_both_modes() {
+        for said in [
+            "new paragraph",
+            "New paragraph",
+            "New Paragraph",
+            "NEW PARAGRAPH",
+            "New paragraph.",
+            "New paragraph,",
+            "New paragraph\"",
+            "New paragraph.\"",
+            "new paragraphs",
+            "New paragraphs.",
+            "new para graph",
+            "New para graph.",
+            "new-paragraph",
+            "newparagraph",
+        ] {
+            assert_eq!(normal(said), "\n\n", "normal: {said}");
+            assert_eq!(
+                continuous(&["We agree.", said, "the end"]),
+                "We agree.\n\nThe end",
+                "continuous: {said}"
+            );
+        }
+        for said in [
+            "new line",
+            "New line",
+            "NEW LINE",
+            "New line.",
+            "New line\"",
+            "new lines",
+            "New lines.",
+            "new-line",
+            "newline",
+            "Newline.",
+        ] {
+            assert_eq!(normal(said), "\n", "normal: {said}");
+            assert_eq!(
+                continuous(&["Main Street", said, "apartment 4"]),
+                "Main Street\napartment 4",
+                "continuous: {said}"
+            );
+        }
+    }
+
+    #[test]
+    fn said_mid_flow_in_both_modes() {
+        for (said, written) in [
+            (
+                "Thank you new paragraph The court agreed",
+                "Thank you\n\nThe court agreed",
+            ),
+            (
+                "Thank you. New paragraph. the court agreed",
+                "Thank you.\n\nThe court agreed",
+            ),
+            (
+                "Thank you New paragraph\" The court agreed",
+                "Thank you\n\nThe court agreed",
+            ),
+            (
+                "Thank you new paragraphs The court agreed",
+                "Thank you\n\nThe court agreed",
+            ),
+            (
+                "Thank you new para graph. The court agreed",
+                "Thank you\n\nThe court agreed",
+            ),
+            (
+                "The motion is denied period new paragraph The parties agree",
+                "The motion is denied.\n\nThe parties agree",
+            ),
+            (
+                "Main Street new line Springfield",
+                "Main Street\nSpringfield",
+            ),
+            (
+                "Main Street, new line, apartment 4",
+                "Main Street,\napartment 4",
+            ),
+            (
+                "Main Street. New line. Springfield",
+                "Main Street.\nSpringfield",
+            ),
+        ] {
+            assert_eq!(normal(said), written, "normal: {said}");
+            assert_eq!(continuous(&[said]), written, "continuous: {said}");
+        }
+    }
+
+    #[test]
+    fn at_the_end_of_a_segment_in_continuous_dictation() {
+        assert_eq!(
+            continuous(&["Thank you new paragraph", "the court agreed"]),
+            "Thank you\n\nThe court agreed"
+        );
+        assert_eq!(
+            continuous(&["Main Street new line", "apartment 4"]),
+            "Main Street\napartment 4"
+        );
+    }
+
+    #[test]
+    fn at_the_start_of_a_segment_in_continuous_dictation() {
+        assert_eq!(
+            continuous(&["The court denied the motion", "New paragraph The parties"]),
+            "The court denied the motion\n\nThe parties"
+        );
+    }
+
+    #[test]
+    fn normal_sentences_stay_words_in_both_modes() {
+        for sentence in [
+            "the new paragraph in the contract is fine",
+            "The new paragraph in the contract is fine.",
+            "We added a new paragraph.",
+            "We added new paragraphs.",
+            "Please add new paragraph.",
+            "Insert new line.",
+            "Start on a new line.",
+            "New line of credit approved",
+            "We signed a new line of credit.",
+            "New Line Cinema released it",
+            "the new paragraphs are fine",
+            "two new paragraphs.",
+            "the new para graph.",
+        ] {
+            assert_eq!(normal(sentence), sentence, "normal: {sentence}");
+            assert_eq!(continuous(&[sentence]), sentence, "continuous: {sentence}");
+        }
+    }
+
+    #[test]
+    fn literal_types_the_words_in_both_modes() {
+        for (said, written) in [
+            ("literal new paragraph", "new paragraph"),
+            ("Literal new paragraph.", "New paragraph."),
+            ("literal new line", "new line"),
+            ("literal new paragraphs", "new paragraphs"),
+        ] {
+            assert_eq!(normal(said), written, "normal: {said}");
+            assert_eq!(continuous(&[said]), written, "continuous: {said}");
+        }
+    }
+
+    #[test]
+    fn other_spoken_marks_with_the_models_punctuation_in_both_modes() {
+        for (said, written) in [
+            ("Dear Sir Comma. thank you", "Dear Sir, thank you"),
+            ("Dear Sir comma\" thank you", "Dear Sir, thank you"),
+            ("Is it final Question mark.", "Is it final?"),
+            ("We won Period.", "We won."),
+        ] {
+            assert_eq!(normal(said), written, "normal: {said}");
+            assert_eq!(continuous(&[said]), written, "continuous: {said}");
+        }
+    }
+
+    #[test]
+    fn voice_commands_off_types_them_in_continuous_dictation() {
+        assert_eq!(
+            continuous_with(&["Thank you new paragraph The end"], false),
+            "Thank you new paragraph The end"
+        );
+        assert_eq!(
+            continuous_with(&["New paragraph."], false),
+            "New paragraph."
+        );
+    }
 }
 
 #[cfg(test)]

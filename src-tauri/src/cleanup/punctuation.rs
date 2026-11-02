@@ -8,8 +8,12 @@
 //! - Other marks count anywhere, unless a determiner comes before them ("the
 //!   colon") or a word after them says they're a word ("colon cancer").
 //!
+//! - "new paragraph" and "new line" count where "period" does, or said alone, and
+//!   never after a word that makes them ordinary ("we added new paragraphs").
+//!
 //! The cost: "denied period the parties may appeal", all one lowercase run, stays
-//! as words. "literal period" types the word; "scratch that" undoes a wrong guess.
+//! as words, and so does "denied new paragraph the parties may appeal". "literal
+//! period" types the word; "scratch that" undoes a wrong guess.
 
 /// How a mark sits against its neighbors.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -22,6 +26,8 @@ enum Spacing {
     Joining,
     /// `word § next`
     Separate,
+    /// A line break, with no spaces around it.
+    Break,
 }
 
 /// When a mark's words count as the mark.
@@ -31,6 +37,8 @@ enum Rule {
     Anywhere,
     /// The strict rule for "period".
     PhraseEnd,
+    /// The same position rule, for "new paragraph" and "new line".
+    LineCommand,
 }
 
 struct Mark {
@@ -65,8 +73,153 @@ const fn sentence_end(words: &'static [&'static str], output: &'static str) -> M
     }
 }
 
+const fn line_command(
+    words: &'static [&'static str],
+    output: &'static str,
+    capitalize_next: bool,
+) -> Mark {
+    Mark {
+        rule: Rule::LineCommand,
+        ends_sentence: capitalize_next,
+        not_before: NOT_BEFORE_LINE_COMMAND,
+        not_after: NOT_AFTER_LINE_COMMAND,
+        ..mark(words, output, Spacing::Break)
+    }
+}
+
+const PARAGRAPH_BREAK: &str = "\n\n";
+const LINE_BREAK: &str = "\n";
+
+/// Before a line command, these make it ordinary words ("insert new line").
+const NOT_AFTER_LINE_COMMAND: &[&str] = &[
+    "add",
+    "adds",
+    "added",
+    "adding",
+    "insert",
+    "inserts",
+    "inserted",
+    "inserting",
+    "start",
+    "starts",
+    "started",
+    "starting",
+    "begin",
+    "begins",
+    "began",
+    "begun",
+    "beginning",
+    "write",
+    "writes",
+    "wrote",
+    "written",
+    "writing",
+    "draft",
+    "drafts",
+    "drafted",
+    "drafting",
+    "create",
+    "creates",
+    "created",
+    "creating",
+    "include",
+    "includes",
+    "included",
+    "including",
+    "review",
+    "reviews",
+    "reviewed",
+    "reviewing",
+    "read",
+    "reads",
+    "reading",
+    "see",
+    "saw",
+    "seen",
+    "need",
+    "needs",
+    "needed",
+    "want",
+    "wants",
+    "wanted",
+    "draw",
+    "draws",
+    "drew",
+    "drawn",
+    "open",
+    "opens",
+    "opened",
+    "launch",
+    "launched",
+    "in",
+    "on",
+    "of",
+    "to",
+    "for",
+    "with",
+    "by",
+    "at",
+    "from",
+    "into",
+    "per",
+    "under",
+    "and",
+    "or",
+    "as",
+    "two",
+    "three",
+    "four",
+    "five",
+    "six",
+    "seven",
+    "eight",
+    "nine",
+    "ten",
+    "several",
+    "many",
+    "few",
+    "more",
+    "both",
+    "all",
+    "brand",
+    "whole",
+    "entire",
+    "own",
+    "separate",
+    "first",
+    "second",
+    "third",
+    "next",
+];
+
+/// After a line command, these make it a name or a reference ("New Line Cinema").
+const NOT_BEFORE_LINE_COMMAND: &[&str] = &[
+    "cinema",
+    "productions",
+    "films",
+    "entertainment",
+    "communications",
+    "one",
+    "two",
+    "three",
+    "four",
+    "five",
+    "a",
+    "b",
+];
+
 /// Every spoken mark. The one place to translate or extend them.
 const MARKS: &[Mark] = &[
+    line_command(&["new", "paragraph"], PARAGRAPH_BREAK, true),
+    line_command(&["new", "paragraphs"], PARAGRAPH_BREAK, true),
+    line_command(&["new", "para", "graph"], PARAGRAPH_BREAK, true),
+    line_command(&["new-paragraph"], PARAGRAPH_BREAK, true),
+    line_command(&["newparagraph"], PARAGRAPH_BREAK, true),
+    line_command(&["new", "line"], LINE_BREAK, false),
+    line_command(&["new", "lines"], LINE_BREAK, false),
+    line_command(&["new-line"], LINE_BREAK, false),
+    line_command(&["newline"], LINE_BREAK, false),
+    line_command(&["newlines"], LINE_BREAK, false),
     Mark {
         rule: Rule::PhraseEnd,
         not_before: &["of"],
@@ -94,6 +247,7 @@ const MARKS: &[Mark] = &[
     },
     mark(&["semicolon"], ";", Spacing::AfterWord),
     mark(&["semi", "colon"], ";", Spacing::AfterWord),
+    mark(&["semi-colon"], ";", Spacing::AfterWord),
     mark(&["ellipsis"], "…", Spacing::AfterWord),
     mark(&["open", "quote"], "“", Spacing::Opening),
     mark(&["close", "quote"], "”", Spacing::AfterWord),
@@ -196,11 +350,17 @@ const BEFORE_TIME_PERIOD: &[&str] = &[
 /// Models add these after a word; a spoken mark replaces them.
 const ADDED_PUNCTUATION: &[char] = &[',', '.', ';', ':', '?', '!', '…'];
 const SENTENCE_STOP: &[char] = &['.', '?', '!'];
+/// Models sometimes leave one of these after a word: `New paragraph"`.
+const ADDED_QUOTES: &[char] = &['"', '\'', '”', '’'];
+
+fn is_added_after_a_word(c: char) -> bool {
+    ADDED_PUNCTUATION.contains(&c) || ADDED_QUOTES.contains(&c)
+}
 
 /// A token's word, lowercased and without punctuation the model added around it.
 /// `None` if something else is attached, like a quote: then it's not a bare word.
 fn bare_word(token: &str) -> Option<String> {
-    let core = token.trim_end_matches(ADDED_PUNCTUATION);
+    let core = token.trim_end_matches(is_added_after_a_word);
     if core.is_empty() || !core.chars().all(|c| c.is_alphanumeric() || c == '-') {
         return None;
     }
@@ -225,11 +385,31 @@ fn starts_with_words(tokens: &[&str], at: usize, words: &[&str]) -> bool {
         match bare_word(token) {
             Some(bare) => {
                 bare == *word
-                    && (is_last || token.len() == token.trim_end_matches(ADDED_PUNCTUATION).len())
+                    && (is_last
+                        || token.len() == token.trim_end_matches(is_added_after_a_word).len())
             }
             None => false,
         }
     })
+}
+
+/// A sentence ends here, even with a stray quote after the stop.
+fn ends_with_stop(token: &str) -> bool {
+    token
+        .trim_end_matches(ADDED_QUOTES)
+        .ends_with(SENTENCE_STOP)
+}
+
+fn starts_capitalized(token: &str) -> bool {
+    token
+        .chars()
+        .find(|c| c.is_alphabetic())
+        .is_some_and(char::is_uppercase)
+}
+
+/// Nothing but punctuation, like a lone "." the model wrote after a word.
+fn is_only_added(token: &str) -> bool {
+    token.chars().all(is_added_after_a_word)
 }
 
 fn is_mark_here(mark: &Mark, tokens: &[&str], at: usize) -> bool {
@@ -251,7 +431,10 @@ fn is_mark_here(mark: &Mark, tokens: &[&str], at: usize) -> bool {
     }
     let last = tokens[at + mark.words.len() - 1];
     let next = tokens.get(at + mark.words.len()).copied();
-    if next.is_some_and(|n| mark.not_before.contains(&plain_word(n).as_str())) {
+    // Punctuation after the mark separates it from the word that would make it
+    // ordinary: "new paragraph two" is a reference, "New paragraph. Two" isn't.
+    let runs_on = last.len() == last.trim_end_matches(is_added_after_a_word).len();
+    if runs_on && next.is_some_and(|n| mark.not_before.contains(&plain_word(n).as_str())) {
         return false;
     }
     match mark.rule {
@@ -275,18 +458,50 @@ fn is_mark_here(mark: &Mark, tokens: &[&str], at: usize) -> bool {
             ]
             .iter()
             .any(|words| starts_with_words(tokens, at + mark.words.len(), words));
-            let at_phrase_end =
-                next.is_none() || last.ends_with(SENTENCE_STOP) || before_closing_mark;
-            let before_capital = next
-                .and_then(|n| n.chars().find(|c| c.is_alphabetic()))
-                .is_some_and(char::is_uppercase);
+            // "denied period new paragraph" is how a paragraph ends.
+            let before_line_command = MARKS
+                .iter()
+                .filter(|other| other.rule == Rule::LineCommand)
+                .any(|other| is_mark_here(other, tokens, at + mark.words.len()));
+            let at_phrase_end = next.is_none()
+                || ends_with_stop(last)
+                || before_closing_mark
+                || before_line_command;
+            let before_capital = next.is_some_and(starts_capitalized);
             at_phrase_end || before_capital
+        }
+        Rule::LineCommand => {
+            if previous
+                .as_deref()
+                .is_some_and(|p| p.chars().all(|c| c.is_ascii_digit()))
+            {
+                return false;
+            }
+            // A comma counts here: the model heard a pause after the command.
+            let at_phrase_end = next.is_none_or(is_only_added)
+                || ends_with_stop(last)
+                || last
+                    .trim_end_matches(ADDED_QUOTES)
+                    .ends_with([',', ';', ':']);
+            at_phrase_end || next.is_some_and(starts_capitalized)
         }
     }
 }
 
-fn mark_at(tokens: &[&str], at: usize) -> Option<&'static Mark> {
-    MARKS.iter().find(|mark| is_mark_here(mark, tokens, at))
+fn mark_at(tokens: &[&str], at: usize, line_commands: bool) -> Option<&'static Mark> {
+    MARKS
+        .iter()
+        .filter(|mark| line_commands || mark.rule != Rule::LineCommand)
+        .find(|mark| is_mark_here(mark, tokens, at))
+}
+
+/// The quote to put back after a mark that replaced `token`, if it closes one
+/// that's open: `"denied period"` is `"denied."`. Otherwise it's a stray.
+fn closing_quote(token: &str, written: &str) -> Option<char> {
+    let quote = token.chars().last().filter(|c| matches!(c, '"' | '”'))?;
+    let straight = written.matches('"').count();
+    let open = written.matches('“').count() > written.matches('”').count();
+    (straight % 2 == 1 || open).then_some(quote)
 }
 
 /// How many tokens after "literal" it protects: a spoken mark, or a voice command.
@@ -325,11 +540,29 @@ enum Last {
     Glued,
     /// A mark that wants a space after it.
     Spaced,
+    /// A line break: no space follows, and a mark has nothing to attach to.
+    Break,
 }
 
-/// Turns spoken punctuation in `text` into marks. Never lowercases anything, and
-/// only uppercases the word after a mark that ends a sentence.
+impl Last {
+    fn wants_space(self) -> bool {
+        matches!(self, Last::Word | Last::Spaced)
+    }
+}
+
+/// Turns spoken punctuation and line commands in `text` into marks and breaks.
 pub fn apply(text: &str) -> String {
+    convert(text, true)
+}
+
+/// The same, leaving "new paragraph" and "new line" as words.
+pub fn apply_without_line_commands(text: &str) -> String {
+    convert(text, false)
+}
+
+/// Never lowercases anything, and only uppercases the word after a mark that ends
+/// a sentence or a new paragraph.
+fn convert(text: &str, line_commands: bool) -> String {
     let tokens: Vec<&str> = text.split_whitespace().collect();
     let mut out = String::with_capacity(text.len());
     let mut last = Last::Nothing;
@@ -350,7 +583,7 @@ pub fn apply(text: &str) -> String {
                     } else {
                         token.to_string()
                     };
-                    if last != Last::Nothing && last != Last::Glued {
+                    if last.wants_space() {
                         out.push(' ');
                     }
                     out.push_str(&word);
@@ -362,7 +595,28 @@ pub fn apply(text: &str) -> String {
             }
         }
 
-        if let Some(mark) = mark_at(&tokens, at) {
+        if let Some(mark) = mark_at(&tokens, at, line_commands) {
+            if mark.spacing == Spacing::Break {
+                out.push_str(mark.output);
+                last = Last::Break;
+                // After "denied period new line", a sentence still starts next.
+                capitalize_next = capitalize_next || mark.ends_sentence;
+                at += mark.words.len();
+                // A stray "." the model wrote after the command goes with it.
+                while tokens.get(at).copied().is_some_and(is_only_added) {
+                    at += 1;
+                }
+                continue;
+            }
+            // "new paragraph period": there's no word left for the mark to follow.
+            if last == Last::Break
+                && matches!(mark.spacing, Spacing::AfterWord | Spacing::Joining)
+                && mark.output != "”"
+                && mark.output != ")"
+            {
+                at += mark.words.len();
+                continue;
+            }
             match mark.spacing {
                 Spacing::AfterWord | Spacing::Joining => {
                     // The mark replaces whatever the model put there.
@@ -372,14 +626,17 @@ pub fn apply(text: &str) -> String {
                     }
                 }
                 Spacing::Opening | Spacing::Separate => {
-                    if last != Last::Nothing && last != Last::Glued {
+                    if last.wants_space() {
                         out.push(' ');
                     }
                 }
+                Spacing::Break => unreachable!("handled above"),
             }
             // "close quote." : the model heard a sentence end there, so it stays,
             // inside a closing quote and after a closing paren, as US style has it.
-            let spoken_stop = tokens[at + mark.words.len() - 1]
+            let last_token = tokens[at + mark.words.len() - 1];
+            let spoken_stop = last_token
+                .trim_end_matches(ADDED_QUOTES)
                 .chars()
                 .last()
                 .filter(|c| SENTENCE_STOP.contains(c));
@@ -397,16 +654,24 @@ pub fn apply(text: &str) -> String {
                 }
                 _ => out.push_str(mark.output),
             }
+            if mark.output != "”" {
+                let before = out.len() - mark.output.len();
+                if let Some(quote) = closing_quote(last_token, &out[..before]) {
+                    out.push(quote);
+                }
+            }
             last = match mark.spacing {
                 Spacing::AfterWord | Spacing::Separate => Last::Spaced,
                 Spacing::Opening | Spacing::Joining => Last::Glued,
+                Spacing::Break => unreachable!("handled above"),
             };
-            capitalize_next = ends_sentence;
+            // An opening mark doesn't use up the capital a new paragraph is owed.
+            capitalize_next = ends_sentence || (capitalize_next && last == Last::Glued);
             at += mark.words.len();
             continue;
         }
 
-        if last != Last::Nothing && last != Last::Glued {
+        if last.wants_space() {
             out.push(' ');
         }
         if capitalize_next {
@@ -616,6 +881,279 @@ mod tests {
         assert_eq!(
             apply("He said open quote stop close quote, today"),
             "He said “stop” today"
+        );
+    }
+
+    #[test]
+    fn every_mark_tolerates_how_the_model_writes_it() {
+        for (spoken, written) in [
+            ("comma", ","),
+            ("full stop", "."),
+            ("period", "."),
+            ("question mark", "?"),
+            ("exclamation point", "!"),
+            ("colon", ":"),
+            ("semicolon", ";"),
+            ("semi colon", ";"),
+            ("semi-colon", ";"),
+            ("ellipsis", "…"),
+            ("hyphen", "-"),
+            ("dash", "—"),
+        ] {
+            let upper = spoken.to_uppercase();
+            let mut title = spoken.to_string();
+            title[..1].make_ascii_uppercase();
+            for variant in [
+                spoken.to_string(),
+                upper,
+                title.clone(),
+                format!("{title}."),
+                format!("{title},"),
+                format!("{title}!"),
+                format!("{title}?"),
+                format!("{title}\""),
+                format!("{title}.\""),
+            ] {
+                let said = format!("We agree {variant}");
+                let out = apply(&said);
+                assert!(
+                    out.starts_with(&format!("We agree{written}")),
+                    "{said} became {out}"
+                );
+            }
+        }
+    }
+
+    #[test]
+    fn a_stray_quote_does_not_stop_a_mark_mid_sentence() {
+        assert_eq!(apply("Dear Sir comma\" thank you"), "Dear Sir, thank you");
+        assert_eq!(
+            apply("The motion is denied period\" The parties agree"),
+            "The motion is denied. The parties agree"
+        );
+    }
+
+    #[test]
+    fn a_real_closing_quote_stays_after_a_mark() {
+        assert_eq!(apply("He said \"denied period\""), "He said \"denied.\"");
+        assert_eq!(apply("He said “denied period”"), "He said “denied.”");
+    }
+
+    #[test]
+    fn a_quoted_mark_stays_a_word() {
+        for sentence in [
+            "the word \"comma\" is spelled",
+            "He said \"period\" twice",
+            "the phrase \"new paragraph\" here",
+        ] {
+            assert_eq!(apply(sentence), sentence, "{sentence}");
+        }
+    }
+
+    #[test]
+    fn line_commands_alone_in_every_way_the_model_writes_them() {
+        for said in [
+            "new paragraph",
+            "New paragraph",
+            "New Paragraph",
+            "NEW PARAGRAPH",
+            "New paragraph.",
+            "New paragraph,",
+            "New paragraph!",
+            "New paragraph\"",
+            "New paragraph.\"",
+            "New paragraph”",
+            "new paragraphs",
+            "New paragraphs.",
+            "new para graph",
+            "New para graph.",
+            "new-paragraph",
+            "New-paragraph.",
+            "newparagraph",
+            "Newparagraph.",
+            "New paragraph .",
+        ] {
+            assert_eq!(apply(said), "\n\n", "{said}");
+        }
+        for said in [
+            "new line",
+            "New line",
+            "New Line",
+            "NEW LINE",
+            "New line.",
+            "New line,",
+            "New line\"",
+            "new lines",
+            "New lines.",
+            "new-line",
+            "newline",
+            "Newline.",
+            "newlines",
+        ] {
+            assert_eq!(apply(said), "\n", "{said}");
+        }
+    }
+
+    #[test]
+    fn line_commands_at_the_end_of_a_phrase_or_before_a_capital() {
+        for (said, written) in [
+            ("Thank you new paragraph", "Thank you\n\n"),
+            ("Thank you. New paragraph.", "Thank you.\n\n"),
+            (
+                "Thank you new paragraph The court agreed",
+                "Thank you\n\nThe court agreed",
+            ),
+            (
+                "Thank you. New paragraph. the court agreed",
+                "Thank you.\n\nThe court agreed",
+            ),
+            (
+                "Dear Sir, new paragraph, thank you",
+                "Dear Sir,\n\nThank you",
+            ),
+            (
+                "Thank you New paragraph\" We agree",
+                "Thank you\n\nWe agree",
+            ),
+            (
+                "Thank you new paragraphs The court",
+                "Thank you\n\nThe court",
+            ),
+            (
+                "Thank you new para graph. The court",
+                "Thank you\n\nThe court",
+            ),
+            (
+                "The motion is denied period new paragraph The parties agree",
+                "The motion is denied.\n\nThe parties agree",
+            ),
+            (
+                "The motion is denied period new paragraph. the parties agree",
+                "The motion is denied.\n\nThe parties agree",
+            ),
+            ("New paragraph The court agreed", "\n\nThe court agreed"),
+            ("New paragraph. open quote stop close quote", "\n\n“Stop”"),
+            (
+                "Main Street new line Springfield",
+                "Main Street\nSpringfield",
+            ),
+            (
+                "Main Street. New line. Springfield",
+                "Main Street.\nSpringfield",
+            ),
+            (
+                "Main Street, new line, apartment 4",
+                "Main Street,\napartment 4",
+            ),
+            (
+                "Main Street newline Springfield",
+                "Main Street\nSpringfield",
+            ),
+            (
+                "Main Street New line\" Springfield",
+                "Main Street\nSpringfield",
+            ),
+            ("We agree period new line. the end", "We agree.\nThe end"),
+        ] {
+            assert_eq!(apply(said), written, "{said}");
+        }
+    }
+
+    #[test]
+    fn punctuation_separates_a_command_from_a_word_that_would_guard_it() {
+        assert_eq!(apply("One. New paragraph. Two"), "One.\n\nTwo");
+        assert_eq!(
+            apply("New paragraph two says otherwise"),
+            "New paragraph two says otherwise"
+        );
+        assert_eq!(apply("Re colon, cancer"), "Re: cancer");
+        assert_eq!(apply("She has colon cancer"), "She has colon cancer");
+    }
+
+    #[test]
+    fn only_a_paragraph_capitalizes_what_follows() {
+        assert_eq!(apply("One. New paragraph. two"), "One.\n\nTwo");
+        assert_eq!(apply("One, new line, two"), "One,\ntwo");
+        assert_eq!(
+            apply("Dear Sir, New paragraph, iPhone"),
+            "Dear Sir,\n\nIPhone"
+        );
+    }
+
+    #[test]
+    fn no_stray_mark_after_a_line_command() {
+        assert_eq!(apply("One new paragraph. Period."), "One\n\n");
+        assert_eq!(apply("One new line. Comma."), "One\n");
+    }
+
+    #[test]
+    fn line_commands_in_a_normal_sentence_stay_words() {
+        for sentence in [
+            "the new paragraph in the contract is fine",
+            "The new paragraph in the contract is fine.",
+            "the new paragraph.",
+            "The new line.",
+            "a new paragraph",
+            "a new line",
+            "We added a new paragraph.",
+            "We added new paragraphs.",
+            "Please add new paragraph.",
+            "Insert new line.",
+            "Start on a new line.",
+            "Begin on new line.",
+            "This new paragraph is fine.",
+            "That new line.",
+            "two new paragraphs.",
+            "2 new lines.",
+            "several new paragraphs.",
+            "the new paragraphs are fine",
+            "New paragraph in the contract is fine.",
+            "New line of credit approved",
+            "a new line of credit",
+            "We signed a new line of credit.",
+            "New Line Cinema released it",
+            "New paragraph two says otherwise",
+            "new lines of credit",
+            "a brand new paragraph.",
+            "the new para graph.",
+            "No new line.",
+        ] {
+            assert_eq!(apply(sentence), sentence, "{sentence}");
+        }
+    }
+
+    #[test]
+    fn the_known_tradeoff_a_lowercase_run_keeps_the_command_as_words() {
+        assert_eq!(
+            apply("the motion is denied new paragraph the parties may appeal"),
+            "the motion is denied new paragraph the parties may appeal"
+        );
+    }
+
+    #[test]
+    fn literal_types_a_line_command_in_every_form() {
+        for (said, written) in [
+            ("literal new paragraph", "new paragraph"),
+            ("Literal new paragraph.", "New paragraph."),
+            (
+                "the words literal new paragraph here",
+                "the words new paragraph here",
+            ),
+            ("literal new line", "new line"),
+            ("Literal new line.", "New line."),
+            ("literal new paragraphs", "new paragraphs"),
+            ("literal new para graph", "new para graph"),
+            ("literal newline", "newline"),
+        ] {
+            assert_eq!(apply(said), written, "{said}");
+        }
+    }
+
+    #[test]
+    fn line_commands_can_be_left_as_words() {
+        assert_eq!(
+            apply_without_line_commands("Thank you new paragraph The court comma"),
+            "Thank you new paragraph The court,"
         );
     }
 

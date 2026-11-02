@@ -37,15 +37,31 @@ fn effective_language<'a>(settings: &'a AppSettings, detected: Option<&'a str>) 
     detected.or(Some(settings.selected_language.as_str()))
 }
 
+fn rules_are_on(settings: &AppSettings, language: Option<&str>) -> bool {
+    settings.local_cleanup_enabled
+        && settings.spoken_punctuation_enabled
+        && rules_apply_to(effective_language(settings, language))
+}
+
 /// Cleans up one piece of dictated text. `language` is what was detected, if known.
 pub fn apply(settings: &AppSettings, text: &str, language: Option<&str>) -> String {
-    if !settings.local_cleanup_enabled
-        || !settings.spoken_punctuation_enabled
-        || !rules_apply_to(effective_language(settings, language))
-    {
+    if !rules_are_on(settings, language) {
         return text.to_string();
     }
     punctuation::apply(text)
+}
+
+/// The same for a segment of continuous dictation, whose own setting can turn
+/// voice commands off: then "new paragraph" is typed as said.
+pub fn apply_to_segment(settings: &AppSettings, text: &str, voice_commands: bool) -> String {
+    if !rules_are_on(settings, None) {
+        return text.to_string();
+    }
+    if voice_commands {
+        punctuation::apply(text)
+    } else {
+        punctuation::apply_without_line_commands(text)
+    }
 }
 
 /// What the Cleanup settings say about AI cleanup's provider.
@@ -207,6 +223,45 @@ mod tests {
         assert_eq!(
             through_the_pipeline("the um limitations period expired", &settings),
             "the limitations period expired"
+        );
+    }
+
+    #[test]
+    fn line_commands_compose_with_filler_removal() {
+        assert_eq!(
+            through_the_pipeline("Thank you, um, new paragraph. Uh, the end", &on()),
+            "Thank you,\n\nThe end"
+        );
+    }
+
+    #[test]
+    fn line_commands_follow_the_cleanup_settings() {
+        let said = "Thank you new paragraph The end";
+        for settings in [
+            AppSettings {
+                local_cleanup_enabled: false,
+                ..on()
+            },
+            AppSettings {
+                spoken_punctuation_enabled: false,
+                ..on()
+            },
+        ] {
+            assert_eq!(apply(&settings, said, None), said);
+            assert_eq!(apply_to_segment(&settings, said, true), said);
+        }
+        assert_eq!(apply(&on(), said, Some("es")), said);
+    }
+
+    #[test]
+    fn the_voice_command_setting_only_turns_off_line_commands() {
+        assert_eq!(
+            apply_to_segment(&on(), "Thank you new paragraph The end comma", false),
+            "Thank you new paragraph The end,"
+        );
+        assert_eq!(
+            apply_to_segment(&on(), "Thank you new paragraph The end comma", true),
+            "Thank you\n\nThe end,"
         );
     }
 

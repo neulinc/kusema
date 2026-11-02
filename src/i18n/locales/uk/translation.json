@@ -583,7 +583,7 @@
       },
       "voiceCommands": {
         "label": "Voice Commands",
-        "description": "Say \"new paragraph\", \"new line\", \"scratch that\" or \"stop dictation\" on its own, between pauses, and it acts instead of being typed. The same words inside a sentence are always typed."
+        "description": "Say \"new paragraph\" or \"new line\" as you talk, or \"scratch that\" or \"stop dictation\" on its own between pauses, and it acts instead of being typed. Normal sentences with these words are typed as usual."
       }
     },
     "sound": {

@@ -743,6 +743,30 @@ fn paste_via_external_script(text: &str, script_path: &str) -> Result<(), String
 }
 
 /// Types text directly by simulating individual key presses.
+/// Types `text` with one Return per line break: typed as text, a break counts twice.
+fn type_lines(enigo: &mut Enigo, text: &str) -> Result<(), String> {
+    for (index, line) in text.split('\n').enumerate() {
+        if index > 0 {
+            enigo
+                .key(Key::Return, Direction::Click)
+                .map_err(|e| format!("Failed to press Return: {e}"))?;
+        }
+        if !line.is_empty() {
+            input::paste_text_direct(enigo, line)?;
+        }
+    }
+    Ok(())
+}
+
+/// Windows apps expect CRLF line breaks on the clipboard.
+fn for_clipboard(text: &str) -> String {
+    if cfg!(target_os = "windows") {
+        text.replace('\n', "\r\n")
+    } else {
+        text.to_string()
+    }
+}
+
 fn paste_direct(
     text: &str,
     app_handle: &AppHandle,
@@ -757,9 +781,7 @@ fn paste_direct(
     }
 
     let text = text.to_string();
-    with_enigo(app_handle, move |enigo| {
-        input::paste_text_direct(enigo, &text)
-    })
+    with_enigo(app_handle, move |enigo| type_lines(enigo, &text))
 }
 
 pub(crate) fn send_return_key(enigo: &mut Enigo, key_type: AutoSubmitKey) -> Result<(), String> {
@@ -858,17 +880,7 @@ pub fn type_segment(
                     if !on_target() {
                         return Ok(false);
                     }
-                    // One Return per line break: typed as text, a break counts twice.
-                    for (index, line) in text.split('\n').enumerate() {
-                        if index > 0 {
-                            enigo
-                                .key(Key::Return, Direction::Click)
-                                .map_err(|e| format!("Failed to press Return: {e}"))?;
-                        }
-                        if !line.is_empty() {
-                            input::paste_text_direct(enigo, line)?;
-                        }
-                    }
+                    type_lines(enigo, &text)?;
                     Ok(true)
                 })?;
                 if !sent {
@@ -903,9 +915,7 @@ pub fn type_segment(
                 }
             };
 
-            // Windows apps expect CRLF line breaks on the clipboard.
-            let clip_text = text.replace('\n', "\r\n");
-            crate::dictation::write_clipboard_private(&clip_text)?;
+            crate::dictation::write_clipboard_private(&for_clipboard(text))?;
             std::thread::sleep(Duration::from_millis(settings.paste_delay_ms));
             let sent = with_enigo(app_handle, move |enigo| {
                 if !on_target() {
@@ -967,7 +977,8 @@ pub fn paste(text: String, app_handle: AppHandle) -> Result<(), String> {
     let paste_delay_after_ms = settings.paste_delay_after_ms;
 
     // Append trailing space if setting is enabled
-    let text = if settings.append_trailing_space {
+    // Kusema: not after a line break, where it would indent the next line.
+    let text = if settings.append_trailing_space && !text.ends_with('\n') {
         format!("{} ", text)
     } else {
         text
@@ -992,6 +1003,7 @@ pub fn paste(text: String, app_handle: AppHandle) -> Result<(), String> {
             )?;
         }
         PasteMethod::CtrlV | PasteMethod::CtrlShiftV | PasteMethod::ShiftInsert => {
+            let text = for_clipboard(&text);
             // Debug-gated receipt-sequenced paste (#502): restore the clipboard
             // after the target actually reads the transcript, not on a timer.
             // On success it fully handles the paste (including auto-submit and
@@ -1159,6 +1171,17 @@ e.g. 28:1 28:0 means pressing on the Enter button on a standard US keyboard.
         assert!(should_send_auto_submit(true, PasteMethod::Direct));
         assert!(should_send_auto_submit(true, PasteMethod::CtrlShiftV));
         assert!(should_send_auto_submit(true, PasteMethod::ShiftInsert));
+    }
+
+    #[cfg(target_os = "windows")]
+    #[test]
+    fn line_breaks_on_the_clipboard_are_what_windows_apps_expect() {
+        assert_eq!(
+            for_clipboard("One\n\nTwo\nThree"),
+            "One\r\n\r\nTwo\r\nThree"
+        );
+        assert_eq!(for_clipboard("\n\n"), "\r\n\r\n");
+        assert_eq!(for_clipboard("One"), "One");
     }
 
     #[test]

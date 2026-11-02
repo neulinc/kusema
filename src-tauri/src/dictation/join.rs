@@ -205,6 +205,7 @@ const SENTENCE_OPENERS: &[&str] = &[
 /// A segment needs this many words to read as a finished sentence.
 const MIN_FINISHED_WORDS: usize = 3;
 
+const PARAGRAPH_BREAK: &str = "\n\n";
 const SENTENCE_END: &[char] = &['.', '?', '!', '…', '。', '！', '？'];
 /// May follow the end of a sentence: `He said "stop."`
 const CLOSERS: &[char] = &['"', '\'', ')', ']', '}', '”', '’', '»'];
@@ -256,13 +257,14 @@ impl JoinState {
     /// The text to write for `segment`, and the state after writing it. A
     /// blank segment writes nothing.
     pub fn join(&self, segment: &str) -> (String, JoinState) {
-        let segment = segment.trim();
+        // Line breaks from "new paragraph" and "new line" are part of the text.
+        let segment = segment.trim_matches([' ', '\t']);
         let Some(first) = segment.chars().next() else {
             return (String::new(), *self);
         };
 
         let mut out = String::with_capacity(segment.len() + 2);
-        if self.insert_periods && self.may_end && opens_a_sentence(segment) {
+        if self.insert_periods && self.may_end && first != '\n' && opens_a_sentence(segment) {
             out.push('.');
         }
         if self.needs_space_before(first) {
@@ -276,7 +278,9 @@ impl JoinState {
 
         let next = JoinState {
             at_start: false,
-            capitalize_next: ends_sentence(segment),
+            capitalize_next: segment.ends_with(PARAGRAPH_BREAK)
+                || ends_sentence(segment.trim_end())
+                || (segment.trim().is_empty() && self.capitalize_next),
             last_char: segment.chars().last(),
             may_end: could_be_finished(segment),
             ..*self
@@ -284,11 +288,12 @@ impl JoinState {
         (out, next)
     }
 
-    /// `line_break` as the next thing written; what follows starts a sentence.
+    /// `line_break` as the next thing written. A paragraph starts a sentence; a
+    /// new line only continues one that had already ended.
     pub fn join_break(&self, line_break: &str) -> (String, JoinState) {
         let next = JoinState {
             at_start: false,
-            capitalize_next: true,
+            capitalize_next: line_break == PARAGRAPH_BREAK || self.capitalize_next,
             last_char: None,
             may_end: false,
             ..*self
@@ -303,6 +308,9 @@ impl JoinState {
         let Some(last) = self.last_char else {
             return false; // straight after a line break
         };
+        if first == '\n' || last == '\n' {
+            return false;
+        }
         if NO_SPACE_BEFORE.contains(&first) || NO_SPACE_AFTER.contains(&last) {
             return false;
         }
@@ -358,7 +366,7 @@ fn ends_sentence(segment: &str) -> bool {
 fn capitalize_first_word(segment: &str) -> String {
     let start = segment
         .char_indices()
-        .find(|(_, c)| !OPENERS.contains(c))
+        .find(|(_, c)| !OPENERS.contains(c) && !c.is_whitespace())
         .map_or(segment.len(), |(i, _)| i);
     let (head, rest) = segment.split_at(start);
     let mut chars = rest.chars();
@@ -486,6 +494,47 @@ mod tests {
         assert_eq!(
             format!("{first}{line_break}{next}"),
             "First paragraph\n\nSecond paragraph"
+        );
+    }
+
+    #[test]
+    fn a_new_line_alone_does_not_capitalize() {
+        let (first, state) = JoinState::default().join("Main Street");
+        let (line_break, state) = state.join_break("\n");
+        let (next, _) = state.join("apartment 4");
+        assert_eq!(
+            format!("{first}{line_break}{next}"),
+            "Main Street\napartment 4"
+        );
+    }
+
+    #[test]
+    fn a_new_line_keeps_a_capital_a_sentence_end_was_owed() {
+        let (first, state) = JoinState::default().join("We agree.");
+        let (line_break, state) = state.join_break("\n");
+        let (next, _) = state.join("the end");
+        assert_eq!(format!("{first}{line_break}{next}"), "We agree.\nThe end");
+    }
+
+    #[test]
+    fn line_breaks_inside_a_segment_join_without_spaces() {
+        assert_eq!(written(&["One.\n\nTwo", "three"]), "One.\n\nTwo three");
+        assert_eq!(written(&["One\n\n", "two"]), "One\n\nTwo");
+        assert_eq!(written(&["One\n", "two"]), "One\ntwo");
+        assert_eq!(written(&["One", "\n\nTwo"]), "One\n\nTwo");
+        assert_eq!(written(&["One", "\n\n", "two"]), "One\n\nTwo");
+        assert_eq!(written(&["One.", "\n", "two"]), "One.\nTwo");
+    }
+
+    #[test]
+    fn no_period_goes_in_before_or_after_a_break_in_a_segment() {
+        assert_eq!(
+            written_with_periods(&["The court denied the motion", "\n\nThe parties"]),
+            "The court denied the motion\n\nThe parties"
+        );
+        assert_eq!(
+            written_with_periods(&["The court denied the motion\n\n", "The parties"]),
+            "The court denied the motion\n\nThe parties"
         );
     }
 
