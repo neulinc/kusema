@@ -724,6 +724,8 @@ pub fn hide_recording_overlay(app_handle: &AppHandle) {
                 return;
             }
             let _ = window_clone.hide();
+            #[cfg(target_os = "windows")]
+            crate::overlay_recovery::rebuild_if_needed(window_clone.app_handle());
         });
     }
 }

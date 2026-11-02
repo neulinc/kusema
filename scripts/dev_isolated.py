@@ -2,11 +2,14 @@
 Runs a debug build of Kusema with no access to the real user's data. This is the
 only way to launch a build for testing: see "Testing rule" in the build plan.
 
-  python scripts/dev_isolated.py start [--set NAME=JSON ...] [--env NAME=VALUE ...]
+  python scripts/dev_isolated.py start [--built] [--set NAME=JSON ...] [--env NAME=VALUE ...]
   python scripts/dev_isolated.py stop [--keep]
 
 `start` sets everything up first, then launches `bun run tauri dev`, then checks
-the app is really using the isolated folder. If it can't confirm that, it stops
+the app is really using the isolated folder. With --built it first builds a debug
+build with the frontend inside it, as a release has it (release CSP, pages served
+by the app instead of the dev server), and launches that: still a debug build, so
+every guard below applies. If it can't confirm that, it stops
 the app and exits with an error. `stop` ends the run, removes the test data
 (unless --keep) and reports whether anything real changed.
 
@@ -173,10 +176,26 @@ def start(args):
         name, _, value = item.partition("=")
         env[name] = value
 
+    command = "bun run tauri dev"
+    if args.built:
+        say("Building a debug build with the frontend inside it...")
+        with open(RUN_LOG, "wb") as log:
+            built = subprocess.run(
+                "bun run tauri build --debug --no-bundle",
+                cwd=REPO,
+                env={**os.environ, "CARGO_BUILD_JOBS": os.environ.get("CARGO_BUILD_JOBS", "4")},
+                stdout=log,
+                stderr=subprocess.STDOUT,
+                shell=True,
+            )
+        if built.returncode != 0:
+            raise SystemExit(f"Build failed; nothing was launched. See {RUN_LOG}")
+        command = f'"{DEBUG / "handy.exe"}"'
+
     offset = APP_LOG.stat().st_size if APP_LOG.exists() else 0
-    with open(RUN_LOG, "wb") as log:
+    with open(RUN_LOG, "ab" if args.built else "wb") as log:
         process = subprocess.Popen(
-            "bun run tauri dev",
+            command,
             cwd=REPO,
             env=env,
             stdout=log,
@@ -232,6 +251,7 @@ def main():
     commands = parser.add_subparsers(dest="command", required=True)
     start_parser = commands.add_parser("start")
     start_parser.add_argument("--first-run", action="store_true", help="open on first-run setup")
+    start_parser.add_argument("--built", action="store_true", help="run the frontend as a release has it")
     start_parser.add_argument("--set", action="append", default=[], metavar="NAME=JSON")
     start_parser.add_argument("--env", action="append", default=[], metavar="NAME=VALUE")
     stop_parser = commands.add_parser("stop")

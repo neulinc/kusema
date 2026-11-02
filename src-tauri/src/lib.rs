@@ -23,6 +23,8 @@ mod managers;
 mod memory;
 mod network;
 mod overlay;
+#[cfg(target_os = "windows")]
+mod overlay_recovery;
 mod paste_tx;
 pub mod portable;
 mod screen;
@@ -398,6 +400,8 @@ fn initialize_core_logic(app_handle: &AppHandle) {
 
     // Create the recording overlay window (hidden by default)
     utils::create_recording_overlay(app_handle);
+    #[cfg(target_os = "windows")]
+    overlay_recovery::watch(app_handle);
 }
 
 #[tauri::command]
