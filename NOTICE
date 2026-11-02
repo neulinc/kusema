@@ -1,0 +1,16 @@
+Kusema
+Copyright (c) Neulinc LLC. Kusema's name, logo and artwork are not covered by the
+open-source license. See LICENSE.
+
+Kusema is built on Handy by CJ Pais, used under the MIT License.
+https://github.com/cjpais/Handy
+
+Licensed by NVIDIA Corporation under the NVIDIA Open Model License
+
+The notice above applies to the NVIDIA models Kusema can download. The agreement
+is in src/content/licenses/nvidia-open-model-license.txt and at
+https://www.nvidia.com/en-us/agreements/enterprise-software/nvidia-open-model-license/
+
+Every other open-source component and model, with its license, is listed in
+Kusema under About > Credits and licenses, and in
+src/content/third-party-notices.txt.

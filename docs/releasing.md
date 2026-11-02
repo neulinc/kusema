@@ -73,7 +73,8 @@ endpoint in `tauri.conf.json`.
    short, user-facing lines. Users see them once in the app after updating
    ("What's new"), and the workflow uses the same file as the GitHub Release
    text. The workflow fails if the file is missing.
-3. **Check:** `bun run lint`, `bun run format:check`, `bun run
+3. **Check:** `bun run credits --check` (if it fails, run `bun run credits` and
+   commit the result), `bun run lint`, `bun run format:check`, `bun run
 check:translations`, and `cargo test` in `src-tauri`.
 4. **Commit and tag**, then push both:
 

@@ -3,6 +3,3 @@ contact_links:
   - name: ⬇️ Download Kusema
     url: https://github.com/neulinc/kusema/releases/latest
     about: Get the latest installer. Many bugs are already fixed in the newest version.
-  - name: 🎙️ Dictation problem that also happens in Handy
-    url: https://github.com/cjpais/Handy/issues
-    about: Kusema is built on Handy. Problems with dictation itself, speech models or microphones that Handy has too are best reported there.

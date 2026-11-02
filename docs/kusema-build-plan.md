@@ -438,7 +438,7 @@ Nothing is sold until all of these are done.
 - **Windows code signing (Azure Artifact Signing):** removes the SmartScreen warning from the installer and updates.
 - **Product page:** what Kusema does, its privacy claims and how to get it, written for small law firms.
 - **IT documentation:** what Kusema sends (ledger), what it never sends (audio), and Windows/WebView2 network traffic outside Kusema's control.
-- **License review:** have a lawyer review model and dependency licenses (especially NVIDIA Open Model License terms) before selling.
+- **License review (see `src/content/third-party-notices.txt`):** have a lawyer review model and dependency licenses (especially NVIDIA Open Model License terms) before selling.
 - **Detach from the Handy fork network:** detach neulinc/kusema via GitHub Support (so it appears in GitHub search); keep the upstream remote, MIT license and Handy credit.
 - **Launch:** to small and solo US law firms, with accessibility users as the community channel.
 
@@ -534,7 +534,7 @@ Turn meetings into notes, only with a clear consent step: recording a conversati
 - **Separate provider settings for Assistant vs. post-processing**, if you want, e.g., Groq for fast cleanup and Claude for questions.
 - **Offline/air-gapped installer (Pro):** bundle the speech model, ONNX Runtime and Kokoro voices in the installer for offices that block downloads.
 - **Interrupt by voice:** say "Hey Kusema" while it's talking to cut it off. Needs echo cancellation, so do this after the wake word.
-- **Remaining Handy links:** replace handy.computer links (Linux setup guide, macOS Secure Input help, About-page donate link) with Kusema pages or remove them.
+- **Remaining Handy links:** ✅ Done (2026-11-01), in Step 10b.
 - **More Kokoro languages:** Kokoro also has Spanish, French, Hindi, Italian, Japanese, Portuguese and Chinese voices; each needs its own phonemizer (misaki has some), without espeak-ng.
 - **Line endings:** ✅ Done (2026-10-27). `.gitattributes` sets `* text=auto eol=lf`, so checkouts are LF even with `core.autocrlf=true`, and `bun run format:check` passes on Windows.
 

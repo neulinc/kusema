@@ -10,6 +10,11 @@ import { AppLanguageSelector } from "../AppLanguageSelector";
 import { ShowWhatsNewOnUpdate } from "../ShowWhatsNewOnUpdate";
 import { ThemeSelector } from "../ThemeSelector";
 import { LogDirectory } from "../debug";
+import { CreditsSettings } from "./CreditsSettings";
+
+const SOURCE_URL = "https://github.com/neulinc/kusema";
+const ORGANIZATIONS_URL = "https://neulinc.com/kusema";
+const REPORT_URL = "https://github.com/neulinc/kusema/issues/new/choose";
 
 export const AboutSettings: React.FC = () => {
   const { t } = useTranslation();
@@ -29,13 +34,7 @@ export const AboutSettings: React.FC = () => {
     fetchVersion();
   }, []);
 
-  const handleDonateClick = async () => {
-    try {
-      await openUrl("https://handy.computer/donate");
-    } catch (error) {
-      console.error("Failed to open donate link:", error);
-    }
-  };
+  const open = (url: string) => openUrl(url).catch(console.error);
 
   return (
     <div className="max-w-3xl w-full mx-auto space-y-6">
@@ -54,12 +53,30 @@ export const AboutSettings: React.FC = () => {
         <ShowWhatsNewOnUpdate descriptionMode="tooltip" grouped={true} />
 
         <SettingContainer
-          title={t("settings.about.supportDevelopment.title")}
-          description={t("settings.about.supportDevelopment.description")}
+          title={t("settings.about.organizations.title")}
+          description={t("settings.about.organizations.description")}
           grouped={true}
         >
-          <Button variant="primary" size="md" onClick={handleDonateClick}>
-            {t("settings.about.supportDevelopment.button")}
+          <Button
+            variant="secondary"
+            size="md"
+            onClick={() => open(ORGANIZATIONS_URL)}
+          >
+            {t("settings.about.organizations.button")}
+          </Button>
+        </SettingContainer>
+
+        <SettingContainer
+          title={t("settings.about.report.title")}
+          description={t("settings.about.report.description")}
+          grouped={true}
+        >
+          <Button
+            variant="secondary"
+            size="md"
+            onClick={() => open(REPORT_URL)}
+          >
+            {t("settings.about.report.button")}
           </Button>
         </SettingContainer>
 
@@ -71,7 +88,7 @@ export const AboutSettings: React.FC = () => {
           <Button
             variant="secondary"
             size="md"
-            onClick={() => openUrl("https://github.com/cjpais/Handy")}
+            onClick={() => open(SOURCE_URL)}
           >
             {t("settings.about.sourceCode.button")}
           </Button>
@@ -81,18 +98,7 @@ export const AboutSettings: React.FC = () => {
         <LogDirectory grouped={true} />
       </SettingsGroup>
 
-      <SettingsGroup title={t("settings.about.acknowledgments.title")}>
-        <SettingContainer
-          title={t("settings.about.acknowledgments.ggml.title")}
-          description={t("settings.about.acknowledgments.ggml.description")}
-          grouped={true}
-          layout="stacked"
-        >
-          <div className="text-sm text-ink-3">
-            {t("settings.about.acknowledgments.ggml.details")}
-          </div>
-        </SettingContainer>
-      </SettingsGroup>
+      <CreditsSettings />
     </div>
   );
 };

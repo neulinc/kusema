@@ -65,6 +65,16 @@ Kusema is **early software** (version 0.x), currently developed and tested on **
 
 **Coming next:** safe voice commands for Windows settings (dark mode, volume, wallpaper and more) and an optional "Hey Kusema" wake word.
 
+## Troubleshooting
+
+### Shortcuts stopped working on macOS
+
+macOS's Secure Input blocks keyboard shortcuts while it's on. Password fields turn it on for a moment; if it stays on, look for an app holding it. In Terminal, turn off **Terminal > Secure Keyboard Entry**. If that doesn't help, sign out and back in.
+
+### Linux
+
+Kusema is developed and tested on Windows, and shortcuts and typing on Linux depend on your desktop. On Wayland, typing into other apps needs a tool such as `wtype`, `dotool` or `ydotool`; on X11, `xdotool`.
+
 ## Building from source
 
 See [BUILD.md](BUILD.md) for prerequisites (Rust, Bun, Visual Studio C++ Build Tools, CMake, Vulkan SDK), then:
@@ -90,4 +100,4 @@ MIT, see [LICENSE](LICENSE). Kusema's name, logo and artwork are © Neulinc LLC 
 
 ---
 
-<p align="center">Made by <a href="https://github.com/neulinc">Neulinc</a>: Smarter Systems for Small Giants.</p>
+<p align="center"><a href="https://neulinc.com/kusema">Kusema</a> is made by <a href="https://github.com/neulinc">Neulinc</a>: Smarter Systems for Small Giants.</p>

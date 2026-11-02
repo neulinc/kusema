@@ -4,7 +4,7 @@ import { openUrl } from "@tauri-apps/plugin-opener";
 import { ExternalLink } from "lucide-react";
 import { TextLink } from "../ui/TextLink";
 
-const LINUX_SETUP_URL = "https://handy.computer/docs/linux";
+const LINUX_SETUP_URL = "https://github.com/neulinc/kusema#linux";
 
 /** Linux footer hint linking the setup guide; shortcuts and pasting vary by desktop. */
 export const LinuxGuide: React.FC<{

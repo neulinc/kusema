@@ -10,8 +10,6 @@ assignees: ""
 
 **Please search [existing issues](https://github.com/neulinc/kusema/issues) (open and closed) to avoid duplicates.** Your bug may already be reported.
 
-Kusema is built on [Handy](https://github.com/cjpais/Handy). If the same problem happens in Handy too (for example with dictation itself, speech models or your microphone), it's best reported in [Handy's issues](https://github.com/cjpais/Handy/issues) as well.
-
 **Never paste an API key.** And check screenshots and logs for anything private before attaching them.
 
 ## Bug Description

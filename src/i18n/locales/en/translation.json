@@ -1115,21 +1115,38 @@
       },
       "sourceCode": {
         "title": "Source Code",
-        "description": "View the source code of Handy, the project Kusema is based on",
+        "description": "View Kusema's source code",
         "button": "View on GitHub"
       },
-      "supportDevelopment": {
-        "title": "Support Development",
-        "description": "Support Handy, the open-source project Kusema is built on",
-        "button": "Donate"
-      },
       "acknowledgments": {
-        "title": "Acknowledgments",
         "ggml": {
           "title": "ggml",
           "description": "High-performance tensor library for on-device machine learning inference",
           "details": "Kusema's local speech-to-text is built on transcribe.cpp and ggml. Thanks to the amazing work by Georgi Gerganov and contributors."
         }
+      },
+      "organizations": {
+        "title": "Kusema for organizations",
+        "description": "Setup, support and options for firms",
+        "button": "Learn more"
+      },
+      "report": {
+        "title": "Report a problem or suggest a feature",
+        "description": "Tell us on GitHub what went wrong or what you'd like",
+        "button": "Open GitHub"
+      },
+      "credits": {
+        "title": "Credits and licenses",
+        "handy": {
+          "title": "Built on Handy",
+          "description": "Kusema is built on Handy by CJ Pais, used under the MIT License.",
+          "button": "View Handy"
+        },
+        "nvidiaLicense": "NVIDIA Open Model License",
+        "models": "Speech and voice models ({{count}})",
+        "components": "Open-source components ({{count}})",
+        "notices": "Full license texts",
+        "loading": "Loading..."
       }
     },
     "privacy": {
