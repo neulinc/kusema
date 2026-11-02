@@ -816,10 +816,11 @@
         }
       },
       "conversation": {
-        "title": "Conversation",
         "empty": "Ask a question with the Ask Kusema shortcut. The conversation will appear here.",
         "new": "New conversation",
-        "screenshot": "Screenshot"
+        "screenshot": "Screenshot",
+        "noProvider": "Ask Kusema needs an AI model to answer. Choose one in Settings.",
+        "openSettings": "Open Settings"
       },
       "voice": {
         "title": "Voice",
@@ -851,6 +852,11 @@
           "description": "Hear the selected voice at the selected speed.",
           "button": "Preview"
         }
+      },
+      "tabs": {
+        "label": "Assistant",
+        "conversation": "Conversation",
+        "settings": "Settings"
       }
     },
     "postProcessing": {
@@ -1115,21 +1121,38 @@
       },
       "sourceCode": {
         "title": "Broncode",
-        "description": "Bekijk de broncode en draag bij",
+        "description": "View Kusema's source code",
         "button": "Bekijk op GitHub"
       },
-      "supportDevelopment": {
-        "title": "Ontwikkeling ondersteunen",
-        "description": "Help ons om te blijven bouwen aan Handy",
-        "button": "Doneren"
-      },
       "acknowledgments": {
-        "title": "Dankbetuigingen",
         "ggml": {
           "title": "ggml",
           "description": "Krachtige tensorbibliotheek voor lokale AI-verwerking",
           "details": "Handy's lokale spraak-naar-tekst is gebouwd op transcribe.cpp en ggml. Met dank aan het geweldige werk van Georgi Gerganov en alle bijdragers."
         }
+      },
+      "organizations": {
+        "title": "Kusema for organizations",
+        "description": "Setup, support and options for firms",
+        "button": "Learn more"
+      },
+      "report": {
+        "title": "Report a problem or suggest a feature",
+        "description": "Tell us on GitHub what went wrong or what you'd like",
+        "button": "Open GitHub"
+      },
+      "credits": {
+        "title": "Credits and licenses",
+        "handy": {
+          "title": "Built on Handy",
+          "description": "Kusema is built on Handy by CJ Pais, used under the MIT License.",
+          "button": "View Handy"
+        },
+        "nvidiaLicense": "NVIDIA Open Model License",
+        "models": "Speech and voice models ({{count}})",
+        "components": "Open-source components ({{count}})",
+        "notices": "Full license texts",
+        "loading": "Loading..."
       }
     },
     "privacy": {
@@ -1249,6 +1272,41 @@
       "notDone": "Not done yet",
       "progress": "{{done}} of {{count}} done",
       "allDone": "All three done. Nice work."
+    },
+    "glow": {
+      "title": "Recording indicator",
+      "description": "A glow around the edges of your screen shows that Kusema is listening. Only you see it: it stays out of screenshots and screen shares.",
+      "enabled": {
+        "label": "Screen glow",
+        "description": "Show a colored glow around the screen you're working on while Kusema is listening. You can still click and type through it."
+      },
+      "thickness": {
+        "label": "Thickness",
+        "description": "How far the glow reaches in from the edge of the screen."
+      },
+      "intensity": {
+        "label": "Intensity",
+        "description": "How strong the glow is."
+      },
+      "palette": {
+        "label": "Colors",
+        "description": "The color-blind friendly set keeps the modes easy to tell apart with every common kind of color blindness.",
+        "standard": "Standard",
+        "color_blind": "Color-blind friendly"
+      },
+      "modes": {
+        "dictation": "Dictation",
+        "continuous": "Continuous dictation",
+        "ask": "Ask Kusema",
+        "ask_screen": "Ask about my screen",
+        "paused": "Continuous dictation paused (window changed)"
+      },
+      "preview": "Preview",
+      "previewLabel": "Preview the glow for {{mode}}",
+      "sounds": {
+        "label": "Continuous dictation sounds",
+        "description": "Play a short sound when continuous dictation starts and stops. Sounds for other dictation are under Sound below."
+      }
     }
   },
   "footer": {
