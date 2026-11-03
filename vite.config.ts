@@ -24,6 +24,7 @@ export default defineConfig(async () => ({
         main: resolve(__dirname, "index.html"),
         overlay: resolve(__dirname, "src/overlay/index.html"),
         "screen-card": resolve(__dirname, "src/screen-card/index.html"),
+        "ask-box": resolve(__dirname, "src/ask-box/index.html"),
       },
     },
   },

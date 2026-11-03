@@ -450,6 +450,10 @@
           "voice_edit": {
             "name": "Edit by Voice",
             "description": "Select text, then hold and say how to change it (“make this more formal”), or say a command like “select last word”."
+          },
+          "ask_box": {
+            "name": "Type to Kusema",
+            "description": "Opens a small box near your window to type a question. Esc closes it."
           }
         },
         "errors": {
@@ -828,7 +832,9 @@
         "new": "New conversation",
         "screenshot": "Screenshot",
         "noProvider": "Ask Kusema needs an AI model to answer. Choose one in Settings.",
-        "openSettings": "Open Settings"
+        "openSettings": "Open Settings",
+        "typePlaceholder": "Type a question… (Enter to ask)",
+        "insert": "Insert into document"
       },
       "voice": {
         "title": "Voice",
@@ -865,6 +871,26 @@
         "label": "Assistant",
         "conversation": "Conversation",
         "settings": "Settings"
+      },
+      "answers": {
+        "title": "Typed Questions and Answers",
+        "description": "Type a question instead of speaking it, choose where answers go, and get step-by-step help.",
+        "answerTo": {
+          "label": "Answer Goes To",
+          "description": "Speak the answer, type it into the document you were working in, or both. End a question with “…and type it” or “…put it in the document” to type just that answer.",
+          "speak": "Speak",
+          "type": "Type into document",
+          "both": "Both"
+        },
+        "speakTyped": {
+          "label": "Speak Answers to Typed Questions",
+          "description": "Read answers aloud for questions you type, too. Off, they only appear on screen."
+        },
+        "tutor": {
+          "label": "Tutor Style",
+          "description": "Explain step by step, check understanding, and guide you to answers instead of handing over homework answers, unless you ask for the answer. You can also say “explain step by step” in any question.",
+          "note": "Follow your school's or exam's rules on AI use."
+        }
       }
     },
     "postProcessing": {
@@ -1302,7 +1328,7 @@
       "description": "A glow around the edges of your screen shows that Kusema is listening. Only you see it: it stays out of screenshots and screen shares.",
       "enabled": {
         "label": "Screen glow",
-        "description": "Show a colored glow around the screen you're working on while Kusema is listening. You can still click and type through it."
+        "description": "Show a colored glow around the screen you're working on during continuous dictation and questions. You can still click and type through it."
       },
       "thickness": {
         "label": "Thickness",
@@ -1330,6 +1356,10 @@
       "sounds": {
         "label": "Continuous dictation sounds",
         "description": "Play a short sound when continuous dictation starts and stops. Sounds for other dictation are under Sound below."
+      },
+      "dictation": {
+        "label": "Glow for Normal Dictation",
+        "description": "Also show the glow while you hold the dictation shortcut. Continuous dictation and questions glow whenever the screen glow is on."
       }
     },
     "voiceEdit": {
@@ -1393,6 +1423,40 @@
         "exported": "Exported {{number}} words.",
         "import": "Import…"
       }
+    },
+    "appStyles": {
+      "title": "Styles per App",
+      "description": "AI cleanup, AI voice edits and answers typed into a document follow the style of the program they go into. Only the program's name is used, on this computer. Local cleanup isn't affected.",
+      "enabled": {
+        "label": "Use Styles per App",
+        "description": "Off, every program gets the same neutral text."
+      },
+      "builtIn": {
+        "email": {
+          "name": "Email",
+          "instruction": "Format it as an email: a short greeting line, brief paragraphs, and a sign-off when it's a whole message. Keep the author's voice."
+        },
+        "formal": {
+          "name": "Formal",
+          "instruction": "Use a formal, professional tone: complete sentences, no slang, no contractions."
+        },
+        "casual": {
+          "name": "Concise and casual",
+          "instruction": "Keep it concise and casual: short sentences and plain, friendly words, with no formal greeting or sign-off."
+        }
+      },
+      "newName": "New style",
+      "name": "Style name",
+      "instruction": "How to write",
+      "instructionPlaceholder": "Describe the style in plain words, like “Short and friendly, no sign-off.”",
+      "apps": "Programs:",
+      "addApp": "Add a program",
+      "addAppPlaceholder": "e.g. notepad.exe",
+      "removeApp": "Remove {{app}}",
+      "remove": "Remove the {{name}} style",
+      "add": "Add style",
+      "reset": "Restore defaults",
+      "neutral": "Programs that aren't listed get neutral text."
     }
   },
   "footer": {
@@ -1475,7 +1539,15 @@
       "pasteFailed": "Couldn't type that; it's in History"
     },
     "privileged": "Privileged",
-    "editing": "Editing"
+    "editing": "Editing",
+    "withStyle": "{{name}} style…",
+    "answer": {
+      "waiting": "Click back into your document to type the answer.",
+      "noTarget": "Kusema doesn't know which document this answer is for. Click in the document and ask again.",
+      "windowChanged": "The window changed, so the answer wasn't typed. Insert it from the Assistant page.",
+      "notTyping": "The paste method is set to None, so the answer wasn't typed.",
+      "failed": "Couldn't type the answer into this window."
+    }
   },
   "screenCard": {
     "title": "Send this screenshot?",
@@ -1586,5 +1658,20 @@
       "corrected": "Corrected.",
       "learned": "Corrected. Kusema learned: {{name}}"
     }
+  },
+  "askBox": {
+    "title": "Ask Kusema",
+    "placeholder": "Type a question…",
+    "ask": "Ask",
+    "screen": "Ask about my screen",
+    "screenUnavailable": "Click a window first, then open this box, to ask about it.",
+    "typesInto": "Answers can be typed into {{app}}",
+    "style": "{{name}} style",
+    "thinking": "Thinking…",
+    "insert": "Insert into document",
+    "stop": "Stop",
+    "close": "Close",
+    "hint": "Enter asks · Shift+Enter: new line · Esc closes",
+    "noWindow": "Click the window you want to ask about, then open this box again."
   }
 }

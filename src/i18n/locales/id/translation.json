@@ -450,6 +450,10 @@
           "voice_edit": {
             "name": "Edit dengan suara",
             "description": "Pilih teks, lalu tahan pintasan dan ucapkan cara mengubahnya (“buat ini lebih formal”), atau ucapkan perintah seperti “select last word”."
+          },
+          "ask_box": {
+            "name": "Ketik ke Kusema",
+            "description": "Membuka kotak kecil di dekat jendela Anda untuk mengetik pertanyaan. Esc menutupnya."
           }
         },
         "errors": {
@@ -828,7 +832,9 @@
         "new": "Percakapan baru",
         "screenshot": "Tangkapan layar",
         "noProvider": "Tanya Kusema memerlukan model AI untuk menjawab. Pilih satu di Pengaturan.",
-        "openSettings": "Buka Pengaturan"
+        "openSettings": "Buka Pengaturan",
+        "typePlaceholder": "Ketik pertanyaan… (Enter untuk bertanya)",
+        "insert": "Sisipkan ke dokumen"
       },
       "voice": {
         "title": "Suara",
@@ -865,6 +871,26 @@
         "label": "Asisten",
         "conversation": "Percakapan",
         "settings": "Pengaturan"
+      },
+      "answers": {
+        "title": "Pertanyaan ketik dan jawaban",
+        "description": "Ketik pertanyaan alih-alih mengucapkannya, pilih ke mana jawaban dikirim, dan dapatkan bantuan langkah demi langkah.",
+        "answerTo": {
+          "label": "Jawaban dikirim ke",
+          "description": "Bacakan jawaban, ketik ke dokumen tempat Anda bekerja, atau keduanya. Akhiri pertanyaan dengan “…and type it” atau “…put it in the document” untuk mengetik jawaban itu saja.",
+          "speak": "Bacakan",
+          "type": "Ketik ke dokumen",
+          "both": "Keduanya"
+        },
+        "speakTyped": {
+          "label": "Bacakan jawaban untuk pertanyaan ketik",
+          "description": "Bacakan juga jawaban untuk pertanyaan yang Anda ketik. Jika mati, jawaban hanya muncul di layar."
+        },
+        "tutor": {
+          "label": "Gaya tutor",
+          "description": "Menjelaskan langkah demi langkah, memeriksa pemahaman, dan menuntun ke jawaban alih-alih memberikan jawaban PR begitu saja, kecuali Anda meminta jawabannya. Anda juga bisa mengucapkan “explain step by step” dalam pertanyaan apa pun.",
+          "note": "Ikuti aturan sekolah atau ujian Anda tentang penggunaan AI."
+        }
       }
     },
     "postProcessing": {
@@ -1302,7 +1328,7 @@
       "description": "Cahaya di tepi layar menunjukkan bahwa Kusema sedang mendengarkan. Hanya Anda yang melihatnya: cahaya ini tidak muncul di tangkapan layar atau saat berbagi layar.",
       "enabled": {
         "label": "Cahaya layar",
-        "description": "Tampilkan cahaya berwarna di sekeliling layar yang sedang Anda kerjakan selama Kusema mendengarkan. Anda tetap bisa mengklik dan mengetik melewatinya."
+        "description": "Tampilkan cahaya berwarna di sekitar layar tempat Anda bekerja selama dikte berkelanjutan dan pertanyaan. Anda tetap bisa mengklik dan mengetik menembusnya."
       },
       "thickness": {
         "label": "Ketebalan",
@@ -1330,6 +1356,10 @@
       "sounds": {
         "label": "Suara dikte berkelanjutan",
         "description": "Putar suara singkat saat dikte berkelanjutan dimulai dan berhenti. Suara untuk dikte lainnya ada di bagian Suara di bawah."
+      },
+      "dictation": {
+        "label": "Cahaya untuk dikte biasa",
+        "description": "Tampilkan cahaya juga saat Anda menahan pintasan dikte. Dikte berkelanjutan dan pertanyaan selalu bercahaya saat cahaya layar aktif."
       }
     },
     "voiceEdit": {
@@ -1393,6 +1423,40 @@
         "imported": "{{added}} kata baru diimpor ({{existing}} sudah ada).",
         "exported": "{{number}} kata diekspor."
       }
+    },
+    "appStyles": {
+      "title": "Gaya per aplikasi",
+      "description": "Pembersihan AI, pengeditan suara AI, dan jawaban yang diketik ke dokumen mengikuti gaya program tujuannya. Hanya nama program yang digunakan, di komputer ini. Pembersihan lokal tidak terpengaruh.",
+      "enabled": {
+        "label": "Gunakan gaya per aplikasi",
+        "description": "Jika mati, setiap program mendapat teks netral yang sama."
+      },
+      "builtIn": {
+        "email": {
+          "name": "Email",
+          "instruction": "Format sebagai email: baris sapaan singkat, paragraf ringkas, dan penutup jika berupa pesan utuh. Pertahankan gaya penulis."
+        },
+        "formal": {
+          "name": "Formal",
+          "instruction": "Gunakan nada formal dan profesional: kalimat lengkap, tanpa bahasa gaul atau singkatan."
+        },
+        "casual": {
+          "name": "Ringkas dan santai",
+          "instruction": "Buat ringkas dan santai: kalimat pendek dan kata-kata sederhana yang ramah, tanpa sapaan atau penutup formal."
+        }
+      },
+      "newName": "Gaya baru",
+      "name": "Nama gaya",
+      "instruction": "Cara menulis",
+      "instructionPlaceholder": "Jelaskan gaya dengan kata-kata sederhana, misalnya “Singkat dan ramah, tanpa penutup.”",
+      "apps": "Program:",
+      "addApp": "Tambah program",
+      "addAppPlaceholder": "mis. notepad.exe",
+      "removeApp": "Hapus {{app}}",
+      "remove": "Hapus gaya “{{name}}”",
+      "add": "Tambah gaya",
+      "reset": "Pulihkan bawaan",
+      "neutral": "Program yang tidak ada di daftar mendapat teks netral."
     }
   },
   "footer": {
@@ -1475,7 +1539,15 @@
       "pasteFailed": "Tidak dapat mengetik itu; tersimpan di Riwayat"
     },
     "privileged": "Privileged",
-    "editing": "Mengedit"
+    "editing": "Mengedit",
+    "withStyle": "Gaya “{{name}}”…",
+    "answer": {
+      "waiting": "Klik kembali ke dokumen Anda agar jawaban diketik.",
+      "noTarget": "Kusema tidak tahu jawaban ini untuk dokumen yang mana. Klik di dokumen dan tanyakan lagi.",
+      "windowChanged": "Jendela berganti, jadi jawaban tidak diketik. Sisipkan dari halaman Asisten.",
+      "notTyping": "Metode tempel disetel ke “Tidak Ada”, jadi jawaban tidak diketik.",
+      "failed": "Tidak dapat mengetik jawaban ke jendela ini."
+    }
   },
   "screenCard": {
     "title": "Kirim tangkapan layar ini?",
@@ -1586,5 +1658,20 @@
       "corrected": "Dikoreksi.",
       "learned": "Dikoreksi. Kusema mempelajari: {{name}}"
     }
+  },
+  "askBox": {
+    "title": "Tanya Kusema",
+    "placeholder": "Ketik pertanyaan…",
+    "ask": "Tanya",
+    "screen": "Tanya Tentang Layar Saya",
+    "screenUnavailable": "Klik sebuah jendela dulu, lalu buka kotak ini untuk bertanya tentangnya.",
+    "typesInto": "Jawaban dapat diketik ke {{app}}",
+    "style": "Gaya “{{name}}”",
+    "thinking": "Berpikir…",
+    "insert": "Sisipkan ke dokumen",
+    "stop": "Hentikan",
+    "close": "Tutup",
+    "hint": "Enter bertanya · Shift+Enter: baris baru · Esc menutup",
+    "noWindow": "Klik jendela yang ingin Anda tanyakan, lalu buka kotak ini lagi."
   }
 }

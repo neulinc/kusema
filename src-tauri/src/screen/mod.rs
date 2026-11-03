@@ -77,6 +77,24 @@ pub fn activate(window: &CapturedWindow) {
     restore_focus(window);
 }
 
+/// Kusema type-to-ask: the work area and scale of the monitor showing most of
+/// `rect`.
+pub fn work_area_near(rect: ScreenRect) -> Option<(ScreenRect, f64)> {
+    capture::monitor_work_area(rect)
+}
+
+/// Kusema type-to-ask: capture `window`, which must be back in front (the Ask
+/// box has stepped aside for it), and flash a border around it.
+pub fn capture_window(window: CapturedWindow) -> Result<Capture, CaptureError> {
+    let now = capture::foreground_window()?;
+    if now.handle != window.handle {
+        return Err(CaptureError::NoWindow);
+    }
+    let capture = capture::capture(now)?;
+    flash::flash(capture.window.rect);
+    Ok(capture)
+}
+
 /// A screenshot of one window, as captured.
 pub struct Capture {
     pub image: RgbImage,

@@ -450,6 +450,10 @@
           "voice_edit": {
             "name": "Mit der Stimme bearbeiten",
             "description": "Text markieren, dann gedrückt halten und sagen, wie er sich ändern soll („mach das förmlicher“), oder einen Befehl wie „select last word“ sagen."
+          },
+          "ask_box": {
+            "name": "Kusema schreiben",
+            "description": "Öffnet ein kleines Feld neben Ihrem Fenster, um eine Frage einzutippen. Esc schließt es."
           }
         },
         "errors": {
@@ -828,7 +832,9 @@
         "new": "Neues Gespräch",
         "screenshot": "Screenshot",
         "noProvider": "\"Kusema fragen\" braucht ein KI-Modell, um zu antworten. Wähle eines unter Einstellungen.",
-        "openSettings": "Einstellungen öffnen"
+        "openSettings": "Einstellungen öffnen",
+        "typePlaceholder": "Frage eingeben … (Eingabe zum Fragen)",
+        "insert": "In Dokument einfügen"
       },
       "voice": {
         "title": "Stimme",
@@ -865,6 +871,26 @@
         "label": "Assistent",
         "conversation": "Gespräch",
         "settings": "Einstellungen"
+      },
+      "answers": {
+        "title": "Getippte Fragen und Antworten",
+        "description": "Tippen Sie eine Frage, statt sie zu sprechen, wählen Sie, wohin Antworten gehen, und lassen Sie sich Schritt für Schritt helfen.",
+        "answerTo": {
+          "label": "Antwort geht an",
+          "description": "Die Antwort vorlesen, in das Dokument tippen, in dem Sie gearbeitet haben, oder beides. Beenden Sie eine Frage mit „…and type it“ oder „…put it in the document“, um nur diese Antwort zu tippen.",
+          "speak": "Vorlesen",
+          "type": "In Dokument tippen",
+          "both": "Beides"
+        },
+        "speakTyped": {
+          "label": "Antworten auf getippte Fragen vorlesen",
+          "description": "Antworten auch auf getippte Fragen vorlesen. Aus: Sie erscheinen nur auf dem Bildschirm."
+        },
+        "tutor": {
+          "label": "Tutor-Stil",
+          "description": "Schritt für Schritt erklären, das Verständnis prüfen und zur Antwort hinführen, statt Hausaufgaben einfach zu lösen, außer Sie bitten um die Antwort. Sie können in jeder Frage auch „explain step by step“ sagen.",
+          "note": "Halten Sie sich an die Regeln Ihrer Schule oder Prüfung zur Nutzung von KI."
+        }
       }
     },
     "postProcessing": {
@@ -1302,7 +1328,7 @@
       "description": "Ein Leuchten an den Bildschirmrändern zeigt, dass Kusema zuhört. Nur du siehst es: Auf Screenshots und bei der Bildschirmfreigabe erscheint es nicht.",
       "enabled": {
         "label": "Bildschirmleuchten",
-        "description": "Ein farbiges Leuchten um den Bildschirm zeigen, an dem du arbeitest, solange Kusema zuhört. Du kannst weiterhin hindurchklicken und tippen."
+        "description": "Beim fortlaufenden Diktieren und bei Fragen ein farbiges Leuchten um den Bildschirm zeigen, an dem Sie arbeiten. Sie können weiterhin hindurch klicken und tippen."
       },
       "thickness": {
         "label": "Breite",
@@ -1330,6 +1356,10 @@
       "sounds": {
         "label": "Töne beim fortlaufenden Diktieren",
         "description": "Einen kurzen Ton abspielen, wenn das fortlaufende Diktieren beginnt und endet. Töne für anderes Diktieren findest du unten unter Ton."
+      },
+      "dictation": {
+        "label": "Leuchten beim normalen Diktieren",
+        "description": "Das Leuchten auch zeigen, während Sie die Diktier-Tastenkombination halten. Fortlaufendes Diktieren und Fragen leuchten immer, wenn das Bildschirmleuchten an ist."
       }
     },
     "voiceEdit": {
@@ -1393,6 +1423,40 @@
         "imported": "{{added}} neue Wörter importiert ({{existing}} waren schon vorhanden).",
         "exported": "{{number}} Wörter exportiert."
       }
+    },
+    "appStyles": {
+      "title": "Stile pro App",
+      "description": "KI-Bereinigung, KI-Sprachbearbeitung und in ein Dokument getippte Antworten folgen dem Stil des Programms, in das sie gehen. Verwendet wird nur der Programmname, auf diesem Computer. Die lokale Bereinigung ist nicht betroffen.",
+      "enabled": {
+        "label": "Stile pro App verwenden",
+        "description": "Aus: Jedes Programm erhält denselben neutralen Text."
+      },
+      "builtIn": {
+        "email": {
+          "name": "E-Mail",
+          "instruction": "Als E-Mail formatieren: eine kurze Begrüßung, knappe Absätze und eine Grußformel, wenn es eine ganze Nachricht ist. Den Ton des Verfassers beibehalten."
+        },
+        "formal": {
+          "name": "Förmlich",
+          "instruction": "Einen förmlichen, professionellen Ton verwenden: vollständige Sätze, kein Slang, keine Kurzformen."
+        },
+        "casual": {
+          "name": "Knapp und locker",
+          "instruction": "Knapp und locker halten: kurze Sätze und einfache, freundliche Wörter, ohne förmliche Begrüßung oder Grußformel."
+        }
+      },
+      "newName": "Neuer Stil",
+      "name": "Name des Stils",
+      "instruction": "Wie geschrieben wird",
+      "instructionPlaceholder": "Beschreiben Sie den Stil in einfachen Worten, etwa „Kurz und freundlich, ohne Grußformel.“",
+      "apps": "Programme:",
+      "addApp": "Programm hinzufügen",
+      "addAppPlaceholder": "z. B. notepad.exe",
+      "removeApp": "{{app}} entfernen",
+      "remove": "Stil „{{name}}“ entfernen",
+      "add": "Stil hinzufügen",
+      "reset": "Standard wiederherstellen",
+      "neutral": "Nicht aufgeführte Programme erhalten neutralen Text."
     }
   },
   "footer": {
@@ -1475,7 +1539,15 @@
       "pasteFailed": "Konnte das nicht schreiben; es steht im Verlauf"
     },
     "privileged": "Privileged",
-    "editing": "Bearbeiten"
+    "editing": "Bearbeiten",
+    "withStyle": "Stil „{{name}}“ …",
+    "answer": {
+      "waiting": "Klicken Sie zurück in Ihr Dokument, um die Antwort zu tippen.",
+      "noTarget": "Kusema weiß nicht, für welches Dokument diese Antwort ist. Klicken Sie in das Dokument und fragen Sie erneut.",
+      "windowChanged": "Das Fenster hat gewechselt, daher wurde die Antwort nicht getippt. Fügen Sie sie auf der Assistent-Seite ein.",
+      "notTyping": "Die Einfügemethode ist auf „Keine“ gestellt, daher wurde die Antwort nicht getippt.",
+      "failed": "Die Antwort konnte nicht in dieses Fenster getippt werden."
+    }
   },
   "screenCard": {
     "title": "Diesen Screenshot senden?",
@@ -1586,5 +1658,20 @@
       "corrected": "Korrigiert.",
       "learned": "Korrigiert. Kusema hat gelernt: {{name}}"
     }
+  },
+  "askBox": {
+    "title": "Kusema fragen",
+    "placeholder": "Frage eingeben …",
+    "ask": "Fragen",
+    "screen": "Zu meinem Bildschirm fragen",
+    "screenUnavailable": "Klicken Sie zuerst in ein Fenster und öffnen Sie dann dieses Feld, um dazu zu fragen.",
+    "typesInto": "Antworten können in {{app}} getippt werden",
+    "style": "Stil „{{name}}“",
+    "thinking": "Denkt nach …",
+    "insert": "In Dokument einfügen",
+    "stop": "Stopp",
+    "close": "Schließen",
+    "hint": "Eingabe fragt · Umschalt+Eingabe: neue Zeile · Esc schließt",
+    "noWindow": "Klicken Sie in das Fenster, zu dem Sie fragen möchten, und öffnen Sie dieses Feld erneut."
   }
 }

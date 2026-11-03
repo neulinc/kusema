@@ -450,6 +450,10 @@
           "voice_edit": {
             "name": "Sesle düzenle",
             "description": "Metni seçin, sonra kısayolu basılı tutup nasıl değişeceğini söyleyin (“bunu daha resmî yap”) ya da “select last word” gibi bir komut söyleyin."
+          },
+          "ask_box": {
+            "name": "Kusema'ya yaz",
+            "description": "Pencerenizin yanında soru yazmak için küçük bir kutu açar. Esc kapatır."
           }
         },
         "errors": {
@@ -828,7 +832,9 @@
         "new": "Yeni konuşma",
         "screenshot": "Ekran görüntüsü",
         "noProvider": "\"Kusema'ya sor\" yanıt vermek için bir yapay zekâ modeline ihtiyaç duyar. Ayarlar'dan bir tane seçin.",
-        "openSettings": "Ayarları aç"
+        "openSettings": "Ayarları aç",
+        "typePlaceholder": "Bir soru yazın… (sormak için Enter)",
+        "insert": "Belgeye ekle"
       },
       "voice": {
         "title": "Ses",
@@ -865,6 +871,26 @@
         "label": "Asistan",
         "conversation": "Konuşma",
         "settings": "Ayarlar"
+      },
+      "answers": {
+        "title": "Yazılı sorular ve yanıtlar",
+        "description": "Soruyu söylemek yerine yazın, yanıtların nereye gideceğini seçin ve adım adım yardım alın.",
+        "answerTo": {
+          "label": "Yanıtın gideceği yer",
+          "description": "Yanıtı sesli okuyun, üzerinde çalıştığınız belgeye yazın ya da ikisini birden yapın. Yalnızca o yanıtı yazdırmak için soruyu “…and type it” veya “…put it in the document” ile bitirin.",
+          "speak": "Sesli oku",
+          "type": "Belgeye yaz",
+          "both": "İkisi de"
+        },
+        "speakTyped": {
+          "label": "Yazılı soruların yanıtlarını oku",
+          "description": "Yazdığınız soruların yanıtlarını da sesli okuyun. Kapalıyken yalnızca ekranda görünür."
+        },
+        "tutor": {
+          "label": "Öğretmen tarzı",
+          "description": "Adım adım açıklar, anlayıp anlamadığınızı kontrol eder ve ödev yanıtlarını hazır vermek yerine sizi yanıta yönlendirir; yanıtı isterseniz verir. Herhangi bir soruda “explain step by step” de diyebilirsiniz.",
+          "note": "Okulunuzun veya sınavınızın yapay zekâ kullanımı kurallarına uyun."
+        }
       }
     },
     "postProcessing": {
@@ -1302,7 +1328,7 @@
       "description": "Ekranınızın kenarlarındaki ışıltı Kusema'nın dinlediğini gösterir. Yalnızca siz görürsünüz: ekran görüntülerinde ve ekran paylaşımında görünmez.",
       "enabled": {
         "label": "Ekran ışıltısı",
-        "description": "Kusema dinlerken çalıştığınız ekranın çevresinde renkli bir ışıltı gösterir. Yine de içinden tıklayıp yazabilirsiniz."
+        "description": "Sürekli dikte ve sorular sırasında üzerinde çalıştığınız ekranın çevresinde renkli bir ışıltı göster. İçinden tıklamaya ve yazmaya devam edebilirsiniz."
       },
       "thickness": {
         "label": "Kalınlık",
@@ -1330,6 +1356,10 @@
       "sounds": {
         "label": "Sürekli dikte sesleri",
         "description": "Sürekli dikte başlayıp durduğunda kısa bir ses çalar. Diğer dikteler için sesler aşağıda Ses bölümündedir."
+      },
+      "dictation": {
+        "label": "Normal dikte için ışıltı",
+        "description": "Dikte kısayolunu basılı tutarken de ışıltıyı göster. Sürekli dikte ve sorular, ekran ışıltısı açıkken her zaman ışıldar."
       }
     },
     "voiceEdit": {
@@ -1393,6 +1423,40 @@
         "imported": "{{added}} yeni sözcük içe aktarıldı ({{existing}} tanesi zaten vardı).",
         "exported": "{{number}} sözcük dışa aktarıldı."
       }
+    },
+    "appStyles": {
+      "title": "Uygulamaya göre stiller",
+      "description": "Yapay zekâ temizliği, yapay zekâ ile sesli düzenlemeler ve belgeye yazılan yanıtlar gittikleri programın stilini izler. Yalnızca programın adı, bu bilgisayarda kullanılır. Yerel temizlik etkilenmez.",
+      "enabled": {
+        "label": "Uygulamaya göre stilleri kullan",
+        "description": "Kapalıyken her program aynı nötr metni alır."
+      },
+      "builtIn": {
+        "email": {
+          "name": "E-posta",
+          "instruction": "E-posta olarak biçimlendir: kısa bir selamlama, kısa paragraflar ve tam bir mesajsa bir kapanış. Yazarın üslubunu koru."
+        },
+        "formal": {
+          "name": "Resmî",
+          "instruction": "Resmî, profesyonel bir ton kullan: tam cümleler, argo ve kısaltma yok."
+        },
+        "casual": {
+          "name": "Kısa ve rahat",
+          "instruction": "Kısa ve rahat tut: kısa cümleler ve sade, samimi sözcükler; resmî selamlama veya kapanış yok."
+        }
+      },
+      "newName": "Yeni stil",
+      "name": "Stil adı",
+      "instruction": "Nasıl yazılacağı",
+      "instructionPlaceholder": "Stili sade sözcüklerle anlatın, örneğin “Kısa ve samimi, kapanış yok.”",
+      "apps": "Programlar:",
+      "addApp": "Program ekle",
+      "addAppPlaceholder": "ör. notepad.exe",
+      "removeApp": "{{app}} kaldır",
+      "remove": "“{{name}}” stilini kaldır",
+      "add": "Stil ekle",
+      "reset": "Varsayılanları geri yükle",
+      "neutral": "Listede olmayan programlar nötr metin alır."
     }
   },
   "footer": {
@@ -1475,7 +1539,15 @@
       "pasteFailed": "Bu yazılamadı; Geçmiş'te duruyor"
     },
     "privileged": "Privileged",
-    "editing": "Düzenleme"
+    "editing": "Düzenleme",
+    "withStyle": "“{{name}}” stili…",
+    "answer": {
+      "waiting": "Yanıtın yazılması için belgenize geri tıklayın.",
+      "noTarget": "Kusema bu yanıtın hangi belge için olduğunu bilmiyor. Belgeye tıklayıp yeniden sorun.",
+      "windowChanged": "Pencere değişti, bu yüzden yanıt yazılmadı. Asistan sayfasından ekleyin.",
+      "notTyping": "Yapıştırma yöntemi “Yok” olarak ayarlı, bu yüzden yanıt yazılmadı.",
+      "failed": "Yanıt bu pencereye yazılamadı."
+    }
   },
   "screenCard": {
     "title": "Bu ekran görüntüsü gönderilsin mi?",
@@ -1586,5 +1658,20 @@
       "corrected": "Düzeltildi.",
       "learned": "Düzeltildi. Kusema öğrendi: {{name}}"
     }
+  },
+  "askBox": {
+    "title": "Kusema'ya sor",
+    "placeholder": "Bir soru yazın…",
+    "ask": "Sor",
+    "screen": "Ekranım Hakkında Sor",
+    "screenUnavailable": "Önce bir pencereye tıklayın, sonra o pencere hakkında sormak için bu kutuyu açın.",
+    "typesInto": "Yanıtlar {{app}} içine yazılabilir",
+    "style": "“{{name}}” stili",
+    "thinking": "Düşünüyor…",
+    "insert": "Belgeye ekle",
+    "stop": "Durdur",
+    "close": "Kapat",
+    "hint": "Enter sorar · Shift+Enter: yeni satır · Esc kapatır",
+    "noWindow": "Hakkında sormak istediğiniz pencereye tıklayın, sonra bu kutuyu yeniden açın."
   }
 }

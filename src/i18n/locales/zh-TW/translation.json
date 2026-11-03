@@ -450,6 +450,10 @@
           "voice_edit": {
             "name": "語音編輯",
             "description": "選取文字，然後按住快速鍵說出要怎麼修改（「改得更正式一點」），或說一個指令，例如「select last word」。"
+          },
+          "ask_box": {
+            "name": "向 Kusema 輸入",
+            "description": "在視窗旁開啟一個小方塊，用來輸入問題。按 Esc 關閉。"
           }
         },
         "errors": {
@@ -828,7 +832,9 @@
         "new": "新對話",
         "screenshot": "螢幕擷圖",
         "noProvider": "「問 Kusema」需要 AI 模型才能回答。請在「設定」中選擇一個。",
-        "openSettings": "開啟設定"
+        "openSettings": "開啟設定",
+        "typePlaceholder": "輸入問題…（按 Enter 提問）",
+        "insert": "插入文件"
       },
       "voice": {
         "title": "語音",
@@ -865,6 +871,26 @@
         "label": "助理",
         "conversation": "對話",
         "settings": "設定"
+      },
+      "answers": {
+        "title": "輸入的問題與回答",
+        "description": "用輸入代替說話來提問，選擇回答的去向，並獲得逐步講解。",
+        "answerTo": {
+          "label": "回答去向",
+          "description": "朗讀回答、把回答輸入到你正在使用的文件，或兩者都做。在問題結尾加上「…and type it」或「…put it in the document」，就只輸入這一則回答。",
+          "speak": "朗讀",
+          "type": "輸入到文件",
+          "both": "兩者"
+        },
+        "speakTyped": {
+          "label": "朗讀輸入問題的回答",
+          "description": "你輸入的問題，其回答也會朗讀出來。關閉時只顯示在螢幕上。"
+        },
+        "tutor": {
+          "label": "家教風格",
+          "description": "逐步講解、確認理解，引導你得出答案，而不是直接給出作業答案，除非你要求答案。你也可以在任何問題中說「explain step by step」。",
+          "note": "請遵守你所在學校或考試關於使用 AI 的規定。"
+        }
       }
     },
     "postProcessing": {
@@ -1302,7 +1328,7 @@
       "description": "螢幕邊緣的光暈表示 Kusema 正在聆聽。只有您看得到：它不會出現在螢幕擷圖或螢幕分享中。",
       "enabled": {
         "label": "螢幕光暈",
-        "description": "Kusema 聆聽時，在您使用的螢幕周圍顯示彩色光暈。您仍可透過它點選和輸入。"
+        "description": "在連續聽寫和提問時，在你正在使用的螢幕四周顯示彩色光暈。你仍可以透過它點選和輸入。"
       },
       "thickness": {
         "label": "粗細",
@@ -1330,6 +1356,10 @@
       "sounds": {
         "label": "連續聽寫提示音",
         "description": "連續聽寫開始和停止時播放簡短提示音。其他聽寫的提示音在下方的「聲音」中。"
+      },
+      "dictation": {
+        "label": "一般聽寫時也顯示光暈",
+        "description": "按住聽寫快速鍵時也顯示光暈。只要螢幕光暈開啟，連續聽寫和提問一律會顯示光暈。"
       }
     },
     "voiceEdit": {
@@ -1393,6 +1423,40 @@
         "imported": "已匯入 {{added}} 個新字詞（{{existing}} 個已存在）。",
         "exported": "已匯出 {{number}} 個字詞。"
       }
+    },
+    "appStyles": {
+      "title": "依應用程式設定風格",
+      "description": "AI 整理、AI 語音編輯和輸入到文件中的回答，會遵循目標程式的風格。只使用本機上的程式名稱。本機整理不受影響。",
+      "enabled": {
+        "label": "使用依應用程式風格",
+        "description": "關閉時，所有程式都使用相同的中性文字。"
+      },
+      "builtIn": {
+        "email": {
+          "name": "電子郵件",
+          "instruction": "以電子郵件格式呈現：簡短的問候語、簡潔的段落，若是完整郵件則加上結語。保持作者的語氣。"
+        },
+        "formal": {
+          "name": "正式",
+          "instruction": "使用正式、專業的語氣：完整的句子，不用俚語和縮寫。"
+        },
+        "casual": {
+          "name": "簡潔隨興",
+          "instruction": "保持簡潔隨興：短句和平實親切的用詞，不用正式的問候語或結語。"
+        }
+      },
+      "newName": "新風格",
+      "name": "風格名稱",
+      "instruction": "寫作方式",
+      "instructionPlaceholder": "用平實的話描述風格，例如「簡短友善，不加結語。」",
+      "apps": "程式：",
+      "addApp": "新增程式",
+      "addAppPlaceholder": "例如 notepad.exe",
+      "removeApp": "移除 {{app}}",
+      "remove": "移除「{{name}}」風格",
+      "add": "新增風格",
+      "reset": "還原預設值",
+      "neutral": "未列出的程式使用中性文字。"
     }
   },
   "footer": {
@@ -1475,7 +1539,15 @@
       "pasteFailed": "無法輸入這段話；已在歷史紀錄中"
     },
     "privileged": "Privileged",
-    "editing": "編輯"
+    "editing": "編輯",
+    "withStyle": "「{{name}}」風格…",
+    "answer": {
+      "waiting": "請點回文件，以便輸入回答。",
+      "noTarget": "Kusema 不知道這則回答對應哪個文件。請點選文件後再問一次。",
+      "windowChanged": "視窗已切換，因此未輸入回答。請從「助理」頁面插入。",
+      "notTyping": "貼上方式設為「無」，因此未輸入回答。",
+      "failed": "無法在此視窗中輸入回答。"
+    }
   },
   "screenCard": {
     "title": "要傳送這張螢幕擷圖嗎？",
@@ -1586,5 +1658,20 @@
       "corrected": "已更正。",
       "learned": "已更正。Kusema 學到了：{{name}}"
     }
+  },
+  "askBox": {
+    "title": "問 Kusema",
+    "placeholder": "輸入問題…",
+    "ask": "提問",
+    "screen": "詢問我的螢幕",
+    "screenUnavailable": "請先點選一個視窗，再開啟此方塊，即可詢問該視窗。",
+    "typesInto": "回答可輸入到 {{app}}",
+    "style": "「{{name}}」風格",
+    "thinking": "正在思考…",
+    "insert": "插入文件",
+    "stop": "停止",
+    "close": "關閉",
+    "hint": "Enter 提問 · Shift+Enter 換行 · Esc 關閉",
+    "noWindow": "請點選你想詢問的視窗，然後重新開啟此方塊。"
   }
 }

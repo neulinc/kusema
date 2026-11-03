@@ -450,6 +450,10 @@
           "voice_edit": {
             "name": "음성으로 편집",
             "description": "텍스트를 선택한 뒤 단축키를 누른 채 바꿀 방법을 말하거나(“더 격식 있게 바꿔 줘”), “select last word” 같은 명령을 말하세요."
+          },
+          "ask_box": {
+            "name": "Kusema에게 입력",
+            "description": "창 근처에 작은 상자를 열어 질문을 입력합니다. Esc로 닫습니다."
           }
         },
         "errors": {
@@ -828,7 +832,9 @@
         "new": "새 대화",
         "screenshot": "스크린샷",
         "noProvider": "\"Kusema에게 묻기\"가 답하려면 AI 모델이 필요합니다. 설정에서 하나를 선택하세요.",
-        "openSettings": "설정 열기"
+        "openSettings": "설정 열기",
+        "typePlaceholder": "질문을 입력하세요… (Enter로 묻기)",
+        "insert": "문서에 삽입"
       },
       "voice": {
         "title": "음성",
@@ -865,6 +871,26 @@
         "label": "어시스턴트",
         "conversation": "대화",
         "settings": "설정"
+      },
+      "answers": {
+        "title": "입력한 질문과 답변",
+        "description": "말하는 대신 질문을 입력하고, 답변이 갈 곳을 고르고, 단계별 도움을 받으세요.",
+        "answerTo": {
+          "label": "답변을 보낼 곳",
+          "description": "답변을 소리 내어 읽거나, 작업하던 문서에 입력하거나, 둘 다 합니다. 질문 끝에 '…and type it' 또는 '…put it in the document'를 붙이면 그 답변만 입력합니다.",
+          "speak": "읽어 주기",
+          "type": "문서에 입력",
+          "both": "둘 다"
+        },
+        "speakTyped": {
+          "label": "입력한 질문의 답변 읽어 주기",
+          "description": "입력한 질문의 답변도 소리 내어 읽습니다. 끄면 화면에만 표시됩니다."
+        },
+        "tutor": {
+          "label": "튜터 스타일",
+          "description": "단계별로 설명하고, 이해했는지 확인하며, 숙제 답을 그냥 주는 대신 답으로 이끌어 줍니다. 답을 요청하면 답을 줍니다. 어떤 질문에서든 'explain step by step'이라고 말해도 됩니다.",
+          "note": "AI 사용에 관한 학교나 시험의 규칙을 따르세요."
+        }
       }
     },
     "postProcessing": {
@@ -1302,7 +1328,7 @@
       "description": "화면 가장자리의 빛으로 Kusema가 듣고 있음을 알려 줍니다. 나만 볼 수 있으며, 스크린샷이나 화면 공유에는 나타나지 않습니다.",
       "enabled": {
         "label": "화면 빛",
-        "description": "Kusema가 듣는 동안 작업 중인 화면 둘레에 색 있는 빛을 표시합니다. 빛 위로도 클릭하고 입력할 수 있습니다."
+        "description": "연속 받아쓰기와 질문 중에 작업 중인 화면 둘레에 색깔 있는 빛을 표시합니다. 빛 위로도 계속 클릭하고 입력할 수 있습니다."
       },
       "thickness": {
         "label": "두께",
@@ -1330,6 +1356,10 @@
       "sounds": {
         "label": "연속 받아쓰기 소리",
         "description": "연속 받아쓰기가 시작하고 끝날 때 짧은 소리를 냅니다. 다른 받아쓰기 소리는 아래 사운드에 있습니다."
+      },
+      "dictation": {
+        "label": "일반 받아쓰기에도 빛 표시",
+        "description": "받아쓰기 단축키를 누르고 있는 동안에도 빛을 표시합니다. 연속 받아쓰기와 질문은 화면 빛이 켜져 있으면 항상 빛납니다."
       }
     },
     "voiceEdit": {
@@ -1393,6 +1423,40 @@
         "imported": "새 단어 {{added}}개를 가져왔습니다(이미 있던 단어: {{existing}}개).",
         "exported": "단어 {{number}}개를 내보냈습니다."
       }
+    },
+    "appStyles": {
+      "title": "앱별 스타일",
+      "description": "AI 정리, AI 음성 편집, 문서에 입력하는 답변은 들어갈 프로그램의 스타일을 따릅니다. 이 컴퓨터에서 프로그램 이름만 사용합니다. 로컬 정리는 바뀌지 않습니다.",
+      "enabled": {
+        "label": "앱별 스타일 사용",
+        "description": "끄면 모든 프로그램에 같은 중립적인 글이 들어갑니다."
+      },
+      "builtIn": {
+        "email": {
+          "name": "이메일",
+          "instruction": "이메일 형식으로: 짧은 인사말, 간결한 문단, 전체 메시지라면 맺음말. 글쓴이의 어조를 유지합니다."
+        },
+        "formal": {
+          "name": "격식체",
+          "instruction": "격식 있고 전문적인 어조로: 완전한 문장, 속어나 줄임말 없이."
+        },
+        "casual": {
+          "name": "간결하고 편하게",
+          "instruction": "간결하고 편하게: 짧은 문장과 쉽고 친근한 단어로, 격식 있는 인사말이나 맺음말 없이."
+        }
+      },
+      "newName": "새 스타일",
+      "name": "스타일 이름",
+      "instruction": "쓰는 방법",
+      "instructionPlaceholder": "스타일을 쉬운 말로 설명하세요. 예: '짧고 친근하게, 맺음말 없이.'",
+      "apps": "프로그램:",
+      "addApp": "프로그램 추가",
+      "addAppPlaceholder": "예: notepad.exe",
+      "removeApp": "{{app}} 제거",
+      "remove": "'{{name}}' 스타일 제거",
+      "add": "스타일 추가",
+      "reset": "기본값 복원",
+      "neutral": "목록에 없는 프로그램에는 중립적인 글이 들어갑니다."
     }
   },
   "footer": {
@@ -1475,7 +1539,15 @@
       "pasteFailed": "입력할 수 없었습니다. 히스토리에 있습니다"
     },
     "privileged": "Privileged",
-    "editing": "편집"
+    "editing": "편집",
+    "withStyle": "'{{name}}' 스타일…",
+    "answer": {
+      "waiting": "답변을 입력하려면 문서를 다시 클릭하세요.",
+      "noTarget": "Kusema가 이 답변이 어느 문서용인지 모릅니다. 문서를 클릭하고 다시 물어보세요.",
+      "windowChanged": "창이 바뀌어 답변을 입력하지 않았습니다. 어시스턴트 페이지에서 삽입하세요.",
+      "notTyping": "붙여넣기 방법이 '없음'으로 설정되어 답변을 입력하지 않았습니다.",
+      "failed": "이 창에 답변을 입력하지 못했습니다."
+    }
   },
   "screenCard": {
     "title": "이 스크린샷을 보낼까요?",
@@ -1586,5 +1658,20 @@
       "corrected": "고쳤습니다.",
       "learned": "고쳤습니다. Kusema가 배운 단어: {{name}}"
     }
+  },
+  "askBox": {
+    "title": "Kusema에게 묻기",
+    "placeholder": "질문을 입력하세요…",
+    "ask": "묻기",
+    "screen": "내 화면에 대해 묻기",
+    "screenUnavailable": "먼저 창을 클릭한 다음 이 상자를 열면 그 창에 대해 물을 수 있습니다.",
+    "typesInto": "답변을 {{app}}에 입력할 수 있습니다",
+    "style": "'{{name}}' 스타일",
+    "thinking": "생각 중…",
+    "insert": "문서에 삽입",
+    "stop": "중지",
+    "close": "닫기",
+    "hint": "Enter로 묻기 · Shift+Enter로 줄 바꿈 · Esc로 닫기",
+    "noWindow": "묻고 싶은 창을 클릭한 다음 이 상자를 다시 여세요."
   }
 }

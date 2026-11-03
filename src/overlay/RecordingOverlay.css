@@ -496,3 +496,222 @@
   white-space: normal;
   color: var(--color-text);
 }
+
+/* ============================================================
+   Kusema pill: a soft indigo-to-violet glow with a warm amber highlight,
+   flowing slowly behind the card and swelling with the voice (--lvl, 0-1,
+   set on the stage). It's drawn inside the window's transparent margin
+   (--ov-glow-pad, PILL_GLOW_PAD in overlay.rs), so the window itself never
+   shows. Only transform and opacity animate, on the compositor.
+   ============================================================ */
+:root {
+  --ov-glow-pad: 14px;
+  --kz-indigo: #6366f1;
+  --kz-violet: #a855f7;
+  --kz-amber: #f59e0b;
+  --kz-red: #ef4444;
+}
+.ov-stage {
+  padding: var(--ov-glow-pad);
+  box-sizing: border-box;
+}
+.scard {
+  max-width: calc(100vw - 2px - 2 * var(--ov-glow-pad));
+}
+.stext-cap {
+  max-height: min(
+    var(--ov-cap-max-h),
+    calc(100vh - var(--ov-base-h) - 20px - 2 * var(--ov-glow-pad))
+  );
+}
+.spill {
+  position: relative;
+  display: flex;
+  flex: none;
+  isolation: isolate;
+}
+.sglow {
+  position: absolute;
+  inset: -4px;
+  z-index: -1;
+  border-radius: 28px;
+  overflow: hidden;
+  pointer-events: none;
+  filter: blur(7px);
+  opacity: calc(0.32 + var(--lvl, 0) * 0.6);
+  transform: scale(calc(1 + var(--lvl, 0) * 0.035));
+  transition:
+    opacity 140ms linear,
+    transform 140ms linear;
+  will-change: opacity, transform;
+}
+.sglow::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 200%;
+  /* Two identical periods, so sliding by half loops without a seam. */
+  background: linear-gradient(
+    90deg,
+    var(--kz-indigo) 0%,
+    var(--kz-violet) 14%,
+    var(--kz-amber) 25%,
+    var(--kz-violet) 36%,
+    var(--kz-indigo) 50%,
+    var(--kz-violet) 64%,
+    var(--kz-amber) 75%,
+    var(--kz-violet) 86%,
+    var(--kz-indigo) 100%
+  );
+  animation: sglow-flow 10s linear infinite;
+  will-change: transform;
+}
+@keyframes sglow-flow {
+  to {
+    transform: translateX(-50%);
+  }
+}
+.spill:has(.scard.open) .sglow {
+  border-radius: 20px;
+}
+
+/* Thinking: steadier and quicker, not tied to the voice. */
+.look-thinking .sglow {
+  opacity: 0.42;
+  transform: none;
+}
+.look-thinking .sglow::before {
+  animation-duration: 4s;
+}
+/* Speaking: the warm highlight leads, breathing slowly. */
+.look-speaking .sglow {
+  transform: none;
+  animation: sglow-breathe 2.4s ease-in-out infinite;
+}
+.look-speaking .sglow::before {
+  background: linear-gradient(
+    90deg,
+    var(--kz-amber) 0%,
+    var(--kz-violet) 25%,
+    var(--kz-amber) 50%,
+    var(--kz-violet) 75%,
+    var(--kz-amber) 100%
+  );
+  animation-duration: 6s;
+}
+@keyframes sglow-breathe {
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+/* Done: a brief warm flash as the pill fades. */
+.look-done .sglow {
+  opacity: 0.75;
+  transform: scale(1.04);
+  transition:
+    opacity 120ms ease-out,
+    transform 260ms ease-out;
+}
+.look-done .sglow::before {
+  background: var(--kz-amber);
+  animation: none;
+}
+/* Paused: no glow, a dashed edge and a pause icon, not colour alone. */
+.look-paused .sglow {
+  display: none;
+}
+.scard.look-paused {
+  border: 1.5px dashed var(--s-muted);
+}
+/* Error: a still warning glow, a solid heavier edge and a warning icon. */
+.look-error .sglow {
+  opacity: 0.5;
+  transform: none;
+}
+.look-error .sglow::before {
+  background: linear-gradient(90deg, var(--kz-red), var(--kz-amber));
+  animation: none;
+}
+.scard.look-error {
+  border: 1.5px solid var(--kz-amber);
+}
+.look-notice .sglow {
+  opacity: 0.28;
+  transform: none;
+}
+.look-notice .sglow::before {
+  animation: none;
+}
+
+/* The mode icon where the dot was: microphone, hands-free, question,
+   screen or pencil. */
+.sicon {
+  width: 15px;
+  height: 15px;
+  flex: none;
+  display: block;
+  color: var(--s-muted);
+  transition:
+    color 180ms ease,
+    opacity 180ms ease;
+}
+.sicon.ready {
+  color: var(--kz-violet);
+}
+.sicon.arming {
+  opacity: 0.5;
+}
+.look-error .sicon {
+  color: var(--kz-amber);
+}
+.look-paused .sicon {
+  color: var(--color-text);
+}
+.swave.ready i {
+  background: linear-gradient(to top, var(--kz-indigo), var(--kz-violet));
+}
+.swave.ready i:nth-child(5) {
+  background: linear-gradient(to top, var(--kz-violet), var(--kz-amber));
+}
+.snotice-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  padding: 10px 16px 10px 14px;
+}
+.snotice-row .sicon {
+  margin-top: 1px;
+}
+.snotice-row .snotice {
+  padding: 0;
+}
+
+/* Windows' "Animation effects" off: a still gradient, no flow or pulse. */
+@media (prefers-reduced-motion: reduce) {
+  .sglow,
+  .look-speaking .sglow {
+    animation: none;
+    transition: none;
+    transform: none;
+  }
+  .sglow::before {
+    animation: none !important;
+  }
+  .scard,
+  .scard.leaving {
+    animation: none;
+    transition: none;
+  }
+  .sdot.ready,
+  .scaret,
+  .swave.arming i {
+    animation: none;
+  }
+  .sspinner {
+    animation-duration: 2.4s;
+  }
+}

@@ -11,6 +11,7 @@ import type {
   VadBackend,
   LanguageDetectionMode,
   GlowPalette,
+  AnswerTo,
 } from "@/bindings";
 import { commands } from "@/bindings";
 import { toast } from "sonner";
@@ -202,6 +203,16 @@ const settingUpdaters: {
   privileged_hotkey_enabled: (value) =>
     commands.changePrivilegedHotkeyEnabledSetting(value as boolean),
   glow_enabled: (value) => commands.changeGlowEnabledSetting(value as boolean),
+  glow_dictation: (value) =>
+    commands.changeGlowDictationSetting(value as boolean),
+  assistant_speak_typed: (value) =>
+    commands.changeAssistantSpeakTypedSetting(value as boolean),
+  assistant_answer_to: (value) =>
+    commands.changeAssistantAnswerToSetting(value as AnswerTo),
+  assistant_tutor: (value) =>
+    commands.changeAssistantTutorSetting(value as boolean),
+  app_styles_enabled: (value) =>
+    commands.changeAppStylesEnabledSetting(value as boolean),
   glow_thickness: (value) =>
     commands.changeGlowThicknessSetting(value as number),
   glow_intensity: (value) =>

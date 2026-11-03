@@ -452,6 +452,10 @@
           "voice_edit": {
             "name": "Editar por voz",
             "description": "Selecciona texto y luego mantén pulsado el atajo y di cómo cambiarlo («haz esto más formal»), o di un comando como «select last word»."
+          },
+          "ask_box": {
+            "name": "Escribir a Kusema",
+            "description": "Abre un pequeño cuadro junto a tu ventana para escribir una pregunta. Esc lo cierra."
           }
         },
         "errors": {
@@ -831,7 +835,9 @@
         "new": "Nueva conversación",
         "screenshot": "Captura",
         "noProvider": "\"Preguntar a Kusema\" necesita un modelo de IA para responder. Elige uno en Ajustes.",
-        "openSettings": "Abrir ajustes"
+        "openSettings": "Abrir ajustes",
+        "typePlaceholder": "Escribe una pregunta… (Intro para preguntar)",
+        "insert": "Insertar en el documento"
       },
       "voice": {
         "title": "Voz",
@@ -868,6 +874,26 @@
         "label": "Asistente",
         "conversation": "Conversación",
         "settings": "Ajustes"
+      },
+      "answers": {
+        "title": "Preguntas escritas y respuestas",
+        "description": "Escribe una pregunta en lugar de decirla, elige adónde van las respuestas y recibe ayuda paso a paso.",
+        "answerTo": {
+          "label": "La respuesta va a",
+          "description": "Leer la respuesta en voz alta, escribirla en el documento en el que estabas trabajando, o ambas. Termina una pregunta con «…and type it» o «…put it in the document» para escribir solo esa respuesta.",
+          "speak": "Leer en voz alta",
+          "type": "Escribir en el documento",
+          "both": "Ambas"
+        },
+        "speakTyped": {
+          "label": "Leer respuestas a preguntas escritas",
+          "description": "Leer en voz alta también las respuestas a las preguntas que escribes. Desactivado, solo aparecen en pantalla."
+        },
+        "tutor": {
+          "label": "Estilo tutor",
+          "description": "Explicar paso a paso, comprobar que se entiende y guiarte hacia la respuesta en lugar de dar resueltos los deberes, salvo que pidas la respuesta. También puedes decir «explain step by step» en cualquier pregunta.",
+          "note": "Sigue las normas de tu centro o de tu examen sobre el uso de la IA."
+        }
       }
     },
     "postProcessing": {
@@ -1308,7 +1334,7 @@
       "description": "Un brillo en los bordes de la pantalla muestra que Kusema está escuchando. Solo tú lo ves: no aparece en capturas ni al compartir pantalla.",
       "enabled": {
         "label": "Brillo de pantalla",
-        "description": "Muestra un brillo de color alrededor de la pantalla en la que trabajas mientras Kusema escucha. Puedes seguir haciendo clic y escribiendo a través de él."
+        "description": "Mostrar un brillo de color alrededor de la pantalla en la que trabajas durante el dictado continuo y las preguntas. Puedes seguir haciendo clic y escribiendo a través de él."
       },
       "thickness": {
         "label": "Grosor",
@@ -1336,6 +1362,10 @@
       "sounds": {
         "label": "Sonidos del dictado continuo",
         "description": "Reproduce un sonido corto cuando el dictado continuo empieza y termina. Los sonidos de los otros dictados están en Sonido, más abajo."
+      },
+      "dictation": {
+        "label": "Brillo en el dictado normal",
+        "description": "Mostrar el brillo también mientras mantienes pulsado el atajo de dictado. El dictado continuo y las preguntas brillan siempre que el brillo de pantalla está activado."
       }
     },
     "voiceEdit": {
@@ -1399,6 +1429,40 @@
         "imported": "Se importaron {{added}} palabras nuevas ({{existing}} ya estaban).",
         "exported": "Se exportaron {{number}} palabras."
       }
+    },
+    "appStyles": {
+      "title": "Estilos por aplicación",
+      "description": "La limpieza con IA, las ediciones por voz con IA y las respuestas escritas en un documento siguen el estilo del programa al que van. Solo se usa el nombre del programa, en este equipo. La limpieza local no cambia.",
+      "enabled": {
+        "label": "Usar estilos por aplicación",
+        "description": "Desactivado, todos los programas reciben el mismo texto neutro."
+      },
+      "builtIn": {
+        "email": {
+          "name": "Correo",
+          "instruction": "Darle formato de correo: una línea breve de saludo, párrafos cortos y una despedida cuando es un mensaje completo. Mantener la voz del autor."
+        },
+        "formal": {
+          "name": "Formal",
+          "instruction": "Usar un tono formal y profesional: frases completas, sin jerga ni contracciones."
+        },
+        "casual": {
+          "name": "Breve e informal",
+          "instruction": "Mantenerlo breve e informal: frases cortas y palabras sencillas y cercanas, sin saludo ni despedida formales."
+        }
+      },
+      "newName": "Nuevo estilo",
+      "name": "Nombre del estilo",
+      "instruction": "Cómo escribir",
+      "instructionPlaceholder": "Describe el estilo con palabras sencillas, como «Breve y cercano, sin despedida».",
+      "apps": "Programas:",
+      "addApp": "Añadir un programa",
+      "addAppPlaceholder": "p. ej. notepad.exe",
+      "removeApp": "Quitar {{app}}",
+      "remove": "Quitar el estilo «{{name}}»",
+      "add": "Añadir estilo",
+      "reset": "Restaurar valores predeterminados",
+      "neutral": "Los programas que no están en la lista reciben texto neutro."
     }
   },
   "footer": {
@@ -1481,7 +1545,15 @@
       "pasteFailed": "No se pudo escribir; está en el Historial"
     },
     "privileged": "Privileged",
-    "editing": "Editando"
+    "editing": "Editando",
+    "withStyle": "Estilo «{{name}}»…",
+    "answer": {
+      "waiting": "Vuelve a hacer clic en tu documento para escribir la respuesta.",
+      "noTarget": "Kusema no sabe para qué documento es esta respuesta. Haz clic en el documento y vuelve a preguntar.",
+      "windowChanged": "La ventana cambió, así que la respuesta no se escribió. Insértala desde la página Asistente.",
+      "notTyping": "El método de pegado está en «Ninguno», así que la respuesta no se escribió.",
+      "failed": "No se pudo escribir la respuesta en esta ventana."
+    }
   },
   "screenCard": {
     "title": "¿Enviar esta captura?",
@@ -1594,5 +1666,20 @@
       "corrected": "Corregido.",
       "learned": "Corregido. Kusema aprendió: {{name}}"
     }
+  },
+  "askBox": {
+    "title": "Preguntar a Kusema",
+    "placeholder": "Escribe una pregunta…",
+    "ask": "Preguntar",
+    "screen": "Preguntar sobre mi pantalla",
+    "screenUnavailable": "Haz clic primero en una ventana y luego abre este cuadro para preguntar sobre ella.",
+    "typesInto": "Las respuestas se pueden escribir en {{app}}",
+    "style": "Estilo «{{name}}»",
+    "thinking": "Pensando…",
+    "insert": "Insertar en el documento",
+    "stop": "Detener",
+    "close": "Cerrar",
+    "hint": "Intro pregunta · Mayús+Intro: nueva línea · Esc cierra",
+    "noWindow": "Haz clic en la ventana sobre la que quieres preguntar y vuelve a abrir este cuadro."
   }
 }

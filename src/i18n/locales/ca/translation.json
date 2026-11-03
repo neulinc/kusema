@@ -452,6 +452,10 @@
           "voice_edit": {
             "name": "Editar amb la veu",
             "description": "Seleccioneu text, després manteniu premuda la drecera i digueu com canviar-lo («fes això més formal»), o digueu una ordre com «select last word»."
+          },
+          "ask_box": {
+            "name": "Escriu al Kusema",
+            "description": "Obre un quadre petit al costat de la finestra per escriure una pregunta. Esc el tanca."
           }
         },
         "errors": {
@@ -831,7 +835,9 @@
         "new": "Conversa nova",
         "screenshot": "Captura",
         "noProvider": "«Pregunta al Kusema» necessita un model d'IA per respondre. Trieu-ne un a Configuració.",
-        "openSettings": "Obre la configuració"
+        "openSettings": "Obre la configuració",
+        "typePlaceholder": "Escriu una pregunta… (Retorn per preguntar)",
+        "insert": "Insereix al document"
       },
       "voice": {
         "title": "Veu",
@@ -868,6 +874,26 @@
         "label": "Assistent",
         "conversation": "Conversa",
         "settings": "Configuració"
+      },
+      "answers": {
+        "title": "Preguntes escrites i respostes",
+        "description": "Escriu una pregunta en lloc de dir-la, tria on van les respostes i rep ajuda pas a pas.",
+        "answerTo": {
+          "label": "La resposta va a",
+          "description": "Llegir la resposta en veu alta, escriure-la al document on treballaves, o totes dues coses. Acaba una pregunta amb «…and type it» o «…put it in the document» per escriure només aquella resposta.",
+          "speak": "En veu alta",
+          "type": "Al document",
+          "both": "Totes dues"
+        },
+        "speakTyped": {
+          "label": "Llegeix les respostes a preguntes escrites",
+          "description": "Llegeix en veu alta també les respostes a les preguntes que escrius. Desactivat, només apareixen a la pantalla."
+        },
+        "tutor": {
+          "label": "Estil tutor",
+          "description": "Explicar pas a pas, comprovar que s'entén i guiar-te cap a la resposta en lloc de donar els deures fets, tret que demanis la resposta. També pots dir «explain step by step» en qualsevol pregunta.",
+          "note": "Segueix les normes de la teva escola o examen sobre l'ús de la IA."
+        }
       }
     },
     "postProcessing": {
@@ -1308,7 +1334,7 @@
       "description": "Una lluïssor a les vores de la pantalla mostra que el Kusema escolta. Només la veieu vosaltres: no apareix a les captures ni quan compartiu la pantalla.",
       "enabled": {
         "label": "Lluïssor de pantalla",
-        "description": "Mostra una lluïssor de color al voltant de la pantalla on treballeu mentre el Kusema escolta. Podeu continuar fent clic i escrivint a través seu."
+        "description": "Mostra una lluïssor de color al voltant de la pantalla on treballes durant el dictat continu i les preguntes. Hi pots continuar fent clic i escrivint a través."
       },
       "thickness": {
         "label": "Gruix",
@@ -1336,6 +1362,10 @@
       "sounds": {
         "label": "Sons del dictat continu",
         "description": "Reprodueix un so curt quan el dictat continu comença i s'atura. Els sons dels altres dictats són a So, més avall."
+      },
+      "dictation": {
+        "label": "Lluïssor en el dictat normal",
+        "description": "Mostra la lluïssor també mentre mantens premuda la drecera de dictat. El dictat continu i les preguntes sempre brillen quan la lluïssor de pantalla és activada."
       }
     },
     "voiceEdit": {
@@ -1399,6 +1429,40 @@
         "imported": "S'han importat {{added}} paraules noves ({{existing}} ja hi eren).",
         "exported": "S'han exportat {{number}} paraules."
       }
+    },
+    "appStyles": {
+      "title": "Estils per aplicació",
+      "description": "La neteja amb IA, les edicions per veu amb IA i les respostes escrites en un document segueixen l'estil del programa on van. Només es fa servir el nom del programa, en aquest ordinador. La neteja local no canvia.",
+      "enabled": {
+        "label": "Fes servir estils per aplicació",
+        "description": "Desactivat, tots els programes reben el mateix text neutre."
+      },
+      "builtIn": {
+        "email": {
+          "name": "Correu",
+          "instruction": "Donar-li format de correu: una línia breu de salutació, paràgrafs curts i un comiat quan és un missatge sencer. Mantenir la veu de l'autor."
+        },
+        "formal": {
+          "name": "Formal",
+          "instruction": "Fer servir un to formal i professional: frases completes, sense argot ni contraccions."
+        },
+        "casual": {
+          "name": "Breu i informal",
+          "instruction": "Mantenir-ho breu i informal: frases curtes i paraules senzilles i properes, sense salutació ni comiat formals."
+        }
+      },
+      "newName": "Estil nou",
+      "name": "Nom de l'estil",
+      "instruction": "Com s'ha d'escriure",
+      "instructionPlaceholder": "Descriu l'estil amb paraules senzilles, com ara «Breu i proper, sense comiat».",
+      "apps": "Programes:",
+      "addApp": "Afegeix un programa",
+      "addAppPlaceholder": "p. ex. notepad.exe",
+      "removeApp": "Treu {{app}}",
+      "remove": "Treu l'estil «{{name}}»",
+      "add": "Afegeix un estil",
+      "reset": "Restaura els valors per defecte",
+      "neutral": "Els programes que no són a la llista reben text neutre."
     }
   },
   "footer": {
@@ -1481,7 +1545,15 @@
       "pasteFailed": "No s'ha pogut escriure; és a l'Historial"
     },
     "privileged": "Privileged",
-    "editing": "Edició"
+    "editing": "Edició",
+    "withStyle": "Estil «{{name}}»…",
+    "answer": {
+      "waiting": "Torna a fer clic al document per escriure la resposta.",
+      "noTarget": "El Kusema no sap per a quin document és aquesta resposta. Fes clic al document i torna a preguntar.",
+      "windowChanged": "La finestra ha canviat, així que la resposta no s'ha escrit. Insereix-la des de la pàgina Assistent.",
+      "notTyping": "El mètode d'enganxament és «Cap», així que la resposta no s'ha escrit.",
+      "failed": "No s'ha pogut escriure la resposta en aquesta finestra."
+    }
   },
   "screenCard": {
     "title": "Voleu enviar aquesta captura?",
@@ -1594,5 +1666,20 @@
       "corrected": "Corregit.",
       "learned": "Corregit. El Kusema ha après: {{name}}"
     }
+  },
+  "askBox": {
+    "title": "Pregunta al Kusema",
+    "placeholder": "Escriu una pregunta…",
+    "ask": "Pregunta",
+    "screen": "Pregunta sobre la meva pantalla",
+    "screenUnavailable": "Primer fes clic en una finestra i després obre aquest quadre per preguntar-ne.",
+    "typesInto": "Les respostes es poden escriure a {{app}}",
+    "style": "Estil «{{name}}»",
+    "thinking": "Pensant…",
+    "insert": "Insereix al document",
+    "stop": "Atura",
+    "close": "Tanca",
+    "hint": "Retorn pregunta · Maj+Retorn: línia nova · Esc tanca",
+    "noWindow": "Fes clic a la finestra sobre la qual vols preguntar i torna a obrir aquest quadre."
   }
 }

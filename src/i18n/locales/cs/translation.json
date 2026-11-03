@@ -454,6 +454,10 @@
           "voice_edit": {
             "name": "Upravit hlasem",
             "description": "Označte text, pak podržte zkratku a řekněte, jak ho změnit („udělej to formálnější“), nebo řekněte příkaz jako „select last word“."
+          },
+          "ask_box": {
+            "name": "Napsat Kusemě",
+            "description": "Otevře u vašeho okna malé pole pro napsání otázky. Esc ho zavře."
           }
         },
         "errors": {
@@ -834,7 +838,9 @@
         "new": "Nová konverzace",
         "screenshot": "Snímek obrazovky",
         "noProvider": "„Zeptat se Kusemy“ potřebuje k odpovědi model AI. Vyberte ho v Nastavení.",
-        "openSettings": "Otevřít nastavení"
+        "openSettings": "Otevřít nastavení",
+        "typePlaceholder": "Napište otázku… (Enter pro dotaz)",
+        "insert": "Vložit do dokumentu"
       },
       "voice": {
         "title": "Hlas",
@@ -871,6 +877,26 @@
         "label": "Asistent",
         "conversation": "Konverzace",
         "settings": "Nastavení"
+      },
+      "answers": {
+        "title": "Psané otázky a odpovědi",
+        "description": "Napište otázku místo vyslovení, zvolte, kam odpovědi půjdou, a získejte pomoc krok za krokem.",
+        "answerTo": {
+          "label": "Odpověď jde do",
+          "description": "Přečíst odpověď nahlas, napsat ji do dokumentu, ve kterém jste pracovali, nebo obojí. Ukončete otázku slovy „…and type it“ nebo „…put it in the document“, aby se napsala jen tato odpověď.",
+          "speak": "Přečíst nahlas",
+          "type": "Napsat do dokumentu",
+          "both": "Obojí"
+        },
+        "speakTyped": {
+          "label": "Číst odpovědi na psané otázky",
+          "description": "Číst nahlas i odpovědi na otázky, které napíšete. Vypnuto se zobrazí jen na obrazovce."
+        },
+        "tutor": {
+          "label": "Styl doučování",
+          "description": "Vysvětlovat krok za krokem, ověřovat porozumění a vést k odpovědi místo předání hotových domácích úkolů, pokud o odpověď nepožádáte. V jakékoli otázce můžete také říct „explain step by step“.",
+          "note": "Dodržujte pravidla své školy nebo zkoušky pro používání AI."
+        }
       }
     },
     "postProcessing": {
@@ -1314,7 +1340,7 @@
       "description": "Záře na okrajích obrazovky ukazuje, že Kusema poslouchá. Vidíte ji jen vy: neobjeví se na snímcích obrazovky ani při sdílení obrazovky.",
       "enabled": {
         "label": "Záře obrazovky",
-        "description": "Zobrazit barevnou záři kolem obrazovky, na které pracujete, když Kusema poslouchá. Stále přes ni můžete klikat a psát."
+        "description": "Zobrazovat barevnou záři kolem obrazovky, na které pracujete, během průběžného diktování a otázek. Stále přes ni můžete klikat a psát."
       },
       "thickness": {
         "label": "Šířka",
@@ -1342,6 +1368,10 @@
       "sounds": {
         "label": "Zvuky souvislého diktování",
         "description": "Přehrát krátký zvuk, když souvislé diktování začne a skončí. Zvuky pro jiné diktování najdete níže v sekci Zvuk."
+      },
+      "dictation": {
+        "label": "Záře při běžném diktování",
+        "description": "Zobrazovat záři i při držení zkratky diktování. Průběžné diktování a otázky září vždy, když je záře obrazovky zapnutá."
       }
     },
     "voiceEdit": {
@@ -1405,6 +1435,40 @@
         "imported": "Importována nová slova: {{added}} (už tam bylo: {{existing}}).",
         "exported": "Exportována slova: {{number}}."
       }
+    },
+    "appStyles": {
+      "title": "Styly podle aplikace",
+      "description": "Úprava pomocí AI, hlasové úpravy pomocí AI a odpovědi psané do dokumentu se řídí stylem programu, do kterého jdou. Používá se jen název programu, na tomto počítači. Místní úprava se nemění.",
+      "enabled": {
+        "label": "Používat styly podle aplikace",
+        "description": "Vypnuto dostane každý program stejný neutrální text."
+      },
+      "builtIn": {
+        "email": {
+          "name": "E-mail",
+          "instruction": "Naformátovat jako e-mail: krátký pozdrav, stručné odstavce a rozloučení, je-li to celá zpráva. Zachovat hlas autora."
+        },
+        "formal": {
+          "name": "Formální",
+          "instruction": "Používat formální, profesionální tón: celé věty, žádný slang ani zkratky."
+        },
+        "casual": {
+          "name": "Stručný a neformální",
+          "instruction": "Psát stručně a neformálně: krátké věty a jednoduchá, přátelská slova, bez formálního pozdravu či rozloučení."
+        }
+      },
+      "newName": "Nový styl",
+      "name": "Název stylu",
+      "instruction": "Jak psát",
+      "instructionPlaceholder": "Popište styl obyčejnými slovy, například „Krátce a přátelsky, bez rozloučení.“",
+      "apps": "Programy:",
+      "addApp": "Přidat program",
+      "addAppPlaceholder": "např. notepad.exe",
+      "removeApp": "Odebrat {{app}}",
+      "remove": "Odebrat styl „{{name}}“",
+      "add": "Přidat styl",
+      "reset": "Obnovit výchozí",
+      "neutral": "Programy, které nejsou v seznamu, dostanou neutrální text."
     }
   },
   "footer": {
@@ -1487,7 +1551,15 @@
       "pasteFailed": "Nepodařilo se to napsat; je to v Historii"
     },
     "privileged": "Privileged",
-    "editing": "Úpravy"
+    "editing": "Úpravy",
+    "withStyle": "Styl „{{name}}“…",
+    "answer": {
+      "waiting": "Klikněte zpět do dokumentu, aby se odpověď napsala.",
+      "noTarget": "Kusema neví, pro který dokument je tato odpověď. Klikněte do dokumentu a zeptejte se znovu.",
+      "windowChanged": "Okno se změnilo, takže odpověď nebyla napsána. Vložte ji ze stránky Asistent.",
+      "notTyping": "Způsob vkládání je nastaven na „Žádné“, takže odpověď nebyla napsána.",
+      "failed": "Odpověď se do tohoto okna nepodařilo napsat."
+    }
   },
   "screenCard": {
     "title": "Odeslat tento snímek obrazovky?",
@@ -1602,5 +1674,20 @@
       "corrected": "Opraveno.",
       "learned": "Opraveno. Kusema se naučila: {{name}}"
     }
+  },
+  "askBox": {
+    "title": "Zeptat se Kusemy",
+    "placeholder": "Napište otázku…",
+    "ask": "Zeptat se",
+    "screen": "Zeptat se na obrazovku",
+    "screenUnavailable": "Nejdřív klikněte do okna a pak otevřete toto pole, abyste se na něj zeptali.",
+    "typesInto": "Odpovědi lze napsat do {{app}}",
+    "style": "Styl „{{name}}“",
+    "thinking": "Přemýšlím…",
+    "insert": "Vložit do dokumentu",
+    "stop": "Zastavit",
+    "close": "Zavřít",
+    "hint": "Enter se zeptá · Shift+Enter: nový řádek · Esc zavře",
+    "noWindow": "Klikněte do okna, na které se chcete zeptat, a otevřete toto pole znovu."
   }
 }

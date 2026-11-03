@@ -450,6 +450,10 @@
           "voice_edit": {
             "name": "Sửa bằng giọng nói",
             "description": "Chọn văn bản, rồi giữ phím tắt và nói cách sửa (“làm cho trang trọng hơn”), hoặc nói một lệnh như “select last word”."
+          },
+          "ask_box": {
+            "name": "Gõ cho Kusema",
+            "description": "Mở một hộp nhỏ cạnh cửa sổ của bạn để gõ câu hỏi. Esc để đóng."
           }
         },
         "errors": {
@@ -828,7 +832,9 @@
         "new": "Cuộc trò chuyện mới",
         "screenshot": "Ảnh chụp màn hình",
         "noProvider": "Hỏi Kusema cần một mô hình AI để trả lời. Hãy chọn một mô hình trong Cài đặt.",
-        "openSettings": "Mở Cài đặt"
+        "openSettings": "Mở Cài đặt",
+        "typePlaceholder": "Nhập câu hỏi… (Enter để hỏi)",
+        "insert": "Chèn vào tài liệu"
       },
       "voice": {
         "title": "Giọng nói",
@@ -865,6 +871,26 @@
         "label": "Trợ lý",
         "conversation": "Cuộc trò chuyện",
         "settings": "Cài đặt"
+      },
+      "answers": {
+        "title": "Câu hỏi gõ và câu trả lời",
+        "description": "Gõ câu hỏi thay vì nói, chọn nơi câu trả lời được gửi tới và nhận trợ giúp từng bước.",
+        "answerTo": {
+          "label": "Câu trả lời gửi tới",
+          "description": "Đọc to câu trả lời, gõ nó vào tài liệu bạn đang làm việc, hoặc cả hai. Kết thúc câu hỏi bằng “…and type it” hoặc “…put it in the document” để chỉ gõ câu trả lời đó.",
+          "speak": "Đọc to",
+          "type": "Gõ vào tài liệu",
+          "both": "Cả hai"
+        },
+        "speakTyped": {
+          "label": "Đọc to câu trả lời cho câu hỏi gõ",
+          "description": "Đọc to cả câu trả lời cho những câu hỏi bạn gõ. Khi tắt, chúng chỉ hiện trên màn hình."
+        },
+        "tutor": {
+          "label": "Phong cách gia sư",
+          "description": "Giải thích từng bước, kiểm tra mức hiểu và dẫn bạn tới đáp án thay vì đưa sẵn lời giải bài tập, trừ khi bạn yêu cầu đáp án. Bạn cũng có thể nói “explain step by step” trong bất kỳ câu hỏi nào.",
+          "note": "Hãy tuân theo quy định của trường hoặc kỳ thi về việc dùng AI."
+        }
       }
     },
     "postProcessing": {
@@ -1302,7 +1328,7 @@
       "description": "Một vầng sáng quanh viền màn hình cho thấy Kusema đang nghe. Chỉ bạn nhìn thấy: nó không xuất hiện trong ảnh chụp màn hình hay khi chia sẻ màn hình.",
       "enabled": {
         "label": "Vầng sáng màn hình",
-        "description": "Hiện vầng sáng màu quanh màn hình bạn đang làm việc trong khi Kusema nghe. Bạn vẫn có thể nhấp và gõ xuyên qua nó."
+        "description": "Hiển thị vầng sáng màu quanh màn hình bạn đang làm việc trong khi đọc chính tả liên tục và đặt câu hỏi. Bạn vẫn có thể bấm và gõ xuyên qua nó."
       },
       "thickness": {
         "label": "Độ dày",
@@ -1330,6 +1356,10 @@
       "sounds": {
         "label": "Âm thanh đọc chính tả liên tục",
         "description": "Phát một âm thanh ngắn khi đọc chính tả liên tục bắt đầu và dừng. Âm thanh cho kiểu đọc chính tả khác nằm ở mục Âm thanh bên dưới."
+      },
+      "dictation": {
+        "label": "Vầng sáng khi đọc chính tả thường",
+        "description": "Hiển thị vầng sáng cả khi bạn giữ phím tắt đọc chính tả. Đọc chính tả liên tục và câu hỏi luôn có vầng sáng khi vầng sáng màn hình đang bật."
       }
     },
     "voiceEdit": {
@@ -1393,6 +1423,40 @@
         "imported": "Đã nhập {{added}} từ mới ({{existing}} từ đã có).",
         "exported": "Đã xuất {{number}} từ."
       }
+    },
+    "appStyles": {
+      "title": "Phong cách theo ứng dụng",
+      "description": "Dọn dẹp bằng AI, chỉnh sửa bằng giọng nói với AI và câu trả lời gõ vào tài liệu sẽ theo phong cách của chương trình nhận chúng. Chỉ dùng tên chương trình, trên máy tính này. Dọn dẹp cục bộ không bị ảnh hưởng.",
+      "enabled": {
+        "label": "Dùng phong cách theo ứng dụng",
+        "description": "Khi tắt, mọi chương trình nhận cùng một văn bản trung tính."
+      },
+      "builtIn": {
+        "email": {
+          "name": "Email",
+          "instruction": "Trình bày như email: một dòng chào ngắn, các đoạn ngắn gọn và lời kết khi là cả một thư. Giữ giọng văn của người viết."
+        },
+        "formal": {
+          "name": "Trang trọng",
+          "instruction": "Dùng giọng trang trọng, chuyên nghiệp: câu đầy đủ, không tiếng lóng, không viết tắt."
+        },
+        "casual": {
+          "name": "Ngắn gọn và thân mật",
+          "instruction": "Giữ ngắn gọn và thân mật: câu ngắn và từ ngữ đơn giản, thân thiện, không có lời chào hay lời kết trang trọng."
+        }
+      },
+      "newName": "Phong cách mới",
+      "name": "Tên phong cách",
+      "instruction": "Cách viết",
+      "instructionPlaceholder": "Mô tả phong cách bằng lời đơn giản, ví dụ “Ngắn và thân thiện, không có lời kết.”",
+      "apps": "Chương trình:",
+      "addApp": "Thêm chương trình",
+      "addAppPlaceholder": "vd: notepad.exe",
+      "removeApp": "Xóa {{app}}",
+      "remove": "Xóa phong cách “{{name}}”",
+      "add": "Thêm phong cách",
+      "reset": "Khôi phục mặc định",
+      "neutral": "Chương trình không có trong danh sách sẽ nhận văn bản trung tính."
     }
   },
   "footer": {
@@ -1475,7 +1539,15 @@
       "pasteFailed": "Không thể gõ đoạn đó; nó có trong Lịch sử"
     },
     "privileged": "Privileged",
-    "editing": "Đang sửa"
+    "editing": "Đang sửa",
+    "withStyle": "Phong cách “{{name}}”…",
+    "answer": {
+      "waiting": "Hãy bấm lại vào tài liệu để gõ câu trả lời.",
+      "noTarget": "Kusema không biết câu trả lời này dành cho tài liệu nào. Hãy bấm vào tài liệu và hỏi lại.",
+      "windowChanged": "Cửa sổ đã thay đổi nên câu trả lời không được gõ. Hãy chèn nó từ trang Trợ lý.",
+      "notTyping": "Phương thức dán đang đặt là “Không có” nên câu trả lời không được gõ.",
+      "failed": "Không thể gõ câu trả lời vào cửa sổ này."
+    }
   },
   "screenCard": {
     "title": "Gửi ảnh chụp màn hình này?",
@@ -1586,5 +1658,20 @@
       "corrected": "Đã sửa.",
       "learned": "Đã sửa. Kusema đã học: {{name}}"
     }
+  },
+  "askBox": {
+    "title": "Hỏi Kusema",
+    "placeholder": "Nhập câu hỏi…",
+    "ask": "Hỏi",
+    "screen": "Hỏi Về Màn Hình Của Tôi",
+    "screenUnavailable": "Hãy bấm vào một cửa sổ trước, rồi mở hộp này để hỏi về cửa sổ đó.",
+    "typesInto": "Câu trả lời có thể được gõ vào {{app}}",
+    "style": "Phong cách “{{name}}”",
+    "thinking": "Đang suy nghĩ…",
+    "insert": "Chèn vào tài liệu",
+    "stop": "Dừng",
+    "close": "Đóng",
+    "hint": "Enter để hỏi · Shift+Enter: xuống dòng · Esc để đóng",
+    "noWindow": "Hãy bấm vào cửa sổ bạn muốn hỏi, rồi mở lại hộp này."
   }
 }

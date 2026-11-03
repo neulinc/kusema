@@ -452,6 +452,10 @@
           "voice_edit": {
             "name": "Modifier à la voix",
             "description": "Sélectionnez du texte, puis maintenez le raccourci et dites comment le modifier (« rends ce texte plus formel »), ou dites une commande comme « select last word »."
+          },
+          "ask_box": {
+            "name": "Écrire à Kusema",
+            "description": "Ouvre une petite zone près de votre fenêtre pour saisir une question. Échap la ferme."
           }
         },
         "errors": {
@@ -831,7 +835,9 @@
         "new": "Nouvelle conversation",
         "screenshot": "Capture d'écran",
         "noProvider": "« Demander à Kusema » a besoin d'un modèle d'IA pour répondre. Choisissez-en un dans Réglages.",
-        "openSettings": "Ouvrir les réglages"
+        "openSettings": "Ouvrir les réglages",
+        "typePlaceholder": "Saisissez une question… (Entrée pour demander)",
+        "insert": "Insérer dans le document"
       },
       "voice": {
         "title": "Voix",
@@ -868,6 +874,26 @@
         "label": "Assistant",
         "conversation": "Conversation",
         "settings": "Réglages"
+      },
+      "answers": {
+        "title": "Questions saisies et réponses",
+        "description": "Saisissez une question au lieu de la dire, choisissez où vont les réponses et obtenez une aide pas à pas.",
+        "answerTo": {
+          "label": "La réponse va",
+          "description": "Lire la réponse à voix haute, la saisir dans le document où vous travailliez, ou les deux. Terminez une question par « …and type it » ou « …put it in the document » pour ne saisir que cette réponse.",
+          "speak": "À voix haute",
+          "type": "Dans le document",
+          "both": "Les deux"
+        },
+        "speakTyped": {
+          "label": "Lire les réponses aux questions saisies",
+          "description": "Lire aussi à voix haute les réponses aux questions que vous saisissez. Désactivé, elles n'apparaissent qu'à l'écran."
+        },
+        "tutor": {
+          "label": "Style tuteur",
+          "description": "Expliquer pas à pas, vérifier la compréhension et guider vers la réponse plutôt que donner les devoirs tout faits, sauf si vous demandez la réponse. Vous pouvez aussi dire « explain step by step » dans n'importe quelle question.",
+          "note": "Respectez les règles de votre école ou de votre examen sur l'usage de l'IA."
+        }
       }
     },
     "postProcessing": {
@@ -1308,7 +1334,7 @@
       "description": "Une lueur sur les bords de l'écran montre que Kusema écoute. Vous seul la voyez : elle n'apparaît ni dans les captures d'écran ni dans les partages d'écran.",
       "enabled": {
         "label": "Lueur d'écran",
-        "description": "Afficher une lueur colorée autour de l'écran sur lequel vous travaillez pendant que Kusema écoute. Vous pouvez toujours cliquer et taper au travers."
+        "description": "Afficher une lueur colorée autour de l'écran sur lequel vous travaillez pendant la dictée continue et les questions. Vous pouvez toujours cliquer et saisir à travers."
       },
       "thickness": {
         "label": "Épaisseur",
@@ -1336,6 +1362,10 @@
       "sounds": {
         "label": "Sons de la dictée continue",
         "description": "Jouer un son court quand la dictée continue démarre et s'arrête. Les sons des autres dictées se trouvent sous Son, plus bas."
+      },
+      "dictation": {
+        "label": "Lueur pour la dictée normale",
+        "description": "Afficher aussi la lueur pendant que vous maintenez le raccourci de dictée. La dictée continue et les questions s'illuminent dès que la lueur d'écran est activée."
       }
     },
     "voiceEdit": {
@@ -1399,6 +1429,40 @@
         "imported": "{{added}} nouveaux mots importés ({{existing}} y étaient déjà).",
         "exported": "{{number}} mots exportés."
       }
+    },
+    "appStyles": {
+      "title": "Styles par application",
+      "description": "Le nettoyage par IA, les modifications vocales par IA et les réponses saisies dans un document suivent le style du programme où elles vont. Seul le nom du programme est utilisé, sur cet ordinateur. Le nettoyage local n'est pas concerné.",
+      "enabled": {
+        "label": "Utiliser les styles par application",
+        "description": "Désactivé, chaque programme reçoit le même texte neutre."
+      },
+      "builtIn": {
+        "email": {
+          "name": "E-mail",
+          "instruction": "Le mettre en forme comme un e-mail : une courte formule d'appel, des paragraphes brefs et une formule de politesse s'il s'agit d'un message entier. Garder la voix de l'auteur."
+        },
+        "formal": {
+          "name": "Formel",
+          "instruction": "Utiliser un ton formel et professionnel : phrases complètes, pas d'argot ni de formes familières."
+        },
+        "casual": {
+          "name": "Bref et décontracté",
+          "instruction": "Rester bref et décontracté : phrases courtes et mots simples et amicaux, sans formule d'appel ni de politesse."
+        }
+      },
+      "newName": "Nouveau style",
+      "name": "Nom du style",
+      "instruction": "Comment écrire",
+      "instructionPlaceholder": "Décrivez le style avec des mots simples, par exemple « Court et amical, sans formule de politesse. »",
+      "apps": "Programmes :",
+      "addApp": "Ajouter un programme",
+      "addAppPlaceholder": "p. ex. notepad.exe",
+      "removeApp": "Retirer {{app}}",
+      "remove": "Retirer le style « {{name}} »",
+      "add": "Ajouter un style",
+      "reset": "Rétablir les valeurs par défaut",
+      "neutral": "Les programmes qui ne sont pas listés reçoivent un texte neutre."
     }
   },
   "footer": {
@@ -1481,7 +1545,15 @@
       "pasteFailed": "Impossible de saisir ceci ; c'est dans l'Historique"
     },
     "privileged": "Privileged",
-    "editing": "Modification"
+    "editing": "Modification",
+    "withStyle": "Style « {{name}} »…",
+    "answer": {
+      "waiting": "Cliquez à nouveau dans votre document pour saisir la réponse.",
+      "noTarget": "Kusema ne sait pas à quel document cette réponse est destinée. Cliquez dans le document et reposez la question.",
+      "windowChanged": "La fenêtre a changé, la réponse n'a donc pas été saisie. Insérez-la depuis la page Assistant.",
+      "notTyping": "La méthode de collage est réglée sur « Aucun », la réponse n'a donc pas été saisie.",
+      "failed": "Impossible de saisir la réponse dans cette fenêtre."
+    }
   },
   "screenCard": {
     "title": "Envoyer cette capture d'écran ?",
@@ -1594,5 +1666,20 @@
       "corrected": "Corrigé.",
       "learned": "Corrigé. Kusema a appris : {{name}}"
     }
+  },
+  "askBox": {
+    "title": "Demander à Kusema",
+    "placeholder": "Saisissez une question…",
+    "ask": "Demander",
+    "screen": "Poser une question sur mon écran",
+    "screenUnavailable": "Cliquez d'abord dans une fenêtre, puis ouvrez cette zone pour poser une question à son sujet.",
+    "typesInto": "Les réponses peuvent être saisies dans {{app}}",
+    "style": "Style « {{name}} »",
+    "thinking": "Réflexion…",
+    "insert": "Insérer dans le document",
+    "stop": "Arrêter",
+    "close": "Fermer",
+    "hint": "Entrée pose la question · Maj+Entrée : nouvelle ligne · Échap ferme",
+    "noWindow": "Cliquez dans la fenêtre sur laquelle vous voulez poser une question, puis rouvrez cette zone."
   }
 }

@@ -85,6 +85,18 @@ async changeGlowEnabledSetting(enabled: boolean) : Promise<Result<null, string>>
     else return { status: "error", error: e  as any };
 }
 },
+/**
+ * Kusema: the glow for normal dictation too (off by default; continuous
+ * dictation and questions glow whenever the glow is on).
+ */
+async changeGlowDictationSetting(enabled: boolean) : Promise<Result<null, string>> {
+    try {
+    return { status: "ok", data: await TAURI_INVOKE("change_glow_dictation_setting", { enabled }) };
+} catch (e) {
+    if(e instanceof Error) throw e;
+    else return { status: "error", error: e  as any };
+}
+},
 async changeGlowThicknessSetting(thickness: number) : Promise<Result<null, string>> {
     try {
     return { status: "ok", data: await TAURI_INVOKE("change_glow_thickness_setting", { thickness }) };
@@ -1175,6 +1187,144 @@ async changeAssistantScreenModelSetting(model: string | null) : Promise<Result<n
     else return { status: "error", error: e  as any };
 }
 },
+async changeAssistantSpeakTypedSetting(enabled: boolean) : Promise<Result<null, string>> {
+    try {
+    return { status: "ok", data: await TAURI_INVOKE("change_assistant_speak_typed_setting", { enabled }) };
+} catch (e) {
+    if(e instanceof Error) throw e;
+    else return { status: "error", error: e  as any };
+}
+},
+async changeAssistantAnswerToSetting(answerTo: AnswerTo) : Promise<Result<null, string>> {
+    try {
+    return { status: "ok", data: await TAURI_INVOKE("change_assistant_answer_to_setting", { answerTo }) };
+} catch (e) {
+    if(e instanceof Error) throw e;
+    else return { status: "error", error: e  as any };
+}
+},
+async changeAssistantTutorSetting(enabled: boolean) : Promise<Result<null, string>> {
+    try {
+    return { status: "ok", data: await TAURI_INVOKE("change_assistant_tutor_setting", { enabled }) };
+} catch (e) {
+    if(e instanceof Error) throw e;
+    else return { status: "error", error: e  as any };
+}
+},
+/**
+ * A question typed on the Assistant page. Returns its id at once; the answer
+ * comes as `assistant-stream`, then `assistant-reply` or `assistant-error`.
+ */
+async askTyped(question: string) : Promise<Result<number, string>> {
+    try {
+    return { status: "ok", data: await TAURI_INVOKE("ask_typed", { question }) };
+} catch (e) {
+    if(e instanceof Error) throw e;
+    else return { status: "error", error: e  as any };
+}
+},
+/**
+ * Stop a typed question waiting for its answer, and any reply being spoken.
+ */
+async cancelTypedQuestion(id: number) : Promise<void> {
+    await TAURI_INVOKE("cancel_typed_question", { id });
+},
+/**
+ * Type an answer from the Assistant page into the document it was asked from.
+ */
+async insertAssistantAnswer(answer: string) : Promise<Result<null, string>> {
+    try {
+    return { status: "ok", data: await TAURI_INVOKE("insert_assistant_answer", { answer }) };
+} catch (e) {
+    if(e instanceof Error) throw e;
+    else return { status: "error", error: e  as any };
+}
+},
+/**
+ * The answers that know which document they're for.
+ */
+async getInsertableAnswers() : Promise<string[]> {
+    return await TAURI_INVOKE("get_insertable_answers");
+},
+/**
+ * The page rendered: show the box and give it the keyboard.
+ */
+async askBoxReady() : Promise<AskBoxInfo | null> {
+    return await TAURI_INVOKE("ask_box_ready");
+},
+/**
+ * Escape, or the close button.
+ */
+async askBoxClose() : Promise<void> {
+    await TAURI_INVOKE("ask_box_close");
+},
+/**
+ * The box lost the keyboard.
+ */
+async askBoxBlurred(empty: boolean, hasAnswer: boolean) : Promise<void> {
+    await TAURI_INVOKE("ask_box_blurred", { empty, hasAnswer });
+},
+/**
+ * The page's content is `height` logical pixels tall.
+ */
+async setAskBoxHeight(height: number) : Promise<void> {
+    await TAURI_INVOKE("set_ask_box_height", { height });
+},
+/**
+ * Ask what was typed, about the window in front too with `screen`. Returns
+ * the question's id; the answer comes as `assistant-stream`, then
+ * `assistant-reply` or `assistant-error`.
+ */
+async askBoxSubmit(question: string, screen: boolean) : Promise<Result<number, string>> {
+    try {
+    return { status: "ok", data: await TAURI_INVOKE("ask_box_submit", { question, screen }) };
+} catch (e) {
+    if(e instanceof Error) throw e;
+    else return { status: "error", error: e  as any };
+}
+},
+/**
+ * Stop the question the box is waiting on.
+ */
+async askBoxStop(id: number) : Promise<void> {
+    await TAURI_INVOKE("ask_box_stop", { id });
+},
+/**
+ * "Insert into document": close the box, then type the answer where the
+ * question was asked.
+ */
+async askBoxInsert(answer: string) : Promise<Result<null, string>> {
+    try {
+    return { status: "ok", data: await TAURI_INVOKE("ask_box_insert", { answer }) };
+} catch (e) {
+    if(e instanceof Error) throw e;
+    else return { status: "error", error: e  as any };
+}
+},
+async setAppStyles(styles: AppStyle[]) : Promise<Result<null, string>> {
+    try {
+    return { status: "ok", data: await TAURI_INVOKE("set_app_styles", { styles }) };
+} catch (e) {
+    if(e instanceof Error) throw e;
+    else return { status: "error", error: e  as any };
+}
+},
+async resetAppStyles() : Promise<Result<null, string>> {
+    try {
+    return { status: "ok", data: await TAURI_INVOKE("reset_app_styles") };
+} catch (e) {
+    if(e instanceof Error) throw e;
+    else return { status: "error", error: e  as any };
+}
+},
+async changeAppStylesEnabledSetting(enabled: boolean) : Promise<Result<null, string>> {
+    try {
+    return { status: "ok", data: await TAURI_INVOKE("change_app_styles_enabled_setting", { enabled }) };
+} catch (e) {
+    if(e instanceof Error) throw e;
+    else return { status: "error", error: e  as any };
+}
+},
 async getPrivacyOverview() : Promise<Result<PrivacyOverview, string>> {
     try {
     return { status: "ok", data: await TAURI_INVOKE("get_privacy_overview") };
@@ -1519,6 +1669,10 @@ transcriptionJob: "transcription-job"
 /** user-defined types **/
 
 /**
+ * A style that applies to some text, and what the overlay shows for it.
+ */
+export type Active = { id: string; name: string | null }
+/**
  * What the Cleanup settings say about AI cleanup's provider.
  */
 export type AiCleanupStatus = { provider: string | null; model: string | null; 
@@ -1530,6 +1684,18 @@ is_local: boolean; has_key: boolean;
  * Privileged mode would refuse it.
  */
 blocked: boolean }
+/**
+ * Where an answer goes (the "Answer goes to" setting).
+ */
+export type AnswerTo = 
+/**
+ * Spoken (when replies are spoken) and shown in the Conversation tab.
+ */
+"speak" | 
+/**
+ * Typed into the window that was active when the question was asked.
+ */
+"type" | "both"
 /**
  * The container-level `serde(default)` (backed by the `Default` impl below)
  * guarantees every field — including ones added in the future — falls back to
@@ -1721,7 +1887,64 @@ vocabulary?: VocabEntry[];
 /**
  * Kusema vocabulary: which built-in packs are on.
  */
-vocabulary_packs?: VocabPacks }
+vocabulary_packs?: VocabPacks; 
+/**
+ * Kusema type-to-ask: read answers to typed questions aloud too.
+ */
+assistant_speak_typed?: boolean; 
+/**
+ * Kusema paste-the-answer: speak answers, type them into the document, or both.
+ */
+assistant_answer_to?: AnswerTo; 
+/**
+ * Kusema tutor style: explain step by step instead of handing over answers.
+ */
+assistant_tutor?: boolean; 
+/**
+ * Kusema styles per app.
+ */
+app_styles?: AppStyle[]; app_styles_enabled?: boolean; 
+/**
+ * Kusema: the edge glow for normal (push-to-talk) dictation as well;
+ * continuous dictation and questions follow `glow_enabled` alone.
+ */
+glow_dictation?: boolean }
+/**
+ * One style and the programs it's for.
+ */
+export type AppStyle = { 
+/**
+ * "email", "formal" and "casual" are built in; others are the user's.
+ */
+id: string; 
+/**
+ * `None`: the built-in style's (translated) name.
+ */
+name?: string | null; 
+/**
+ * Program file names, lowercase ("outlook.exe").
+ */
+apps?: string[]; 
+/**
+ * In plain language. `None`: the built-in style's.
+ */
+instruction?: string | null }
+/**
+ * Sent to the page each time the box opens.
+ */
+export type AskBoxInfo = { 
+/**
+ * The program answers would be typed into, if any.
+ */
+app: string | null; 
+/**
+ * Its style, when "type into document" is on.
+ */
+style: Active | null; 
+/**
+ * "Ask about my screen" has a window to look at.
+ */
+can_see_screen: boolean }
 export type AudioDevice = { index: string; name: string; is_default: boolean }
 export type AutoSubmitKey = "enter" | "ctrl_enter" | "cmd_enter"
 export type AutoUnavailableReason = 

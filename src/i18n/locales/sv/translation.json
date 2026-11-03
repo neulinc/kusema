@@ -450,6 +450,10 @@
           "voice_edit": {
             "name": "Redigera med rösten",
             "description": "Markera text, håll sedan ned kortkommandot och säg hur den ska ändras (“gör det här mer formellt”), eller säg ett kommando som “select last word”."
+          },
+          "ask_box": {
+            "name": "Skriv till Kusema",
+            "description": "Öppnar en liten ruta vid ditt fönster där du skriver en fråga. Esc stänger den."
           }
         },
         "errors": {
@@ -828,7 +832,9 @@
         "new": "Ny konversation",
         "screenshot": "Skärmbild",
         "noProvider": "\"Fråga Kusema\" behöver en AI-modell för att svara. Välj en under Inställningar.",
-        "openSettings": "Öppna inställningar"
+        "openSettings": "Öppna inställningar",
+        "typePlaceholder": "Skriv en fråga… (Enter för att fråga)",
+        "insert": "Infoga i dokumentet"
       },
       "voice": {
         "title": "Röst",
@@ -865,6 +871,26 @@
         "label": "Assistent",
         "conversation": "Konversation",
         "settings": "Inställningar"
+      },
+      "answers": {
+        "title": "Skrivna frågor och svar",
+        "description": "Skriv en fråga i stället för att säga den, välj vart svaren går och få hjälp steg för steg.",
+        "answerTo": {
+          "label": "Svaret går till",
+          "description": "Läs upp svaret, skriv in det i dokumentet du arbetade i, eller båda. Avsluta en fråga med ”…and type it” eller ”…put it in the document” för att bara skriva in det svaret.",
+          "speak": "Läs upp",
+          "type": "Skriv in i dokumentet",
+          "both": "Båda"
+        },
+        "speakTyped": {
+          "label": "Läs upp svar på skrivna frågor",
+          "description": "Läs också upp svar på frågor du skriver. Av visas de bara på skärmen."
+        },
+        "tutor": {
+          "label": "Handledarstil",
+          "description": "Förklara steg för steg, kontrollera förståelsen och led dig fram till svaret i stället för att lämna ut färdiga läxsvar, om du inte ber om svaret. Du kan också säga ”explain step by step” i vilken fråga som helst.",
+          "note": "Följ din skolas eller ditt provs regler för AI-användning."
+        }
       }
     },
     "postProcessing": {
@@ -1302,7 +1328,7 @@
       "description": "Ett sken längs skärmens kanter visar att Kusema lyssnar. Bara du ser det: det syns inte i skärmbilder eller vid skärmdelning.",
       "enabled": {
         "label": "Skärmsken",
-        "description": "Visa ett färgat sken runt skärmen du arbetar på medan Kusema lyssnar. Du kan fortfarande klicka och skriva genom det."
+        "description": "Visa ett färgat sken runt skärmen du arbetar på under kontinuerlig diktering och frågor. Du kan fortfarande klicka och skriva genom det."
       },
       "thickness": {
         "label": "Tjocklek",
@@ -1330,6 +1356,10 @@
       "sounds": {
         "label": "Ljud vid löpande diktat",
         "description": "Spela ett kort ljud när löpande diktat startar och slutar. Ljud för annat diktat finns under Ljud längre ned."
+      },
+      "dictation": {
+        "label": "Sken vid vanlig diktering",
+        "description": "Visa skenet också medan du håller ned dikteringskortkommandot. Kontinuerlig diktering och frågor lyser alltid när skärmskenet är på."
       }
     },
     "voiceEdit": {
@@ -1393,6 +1423,40 @@
         "imported": "Importerade {{added}} nya ord ({{existing}} fanns redan).",
         "exported": "Exporterade {{number}} ord."
       }
+    },
+    "appStyles": {
+      "title": "Stilar per app",
+      "description": "AI-städning, AI-röstredigeringar och svar som skrivs in i ett dokument följer stilen i programmet de hamnar i. Bara programmets namn används, på den här datorn. Lokal städning påverkas inte.",
+      "enabled": {
+        "label": "Använd stilar per app",
+        "description": "Av får alla program samma neutrala text."
+      },
+      "builtIn": {
+        "email": {
+          "name": "E-post",
+          "instruction": "Formatera som e-post: en kort hälsningsrad, korta stycken och en avslutning när det är ett helt meddelande. Behåll skribentens röst."
+        },
+        "formal": {
+          "name": "Formell",
+          "instruction": "Använd en formell, professionell ton: hela meningar, ingen slang, inga sammandragningar."
+        },
+        "casual": {
+          "name": "Kort och avslappnad",
+          "instruction": "Håll det kort och avslappnat: korta meningar och enkla, vänliga ord, utan formell hälsning eller avslutning."
+        }
+      },
+      "newName": "Ny stil",
+      "name": "Stilens namn",
+      "instruction": "Hur det ska skrivas",
+      "instructionPlaceholder": "Beskriv stilen med enkla ord, till exempel ”Kort och vänligt, ingen avslutning.”",
+      "apps": "Program:",
+      "addApp": "Lägg till ett program",
+      "addAppPlaceholder": "t.ex. notepad.exe",
+      "removeApp": "Ta bort {{app}}",
+      "remove": "Ta bort stilen ”{{name}}”",
+      "add": "Lägg till stil",
+      "reset": "Återställ standard",
+      "neutral": "Program som inte finns i listan får neutral text."
     }
   },
   "footer": {
@@ -1475,7 +1539,15 @@
       "pasteFailed": "Kunde inte skriva det; det finns i Historik"
     },
     "privileged": "Privileged",
-    "editing": "Redigerar"
+    "editing": "Redigerar",
+    "withStyle": "Stilen ”{{name}}”…",
+    "answer": {
+      "waiting": "Klicka tillbaka i dokumentet för att skriva in svaret.",
+      "noTarget": "Kusema vet inte vilket dokument svaret gäller. Klicka i dokumentet och fråga igen.",
+      "windowChanged": "Fönstret ändrades, så svaret skrevs inte in. Infoga det från sidan Assistent.",
+      "notTyping": "Inklistringsmetoden är inställd på ”Ingen”, så svaret skrevs inte in.",
+      "failed": "Det gick inte att skriva in svaret i det här fönstret."
+    }
   },
   "screenCard": {
     "title": "Skicka den här skärmbilden?",
@@ -1586,5 +1658,20 @@
       "corrected": "Rättat.",
       "learned": "Rättat. Kusema lärde sig: {{name}}"
     }
+  },
+  "askBox": {
+    "title": "Fråga Kusema",
+    "placeholder": "Skriv en fråga…",
+    "ask": "Fråga",
+    "screen": "Fråga om min skärm",
+    "screenUnavailable": "Klicka först i ett fönster och öppna sedan den här rutan för att fråga om det.",
+    "typesInto": "Svar kan skrivas in i {{app}}",
+    "style": "Stilen ”{{name}}”",
+    "thinking": "Tänker…",
+    "insert": "Infoga i dokumentet",
+    "stop": "Stoppa",
+    "close": "Stäng",
+    "hint": "Enter frågar · Skift+Enter: ny rad · Esc stänger",
+    "noWindow": "Klicka i fönstret du vill fråga om och öppna sedan rutan igen."
   }
 }

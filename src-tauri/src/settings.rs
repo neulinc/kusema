@@ -645,6 +645,28 @@ pub struct AppSettings {
     /// Kusema vocabulary: which built-in packs are on.
     #[serde(default)]
     pub vocabulary_packs: crate::vocabulary::VocabPacks,
+    /// Kusema type-to-ask: read answers to typed questions aloud too.
+    #[serde(default)]
+    pub assistant_speak_typed: bool,
+    /// Kusema paste-the-answer: speak answers, type them into the document, or both.
+    #[serde(default)]
+    pub assistant_answer_to: crate::assistant::AnswerTo,
+    /// Kusema tutor style: explain step by step instead of handing over answers.
+    #[serde(default)]
+    pub assistant_tutor: bool,
+    /// Kusema styles per app.
+    #[serde(default = "crate::app_styles::default_styles")]
+    pub app_styles: Vec<crate::app_styles::AppStyle>,
+    #[serde(default = "default_app_styles_enabled")]
+    pub app_styles_enabled: bool,
+    /// Kusema: the edge glow for normal (push-to-talk) dictation as well;
+    /// continuous dictation and questions follow `glow_enabled` alone.
+    #[serde(default)]
+    pub glow_dictation: bool,
+}
+
+fn default_app_styles_enabled() -> bool {
+    true
 }
 
 fn default_voice_edit_trigger() -> String {
@@ -1216,6 +1238,21 @@ pub fn get_default_settings() -> AppSettings {
             current_binding: default_voice_edit_shortcut.to_string(),
         },
     );
+    // Kusema type-to-ask. Backspace, not a letter, for the same reason.
+    #[cfg(target_os = "macos")]
+    let default_ask_box_shortcut = "ctrl+option+shift+backspace";
+    #[cfg(not(target_os = "macos"))]
+    let default_ask_box_shortcut = "ctrl+alt+shift+backspace";
+    bindings.insert(
+        crate::ask_box::BINDING.to_string(),
+        ShortcutBinding {
+            id: crate::ask_box::BINDING.to_string(),
+            name: "Type to Kusema".to_string(),
+            description: "Opens a box to type a question to Kusema.".to_string(),
+            default_binding: default_ask_box_shortcut.to_string(),
+            current_binding: default_ask_box_shortcut.to_string(),
+        },
+    );
     bindings.insert(
         "cancel".to_string(),
         ShortcutBinding {
@@ -1321,6 +1358,12 @@ pub fn get_default_settings() -> AppSettings {
         voice_edit_trigger: default_voice_edit_trigger(),
         vocabulary: Vec::new(),
         vocabulary_packs: crate::vocabulary::VocabPacks::default(),
+        assistant_speak_typed: false,
+        assistant_answer_to: Default::default(),
+        assistant_tutor: false,
+        app_styles: crate::app_styles::default_styles(),
+        app_styles_enabled: default_app_styles_enabled(),
+        glow_dictation: false,
     }
 }
 

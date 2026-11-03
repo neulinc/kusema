@@ -3,8 +3,11 @@
 //! "Ask about my screen" adds a screenshot of the active window to the
 //! question (see `crate::screen`).
 
+pub mod answer;
 mod conversation;
+pub mod insert;
 
+pub use answer::AnswerTo;
 pub use conversation::Conversation;
 
 use crate::actions::{complete_unless_cancelled, strip_think_block};
@@ -15,7 +18,7 @@ use crate::settings::{
 };
 use log::{debug, error, info};
 use serde::Serialize;
-use std::sync::atomic::{AtomicUsize, Ordering};
+use std::sync::atomic::{AtomicU64, AtomicUsize, Ordering};
 use std::sync::{Arc, Mutex};
 use tauri::{AppHandle, Emitter, Manager, State};
 
@@ -40,6 +43,8 @@ Claude, or a local vision model in Ollama.";
 pub struct AssistantReply {
     pub question: String,
     pub answer: String,
+    /// Kusema: the request it answers (see `AskOptions::id`).
+    pub id: u64,
 }
 
 /// Emitted as `assistant-error` when a question couldn't be answered.
@@ -47,7 +52,40 @@ pub struct AssistantReply {
 pub struct AssistantError {
     pub question: String,
     pub message: String,
+    pub id: u64,
 }
+
+/// Emitted as `assistant-stream` as an answer streams in.
+#[derive(Clone, Debug, Serialize)]
+struct AssistantStream {
+    id: u64,
+    text: String,
+}
+
+/// Where a question came from.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Default)]
+pub enum Source {
+    /// Spoken with an Assistant hotkey.
+    #[default]
+    Spoken,
+    /// Typed in the floating Ask box.
+    AskBox,
+    /// Typed on the Assistant page.
+    Page,
+}
+
+/// How a question was asked.
+#[derive(Debug, Clone, Copy, Default)]
+pub struct AskOptions {
+    pub source: Source,
+    /// The window and control a "type it" answer goes into.
+    pub target: Option<insert::DocTarget>,
+    /// Tells this question's stream, reply or error from others'.
+    pub id: u64,
+}
+
+/// Answers kept for "Insert into document", with the window each was asked from.
+const MAX_ANSWER_TARGETS: usize = 20;
 
 #[derive(Default)]
 struct Inner {
@@ -55,6 +93,10 @@ struct Inner {
     /// Bumped by "New conversation", so a reply to a question asked before the
     /// reset doesn't land in the fresh conversation.
     epoch: u64,
+    /// Kusema paste-the-answer: recent answers and where they were asked.
+    answer_targets: Vec<(String, insert::DocTarget)>,
+    /// Where a spoken question's hotkey was pressed.
+    pending_target: Option<insert::DocTarget>,
 }
 
 /// Tauri managed state for Assistant mode.
@@ -62,6 +104,33 @@ struct Inner {
 pub struct AssistantState {
     inner: Mutex<Inner>,
     in_flight: AtomicUsize,
+    next_id: AtomicU64,
+}
+
+/// A fresh id for `AskOptions::id`.
+pub fn next_id(app: &AppHandle) -> u64 {
+    app.try_state::<AssistantState>()
+        .map_or(0, |state| state.next_id.fetch_add(1, Ordering::SeqCst) + 1)
+}
+
+/// At an Assistant hotkey's press: remember where an answer could be typed.
+pub fn note_target_at_press(app: &AppHandle) {
+    if let Some(state) = app.try_state::<AssistantState>() {
+        state.lock().pending_target = insert::at_press();
+    }
+}
+
+impl AskOptions {
+    /// For a spoken question: the window noted at the hotkey's press.
+    pub fn spoken(app: &AppHandle) -> Self {
+        Self {
+            source: Source::Spoken,
+            target: app
+                .try_state::<AssistantState>()
+                .and_then(|state| state.lock().pending_target.take()),
+            id: next_id(app),
+        }
+    }
 }
 
 impl AssistantState {
@@ -225,13 +294,14 @@ pub(crate) fn describe_error(
     }
 }
 
-fn emit_error(app: &AppHandle, question: &str, message: String) {
+fn emit_error(app: &AppHandle, question: &str, message: String, id: u64) {
     error!("Assistant request failed: {message}");
     let _ = app.emit(
         "assistant-error",
         AssistantError {
             question: question.to_string(),
             message,
+            id,
         },
     );
 }
@@ -243,20 +313,80 @@ fn emit_screen_error(
     question: &str,
     message: String,
     near: Option<CapturedWindow>,
+    id: u64,
 ) {
     screen::card::notice(app, message.clone(), near);
-    emit_error(app, question, message);
+    emit_error(app, question, message, id);
+}
+
+/// What one question asks for, from the question and the settings.
+struct Plan {
+    question: String,
+    delivery: answer::Delivery,
+    tutor: bool,
+    style: Option<crate::app_styles::Active>,
+}
+
+impl Plan {
+    fn new(settings: &AppSettings, question: &str, options: &AskOptions) -> Self {
+        let request = answer::parse(question);
+        let delivery = answer::delivery(
+            settings.assistant_answer_to,
+            request.type_it,
+            options.source != Source::Spoken,
+            settings.assistant_speak_typed,
+        );
+        // The Assistant page has no document of its own to type into.
+        let delivery = answer::Delivery {
+            type_it: delivery.type_it && options.source != Source::Page,
+            ..delivery
+        };
+        let style = options
+            .target
+            .filter(|_| delivery.type_it)
+            .and_then(|target| {
+                crate::app_styles::active(
+                    settings,
+                    &crate::app_styles::process_of(target.window.handle()),
+                )
+            });
+        Self {
+            tutor: answer::tutor(settings.assistant_tutor, &request),
+            question: request.question,
+            delivery,
+            style,
+        }
+    }
+
+    fn prompt(&self, base: &str) -> String {
+        answer::compose(
+            base,
+            &answer::Extras {
+                document: self.delivery.type_it,
+                tutor: self.tutor,
+                style: self.style.as_ref().map(|s| s.instruction.as_str()),
+            },
+        )
+    }
 }
 
 /// Ask the configured LLM `question` with the whole conversation as context,
 /// then record the exchange and emit `assistant-reply`, or `assistant-error`
 /// on failure. Returns early, emitting nothing, once `is_cancelled` is true.
-pub async fn ask<C: Fn() -> bool>(app: &AppHandle, question: String, is_cancelled: C) {
+pub async fn ask<C: Fn() -> bool>(
+    app: &AppHandle,
+    question: String,
+    options: AskOptions,
+    is_cancelled: C,
+) {
     let Some(state) = app.try_state::<AssistantState>() else {
         error!("AssistantState is not initialized");
         return;
     };
     let _in_flight = InFlight::new(&state.in_flight);
+    let settings = get_settings(app);
+    let plan = Plan::new(&settings, &question, &options);
+    let question = plan.question.clone();
 
     let (turns, epoch, about_screen) = {
         let inner = state.lock();
@@ -268,7 +398,6 @@ pub async fn ask<C: Fn() -> bool>(app: &AppHandle, question: String, is_cancelle
     };
     // Follow-ups about a screenshot stay with the screen-question provider:
     // the earlier answers describe what was on screen.
-    let settings = get_settings(app);
     let target = if about_screen {
         resolve_screen_target(&settings)
     } else {
@@ -276,10 +405,10 @@ pub async fn ask<C: Fn() -> bool>(app: &AppHandle, question: String, is_cancelle
     };
     let target = match target {
         Ok(target) => target,
-        Err(message) => return emit_error(app, &question, message),
+        Err(message) => return emit_error(app, &question, message, options.id),
     };
     let turns = conversation::keep_images_for(turns, &target.provider.id);
-    let system_prompt = state.lock().conversation.prompt_for(&turns);
+    let system_prompt = plan.prompt(&state.lock().conversation.prompt_for(&turns));
 
     let Some(answer) = get_answer(
         app,
@@ -289,14 +418,25 @@ pub async fn ask<C: Fn() -> bool>(app: &AppHandle, question: String, is_cancelle
         &turns,
         &is_cancelled,
         None,
+        &plan,
+        options.id,
     )
     .await
     else {
         return;
     };
-    record(app, &state, epoch, question, answer, |c, q, a| {
-        c.push_exchange(q, a)
-    });
+    if !record(
+        app,
+        &state,
+        epoch,
+        question,
+        answer.clone(),
+        &options,
+        |c, q, a| c.push_exchange(q, a),
+    ) {
+        return;
+    }
+    deliver(app, &plan, &options, answer, &is_cancelled).await;
 }
 
 /// Ask `question` about the window in `capture`: prepare the screenshot, get
@@ -306,6 +446,7 @@ pub async fn ask_about_screen<C: Fn() -> bool>(
     app: &AppHandle,
     question: String,
     capture: Option<Capture>,
+    options: AskOptions,
     is_cancelled: C,
 ) {
     let Some(state) = app.try_state::<AssistantState>() else {
@@ -313,16 +454,19 @@ pub async fn ask_about_screen<C: Fn() -> bool>(
         return;
     };
     let _in_flight = InFlight::new(&state.in_flight);
+    let id = options.id;
 
     let Some(capture) = capture else {
         let message = "The screenshot is missing. Press the shortcut again.".to_string();
-        return emit_screen_error(app, &question, message, None);
+        return emit_screen_error(app, &question, message, None, id);
     };
     let window = capture.window;
     let settings = get_settings(app);
+    let plan = Plan::new(&settings, &question, &options);
+    let question = plan.question.clone();
     let target = match resolve_screen_target(&settings) {
         Ok(target) => target,
-        Err(message) => return emit_screen_error(app, &question, message, Some(window)),
+        Err(message) => return emit_screen_error(app, &question, message, Some(window), id),
     };
 
     let prepared =
@@ -334,7 +478,7 @@ pub async fn ask_about_screen<C: Fn() -> bool>(
         Ok(prepared) => prepared,
         Err(e) => {
             let message = format!("Couldn't prepare the screenshot ({e}).");
-            return emit_screen_error(app, &question, message, Some(window));
+            return emit_screen_error(app, &question, message, Some(window), id);
         }
     };
     debug!(
@@ -365,9 +509,12 @@ pub async fn ask_about_screen<C: Fn() -> bool>(
         .await;
         if confirmation != Confirmation::Send {
             info!("Screenshot not sent ({confirmation:?})");
+            crate::ask_box::question_ended(app, id);
             return;
         }
-        crate::overlay::show_processing_overlay(app);
+        if options.source == Source::Spoken {
+            crate::overlay::show_processing_overlay(app);
+        }
     }
 
     let (turns, epoch) = {
@@ -379,7 +526,7 @@ pub async fn ask_about_screen<C: Fn() -> bool>(
             inner.epoch,
         )
     };
-    let system_prompt = state.lock().conversation.prompt_for(&turns);
+    let system_prompt = plan.prompt(&state.lock().conversation.prompt_for(&turns));
 
     let Some(answer) = get_answer(
         app,
@@ -389,20 +536,62 @@ pub async fn ask_about_screen<C: Fn() -> bool>(
         &turns,
         &is_cancelled,
         Some(window),
+        &plan,
+        id,
     )
     .await
     else {
         return;
     };
-    record(app, &state, epoch, question, answer, move |c, q, a| {
-        c.push_screen_exchange(q, a, image)
-    });
+    if !record(
+        app,
+        &state,
+        epoch,
+        question,
+        answer.clone(),
+        &options,
+        move |c, q, a| c.push_screen_exchange(q, a, image),
+    ) {
+        return;
+    }
+    deliver(app, &plan, &options, answer, &is_cancelled).await;
+}
+
+/// Kusema paste-the-answer: type the answer into the document, if asked to.
+async fn deliver<C: Fn() -> bool>(
+    app: &AppHandle,
+    plan: &Plan,
+    options: &AskOptions,
+    answer: String,
+    is_cancelled: &C,
+) {
+    if !plan.delivery.type_it || is_cancelled() {
+        return;
+    }
+    let Some(target) = options.target else {
+        insert::tell(app, &insert::InsertProblem::NoTarget, None);
+        return;
+    };
+    if let Some(style) = &plan.style {
+        crate::app_styles::announce(app, style);
+    }
+    // From the Ask box: it closes, handing focus back if it still had it.
+    // Nothing is brought to the front here: if the user went elsewhere, the
+    // answer waits for them to come back.
+    if options.source == Source::AskBox {
+        crate::ask_box::close_for_typing(app);
+    }
+    let app = app.clone();
+    let _ =
+        tauri::async_runtime::spawn_blocking(move || insert::insert(&app, target, &answer, false))
+            .await;
 }
 
 /// Send the conversation and speak the reply as it streams in. Returns the
 /// answer, or `None` after reporting a failure (or on cancel). `screen`: the
 /// question is about a screenshot of this window, so failures are also shown
 /// beside it.
+#[allow(clippy::too_many_arguments)]
 async fn get_answer<C: Fn() -> bool>(
     app: &AppHandle,
     question: &str,
@@ -411,10 +600,12 @@ async fn get_answer<C: Fn() -> bool>(
     turns: &[ChatTurn],
     is_cancelled: &C,
     screen: Option<CapturedWindow>,
+    plan: &Plan,
+    id: u64,
 ) -> Option<String> {
     let with_image = turns.iter().any(|t| t.image.is_some());
     debug!(
-        "Asking assistant via provider '{}' (model: {}, {} messages{})",
+        "Asking assistant via provider '{}' (model: {}, {} messages{}{}{})",
         target.provider.id,
         target.model,
         turns.len(),
@@ -422,18 +613,28 @@ async fn get_answer<C: Fn() -> bool>(
             ", with a screenshot"
         } else {
             ""
-        }
+        },
+        if plan.tutor { ", tutor style" } else { "" },
+        if plan.delivery.type_it {
+            ", to type"
+        } else {
+            ""
+        },
     );
     let fail = |message: String| {
         if screen.is_some() || with_image {
-            emit_screen_error(app, question, message, screen);
+            emit_screen_error(app, question, message, screen, id);
         } else {
-            emit_error(app, question, message);
+            emit_error(app, question, message, id);
         }
     };
 
     // Speak each sentence as soon as it has streamed in.
-    let mut speech = crate::tts::begin_reply(app);
+    let mut speech = plan
+        .delivery
+        .speak
+        .then(|| crate::tts::begin_reply(app))
+        .flatten();
     let request = llm_client::send_conversation(
         &target.provider,
         target.api_key.clone(),
@@ -444,10 +645,18 @@ async fn get_answer<C: Fn() -> bool>(
             if let Some(speech) = speech.as_mut() {
                 speech.push(text);
             }
+            let _ = app.emit(
+                "assistant-stream",
+                AssistantStream {
+                    id,
+                    text: text.to_string(),
+                },
+            );
         },
     );
     let Some(result) = complete_unless_cancelled(request, is_cancelled).await else {
         info!("Assistant request cancelled");
+        crate::ask_box::question_ended(app, id);
         return None;
     };
 
@@ -462,6 +671,7 @@ async fn get_answer<C: Fn() -> bool>(
                 question,
                 describe_error(&target.provider, &e, with_image),
                 screen,
+                id,
             );
             return None;
         }
@@ -482,28 +692,122 @@ async fn get_answer<C: Fn() -> bool>(
 }
 
 /// Add a finished exchange to the conversation (unless it was cleared while
-/// the question was out) and emit `assistant-reply`.
+/// the question was out) and emit `assistant-reply`. `false` if it was
+/// dropped.
 fn record(
     app: &AppHandle,
     state: &AssistantState,
     epoch: u64,
     question: String,
     answer: String,
+    options: &AskOptions,
     push: impl FnOnce(&mut Conversation, String, String),
-) {
+) -> bool {
     {
         let mut inner = state.lock();
         if inner.epoch != epoch {
             debug!("Dropping assistant reply for a conversation that was cleared");
             drop(inner);
             crate::tts::stop(app);
-            return;
+            crate::ask_box::question_ended(app, options.id);
+            return false;
         }
         push(&mut inner.conversation, question.clone(), answer.clone());
+        if let Some(target) = options.target {
+            inner.answer_targets.push((answer.clone(), target));
+            let excess = inner
+                .answer_targets
+                .len()
+                .saturating_sub(MAX_ANSWER_TARGETS);
+            inner.answer_targets.drain(..excess);
+        }
     }
     crate::setup::first_wins::record(app, crate::setup::first_wins::Win::Asked);
 
-    let _ = app.emit("assistant-reply", AssistantReply { question, answer });
+    let _ = app.emit(
+        "assistant-reply",
+        AssistantReply {
+            question,
+            answer,
+            id: options.id,
+        },
+    );
+    true
+}
+
+/// The window `answer` was asked from, if it's one Kusema could type into.
+fn target_of(app: &AppHandle, answer: &str) -> Option<insert::DocTarget> {
+    let state = app.try_state::<AssistantState>()?;
+    let inner = state.lock();
+    inner
+        .answer_targets
+        .iter()
+        .rev()
+        .find(|(text, _)| text == answer)
+        .map(|(_, target)| *target)
+}
+
+/// Kusema paste-the-answer: type an earlier answer into the window it was
+/// asked from, bringing that window to the front first.
+pub async fn insert_answer(app: &AppHandle, answer: String) -> Result<(), String> {
+    let Some(target) = target_of(app, &answer) else {
+        insert::tell(app, &insert::InsertProblem::NoTarget, None);
+        return Err("noTarget".to_string());
+    };
+    let app = app.clone();
+    tauri::async_runtime::spawn_blocking(move || insert::insert(&app, target, &answer, true))
+        .await
+        .map_err(|e| e.to_string())?
+        .map_err(|problem| format!("{problem:?}"))
+}
+
+/// Type an answer from the Assistant page into the document it was asked from.
+#[tauri::command]
+#[specta::specta]
+pub async fn insert_assistant_answer(app: AppHandle, answer: String) -> Result<(), String> {
+    insert_answer(&app, answer).await
+}
+
+/// The answers that know which document they're for.
+#[tauri::command]
+#[specta::specta]
+pub fn get_insertable_answers(state: State<'_, AssistantState>) -> Vec<String> {
+    state
+        .lock()
+        .answer_targets
+        .iter()
+        .map(|(answer, _)| answer.clone())
+        .collect()
+}
+
+/// A question typed on the Assistant page. Returns its id at once; the answer
+/// comes as `assistant-stream`, then `assistant-reply` or `assistant-error`.
+#[tauri::command]
+#[specta::specta]
+pub fn ask_typed(app: AppHandle, question: String) -> Result<u64, String> {
+    let question = question.trim().to_string();
+    if question.is_empty() {
+        return Err("empty".to_string());
+    }
+    let options = AskOptions {
+        source: Source::Page,
+        target: None,
+        id: next_id(&app),
+    };
+    let id = options.id;
+    tauri::async_runtime::spawn(async move {
+        let cancelled = crate::ask_box::cancel_flag(&app, id);
+        ask(&app, question, options, || cancelled.is_set()).await;
+    });
+    Ok(id)
+}
+
+/// Stop a typed question waiting for its answer, and any reply being spoken.
+#[tauri::command]
+#[specta::specta]
+pub fn cancel_typed_question(app: AppHandle, id: u64) {
+    crate::ask_box::cancel(&app, id);
+    crate::tts::stop(&app);
 }
 
 /// The current conversation, oldest message first.
@@ -521,6 +825,7 @@ pub fn clear_assistant_conversation(app: AppHandle, state: State<'_, AssistantSt
     {
         let mut inner = state.lock();
         inner.conversation.clear();
+        inner.answer_targets.clear();
         inner.epoch += 1;
     }
     screen::discard(&app);
@@ -564,6 +869,41 @@ pub fn change_assistant_screen_model_setting(
         .map(|m| m.trim().to_string())
         .filter(|m| !m.is_empty());
     write_settings(&app, settings);
+    Ok(())
+}
+
+fn assistant_setting_changed(app: &AppHandle, settings: AppSettings, name: &str) {
+    write_settings(app, settings);
+    let _ = app.emit("settings-changed", serde_json::json!({ "setting": name }));
+}
+
+#[tauri::command]
+#[specta::specta]
+pub fn change_assistant_speak_typed_setting(app: AppHandle, enabled: bool) -> Result<(), String> {
+    let mut settings = get_settings(&app);
+    settings.assistant_speak_typed = enabled;
+    assistant_setting_changed(&app, settings, "assistant_speak_typed");
+    Ok(())
+}
+
+#[tauri::command]
+#[specta::specta]
+pub fn change_assistant_answer_to_setting(
+    app: AppHandle,
+    answer_to: AnswerTo,
+) -> Result<(), String> {
+    let mut settings = get_settings(&app);
+    settings.assistant_answer_to = answer_to;
+    assistant_setting_changed(&app, settings, "assistant_answer_to");
+    Ok(())
+}
+
+#[tauri::command]
+#[specta::specta]
+pub fn change_assistant_tutor_setting(app: AppHandle, enabled: bool) -> Result<(), String> {
+    let mut settings = get_settings(&app);
+    settings.assistant_tutor = enabled;
+    assistant_setting_changed(&app, settings, "assistant_tutor");
     Ok(())
 }
 

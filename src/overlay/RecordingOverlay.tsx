@@ -37,6 +37,72 @@ type EditNotice = {
 /** How long a voice editing message replaces continuous dictation's status. */
 const EDIT_NOTICE_MS = 5000;
 
+/** Kusema: how long the "done" look shows as the pill fades (ov-fade is 200ms). */
+const LEAVING_MS = 260;
+
+/** Kusema: which mode the pill is listening for (its icon). */
+type PillMode = "dictation" | "ask" | "ask_screen" | "edit" | "continuous";
+
+/** Kusema styles per app: the style about to change the text. */
+type AppStyleEvent = { id: string; name: string | null };
+
+/** Continuous dictation notices that mean something went wrong. */
+const ERROR_NOTICES: DictationNotice[] = [
+  "microphone_lost",
+  "cant_keep_up",
+  "transcription_failed",
+  "paste_failed",
+];
+
+/** The pill's look, from what's happening. */
+type Look =
+  | "listening"
+  | "thinking"
+  | "speaking"
+  | "paused"
+  | "error"
+  | "notice"
+  | "done";
+
+const PATHS: Record<PillMode, string> = {
+  // Microphone.
+  dictation:
+    "M8 2.5a2 2 0 0 1 2 2v3.5a2 2 0 0 1-4 0V4.5a2 2 0 0 1 2-2ZM4.5 7.5a3.5 3.5 0 0 0 7 0M8 11v2.5",
+  // Microphone with a loop: hands-free.
+  continuous:
+    "M8 2.5a2 2 0 0 1 2 2v3.5a2 2 0 0 1-4 0V4.5a2 2 0 0 1 2-2ZM4.5 7.5a3.5 3.5 0 0 0 7 0M8 11v2.5M2.5 5.5v4M13.5 5.5v4",
+  // Speech bubble.
+  ask: "M3 4.5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2H7.5L4.5 13v-2.5H5a2 2 0 0 1-2-2Z",
+  // Screen.
+  ask_screen: "M2.5 3.5h11v7h-11ZM6 13.5h4M8 10.5v3",
+  // Pencil.
+  edit: "M10.5 3 13 5.5 6 12.5H3.5V10Z",
+};
+
+const ICONS = {
+  pause: "M5.5 3.5v9M10.5 3.5v9",
+  warn: "M8 2.5 14 13H2ZM8 6.5v3M8 11.2v.1",
+  info: "M8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12ZM8 7.5v3.5M8 5.2v.1",
+  speak:
+    "M3 6.5h2.5L9 3.5v9l-3.5-3H3ZM11 6a2.5 2.5 0 0 1 0 4M12.5 4.5a4.5 4.5 0 0 1 0 7",
+};
+
+const PillIcon: React.FC<{ d: string; className?: string }> = ({
+  d,
+  className = "",
+}) => (
+  <svg className={`sicon ${className}`} viewBox="0 0 16 16" aria-hidden="true">
+    <path
+      d={d}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
 const DICTATION_NOTICES: Record<DictationNotice, string> = {
   nothing_to_scratch: "overlay.dictation.nothingToScratch",
   scratch_window_changed: "overlay.dictation.scratchWindowChanged",
@@ -92,6 +158,12 @@ const RecordingOverlay: React.FC = () => {
   // Kusema voice editing: the message shown, and until when in dictation.
   const [editNotice, setEditNotice] = useState("");
   const [editNoticeUntil, setEditNoticeUntil] = useState(0);
+  // Kusema: the mode being listened for, the app style in use, and the
+  // moment the pill is leaving (its "done" flourish).
+  const [mode, setMode] = useState<PillMode>("dictation");
+  const [appStyle, setAppStyle] = useState<AppStyleEvent | null>(null);
+  const [leaving, setLeaving] = useState(false);
+  const leavingTimerRef = useRef<ReturnType<typeof setTimeout>>();
   // Bumped on each new streaming session so the Live card remounts fresh (replays
   // the pop-in, and never animates in from the previous panel's open size).
   const [session, setSession] = useState(0);
@@ -117,6 +189,11 @@ const RecordingOverlay: React.FC = () => {
         // Reset synchronously before settings I/O. A fast microphone can emit
         // recording-ready while the awaits below are in flight; resetting after
         // them would overwrite that event and leave the overlay stuck arming.
+        clearTimeout(leavingTimerRef.current);
+        setLeaving(false);
+        if (overlayState !== "processing" && overlayState !== "notice") {
+          setAppStyle(null);
+        }
         if (overlayState === "dictating") {
           setDictation(null);
           smoothedLevelsRef.current = Array(16).fill(0);
@@ -159,9 +236,25 @@ const RecordingOverlay: React.FC = () => {
       });
 
       const unlistenHide = await listen("hide-overlay", () => {
+        // The "done" look plays while the pill fades, then it's gone, so a
+        // later show never flashes this content.
+        setLeaving(true);
+        clearTimeout(leavingTimerRef.current);
+        leavingTimerRef.current = setTimeout(
+          () => setLeaving(false),
+          LEAVING_MS,
+        );
         setIsVisible(false);
         setCaptureReady(false);
       });
+
+      const unlistenMode = await listen<PillMode>("overlay-mode", (event) =>
+        setMode(event.payload),
+      );
+
+      const unlistenStyle = await listen<AppStyleEvent>("app-style", (event) =>
+        setAppStyle(event.payload),
+      );
 
       const unlistenEditNotice = await listen<EditNotice>(
         "voice-edit-notice",
@@ -247,6 +340,8 @@ const RecordingOverlay: React.FC = () => {
       return () => {
         unlistenShow();
         unlistenHide();
+        unlistenMode();
+        unlistenStyle();
         unlistenReady();
         unlistenEditNotice();
         unlistenLevel();
@@ -256,6 +351,7 @@ const RecordingOverlay: React.FC = () => {
         unlistenPhase();
         unlistenModel();
         clearTimeout(modelLoadTimerRef.current);
+        clearTimeout(leavingTimerRef.current);
       };
     };
 
@@ -298,7 +394,8 @@ const RecordingOverlay: React.FC = () => {
     setOverflowing(false);
   }, [session]);
 
-  if (!isVisible) return null;
+  // Kusema: kept mounted for a moment after hiding, for the "done" look.
+  if (!isVisible && !leaving) return null;
 
   // Re-pin when the user is within ~a line of the bottom; unpin otherwise.
   const handleStreamScroll = () => {
@@ -313,6 +410,29 @@ const RecordingOverlay: React.FC = () => {
   const transcribingLabel = modelLoading
     ? t("overlay.loadingModel")
     : t("overlay.transcribing");
+
+  // Kusema: the voice level drives the glow; the style, when one is shaping
+  // the text, is named in the working label.
+  const level = Math.min(
+    1,
+    (levels.reduce((sum, v) => sum + v, 0) / Math.max(1, levels.length)) * 1.6,
+  );
+  const styleName = appStyle
+    ? (appStyle.name ??
+      t(`settings.appStyles.builtIn.${appStyle.id}.name`, {
+        defaultValue: appStyle.id,
+      }))
+    : null;
+  const styledLabel = (label: string) =>
+    styleName ? t("overlay.withStyle", { name: styleName }) : label;
+  const stageStyle = { "--lvl": level.toFixed(3) } as React.CSSProperties;
+  const glow = <span className="sglow" aria-hidden="true" />;
+  const modeIcon = (pillMode: PillMode) => (
+    <PillIcon
+      d={PATHS[pillMode]}
+      className={captureReady || pillMode === "continuous" ? "ready" : "arming"}
+    />
+  );
 
   // ---- Shared building blocks (one visual language for every overlay form) ----
   const waveform = (
@@ -354,7 +474,7 @@ const RecordingOverlay: React.FC = () => {
   const listeningRow = (showTimer: boolean, showCancel: boolean) => (
     <div className="sbase">
       <div className="sbase-l">
-        <span className={`sdot ${captureReady ? "ready" : "arming"}`} />
+        {modeIcon(state === "editing" ? "edit" : mode)}
         {state === "editing" && (
           <span className="pchip">{t("overlay.editing")}</span>
         )}
@@ -373,10 +493,16 @@ const RecordingOverlay: React.FC = () => {
   const workingRow = (label: string, showCancel: boolean) => (
     <div className="sbase">
       <div className="sbase-l">
-        <span className="sspinner" />
+        {state === "speaking" ? (
+          <PillIcon d={ICONS.speak} className="ready speaking" />
+        ) : (
+          <span className="sspinner" />
+        )}
         {privilegedChip}
       </div>
-      <span className="swork-label">{label}</span>
+      <span className="swork-label" role="status" title={label}>
+        {label}
+      </span>
       <div className="sbase-r">{showCancel && cancelBtn}</div>
     </div>
   );
@@ -401,40 +527,64 @@ const RecordingOverlay: React.FC = () => {
       : 0;
     const listening = phase === "dictating";
     const stoppable = phase !== "finishing" && phase !== "ended";
+    const failed =
+      !!dictation?.notice && ERROR_NOTICES.includes(dictation.notice);
+    const look: Look = leaving
+      ? "done"
+      : failed
+        ? "error"
+        : phase === "paused" || phase === "no_target"
+          ? "paused"
+          : listening
+            ? "listening"
+            : "thinking";
 
     return (
       <div
         dir={direction}
-        className={`ov-stage ${position} ov-fade ${isVisible ? "show" : ""}`}
+        className={`ov-stage ${position} ov-fade ${isVisible ? "show" : ""} look-${look}`}
+        style={stageStyle}
       >
-        <div className="scard compact dictating">
-          <div className="drow">
-            <span className={`sdot ${listening ? "ready" : "arming"}`} />
-            {privilegedChip}
-            {listening && (
-              <div className="swave ready">
-                {levels.slice(0, 5).map((v, i) => (
-                  <i
-                    key={i}
-                    style={{
-                      height: `${Math.max(3, Math.min(18, 3 + Math.pow(v, 0.7) * 15))}px`,
-                    }}
-                  />
-                ))}
-              </div>
-            )}
-            <span className="dlabel" role="status" title={label}>
-              {label}
-            </span>
-            <span className="stimer">{fmtTime(seconds)}</span>
-            {stoppable && (
-              <button
-                className="dstop"
-                onClick={() => commands.cancelOperation()}
-              >
-                {t("overlay.dictation.stop")}
-              </button>
-            )}
+        <div className="spill">
+          {glow}
+          <div className={`scard compact dictating look-${look}`}>
+            <div className="drow">
+              {look === "error" ? (
+                <PillIcon d={ICONS.warn} className="ready" />
+              ) : look === "paused" ? (
+                <PillIcon d={ICONS.pause} className="ready" />
+              ) : (
+                <PillIcon
+                  d={PATHS.continuous}
+                  className={listening ? "ready" : "arming"}
+                />
+              )}
+              {privilegedChip}
+              {listening && (
+                <div className="swave ready">
+                  {levels.slice(0, 5).map((v, i) => (
+                    <i
+                      key={i}
+                      style={{
+                        height: `${Math.max(3, Math.min(18, 3 + Math.pow(v, 0.7) * 15))}px`,
+                      }}
+                    />
+                  ))}
+                </div>
+              )}
+              <span className="dlabel" role="status" title={label}>
+                {label}
+              </span>
+              <span className="stimer">{fmtTime(seconds)}</span>
+              {stoppable && (
+                <button
+                  className="dstop"
+                  onClick={() => commands.cancelOperation()}
+                >
+                  {t("overlay.dictation.stop")}
+                </button>
+              )}
+            </div>
           </div>
         </div>
       </div>
@@ -446,12 +596,19 @@ const RecordingOverlay: React.FC = () => {
     return (
       <div
         dir={direction}
-        className={`ov-stage ${position} ov-fade ${isVisible ? "show" : ""}`}
+        className={`ov-stage ${position} ov-fade ${isVisible ? "show" : ""} look-notice`}
+        style={stageStyle}
       >
-        <div className="scard compact notice">
-          <p className="snotice" role="status">
-            {editNotice}
-          </p>
+        <div className="spill">
+          {glow}
+          <div className="scard compact notice look-notice">
+            <div className="snotice-row">
+              <PillIcon d={ICONS.info} className="ready" />
+              <p className="snotice" role="status">
+                {editNotice}
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     );
@@ -472,49 +629,54 @@ const RecordingOverlay: React.FC = () => {
     const open = hasText || loadingNotice || (loadNoticeShown && !working);
     const collapsed = working && !hasText;
 
+    const look: Look = leaving ? "done" : working ? "thinking" : "listening";
     return (
       <div
         dir={direction}
-        className={`ov-stage ${position} ${privileged ? "privileged" : ""}`}
+        className={`ov-stage ${position} ${privileged ? "privileged" : ""} look-${look}`}
+        style={stageStyle}
       >
-        <div
-          key={session}
-          className={`scard ${open ? "open" : ""} ${collapsed ? "working" : ""} ${
-            isVisible ? "" : "leaving"
-          }`}
-        >
-          <div className="stext">
-            <div className="stext-clip">
-              <div
-                className={`stext-cap ${overflowing ? "overflowing" : ""}`}
-                ref={capRef}
-                onScroll={handleStreamScroll}
-              >
-                <p>
-                  {loadingNotice && (
-                    <span className="sloading">
-                      {t("overlay.loadingModel")}
+        <div className="spill">
+          {glow}
+          <div
+            key={session}
+            className={`scard ${open ? "open" : ""} ${collapsed ? "working" : ""} ${
+              isVisible ? "" : "leaving"
+            }`}
+          >
+            <div className="stext">
+              <div className="stext-clip">
+                <div
+                  className={`stext-cap ${overflowing ? "overflowing" : ""}`}
+                  ref={capRef}
+                  onScroll={handleStreamScroll}
+                >
+                  <p>
+                    {loadingNotice && (
+                      <span className="sloading">
+                        {t("overlay.loadingModel")}
+                      </span>
+                    )}
+                    <span className="committed">
+                      {streamText.committed ? streamText.committed + " " : ""}
                     </span>
-                  )}
-                  <span className="committed">
-                    {streamText.committed ? streamText.committed + " " : ""}
-                  </span>
-                  <span className="tentative">{streamText.tentative}</span>
-                  {/* Drop the blinking caret once finalizing — it's no longer
+                    <span className="tentative">{streamText.tentative}</span>
+                    {/* Drop the blinking caret once finalizing — it's no longer
                       capturing, and a static spinner conveys the work. */}
-                  {!working && !loadingNotice && <span className="scaret" />}
-                </p>
+                    {!working && !loadingNotice && <span className="scaret" />}
+                  </p>
+                </div>
               </div>
             </div>
+            {working
+              ? workingRow(
+                  workKind === "polishing"
+                    ? styledLabel(t("overlay.processing"))
+                    : transcribingLabel,
+                  true,
+                )
+              : listeningRow(open, true)}
           </div>
-          {working
-            ? workingRow(
-                workKind === "polishing"
-                  ? t("overlay.processing")
-                  : transcribingLabel,
-                true,
-              )
-            : listeningRow(open, true)}
         </div>
       </div>
     );
@@ -528,24 +690,35 @@ const RecordingOverlay: React.FC = () => {
     state === "transcribing" || state === "processing" || state === "speaking";
   const workLabel =
     state === "processing"
-      ? t("overlay.processing")
+      ? styledLabel(t("overlay.processing"))
       : state === "speaking"
         ? t("overlay.speaking")
         : transcribingLabel;
+  const look: Look = leaving
+    ? "done"
+    : state === "speaking"
+      ? "speaking"
+      : working
+        ? "thinking"
+        : "listening";
 
   return (
     <div
       dir={direction}
       className={`ov-stage ${position} ov-fade ${isVisible ? "show" : ""} ${
         privileged ? "privileged" : ""
-      }`}
+      } look-${look}`}
+      style={stageStyle}
     >
-      <div
-        className={`scard compact ${working && isVisible ? "cworking" : ""} ${
-          state === "editing" ? "editing" : ""
-        }`}
-      >
-        {working ? workingRow(workLabel, true) : listeningRow(false, true)}
+      <div className="spill">
+        {glow}
+        <div
+          className={`scard compact ${working && (isVisible || leaving) ? "cworking" : ""} ${
+            state === "editing" ? "editing" : ""
+          }`}
+        >
+          {working ? workingRow(workLabel, true) : listeningRow(false, true)}
+        </div>
       </div>
     </div>
   );

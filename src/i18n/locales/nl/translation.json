@@ -450,6 +450,10 @@
           "voice_edit": {
             "name": "Bewerken met spraak",
             "description": "Selecteer tekst, houd de sneltoets ingedrukt en zeg hoe die moet veranderen (“maak dit formeler”), of zeg een opdracht zoals “select last word”."
+          },
+          "ask_box": {
+            "name": "Typ naar Kusema",
+            "description": "Opent een klein vak bij je venster om een vraag te typen. Esc sluit het."
           }
         },
         "errors": {
@@ -828,7 +832,9 @@
         "new": "Nieuw gesprek",
         "screenshot": "Schermafbeelding",
         "noProvider": "'Vraag het Kusema' heeft een AI-model nodig om te antwoorden. Kies er een bij Instellingen.",
-        "openSettings": "Instellingen openen"
+        "openSettings": "Instellingen openen",
+        "typePlaceholder": "Typ een vraag… (Enter om te vragen)",
+        "insert": "In document invoegen"
       },
       "voice": {
         "title": "Stem",
@@ -865,6 +871,26 @@
         "label": "Assistent",
         "conversation": "Gesprek",
         "settings": "Instellingen"
+      },
+      "answers": {
+        "title": "Getypte vragen en antwoorden",
+        "description": "Typ een vraag in plaats van hem uit te spreken, kies waar antwoorden heen gaan en krijg stap voor stap hulp.",
+        "answerTo": {
+          "label": "Antwoord gaat naar",
+          "description": "Het antwoord uitspreken, typen in het document waarin je werkte, of allebei. Eindig een vraag met ‘…and type it’ of ‘…put it in the document’ om alleen dat antwoord te typen.",
+          "speak": "Uitspreken",
+          "type": "Typen in document",
+          "both": "Allebei"
+        },
+        "speakTyped": {
+          "label": "Antwoorden op getypte vragen uitspreken",
+          "description": "Ook antwoorden op vragen die je typt hardop voorlezen. Uit verschijnen ze alleen op het scherm."
+        },
+        "tutor": {
+          "label": "Tutorstijl",
+          "description": "Stap voor stap uitleggen, begrip controleren en je naar het antwoord leiden in plaats van huiswerk voor te zeggen, tenzij je om het antwoord vraagt. Je kunt ook ‘explain step by step’ zeggen in elke vraag.",
+          "note": "Volg de regels van je school of examen over het gebruik van AI."
+        }
       }
     },
     "postProcessing": {
@@ -1302,7 +1328,7 @@
       "description": "Een gloed langs de randen van je scherm laat zien dat Kusema luistert. Alleen jij ziet hem: hij komt niet in schermafbeeldingen of bij schermdelen.",
       "enabled": {
         "label": "Schermgloed",
-        "description": "Toon een gekleurde gloed rond het scherm waarop je werkt terwijl Kusema luistert. Je kunt er gewoon doorheen klikken en typen."
+        "description": "Een gekleurde gloed tonen rond het scherm waarop je werkt tijdens doorlopend dicteren en vragen. Je kunt er nog steeds doorheen klikken en typen."
       },
       "thickness": {
         "label": "Dikte",
@@ -1330,6 +1356,10 @@
       "sounds": {
         "label": "Geluiden bij doorlopend dicteren",
         "description": "Speelt een kort geluid als doorlopend dicteren begint en stopt. Geluiden voor ander dicteren staan onder Geluid, verderop."
+      },
+      "dictation": {
+        "label": "Gloed bij normaal dicteren",
+        "description": "De gloed ook tonen terwijl je de dicteersnelkoppeling ingedrukt houdt. Doorlopend dicteren en vragen gloeien altijd als de schermgloed aan staat."
       }
     },
     "voiceEdit": {
@@ -1393,6 +1423,40 @@
         "imported": "{{added}} nieuwe woorden geïmporteerd ({{existing}} stonden er al).",
         "exported": "{{number}} woorden geëxporteerd."
       }
+    },
+    "appStyles": {
+      "title": "Stijlen per app",
+      "description": "AI-opschoning, AI-spraakbewerkingen en antwoorden die in een document worden getypt volgen de stijl van het programma waar ze in gaan. Alleen de programmanaam wordt gebruikt, op deze computer. Lokale opschoning verandert niet.",
+      "enabled": {
+        "label": "Stijlen per app gebruiken",
+        "description": "Uit krijgt elk programma dezelfde neutrale tekst."
+      },
+      "builtIn": {
+        "email": {
+          "name": "E-mail",
+          "instruction": "Opmaken als e-mail: een korte aanhef, beknopte alinea's en een afsluiting als het een heel bericht is. De stem van de schrijver behouden."
+        },
+        "formal": {
+          "name": "Formeel",
+          "instruction": "Een formele, professionele toon gebruiken: volledige zinnen, geen straattaal of samentrekkingen."
+        },
+        "casual": {
+          "name": "Kort en informeel",
+          "instruction": "Kort en informeel houden: korte zinnen en eenvoudige, vriendelijke woorden, zonder formele aanhef of afsluiting."
+        }
+      },
+      "newName": "Nieuwe stijl",
+      "name": "Naam van de stijl",
+      "instruction": "Hoe te schrijven",
+      "instructionPlaceholder": "Beschrijf de stijl in gewone woorden, zoals ‘Kort en vriendelijk, zonder afsluiting.’",
+      "apps": "Programma's:",
+      "addApp": "Programma toevoegen",
+      "addAppPlaceholder": "bijv. notepad.exe",
+      "removeApp": "{{app}} verwijderen",
+      "remove": "Stijl ‘{{name}}’ verwijderen",
+      "add": "Stijl toevoegen",
+      "reset": "Standaard herstellen",
+      "neutral": "Programma's die niet in de lijst staan krijgen neutrale tekst."
     }
   },
   "footer": {
@@ -1475,7 +1539,15 @@
       "pasteFailed": "Kon dat niet typen; het staat in Geschiedenis"
     },
     "privileged": "Privileged",
-    "editing": "Bewerken"
+    "editing": "Bewerken",
+    "withStyle": "Stijl ‘{{name}}’…",
+    "answer": {
+      "waiting": "Klik terug in je document om het antwoord te typen.",
+      "noTarget": "Kusema weet niet voor welk document dit antwoord is. Klik in het document en vraag het opnieuw.",
+      "windowChanged": "Het venster is veranderd, dus het antwoord is niet getypt. Voeg het in vanaf de pagina Assistent.",
+      "notTyping": "De plakmethode staat op ‘Geen’, dus het antwoord is niet getypt.",
+      "failed": "Kon het antwoord niet in dit venster typen."
+    }
   },
   "screenCard": {
     "title": "Deze schermafbeelding versturen?",
@@ -1586,5 +1658,20 @@
       "corrected": "Gecorrigeerd.",
       "learned": "Gecorrigeerd. Kusema heeft geleerd: {{name}}"
     }
+  },
+  "askBox": {
+    "title": "Vraag het Kusema",
+    "placeholder": "Typ een vraag…",
+    "ask": "Vragen",
+    "screen": "Vraag over mijn scherm",
+    "screenUnavailable": "Klik eerst in een venster en open dan dit vak om erover te vragen.",
+    "typesInto": "Antwoorden kunnen worden getypt in {{app}}",
+    "style": "Stijl ‘{{name}}’",
+    "thinking": "Denkt na…",
+    "insert": "In document invoegen",
+    "stop": "Stoppen",
+    "close": "Sluiten",
+    "hint": "Enter vraagt · Shift+Enter: nieuwe regel · Esc sluit",
+    "noWindow": "Klik in het venster waarover je wilt vragen en open dit vak opnieuw."
   }
 }

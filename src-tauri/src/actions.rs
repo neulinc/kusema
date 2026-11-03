@@ -22,7 +22,7 @@ use serde::{Deserialize, Serialize};
 use specta::Type;
 use std::collections::HashMap;
 use std::future::Future;
-use std::sync::atomic::{AtomicU64, Ordering};
+use std::sync::atomic::{AtomicBool, AtomicU64, Ordering};
 use std::sync::Arc;
 use std::time::{Duration, Instant};
 use tauri::Manager;
@@ -105,6 +105,10 @@ impl Drop for FinishGuard {
     }
 }
 
+/// Kusema: the last press of an Assistant or editing hotkey said why it
+/// couldn't start (no window to look at or edit), so its release does nothing.
+static PRESS_REFUSED: AtomicBool = AtomicBool::new(false);
+
 // Shortcut Action Trait
 pub trait ShortcutAction: Send + Sync {
     fn start(&self, app: &AppHandle, binding_id: &str, shortcut_str: &str);
@@ -181,7 +185,12 @@ fn should_use_streaming_overlay(style: OverlayStyle, is_streaming: bool) -> bool
     style == OverlayStyle::Live && is_streaming
 }
 
-async fn post_process_transcription(settings: &AppSettings, transcription: &str) -> Option<String> {
+/// Kusema: `style` is the app's style (see `crate::app_styles`), if it has one.
+async fn post_process_transcription(
+    settings: &AppSettings,
+    transcription: &str,
+    style: Option<&str>,
+) -> Option<String> {
     if is_blank_transcription(transcription) {
         debug!("Post-processing skipped because the transcription is empty");
         return None;
@@ -236,6 +245,10 @@ async fn post_process_transcription(settings: &AppSettings, transcription: &str)
         debug!("Post-processing skipped because the selected prompt is empty");
         return None;
     }
+    let prompt = match style {
+        Some(style) => crate::app_styles::with_style(&prompt, style),
+        None => prompt,
+    };
 
     debug!(
         "Starting LLM post-processing with provider '{}' (model: {})",
@@ -440,7 +453,15 @@ pub(crate) async fn process_transcription_output(
         }) {
             crate::network::announce_refusal(app, &provider.label);
         }
-        if let Some(processed_text) = post_process_transcription(&settings, &final_text).await {
+        // Kusema styles per app: the program the text is about to go into.
+        let style = crate::app_styles::for_foreground(&settings);
+        if let Some(style) = &style {
+            crate::app_styles::announce(app, style);
+        }
+        let style = style.as_ref().map(|s| s.instruction.as_str());
+        if let Some(processed_text) =
+            post_process_transcription(&settings, &final_text, style).await
+        {
             post_processed_text = Some(processed_text.clone());
             final_text = processed_text;
 
@@ -472,14 +493,19 @@ impl ShortcutAction for TranscribeAction {
         crate::tts::stop(app);
         if matches!(self.assistant, Some(AskMode::Plain | AskMode::Screen)) {
             crate::tts::prepare(app);
+            // Kusema paste-the-answer: where "…and type it" would type.
+            crate::assistant::note_target_at_press(app);
         }
         // The window is captured now, before any overlay of ours can cover it.
         // If there's nothing that can be captured, say why instead of recording.
+        PRESS_REFUSED.store(false, Ordering::SeqCst);
         if self.assistant == Some(AskMode::Screen) && !crate::screen::capture_at_press(app) {
+            PRESS_REFUSED.store(true, Ordering::SeqCst);
             return;
         }
         // Kusema voice editing: the window and control with the caret, likewise.
         if self.assistant == Some(AskMode::Edit) && !crate::voice_edit::at_press(app) {
+            PRESS_REFUSED.store(true, Ordering::SeqCst);
             return;
         }
 
@@ -556,6 +582,16 @@ impl ShortcutAction for TranscribeAction {
         // doesn't stream (or whose capability is not known yet) gets the compact
         // pill instead of an oversized transparent live window.
         let overlay_started = Instant::now();
+        // Kusema: the pill's mode icon.
+        crate::overlay::set_mode(
+            app,
+            match self.assistant {
+                Some(AskMode::Plain) => "ask",
+                Some(AskMode::Screen) => "ask_screen",
+                Some(AskMode::Edit) => "edit",
+                None => "dictation",
+            },
+        );
         match settings.overlay_style {
             // Kusema: says which mode is listening.
             OverlayStyle::Live | OverlayStyle::Minimal if self.assistant == Some(AskMode::Edit) => {
@@ -661,6 +697,17 @@ impl ShortcutAction for TranscribeAction {
     }
 
     fn stop(&self, app: &AppHandle, binding_id: &str, _shortcut_str: &str) {
+        // Kusema: the press said why it couldn't start; there's nothing to
+        // stop, and a "Transcribing" pill would replace that message.
+        if PRESS_REFUSED.swap(false, Ordering::SeqCst) {
+            debug!("TranscribeAction::stop: the press was refused, nothing to stop");
+            // Still tells the coordinator this take is over.
+            drop(FinishGuard(
+                app.clone(),
+                Arc::clone(&app.state::<Arc<TranscriptionManager>>()),
+            ));
+            return;
+        }
         // Prevent a slow microphone from emitting a ready event or start chime
         // after the user has already requested stop.
         app.state::<Arc<AudioRecordingManager>>()
@@ -887,6 +934,7 @@ impl ShortcutAction for TranscribeAction {
                                         crate::assistant::ask(
                                             &ah,
                                             processed.final_text,
+                                            crate::assistant::AskOptions::spoken(&ah),
                                             is_cancelled,
                                         )
                                         .await
@@ -896,6 +944,7 @@ impl ShortcutAction for TranscribeAction {
                                             &ah,
                                             processed.final_text,
                                             screenshot,
+                                            crate::assistant::AskOptions::spoken(&ah),
                                             is_cancelled,
                                         )
                                         .await
@@ -1056,6 +1105,10 @@ impl ShortcutAction for CancelAction {
         if crate::screen::card::cancel_open(app) {
             return;
         }
+        // Kusema type-to-ask: with the Ask box in front, Escape closes it.
+        if crate::ask_box::cancel_open(app) {
+            return;
+        }
         utils::cancel_current_operation(app);
     }
 
@@ -1132,6 +1185,10 @@ pub static ACTION_MAP: Lazy<HashMap<String, Arc<dyn ShortcutAction>>> = Lazy::ne
     map.insert(
         crate::network::TOGGLE_BINDING.to_string(),
         Arc::new(crate::network::TogglePrivilegedAction) as Arc<dyn ShortcutAction>,
+    );
+    map.insert(
+        crate::ask_box::BINDING.to_string(),
+        Arc::new(crate::ask_box::AskBoxAction) as Arc<dyn ShortcutAction>,
     );
     map.insert(
         "cancel".to_string(),

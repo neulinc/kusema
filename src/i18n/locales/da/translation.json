@@ -450,6 +450,10 @@
           "voice_edit": {
             "name": "Rediger med stemmen",
             "description": "Marker tekst, hold derefter genvejen nede og sig, hvordan den skal ændres (“gør det mere formelt”), eller sig en kommando som “select last word”."
+          },
+          "ask_box": {
+            "name": "Skriv til Kusema",
+            "description": "Åbner en lille boks ved dit vindue, hvor du skriver et spørgsmål. Esc lukker den."
           }
         },
         "errors": {
@@ -828,7 +832,9 @@
         "new": "Ny samtale",
         "screenshot": "Skærmbillede",
         "noProvider": "\"Spørg Kusema\" skal bruge en AI-model for at svare. Vælg en under Indstillinger.",
-        "openSettings": "Åbn indstillinger"
+        "openSettings": "Åbn indstillinger",
+        "typePlaceholder": "Skriv et spørgsmål… (Enter for at spørge)",
+        "insert": "Indsæt i dokumentet"
       },
       "voice": {
         "title": "Stemme",
@@ -865,6 +871,26 @@
         "label": "Assistent",
         "conversation": "Samtale",
         "settings": "Indstillinger"
+      },
+      "answers": {
+        "title": "Skrevne spørgsmål og svar",
+        "description": "Skriv et spørgsmål i stedet for at sige det, vælg hvor svarene går hen, og få hjælp trin for trin.",
+        "answerTo": {
+          "label": "Svaret går til",
+          "description": "Læs svaret op, skriv det ind i det dokument, du arbejdede i, eller begge dele. Afslut et spørgsmål med “…and type it” eller “…put it in the document” for kun at skrive det svar ind.",
+          "speak": "Læs op",
+          "type": "Skriv ind i dokumentet",
+          "both": "Begge dele"
+        },
+        "speakTyped": {
+          "label": "Læs svar på skrevne spørgsmål op",
+          "description": "Læs også svar på spørgsmål, du skriver, op. Slået fra vises de kun på skærmen."
+        },
+        "tutor": {
+          "label": "Vejlederstil",
+          "description": "Forklar trin for trin, tjek forståelsen, og led dig frem til svaret i stedet for at udlevere færdige lektiesvar, medmindre du beder om svaret. Du kan også sige “explain step by step” i ethvert spørgsmål.",
+          "note": "Følg din skoles eller eksamens regler for brug af AI."
+        }
       }
     },
     "postProcessing": {
@@ -1302,7 +1328,7 @@
       "description": "Et lysskær langs skærmens kanter viser, at Kusema lytter. Kun du ser det: det kommer ikke med på skærmbilleder eller ved skærmdeling.",
       "enabled": {
         "label": "Lysskær på skærmen",
-        "description": "Vis et farvet lysskær rundt om den skærm, du arbejder på, mens Kusema lytter. Du kan stadig klikke og skrive igennem det."
+        "description": "Vis et farvet lysskær rundt om den skærm, du arbejder på, under løbende diktering og spørgsmål. Du kan stadig klikke og skrive gennem det."
       },
       "thickness": {
         "label": "Tykkelse",
@@ -1330,6 +1356,10 @@
       "sounds": {
         "label": "Lyde ved løbende diktat",
         "description": "Afspil en kort lyd, når løbende diktat starter og stopper. Lyde for anden diktat finder du under Lyd længere nede."
+      },
+      "dictation": {
+        "label": "Lysskær ved normal diktering",
+        "description": "Vis også lysskæret, mens du holder dikteringsgenvejen nede. Løbende diktering og spørgsmål lyser altid, når lysskæret på skærmen er slået til."
       }
     },
     "voiceEdit": {
@@ -1393,6 +1423,40 @@
         "imported": "Importerede {{added}} nye ord ({{existing}} fandtes allerede).",
         "exported": "Eksporterede {{number}} ord."
       }
+    },
+    "appStyles": {
+      "title": "Stilarter pr. app",
+      "description": "AI-oprydning, AI-stemmeredigeringer og svar, der skrives ind i et dokument, følger stilen i det program, de ender i. Kun programmets navn bruges, på denne computer. Lokal oprydning påvirkes ikke.",
+      "enabled": {
+        "label": "Brug stilarter pr. app",
+        "description": "Slået fra får alle programmer den samme neutrale tekst."
+      },
+      "builtIn": {
+        "email": {
+          "name": "E-mail",
+          "instruction": "Formatér som en e-mail: en kort hilsen, korte afsnit og en afslutning, når det er en hel besked. Bevar forfatterens stemme."
+        },
+        "formal": {
+          "name": "Formel",
+          "instruction": "Brug en formel, professionel tone: hele sætninger, intet slang, ingen sammentrækninger."
+        },
+        "casual": {
+          "name": "Kort og afslappet",
+          "instruction": "Hold det kort og afslappet: korte sætninger og enkle, venlige ord, uden formel hilsen eller afslutning."
+        }
+      },
+      "newName": "Ny stil",
+      "name": "Stilens navn",
+      "instruction": "Sådan skrives der",
+      "instructionPlaceholder": "Beskriv stilen med almindelige ord, fx “Kort og venlig, ingen afslutning.”",
+      "apps": "Programmer:",
+      "addApp": "Tilføj et program",
+      "addAppPlaceholder": "fx notepad.exe",
+      "removeApp": "Fjern {{app}}",
+      "remove": "Fjern stilen “{{name}}”",
+      "add": "Tilføj stil",
+      "reset": "Gendan standard",
+      "neutral": "Programmer, der ikke står på listen, får neutral tekst."
     }
   },
   "footer": {
@@ -1475,7 +1539,15 @@
       "pasteFailed": "Kunne ikke skrive det; det ligger i Historik"
     },
     "privileged": "Privileged",
-    "editing": "Redigerer"
+    "editing": "Redigerer",
+    "withStyle": "Stilen “{{name}}”…",
+    "answer": {
+      "waiting": "Klik tilbage i dit dokument for at skrive svaret ind.",
+      "noTarget": "Kusema ved ikke, hvilket dokument svaret er til. Klik i dokumentet, og spørg igen.",
+      "windowChanged": "Vinduet skiftede, så svaret blev ikke skrevet ind. Indsæt det fra siden Assistent.",
+      "notTyping": "Indsætningsmetoden er sat til “Ingen”, så svaret blev ikke skrevet ind.",
+      "failed": "Kunne ikke skrive svaret ind i dette vindue."
+    }
   },
   "screenCard": {
     "title": "Send dette skærmbillede?",
@@ -1586,5 +1658,20 @@
       "corrected": "Rettet.",
       "learned": "Rettet. Kusema lærte: {{name}}"
     }
+  },
+  "askBox": {
+    "title": "Spørg Kusema",
+    "placeholder": "Skriv et spørgsmål…",
+    "ask": "Spørg",
+    "screen": "Spørg om min skærm",
+    "screenUnavailable": "Klik først i et vindue, og åbn så denne boks for at spørge om det.",
+    "typesInto": "Svar kan skrives ind i {{app}}",
+    "style": "Stilen “{{name}}”",
+    "thinking": "Tænker…",
+    "insert": "Indsæt i dokumentet",
+    "stop": "Stop",
+    "close": "Luk",
+    "hint": "Enter spørger · Skift+Enter: ny linje · Esc lukker",
+    "noWindow": "Klik i det vindue, du vil spørge om, og åbn så boksen igen."
   }
 }

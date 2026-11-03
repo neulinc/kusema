@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { listen } from "@tauri-apps/api/event";
-import { Image } from "lucide-react";
+import { FileInput, Image } from "lucide-react";
 import { commands, type ChatTurn } from "@/bindings";
 import { SettingsGroup } from "../../ui/SettingsGroup";
 import { Button } from "../../ui/Button";
@@ -12,6 +12,8 @@ import { VoiceCommandsButton } from "../VoiceCommandsDialog";
 import { AssistantVoiceSettings } from "./AssistantVoiceSettings";
 import { AssistantProviderSettings } from "./AssistantProviderSettings";
 import { AssistantScreenSettings } from "./AssistantScreenSettings";
+import { AssistantAnswerSettings } from "./AssistantAnswerSettings";
+import { AppStylesSettings } from "./AppStylesSettings";
 import { useSettings } from "../../../hooks/useSettings";
 import { PrivilegedChip, PrivilegedToggle } from "../privacy/PrivilegedToggle";
 import {
@@ -25,6 +27,14 @@ import {
 interface AssistantErrorPayload {
   question: string;
   message: string;
+  id?: number;
+}
+
+/** Kusema type-to-ask: a question typed here, while its answer streams in. */
+interface Typed {
+  id: number;
+  question: string;
+  text: string;
 }
 
 export const AssistantSettings: React.FC<{
@@ -34,6 +44,9 @@ export const AssistantSettings: React.FC<{
   const { getSetting } = useSettings();
   const [messages, setMessages] = useState<ChatTurn[]>([]);
   const [error, setError] = useState<AssistantErrorPayload | null>(null);
+  const [draft, setDraft] = useState("");
+  const [typed, setTyped] = useState<Typed | null>(null);
+  const [insertable, setInsertable] = useState<string[]>([]);
   const bottomRef = useRef<HTMLDivElement>(null);
   const [tab, setTab] = useState<AssistantTab>(loadTab);
   const tabRefs = useRef<
@@ -60,6 +73,7 @@ export const AssistantSettings: React.FC<{
   const refresh = useCallback(async () => {
     try {
       setMessages(await commands.getAssistantConversation());
+      setInsertable(await commands.getInsertableAnswers());
     } catch (e) {
       console.error("Failed to load assistant conversation:", e);
     }
@@ -67,17 +81,39 @@ export const AssistantSettings: React.FC<{
 
   useEffect(() => {
     refresh();
-    const unlistenReply = listen("assistant-reply", () => {
+    const unlistenReply = listen<{ id: number }>("assistant-reply", (event) => {
       setError(null);
+      setTyped((current) =>
+        current?.id === event.payload.id ? null : current,
+      );
       refresh();
     });
     const unlistenError = listen<AssistantErrorPayload>(
       "assistant-error",
-      (event) => setError(event.payload),
+      (event) => {
+        setError(event.payload);
+        setTyped((current) =>
+          current?.id === event.payload.id ? null : current,
+        );
+      },
+    );
+    const unlistenStream = listen<{ id: number; text: string }>(
+      "assistant-stream",
+      (event) =>
+        setTyped((current) =>
+          current?.id === event.payload.id
+            ? { ...current, text: current.text + event.payload.text }
+            : current,
+        ),
+    );
+    const unlistenEnded = listen<number>("assistant-ended", (event) =>
+      setTyped((current) => (current?.id === event.payload ? null : current)),
     );
     return () => {
       unlistenReply.then((fn) => fn());
       unlistenError.then((fn) => fn());
+      unlistenStream.then((fn) => fn());
+      unlistenEnded.then((fn) => fn());
     };
   }, [refresh]);
 
@@ -85,7 +121,25 @@ export const AssistantSettings: React.FC<{
   useEffect(() => {
     if (tab === "conversation")
       bottomRef.current?.scrollIntoView({ block: "end" });
-  }, [messages, error, tab]);
+  }, [messages, error, tab, typed]);
+
+  const askTyped = async () => {
+    const question = draft.trim();
+    if (!question || typed) return;
+    setError(null);
+    const result = await commands.askTyped(question);
+    if (result.status === "ok") {
+      setTyped({ id: result.data, question, text: "" });
+      setDraft("");
+    }
+  };
+
+  const onDraftKey = (event: React.KeyboardEvent) => {
+    if (event.key === "Enter" && !event.shiftKey) {
+      event.preventDefault();
+      void askTyped();
+    }
+  };
 
   const handleNewConversation = async () => {
     try {
@@ -160,6 +214,10 @@ export const AssistantSettings: React.FC<{
             onOpenPostProcessing={onOpenPostProcessing}
           />
 
+          <AssistantAnswerSettings />
+
+          <AppStylesSettings />
+
           <AssistantScreenSettings />
 
           <AssistantVoiceSettings />
@@ -228,9 +286,39 @@ export const AssistantSettings: React.FC<{
                     </span>
                   )}
                   {message.content}
+                  {message.role === "assistant" &&
+                    insertable.includes(message.content) && (
+                      <button
+                        type="button"
+                        onClick={() =>
+                          void commands.insertAssistantAnswer(message.content)
+                        }
+                        className="mt-2 flex items-center gap-1 text-xs text-ink-2 hover:text-text focus:outline-none focus-visible:ring-2 focus-visible:ring-logo-primary rounded"
+                      >
+                        <FileInput className="h-3.5 w-3.5" />
+                        {t("settings.assistant.conversation.insert")}
+                      </button>
+                    )}
                 </div>
               </div>
             ))}
+            {typed && (
+              <>
+                <div className="flex justify-end">
+                  <div className="max-w-[80%] rounded-lg px-3 py-2 text-sm whitespace-pre-wrap select-text bg-logo-primary/20">
+                    {typed.question}
+                  </div>
+                </div>
+                <div className="flex justify-start">
+                  <div
+                    aria-live="polite"
+                    className="max-w-[80%] rounded-lg px-3 py-2 text-sm whitespace-pre-wrap select-text bg-wash border border-line"
+                  >
+                    {typed.text || t("askBox.thinking")}
+                  </div>
+                </div>
+              </>
+            )}
             {error && (
               <>
                 <div className="flex justify-end">
@@ -243,7 +331,40 @@ export const AssistantSettings: React.FC<{
             )}
             <div ref={bottomRef} />
           </div>
-          {/* v0.5's type-to-ask box goes here, below the conversation. */}
+          {/* Kusema type-to-ask: stays in reach at the bottom. */}
+          <div className="sticky bottom-0 z-10 flex items-end gap-2 bg-background py-2">
+            <textarea
+              value={draft}
+              onChange={(e) => setDraft(e.target.value)}
+              onKeyDown={onDraftKey}
+              rows={Math.min(4, Math.max(1, draft.split("\n").length))}
+              placeholder={t("settings.assistant.conversation.typePlaceholder")}
+              aria-label={t("settings.assistant.conversation.typePlaceholder")}
+              disabled={!hasModel}
+              className="min-h-9 flex-1 resize-none rounded-lg border border-line bg-wash px-3 py-2 text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-logo-primary disabled:opacity-50"
+            />
+            {typed ? (
+              <Button
+                variant="secondary"
+                size="sm"
+                onClick={() => {
+                  void commands.cancelTypedQuestion(typed.id);
+                  setTyped(null);
+                }}
+              >
+                {t("askBox.stop")}
+              </Button>
+            ) : (
+              <Button
+                variant="primary"
+                size="sm"
+                onClick={() => void askTyped()}
+                disabled={!draft.trim() || !hasModel}
+              >
+                {t("askBox.ask")}
+              </Button>
+            )}
+          </div>
         </div>
       )}
     </div>

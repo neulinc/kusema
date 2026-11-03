@@ -452,6 +452,10 @@
           "voice_edit": {
             "name": "Editar por voz",
             "description": "Selecione um texto, mantenha o atalho pressionado e diga como mudá-lo («deixe isto mais formal»), ou diga um comando como «select last word»."
+          },
+          "ask_box": {
+            "name": "Escrever para o Kusema",
+            "description": "Abre uma pequena caixa perto da sua janela para digitar uma pergunta. Esc a fecha."
           }
         },
         "errors": {
@@ -831,7 +835,9 @@
         "new": "Nova conversa",
         "screenshot": "Captura de tela",
         "noProvider": "\"Perguntar ao Kusema\" precisa de um modelo de IA para responder. Escolha um em Configurações.",
-        "openSettings": "Abrir configurações"
+        "openSettings": "Abrir configurações",
+        "typePlaceholder": "Digite uma pergunta… (Enter para perguntar)",
+        "insert": "Inserir no documento"
       },
       "voice": {
         "title": "Voz",
@@ -868,6 +874,26 @@
         "label": "Assistente",
         "conversation": "Conversa",
         "settings": "Configurações"
+      },
+      "answers": {
+        "title": "Perguntas digitadas e respostas",
+        "description": "Digite uma pergunta em vez de falar, escolha para onde vão as respostas e receba ajuda passo a passo.",
+        "answerTo": {
+          "label": "A resposta vai para",
+          "description": "Ler a resposta em voz alta, digitá-la no documento em que você estava trabalhando, ou os dois. Termine uma pergunta com “…and type it” ou “…put it in the document” para digitar só essa resposta.",
+          "speak": "Ler em voz alta",
+          "type": "Digitar no documento",
+          "both": "Os dois"
+        },
+        "speakTyped": {
+          "label": "Ler respostas a perguntas digitadas",
+          "description": "Ler em voz alta também as respostas às perguntas que você digita. Desligado, elas só aparecem na tela."
+        },
+        "tutor": {
+          "label": "Estilo tutor",
+          "description": "Explicar passo a passo, verificar o entendimento e guiar você até a resposta em vez de entregar a lição de casa pronta, a menos que você peça a resposta. Você também pode dizer “explain step by step” em qualquer pergunta.",
+          "note": "Siga as regras da sua escola ou do seu exame sobre o uso de IA."
+        }
       }
     },
     "postProcessing": {
@@ -1308,7 +1334,7 @@
       "description": "Um brilho nas bordas da tela mostra que o Kusema está ouvindo. Só você o vê: ele não aparece em capturas de tela nem no compartilhamento de tela.",
       "enabled": {
         "label": "Brilho da tela",
-        "description": "Mostra um brilho colorido em volta da tela em que você está trabalhando enquanto o Kusema ouve. Você continua podendo clicar e digitar através dele."
+        "description": "Mostrar um brilho colorido ao redor da tela em que você trabalha durante o ditado contínuo e as perguntas. Você ainda pode clicar e digitar através dele."
       },
       "thickness": {
         "label": "Espessura",
@@ -1336,6 +1362,10 @@
       "sounds": {
         "label": "Sons do ditado contínuo",
         "description": "Toca um som curto quando o ditado contínuo começa e termina. Os sons dos outros ditados ficam em Som, mais abaixo."
+      },
+      "dictation": {
+        "label": "Brilho no ditado normal",
+        "description": "Mostrar o brilho também enquanto você segura o atalho de ditado. O ditado contínuo e as perguntas brilham sempre que o brilho da tela está ligado."
       }
     },
     "voiceEdit": {
@@ -1399,6 +1429,40 @@
         "imported": "{{added}} palavras novas importadas ({{existing}} já estavam lá).",
         "exported": "{{number}} palavras exportadas."
       }
+    },
+    "appStyles": {
+      "title": "Estilos por aplicativo",
+      "description": "A limpeza com IA, as edições por voz com IA e as respostas digitadas em um documento seguem o estilo do programa para onde vão. Só o nome do programa é usado, neste computador. A limpeza local não muda.",
+      "enabled": {
+        "label": "Usar estilos por aplicativo",
+        "description": "Desligado, todos os programas recebem o mesmo texto neutro."
+      },
+      "builtIn": {
+        "email": {
+          "name": "E-mail",
+          "instruction": "Formatar como e-mail: uma linha curta de saudação, parágrafos breves e uma despedida quando for uma mensagem inteira. Manter a voz do autor."
+        },
+        "formal": {
+          "name": "Formal",
+          "instruction": "Usar um tom formal e profissional: frases completas, sem gírias nem contrações."
+        },
+        "casual": {
+          "name": "Conciso e descontraído",
+          "instruction": "Manter conciso e descontraído: frases curtas e palavras simples e amigáveis, sem saudação ou despedida formais."
+        }
+      },
+      "newName": "Novo estilo",
+      "name": "Nome do estilo",
+      "instruction": "Como escrever",
+      "instructionPlaceholder": "Descreva o estilo em palavras simples, como “Curto e simpático, sem despedida.”",
+      "apps": "Programas:",
+      "addApp": "Adicionar um programa",
+      "addAppPlaceholder": "ex.: notepad.exe",
+      "removeApp": "Remover {{app}}",
+      "remove": "Remover o estilo “{{name}}”",
+      "add": "Adicionar estilo",
+      "reset": "Restaurar padrões",
+      "neutral": "Programas que não estão na lista recebem texto neutro."
     }
   },
   "footer": {
@@ -1481,7 +1545,15 @@
       "pasteFailed": "Não foi possível digitar; está no Histórico"
     },
     "privileged": "Privileged",
-    "editing": "Editando"
+    "editing": "Editando",
+    "withStyle": "Estilo “{{name}}”…",
+    "answer": {
+      "waiting": "Clique de volta no seu documento para digitar a resposta.",
+      "noTarget": "O Kusema não sabe para qual documento é esta resposta. Clique no documento e pergunte de novo.",
+      "windowChanged": "A janela mudou, então a resposta não foi digitada. Insira-a pela página Assistente.",
+      "notTyping": "O método de colagem está em “Nenhum”, então a resposta não foi digitada.",
+      "failed": "Não foi possível digitar a resposta nesta janela."
+    }
   },
   "screenCard": {
     "title": "Enviar esta captura de tela?",
@@ -1594,5 +1666,20 @@
       "corrected": "Corrigido.",
       "learned": "Corrigido. O Kusema aprendeu: {{name}}"
     }
+  },
+  "askBox": {
+    "title": "Perguntar ao Kusema",
+    "placeholder": "Digite uma pergunta…",
+    "ask": "Perguntar",
+    "screen": "Perguntar sobre minha tela",
+    "screenUnavailable": "Clique primeiro em uma janela e depois abra esta caixa para perguntar sobre ela.",
+    "typesInto": "As respostas podem ser digitadas em {{app}}",
+    "style": "Estilo “{{name}}”",
+    "thinking": "Pensando…",
+    "insert": "Inserir no documento",
+    "stop": "Parar",
+    "close": "Fechar",
+    "hint": "Enter pergunta · Shift+Enter: nova linha · Esc fecha",
+    "noWindow": "Clique na janela sobre a qual quer perguntar e abra esta caixa de novo."
   }
 }

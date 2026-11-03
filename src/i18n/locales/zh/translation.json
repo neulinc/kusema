@@ -450,6 +450,10 @@
           "voice_edit": {
             "name": "语音编辑",
             "description": "选中文字，然后按住快捷键说出如何修改（“改得更正式些”），或说一个命令，比如“select last word”。"
+          },
+          "ask_box": {
+            "name": "向 Kusema 输入",
+            "description": "在窗口旁打开一个小框，用来输入问题。按 Esc 关闭。"
           }
         },
         "errors": {
@@ -828,7 +832,9 @@
         "new": "新对话",
         "screenshot": "截图",
         "noProvider": "\"问 Kusema\"需要 AI 模型才能回答。请在\"设置\"中选择一个。",
-        "openSettings": "打开设置"
+        "openSettings": "打开设置",
+        "typePlaceholder": "输入问题…（按 Enter 提问）",
+        "insert": "插入文档"
       },
       "voice": {
         "title": "语音",
@@ -865,6 +871,26 @@
         "label": "助手",
         "conversation": "对话",
         "settings": "设置"
+      },
+      "answers": {
+        "title": "输入的问题与回答",
+        "description": "用输入代替说话来提问，选择回答的去向，并获得分步讲解。",
+        "answerTo": {
+          "label": "回答去向",
+          "description": "朗读回答、把回答输入到你正在使用的文档，或两者都做。在问题末尾加上“…and type it”或“…put it in the document”，就只输入这一条回答。",
+          "speak": "朗读",
+          "type": "输入到文档",
+          "both": "两者"
+        },
+        "speakTyped": {
+          "label": "朗读输入问题的回答",
+          "description": "你输入的问题，其回答也会朗读出来。关闭时只显示在屏幕上。"
+        },
+        "tutor": {
+          "label": "辅导风格",
+          "description": "分步讲解、确认理解，引导你得出答案，而不是直接给出作业答案，除非你要求答案。你也可以在任何问题中说“explain step by step”。",
+          "note": "请遵守你所在学校或考试关于使用 AI 的规定。"
+        }
       }
     },
     "postProcessing": {
@@ -1302,7 +1328,7 @@
       "description": "屏幕边缘的光晕表示 Kusema 正在听。只有您能看到：它不会出现在截图或屏幕共享中。",
       "enabled": {
         "label": "屏幕光晕",
-        "description": "Kusema 正在听时，在您使用的屏幕周围显示彩色光晕。您仍然可以透过它点击和输入。"
+        "description": "在连续听写和提问时，在你正在使用的屏幕四周显示彩色光晕。你仍可以透过它点击和输入。"
       },
       "thickness": {
         "label": "粗细",
@@ -1330,6 +1356,10 @@
       "sounds": {
         "label": "连续听写提示音",
         "description": "连续听写开始和停止时播放简短提示音。其他听写的提示音在下方的\"声音\"中。"
+      },
+      "dictation": {
+        "label": "普通听写时也显示光晕",
+        "description": "按住听写快捷键时也显示光晕。只要屏幕光晕开启，连续听写和提问总会显示光晕。"
       }
     },
     "voiceEdit": {
@@ -1393,6 +1423,40 @@
         "imported": "已导入 {{added}} 个新词（{{existing}} 个已存在）。",
         "exported": "已导出 {{number}} 个词。"
       }
+    },
+    "appStyles": {
+      "title": "按应用设置风格",
+      "description": "AI 整理、AI 语音编辑和输入到文档中的回答，会遵循目标程序的风格。只使用本机上的程序名称。本地整理不受影响。",
+      "enabled": {
+        "label": "使用按应用风格",
+        "description": "关闭时，所有程序都使用相同的中性文本。"
+      },
+      "builtIn": {
+        "email": {
+          "name": "电子邮件",
+          "instruction": "按电子邮件格式：简短的问候语、简洁的段落，若是完整邮件则加上结束语。保持作者的口吻。"
+        },
+        "formal": {
+          "name": "正式",
+          "instruction": "使用正式、专业的语气：完整的句子，不用俚语和缩写。"
+        },
+        "casual": {
+          "name": "简洁随意",
+          "instruction": "保持简洁随意：短句和平实亲切的用词，不用正式的问候语或结束语。"
+        }
+      },
+      "newName": "新风格",
+      "name": "风格名称",
+      "instruction": "写作方式",
+      "instructionPlaceholder": "用平实的话描述风格，例如“简短友好，不加结束语。”",
+      "apps": "程序：",
+      "addApp": "添加程序",
+      "addAppPlaceholder": "例如 notepad.exe",
+      "removeApp": "移除 {{app}}",
+      "remove": "移除“{{name}}”风格",
+      "add": "添加风格",
+      "reset": "恢复默认",
+      "neutral": "未列出的程序使用中性文本。"
     }
   },
   "footer": {
@@ -1475,7 +1539,15 @@
       "pasteFailed": "无法输入这段话；已在历史记录中"
     },
     "privileged": "Privileged",
-    "editing": "编辑"
+    "editing": "编辑",
+    "withStyle": "“{{name}}”风格…",
+    "answer": {
+      "waiting": "请点回文档，以便输入回答。",
+      "noTarget": "Kusema 不知道这条回答对应哪个文档。请点击文档后再问一次。",
+      "windowChanged": "窗口已切换，因此未输入回答。请从“助手”页面插入。",
+      "notTyping": "粘贴方式设为“无”，因此未输入回答。",
+      "failed": "无法在此窗口中输入回答。"
+    }
   },
   "screenCard": {
     "title": "发送这张截图？",
@@ -1586,5 +1658,20 @@
       "corrected": "已更正。",
       "learned": "已更正。Kusema 学到了：{{name}}"
     }
+  },
+  "askBox": {
+    "title": "问 Kusema",
+    "placeholder": "输入问题…",
+    "ask": "提问",
+    "screen": "询问我的屏幕",
+    "screenUnavailable": "请先点击一个窗口，再打开此框，即可询问该窗口。",
+    "typesInto": "回答可输入到 {{app}}",
+    "style": "“{{name}}”风格",
+    "thinking": "正在思考…",
+    "insert": "插入文档",
+    "stop": "停止",
+    "close": "关闭",
+    "hint": "Enter 提问 · Shift+Enter 换行 · Esc 关闭",
+    "noWindow": "请点击你想询问的窗口，然后重新打开此框。"
   }
 }

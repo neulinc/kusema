@@ -97,6 +97,8 @@ pub struct Style {
 #[derive(Clone, Copy, Debug)]
 struct Look {
     enabled: bool,
+    /// Normal dictation glows too.
+    dictation: bool,
     thickness: u32,
     intensity: u32,
     palette: GlowPalette,
@@ -106,6 +108,7 @@ impl Look {
     fn from_settings(settings: &AppSettings) -> Self {
         Self {
             enabled: settings.glow_enabled,
+            dictation: settings.glow_dictation,
             thickness: settings.glow_thickness,
             intensity: settings.glow_intensity,
             palette: settings.glow_palette,
@@ -123,7 +126,9 @@ struct Desired {
 impl Desired {
     /// A real recording always wins over a preview.
     fn style(&self, now: Instant) -> Option<Style> {
-        let recording = self.recording.filter(|_| self.look.enabled);
+        let recording = self.recording.filter(|mode| {
+            self.look.enabled && (*mode != GlowMode::Dictation || self.look.dictation)
+        });
         let preview = self
             .preview
             .filter(|(_, until)| now < *until)
@@ -158,6 +163,12 @@ fn update(change: impl FnOnce(&mut Desired), look: Look) {
     }
     #[cfg(target_os = "windows")]
     windows_impl::wake();
+}
+
+/// Kusema: keep a window out of screen capture (see `windows_impl`).
+#[cfg(target_os = "windows")]
+pub fn exclude_from_capture(hwnd: isize) {
+    windows_impl::exclude_from_capture(hwnd);
 }
 
 /// The style to draw now, for the drawing thread.
@@ -216,6 +227,17 @@ pub fn change_glow_enabled_setting(app: AppHandle, enabled: bool) -> Result<(), 
     let mut new_settings = settings::get_settings(&app);
     new_settings.glow_enabled = enabled;
     settings_changed(&app, "glow_enabled", new_settings);
+    Ok(())
+}
+
+/// Kusema: the glow for normal dictation too (off by default; continuous
+/// dictation and questions glow whenever the glow is on).
+#[tauri::command]
+#[specta::specta]
+pub fn change_glow_dictation_setting(app: AppHandle, enabled: bool) -> Result<(), String> {
+    let mut new_settings = settings::get_settings(&app);
+    new_settings.glow_dictation = enabled;
+    settings_changed(&app, "glow_dictation", new_settings);
     Ok(())
 }
 
@@ -350,6 +372,7 @@ mod tests {
     fn look() -> Look {
         Look {
             enabled: true,
+            dictation: true,
             thickness: 24,
             intensity: 80,
             palette: GlowPalette::Standard,
@@ -418,6 +441,26 @@ mod tests {
         let mut off = desired(Some(GlowMode::Dictation));
         off.look.enabled = false;
         assert_eq!(off.style(Instant::now()), None);
+    }
+
+    #[test]
+    fn normal_dictation_glows_only_when_asked_to() {
+        let now = Instant::now();
+        let mut state = desired(Some(GlowMode::Dictation));
+        state.look.dictation = false;
+        assert_eq!(state.style(now), None);
+        // Continuous dictation and questions keep their glow.
+        for mode in [
+            GlowMode::Continuous,
+            GlowMode::Paused,
+            GlowMode::Ask,
+            GlowMode::AskScreen,
+        ] {
+            state.recording = Some(mode);
+            assert!(state.style(now).is_some(), "{mode:?}");
+        }
+        let defaults = crate::settings::get_default_settings();
+        assert!(defaults.glow_enabled && !defaults.glow_dictation);
     }
 
     #[test]

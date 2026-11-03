@@ -58,8 +58,26 @@ const OVERLAY_STREAM_HEIGHT: f64 = 120.0;
 // and stop button.
 const OVERLAY_DICTATION_WIDTH: f64 = 420.0;
 
-/// Overlay window size (logical) for a given UI state.
+/// Kusema: transparent room on every side of the card for its glow
+/// (--ov-glow-pad in RecordingOverlay.css). The window grows by it and moves
+/// out by it, so the card itself stays exactly where it was.
+const PILL_GLOW_PAD: f64 = 14.0;
+
+/// Overlay window size (logical) for a given UI state, with the glow's room.
 fn overlay_dimensions(state: &str) -> (f64, f64) {
+    let (width, height) = card_dimensions(state);
+    (width + 2.0 * PILL_GLOW_PAD, height + 2.0 * PILL_GLOW_PAD)
+}
+
+/// The window's y moved out by the glow's room, away from the card's edge.
+fn glow_shift(position: OverlayPosition) -> f64 {
+    match position {
+        OverlayPosition::Top => -PILL_GLOW_PAD,
+        OverlayPosition::Bottom => PILL_GLOW_PAD,
+    }
+}
+
+fn card_dimensions(state: &str) -> (f64, f64) {
     if state == "streaming" {
         (OVERLAY_STREAM_WIDTH, OVERLAY_STREAM_HEIGHT)
     } else if state == "dictating" {
@@ -98,7 +116,7 @@ fn configure_layer_shell_position(gtk_window: &gtk::ApplicationWindow, position:
 
     gtk_window.set_anchor(edge, true);
     gtk_window.set_anchor(opposite_edge, false);
-    gtk_window.set_layer_shell_margin(edge, margin.round() as i32);
+    gtk_window.set_layer_shell_margin(edge, (margin - PILL_GLOW_PAD).max(0.0).round() as i32);
     gtk_window.set_layer_shell_margin(opposite_edge, 0);
 }
 
@@ -284,7 +302,7 @@ fn calculate_overlay_position(
         }
     };
 
-    Some((x, y))
+    Some((x, y + glow_shift(settings.overlay_position)))
 }
 
 /// Current overlay window size in logical units (points), for repositioning
@@ -357,6 +375,7 @@ fn place_windows_overlay(
     let monitor = get_monitor_with_cursor(app_handle)
         .ok_or_else(|| "failed to determine the monitor containing the cursor".to_string())?;
     let text_scale = windows_text_scale_factor();
+    let overlay_position = settings::get_settings(app_handle).overlay_position;
     let (x, y, width, height) = windows_overlay_bounds(
         *monitor.position(),
         *monitor.size(),
@@ -364,8 +383,10 @@ fn place_windows_overlay(
         text_scale,
         logical_width,
         logical_height,
-        settings::get_settings(app_handle).overlay_position,
+        overlay_position,
     );
+    // The room is CSS pixels, so it zooms with the text scale like the card.
+    let y = y + (glow_shift(overlay_position) * monitor.scale_factor() * text_scale).round() as i32;
     let hwnd = overlay_window
         .hwnd()
         .map_err(|error| format!("failed to get overlay window handle: {error}"))?;
@@ -449,6 +470,12 @@ pub fn create_recording_overlay(app_handle: &AppHandle) {
                 }
             }
 
+            // Kusema: the pill is for the person at the computer, not for
+            // screenshots or screen shares.
+            #[cfg(target_os = "windows")]
+            if let Ok(hwnd) = window.hwnd() {
+                crate::glow::exclude_from_capture(hwnd.0 as isize);
+            }
             debug!("Recording overlay window created successfully (hidden)");
         }
         Err(e) => {
@@ -621,6 +648,14 @@ pub fn emit_recording_ready(app_handle: &AppHandle) {
 }
 
 /// Shows the recording overlay window with fade-in animation
+/// Kusema: which mode the pill is for ("dictation", "ask", "ask_screen",
+/// "edit"), for its icon. Sent before the state, so the pill opens with it.
+pub fn set_mode(app_handle: &AppHandle, mode: &str) {
+    if let Some(window) = app_handle.get_webview_window("recording_overlay") {
+        let _ = window.emit("overlay-mode", mode);
+    }
+}
+
 pub fn show_recording_overlay(app_handle: &AppHandle) {
     show_overlay_state(app_handle, "recording");
 }

@@ -37,6 +37,16 @@ export const RecordingGlowSettings: React.FC = () => {
         descriptionMode="tooltip"
         grouped
       />
+      <ToggleSwitch
+        checked={getSetting("glow_dictation") ?? false}
+        onChange={(on) => updateSetting("glow_dictation", on)}
+        isUpdating={isUpdating("glow_dictation")}
+        label={t("settings.glow.dictation.label")}
+        description={t("settings.glow.dictation.description")}
+        descriptionMode="tooltip"
+        grouped
+        disabled={!enabled}
+      />
       <Slider
         value={getSetting("glow_thickness") ?? 24}
         onChange={(value) => updateSetting("glow_thickness", value)}

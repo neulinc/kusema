@@ -103,9 +103,24 @@ fn create_strip() -> windows::core::Result<HWND> {
     }
 }
 
-/// Debug builds only: lets a test take a picture of the glow.
+/// Debug builds only: lets a test take a picture of the glow (and of the
+/// recording pill, with `KUSEMA_DEBUG_CAPTURABLE`).
 fn capturable_for_testing() -> bool {
-    cfg!(debug_assertions) && std::env::var_os("KUSEMA_DEBUG_GLOW_CAPTURABLE").is_some()
+    cfg!(debug_assertions)
+        && (std::env::var_os("KUSEMA_DEBUG_GLOW_CAPTURABLE").is_some()
+            || std::env::var_os("KUSEMA_DEBUG_CAPTURABLE").is_some())
+}
+
+/// Keeps one of Kusema's windows for the person at the computer: out of
+/// screenshots, screen shares and what Ask about my screen captures. It still
+/// shows on screen as usual.
+pub fn exclude_from_capture(hwnd: isize) {
+    if capturable_for_testing() {
+        return;
+    }
+    unsafe {
+        let _ = SetWindowDisplayAffinity(HWND(hwnd as *mut _), WDA_EXCLUDEFROMCAPTURE);
+    }
 }
 
 /// Windows' "Animation effects" setting. If it can't be read, stay still.

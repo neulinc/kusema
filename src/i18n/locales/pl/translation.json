@@ -454,6 +454,10 @@
           "voice_edit": {
             "name": "Edytuj głosem",
             "description": "Zaznacz tekst, przytrzymaj skrót i powiedz, jak go zmienić („napisz to bardziej formalnie”), albo powiedz polecenie, np. „select last word”."
+          },
+          "ask_box": {
+            "name": "Napisz do Kusema",
+            "description": "Otwiera małe pole przy oknie, w którym wpiszesz pytanie. Esc je zamyka."
           }
         },
         "errors": {
@@ -834,7 +838,9 @@
         "new": "Nowa rozmowa",
         "screenshot": "Zrzut ekranu",
         "noProvider": "„Zapytaj Kusema” potrzebuje modelu AI, aby odpowiadać. Wybierz go w Ustawieniach.",
-        "openSettings": "Otwórz ustawienia"
+        "openSettings": "Otwórz ustawienia",
+        "typePlaceholder": "Wpisz pytanie… (Enter, aby zapytać)",
+        "insert": "Wstaw do dokumentu"
       },
       "voice": {
         "title": "Głos",
@@ -871,6 +877,26 @@
         "label": "Asystent",
         "conversation": "Rozmowa",
         "settings": "Ustawienia"
+      },
+      "answers": {
+        "title": "Pytania wpisywane i odpowiedzi",
+        "description": "Wpisz pytanie zamiast je mówić, wybierz, dokąd trafiają odpowiedzi, i uzyskaj pomoc krok po kroku.",
+        "answerTo": {
+          "label": "Odpowiedź trafia do",
+          "description": "Przeczytać odpowiedź na głos, wpisać ją do dokumentu, w którym pracowałeś, lub jedno i drugie. Zakończ pytanie słowami „…and type it” lub „…put it in the document”, aby wpisać tylko tę odpowiedź.",
+          "speak": "Na głos",
+          "type": "Do dokumentu",
+          "both": "Jedno i drugie"
+        },
+        "speakTyped": {
+          "label": "Czytaj odpowiedzi na wpisane pytania",
+          "description": "Czytaj na głos także odpowiedzi na pytania, które wpisujesz. Po wyłączeniu pojawiają się tylko na ekranie."
+        },
+        "tutor": {
+          "label": "Styl korepetytora",
+          "description": "Wyjaśniać krok po kroku, sprawdzać zrozumienie i prowadzić do odpowiedzi zamiast podawać gotowe rozwiązania prac domowych, chyba że poprosisz o odpowiedź. W każdym pytaniu możesz też powiedzieć „explain step by step”.",
+          "note": "Przestrzegaj zasad swojej szkoły lub egzaminu dotyczących korzystania z AI."
+        }
       }
     },
     "postProcessing": {
@@ -1314,7 +1340,7 @@
       "description": "Poświata na krawędziach ekranu pokazuje, że Kusema słucha. Widzisz ją tylko Ty: nie pojawia się na zrzutach ekranu ani podczas udostępniania ekranu.",
       "enabled": {
         "label": "Poświata ekranu",
-        "description": "Pokazuj kolorową poświatę wokół ekranu, na którym pracujesz, gdy Kusema słucha. Nadal możesz przez nią klikać i pisać."
+        "description": "Pokazuj kolorową poświatę wokół ekranu, na którym pracujesz, podczas ciągłego dyktowania i pytań. Nadal możesz przez nią klikać i pisać."
       },
       "thickness": {
         "label": "Grubość",
@@ -1342,6 +1368,10 @@
       "sounds": {
         "label": "Dźwięki dyktowania ciągłego",
         "description": "Odtwarzaj krótki dźwięk, gdy dyktowanie ciągłe się zaczyna i kończy. Dźwięki dla innego dyktowania znajdziesz niżej, w sekcji Dźwięk."
+      },
+      "dictation": {
+        "label": "Poświata przy zwykłym dyktowaniu",
+        "description": "Pokazuj poświatę także wtedy, gdy przytrzymujesz skrót dyktowania. Ciągłe dyktowanie i pytania świecą zawsze, gdy poświata ekranu jest włączona."
       }
     },
     "voiceEdit": {
@@ -1405,6 +1435,40 @@
         "imported": "Zaimportowano nowe słowa: {{added}} (już były: {{existing}}).",
         "exported": "Wyeksportowano słowa: {{number}}."
       }
+    },
+    "appStyles": {
+      "title": "Style dla aplikacji",
+      "description": "Porządkowanie przez AI, edycje głosowe AI i odpowiedzi wpisywane do dokumentu stosują styl programu, do którego trafiają. Używana jest tylko nazwa programu, na tym komputerze. Lokalne porządkowanie się nie zmienia.",
+      "enabled": {
+        "label": "Używaj stylów dla aplikacji",
+        "description": "Po wyłączeniu każdy program dostaje ten sam neutralny tekst."
+      },
+      "builtIn": {
+        "email": {
+          "name": "E-mail",
+          "instruction": "Sformatuj jako e-mail: krótkie powitanie, zwięzłe akapity i zakończenie, gdy to cała wiadomość. Zachowaj głos autora."
+        },
+        "formal": {
+          "name": "Formalny",
+          "instruction": "Używaj formalnego, profesjonalnego tonu: pełne zdania, bez slangu i skrótów."
+        },
+        "casual": {
+          "name": "Zwięzły i swobodny",
+          "instruction": "Pisz zwięźle i swobodnie: krótkie zdania i proste, przyjazne słowa, bez formalnego powitania i zakończenia."
+        }
+      },
+      "newName": "Nowy styl",
+      "name": "Nazwa stylu",
+      "instruction": "Jak pisać",
+      "instructionPlaceholder": "Opisz styl prostymi słowami, np. „Krótko i przyjaźnie, bez zakończenia.”",
+      "apps": "Programy:",
+      "addApp": "Dodaj program",
+      "addAppPlaceholder": "np. notepad.exe",
+      "removeApp": "Usuń {{app}}",
+      "remove": "Usuń styl „{{name}}”",
+      "add": "Dodaj styl",
+      "reset": "Przywróć domyślne",
+      "neutral": "Programy spoza listy dostają neutralny tekst."
     }
   },
   "footer": {
@@ -1487,7 +1551,15 @@
       "pasteFailed": "Nie udało się tego wpisać; jest w Historii"
     },
     "privileged": "Privileged",
-    "editing": "Edycja"
+    "editing": "Edycja",
+    "withStyle": "Styl „{{name}}”…",
+    "answer": {
+      "waiting": "Kliknij z powrotem w dokument, aby wpisać odpowiedź.",
+      "noTarget": "Kusema nie wie, do którego dokumentu jest ta odpowiedź. Kliknij w dokument i zapytaj ponownie.",
+      "windowChanged": "Okno się zmieniło, więc odpowiedź nie została wpisana. Wstaw ją ze strony Asystent.",
+      "notTyping": "Metoda wklejania jest ustawiona na „Brak”, więc odpowiedź nie została wpisana.",
+      "failed": "Nie udało się wpisać odpowiedzi w tym oknie."
+    }
   },
   "screenCard": {
     "title": "Wysłać ten zrzut ekranu?",
@@ -1602,5 +1674,20 @@
       "corrected": "Poprawiono.",
       "learned": "Poprawiono. Kusema nauczyła się: {{name}}"
     }
+  },
+  "askBox": {
+    "title": "Zapytaj Kusema",
+    "placeholder": "Wpisz pytanie…",
+    "ask": "Zapytaj",
+    "screen": "Zapytaj o mój ekran",
+    "screenUnavailable": "Najpierw kliknij okno, a potem otwórz to pole, aby o nie zapytać.",
+    "typesInto": "Odpowiedzi można wpisać w {{app}}",
+    "style": "Styl „{{name}}”",
+    "thinking": "Myślę…",
+    "insert": "Wstaw do dokumentu",
+    "stop": "Zatrzymaj",
+    "close": "Zamknij",
+    "hint": "Enter pyta · Shift+Enter: nowy wiersz · Esc zamyka",
+    "noWindow": "Kliknij okno, o które chcesz zapytać, i otwórz to pole ponownie."
   }
 }

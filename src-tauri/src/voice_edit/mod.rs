@@ -290,6 +290,16 @@ pub fn at_press(app: &AppHandle) -> bool {
     }
 }
 
+/// The lowercase file name of the program that owns `window`.
+pub(crate) fn process_name(window: isize) -> String {
+    platform::app_of(window, 0).0
+}
+
+/// A modifier key is down (one still held from a hotkey).
+pub(crate) fn modifiers_held() -> bool {
+    platform::any_modifier_held()
+}
+
 /// Keystrokes now would reach where the hotkey was pressed, as sent.
 fn on_target(target: Target) -> OnTarget {
     Arc::new(move || {
@@ -716,7 +726,13 @@ async fn edit_text<C: Fn() -> bool>(
         ai.provider.id
     );
 
-    let system = prompt::system_prompt(&instruction);
+    // Kusema styles per app: the program the text is in.
+    let style = crate::app_styles::active(settings, &process_name(target.window.handle()));
+    if let Some(style) = &style {
+        crate::app_styles::announce(app, style);
+    }
+    let system =
+        prompt::system_prompt(&instruction, style.as_ref().map(|s| s.instruction.as_str()));
     let turns = prompt::turns(&original);
     let request = crate::llm_client::send_conversation_for(
         Some(Purpose::VoiceEdit),

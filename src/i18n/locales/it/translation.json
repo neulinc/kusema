@@ -452,6 +452,10 @@
           "voice_edit": {
             "name": "Modifica a voce",
             "description": "Seleziona il testo, poi tieni premuta la scorciatoia e di' come cambiarlo («rendilo più formale»), oppure di' un comando come «select last word»."
+          },
+          "ask_box": {
+            "name": "Scrivi a Kusema",
+            "description": "Apre un piccolo riquadro vicino alla finestra per scrivere una domanda. Esc lo chiude."
           }
         },
         "errors": {
@@ -831,7 +835,9 @@
         "new": "Nuova conversazione",
         "screenshot": "Screenshot",
         "noProvider": "\"Chiedi a Kusema\" ha bisogno di un modello di IA per rispondere. Scegline uno in Impostazioni.",
-        "openSettings": "Apri le impostazioni"
+        "openSettings": "Apri le impostazioni",
+        "typePlaceholder": "Scrivi una domanda… (Invio per chiedere)",
+        "insert": "Inserisci nel documento"
       },
       "voice": {
         "title": "Voce",
@@ -868,6 +874,26 @@
         "label": "Assistente",
         "conversation": "Conversazione",
         "settings": "Impostazioni"
+      },
+      "answers": {
+        "title": "Domande scritte e risposte",
+        "description": "Scrivi una domanda invece di dirla, scegli dove vanno le risposte e ricevi aiuto passo passo.",
+        "answerTo": {
+          "label": "La risposta va",
+          "description": "Leggere la risposta ad alta voce, digitarla nel documento in cui stavi lavorando, o entrambe. Termina una domanda con «…and type it» o «…put it in the document» per digitare solo quella risposta.",
+          "speak": "Ad alta voce",
+          "type": "Nel documento",
+          "both": "Entrambe"
+        },
+        "speakTyped": {
+          "label": "Leggi le risposte alle domande scritte",
+          "description": "Leggi ad alta voce anche le risposte alle domande che scrivi. Disattivato, compaiono solo sullo schermo."
+        },
+        "tutor": {
+          "label": "Stile tutor",
+          "description": "Spiegare passo passo, verificare la comprensione e guidarti verso la risposta invece di consegnare i compiti già svolti, a meno che tu non chieda la risposta. Puoi anche dire «explain step by step» in qualsiasi domanda.",
+          "note": "Rispetta le regole della tua scuola o del tuo esame sull'uso dell'IA."
+        }
       }
     },
     "postProcessing": {
@@ -1308,7 +1334,7 @@
       "description": "Un bagliore sui bordi dello schermo mostra che Kusema sta ascoltando. Lo vedi solo tu: non compare negli screenshot né nella condivisione dello schermo.",
       "enabled": {
         "label": "Bagliore dello schermo",
-        "description": "Mostra un bagliore colorato intorno allo schermo su cui lavori mentre Kusema ascolta. Puoi comunque cliccare e scrivere attraverso."
+        "description": "Mostra un bagliore colorato intorno allo schermo su cui lavori durante la dettatura continua e le domande. Puoi comunque fare clic e scrivere attraverso."
       },
       "thickness": {
         "label": "Spessore",
@@ -1336,6 +1362,10 @@
       "sounds": {
         "label": "Suoni della dettatura continua",
         "description": "Riproduce un breve suono quando la dettatura continua inizia e finisce. I suoni delle altre dettature sono in Suono, più in basso."
+      },
+      "dictation": {
+        "label": "Bagliore per la dettatura normale",
+        "description": "Mostra il bagliore anche mentre tieni premuta la scorciatoia di dettatura. La dettatura continua e le domande si illuminano sempre quando il bagliore dello schermo è attivo."
       }
     },
     "voiceEdit": {
@@ -1399,6 +1429,40 @@
         "imported": "Importate {{added}} parole nuove ({{existing}} c'erano già).",
         "exported": "Esportate {{number}} parole."
       }
+    },
+    "appStyles": {
+      "title": "Stili per app",
+      "description": "La pulizia con IA, le modifiche vocali con IA e le risposte digitate in un documento seguono lo stile del programma in cui vanno. Viene usato solo il nome del programma, su questo computer. La pulizia locale non cambia.",
+      "enabled": {
+        "label": "Usa gli stili per app",
+        "description": "Disattivato, ogni programma riceve lo stesso testo neutro."
+      },
+      "builtIn": {
+        "email": {
+          "name": "Email",
+          "instruction": "Formattarlo come un'email: una breve riga di saluto, paragrafi brevi e una chiusura quando è un messaggio intero. Mantenere la voce dell'autore."
+        },
+        "formal": {
+          "name": "Formale",
+          "instruction": "Usare un tono formale e professionale: frasi complete, niente gergo né forme contratte."
+        },
+        "casual": {
+          "name": "Conciso e informale",
+          "instruction": "Mantenerlo conciso e informale: frasi brevi e parole semplici e cordiali, senza saluti o chiusure formali."
+        }
+      },
+      "newName": "Nuovo stile",
+      "name": "Nome dello stile",
+      "instruction": "Come scrivere",
+      "instructionPlaceholder": "Descrivi lo stile con parole semplici, ad esempio «Breve e cordiale, senza chiusura.»",
+      "apps": "Programmi:",
+      "addApp": "Aggiungi un programma",
+      "addAppPlaceholder": "es. notepad.exe",
+      "removeApp": "Rimuovi {{app}}",
+      "remove": "Rimuovi lo stile «{{name}}»",
+      "add": "Aggiungi stile",
+      "reset": "Ripristina predefiniti",
+      "neutral": "I programmi non elencati ricevono testo neutro."
     }
   },
   "footer": {
@@ -1481,7 +1545,15 @@
       "pasteFailed": "Impossibile scriverlo; è nella Cronologia"
     },
     "privileged": "Privileged",
-    "editing": "Modifica"
+    "editing": "Modifica",
+    "withStyle": "Stile «{{name}}»…",
+    "answer": {
+      "waiting": "Fai di nuovo clic nel documento per digitare la risposta.",
+      "noTarget": "Kusema non sa a quale documento è destinata questa risposta. Fai clic nel documento e chiedi di nuovo.",
+      "windowChanged": "La finestra è cambiata, quindi la risposta non è stata digitata. Inseriscila dalla pagina Assistente.",
+      "notTyping": "Il metodo di incolla è impostato su «Nessuno», quindi la risposta non è stata digitata.",
+      "failed": "Impossibile digitare la risposta in questa finestra."
+    }
   },
   "screenCard": {
     "title": "Inviare questo screenshot?",
@@ -1594,5 +1666,20 @@
       "corrected": "Corretto.",
       "learned": "Corretto. Kusema ha imparato: {{name}}"
     }
+  },
+  "askBox": {
+    "title": "Chiedi a Kusema",
+    "placeholder": "Scrivi una domanda…",
+    "ask": "Chiedi",
+    "screen": "Chiedi del mio schermo",
+    "screenUnavailable": "Fai prima clic su una finestra, poi apri questo riquadro per chiedere di essa.",
+    "typesInto": "Le risposte possono essere digitate in {{app}}",
+    "style": "Stile «{{name}}»",
+    "thinking": "Sto pensando…",
+    "insert": "Inserisci nel documento",
+    "stop": "Interrompi",
+    "close": "Chiudi",
+    "hint": "Invio chiede · Maiusc+Invio: nuova riga · Esc chiude",
+    "noWindow": "Fai clic sulla finestra di cui vuoi chiedere, poi riapri questo riquadro."
   }
 }

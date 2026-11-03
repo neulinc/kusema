@@ -1,6 +1,8 @@
 mod actions;
+mod app_styles;
 #[cfg(all(target_os = "macos", target_arch = "aarch64"))]
 mod apple_intelligence;
+mod ask_box;
 mod assistant;
 mod audio_feedback;
 pub mod audio_toolkit;
@@ -705,6 +707,7 @@ pub fn run(cli_args: CliArgs) {
             shortcut::change_theme_setting,
             shortcut::change_start_hidden_setting,
             glow::change_glow_enabled_setting,
+            glow::change_glow_dictation_setting,
             glow::change_glow_thickness_setting,
             glow::change_glow_intensity_setting,
             glow::change_glow_palette_setting,
@@ -843,6 +846,23 @@ pub fn run(cli_args: CliArgs) {
             assistant::change_assistant_screen_confirm_setting,
             assistant::change_assistant_screen_provider_setting,
             assistant::change_assistant_screen_model_setting,
+            assistant::change_assistant_speak_typed_setting,
+            assistant::change_assistant_answer_to_setting,
+            assistant::change_assistant_tutor_setting,
+            assistant::ask_typed,
+            assistant::cancel_typed_question,
+            assistant::insert_assistant_answer,
+            assistant::get_insertable_answers,
+            ask_box::ask_box_ready,
+            ask_box::ask_box_close,
+            ask_box::ask_box_blurred,
+            ask_box::set_ask_box_height,
+            ask_box::ask_box_submit,
+            ask_box::ask_box_stop,
+            ask_box::ask_box_insert,
+            app_styles::set_app_styles,
+            app_styles::reset_app_styles,
+            app_styles::change_app_styles_enabled_setting,
             network::get_privacy_overview,
             network::get_privacy_ledger,
             network::clear_privacy_ledger,
@@ -1013,6 +1033,8 @@ pub fn run(cli_args: CliArgs) {
         ))
         .manage(cli_args.clone())
         .manage(assistant::AssistantState::default())
+        .manage(ask_box::AskBoxState::default())
+        .manage(ask_box::AskBoxReady::default())
         .manage(screen::ScreenState::default())
         .manage(dictation::DictationState::default())
         .manage(setup::mic_test::MicTestState::default())
