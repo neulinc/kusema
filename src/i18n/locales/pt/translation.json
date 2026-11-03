@@ -1333,7 +1333,17 @@
         "label": "Prévia das edições de IA",
         "description": "Mostra o novo texto antes de substituir o antigo. Desative para edições rápidas: Ctrl+Z no aplicativo ainda as desfaz."
       },
-      "whatCanISay": "O que posso dizer?"
+      "whatCanISay": "O que posso dizer?",
+      "trigger": {
+        "label": "Palavra de ativação no ditado contínuo",
+        "description": "No ditado contínuo, comece uma frase com esta palavra para alterar o texto em vez de digitá-lo: «Kusema, deixe isto mais formal». Deixe em branco para desativar.",
+        "placeholder": "Kusema"
+      },
+      "simpleKey": {
+        "title": "Atalho mais simples",
+        "description": "Mantenha uma tecla pressionada em vez de quatro. A tecla Ctrl direita deixará de funcionar como Ctrl.",
+        "button": "Usar {{key}}"
+      }
     }
   },
   "footer": {
@@ -1415,7 +1425,8 @@
       "transcriptionFailed": "Não foi possível transcrever",
       "pasteFailed": "Não foi possível digitar; está no Histórico"
     },
-    "privileged": "Privileged"
+    "privileged": "Privileged",
+    "editing": "Editando"
   },
   "screenCard": {
     "title": "Enviar esta captura de tela?",
@@ -1492,7 +1503,10 @@
       "copyThat": "Copia a seleção.",
       "cutThat": "Recorta a seleção.",
       "pasteThat": "Cola."
-    }
+    },
+    "trigger": "No ditado contínuo, comece com «{{trigger}},» para alterar texto do mesmo jeito, por exemplo «{{trigger}}, deixe isto mais formal». Sem essa palavra, tudo é digitado como você diz.",
+    "triggerOff": "Para alterar texto durante o ditado contínuo, defina uma palavra de ativação em Geral → Edição por voz.",
+    "selectFirst": "Alguns aplicativos, como ONLYOFFICE, LibreOffice e Google Docs, não mostram seu texto ao Kusema. Neles, selecione o texto primeiro com o mouse ou o teclado; selecionar uma frase, um parágrafo ou palavras por voz não funciona."
   },
   "voiceEdit": {
     "notice": {
@@ -1507,7 +1521,12 @@
       "selectionChanged": "A seleção mudou, então nada foi substituído.",
       "noChange": "O texto não precisava de alterações.",
       "emptyReply": "{{name}} retornou uma resposta vazia.",
-      "failed": "Não foi possível fazer isso nesta janela."
+      "failed": "Não foi possível fazer isso nesta janela.",
+      "noInstruction": "O Kusema não entendeu uma instrução. Mantenha o atalho pressionado enquanto fala.",
+      "cantRead": "Não foi possível ler o texto selecionado neste aplicativo.",
+      "cantConfirm": "Não foi possível saber se há algo selecionado neste aplicativo, então nada foi excluído.",
+      "timedOut": "A prévia expirou, então nada foi substituído.",
+      "working": "Editando…"
     }
   }
 }

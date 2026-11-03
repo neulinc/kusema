@@ -379,6 +379,19 @@ fn handle_text(shared: &Shared, text: &str, started_at: Instant) {
         .voice_commands
         .then(|| voice_commands::parse(text))
         .flatten();
+    // Kusema voice editing: "Kusema, make this more formal" is an edit, with
+    // its preview; typing waits until it's done.
+    if command.is_none() && shared.voice_commands {
+        let trigger = get_settings(&shared.app).voice_edit_trigger;
+        if let Some(said) = crate::voice_edit::commands::parse_trigger(text, &trigger) {
+            let target = shared.core.lock().unwrap().guard.target();
+            if let Some(target) = target {
+                crate::voice_edit::run_trigger_in_dictation(&shared.app, &said, target);
+                shared.core.lock().unwrap().last_typed = None;
+            }
+            return;
+        }
+    }
     // Kusema voice editing: "select last word", "undo that" and the like.
     if command.is_none() && shared.voice_commands {
         if let Some(edit) = crate::voice_edit::commands::parse_in_dictation(text) {

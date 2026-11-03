@@ -1327,7 +1327,17 @@
         "label": "预览 AI 修改",
         "description": "在新文字替换旧文字之前先显示出来。想快速修改时可以关闭：在应用中按 Ctrl+Z 仍可撤销。"
       },
-      "whatCanISay": "我可以说什么？"
+      "whatCanISay": "我可以说什么？",
+      "trigger": {
+        "label": "连续听写的触发词",
+        "description": "在连续听写时，用这个词开头说一句话，就会修改文字而不是输入它：“Kusema，改得更正式些”。留空即可关闭。",
+        "placeholder": "Kusema"
+      },
+      "simpleKey": {
+        "title": "更简单的快捷键",
+        "description": "按住一个键，而不是四个键。右 Ctrl 将不再作为 Ctrl 使用。",
+        "button": "使用 {{key}}"
+      }
     }
   },
   "footer": {
@@ -1409,7 +1419,8 @@
       "transcriptionFailed": "无法转写这段话",
       "pasteFailed": "无法输入这段话；已在历史记录中"
     },
-    "privileged": "Privileged"
+    "privileged": "Privileged",
+    "editing": "编辑"
   },
   "screenCard": {
     "title": "发送这张截图？",
@@ -1484,7 +1495,10 @@
       "copyThat": "复制选中的内容。",
       "cutThat": "剪切选中的内容。",
       "pasteThat": "粘贴。"
-    }
+    },
+    "trigger": "在连续听写时，以“{{trigger}}，”开头即可用同样的方式修改文字，例如“{{trigger}}，改得更正式些”。不说这个词时，所有内容都会照你说的输入。",
+    "triggerOff": "要在连续听写时修改文字，请在“常规 → 语音编辑”中设置触发词。",
+    "selectFirst": "一些应用（如 ONLYOFFICE、LibreOffice 和 Google 文档）不会把文字提供给 Kusema。在这些应用中，请先用鼠标或键盘选中文字；无法用语音选择句子、段落或词语。"
   },
   "voiceEdit": {
     "notice": {
@@ -1499,7 +1513,12 @@
       "selectionChanged": "选中的内容已改变，所以没有替换任何内容。",
       "noChange": "这段文字不需要修改。",
       "emptyReply": "{{name}} 返回了空回复。",
-      "failed": "无法在这个窗口中完成。"
+      "failed": "无法在这个窗口中完成。",
+      "noInstruction": "Kusema 没有听到指令。说话时请按住快捷键。",
+      "cantRead": "无法读取这个应用中选中的文字。",
+      "cantConfirm": "无法判断这个应用中是否选中了内容，所以没有删除任何内容。",
+      "timedOut": "预览已超时，所以没有替换任何内容。",
+      "working": "正在编辑…"
     }
   }
 }

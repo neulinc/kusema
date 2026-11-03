@@ -1327,7 +1327,17 @@
         "label": "KI-Änderungen vorher zeigen",
         "description": "Zeigt den neuen Text, bevor er den alten ersetzt. Für schnelle Änderungen ausschalten: Strg+Z in der App macht sie trotzdem rückgängig."
       },
-      "whatCanISay": "Was kann ich sagen?"
+      "whatCanISay": "Was kann ich sagen?",
+      "trigger": {
+        "label": "Auslösewort beim fortlaufenden Diktat",
+        "description": "Beginnen Sie beim fortlaufenden Diktat einen Satz mit diesem Wort, um Text zu ändern, statt ihn zu schreiben: „Kusema, mach das förmlicher“. Leer lassen, um das auszuschalten.",
+        "placeholder": "Kusema"
+      },
+      "simpleKey": {
+        "title": "Einfacheres Tastenkürzel",
+        "description": "Eine Taste halten statt vier. Die rechte Strg-Taste funktioniert dann nicht mehr als Strg.",
+        "button": "{{key}} verwenden"
+      }
     }
   },
   "footer": {
@@ -1409,7 +1419,8 @@
       "transcriptionFailed": "Konnte das nicht transkribieren",
       "pasteFailed": "Konnte das nicht schreiben; es steht im Verlauf"
     },
-    "privileged": "Privileged"
+    "privileged": "Privileged",
+    "editing": "Bearbeiten"
   },
   "screenCard": {
     "title": "Diesen Screenshot senden?",
@@ -1484,7 +1495,10 @@
       "copyThat": "Kopiert die Markierung.",
       "cutThat": "Schneidet die Markierung aus.",
       "pasteThat": "Fügt ein."
-    }
+    },
+    "trigger": "Beginnen Sie beim fortlaufenden Diktat mit „{{trigger}},“, um Text auf dieselbe Weise zu ändern, zum Beispiel „{{trigger}}, mach das förmlicher“. Ohne dieses Wort wird alles so geschrieben, wie Sie es sagen.",
+    "triggerOff": "Um Text beim fortlaufenden Diktat zu ändern, legen Sie unter Allgemein → Sprachbearbeitung ein Auslösewort fest.",
+    "selectFirst": "Manche Apps wie ONLYOFFICE, LibreOffice und Google Docs zeigen Kusema ihren Text nicht. Markieren Sie den Text dort zuerst mit Maus oder Tastatur; Sätze, Absätze oder Wörter per Sprache markieren funktioniert dort nicht."
   },
   "voiceEdit": {
     "notice": {
@@ -1499,7 +1513,12 @@
       "selectionChanged": "Die Markierung hat sich geändert, daher wurde nichts ersetzt.",
       "noChange": "Der Text musste nicht geändert werden.",
       "emptyReply": "{{name}} hat eine leere Antwort geliefert.",
-      "failed": "Das ging in diesem Fenster nicht."
+      "failed": "Das ging in diesem Fenster nicht.",
+      "noInstruction": "Kusema hat keine Anweisung verstanden. Halten Sie das Tastenkürzel gedrückt, während Sie sprechen.",
+      "cantRead": "Der markierte Text in dieser App konnte nicht gelesen werden.",
+      "cantConfirm": "Es ließ sich nicht feststellen, ob in dieser App etwas markiert ist, daher wurde nichts gelöscht.",
+      "timedOut": "Die Vorschau ist abgelaufen, daher wurde nichts ersetzt.",
+      "working": "Wird bearbeitet …"
     }
   }
 }

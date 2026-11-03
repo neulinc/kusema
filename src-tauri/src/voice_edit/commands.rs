@@ -282,6 +282,53 @@ fn phrase_after_select(text: &str) -> String {
         .to_string()
 }
 
+/// The default word that starts an AI edit in continuous dictation.
+pub const DEFAULT_TRIGGER: &str = "Kusema";
+
+/// A continuous dictation segment that starts with the trigger word ("Kusema,
+/// make this more formal"): what follows it, as said. `None` for anything
+/// else, which is typed as dictated. Case and the punctuation models put after
+/// a name ("Kusema," "Kusema:") don't matter; the trigger may be several words.
+pub fn parse_trigger(segment: &str, trigger: &str) -> Option<String> {
+    let wanted = words(trigger);
+    if wanted.is_empty() {
+        return None;
+    }
+    // Each word of the segment, with where it ends in the original.
+    let mut found = 0;
+    let mut end = 0;
+    let mut chars = segment.char_indices().peekable();
+    while found < wanted.len() {
+        // Skip to the next word.
+        while let Some(&(_, c)) = chars.peek() {
+            if c.is_alphanumeric() {
+                break;
+            }
+            chars.next();
+        }
+        let start = chars.peek()?.0;
+        let mut stop = segment.len();
+        while let Some(&(i, c)) = chars.peek() {
+            if !(c.is_alphanumeric() || c == '\'') {
+                stop = i;
+                break;
+            }
+            chars.next();
+        }
+        if segment[start..stop].trim_matches('\'').to_lowercase() != wanted[found] {
+            return None;
+        }
+        found += 1;
+        end = stop;
+    }
+    let rest = segment[end..]
+        .trim_start_matches(|c: char| {
+            c.is_whitespace() || matches!(c, ',' | ':' | ';' | '.' | '!' | '-')
+        })
+        .trim();
+    (rest.chars().any(char::is_alphanumeric)).then(|| rest.to_string())
+}
+
 /// Every command and its phrases, for the "What can I say?" list.
 pub fn list() -> Vec<CommandInfo> {
     let mut rows: Vec<CommandInfo> = Vec::new();
@@ -471,5 +518,45 @@ mod tests {
                 }
             }
         }
+    }
+    #[test]
+    fn the_trigger_word_starts_an_ai_edit_in_dictation() {
+        assert_eq!(
+            parse_trigger("Kusema, make this more formal.", "Kusema").as_deref(),
+            Some("make this more formal.")
+        );
+        assert_eq!(
+            parse_trigger("kusema shorten that", "Kusema").as_deref(),
+            Some("shorten that")
+        );
+        assert_eq!(
+            parse_trigger("Kusema: select last word", "Kusema").as_deref(),
+            Some("select last word")
+        );
+        // Any language after it, and a trigger of more than one word.
+        assert_eq!(
+            parse_trigger("Kusema, rends ce texte plus formel.", "Kusema").as_deref(),
+            Some("rends ce texte plus formel.")
+        );
+        assert_eq!(
+            parse_trigger("Hey Kusema, fix the grammar", "hey kusema").as_deref(),
+            Some("fix the grammar")
+        );
+    }
+
+    #[test]
+    fn without_the_trigger_word_sentences_are_dictated() {
+        for sentence in [
+            "Make this more formal.",
+            "We met Kusema, the new associate.",
+            "Kusemas are great",
+            "Kusema.",
+            "Kusema,",
+            "",
+        ] {
+            assert_eq!(parse_trigger(sentence, "Kusema"), None, "{sentence}");
+        }
+        assert_eq!(parse_trigger("Kusema, shorten that", ""), None);
+        assert_eq!(parse_trigger("Hey, fix it", "hey kusema"), None);
     }
 }

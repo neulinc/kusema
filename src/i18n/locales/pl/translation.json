@@ -1339,7 +1339,17 @@
         "label": "Podgląd zmian AI",
         "description": "Pokazuje nowy tekst, zanim zastąpi stary. Wyłącz dla szybkich zmian: Ctrl+Z w aplikacji nadal je cofa."
       },
-      "whatCanISay": "Co mogę powiedzieć?"
+      "whatCanISay": "Co mogę powiedzieć?",
+      "trigger": {
+        "label": "Słowo wyzwalające w dyktowaniu ciągłym",
+        "description": "W dyktowaniu ciągłym zacznij zdanie od tego słowa, aby zmienić tekst zamiast go wpisać: „Kusema, napisz to bardziej formalnie”. Zostaw puste, aby wyłączyć.",
+        "placeholder": "Kusema"
+      },
+      "simpleKey": {
+        "title": "Prostszy skrót",
+        "description": "Przytrzymaj jeden klawisz zamiast czterech. Prawy Ctrl przestanie wtedy działać jako Ctrl.",
+        "button": "Użyj {{key}}"
+      }
     }
   },
   "footer": {
@@ -1421,7 +1431,8 @@
       "transcriptionFailed": "Nie udało się tego rozpoznać",
       "pasteFailed": "Nie udało się tego wpisać; jest w Historii"
     },
-    "privileged": "Privileged"
+    "privileged": "Privileged",
+    "editing": "Edycja"
   },
   "screenCard": {
     "title": "Wysłać ten zrzut ekranu?",
@@ -1500,7 +1511,10 @@
       "copyThat": "Kopiuje zaznaczenie.",
       "cutThat": "Wycina zaznaczenie.",
       "pasteThat": "Wkleja."
-    }
+    },
+    "trigger": "W dyktowaniu ciągłym zacznij od „{{trigger}},”, aby zmienić tekst w ten sam sposób, np. „{{trigger}}, napisz to bardziej formalnie”. Bez tego słowa wszystko jest wpisywane tak, jak mówisz.",
+    "triggerOff": "Aby zmieniać tekst w dyktowaniu ciągłym, ustaw słowo wyzwalające w Ogólne → Edycja głosowa.",
+    "selectFirst": "Niektóre aplikacje, takie jak ONLYOFFICE, LibreOffice i Google Docs, nie pokazują Kusemie swojego tekstu. Tam najpierw zaznacz tekst myszą lub klawiaturą; zaznaczanie zdania, akapitu czy słów głosem nie działa."
   },
   "voiceEdit": {
     "notice": {
@@ -1515,7 +1529,12 @@
       "selectionChanged": "Zaznaczenie się zmieniło, więc nic nie zostało zastąpione.",
       "noChange": "Tekst nie wymagał zmian.",
       "emptyReply": "{{name}} zwrócił pustą odpowiedź.",
-      "failed": "Nie udało się tego zrobić w tym oknie."
+      "failed": "Nie udało się tego zrobić w tym oknie.",
+      "noInstruction": "Kusema nie usłyszała polecenia. Przytrzymaj skrót, gdy mówisz.",
+      "cantRead": "Nie udało się odczytać zaznaczonego tekstu w tej aplikacji.",
+      "cantConfirm": "Nie udało się ustalić, czy w tej aplikacji coś jest zaznaczone, więc nic nie zostało usunięte.",
+      "timedOut": "Czas na podgląd minął, więc nic nie zostało zastąpione.",
+      "working": "Edytowanie…"
     }
   }
 }

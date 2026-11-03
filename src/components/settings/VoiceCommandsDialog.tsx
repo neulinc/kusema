@@ -30,6 +30,7 @@ export const VoiceCommandsDialog: React.FC<{
 
   const binding = getSetting("bindings")?.voice_edit?.current_binding ?? "";
   const shortcut = binding ? formatKeyCombination(binding, osType) : "";
+  const trigger = (getSetting("voice_edit_trigger") ?? "").trim();
 
   return (
     <Dialog
@@ -86,8 +87,14 @@ export const VoiceCommandsDialog: React.FC<{
           <h3 className="font-semibold">{t("voiceCommands.groups.ai")}</h3>
           <p className="text-ink-2">{t("voiceCommands.ai.description")}</p>
           <p>{t("voiceCommands.ai.examples")}</p>
+          <p className="text-ink-2">
+            {trigger
+              ? t("voiceCommands.trigger", { trigger })
+              : t("voiceCommands.triggerOff")}
+          </p>
           <p className="text-ink-3">{t("voiceCommands.ai.privileged")}</p>
         </section>
+        <p className="text-ink-2">{t("voiceCommands.selectFirst")}</p>
         <p className="text-ink-3">{t("voiceCommands.support")}</p>
         <p className="text-ink-3">{t("voiceCommands.english")}</p>
       </div>

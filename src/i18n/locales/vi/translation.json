@@ -1327,7 +1327,17 @@
         "label": "Xem trước thay đổi của AI",
         "description": "Hiển thị văn bản mới trước khi nó thay thế văn bản cũ. Tắt đi để sửa nhanh: Ctrl+Z trong ứng dụng vẫn hoàn tác được."
       },
-      "whatCanISay": "Tôi có thể nói gì?"
+      "whatCanISay": "Tôi có thể nói gì?",
+      "trigger": {
+        "label": "Từ kích hoạt khi đọc chính tả liên tục",
+        "description": "Khi đọc chính tả liên tục, hãy bắt đầu câu bằng từ này để sửa văn bản thay vì gõ nó: “Kusema, làm cho trang trọng hơn”. Để trống để tắt.",
+        "placeholder": "Kusema"
+      },
+      "simpleKey": {
+        "title": "Phím tắt đơn giản hơn",
+        "description": "Giữ một phím thay vì bốn. Phím Ctrl phải sẽ không còn hoạt động như Ctrl.",
+        "button": "Dùng {{key}}"
+      }
     }
   },
   "footer": {
@@ -1409,7 +1419,8 @@
       "transcriptionFailed": "Không thể chép lại đoạn đó",
       "pasteFailed": "Không thể gõ đoạn đó; nó có trong Lịch sử"
     },
-    "privileged": "Privileged"
+    "privileged": "Privileged",
+    "editing": "Đang sửa"
   },
   "screenCard": {
     "title": "Gửi ảnh chụp màn hình này?",
@@ -1484,7 +1495,10 @@
       "copyThat": "Sao chép phần đã chọn.",
       "cutThat": "Cắt phần đã chọn.",
       "pasteThat": "Dán."
-    }
+    },
+    "trigger": "Khi đọc chính tả liên tục, hãy bắt đầu bằng “{{trigger}},” để sửa văn bản theo cùng cách, ví dụ “{{trigger}}, làm cho trang trọng hơn”. Không có từ này, mọi thứ được gõ đúng như bạn nói.",
+    "triggerOff": "Để sửa văn bản khi đọc chính tả liên tục, hãy đặt từ kích hoạt trong Chung → Sửa bằng giọng nói.",
+    "selectFirst": "Một số ứng dụng như ONLYOFFICE, LibreOffice và Google Docs không cho Kusema thấy văn bản. Ở đó, hãy chọn văn bản bằng chuột hoặc bàn phím trước; chọn câu, đoạn hoặc từ bằng giọng nói không hoạt động ở đó."
   },
   "voiceEdit": {
     "notice": {
@@ -1499,7 +1513,12 @@
       "selectionChanged": "Vùng chọn đã thay đổi nên không có gì được thay thế.",
       "noChange": "Văn bản không cần sửa.",
       "emptyReply": "{{name}} trả về câu trả lời trống.",
-      "failed": "Không thể làm việc đó trong cửa sổ này."
+      "failed": "Không thể làm việc đó trong cửa sổ này.",
+      "noInstruction": "Kusema không nghe được yêu cầu. Hãy giữ phím tắt trong khi nói.",
+      "cantRead": "Không đọc được văn bản đã chọn trong ứng dụng này.",
+      "cantConfirm": "Không xác định được có gì đang được chọn trong ứng dụng này hay không, nên không có gì bị xóa.",
+      "timedOut": "Hết thời gian xem trước, nên không có gì được thay thế.",
+      "working": "Đang sửa…"
     }
   }
 }

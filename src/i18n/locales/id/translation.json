@@ -1327,7 +1327,17 @@
         "label": "Pratinjau Edit AI",
         "description": "Menampilkan teks baru sebelum menggantikan yang lama. Matikan untuk edit cepat: Ctrl+Z di aplikasi tetap membatalkannya."
       },
-      "whatCanISay": "Apa yang bisa saya ucapkan?"
+      "whatCanISay": "Apa yang bisa saya ucapkan?",
+      "trigger": {
+        "label": "Kata pemicu saat dikte berkelanjutan",
+        "description": "Saat dikte berkelanjutan, mulai kalimat dengan kata ini untuk mengubah teks alih-alih mengetiknya: “Kusema, buat ini lebih formal”. Kosongkan untuk mematikannya.",
+        "placeholder": "Kusema"
+      },
+      "simpleKey": {
+        "title": "Pintasan yang lebih mudah",
+        "description": "Tahan satu tombol, bukan empat. Ctrl kanan tidak lagi berfungsi sebagai Ctrl.",
+        "button": "Gunakan {{key}}"
+      }
     }
   },
   "footer": {
@@ -1409,7 +1419,8 @@
       "transcriptionFailed": "Tidak dapat mentranskripsikan itu",
       "pasteFailed": "Tidak dapat mengetik itu; tersimpan di Riwayat"
     },
-    "privileged": "Privileged"
+    "privileged": "Privileged",
+    "editing": "Mengedit"
   },
   "screenCard": {
     "title": "Kirim tangkapan layar ini?",
@@ -1484,7 +1495,10 @@
       "copyThat": "Menyalin pilihan.",
       "cutThat": "Memotong pilihan.",
       "pasteThat": "Menempel."
-    }
+    },
+    "trigger": "Saat dikte berkelanjutan, mulai dengan “{{trigger}},” untuk mengubah teks dengan cara yang sama, misalnya “{{trigger}}, buat ini lebih formal”. Tanpa kata itu, semuanya diketik seperti yang Anda ucapkan.",
+    "triggerOff": "Untuk mengubah teks saat dikte berkelanjutan, atur kata pemicu di Umum → Edit Suara.",
+    "selectFirst": "Beberapa aplikasi, seperti ONLYOFFICE, LibreOffice, dan Google Docs, tidak menunjukkan teksnya kepada Kusema. Di sana, pilih teks dengan mouse atau keyboard dulu; memilih kalimat, paragraf, atau kata dengan suara tidak berfungsi di sana."
   },
   "voiceEdit": {
     "notice": {
@@ -1499,7 +1513,12 @@
       "selectionChanged": "Pilihannya berubah, jadi tidak ada yang diganti.",
       "noChange": "Teks tidak perlu diubah.",
       "emptyReply": "{{name}} memberikan balasan kosong.",
-      "failed": "Tidak bisa melakukannya di jendela ini."
+      "failed": "Tidak bisa melakukannya di jendela ini.",
+      "noInstruction": "Kusema tidak menangkap instruksi. Tahan pintasan selama Anda berbicara.",
+      "cantRead": "Tidak dapat membaca teks yang dipilih di aplikasi ini.",
+      "cantConfirm": "Tidak dapat memastikan apakah ada yang dipilih di aplikasi ini, jadi tidak ada yang dihapus.",
+      "timedOut": "Waktu pratinjau habis, jadi tidak ada yang diganti.",
+      "working": "Mengedit…"
     }
   }
 }

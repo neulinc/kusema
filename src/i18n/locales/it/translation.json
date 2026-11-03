@@ -1333,7 +1333,17 @@
         "label": "Anteprima delle modifiche IA",
         "description": "Mostra il nuovo testo prima che sostituisca il vecchio. Disattiva per modifiche rapide: Ctrl+Z nell'app le annulla comunque."
       },
-      "whatCanISay": "Cosa posso dire?"
+      "whatCanISay": "Cosa posso dire?",
+      "trigger": {
+        "label": "Parola di attivazione nella dettatura continua",
+        "description": "Nella dettatura continua, inizia una frase con questa parola per cambiare il testo invece di scriverlo: «Kusema, rendilo più formale». Lascia vuoto per disattivare.",
+        "placeholder": "Kusema"
+      },
+      "simpleKey": {
+        "title": "Scorciatoia più semplice",
+        "description": "Tieni premuto un solo tasto invece di quattro. Il tasto Ctrl destro non funzionerà più come Ctrl.",
+        "button": "Usa {{key}}"
+      }
     }
   },
   "footer": {
@@ -1415,7 +1425,8 @@
       "transcriptionFailed": "Impossibile trascrivere",
       "pasteFailed": "Impossibile scriverlo; è nella Cronologia"
     },
-    "privileged": "Privileged"
+    "privileged": "Privileged",
+    "editing": "Modifica"
   },
   "screenCard": {
     "title": "Inviare questo screenshot?",
@@ -1492,7 +1503,10 @@
       "copyThat": "Copia la selezione.",
       "cutThat": "Taglia la selezione.",
       "pasteThat": "Incolla."
-    }
+    },
+    "trigger": "Nella dettatura continua, inizia con «{{trigger}},» per cambiare il testo allo stesso modo, ad esempio «{{trigger}}, rendilo più formale». Senza questa parola, tutto viene scritto come lo dici.",
+    "triggerOff": "Per cambiare il testo durante la dettatura continua, imposta una parola di attivazione in Generale → Modifica vocale.",
+    "selectFirst": "Alcune app, come ONLYOFFICE, LibreOffice e Google Docs, non mostrano il loro testo a Kusema. Lì seleziona prima il testo con il mouse o la tastiera; selezionare una frase, un paragrafo o delle parole a voce non funziona."
   },
   "voiceEdit": {
     "notice": {
@@ -1507,7 +1521,12 @@
       "selectionChanged": "La selezione è cambiata, quindi non è stato sostituito nulla.",
       "noChange": "Il testo non aveva bisogno di modifiche.",
       "emptyReply": "{{name}} ha restituito una risposta vuota.",
-      "failed": "Impossibile farlo in questa finestra."
+      "failed": "Impossibile farlo in questa finestra.",
+      "noInstruction": "Kusema non ha capito un'istruzione. Tieni premuta la scorciatoia mentre parli.",
+      "cantRead": "Impossibile leggere il testo selezionato in questa app.",
+      "cantConfirm": "Impossibile capire se in questa app c'è qualcosa di selezionato, quindi non è stato eliminato nulla.",
+      "timedOut": "L'anteprima è scaduta, quindi non è stato sostituito nulla.",
+      "working": "Modifica in corso…"
     }
   }
 }

@@ -557,6 +557,10 @@ impl ShortcutAction for TranscribeAction {
         // pill instead of an oversized transparent live window.
         let overlay_started = Instant::now();
         match settings.overlay_style {
+            // Kusema: says which mode is listening.
+            OverlayStyle::Live | OverlayStyle::Minimal if self.assistant == Some(AskMode::Edit) => {
+                utils::show_editing_overlay(app)
+            }
             OverlayStyle::Live if model_supports_streaming => utils::show_streaming_overlay(app),
             OverlayStyle::Live | OverlayStyle::Minimal => show_recording_overlay(app),
             OverlayStyle::None => {} // show_overlay_state no-ops on None anyway
@@ -857,7 +861,8 @@ impl ShortcutAction for TranscribeAction {
                                 }
                             }
 
-                            if processed.final_text.is_empty() {
+                            // Kusema: an edit heard as nothing says so.
+                            if processed.final_text.is_empty() && assistant != Some(AskMode::Edit) {
                                 utils::hide_recording_overlay(&ah);
                                 set_tray_state(&ah, TrayIconState::Idle);
                                 emit_transcription_complete(
@@ -875,6 +880,8 @@ impl ShortcutAction for TranscribeAction {
                                 // Escape must reach an in-flight request too.
                                 shortcut::register_cancel_shortcut(&ah);
                                 let is_cancelled = || rm.was_cancelled_since(cancel_generation);
+                                // Kusema: an edit's message keeps the overlay a moment.
+                                let mut keep_overlay = false;
                                 match mode {
                                     AskMode::Plain => {
                                         crate::assistant::ask(
@@ -894,7 +901,7 @@ impl ShortcutAction for TranscribeAction {
                                         .await
                                     }
                                     AskMode::Edit => {
-                                        crate::voice_edit::handle(
+                                        keep_overlay = crate::voice_edit::handle(
                                             &ah,
                                             processed.final_text,
                                             is_cancelled,
@@ -905,6 +912,7 @@ impl ShortcutAction for TranscribeAction {
                                 // A reply still being spoken keeps the UI until it ends.
                                 if !rm.was_cancelled_since(cancel_generation)
                                     && !crate::tts::is_speaking(&ah)
+                                    && !keep_overlay
                                 {
                                     shortcut::unregister_cancel_shortcut(&ah);
                                     utils::hide_recording_overlay(&ah);
@@ -1044,6 +1052,10 @@ struct CancelAction;
 
 impl ShortcutAction for CancelAction {
     fn start(&self, app: &AppHandle, _binding_id: &str, _shortcut_str: &str) {
+        // Kusema: with a confirmation card open, Escape answers just that.
+        if crate::screen::card::cancel_open(app) {
+            return;
+        }
         utils::cancel_current_operation(app);
     }
 

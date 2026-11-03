@@ -212,6 +212,8 @@ const settingUpdaters: {
     commands.changeDictationSoundsSetting(value as boolean),
   voice_edit_preview: (value) =>
     commands.changeVoiceEditPreviewSetting(value as boolean),
+  voice_edit_trigger: (value) =>
+    commands.changeVoiceEditTriggerSetting(value as string),
   show_all_models: (value) =>
     commands.changeShowAllModelsSetting(value as boolean),
   ledger_retention_days: (value) =>

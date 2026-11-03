@@ -1327,7 +1327,17 @@
         "label": "AI 편집 미리 보기",
         "description": "새 텍스트가 기존 텍스트를 바꾸기 전에 보여 줍니다. 빠르게 편집하려면 끄세요. 앱에서 Ctrl+Z를 누르면 여전히 되돌릴 수 있습니다."
       },
-      "whatCanISay": "무엇을 말할 수 있나요?"
+      "whatCanISay": "무엇을 말할 수 있나요?",
+      "trigger": {
+        "label": "연속 받아쓰기 트리거 단어",
+        "description": "연속 받아쓰기 중에 이 단어로 문장을 시작하면 입력하는 대신 텍스트를 바꿉니다: “Kusema, 더 격식 있게 바꿔 줘”. 비워 두면 꺼집니다.",
+        "placeholder": "Kusema"
+      },
+      "simpleKey": {
+        "title": "더 쉬운 단축키",
+        "description": "키 네 개 대신 하나만 누르고 있습니다. 오른쪽 Ctrl은 더 이상 Ctrl로 작동하지 않습니다.",
+        "button": "{{key}} 사용"
+      }
     }
   },
   "footer": {
@@ -1409,7 +1419,8 @@
       "transcriptionFailed": "받아쓸 수 없었습니다",
       "pasteFailed": "입력할 수 없었습니다. 히스토리에 있습니다"
     },
-    "privileged": "Privileged"
+    "privileged": "Privileged",
+    "editing": "편집"
   },
   "screenCard": {
     "title": "이 스크린샷을 보낼까요?",
@@ -1484,7 +1495,10 @@
       "copyThat": "선택한 부분을 복사합니다.",
       "cutThat": "선택한 부분을 잘라냅니다.",
       "pasteThat": "붙여 넣습니다."
-    }
+    },
+    "trigger": "연속 받아쓰기 중에 “{{trigger}},”로 시작하면 같은 방식으로 텍스트를 바꿀 수 있습니다. 예: “{{trigger}}, 더 격식 있게 바꿔 줘”. 이 단어가 없으면 말한 그대로 입력됩니다.",
+    "triggerOff": "연속 받아쓰기 중에 텍스트를 바꾸려면 일반 → 음성 편집에서 트리거 단어를 설정하세요.",
+    "selectFirst": "ONLYOFFICE, LibreOffice, Google Docs 같은 일부 앱은 Kusema에 텍스트를 보여 주지 않습니다. 그런 앱에서는 먼저 마우스나 키보드로 텍스트를 선택하세요. 음성으로 문장, 단락, 단어를 선택할 수는 없습니다."
   },
   "voiceEdit": {
     "notice": {
@@ -1499,7 +1513,12 @@
       "selectionChanged": "선택 영역이 바뀌어서 아무것도 바꾸지 않았습니다.",
       "noChange": "텍스트를 바꿀 필요가 없었습니다.",
       "emptyReply": "{{name}}에서 빈 응답이 왔습니다.",
-      "failed": "이 창에서는 할 수 없었습니다."
+      "failed": "이 창에서는 할 수 없었습니다.",
+      "noInstruction": "지시를 알아듣지 못했습니다. 말하는 동안 단축키를 누르고 있으세요.",
+      "cantRead": "이 앱에서 선택한 텍스트를 읽을 수 없습니다.",
+      "cantConfirm": "이 앱에서 선택된 것이 있는지 알 수 없어 아무것도 삭제하지 않았습니다.",
+      "timedOut": "미리 보기 시간이 지나 아무것도 바꾸지 않았습니다.",
+      "working": "편집 중…"
     }
   }
 }

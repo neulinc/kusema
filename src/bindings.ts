@@ -1345,6 +1345,18 @@ async changeVoiceEditPreviewSetting(enabled: boolean) : Promise<Result<null, str
     else return { status: "error", error: e  as any };
 }
 },
+/**
+ * The word that starts an AI edit in continuous dictation. Empty turns that
+ * off; surrounding punctuation is dropped.
+ */
+async changeVoiceEditTriggerSetting(trigger: string) : Promise<Result<null, string>> {
+    try {
+    return { status: "ok", data: await TAURI_INVOKE("change_voice_edit_trigger_setting", { trigger }) };
+} catch (e) {
+    if(e instanceof Error) throw e;
+    else return { status: "error", error: e  as any };
+}
+},
 async getTtsVoices() : Promise<Result<Voice[], string>> {
     try {
     return { status: "ok", data: await TAURI_INVOKE("get_tts_voices") };
@@ -1629,7 +1641,12 @@ dictation_sounds?: boolean;
 /**
  * Kusema voice editing: show the AI's edit before it replaces the text.
  */
-voice_edit_preview?: boolean }
+voice_edit_preview?: boolean; 
+/**
+ * Kusema voice editing: said first in continuous dictation ("Kusema,
+ * shorten that"), it makes the rest an edit. Empty turns that off.
+ */
+voice_edit_trigger?: string }
 export type AudioDevice = { index: string; name: string; is_default: boolean }
 export type AutoSubmitKey = "enter" | "ctrl_enter" | "cmd_enter"
 export type AutoUnavailableReason = 

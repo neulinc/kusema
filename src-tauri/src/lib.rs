@@ -862,6 +862,7 @@ pub fn run(cli_args: CliArgs) {
             screen::card::set_screen_card_enlarged,
             voice_edit::get_voice_commands,
             voice_edit::change_voice_edit_preview_setting,
+            voice_edit::change_voice_edit_trigger_setting,
             tts::get_tts_voices,
             tts::preview_tts_voice,
             tts::change_assistant_speak_replies_setting,

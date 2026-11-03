@@ -1339,7 +1339,17 @@
         "label": "Náhled úprav AI",
         "description": "Ukáže nový text dřív, než nahradí starý. Pro rychlé úpravy vypněte: Ctrl+Z v aplikaci je i tak vrátí."
       },
-      "whatCanISay": "Co můžu říct?"
+      "whatCanISay": "Co můžu říct?",
+      "trigger": {
+        "label": "Spouštěcí slovo při průběžném diktování",
+        "description": "Při průběžném diktování začněte větu tímto slovem, chcete-li text změnit místo napsání: „Kusema, udělej to formálnější“. Ponechte prázdné, chcete-li funkci vypnout.",
+        "placeholder": "Kusema"
+      },
+      "simpleKey": {
+        "title": "Jednodušší zkratka",
+        "description": "Držte jednu klávesu místo čtyř. Pravý Ctrl pak přestane fungovat jako Ctrl.",
+        "button": "Použít {{key}}"
+      }
     }
   },
   "footer": {
@@ -1421,7 +1431,8 @@
       "transcriptionFailed": "Nepodařilo se to přepsat",
       "pasteFailed": "Nepodařilo se to napsat; je to v Historii"
     },
-    "privileged": "Privileged"
+    "privileged": "Privileged",
+    "editing": "Úpravy"
   },
   "screenCard": {
     "title": "Odeslat tento snímek obrazovky?",
@@ -1500,7 +1511,10 @@
       "copyThat": "Zkopíruje označený text.",
       "cutThat": "Vyjme označený text.",
       "pasteThat": "Vloží."
-    }
+    },
+    "trigger": "Při průběžném diktování začněte slovy „{{trigger}},“ a text se změní stejně, například „{{trigger}}, udělej to formálnější“. Bez toho slova se vše napíše tak, jak to řeknete.",
+    "triggerOff": "Chcete-li měnit text při průběžném diktování, nastavte spouštěcí slovo v Obecné → Hlasové úpravy.",
+    "selectFirst": "Některé aplikace, například ONLYOFFICE, LibreOffice a Google Docs, Kusemě svůj text neukazují. Tam nejdřív označte text myší nebo klávesnicí; označování věty, odstavce nebo slov hlasem tam nefunguje."
   },
   "voiceEdit": {
     "notice": {
@@ -1515,7 +1529,12 @@
       "selectionChanged": "Označení se změnilo, takže se nic nenahradilo.",
       "noChange": "Text nebylo třeba měnit.",
       "emptyReply": "{{name}} vrátil prázdnou odpověď.",
-      "failed": "V tomto okně to nešlo."
+      "failed": "V tomto okně to nešlo.",
+      "noInstruction": "Kusema nezachytila žádný pokyn. Při mluvení držte zkratku.",
+      "cantRead": "Označený text v této aplikaci se nepodařilo přečíst.",
+      "cantConfirm": "Nepodařilo se zjistit, zda je v této aplikaci něco označeno, takže se nic nesmazalo.",
+      "timedOut": "Čas na náhled vypršel, takže se nic nenahradilo.",
+      "working": "Upravuje se…"
     }
   }
 }

@@ -21,7 +21,21 @@ type OverlayState =
   | "transcribing"
   | "processing"
   | "speaking"
-  | "dictating";
+  | "dictating"
+  // Kusema voice editing: the editing hotkey is held, or a message about it.
+  | "editing"
+  | "notice";
+
+/** Kusema voice editing: a message for the overlay. */
+type EditNotice = {
+  key: string | null;
+  name: string | null;
+  message: string;
+  in_dictation: boolean;
+};
+
+/** How long a voice editing message replaces continuous dictation's status. */
+const EDIT_NOTICE_MS = 5000;
 
 const DICTATION_NOTICES: Record<DictationNotice, string> = {
   nothing_to_scratch: "overlay.dictation.nothingToScratch",
@@ -75,6 +89,9 @@ const RecordingOverlay: React.FC = () => {
   const [dictation, setDictation] = useState<DictationStatusEvent | null>(null);
   const [now, setNow] = useState(Date.now());
   const [privileged, setPrivileged] = useState(false);
+  // Kusema voice editing: the message shown, and until when in dictation.
+  const [editNotice, setEditNotice] = useState("");
+  const [editNoticeUntil, setEditNoticeUntil] = useState(0);
   // Bumped on each new streaming session so the Live card remounts fresh (replays
   // the pop-in, and never animates in from the previous panel's open size).
   const [session, setSession] = useState(0);
@@ -105,7 +122,11 @@ const RecordingOverlay: React.FC = () => {
           smoothedLevelsRef.current = Array(16).fill(0);
           setLevels(Array(WAVE_BARS).fill(0));
         }
-        if (overlayState === "recording" || overlayState === "streaming") {
+        if (
+          overlayState === "recording" ||
+          overlayState === "streaming" ||
+          overlayState === "editing"
+        ) {
           setCaptureReady(false);
           smoothedLevelsRef.current = Array(16).fill(0);
           setLevels(Array(WAVE_BARS).fill(0));
@@ -141,6 +162,21 @@ const RecordingOverlay: React.FC = () => {
         setIsVisible(false);
         setCaptureReady(false);
       });
+
+      const unlistenEditNotice = await listen<EditNotice>(
+        "voice-edit-notice",
+        (event) => {
+          const notice = event.payload;
+          setEditNotice(
+            notice.key
+              ? i18n.t(notice.key, { name: notice.name ?? "" })
+              : notice.message,
+          );
+          setEditNoticeUntil(
+            notice.in_dictation ? Date.now() + EDIT_NOTICE_MS : 0,
+          );
+        },
+      );
 
       const unlistenReady = await listen("recording-ready", () => {
         setElapsed(0);
@@ -212,6 +248,7 @@ const RecordingOverlay: React.FC = () => {
         unlistenShow();
         unlistenHide();
         unlistenReady();
+        unlistenEditNotice();
         unlistenLevel();
         unlistenStream();
         unlistenPrivileged();
@@ -318,6 +355,9 @@ const RecordingOverlay: React.FC = () => {
     <div className="sbase">
       <div className="sbase-l">
         <span className={`sdot ${captureReady ? "ready" : "arming"}`} />
+        {state === "editing" && (
+          <span className="pchip">{t("overlay.editing")}</span>
+        )}
         {privilegedChip}
       </div>
       {waveform}
@@ -344,15 +384,18 @@ const RecordingOverlay: React.FC = () => {
   // ---- Continuous dictation: what's happening, how long, and a way out ----
   if (state === "dictating") {
     const phase = dictation?.phase ?? "dictating";
-    const label = dictation?.notice
-      ? t(DICTATION_NOTICES[dictation.notice])
-      : phase === "paused"
-        ? t("overlay.dictation.paused")
-        : phase === "no_target"
-          ? t("overlay.dictation.noTarget")
-          : phase === "dictating"
-            ? t("overlay.dictation.dictating")
-            : t("overlay.dictation.finishing");
+    const label =
+      editNotice && now < editNoticeUntil
+        ? editNotice
+        : dictation?.notice
+          ? t(DICTATION_NOTICES[dictation.notice])
+          : phase === "paused"
+            ? t("overlay.dictation.paused")
+            : phase === "no_target"
+              ? t("overlay.dictation.noTarget")
+              : phase === "dictating"
+                ? t("overlay.dictation.dictating")
+                : t("overlay.dictation.finishing");
     const seconds = dictation
       ? Math.max(0, Math.floor((now - dictation.started_at_ms) / 1000))
       : 0;
@@ -393,6 +436,22 @@ const RecordingOverlay: React.FC = () => {
               </button>
             )}
           </div>
+        </div>
+      </div>
+    );
+  }
+
+  // ---- Kusema voice editing: why an edit didn't happen ----
+  if (state === "notice") {
+    return (
+      <div
+        dir={direction}
+        className={`ov-stage ${position} ov-fade ${isVisible ? "show" : ""}`}
+      >
+        <div className="scard compact notice">
+          <p className="snotice" role="status">
+            {editNotice}
+          </p>
         </div>
       </div>
     );
@@ -482,7 +541,9 @@ const RecordingOverlay: React.FC = () => {
       }`}
     >
       <div
-        className={`scard compact ${working && isVisible ? "cworking" : ""}`}
+        className={`scard compact ${working && isVisible ? "cworking" : ""} ${
+          state === "editing" ? "editing" : ""
+        }`}
       >
         {working ? workingRow(workLabel, true) : listeningRow(false, true)}
       </div>

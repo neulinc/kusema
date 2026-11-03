@@ -50,7 +50,9 @@ mod imp {
     use windows::Win32::UI::Input::KeyboardAndMouse::{
         GetAsyncKeyState, VK_CONTROL, VK_LWIN, VK_MENU, VK_RWIN, VK_SHIFT,
     };
-    use windows::Win32::UI::WindowsAndMessaging::{GetClassNameW, GetWindowThreadProcessId};
+    use windows::Win32::UI::WindowsAndMessaging::{
+        GetClassNameW, GetWindowTextW, GetWindowThreadProcessId,
+    };
 
     /// Whether Ctrl, Alt, Shift or Windows is down: a key sent now would mean
     /// something else (Shift+Left with Ctrl held selects words, not letters).
@@ -143,14 +145,22 @@ mod imp {
         Ok(range)
     }
 
-    /// The selected text: `Some("")` when the control has the text pattern
-    /// but nothing is selected.
-    pub fn selected_text() -> Result<String, UiaError> {
+    /// The selected text, and whether the control shows any text at all. An
+    /// empty selection only means "nothing selected" when there's text to
+    /// select: apps that draw their own text often give UI Automation an
+    /// empty stand-in, like a hidden input box.
+    pub fn selection() -> Result<(String, bool), UiaError> {
         with_text_pattern(|pattern| unsafe {
-            match first_selection(pattern)? {
-                Some(range) => Ok(range.GetText(-1).map_err(failed)?.to_string()),
-                None => Ok(String::new()),
-            }
+            let selected = match first_selection(pattern)? {
+                Some(range) => range.GetText(-1).map_err(failed)?.to_string(),
+                None => String::new(),
+            };
+            let has_text = !selected.is_empty()
+                || pattern
+                    .DocumentRange()
+                    .and_then(|document| document.GetText(1))
+                    .is_ok_and(|text| !text.is_empty());
+            Ok((selected, has_text))
         })
     }
 
@@ -230,6 +240,12 @@ mod imp {
             .ok()
     }
 
+    pub fn window_title(window: isize) -> String {
+        let mut buffer = [0u16; 512];
+        let len = unsafe { GetWindowTextW(HWND(window as *mut _), &mut buffer) };
+        String::from_utf16_lossy(&buffer[..len.max(0) as usize])
+    }
+
     /// The lowercase file name of the process that owns `window`, and the
     /// class of the control focused in it.
     pub fn app_of(window: isize, control: isize) -> (String, String) {
@@ -269,8 +285,12 @@ mod imp {
 mod imp {
     use super::{Selection, UiaError};
 
-    pub fn selected_text() -> Result<String, UiaError> {
+    pub fn selection() -> Result<(String, bool), UiaError> {
         Err(UiaError::NoTextPattern)
+    }
+
+    pub fn window_title(_window: isize) -> String {
+        String::new()
     }
 
     pub fn select(_what: Selection) -> Result<(), UiaError> {
@@ -286,4 +306,4 @@ mod imp {
     }
 }
 
-pub use imp::{any_modifier_held, app_of, select, selected_text};
+pub use imp::{any_modifier_held, app_of, select, selection, window_title};

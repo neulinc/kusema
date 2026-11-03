@@ -1333,7 +1333,17 @@
         "label": "Previsualitza els canvis de la IA",
         "description": "Mostra el text nou abans que substitueixi l'antic. Desactiveu-ho per a canvis ràpids: Ctrl+Z a l'aplicació els continua desfent."
       },
-      "whatCanISay": "Què puc dir?"
+      "whatCanISay": "Què puc dir?",
+      "trigger": {
+        "label": "Paraula d'activació en el dictat continu",
+        "description": "En el dictat continu, comenceu una frase amb aquesta paraula per canviar el text en lloc d'escriure'l: «Kusema, fes això més formal». Deixeu-la buida per desactivar-ho.",
+        "placeholder": "Kusema"
+      },
+      "simpleKey": {
+        "title": "Drecera més senzilla",
+        "description": "Manteniu premuda una sola tecla en lloc de quatre. La tecla Ctrl dreta deixarà de funcionar com a Ctrl.",
+        "button": "Fes servir {{key}}"
+      }
     }
   },
   "footer": {
@@ -1415,7 +1425,8 @@
       "transcriptionFailed": "No s'ha pogut transcriure",
       "pasteFailed": "No s'ha pogut escriure; és a l'Historial"
     },
-    "privileged": "Privileged"
+    "privileged": "Privileged",
+    "editing": "Edició"
   },
   "screenCard": {
     "title": "Voleu enviar aquesta captura?",
@@ -1492,7 +1503,10 @@
       "copyThat": "Copia la selecció.",
       "cutThat": "Retalla la selecció.",
       "pasteThat": "Enganxa."
-    }
+    },
+    "trigger": "En el dictat continu, comenceu amb «{{trigger}},» per canviar el text de la mateixa manera, per exemple «{{trigger}}, fes això més formal». Sense aquesta paraula, tot s'escriu tal com ho dieu.",
+    "triggerOff": "Per canviar text durant el dictat continu, definiu una paraula d'activació a General → Edició per veu.",
+    "selectFirst": "Algunes aplicacions, com ONLYOFFICE, LibreOffice i Google Docs, no mostren el seu text al Kusema. Allà, seleccioneu primer el text amb el ratolí o el teclat; seleccionar una frase, un paràgraf o paraules per veu no hi funciona."
   },
   "voiceEdit": {
     "notice": {
@@ -1507,7 +1521,12 @@
       "selectionChanged": "La selecció ha canviat, així que no s'ha substituït res.",
       "noChange": "No calia canviar el text.",
       "emptyReply": "{{name}} ha retornat una resposta buida.",
-      "failed": "No s'ha pogut fer en aquesta finestra."
+      "failed": "No s'ha pogut fer en aquesta finestra.",
+      "noInstruction": "El Kusema no ha entès cap instrucció. Manteniu premuda la drecera mentre parleu.",
+      "cantRead": "No s'ha pogut llegir el text seleccionat en aquesta aplicació.",
+      "cantConfirm": "No s'ha pogut saber si hi ha res seleccionat en aquesta aplicació, així que no s'ha suprimit res.",
+      "timedOut": "La previsualització ha caducat, així que no s'ha substituït res.",
+      "working": "S'està editant…"
     }
   }
 }

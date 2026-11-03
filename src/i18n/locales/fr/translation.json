@@ -1333,7 +1333,17 @@
         "label": "Aperçu des modifications IA",
         "description": "Affiche le nouveau texte avant qu'il remplace l'ancien. Désactivez pour les modifications rapides : Ctrl+Z dans l'application les annule toujours."
       },
-      "whatCanISay": "Que puis-je dire ?"
+      "whatCanISay": "Que puis-je dire ?",
+      "trigger": {
+        "label": "Mot déclencheur en dictée continue",
+        "description": "En dictée continue, commencez une phrase par ce mot pour modifier du texte au lieu de le saisir : « Kusema, rends ce texte plus formel ». Laissez vide pour désactiver.",
+        "placeholder": "Kusema"
+      },
+      "simpleKey": {
+        "title": "Raccourci plus simple",
+        "description": "Maintenez une seule touche au lieu de quatre. La touche Ctrl droite ne fonctionnera plus comme Ctrl.",
+        "button": "Utiliser {{key}}"
+      }
     }
   },
   "footer": {
@@ -1415,7 +1425,8 @@
       "transcriptionFailed": "Impossible de transcrire ceci",
       "pasteFailed": "Impossible de saisir ceci ; c'est dans l'Historique"
     },
-    "privileged": "Privileged"
+    "privileged": "Privileged",
+    "editing": "Modification"
   },
   "screenCard": {
     "title": "Envoyer cette capture d'écran ?",
@@ -1492,7 +1503,10 @@
       "copyThat": "Copie la sélection.",
       "cutThat": "Coupe la sélection.",
       "pasteThat": "Colle."
-    }
+    },
+    "trigger": "En dictée continue, commencez par « {{trigger}}, » pour modifier du texte de la même façon, par exemple « {{trigger}}, rends ce texte plus formel ». Sans ce mot, tout est saisi tel que vous le dites.",
+    "triggerOff": "Pour modifier du texte en dictée continue, définissez un mot déclencheur dans Général → Modification vocale.",
+    "selectFirst": "Certaines applications, comme ONLYOFFICE, LibreOffice et Google Docs, ne montrent pas leur texte à Kusema. Sélectionnez-y d'abord le texte à la souris ou au clavier ; la sélection d'une phrase, d'un paragraphe ou de mots à la voix n'y fonctionne pas."
   },
   "voiceEdit": {
     "notice": {
@@ -1507,7 +1521,12 @@
       "selectionChanged": "La sélection a changé, rien n'a donc été remplacé.",
       "noChange": "Le texte n'avait pas besoin d'être modifié.",
       "emptyReply": "{{name}} a renvoyé une réponse vide.",
-      "failed": "Impossible de faire cela dans cette fenêtre."
+      "failed": "Impossible de faire cela dans cette fenêtre.",
+      "noInstruction": "Kusema n'a pas compris d'instruction. Maintenez le raccourci pendant que vous parlez.",
+      "cantRead": "Impossible de lire le texte sélectionné dans cette application.",
+      "cantConfirm": "Impossible de savoir si quelque chose est sélectionné dans cette application, rien n'a donc été supprimé.",
+      "timedOut": "L'aperçu a expiré, rien n'a donc été remplacé.",
+      "working": "Modification…"
     }
   }
 }

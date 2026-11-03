@@ -451,6 +451,28 @@ pub fn answer_screen_card(app: AppHandle, state: State<'_, ScreenState>, send: b
     }
 }
 
+/// Kusema: answers an open confirmation (a screenshot or a voice edit) as
+/// Cancel. `true` if there was one, so Escape closes just the card and, in
+/// continuous dictation, the session goes on.
+pub fn cancel_open(app: &AppHandle) -> bool {
+    let Some(state) = app.try_state::<ScreenState>() else {
+        return false;
+    };
+    let (reply, captured) = {
+        let mut inner = state.card.lock();
+        (inner.reply.take(), inner.captured)
+    };
+    let Some(reply) = reply else {
+        return false;
+    };
+    if let Some(window) = captured {
+        restore_focus(&window);
+    }
+    close(app, false);
+    let _ = reply.send(false);
+    true
+}
+
 /// Close a notice card.
 #[tauri::command]
 #[specta::specta]

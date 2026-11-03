@@ -64,6 +64,9 @@ fn overlay_dimensions(state: &str) -> (f64, f64) {
         (OVERLAY_STREAM_WIDTH, OVERLAY_STREAM_HEIGHT)
     } else if state == "dictating" {
         (OVERLAY_DICTATION_WIDTH, OVERLAY_HEIGHT)
+    } else if state == "notice" {
+        // Kusema voice editing: a message of a line or two.
+        (OVERLAY_DICTATION_WIDTH, OVERLAY_HEIGHT * 2.0)
     } else {
         (OVERLAY_WIDTH, OVERLAY_HEIGHT)
     }
@@ -703,6 +706,45 @@ fn update_overlay_position_on_main(app_handle: &AppHandle) {
 /// press the coordinator remembered while the pipeline was busy and started
 /// the instant it drained, well inside the 300 ms hide delay.
 static OVERLAY_SHOW_GENERATION: AtomicU64 = AtomicU64::new(0);
+
+/// Kusema voice editing: the overlay while the editing hotkey is held.
+pub fn show_editing_overlay(app_handle: &AppHandle) {
+    show_overlay_state(app_handle, "editing");
+}
+
+/// Kusema voice editing: shows `notice` in the overlay for `seconds`, inside
+/// continuous dictation's overlay when `in_dictation`. `false` if the overlay
+/// is turned off, so the caller can say it another way.
+pub fn show_edit_notice<T: serde::Serialize + Clone>(
+    app_handle: &AppHandle,
+    notice: &T,
+    in_dictation: bool,
+    seconds: u64,
+) -> bool {
+    if settings::get_settings(app_handle).overlay_style == OverlayStyle::None {
+        return false;
+    }
+    let Some(overlay_window) = app_handle.get_webview_window("recording_overlay") else {
+        return false;
+    };
+    let _ = overlay_window.emit("voice-edit-notice", notice.clone());
+    if in_dictation {
+        return true;
+    }
+    show_overlay_state(app_handle, "notice");
+    let app = app_handle.clone();
+    std::thread::spawn(move || {
+        // The show above lands on the main thread first; anything shown after
+        // it (a new recording) keeps the overlay.
+        std::thread::sleep(std::time::Duration::from_millis(300));
+        let shown = OVERLAY_SHOW_GENERATION.load(Ordering::SeqCst);
+        std::thread::sleep(std::time::Duration::from_secs(seconds));
+        if OVERLAY_SHOW_GENERATION.load(Ordering::SeqCst) == shown {
+            hide_recording_overlay(&app);
+        }
+    });
+    true
+}
 
 /// Hides the recording overlay window with fade-out animation
 pub fn hide_recording_overlay(app_handle: &AppHandle) {

@@ -169,6 +169,56 @@ pub fn keeps_rich_text(process: &str, class: &str) -> bool {
     class.to_lowercase().contains("richedit") && process != "notepad.exe"
 }
 
+/// Apps that draw their own text and don't show it to Windows UI Automation,
+/// so asking it would only waste time: the keyboard and the clipboard are the
+/// way in. By process (lowercase file name) and window title.
+///
+/// Checked on this machine: ONLYOFFICE Desktop Editors (`editors.exe`): its
+/// focused control is a plain pane with no text pattern. Not checked here
+/// (not installed, or needs an account): LibreOffice, which reports through
+/// IAccessible2 rather than UI Automation's text pattern, and Google Docs,
+/// which draws on a canvas unless its screen reader support is turned on.
+pub fn hides_text(process: &str, title: &str) -> bool {
+    const APPS: &[&str] = &[
+        "editors.exe",
+        "desktopeditors.exe",
+        "soffice.bin",
+        "soffice.exe",
+        "swriter.exe",
+    ];
+    const BROWSERS: &[&str] = &["chrome.exe", "msedge.exe", "firefox.exe", "brave.exe"];
+    let process = process.to_lowercase();
+    APPS.contains(&process.as_str())
+        || (BROWSERS.contains(&process.as_str()) && title.contains("Google Docs"))
+}
+
+/// What to do after Ctrl+Shift+Left selected `selected`, when `wanted` words
+/// were asked for.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum WordSelection {
+    Done,
+    /// Only punctuation or too few words so far ("." after "Hello."): once more.
+    Extend,
+    /// It reached into the line before: select from the line start instead.
+    LineStart,
+}
+
+pub fn check_word_selection(selected: &str, wanted: usize) -> WordSelection {
+    let is_word = |w: &&str| w.chars().any(char::is_alphanumeric);
+    if let Some(at) = selected.rfind(['\n', '\r']) {
+        let on_this_line = &selected[at + 1..];
+        if on_this_line.split_whitespace().filter(is_word).count() > 0 {
+            return WordSelection::LineStart;
+        }
+        return WordSelection::Done;
+    }
+    if selected.split_whitespace().filter(is_word).count() < wanted {
+        WordSelection::Extend
+    } else {
+        WordSelection::Done
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -274,5 +324,37 @@ mod tests {
             "chrome.exe",
             "Chrome_RenderWidgetHostHWND"
         ));
+    }
+    #[test]
+    fn apps_that_hide_their_text_are_recognized() {
+        assert!(hides_text("editors.exe", "Document1.docx - ONLYOFFICE"));
+        assert!(hides_text("soffice.bin", "Untitled 1 - LibreOffice Writer"));
+        assert!(hides_text(
+            "chrome.exe",
+            "Memo - Google Docs - Google Chrome"
+        ));
+        assert!(!hides_text("chrome.exe", "Inbox - Gmail"));
+        assert!(!hides_text("winword.exe", "Memo - Word"));
+        assert!(!hides_text("notepad.exe", "notes.txt - Notepad"));
+    }
+
+    #[test]
+    fn a_selected_period_alone_is_extended_to_its_word() {
+        use WordSelection::*;
+        assert_eq!(check_word_selection(".", 1), Extend);
+        assert_eq!(check_word_selection("Hello.", 1), Done);
+        assert_eq!(check_word_selection(" ", 1), Extend);
+        assert_eq!(check_word_selection("ten days.", 3), Extend);
+        assert_eq!(check_word_selection("within ten days.", 3), Done);
+    }
+
+    #[test]
+    fn a_selection_into_the_line_before_selects_from_the_line_start() {
+        use WordSelection::*;
+        // One word on the line: Ctrl+Shift+Left went past its start.
+        assert_eq!(check_word_selection("Sir,\r\nHello.", 2), LineStart);
+        assert_eq!(check_word_selection("Sir,\nHello", 2), LineStart);
+        // Nothing but punctuation on this line: leave it.
+        assert_eq!(check_word_selection("Sir,\n.", 1), Done);
     }
 }

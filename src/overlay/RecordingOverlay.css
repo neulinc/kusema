@@ -480,3 +480,19 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+/* Kusema voice editing: the editing hotkey's chip, and its messages. */
+.scard.compact.editing {
+  width: calc(var(--ov-rest-w) + var(--ov-chip-w));
+}
+.scard.compact.notice {
+  width: var(--ov-dictation-w);
+}
+.snotice {
+  margin: 0;
+  padding: 10px 16px;
+  font-size: 13px;
+  line-height: 1.35;
+  white-space: normal;
+  color: var(--color-text);
+}

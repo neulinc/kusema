@@ -1327,7 +1327,17 @@
         "label": "Förhandsgranska AI-ändringar",
         "description": "Visar den nya texten innan den ersätter den gamla. Stäng av för snabba ändringar: Ctrl+Z i appen ångrar dem ändå."
       },
-      "whatCanISay": "Vad kan jag säga?"
+      "whatCanISay": "Vad kan jag säga?",
+      "trigger": {
+        "label": "Utlösarord vid löpande diktering",
+        "description": "Börja en mening med det här ordet vid löpande diktering för att ändra text i stället för att skriva den: “Kusema, gör det här mer formellt”. Lämna tomt för att stänga av.",
+        "placeholder": "Kusema"
+      },
+      "simpleKey": {
+        "title": "Enklare kortkommando",
+        "description": "Håll ned en tangent i stället för fyra. Höger Ctrl fungerar då inte längre som Ctrl.",
+        "button": "Använd {{key}}"
+      }
     }
   },
   "footer": {
@@ -1409,7 +1419,8 @@
       "transcriptionFailed": "Kunde inte transkribera det",
       "pasteFailed": "Kunde inte skriva det; det finns i Historik"
     },
-    "privileged": "Privileged"
+    "privileged": "Privileged",
+    "editing": "Redigerar"
   },
   "screenCard": {
     "title": "Skicka den här skärmbilden?",
@@ -1484,7 +1495,10 @@
       "copyThat": "Kopierar markeringen.",
       "cutThat": "Klipper ut markeringen.",
       "pasteThat": "Klistrar in."
-    }
+    },
+    "trigger": "Börja med “{{trigger}},” vid löpande diktering för att ändra text på samma sätt, till exempel “{{trigger}}, gör det här mer formellt”. Utan ordet skrivs allt som du säger det.",
+    "triggerOff": "Ställ in ett utlösarord under Allmänt → Röstredigering för att ändra text vid löpande diktering.",
+    "selectFirst": "Vissa appar, som ONLYOFFICE, LibreOffice och Google Docs, visar inte sin text för Kusema. Markera texten med musen eller tangentbordet först där; att markera en mening, ett stycke eller ord med rösten fungerar inte där."
   },
   "voiceEdit": {
     "notice": {
@@ -1499,7 +1513,12 @@
       "selectionChanged": "Markeringen ändrades, så inget ersattes.",
       "noChange": "Texten behövde inte ändras.",
       "emptyReply": "{{name}} gav ett tomt svar.",
-      "failed": "Det gick inte i det här fönstret."
+      "failed": "Det gick inte i det här fönstret.",
+      "noInstruction": "Kusema uppfattade ingen instruktion. Håll ned kortkommandot medan du pratar.",
+      "cantRead": "Det gick inte att läsa den markerade texten i den här appen.",
+      "cantConfirm": "Det gick inte att avgöra om något är markerat i den här appen, så inget togs bort.",
+      "timedOut": "Förhandsgranskningen tog för lång tid, så inget ersattes.",
+      "working": "Redigerar …"
     }
   }
 }

@@ -41,7 +41,9 @@ Hold **Ctrl+Alt+Shift+Enter** and say one of these on its own. They run on your 
 
 Anything else you say with this hotkey is an instruction for your AI provider, applied to the selection. With nothing selected, Kusema uses the text it just typed in that window, if it can find it exactly; otherwise it asks you to select the text first. The selection is sent as text to edit, never as instructions, so a document can't take over the request. In Privileged mode only a model on your own computer is used, and every edit is listed in the privacy ledger (sizes only).
 
-The commands are in English. "Select last sentence", "select last paragraph" and "select …" need an app that lets Kusema read its text through Windows UI Automation: Word, Outlook, Notepad and text boxes in Chrome or Edge do. The other commands use standard keys and work almost everywhere. The same list is in the app under **General → Voice Editing → What can I say?**
+The commands are in English. "Select last sentence", "select last paragraph" and "select …" need an app that lets Kusema read its text through Windows UI Automation: Word, Outlook, Notepad and text boxes in Chrome or Edge do. The other commands use standard keys and work almost everywhere. Some apps, such as ONLYOFFICE, LibreOffice and Google Docs, don't show their text that way: there, select the text with the mouse or keyboard first, and Kusema copies it (putting your clipboard back afterwards).
+
+During continuous dictation, start a sentence with **"Kusema,"** to edit instead of typing: "Kusema, make this more formal". Without that word, everything is typed as you say it. The word can be changed under **General → Voice Editing**, where **Use Right Ctrl** also sets a one-key shortcut for editing. The same list is in the app under **General → Voice Editing → What can I say?**
 
 ## Privacy, in plain terms
 

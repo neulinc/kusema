@@ -89,6 +89,24 @@ pub fn select_back(steps: usize) -> Chord {
     }
 }
 
+/// Ctrl+Shift+Left `times` times: words before the caret.
+pub fn words_left(times: u32) -> Chord {
+    Chord {
+        ctrl: true,
+        shift: true,
+        times,
+        ..key(NavKey::Left)
+    }
+}
+
+/// Shift+Home: from the caret to the start of its line.
+pub fn select_to_line_start() -> Chord {
+    Chord {
+        shift: true,
+        ..key(NavKey::Home)
+    }
+}
+
 /// Right: collapses a selection to its end, where the caret was.
 pub fn collapse_to_end() -> Chord {
     key(NavKey::Right)

@@ -635,6 +635,14 @@ pub struct AppSettings {
     /// Kusema voice editing: show the AI's edit before it replaces the text.
     #[serde(default = "default_voice_edit_preview")]
     pub voice_edit_preview: bool,
+    /// Kusema voice editing: said first in continuous dictation ("Kusema,
+    /// shorten that"), it makes the rest an edit. Empty turns that off.
+    #[serde(default = "default_voice_edit_trigger")]
+    pub voice_edit_trigger: String,
+}
+
+fn default_voice_edit_trigger() -> String {
+    crate::voice_edit::commands::DEFAULT_TRIGGER.to_string()
 }
 
 fn default_voice_edit_preview() -> bool {
@@ -1304,6 +1312,7 @@ pub fn get_default_settings() -> AppSettings {
         glow_palette: Default::default(),
         dictation_sounds: default_dictation_sounds(),
         voice_edit_preview: default_voice_edit_preview(),
+        voice_edit_trigger: default_voice_edit_trigger(),
     }
 }
 

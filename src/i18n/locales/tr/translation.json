@@ -1327,7 +1327,17 @@
         "label": "AI Düzenlemelerini Önizle",
         "description": "Yeni metni eskisinin yerine geçmeden önce gösterir. Hızlı düzenlemeler için kapatın: uygulamada Ctrl+Z yine de geri alır."
       },
-      "whatCanISay": "Ne söyleyebilirim?"
+      "whatCanISay": "Ne söyleyebilirim?",
+      "trigger": {
+        "label": "Sürekli dikte tetikleyici sözcüğü",
+        "description": "Sürekli dikte sırasında, metni yazmak yerine değiştirmek için cümleye bu sözcükle başlayın: “Kusema, bunu daha resmî yap”. Kapatmak için boş bırakın.",
+        "placeholder": "Kusema"
+      },
+      "simpleKey": {
+        "title": "Daha kolay kısayol",
+        "description": "Dört yerine tek bir tuşu basılı tutun. Sağ Ctrl artık Ctrl olarak çalışmaz.",
+        "button": "{{key}} kullan"
+      }
     }
   },
   "footer": {
@@ -1409,7 +1419,8 @@
       "transcriptionFailed": "Bu yazıya dökülemedi",
       "pasteFailed": "Bu yazılamadı; Geçmiş'te duruyor"
     },
-    "privileged": "Privileged"
+    "privileged": "Privileged",
+    "editing": "Düzenleme"
   },
   "screenCard": {
     "title": "Bu ekran görüntüsü gönderilsin mi?",
@@ -1484,7 +1495,10 @@
       "copyThat": "Seçimi kopyalar.",
       "cutThat": "Seçimi keser.",
       "pasteThat": "Yapıştırır."
-    }
+    },
+    "trigger": "Sürekli dikte sırasında metni aynı şekilde değiştirmek için “{{trigger}},” ile başlayın, örneğin “{{trigger}}, bunu daha resmî yap”. Bu sözcük olmadan her şey söylediğiniz gibi yazılır.",
+    "triggerOff": "Sürekli dikte sırasında metni değiştirmek için Genel → Sesle Düzenleme altında bir tetikleyici sözcük belirleyin.",
+    "selectFirst": "ONLYOFFICE, LibreOffice ve Google Docs gibi bazı uygulamalar metinlerini Kusema'ya göstermez. Orada önce metni fare veya klavyeyle seçin; cümle, paragraf veya sözcükleri sesle seçmek orada çalışmaz."
   },
   "voiceEdit": {
     "notice": {
@@ -1499,7 +1513,12 @@
       "selectionChanged": "Seçim değişti, bu yüzden hiçbir şey değiştirilmedi.",
       "noChange": "Metnin değişmesi gerekmiyordu.",
       "emptyReply": "{{name}} boş bir yanıt döndürdü.",
-      "failed": "Bu pencerede yapılamadı."
+      "failed": "Bu pencerede yapılamadı.",
+      "noInstruction": "Kusema bir talimat duymadı. Konuşurken kısayolu basılı tutun.",
+      "cantRead": "Bu uygulamada seçili metin okunamadı.",
+      "cantConfirm": "Bu uygulamada bir şeyin seçili olup olmadığı anlaşılamadı, bu yüzden hiçbir şey silinmedi.",
+      "timedOut": "Önizlemenin süresi doldu, bu yüzden hiçbir şey değiştirilmedi.",
+      "working": "Düzenleniyor…"
     }
   }
 }

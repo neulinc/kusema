@@ -1327,7 +1327,17 @@
         "label": "Preview AI Edits",
         "description": "Show the new text before it replaces the old. Turn off for quick edits: Ctrl+Z in the app still undoes them."
       },
-      "whatCanISay": "What can I say?"
+      "whatCanISay": "What can I say?",
+      "trigger": {
+        "label": "Trigger Word in Continuous Dictation",
+        "description": "Start a sentence with this word during continuous dictation to change text instead of typing it: “Kusema, make this more formal”. Leave it empty to turn this off.",
+        "placeholder": "Kusema"
+      },
+      "simpleKey": {
+        "title": "Easier Shortcut",
+        "description": "Hold one key instead of four. Right Ctrl then no longer works as Ctrl.",
+        "button": "Use {{key}}"
+      }
     }
   },
   "footer": {
@@ -1409,7 +1419,8 @@
       "transcriptionFailed": "Couldn't transcribe that",
       "pasteFailed": "Couldn't type that; it's in History"
     },
-    "privileged": "Privileged"
+    "privileged": "Privileged",
+    "editing": "Editing"
   },
   "screenCard": {
     "title": "Send this screenshot?",
@@ -1484,7 +1495,10 @@
       "copyThat": "Copies the selection.",
       "cutThat": "Cuts the selection.",
       "pasteThat": "Pastes."
-    }
+    },
+    "trigger": "During continuous dictation, start with “{{trigger}},” to change text the same way, for example “{{trigger}}, make this more formal”. Without it, everything is typed as you say it.",
+    "triggerOff": "To change text during continuous dictation, set a trigger word under General → Voice Editing.",
+    "selectFirst": "Some apps, such as ONLYOFFICE, LibreOffice and Google Docs, don't show their text to Kusema. There, select the text with the mouse or keyboard first, and selecting a sentence, paragraph or phrase by voice doesn't work."
   },
   "voiceEdit": {
     "notice": {
@@ -1499,7 +1513,12 @@
       "selectionChanged": "The selection changed, so nothing was replaced.",
       "noChange": "The text didn't need changing.",
       "emptyReply": "{{name}} returned an empty reply.",
-      "failed": "Couldn't do that in this window."
+      "failed": "Couldn't do that in this window.",
+      "noInstruction": "Kusema didn't catch an instruction. Hold the shortcut while you speak.",
+      "cantRead": "Couldn't read the selected text in this app.",
+      "cantConfirm": "Couldn't tell whether anything is selected in this app, so nothing was deleted.",
+      "timedOut": "The preview timed out, so nothing was replaced.",
+      "working": "Editing…"
     }
   }
 }

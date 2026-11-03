@@ -1327,7 +1327,17 @@
         "label": "Vis AI-ændringer først",
         "description": "Viser den nye tekst, før den erstatter den gamle. Slå fra for hurtige ændringer: Ctrl+Z i appen fortryder dem stadig."
       },
-      "whatCanISay": "Hvad kan jeg sige?"
+      "whatCanISay": "Hvad kan jeg sige?",
+      "trigger": {
+        "label": "Udløserord ved løbende diktat",
+        "description": "Start en sætning med dette ord ved løbende diktat for at ændre tekst i stedet for at skrive den: “Kusema, gør det mere formelt”. Lad det være tomt for at slå det fra.",
+        "placeholder": "Kusema"
+      },
+      "simpleKey": {
+        "title": "Nemmere genvej",
+        "description": "Hold én tast nede i stedet for fire. Højre Ctrl virker så ikke længere som Ctrl.",
+        "button": "Brug {{key}}"
+      }
     }
   },
   "footer": {
@@ -1409,7 +1419,8 @@
       "transcriptionFailed": "Kunne ikke transskribere det",
       "pasteFailed": "Kunne ikke skrive det; det ligger i Historik"
     },
-    "privileged": "Privileged"
+    "privileged": "Privileged",
+    "editing": "Redigerer"
   },
   "screenCard": {
     "title": "Send dette skærmbillede?",
@@ -1484,7 +1495,10 @@
       "copyThat": "Kopierer markeringen.",
       "cutThat": "Klipper markeringen.",
       "pasteThat": "Indsætter."
-    }
+    },
+    "trigger": "Start med “{{trigger}},” ved løbende diktat for at ændre tekst på samme måde, fx “{{trigger}}, gør det mere formelt”. Uden ordet skrives alt, som du siger det.",
+    "triggerOff": "Angiv et udløserord under Generelt → Stemmeredigering for at ændre tekst ved løbende diktat.",
+    "selectFirst": "Nogle apps, som ONLYOFFICE, LibreOffice og Google Docs, viser ikke deres tekst til Kusema. Marker teksten med musen eller tastaturet først der; at markere en sætning, et afsnit eller ord med stemmen virker ikke der."
   },
   "voiceEdit": {
     "notice": {
@@ -1499,7 +1513,12 @@
       "selectionChanged": "Markeringen ændrede sig, så intet blev erstattet.",
       "noChange": "Teksten behøvede ikke at blive ændret.",
       "emptyReply": "{{name}} gav et tomt svar.",
-      "failed": "Det kunne ikke lade sig gøre i dette vindue."
+      "failed": "Det kunne ikke lade sig gøre i dette vindue.",
+      "noInstruction": "Kusema opfangede ingen instruktion. Hold genvejen nede, mens du taler.",
+      "cantRead": "Den markerede tekst i denne app kunne ikke læses.",
+      "cantConfirm": "Det kunne ikke afgøres, om noget er markeret i denne app, så intet blev slettet.",
+      "timedOut": "Forhåndsvisningen udløb, så intet blev erstattet.",
+      "working": "Redigerer …"
     }
   }
 }

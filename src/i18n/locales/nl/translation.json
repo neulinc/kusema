@@ -1327,7 +1327,17 @@
         "label": "Voorbeeld van AI-bewerkingen",
         "description": "Toont de nieuwe tekst voordat die de oude vervangt. Zet uit voor snelle bewerkingen: Ctrl+Z in de app maakt ze nog steeds ongedaan."
       },
-      "whatCanISay": "Wat kan ik zeggen?"
+      "whatCanISay": "Wat kan ik zeggen?",
+      "trigger": {
+        "label": "Activeringswoord bij doorlopend dicteren",
+        "description": "Begin bij doorlopend dicteren een zin met dit woord om tekst te wijzigen in plaats van te typen: “Kusema, maak dit formeler”. Laat leeg om dit uit te zetten.",
+        "placeholder": "Kusema"
+      },
+      "simpleKey": {
+        "title": "Eenvoudigere sneltoets",
+        "description": "Houd één toets ingedrukt in plaats van vier. De rechter Ctrl-toets werkt dan niet meer als Ctrl.",
+        "button": "{{key}} gebruiken"
+      }
     }
   },
   "footer": {
@@ -1409,7 +1419,8 @@
       "transcriptionFailed": "Kon dat niet uitschrijven",
       "pasteFailed": "Kon dat niet typen; het staat in Geschiedenis"
     },
-    "privileged": "Privileged"
+    "privileged": "Privileged",
+    "editing": "Bewerken"
   },
   "screenCard": {
     "title": "Deze schermafbeelding versturen?",
@@ -1484,7 +1495,10 @@
       "copyThat": "Kopieert de selectie.",
       "cutThat": "Knipt de selectie.",
       "pasteThat": "Plakt."
-    }
+    },
+    "trigger": "Begin bij doorlopend dicteren met “{{trigger}},” om tekst op dezelfde manier te wijzigen, bijvoorbeeld “{{trigger}}, maak dit formeler”. Zonder dat woord wordt alles getypt zoals je het zegt.",
+    "triggerOff": "Stel onder Algemeen → Spraakbewerking een activeringswoord in om tekst tijdens doorlopend dicteren te wijzigen.",
+    "selectFirst": "Sommige apps, zoals ONLYOFFICE, LibreOffice en Google Docs, laten hun tekst niet aan Kusema zien. Selecteer daar eerst de tekst met de muis of het toetsenbord; een zin, alinea of woorden met spraak selecteren werkt daar niet."
   },
   "voiceEdit": {
     "notice": {
@@ -1499,7 +1513,12 @@
       "selectionChanged": "De selectie is veranderd, dus er is niets vervangen.",
       "noChange": "De tekst hoefde niet te veranderen.",
       "emptyReply": "{{name}} gaf een leeg antwoord.",
-      "failed": "Dat lukte niet in dit venster."
+      "failed": "Dat lukte niet in dit venster.",
+      "noInstruction": "Kusema heeft geen instructie verstaan. Houd de sneltoets ingedrukt terwijl je spreekt.",
+      "cantRead": "De geselecteerde tekst in deze app kon niet worden gelezen.",
+      "cantConfirm": "Niet duidelijk of er in deze app iets geselecteerd is, dus er is niets verwijderd.",
+      "timedOut": "Het voorbeeld is verlopen, dus er is niets vervangen.",
+      "working": "Bezig met bewerken…"
     }
   }
 }
