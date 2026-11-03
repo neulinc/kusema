@@ -44,14 +44,6 @@ pub enum TextHere {
     Nothing,
 }
 
-/// What follows the trigger word, if `said` starts with it in any of its
-/// `forms` (the word itself and how it's heard).
-pub fn after_trigger(said: &str, forms: &[String]) -> Option<String> {
-    forms
-        .iter()
-        .find_map(|form| commands::parse_trigger(said, form))
-}
-
 fn words(text: &str) -> Vec<String> {
     text.split(|c: char| !(c.is_alphanumeric() || c == '\''))
         .filter(|w| !w.is_empty())
@@ -239,7 +231,12 @@ mod tests {
     }
 
     fn routed(said: &str, text: TextHere) -> Option<Route> {
-        after_trigger(said, &forms()).map(|rest| route(&rest, text))
+        match crate::kusema_key::trigger::find(said, &forms()) {
+            crate::kusema_key::trigger::TriggerMatch::Found { rest, .. } => {
+                Some(route(&rest, text))
+            }
+            _ => None,
+        }
     }
 
     fn ask(q: &str, about_selection: bool) -> Option<Route> {

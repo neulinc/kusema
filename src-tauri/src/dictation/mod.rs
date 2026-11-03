@@ -402,8 +402,7 @@ fn handle_text(shared: &Shared, text: &str, started_at: Instant) {
     // Kusema: "Kusema, …" asks, edits or looks at the screen, as in normal
     // dictation; typing waits until it's done.
     if command.is_none() && shared.voice_commands {
-        let forms = crate::kusema_key::trigger_forms(&get_settings(&shared.app));
-        if let Some(rest) = crate::kusema_key::route::after_trigger(text, &forms) {
+        if let Some(rest) = crate::kusema_key::trigger_rest(&get_settings(&shared.app), text) {
             let target = shared.core.lock().unwrap().guard.target();
             if let Some(target) = target {
                 crate::kusema_key::run_in_dictation(&shared.app, &rest, target);

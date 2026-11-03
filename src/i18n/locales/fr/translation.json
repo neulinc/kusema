@@ -1389,7 +1389,9 @@
       "trigger": {
         "label": "Mot déclencheur",
         "description": "Commencez par ce mot pour poser une question, modifier ou faire regarder votre écran au lieu de taper : « Kusema, make this more formal ». Cela marche quand vous maintenez la touche Kusema et en dictée continue. Laissez vide pour désactiver.",
-        "placeholder": "Kusema"
+        "placeholder": "Kusema",
+        "variants": "Aussi entendu comme :",
+        "removeVariant": "Retirer {{variant}}"
       },
       "simpleKey": {
         "title": "Raccourci plus simple",
@@ -1568,7 +1570,9 @@
       "ask": "Question à Kusema…",
       "ask_screen": "Regarde votre écran…",
       "edit": "Modification…"
-    }
+    },
+    "assistantTake": "Demander à Kusema",
+    "triggerHint": "Saisi comme dictée. Pour demander à Kusema, touchez Espace en maintenant {{name}}."
   },
   "screenCard": {
     "title": "Envoyer cette capture d'écran ?",
@@ -1599,6 +1603,12 @@
       "help": "Corrigez puis appuyez sur Entrée. Kusema apprend les mots que vous changez. Maj+Entrée ajoute une ligne, Échap annule.",
       "save": "Enregistrer",
       "cancel": "Annuler"
+    },
+    "offer": {
+      "title": "Ajouter « {{word}} » comme façon de dire « {{trigger}} » ?",
+      "body": "Tout ce que vous commencerez par « {{word}} » ira alors à Kusema. Plus loin dans une phrase, le mot reste tel quel.",
+      "yes": "Ajouter",
+      "no": "Pas maintenant"
     }
   },
   "secureInput": {
@@ -1656,7 +1666,7 @@
     "trigger": "En dictée continue, commencez par « {{trigger}}, » pour modifier du texte de la même façon, par exemple « {{trigger}}, rends ce texte plus formel ». Sans ce mot, tout est saisi tel que vous le dites.",
     "triggerOff": "Pour modifier du texte en dictée continue, définissez un mot déclencheur dans Général → Modification vocale.",
     "selectFirst": "Certaines applications, comme ONLYOFFICE, LibreOffice et Google Docs, ne montrent pas leur texte à Kusema. Sélectionnez-y d'abord le texte à la souris ou au clavier ; la sélection d'une phrase, d'un paragraphe ou de mots à la voix n'y fonctionne pas.",
-    "introKey": "Maintenez {{key}} et dites « {{trigger}} », puis l'une de ces commandes. Celles marquées « Aussi en dictée continue » y fonctionnent quand elles sont dites seules."
+    "introKey": "Maintenez {{key}} et touchez Espace (ou commencez par « {{trigger}} »), puis dites l'une de ces commandes. Celles marquées « Aussi en dictée continue » y fonctionnent quand elles sont dites seules."
   },
   "voiceEdit": {
     "notice": {
@@ -1708,11 +1718,11 @@
       "title": "Touches Kusema",
       "hold": "Maintenez <key/> pour parler.",
       "doubleTap": "Appuyez deux fois sur <key/> pour la dictée continue.",
-      "say": "Dites d'abord <q>{{trigger}}</q> pour poser une question, modifier ou faire regarder votre écran."
+      "ask": "En la maintenant, touchez <space/> pour demander à Kusema, ou commencez par <q>{{trigger}}</q> : poser une question, modifier ou faire regarder votre écran."
     },
     "settings": {
       "title": "Touche Kusema",
-      "description": "Une seule touche pour dicter. Maintenez-la pour parler, appuyez deux fois pour la dictée continue, et commencez par « Kusema » pour poser une question, modifier ou faire regarder votre écran. Les autres applications ne voient jamais la touche.",
+      "description": "Une seule touche pour dicter. Maintenez-la pour parler ; appuyez deux fois pour la dictée continue. Pour poser une question, modifier ou faire regarder votre écran, touchez Espace en la maintenant, ou commencez par « Kusema ». Les autres applications ne voient jamais la touche.",
       "enabled": {
         "label": "Utiliser la touche Kusema",
         "description": "Désactivée, seuls les raccourcis ci-dessous fonctionnent."
@@ -1741,6 +1751,7 @@
       "body": "Kusema a maintenant une seule touche au lieu de nombreux raccourcis. Il n'y a que deux règles :",
       "keptClassic": "Kusema a maintenant une touche pour tout. Vous aviez modifié un raccourci, vos raccourcis fonctionnent donc toujours. Vous pouvez les désactiver dans Raccourcis classiques.",
       "gotIt": "Compris"
-    }
+    },
+    "space": "Espace"
   }
 }

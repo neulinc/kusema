@@ -14,6 +14,8 @@ import type {
 import i18n, { syncLanguageFromSettings } from "@/i18n";
 import type { ModelStateEvent } from "@/lib/types/events";
 import { getLanguageDirection } from "@/lib/utils/rtl";
+import { keyLabel } from "@/lib/kusemaKey";
+import type { KusemaKey } from "@/bindings";
 
 type OverlayState =
   | "recording"
@@ -164,6 +166,9 @@ const RecordingOverlay: React.FC = () => {
   const [appStyle, setAppStyle] = useState<AppStyleEvent | null>(null);
   // Kusema: where "Kusema, …" went (ask, ask_screen, edit), for the label.
   const [route, setRoute] = useState<string | null>(null);
+  // Kusema key: Space was tapped while holding, so this take is a question.
+  const [assistantTake, setAssistantTake] = useState(false);
+  const kusemaKeyRef = useRef<KusemaKey | undefined>(undefined);
   const [leaving, setLeaving] = useState(false);
   const leavingTimerRef = useRef<ReturnType<typeof setTimeout>>();
   // Bumped on each new streaming session so the Live card remounts fresh (replays
@@ -196,6 +201,7 @@ const RecordingOverlay: React.FC = () => {
         if (overlayState !== "processing" && overlayState !== "notice") {
           setAppStyle(null);
           setRoute(null);
+          setAssistantTake(false);
         }
         if (overlayState === "dictating") {
           setDictation(null);
@@ -223,6 +229,7 @@ const RecordingOverlay: React.FC = () => {
               settings.data.overlay_position === "top" ? "top" : "bottom",
             );
             setPrivileged(settings.data.privileged_mode ?? false);
+            kusemaKeyRef.current = settings.data.kusema_key;
           }
         } catch {
           // Keep the previous/default placement if settings can't be read.
@@ -263,14 +270,21 @@ const RecordingOverlay: React.FC = () => {
         setRoute(event.payload),
       );
 
+      const unlistenAssistantTake = await listen("overlay-assistant-take", () =>
+        setAssistantTake(true),
+      );
+
       const unlistenEditNotice = await listen<EditNotice>(
         "voice-edit-notice",
         (event) => {
           const notice = event.payload;
+          // The hint names the Kusema key in the user's language.
+          const name =
+            notice.key === "overlay.triggerHint"
+              ? keyLabel(kusemaKeyRef.current, (k) => i18n.t(k))
+              : (notice.name ?? "");
           setEditNotice(
-            notice.key
-              ? i18n.t(notice.key, { name: notice.name ?? "" })
-              : notice.message,
+            notice.key ? i18n.t(notice.key, { name }) : notice.message,
           );
           setEditNoticeUntil(
             notice.in_dictation ? Date.now() + EDIT_NOTICE_MS : 0,
@@ -350,6 +364,7 @@ const RecordingOverlay: React.FC = () => {
         unlistenMode();
         unlistenStyle();
         unlistenRoute();
+        unlistenAssistantTake();
         unlistenReady();
         unlistenEditNotice();
         unlistenLevel();
@@ -489,6 +504,9 @@ const RecordingOverlay: React.FC = () => {
         {modeIcon(state === "editing" ? "edit" : mode)}
         {state === "editing" && (
           <span className="pchip">{t("overlay.editing")}</span>
+        )}
+        {assistantTake && state !== "editing" && (
+          <span className="pchip">{t("overlay.assistantTake")}</span>
         )}
         {privilegedChip}
       </div>
@@ -719,7 +737,7 @@ const RecordingOverlay: React.FC = () => {
       dir={direction}
       className={`ov-stage ${position} ov-fade ${isVisible ? "show" : ""} ${
         privileged ? "privileged" : ""
-      } look-${look}`}
+      } ${assistantTake ? "assistant-take" : ""} look-${look}`}
       style={stageStyle}
     >
       <div className="spill">

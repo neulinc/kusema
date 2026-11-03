@@ -1389,7 +1389,9 @@
       "trigger": {
         "label": "Palabra de activación",
         "description": "Empieza con esta palabra para preguntar, editar o hacer que mire tu pantalla en lugar de escribir: «Kusema, make this more formal». Funciona mientras mantienes pulsada la tecla Kusema y en el dictado continuo. Déjala vacía para desactivarlo.",
-        "placeholder": "Kusema"
+        "placeholder": "Kusema",
+        "variants": "También se oye como:",
+        "removeVariant": "Quitar {{variant}}"
       },
       "simpleKey": {
         "title": "Atajo más sencillo",
@@ -1568,7 +1570,9 @@
       "ask": "Preguntando a Kusema…",
       "ask_screen": "Mirando tu pantalla…",
       "edit": "Editando…"
-    }
+    },
+    "assistantTake": "Preguntar a Kusema",
+    "triggerHint": "Se escribió como dictado. Para preguntar a Kusema, toca Espacio mientras mantienes pulsada {{name}}."
   },
   "screenCard": {
     "title": "¿Enviar esta captura?",
@@ -1599,6 +1603,12 @@
       "help": "Corrígelo y pulsa Intro. Kusema aprende las palabras que cambies. Mayús+Intro inicia una línea nueva, Esc cancela.",
       "save": "Guardar",
       "cancel": "Cancelar"
+    },
+    "offer": {
+      "title": "¿Añadir «{{word}}» como forma de decir «{{trigger}}»?",
+      "body": "Así, todo lo que empieces con «{{word}}» irá a Kusema. Más adelante en una frase, la palabra se queda como está.",
+      "yes": "Añadir",
+      "no": "Ahora no"
     }
   },
   "secureInput": {
@@ -1656,7 +1666,7 @@
     "trigger": "En el dictado continuo, empieza con «{{trigger}},» para cambiar texto de la misma forma, por ejemplo «{{trigger}}, haz esto más formal». Sin esa palabra, todo se escribe tal como lo dices.",
     "triggerOff": "Para cambiar texto durante el dictado continuo, define una palabra de activación en General → Edición por voz.",
     "selectFirst": "Algunas aplicaciones, como ONLYOFFICE, LibreOffice y Google Docs, no muestran su texto a Kusema. En ellas, selecciona primero el texto con el ratón o el teclado; seleccionar una frase, un párrafo o palabras por voz no funciona allí.",
-    "introKey": "Mantén pulsada {{key}} y di «{{trigger}}», y luego uno de estos. Los comandos marcados «También en el dictado continuo» funcionan ahí cuando se dicen solos."
+    "introKey": "Mantén pulsada {{key}} y toca Espacio (o empieza con «{{trigger}}»), y luego di uno de estos. Los comandos marcados «También en el dictado continuo» funcionan ahí cuando se dicen solos."
   },
   "voiceEdit": {
     "notice": {
@@ -1708,11 +1718,11 @@
       "title": "Teclas de Kusema",
       "hold": "Mantén pulsada <key/> para hablar.",
       "doubleTap": "Pulsa dos veces <key/> para el dictado continuo.",
-      "say": "Di primero <q>{{trigger}}</q> para preguntar, editar o hacer que mire tu pantalla."
+      "ask": "Mientras la mantienes pulsada, toca <space/> para preguntar a Kusema, o empieza con <q>{{trigger}}</q>: preguntar, editar o hacer que mire tu pantalla."
     },
     "settings": {
       "title": "Tecla Kusema",
-      "description": "Una tecla para dictar. Mantenla pulsada para hablar, púlsala dos veces para el dictado continuo y empieza con «Kusema» para preguntar, editar o hacer que mire tu pantalla. Las demás aplicaciones nunca ven la tecla.",
+      "description": "Una tecla para dictar. Mantenla pulsada para hablar; púlsala dos veces para el dictado continuo. Para preguntar, editar o hacer que mire tu pantalla, toca Espacio mientras la mantienes pulsada, o empieza con «Kusema». Las demás aplicaciones nunca ven la tecla.",
       "enabled": {
         "label": "Usar la tecla Kusema",
         "description": "Desactivada, solo funcionan los atajos de abajo."
@@ -1741,6 +1751,7 @@
       "body": "Kusema ahora tiene una sola tecla en lugar de muchos atajos. Estas son las dos únicas reglas:",
       "keptClassic": "Kusema ahora tiene una tecla para todo. Habías cambiado un atajo, así que tus atajos siguen funcionando. Puedes desactivarlos en Atajos clásicos.",
       "gotIt": "Entendido"
-    }
+    },
+    "space": "Espacio"
   }
 }

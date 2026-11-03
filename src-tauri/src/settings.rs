@@ -677,6 +677,10 @@ pub struct AppSettings {
     /// Show the one-time "New: simpler keys" card.
     #[serde(default)]
     pub simpler_keys_card: bool,
+    /// Spellings of the trigger word added from "correct that", recognized
+    /// only at the start of what's said.
+    #[serde(default)]
+    pub trigger_variants: Vec<String>,
 }
 
 fn default_kusema_key_enabled() -> bool {
@@ -1388,6 +1392,7 @@ pub fn get_default_settings() -> AppSettings {
         classic_shortcuts: false,
         keys_scheme: crate::kusema_key::migrate::SCHEME,
         simpler_keys_card: false,
+        trigger_variants: Vec::new(),
     }
 }
 

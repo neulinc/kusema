@@ -32,6 +32,12 @@ pub fn handle_shortcut_event(
     hotkey_string: &str,
     is_pressed: bool,
 ) {
+    // Kusema: while the Kusema key is held its gesture wins over a classic
+    // shortcut (Right Ctrl + Space reads as Ctrl+Space); Space is its tap.
+    if crate::kusema_key::classic_while_held(binding_id, hotkey_string, is_pressed) {
+        return;
+    }
+
     let settings = get_settings(app);
 
     // Transcribe bindings are handled by the coordinator.

@@ -31,6 +31,8 @@ pub struct RawKey {
 pub enum Edge {
     Down,
     Up,
+    /// Space was pressed while the key is held: this take is for the Assistant.
+    Space,
 }
 
 #[derive(Debug, Clone, Default, PartialEq, Eq)]
@@ -65,9 +67,19 @@ pub struct HookState {
     held: Option<u16>,
     /// The key that was captured, while it's still down.
     captured_down: Option<u16>,
+    /// A Space pressed while the key was held, until it's let go: all of it
+    /// is swallowed, the release too.
+    space_down: bool,
     /// What the keyboard has shown so far.
     pub seen_right_ctrl: bool,
     pub seen_copilot: bool,
+}
+
+impl HookState {
+    /// The Kusema key is down now.
+    pub fn key_held(&self) -> bool {
+        self.held.is_some()
+    }
 }
 
 /// What to do with `key`.
@@ -111,6 +123,27 @@ pub fn classify(state: &mut HookState, key: RawKey) -> Action {
         };
     }
 
+    // Space while the key is held switches the take to the Assistant. It never
+    // reaches the app (or a classic Ctrl+Space shortcut behind this hook).
+    if key.vk == vk::SPACE {
+        if key.down && state.held.is_some() {
+            let first = !state.space_down;
+            state.space_down = true;
+            return Action {
+                swallow: true,
+                edge: first.then_some(Edge::Space),
+                ..Default::default()
+            };
+        }
+        if !key.down && state.space_down {
+            state.space_down = false;
+            return Action {
+                swallow: true,
+                ..Default::default()
+            };
+        }
+    }
+
     if let Some(held) = state.held {
         if key.vk == held {
             if key.down {
@@ -151,16 +184,18 @@ pub fn classify(state: &mut HookState, key: RawKey) -> Action {
 pub mod windows {
     use super::*;
     use ::windows::Win32::Foundation::{LPARAM, LRESULT, WPARAM};
+    use ::windows::Win32::System::Threading::GetCurrentThreadId;
     use ::windows::Win32::UI::Input::KeyboardAndMouse::{
         GetAsyncKeyState, SendInput, INPUT, INPUT_0, INPUT_KEYBOARD, KEYBDINPUT, KEYBD_EVENT_FLAGS,
         KEYEVENTF_KEYUP, VIRTUAL_KEY, VK_LSHIFT, VK_LWIN, VK_RSHIFT, VK_RWIN,
     };
     use ::windows::Win32::UI::WindowsAndMessaging::{
-        CallNextHookEx, DispatchMessageW, GetMessageW, SetTimer, SetWindowsHookExW,
-        TranslateMessage, UnhookWindowsHookEx, HHOOK, KBDLLHOOKSTRUCT, LLKHF_INJECTED, MSG,
-        WH_KEYBOARD_LL, WM_KEYDOWN, WM_SYSKEYDOWN, WM_TIMER,
+        CallNextHookEx, DispatchMessageW, GetMessageW, PostThreadMessageW, SetTimer,
+        SetWindowsHookExW, TranslateMessage, UnhookWindowsHookEx, HHOOK, KBDLLHOOKSTRUCT,
+        LLKHF_INJECTED, MSG, WH_KEYBOARD_LL, WM_APP, WM_KEYDOWN, WM_SYSKEYDOWN, WM_TIMER,
     };
     use log::{error, info};
+    use std::sync::atomic::{AtomicU32, Ordering};
     use std::sync::mpsc::Sender;
     use std::sync::{Mutex, OnceLock};
     use std::time::Instant;
@@ -235,9 +270,31 @@ pub mod windows {
         }
     }
 
+    /// Asks the hook's thread to install it afresh, ahead of any hook
+    /// installed since (a classic shortcut fired before Kusema's hook saw
+    /// its keys).
+    pub fn reinstall_soon() {
+        let thread = HOOK_THREAD.load(Ordering::SeqCst);
+        if thread != 0 {
+            unsafe {
+                let _ = PostThreadMessageW(thread, REINSTALL_NOW, WPARAM(0), LPARAM(0));
+            }
+        }
+    }
+
+    static HOOK_THREAD: AtomicU32 = AtomicU32::new(0);
+    const REINSTALL_NOW: u32 = WM_APP + 1;
+
+    /// Hands the gesture an event from elsewhere (a classic shortcut's Space).
+    pub fn inject(event: Event) {
+        if let Some(sender) = SENDER.get() {
+            let _ = sender.lock().unwrap_or_else(|e| e.into_inner()).send(event);
+        }
+    }
+
     /// How often the hook is installed afresh: Windows silently drops a
     /// low-level hook that once answered too slowly, and after sleep.
-    const REINSTALL_MS: u32 = 60_000;
+    const REINSTALL_MS: u32 = 30_000;
 
     unsafe fn install() -> Option<HHOOK> {
         match SetWindowsHookExW(WH_KEYBOARD_LL, Some(proc), None, 0) {
@@ -261,10 +318,11 @@ pub mod windows {
                     return;
                 };
                 info!("Kusema key hook installed");
+                HOOK_THREAD.store(GetCurrentThreadId(), Ordering::SeqCst);
                 SetTimer(None, 0, REINSTALL_MS, None);
                 let mut msg = MSG::default();
                 while GetMessageW(&mut msg, None, 0, 0).as_bool() {
-                    if msg.message == WM_TIMER {
+                    if msg.message == WM_TIMER || msg.message == REINSTALL_NOW {
                         // The new one first, so there's never a gap.
                         if let Some(fresh) = install() {
                             let _ = UnhookWindowsHookEx(hook);
@@ -350,6 +408,24 @@ mod tests {
         let up = classify(&mut s, press(vk::RCONTROL, false));
         assert!(up.swallow);
         assert_eq!(up.edge, Some(Edge::Up));
+    }
+
+    #[test]
+    fn space_while_held_is_swallowed_and_reported_once() {
+        let mut s = state(KusemaKey::RightCtrl);
+        classify(&mut s, press(vk::RCONTROL, true));
+        let space = classify(&mut s, press(vk::SPACE, true));
+        assert!(space.swallow);
+        assert_eq!(space.edge, Some(Edge::Space));
+        // Its repeats and its release are swallowed, reported no more.
+        let repeat = classify(&mut s, press(vk::SPACE, true));
+        assert!(repeat.swallow && repeat.edge.is_none());
+        // Let go of the Kusema key first: Space's release is still swallowed.
+        classify(&mut s, press(vk::RCONTROL, false));
+        assert!(classify(&mut s, press(vk::SPACE, false)).swallow);
+        // Without the key held, Space is just Space.
+        assert_eq!(classify(&mut s, press(vk::SPACE, true)), Action::default());
+        assert_eq!(classify(&mut s, press(vk::SPACE, false)), Action::default());
     }
 
     #[test]

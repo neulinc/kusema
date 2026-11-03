@@ -1,4 +1,6 @@
 # Kusema's own name, always on, so the app's name and the continuous
 # dictation trigger word are written right. Our own list.
 # Written form<TAB>sounds like|sounds like
-Kusema	Kusama|Cusema|Kasema|Cosima|Kuzema|Kusemma|Ku sema|Coosema
+# Not Kusama or Cosima: they're real names. At the start of what's said, the
+# trigger word matching hears them as "Kusema" anyway.
+Kusema	Cusema|Kasema|Kuzema|Kusemma|Ku sema|Coosema

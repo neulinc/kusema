@@ -1383,7 +1383,9 @@
       "trigger": {
         "label": "喚醒詞",
         "description": "以這個詞開頭，就會提問、編輯或查看你的螢幕，而不是輸入文字：「Kusema, make this more formal」。按住 Kusema 鍵時和連續聽寫時都有效。留空即可關閉。",
-        "placeholder": "Kusema"
+        "placeholder": "Kusema",
+        "variants": "也會聽成：",
+        "removeVariant": "移除 {{variant}}"
       },
       "simpleKey": {
         "title": "更簡單的快速鍵",
@@ -1562,7 +1564,9 @@
       "ask": "正在問 Kusema…",
       "ask_screen": "正在查看你的螢幕…",
       "edit": "正在編輯…"
-    }
+    },
+    "assistantTake": "問 Kusema",
+    "triggerHint": "已作為聽寫輸入。要問 Kusema，請按住 {{name}} 時點一下空白鍵。"
   },
   "screenCard": {
     "title": "要傳送這張螢幕擷圖嗎？",
@@ -1593,6 +1597,12 @@
       "help": "改好後按 Enter。Kusema 會學習你改動的字詞。Shift+Enter 換行，Esc 取消。",
       "save": "儲存",
       "cancel": "取消"
+    },
+    "offer": {
+      "title": "將「{{word}}」新增為「{{trigger}}」的一種說法？",
+      "body": "新增後，以「{{word}}」開頭的話會交給 Kusema。句子中間的這個詞維持不變。",
+      "yes": "新增",
+      "no": "暫不"
     }
   },
   "secureInput": {
@@ -1648,7 +1658,7 @@
     "trigger": "在連續聽寫時，以「{{trigger}}，」開頭即可用同樣方式修改文字，例如「{{trigger}}，改得更正式一點」。不說這個詞時，所有內容都會照你說的輸入。",
     "triggerOff": "若要在連續聽寫時修改文字，請在「一般 → 語音編輯」中設定觸發詞。",
     "selectFirst": "部分應用程式（例如 ONLYOFFICE、LibreOffice 和 Google 文件）不會把文字提供給 Kusema。在這些應用程式中，請先用滑鼠或鍵盤選取文字；無法用語音選取句子、段落或字詞。",
-    "introKey": "按住 {{key}} 並說「{{trigger}}」，然後說下列其中一個命令。標有「連續聽寫中也可用」的命令，在連續聽寫中單獨說出即可生效。"
+    "introKey": "按住 {{key}} 並點一下空白鍵（或以「{{trigger}}」開頭），然後說下列其中一個命令。標有「連續聽寫中也可用」的命令，在連續聽寫中單獨說出即可生效。"
   },
   "voiceEdit": {
     "notice": {
@@ -1700,11 +1710,11 @@
       "title": "Kusema 按鍵",
       "hold": "按住 <key/> 說話。",
       "doubleTap": "連按兩下 <key/> 開始連續聽寫。",
-      "say": "先說 <q>{{trigger}}</q>，即可提問、編輯或讓它查看你的螢幕。"
+      "ask": "按住時點一下 <space/> 即可問 Kusema，或以 <q>{{trigger}}</q> 開頭：提問、編輯或查看你的螢幕。"
     },
     "settings": {
       "title": "Kusema 鍵",
-      "description": "一個鍵就能聽寫。按住說話，連按兩下開始連續聽寫，以「Kusema」開頭即可提問、編輯或讓它查看你的螢幕。其他應用程式不會收到這個鍵。",
+      "description": "一個鍵就能聽寫。按住說話；連按兩下開始連續聽寫。要提問、編輯或讓它查看你的螢幕，請在按住時點一下空白鍵，或以「Kusema」開頭。其他應用程式不會收到這個鍵。",
       "enabled": {
         "label": "使用 Kusema 鍵",
         "description": "關閉時，只有下方的快速鍵有效。"
@@ -1733,6 +1743,7 @@
       "body": "Kusema 現在用一個鍵取代許多快速鍵。只有這兩條規則：",
       "keptClassic": "Kusema 現在一個鍵就能完成所有操作。你改過快速鍵，所以原本的快速鍵仍然有效。可在「傳統快速鍵」中關閉。",
       "gotIt": "知道了"
-    }
+    },
+    "space": "空白鍵"
   }
 }

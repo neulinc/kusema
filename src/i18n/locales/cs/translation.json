@@ -1395,7 +1395,9 @@
       "trigger": {
         "label": "Spouštěcí slovo",
         "description": "Začněte tímto slovem a místo psaní se můžete ptát, upravovat nebo nechat Kusemu podívat se na obrazovku: „Kusema, make this more formal“. Funguje to při držení klávesy Kusemy a při průběžném diktování. Nechte prázdné, chcete-li to vypnout.",
-        "placeholder": "Kusema"
+        "placeholder": "Kusema",
+        "variants": "Slyšet také jako:",
+        "removeVariant": "Odebrat {{variant}}"
       },
       "simpleKey": {
         "title": "Jednodušší zkratka",
@@ -1574,7 +1576,9 @@
       "ask": "Ptám se Kusemy…",
       "ask_screen": "Dívám se na obrazovku…",
       "edit": "Upravuji…"
-    }
+    },
+    "assistantTake": "Zeptat se Kusemy",
+    "triggerHint": "Napsáno jako diktát. Chcete-li se zeptat Kusemy, klepněte na mezerník při držení {{name}}."
   },
   "screenCard": {
     "title": "Odeslat tento snímek obrazovky?",
@@ -1605,6 +1609,12 @@
       "help": "Opravte a stiskněte Enter. Kusema se naučí slova, která změníte. Shift+Enter začne nový řádek, Esc zruší.",
       "save": "Uložit",
       "cancel": "Zrušit"
+    },
+    "offer": {
+      "title": "Přidat „{{word}}“ jako způsob, jak říct „{{trigger}}“?",
+      "body": "Pak vše, co začnete slovem „{{word}}“, půjde Kusemě. Dál ve větě zůstane slovo, jak je.",
+      "yes": "Přidat",
+      "no": "Teď ne"
     }
   },
   "secureInput": {
@@ -1664,7 +1674,7 @@
     "trigger": "Při průběžném diktování začněte slovy „{{trigger}},“ a text se změní stejně, například „{{trigger}}, udělej to formálnější“. Bez toho slova se vše napíše tak, jak to řeknete.",
     "triggerOff": "Chcete-li měnit text při průběžném diktování, nastavte spouštěcí slovo v Obecné → Hlasové úpravy.",
     "selectFirst": "Některé aplikace, například ONLYOFFICE, LibreOffice a Google Docs, Kusemě svůj text neukazují. Tam nejdřív označte text myší nebo klávesnicí; označování věty, odstavce nebo slov hlasem tam nefunguje.",
-    "introKey": "Podržte {{key}} a řekněte „{{trigger}}“, pak jeden z těchto příkazů. Příkazy označené „Také při průběžném diktování“ tam fungují, když je řeknete samostatně."
+    "introKey": "Podržte {{key}} a klepněte na mezerník (nebo začněte slovem „{{trigger}}“), pak řekněte jeden z těchto příkazů. Příkazy označené „Také při průběžném diktování“ tam fungují, když je řeknete samostatně."
   },
   "voiceEdit": {
     "notice": {
@@ -1716,11 +1726,11 @@
       "title": "Klávesy Kusemy",
       "hold": "Podržte <key/> a mluvte.",
       "doubleTap": "Dvojitým stiskem <key/> spustíte průběžné diktování.",
-      "say": "Řekněte nejdřív <q>{{trigger}}</q> a můžete se ptát, upravovat nebo nechat Kusemu podívat se na obrazovku."
+      "ask": "Při držení klepněte na <space/> a zeptejte se Kusemy, nebo začněte slovem <q>{{trigger}}</q>: dotaz, úprava nebo pohled na obrazovku."
     },
     "settings": {
       "title": "Klávesa Kusemy",
-      "description": "Jedna klávesa na diktování. Podržte ji a mluvte, dvojitým stiskem spustíte průběžné diktování a když začnete slovem „Kusema“, můžete se ptát, upravovat nebo nechat Kusemu podívat se na obrazovku. Ostatní aplikace klávesu nikdy neuvidí.",
+      "description": "Jedna klávesa na diktování. Podržte ji a mluvte; dvojitým stiskem spustíte průběžné diktování. Chcete-li se ptát, upravovat nebo nechat Kusemu podívat se na obrazovku, klepněte při držení na mezerník, nebo začněte slovem „Kusema“. Ostatní aplikace klávesu nikdy neuvidí.",
       "enabled": {
         "label": "Používat klávesu Kusemy",
         "description": "Vypnuto fungují jen zkratky níže."
@@ -1749,6 +1759,7 @@
       "body": "Kusema má teď jednu klávesu místo mnoha zkratek. Platí jen tato dvě pravidla:",
       "keptClassic": "Kusema má teď jednu klávesu na všechno. Změnili jste zkratku, takže vaše zkratky dál fungují. Vypnout je můžete v části Klasické zkratky.",
       "gotIt": "Rozumím"
-    }
+    },
+    "space": "Mezerník"
   }
 }

@@ -715,3 +715,19 @@
     animation-duration: 2.4s;
   }
 }
+
+/* Kusema key: Space tapped while holding, so the take is a question. The
+   chip widens the pill like the Editing chip; the glow turns warm. */
+.ov-stage.assistant-take .scard.compact {
+  width: calc(var(--ov-rest-w) + var(--ov-chip-w) + 20px);
+}
+.ov-stage.assistant-take .sglow::before {
+  background: linear-gradient(
+    90deg,
+    var(--kz-violet) 0%,
+    var(--kz-amber) 25%,
+    var(--kz-violet) 50%,
+    var(--kz-amber) 75%,
+    var(--kz-violet) 100%
+  );
+}

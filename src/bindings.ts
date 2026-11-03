@@ -1368,6 +1368,12 @@ async cancelKusemaKeyCapture() : Promise<void> {
 async dismissSimplerKeysCard() : Promise<void> {
     await TAURI_INVOKE("dismiss_simpler_keys_card");
 },
+/**
+ * Removes a spelling added from "correct that".
+ */
+async removeTriggerVariant(variant: string) : Promise<void> {
+    await TAURI_INVOKE("remove_trigger_variant", { variant });
+},
 async getPrivacyOverview() : Promise<Result<PrivacyOverview, string>> {
     try {
     return { status: "ok", data: await TAURI_INVOKE("get_privacy_overview") };
@@ -1967,7 +1973,12 @@ keys_scheme?: number;
 /**
  * Show the one-time "New: simpler keys" card.
  */
-simpler_keys_card?: boolean }
+simpler_keys_card?: boolean; 
+/**
+ * Spellings of the trigger word added from "correct that", recognized
+ * only at the start of what's said.
+ */
+trigger_variants?: string[] }
 /**
  * One style and the programs it's for.
  */
@@ -2410,6 +2421,11 @@ export type ScreenCard = { kind: "confirm"; image: string; question: string; pro
  * Kusema vocabulary: the last dictated text, to correct ("correct that").
  */
 { kind: "correct"; text: string; timeoutSecs: number } | 
+/**
+ * Kusema key: "correct that" fixed a misheard trigger word; add `word`
+ * as a way `trigger` is heard?
+ */
+{ kind: "offer"; word: string; trigger: string; timeoutSecs: number } | 
 /**
  * Kusema voice editing: the selected text and what it would become.
  */

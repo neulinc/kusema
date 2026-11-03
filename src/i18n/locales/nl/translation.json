@@ -1383,7 +1383,9 @@
       "trigger": {
         "label": "Activeringswoord",
         "description": "Begin met dit woord om iets te vragen, te bewerken of naar je scherm te laten kijken in plaats van te typen: ‘Kusema, make this more formal’. Dit werkt terwijl je de Kusema-toets ingedrukt houdt en bij doorlopend dicteren. Laat leeg om het uit te zetten.",
-        "placeholder": "Kusema"
+        "placeholder": "Kusema",
+        "variants": "Ook gehoord als:",
+        "removeVariant": "{{variant}} verwijderen"
       },
       "simpleKey": {
         "title": "Eenvoudigere sneltoets",
@@ -1562,7 +1564,9 @@
       "ask": "Kusema wordt gevraagd…",
       "ask_screen": "Kijkt naar je scherm…",
       "edit": "Bewerken…"
-    }
+    },
+    "assistantTake": "Vraag het Kusema",
+    "triggerHint": "Getypt als dictaat. Om Kusema iets te vragen, tik je op Spatie terwijl je {{name}} ingedrukt houdt."
   },
   "screenCard": {
     "title": "Deze schermafbeelding versturen?",
@@ -1593,6 +1597,12 @@
       "help": "Corrigeer en druk op Enter. Kusema leert de woorden die je wijzigt. Shift+Enter begint een nieuwe regel, Esc annuleert.",
       "save": "Opslaan",
       "cancel": "Annuleren"
+    },
+    "offer": {
+      "title": "‘{{word}}’ toevoegen als manier om ‘{{trigger}}’ te zeggen?",
+      "body": "Dan gaat alles wat je met ‘{{word}}’ begint naar Kusema. Verderop in een zin blijft het woord zoals het is.",
+      "yes": "Toevoegen",
+      "no": "Niet nu"
     }
   },
   "secureInput": {
@@ -1648,7 +1658,7 @@
     "trigger": "Begin bij doorlopend dicteren met “{{trigger}},” om tekst op dezelfde manier te wijzigen, bijvoorbeeld “{{trigger}}, maak dit formeler”. Zonder dat woord wordt alles getypt zoals je het zegt.",
     "triggerOff": "Stel onder Algemeen → Spraakbewerking een activeringswoord in om tekst tijdens doorlopend dicteren te wijzigen.",
     "selectFirst": "Sommige apps, zoals ONLYOFFICE, LibreOffice en Google Docs, laten hun tekst niet aan Kusema zien. Selecteer daar eerst de tekst met de muis of het toetsenbord; een zin, alinea of woorden met spraak selecteren werkt daar niet.",
-    "introKey": "Houd {{key}} ingedrukt en zeg ‘{{trigger}}’, dan een van deze. Opdrachten met ‘Ook bij doorlopend dicteren’ werken daar als je ze los zegt."
+    "introKey": "Houd {{key}} ingedrukt en tik op Spatie (of begin met ‘{{trigger}}’), zeg dan een van deze. Opdrachten met ‘Ook bij doorlopend dicteren’ werken daar als je ze los zegt."
   },
   "voiceEdit": {
     "notice": {
@@ -1700,11 +1710,11 @@
       "title": "Kusema-toetsen",
       "hold": "Houd <key/> ingedrukt om te praten.",
       "doubleTap": "Tik twee keer op <key/> voor doorlopend dicteren.",
-      "say": "Zeg eerst <q>{{trigger}}</q> om iets te vragen, te bewerken of naar je scherm te laten kijken."
+      "ask": "Tik tijdens het vasthouden op <space/> om Kusema iets te vragen, of begin met <q>{{trigger}}</q>: vragen, bewerken of naar je scherm laten kijken."
     },
     "settings": {
       "title": "Kusema-toets",
-      "description": "Eén toets om te dicteren. Houd hem ingedrukt om te praten, tik twee keer voor doorlopend dicteren en begin met ‘Kusema’ om iets te vragen, te bewerken of naar je scherm te laten kijken. Andere apps zien de toets nooit.",
+      "description": "Eén toets om te dicteren. Houd hem ingedrukt om te praten; tik twee keer voor doorlopend dicteren. Om iets te vragen, te bewerken of naar je scherm te laten kijken, tik je tijdens het vasthouden op Spatie, of begin je met ‘Kusema’. Andere apps zien de toets nooit.",
       "enabled": {
         "label": "Kusema-toets gebruiken",
         "description": "Uit werken alleen de sneltoetsen hieronder."
@@ -1733,6 +1743,7 @@
       "body": "Kusema heeft nu één toets in plaats van veel sneltoetsen. Dit zijn de enige twee regels:",
       "keptClassic": "Kusema heeft nu één toets voor alles. Je had een sneltoets gewijzigd, dus je sneltoetsen werken nog steeds. Zet ze uit bij Klassieke sneltoetsen als je wilt.",
       "gotIt": "Begrepen"
-    }
+    },
+    "space": "Spatie"
   }
 }

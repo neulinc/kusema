@@ -1389,7 +1389,9 @@
       "trigger": {
         "label": "Paraula d'activació",
         "description": "Comença amb aquesta paraula per preguntar, editar o fer que miri la teva pantalla en lloc d'escriure: «Kusema, make this more formal». Funciona mentre mantens premuda la tecla Kusema i en el dictat continu. Deixa-la buida per desactivar-ho.",
-        "placeholder": "Kusema"
+        "placeholder": "Kusema",
+        "variants": "També se sent com:",
+        "removeVariant": "Treu {{variant}}"
       },
       "simpleKey": {
         "title": "Drecera més senzilla",
@@ -1568,7 +1570,9 @@
       "ask": "Preguntant al Kusema…",
       "ask_screen": "Mirant la teva pantalla…",
       "edit": "Editant…"
-    }
+    },
+    "assistantTake": "Pregunta al Kusema",
+    "triggerHint": "S'ha escrit com a dictat. Per preguntar al Kusema, toca Espai mentre mantens premuda {{name}}."
   },
   "screenCard": {
     "title": "Voleu enviar aquesta captura?",
@@ -1599,6 +1603,12 @@
       "help": "Corregiu-lo i premeu Retorn. El Kusema aprèn les paraules que canvieu. Maj+Retorn comença una línia nova, Esc cancel·la.",
       "save": "Desa",
       "cancel": "Cancel·la"
+    },
+    "offer": {
+      "title": "Vols afegir «{{word}}» com a manera de dir «{{trigger}}»?",
+      "body": "Així, tot el que comencis amb «{{word}}» anirà al Kusema. Més endavant en una frase, la paraula es queda com és.",
+      "yes": "Afegeix",
+      "no": "Ara no"
     }
   },
   "secureInput": {
@@ -1656,7 +1666,7 @@
     "trigger": "En el dictat continu, comenceu amb «{{trigger}},» per canviar el text de la mateixa manera, per exemple «{{trigger}}, fes això més formal». Sense aquesta paraula, tot s'escriu tal com ho dieu.",
     "triggerOff": "Per canviar text durant el dictat continu, definiu una paraula d'activació a General → Edició per veu.",
     "selectFirst": "Algunes aplicacions, com ONLYOFFICE, LibreOffice i Google Docs, no mostren el seu text al Kusema. Allà, seleccioneu primer el text amb el ratolí o el teclat; seleccionar una frase, un paràgraf o paraules per veu no hi funciona.",
-    "introKey": "Mantén premuda {{key}} i digues «{{trigger}}», i després una d'aquestes ordres. Les marcades «També en el dictat continu» hi funcionen quan es diuen soles."
+    "introKey": "Mantén premuda {{key}} i toca Espai (o comença amb «{{trigger}}»), i després digues una d'aquestes ordres. Les marcades «També en el dictat continu» hi funcionen quan es diuen soles."
   },
   "voiceEdit": {
     "notice": {
@@ -1708,11 +1718,11 @@
       "title": "Tecles del Kusema",
       "hold": "Mantén premuda <key/> per parlar.",
       "doubleTap": "Prem dues vegades <key/> per al dictat continu.",
-      "say": "Digues primer <q>{{trigger}}</q> per preguntar, editar o fer que miri la teva pantalla."
+      "ask": "Mentre la mantens premuda, toca <space/> per preguntar al Kusema, o comença amb <q>{{trigger}}</q>: preguntar, editar o fer que miri la teva pantalla."
     },
     "settings": {
       "title": "Tecla Kusema",
-      "description": "Una tecla per dictar. Mantén-la premuda per parlar, prem-la dues vegades per al dictat continu i comença amb «Kusema» per preguntar, editar o fer que miri la teva pantalla. Les altres aplicacions no veuen mai la tecla.",
+      "description": "Una tecla per dictar. Mantén-la premuda per parlar; prem-la dues vegades per al dictat continu. Per preguntar, editar o fer que miri la teva pantalla, toca Espai mentre la mantens premuda, o comença amb «Kusema». Les altres aplicacions no veuen mai la tecla.",
       "enabled": {
         "label": "Fes servir la tecla Kusema",
         "description": "Desactivada, només funcionen les dreceres de sota."
@@ -1741,6 +1751,7 @@
       "body": "Ara el Kusema té una sola tecla en lloc de moltes dreceres. Aquestes són les dues úniques regles:",
       "keptClassic": "Ara el Kusema té una tecla per a tot. Havies canviat una drecera, així que les teves dreceres continuen funcionant. Pots desactivar-les a Dreceres clàssiques.",
       "gotIt": "Entesos"
-    }
+    },
+    "space": "Espai"
   }
 }

@@ -1383,7 +1383,9 @@
       "trigger": {
         "label": "Tetikleme sözcüğü",
         "description": "Yazmak yerine soru sormak, düzenlemek veya ekranınıza baktırmak için bu sözcükle başlayın: “Kusema, make this more formal”. Kusema tuşunu basılı tutarken ve sürekli diktede çalışır. Kapatmak için boş bırakın.",
-        "placeholder": "Kusema"
+        "placeholder": "Kusema",
+        "variants": "Şöyle de duyulur:",
+        "removeVariant": "{{variant}} kaldır"
       },
       "simpleKey": {
         "title": "Daha kolay kısayol",
@@ -1562,7 +1564,9 @@
       "ask": "Kusema'ya soruluyor…",
       "ask_screen": "Ekranınıza bakılıyor…",
       "edit": "Düzenleniyor…"
-    }
+    },
+    "assistantTake": "Kusema'ya sor",
+    "triggerHint": "Dikte olarak yazıldı. Kusema'ya sormak için {{name}} basılıyken Boşluk'a dokunun."
   },
   "screenCard": {
     "title": "Bu ekran görüntüsü gönderilsin mi?",
@@ -1593,6 +1597,12 @@
       "help": "Düzeltin ve Enter'a basın. Kusema değiştirdiğiniz sözcükleri öğrenir. Shift+Enter yeni satır açar, Esc iptal eder.",
       "save": "Kaydet",
       "cancel": "İptal"
+    },
+    "offer": {
+      "title": "“{{word}}”, “{{trigger}}” demenin bir yolu olarak eklensin mi?",
+      "body": "Böylece “{{word}}” ile başladığınız her şey Kusema'ya gider. Cümlenin ilerisinde sözcük olduğu gibi kalır.",
+      "yes": "Ekle",
+      "no": "Şimdi değil"
     }
   },
   "secureInput": {
@@ -1648,7 +1658,7 @@
     "trigger": "Sürekli dikte sırasında metni aynı şekilde değiştirmek için “{{trigger}},” ile başlayın, örneğin “{{trigger}}, bunu daha resmî yap”. Bu sözcük olmadan her şey söylediğiniz gibi yazılır.",
     "triggerOff": "Sürekli dikte sırasında metni değiştirmek için Genel → Sesle Düzenleme altında bir tetikleyici sözcük belirleyin.",
     "selectFirst": "ONLYOFFICE, LibreOffice ve Google Docs gibi bazı uygulamalar metinlerini Kusema'ya göstermez. Orada önce metni fare veya klavyeyle seçin; cümle, paragraf veya sözcükleri sesle seçmek orada çalışmaz.",
-    "introKey": "{{key}} tuşunu basılı tutup “{{trigger}}” deyin, ardından bunlardan birini söyleyin. “Sürekli diktede de” işaretli komutlar orada tek başına söylendiğinde çalışır."
+    "introKey": "{{key}} tuşunu basılı tutup Boşluk'a dokunun (veya “{{trigger}}” ile başlayın), ardından bunlardan birini söyleyin. “Sürekli diktede de” işaretli komutlar orada tek başına söylendiğinde çalışır."
   },
   "voiceEdit": {
     "notice": {
@@ -1700,11 +1710,11 @@
       "title": "Kusema tuşları",
       "hold": "Konuşmak için <key/> tuşunu basılı tutun.",
       "doubleTap": "Sürekli dikte için <key/> tuşuna iki kez dokunun.",
-      "say": "Soru sormak, düzenlemek veya ekranınıza baktırmak için önce <q>{{trigger}}</q> deyin."
+      "ask": "Basılı tutarken Kusema'ya sormak için <space/> tuşuna dokunun veya <q>{{trigger}}</q> ile başlayın: sorun, düzenleyin ya da ekranınıza baktırın."
     },
     "settings": {
       "title": "Kusema tuşu",
-      "description": "Dikte için tek tuş. Konuşmak için basılı tutun, sürekli dikte için iki kez dokunun ve soru sormak, düzenlemek veya ekranınıza baktırmak için “Kusema” ile başlayın. Diğer uygulamalar bu tuşu hiç görmez.",
+      "description": "Dikte için tek tuş. Konuşmak için basılı tutun; sürekli dikte için iki kez dokunun. Soru sormak, düzenlemek veya ekranınıza baktırmak için tuşu basılı tutarken Boşluk'a dokunun ya da “Kusema” ile başlayın. Diğer uygulamalar bu tuşu hiç görmez.",
       "enabled": {
         "label": "Kusema tuşunu kullan",
         "description": "Kapalıyken yalnızca aşağıdaki kısayollar çalışır."
@@ -1733,6 +1743,7 @@
       "body": "Kusema artık birçok kısayol yerine tek bir tuşa sahip. Yalnızca iki kural var:",
       "keptClassic": "Kusema artık her şey için tek tuşa sahip. Bir kısayolu değiştirmiştiniz, bu yüzden kısayollarınız çalışmaya devam ediyor. İsterseniz Klasik kısayollar'dan kapatabilirsiniz.",
       "gotIt": "Anladım"
-    }
+    },
+    "space": "Boşluk"
   }
 }

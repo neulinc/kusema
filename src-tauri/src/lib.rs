@@ -880,6 +880,7 @@ pub fn run(cli_args: CliArgs) {
             kusema_key::start_kusema_key_capture,
             kusema_key::cancel_kusema_key_capture,
             kusema_key::dismiss_simpler_keys_card,
+            kusema_key::remove_trigger_variant,
             network::get_privacy_overview,
             network::get_privacy_ledger,
             network::clear_privacy_ledger,

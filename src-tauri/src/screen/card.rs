@@ -27,6 +27,7 @@ const NOTICE_DURATION: Duration = Duration::from_secs(8);
 const CONFIRM_SIZE: (f64, f64) = (380.0, 460.0);
 const NOTICE_SIZE: (f64, f64) = (380.0, 150.0);
 const EDIT_SIZE: (f64, f64) = (460.0, 440.0);
+const OFFER_SIZE: (f64, f64) = (400.0, 220.0);
 /// A voice edit's preview left unanswered this long is cancelled: there's
 /// more to read than a screenshot question.
 pub const EDIT_TIMEOUT: Duration = Duration::from_secs(60);
@@ -57,6 +58,14 @@ pub enum ScreenCard {
     /// Kusema vocabulary: the last dictated text, to correct ("correct that").
     #[serde(rename_all = "camelCase")]
     Correct { text: String, timeout_secs: u32 },
+    /// Kusema key: "correct that" fixed a misheard trigger word; add `word`
+    /// as a way `trigger` is heard?
+    #[serde(rename_all = "camelCase")]
+    Offer {
+        word: String,
+        trigger: String,
+        timeout_secs: u32,
+    },
     /// Kusema voice editing: the selected text and what it would become.
     #[serde(rename_all = "camelCase")]
     Edit {
@@ -223,6 +232,7 @@ fn open(
     let focus = reply.is_some();
     let size = match card {
         ScreenCard::Edit { .. } | ScreenCard::Correct { .. } => EDIT_SIZE,
+        ScreenCard::Offer { .. } => OFFER_SIZE,
         _ if focus => CONFIRM_SIZE,
         _ => NOTICE_SIZE,
     };

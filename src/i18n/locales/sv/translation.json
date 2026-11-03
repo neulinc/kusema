@@ -1383,7 +1383,9 @@
       "trigger": {
         "label": "Startord",
         "description": "Börja med det här ordet för att fråga, redigera eller låta Kusema titta på skärmen i stället för att skriva: ”Kusema, make this more formal”. Det fungerar när du håller ned Kusema-tangenten och vid kontinuerlig diktering. Lämna tomt för att stänga av.",
-        "placeholder": "Kusema"
+        "placeholder": "Kusema",
+        "variants": "Hörs också som:",
+        "removeVariant": "Ta bort {{variant}}"
       },
       "simpleKey": {
         "title": "Enklare kortkommando",
@@ -1562,7 +1564,9 @@
       "ask": "Frågar Kusema…",
       "ask_screen": "Tittar på skärmen…",
       "edit": "Redigerar…"
-    }
+    },
+    "assistantTake": "Fråga Kusema",
+    "triggerHint": "Skrevs som diktering. För att fråga Kusema, tryck på Blanksteg medan du håller ned {{name}}."
   },
   "screenCard": {
     "title": "Skicka den här skärmbilden?",
@@ -1593,6 +1597,12 @@
       "help": "Rätta och tryck på Enter. Kusema lär sig orden du ändrar. Skift+Enter ger ny rad, Esc avbryter.",
       "save": "Spara",
       "cancel": "Avbryt"
+    },
+    "offer": {
+      "title": "Lägga till ”{{word}}” som ett sätt att säga ”{{trigger}}”?",
+      "body": "Då går allt du börjar med ”{{word}}” till Kusema. Längre in i en mening lämnas ordet som det är.",
+      "yes": "Lägg till",
+      "no": "Inte nu"
     }
   },
   "secureInput": {
@@ -1648,7 +1658,7 @@
     "trigger": "Börja med “{{trigger}},” vid löpande diktering för att ändra text på samma sätt, till exempel “{{trigger}}, gör det här mer formellt”. Utan ordet skrivs allt som du säger det.",
     "triggerOff": "Ställ in ett utlösarord under Allmänt → Röstredigering för att ändra text vid löpande diktering.",
     "selectFirst": "Vissa appar, som ONLYOFFICE, LibreOffice och Google Docs, visar inte sin text för Kusema. Markera texten med musen eller tangentbordet först där; att markera en mening, ett stycke eller ord med rösten fungerar inte där.",
-    "introKey": "Håll ned {{key}} och säg ”{{trigger}}”, sedan något av dessa. Kommandon märkta ”Även i kontinuerlig diktering” fungerar där när de sägs ensamma."
+    "introKey": "Håll ned {{key}} och tryck på Blanksteg (eller börja med ”{{trigger}}”), säg sedan något av dessa. Kommandon märkta ”Även i kontinuerlig diktering” fungerar där när de sägs ensamma."
   },
   "voiceEdit": {
     "notice": {
@@ -1700,11 +1710,11 @@
       "title": "Kusema-tangenter",
       "hold": "Håll ned <key/> för att prata.",
       "doubleTap": "Dubbeltryck på <key/> för kontinuerlig diktering.",
-      "say": "Säg <q>{{trigger}}</q> först för att fråga, redigera eller låta Kusema titta på skärmen."
+      "ask": "Tryck på <space/> medan du håller ned för att fråga Kusema, eller börja med <q>{{trigger}}</q>: fråga, redigera eller låta Kusema titta på skärmen."
     },
     "settings": {
       "title": "Kusema-tangent",
-      "description": "En tangent för diktering. Håll ned den för att prata, dubbeltryck för kontinuerlig diktering och börja med ”Kusema” för att fråga, redigera eller låta Kusema titta på skärmen. Andra appar ser aldrig tangenten.",
+      "description": "En tangent för diktering. Håll ned den för att prata; dubbeltryck för kontinuerlig diktering. För att fråga, redigera eller låta Kusema titta på skärmen trycker du på Blanksteg medan du håller ned den, eller börjar med ”Kusema”. Andra appar ser aldrig tangenten.",
       "enabled": {
         "label": "Använd Kusema-tangenten",
         "description": "Av fungerar bara kortkommandona nedan."
@@ -1733,6 +1743,7 @@
       "body": "Kusema har nu en tangent i stället för många kortkommandon. Det finns bara två regler:",
       "keptClassic": "Kusema har nu en tangent för allt. Du hade ändrat ett kortkommando, så dina kortkommandon fungerar fortfarande. Stäng av dem under Klassiska kortkommandon om du vill.",
       "gotIt": "Uppfattat"
-    }
+    },
+    "space": "Blanksteg"
   }
 }

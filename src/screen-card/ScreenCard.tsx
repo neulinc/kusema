@@ -8,6 +8,61 @@ type Confirm = Extract<Card, { kind: "confirm" }>;
 type Notice = Extract<Card, { kind: "notice" }>;
 type Edit = Extract<Card, { kind: "edit" }>;
 type Correct = Extract<Card, { kind: "correct" }>;
+type Offer = Extract<Card, { kind: "offer" }>;
+
+/** Kusema key: add a misheard first word as a way the trigger is heard? */
+const OfferCard: React.FC<{ card: Offer }> = ({ card }) => {
+  const { t } = useTranslation();
+  const answered = useRef(false);
+  const answer = useCallback((add: boolean) => {
+    if (answered.current) return;
+    answered.current = true;
+    void commands.answerScreenCard(add);
+  }, []);
+  useEffect(() => {
+    ready();
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        answer(true);
+      } else if (event.key === "Escape") {
+        event.preventDefault();
+        answer(false);
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [answer]);
+  return (
+    <div className="flex h-full flex-col gap-3 bg-background p-4 text-text">
+      <h1 className="m-0 text-base font-semibold">
+        {t("screenCard.offer.title", {
+          word: card.word,
+          trigger: card.trigger,
+        })}
+      </h1>
+      <p className="m-0 text-sm text-ink-2">
+        {t("screenCard.offer.body", {
+          word: card.word,
+          trigger: card.trigger,
+        })}
+      </p>
+      <div className="mt-auto flex justify-end gap-2">
+        <Button variant="secondary" size="sm" onClick={() => answer(false)}>
+          {t("screenCard.offer.no")}
+        </Button>
+        <Button
+          variant="primary"
+          size="sm"
+          autoFocus
+          onClick={() => answer(true)}
+        >
+          {t("screenCard.offer.yes")}
+        </Button>
+      </div>
+    </div>
+  );
+};
 
 /** The card's page has painted; the backend shows (and focuses) it now. */
 const ready = () =>
@@ -332,6 +387,7 @@ const ScreenCard: React.FC = () => {
   if (!card) return null;
   if (card.kind === "edit") return <EditCard card={card} />;
   if (card.kind === "correct") return <CorrectCard card={card} />;
+  if (card.kind === "offer") return <OfferCard card={card} />;
   return card.kind === "confirm" ? (
     <ConfirmCard card={card} />
   ) : (

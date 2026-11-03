@@ -1383,7 +1383,9 @@
       "trigger": {
         "label": "Kata pemicu",
         "description": "Awali dengan kata ini untuk bertanya, mengedit, atau meminta melihat layar Anda alih-alih mengetik: “Kusema, make this more formal”. Berfungsi saat Anda menahan tombol Kusema dan dalam dikte berkelanjutan. Kosongkan untuk mematikan.",
-        "placeholder": "Kusema"
+        "placeholder": "Kusema",
+        "variants": "Juga terdengar sebagai:",
+        "removeVariant": "Hapus {{variant}}"
       },
       "simpleKey": {
         "title": "Pintasan yang lebih mudah",
@@ -1562,7 +1564,9 @@
       "ask": "Bertanya ke Kusema…",
       "ask_screen": "Melihat layar Anda…",
       "edit": "Mengedit…"
-    }
+    },
+    "assistantTake": "Tanya Kusema",
+    "triggerHint": "Diketik sebagai dikte. Untuk bertanya ke Kusema, ketuk Spasi sambil menahan {{name}}."
   },
   "screenCard": {
     "title": "Kirim tangkapan layar ini?",
@@ -1593,6 +1597,12 @@
       "help": "Koreksi lalu tekan Enter. Kusema mempelajari kata yang Anda ubah. Shift+Enter untuk baris baru, Esc untuk batal.",
       "save": "Simpan",
       "cancel": "Batal"
+    },
+    "offer": {
+      "title": "Tambahkan “{{word}}” sebagai cara mengucapkan “{{trigger}}”?",
+      "body": "Setelah itu, semua yang Anda awali dengan “{{word}}” akan dikirim ke Kusema. Di tengah kalimat, kata itu dibiarkan apa adanya.",
+      "yes": "Tambahkan",
+      "no": "Nanti saja"
     }
   },
   "secureInput": {
@@ -1648,7 +1658,7 @@
     "trigger": "Saat dikte berkelanjutan, mulai dengan “{{trigger}},” untuk mengubah teks dengan cara yang sama, misalnya “{{trigger}}, buat ini lebih formal”. Tanpa kata itu, semuanya diketik seperti yang Anda ucapkan.",
     "triggerOff": "Untuk mengubah teks saat dikte berkelanjutan, atur kata pemicu di Umum → Edit Suara.",
     "selectFirst": "Beberapa aplikasi, seperti ONLYOFFICE, LibreOffice, dan Google Docs, tidak menunjukkan teksnya kepada Kusema. Di sana, pilih teks dengan mouse atau keyboard dulu; memilih kalimat, paragraf, atau kata dengan suara tidak berfungsi di sana.",
-    "introKey": "Tahan {{key}} dan ucapkan “{{trigger}}”, lalu salah satu perintah ini. Perintah bertanda “Juga dalam dikte berkelanjutan” berfungsi di sana jika diucapkan sendiri."
+    "introKey": "Tahan {{key}} dan ketuk Spasi (atau awali dengan “{{trigger}}”), lalu ucapkan salah satu perintah ini. Perintah bertanda “Juga dalam dikte berkelanjutan” berfungsi di sana jika diucapkan sendiri."
   },
   "voiceEdit": {
     "notice": {
@@ -1700,11 +1710,11 @@
       "title": "Tombol Kusema",
       "hold": "Tahan <key/> untuk berbicara.",
       "doubleTap": "Ketuk <key/> dua kali untuk dikte berkelanjutan.",
-      "say": "Ucapkan <q>{{trigger}}</q> dulu untuk bertanya, mengedit, atau meminta melihat layar Anda."
+      "ask": "Sambil menahan, ketuk <space/> untuk bertanya ke Kusema, atau awali dengan <q>{{trigger}}</q>: bertanya, mengedit, atau meminta melihat layar Anda."
     },
     "settings": {
       "title": "Tombol Kusema",
-      "description": "Satu tombol untuk dikte. Tahan untuk berbicara, ketuk dua kali untuk dikte berkelanjutan, dan awali dengan “Kusema” untuk bertanya, mengedit, atau meminta melihat layar Anda. Aplikasi lain tidak pernah menerima tombol ini.",
+      "description": "Satu tombol untuk dikte. Tahan untuk berbicara; ketuk dua kali untuk dikte berkelanjutan. Untuk bertanya, mengedit, atau meminta melihat layar Anda, ketuk Spasi sambil menahannya, atau awali dengan “Kusema”. Aplikasi lain tidak pernah menerima tombol ini.",
       "enabled": {
         "label": "Gunakan tombol Kusema",
         "description": "Jika mati, hanya pintasan di bawah yang berfungsi."
@@ -1733,6 +1743,7 @@
       "body": "Kusema kini punya satu tombol, bukan banyak pintasan. Hanya ada dua aturan:",
       "keptClassic": "Kusema kini punya satu tombol untuk semuanya. Anda pernah mengubah pintasan, jadi pintasan Anda tetap berfungsi. Matikan di Pintasan klasik jika mau.",
       "gotIt": "Mengerti"
-    }
+    },
+    "space": "Spasi"
   }
 }

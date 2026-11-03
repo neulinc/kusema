@@ -1383,7 +1383,9 @@
       "trigger": {
         "label": "Udløserord",
         "description": "Begynd med dette ord for at spørge, redigere eller få Kusema til at se på din skærm i stedet for at skrive: “Kusema, make this more formal”. Det virker, mens du holder Kusema-tasten nede, og ved løbende diktering. Lad feltet stå tomt for at slå det fra.",
-        "placeholder": "Kusema"
+        "placeholder": "Kusema",
+        "variants": "Høres også som:",
+        "removeVariant": "Fjern {{variant}}"
       },
       "simpleKey": {
         "title": "Nemmere genvej",
@@ -1562,7 +1564,9 @@
       "ask": "Spørger Kusema…",
       "ask_screen": "Ser på din skærm…",
       "edit": "Redigerer…"
-    }
+    },
+    "assistantTake": "Spørg Kusema",
+    "triggerHint": "Skrevet som diktering. For at spørge Kusema skal du trykke på Mellemrum, mens du holder {{name}} nede."
   },
   "screenCard": {
     "title": "Send dette skærmbillede?",
@@ -1593,6 +1597,12 @@
       "help": "Ret og tryk Enter. Kusema lærer de ord, du ændrer. Skift+Enter giver ny linje, Esc annullerer.",
       "save": "Gem",
       "cancel": "Annuller"
+    },
+    "offer": {
+      "title": "Tilføj “{{word}}” som en måde at sige “{{trigger}}” på?",
+      "body": "Så går alt, hvad du begynder med “{{word}}”, til Kusema. Senere i en sætning bliver ordet stående.",
+      "yes": "Tilføj",
+      "no": "Ikke nu"
     }
   },
   "secureInput": {
@@ -1648,7 +1658,7 @@
     "trigger": "Start med “{{trigger}},” ved løbende diktat for at ændre tekst på samme måde, fx “{{trigger}}, gør det mere formelt”. Uden ordet skrives alt, som du siger det.",
     "triggerOff": "Angiv et udløserord under Generelt → Stemmeredigering for at ændre tekst ved løbende diktat.",
     "selectFirst": "Nogle apps, som ONLYOFFICE, LibreOffice og Google Docs, viser ikke deres tekst til Kusema. Marker teksten med musen eller tastaturet først der; at markere en sætning, et afsnit eller ord med stemmen virker ikke der.",
-    "introKey": "Hold {{key}} nede og sig “{{trigger}}”, og så en af disse. Kommandoer mærket “Også i løbende diktering” virker der, når de siges alene."
+    "introKey": "Hold {{key}} nede og tryk på Mellemrum (eller begynd med “{{trigger}}”), og sig så en af disse. Kommandoer mærket “Også i løbende diktering” virker der, når de siges alene."
   },
   "voiceEdit": {
     "notice": {
@@ -1700,11 +1710,11 @@
       "title": "Kusema-taster",
       "hold": "Hold <key/> nede for at tale.",
       "doubleTap": "Dobbelttryk på <key/> for løbende diktering.",
-      "say": "Sig <q>{{trigger}}</q> først for at spørge, redigere eller få Kusema til at se på din skærm."
+      "ask": "Tryk på <space/>, mens du holder tasten nede, for at spørge Kusema, eller begynd med <q>{{trigger}}</q>: spørg, rediger eller få Kusema til at se på din skærm."
     },
     "settings": {
       "title": "Kusema-tast",
-      "description": "Én tast til diktering. Hold den nede for at tale, dobbelttryk for løbende diktering, og begynd med “Kusema” for at spørge, redigere eller få Kusema til at se på din skærm. Andre apps ser aldrig tasten.",
+      "description": "Én tast til diktering. Hold den nede for at tale; dobbelttryk for løbende diktering. For at spørge, redigere eller få Kusema til at se på din skærm trykker du på Mellemrum, mens du holder den nede, eller begynder med “Kusema”. Andre apps ser aldrig tasten.",
       "enabled": {
         "label": "Brug Kusema-tasten",
         "description": "Slået fra virker kun genvejene nedenfor."
@@ -1733,6 +1743,7 @@
       "body": "Kusema har nu én tast i stedet for mange genveje. Der er kun to regler:",
       "keptClassic": "Kusema har nu én tast til alt. Du havde ændret en genvej, så dine genveje virker stadig. Slå dem fra under Klassiske genveje, hvis du vil.",
       "gotIt": "Forstået"
-    }
+    },
+    "space": "Mellemrum"
   }
 }

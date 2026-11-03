@@ -1389,7 +1389,9 @@
       "trigger": {
         "label": "Parola di attivazione",
         "description": "Inizia con questa parola per chiedere, modificare o far guardare il tuo schermo invece di scrivere: «Kusema, make this more formal». Funziona mentre tieni premuto il tasto Kusema e nella dettatura continua. Lascia vuoto per disattivarlo.",
-        "placeholder": "Kusema"
+        "placeholder": "Kusema",
+        "variants": "Sentito anche come:",
+        "removeVariant": "Rimuovi {{variant}}"
       },
       "simpleKey": {
         "title": "Scorciatoia più semplice",
@@ -1568,7 +1570,9 @@
       "ask": "Chiedo a Kusema…",
       "ask_screen": "Guardo il tuo schermo…",
       "edit": "Modifica in corso…"
-    }
+    },
+    "assistantTake": "Chiedi a Kusema",
+    "triggerHint": "Scritto come dettatura. Per chiedere a Kusema, tocca Spazio tenendo premuto {{name}}."
   },
   "screenCard": {
     "title": "Inviare questo screenshot?",
@@ -1599,6 +1603,12 @@
       "help": "Correggi e premi Invio. Kusema impara le parole che cambi. Maiusc+Invio va a capo, Esc annulla.",
       "save": "Salva",
       "cancel": "Annulla"
+    },
+    "offer": {
+      "title": "Aggiungere «{{word}}» come modo di dire «{{trigger}}»?",
+      "body": "Così tutto ciò che inizi con «{{word}}» andrà a Kusema. Più avanti in una frase, la parola resta com'è.",
+      "yes": "Aggiungi",
+      "no": "Non ora"
     }
   },
   "secureInput": {
@@ -1656,7 +1666,7 @@
     "trigger": "Nella dettatura continua, inizia con «{{trigger}},» per cambiare il testo allo stesso modo, ad esempio «{{trigger}}, rendilo più formale». Senza questa parola, tutto viene scritto come lo dici.",
     "triggerOff": "Per cambiare il testo durante la dettatura continua, imposta una parola di attivazione in Generale → Modifica vocale.",
     "selectFirst": "Alcune app, come ONLYOFFICE, LibreOffice e Google Docs, non mostrano il loro testo a Kusema. Lì seleziona prima il testo con il mouse o la tastiera; selezionare una frase, un paragrafo o delle parole a voce non funziona.",
-    "introKey": "Tieni premuto {{key}} e di' «{{trigger}}», poi uno di questi. I comandi segnati «Anche nella dettatura continua» funzionano lì quando sono detti da soli."
+    "introKey": "Tieni premuto {{key}} e tocca Spazio (o inizia con «{{trigger}}»), poi di' uno di questi. I comandi segnati «Anche nella dettatura continua» funzionano lì quando sono detti da soli."
   },
   "voiceEdit": {
     "notice": {
@@ -1708,11 +1718,11 @@
       "title": "Tasti di Kusema",
       "hold": "Tieni premuto <key/> per parlare.",
       "doubleTap": "Premi due volte <key/> per la dettatura continua.",
-      "say": "Di' prima <q>{{trigger}}</q> per chiedere, modificare o far guardare il tuo schermo."
+      "ask": "Tenendolo premuto, tocca <space/> per chiedere a Kusema, o inizia con <q>{{trigger}}</q>: chiedere, modificare o far guardare il tuo schermo."
     },
     "settings": {
       "title": "Tasto Kusema",
-      "description": "Un solo tasto per dettare. Tienilo premuto per parlare, premilo due volte per la dettatura continua e inizia con «Kusema» per chiedere, modificare o far guardare il tuo schermo. Le altre app non vedono mai il tasto.",
+      "description": "Un solo tasto per dettare. Tienilo premuto per parlare; premilo due volte per la dettatura continua. Per chiedere, modificare o far guardare il tuo schermo, tocca Spazio tenendolo premuto, o inizia con «Kusema». Le altre app non vedono mai il tasto.",
       "enabled": {
         "label": "Usa il tasto Kusema",
         "description": "Disattivato, funzionano solo le scorciatoie qui sotto."
@@ -1741,6 +1751,7 @@
       "body": "Ora Kusema ha un solo tasto invece di tante scorciatoie. Le regole sono solo due:",
       "keptClassic": "Ora Kusema ha un tasto per tutto. Avevi cambiato una scorciatoia, quindi le tue scorciatoie funzionano ancora. Puoi disattivarle in Scorciatoie classiche.",
       "gotIt": "Ho capito"
-    }
+    },
+    "space": "Spazio"
   }
 }

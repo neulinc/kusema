@@ -1055,6 +1055,8 @@ impl ShortcutAction for TranscribeAction {
                                         if RECORDING_SESSION.load(Ordering::SeqCst) == session {
                                             utils::hide_recording_overlay(&ah_clone);
                                             set_tray_state(&ah_clone, TrayIconState::Idle);
+                                            // Kusema: it began close to "Kusema".
+                                            crate::kusema_key::hint_after_typed(&ah_clone);
                                         }
                                         emit_transcription_complete(
                                             &ah_clone,

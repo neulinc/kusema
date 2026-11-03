@@ -1383,7 +1383,9 @@
       "trigger": {
         "label": "Từ kích hoạt",
         "description": "Bắt đầu bằng từ này để hỏi, chỉnh sửa hoặc nhờ xem màn hình thay vì gõ: “Kusema, make this more formal”. Hoạt động khi bạn giữ phím Kusema và khi đọc chính tả liên tục. Để trống để tắt.",
-        "placeholder": "Kusema"
+        "placeholder": "Kusema",
+        "variants": "Cũng được nghe thành:",
+        "removeVariant": "Xóa {{variant}}"
       },
       "simpleKey": {
         "title": "Phím tắt đơn giản hơn",
@@ -1562,7 +1564,9 @@
       "ask": "Đang hỏi Kusema…",
       "ask_screen": "Đang xem màn hình của bạn…",
       "edit": "Đang chỉnh sửa…"
-    }
+    },
+    "assistantTake": "Hỏi Kusema",
+    "triggerHint": "Đã gõ như đọc chính tả. Để hỏi Kusema, hãy chạm Space trong khi giữ {{name}}."
   },
   "screenCard": {
     "title": "Gửi ảnh chụp màn hình này?",
@@ -1593,6 +1597,12 @@
       "help": "Sửa rồi nhấn Enter. Kusema học các từ bạn thay đổi. Shift+Enter xuống dòng, Esc để hủy.",
       "save": "Lưu",
       "cancel": "Hủy"
+    },
+    "offer": {
+      "title": "Thêm “{{word}}” làm một cách nói “{{trigger}}”?",
+      "body": "Khi đó, mọi điều bạn bắt đầu bằng “{{word}}” sẽ được gửi tới Kusema. Ở giữa câu, từ này vẫn giữ nguyên.",
+      "yes": "Thêm",
+      "no": "Để sau"
     }
   },
   "secureInput": {
@@ -1648,7 +1658,7 @@
     "trigger": "Khi đọc chính tả liên tục, hãy bắt đầu bằng “{{trigger}},” để sửa văn bản theo cùng cách, ví dụ “{{trigger}}, làm cho trang trọng hơn”. Không có từ này, mọi thứ được gõ đúng như bạn nói.",
     "triggerOff": "Để sửa văn bản khi đọc chính tả liên tục, hãy đặt từ kích hoạt trong Chung → Sửa bằng giọng nói.",
     "selectFirst": "Một số ứng dụng như ONLYOFFICE, LibreOffice và Google Docs không cho Kusema thấy văn bản. Ở đó, hãy chọn văn bản bằng chuột hoặc bàn phím trước; chọn câu, đoạn hoặc từ bằng giọng nói không hoạt động ở đó.",
-    "introKey": "Giữ {{key}} và nói “{{trigger}}”, rồi nói một trong các lệnh sau. Lệnh có ghi “Cũng dùng khi đọc chính tả liên tục” hoạt động ở đó khi được nói riêng."
+    "introKey": "Giữ {{key}} và chạm Space (hoặc bắt đầu bằng “{{trigger}}”), rồi nói một trong các lệnh sau. Lệnh có ghi “Cũng dùng khi đọc chính tả liên tục” hoạt động ở đó khi được nói riêng."
   },
   "voiceEdit": {
     "notice": {
@@ -1700,11 +1710,11 @@
       "title": "Phím Kusema",
       "hold": "Giữ <key/> để nói.",
       "doubleTap": "Nhấn <key/> hai lần để đọc chính tả liên tục.",
-      "say": "Nói <q>{{trigger}}</q> trước để hỏi, chỉnh sửa hoặc nhờ xem màn hình của bạn."
+      "ask": "Trong khi giữ phím, chạm <space/> để hỏi Kusema, hoặc bắt đầu bằng <q>{{trigger}}</q>: hỏi, chỉnh sửa hoặc nhờ xem màn hình."
     },
     "settings": {
       "title": "Phím Kusema",
-      "description": "Một phím để đọc chính tả. Giữ phím để nói, nhấn hai lần để đọc chính tả liên tục, và bắt đầu bằng “Kusema” để hỏi, chỉnh sửa hoặc nhờ xem màn hình của bạn. Các ứng dụng khác không bao giờ nhận phím này.",
+      "description": "Một phím để đọc chính tả. Giữ phím để nói; nhấn hai lần để đọc chính tả liên tục. Để hỏi, chỉnh sửa hoặc nhờ xem màn hình, hãy chạm Space trong khi giữ phím, hoặc bắt đầu bằng “Kusema”. Các ứng dụng khác không bao giờ nhận phím này.",
       "enabled": {
         "label": "Dùng phím Kusema",
         "description": "Khi tắt, chỉ các phím tắt bên dưới hoạt động."
@@ -1733,6 +1743,7 @@
       "body": "Giờ Kusema có một phím thay cho nhiều phím tắt. Chỉ có hai quy tắc:",
       "keptClassic": "Giờ Kusema có một phím cho mọi việc. Bạn đã đổi một phím tắt nên các phím tắt của bạn vẫn hoạt động. Bạn có thể tắt chúng ở Phím tắt cổ điển.",
       "gotIt": "Đã hiểu"
-    }
+    },
+    "space": "Space"
   }
 }

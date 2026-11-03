@@ -1383,7 +1383,9 @@
       "trigger": {
         "label": "Trigger Word",
         "description": "Start what you say with this word to ask, edit or look at your screen instead of typing: “Kusema, make this more formal”. It works while you hold the Kusema key and in continuous dictation. Leave it empty to turn this off.",
-        "placeholder": "Kusema"
+        "placeholder": "Kusema",
+        "variants": "Also heard as:",
+        "removeVariant": "Remove {{variant}}"
       },
       "simpleKey": {
         "title": "Easier Shortcut",
@@ -1562,7 +1564,9 @@
       "ask": "Asking Kusema…",
       "ask_screen": "Looking at your screen…",
       "edit": "Editing…"
-    }
+    },
+    "assistantTake": "Ask Kusema",
+    "triggerHint": "Typed as dictation. To ask Kusema, tap Space while holding {{name}}."
   },
   "screenCard": {
     "title": "Send this screenshot?",
@@ -1593,6 +1597,12 @@
       "help": "Fix it and press Enter. Kusema learns the words you change. Shift+Enter starts a new line, Esc cancels.",
       "save": "Save",
       "cancel": "Cancel"
+    },
+    "offer": {
+      "title": "Add “{{word}}” as a way to say “{{trigger}}”?",
+      "body": "Then anything you start with “{{word}}” goes to Kusema. Later in a sentence, the word is left as it is.",
+      "yes": "Add",
+      "no": "Not now"
     }
   },
   "secureInput": {
@@ -1648,7 +1658,7 @@
     "trigger": "During continuous dictation, start with “{{trigger}},” to change text the same way, for example “{{trigger}}, make this more formal”. Without it, everything is typed as you say it.",
     "triggerOff": "To change text during continuous dictation, set a trigger word under General → Voice Editing.",
     "selectFirst": "Some apps, such as ONLYOFFICE, LibreOffice and Google Docs, don't show their text to Kusema. There, select the text with the mouse or keyboard first, and selecting a sentence, paragraph or phrase by voice doesn't work.",
-    "introKey": "Hold {{key}} and say “{{trigger}},” then one of these. Commands marked “Also in continuous dictation” work there when said on their own."
+    "introKey": "Hold {{key}} and tap Space (or start with “{{trigger}},”), then say one of these. Commands marked “Also in continuous dictation” work there when said on their own."
   },
   "voiceEdit": {
     "notice": {
@@ -1700,11 +1710,11 @@
       "title": "Kusema keys",
       "hold": "Hold <key/> to talk.",
       "doubleTap": "Double-tap <key/> for continuous dictation.",
-      "say": "Say <q>{{trigger}}</q> first to ask, edit or look at your screen."
+      "ask": "Tap <space/> while holding to ask Kusema, or start with <q>{{trigger}}</q>: ask, edit or look at your screen."
     },
     "settings": {
       "title": "Kusema Key",
-      "description": "One key for dictation. Hold it to talk, double-tap it for continuous dictation, and start with “Kusema” to ask, edit or look at your screen. Other apps never see the key.",
+      "description": "One key for dictation. Hold it to talk; double-tap it for continuous dictation. To ask, edit or look at your screen, tap Space while holding it, or start with “Kusema”. Other apps never see the key.",
       "enabled": {
         "label": "Use the Kusema Key",
         "description": "Off, only the shortcuts below work."
@@ -1733,6 +1743,7 @@
       "body": "Kusema now has one key instead of many shortcuts. These are the only two rules:",
       "keptClassic": "Kusema now has one key for everything. You had changed a shortcut, so your shortcuts still work too. Turn them off under Classic Shortcuts if you like.",
       "gotIt": "Got it"
-    }
+    },
+    "space": "Space"
   }
 }

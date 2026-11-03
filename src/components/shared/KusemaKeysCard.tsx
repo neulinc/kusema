@@ -34,9 +34,19 @@ export const KusemaKeysCard: React.FC<{ className?: string }> = ({
         </li>
         <li>
           <Trans
-            i18nKey="kusemaKey.card.say"
+            i18nKey="kusemaKey.card.ask"
             values={{ trigger }}
-            components={{ q: <q className="font-semibold" /> }}
+            components={{
+              space: (
+                <Keycaps
+                  binding=""
+                  labels={[t("kusemaKey.space")]}
+                  osType={os}
+                  size="line"
+                />
+              ),
+              q: <q className="font-semibold" />,
+            }}
           />
         </li>
       </ul>

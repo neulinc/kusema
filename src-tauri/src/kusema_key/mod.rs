@@ -12,10 +12,12 @@ mod hook;
 pub mod keys;
 pub mod migrate;
 pub mod route;
+pub mod trigger;
 
 use log::{debug, info, warn};
 use serde::Serialize;
 use specta::Type;
+use std::sync::atomic::{AtomicBool, Ordering};
 use std::sync::Mutex;
 use std::time::{Duration, Instant};
 use tauri::{AppHandle, Emitter, Manager};
@@ -74,14 +76,85 @@ pub fn trigger_forms(settings: &AppSettings) -> Vec<String> {
     if trigger.eq_ignore_ascii_case(crate::voice_edit::commands::DEFAULT_TRIGGER) {
         forms.extend(KUSEMA_TRIGGER_FORMS.iter().map(|f| f.to_string()));
     }
+    // Spellings the user added from "correct that".
+    forms.extend(settings.trigger_variants.iter().cloned());
     forms
 }
+
+/// The first few words, for the debug log (never the whole utterance).
+fn first_words_for_log(text: &str) -> String {
+    text.split_whitespace()
+        .take(3)
+        .collect::<Vec<_>>()
+        .join(" ")
+}
+
+/// What follows the trigger word at the start of `text`, if it's there
+/// (strictly or as it sounds), logged at debug level.
+pub fn trigger_rest(settings: &AppSettings, text: &str) -> Option<String> {
+    let found = trigger::find(text, &trigger_forms(settings));
+    debug!(
+        "Trigger check: \"{}\" -> {}",
+        first_words_for_log(text),
+        describe(&found)
+    );
+    match found {
+        trigger::TriggerMatch::Found { rest, .. } => Some(rest),
+        _ => None,
+    }
+}
+
+fn describe(found: &trigger::TriggerMatch) -> String {
+    match found {
+        trigger::TriggerMatch::Found { exact, heard, .. } => {
+            format!(
+                "trigger \"{heard}\" ({})",
+                if *exact { "exact" } else { "sounds like" }
+            )
+        }
+        trigger::TriggerMatch::Near { heard } => format!("near miss \"{heard}\", typed"),
+        trigger::TriggerMatch::None => "no trigger, typed".to_string(),
+    }
+}
+
+/// Space was tapped during the take being held: it's for the Assistant.
+static ASSIST_HELD: AtomicBool = AtomicBool::new(false);
+/// A finished take that's for the Assistant, until it's routed.
+static ASSIST_PENDING: AtomicBool = AtomicBool::new(false);
+/// The last take was typed but began close to the trigger word.
+static NEAR_MISS: AtomicBool = AtomicBool::new(false);
 
 /// Shows in the pill which way the speech went.
 fn announce(app: &AppHandle, route: &Route) {
     info!("Trigger word: {}", route.kind());
     if let Some(window) = app.get_webview_window("recording_overlay") {
         let _ = window.emit("overlay-route", route.kind());
+    }
+}
+
+/// What a held take becomes.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub enum Decision {
+    /// For the Assistant: route this (what followed the trigger word, or all
+    /// of it after a Space tap).
+    Route(String),
+    /// Dictation. `hint`: it began close to the trigger word, so the pill
+    /// says how to reach Kusema for sure.
+    Type { hint: bool },
+}
+
+pub fn decide(found: trigger::TriggerMatch, forced: bool, text: &str) -> Decision {
+    let rest = match found {
+        trigger::TriggerMatch::Found { rest, .. } => rest,
+        // Switched with Space: no trigger word needed.
+        _ if forced => text.trim().to_string(),
+        trigger::TriggerMatch::Near { .. } => return Decision::Type { hint: true },
+        trigger::TriggerMatch::None => return Decision::Type { hint: false },
+    };
+    if rest.chars().any(char::is_alphanumeric) {
+        Decision::Route(rest)
+    } else {
+        Decision::Type { hint: false }
     }
 }
 
@@ -109,10 +182,30 @@ fn capture_press_window() -> Result<Capture, crate::screen::CaptureError> {
 
 /// Normal dictation: where `text` goes if it starts with the trigger word.
 pub fn route_dictation(app: &AppHandle, text: &str) -> Option<Routed> {
+    let forced = ASSIST_PENDING.swap(false, Ordering::SeqCst);
+    NEAR_MISS.store(false, Ordering::SeqCst);
     let settings = get_settings(app);
-    let rest = route::after_trigger(text, &trigger_forms(&settings))?;
+    let found = trigger::find(text, &trigger_forms(&settings));
+    debug!(
+        "Trigger check: \"{}\" -> {}{}",
+        first_words_for_log(text),
+        describe(&found),
+        if forced {
+            " (Space was tapped: for the Assistant)"
+        } else {
+            ""
+        }
+    );
+    let rest = match decide(found, forced, text) {
+        Decision::Route(rest) => rest,
+        Decision::Type { hint } => {
+            NEAR_MISS.store(hint, Ordering::SeqCst);
+            return None;
+        }
+    };
     let (here, selection) = crate::voice_edit::text_here();
     let routed = route::route(&rest, here);
+    debug!("Routed to {} ({here:?})", routed.kind());
     announce(app, &routed);
     Some(match routed {
         Route::Command(_) | Route::Edit(_) if !crate::voice_edit::has_pending() => {
@@ -251,13 +344,28 @@ fn run(app: &AppHandle, effect: gesture::Effect, binding: &mut &'static str) {
                 Duration::ZERO,
             );
         }
-        gesture::Effect::FinishHold => coordinator.send_input(
-            binding,
-            SOURCE,
-            false,
-            ShortcutActivation::PushToTalk,
-            Duration::ZERO,
-        ),
+        gesture::Effect::FinishHold { assistant } => {
+            ASSIST_HELD.store(false, Ordering::SeqCst);
+            ASSIST_PENDING.store(assistant, Ordering::SeqCst);
+            coordinator.send_input(
+                binding,
+                SOURCE,
+                false,
+                ShortcutActivation::PushToTalk,
+                Duration::ZERO,
+            )
+        }
+        gesture::Effect::SwitchToAssistant => {
+            info!("Kusema key: Space tapped, this take is for the Assistant");
+            ASSIST_HELD.store(true, Ordering::SeqCst);
+            // The pill and the glow take the Assistant's look.
+            crate::overlay::set_mode(app, "ask");
+            if let Some(window) = app.get_webview_window("recording_overlay") {
+                let _ = window.emit("overlay-assistant-take", ());
+            }
+            crate::glow::recording_started(app, "assistant");
+            crate::tts::prepare(app);
+        }
         gesture::Effect::DiscardHold => {
             discard(app);
             // The start may still have been on its way: check once more.
@@ -342,6 +450,7 @@ pub fn init(app: &AppHandle) {
                             match edge {
                                 hook::Edge::Down => gesture.down(at, continuous),
                                 hook::Edge::Up => gesture.up(at),
+                                hook::Edge::Space => gesture.space(),
                             }
                         }
                         Some(hook::windows::Event::Captured(captured)) => {
@@ -356,6 +465,123 @@ pub fn init(app: &AppHandle) {
             })
             .ok();
     }
+}
+
+/// The Kusema key is down right now.
+pub fn is_held() -> bool {
+    #[cfg(target_os = "windows")]
+    return hook::windows::with_state(|s| s.key_held());
+    #[cfg(not(target_os = "windows"))]
+    false
+}
+
+/// A classic shortcut fired while the Kusema key is held (its hook was
+/// ahead of Kusema's): the Kusema key's gesture wins. A Space in it is the
+/// Space tap; anything else is ignored.
+pub fn classic_while_held(binding_id: &str, hotkey: &str, pressed: bool) -> bool {
+    if !CLASSIC.contains(&binding_id) || !is_held() {
+        return false;
+    }
+    debug!("Kusema key held: classic '{binding_id}' ({hotkey}) gives way");
+    #[cfg(target_os = "windows")]
+    {
+        if pressed && hotkey.to_lowercase().contains("space") {
+            hook::windows::inject(hook::windows::Event::Edge(
+                hook::Edge::Space,
+                Instant::now(),
+            ));
+        }
+        // Its hook was ahead of Kusema's: put Kusema's first again.
+        hook::windows::reinstall_soon();
+    }
+    let _ = pressed;
+    true
+}
+
+/// The English name of the key, for messages that are spoken and logged.
+fn english_label(key: &KusemaKey) -> String {
+    match key {
+        KusemaKey::RightCtrl => "Right Ctrl".to_string(),
+        KusemaKey::Copilot => "the Copilot key".to_string(),
+        KusemaKey::NumpadPlus => "Numpad +".to_string(),
+        KusemaKey::Custom { name, .. } => name.clone(),
+    }
+}
+
+/// After a held take was typed: if it began close to the trigger word, say
+/// how to reach Kusema for sure.
+pub fn hint_after_typed(app: &AppHandle) {
+    if !NEAR_MISS.swap(false, Ordering::SeqCst) {
+        return;
+    }
+    let settings = get_settings(app);
+    if !settings.kusema_key_enabled {
+        return;
+    }
+    let name = english_label(&settings.kusema_key);
+    let notice = serde_json::json!({
+        "key": "overlay.triggerHint",
+        "name": name,
+        "message": format!("Typed as dictation. To ask Kusema, tap Space while holding {name}."),
+        "in_dictation": false,
+    });
+    crate::overlay::show_edit_notice(app, &notice, false, 6);
+}
+
+/// "Correct that" changed a misheard first word to the trigger word: offer
+/// to add that spelling, so speech starting with it goes to Kusema. Blocks
+/// until the card is answered.
+pub fn offer_variant(app: &AppHandle, heard: &str, near: CapturedWindow) {
+    let settings = get_settings(app);
+    let card = crate::screen::card::ScreenCard::Offer {
+        word: heard.to_string(),
+        trigger: route_trigger_word(&settings),
+        timeout_secs: crate::screen::card::EDIT_TIMEOUT.as_secs() as u32,
+    };
+    let answer =
+        tauri::async_runtime::block_on(crate::screen::card::confirm_edit(app, near, card, || {
+            false
+        }));
+    if answer == crate::screen::Confirmation::Send {
+        add_variant(app, heard);
+    }
+}
+
+fn route_trigger_word(settings: &AppSettings) -> String {
+    let trigger = settings.voice_edit_trigger.trim();
+    if trigger.is_empty() {
+        crate::voice_edit::commands::DEFAULT_TRIGGER.to_string()
+    } else {
+        trigger.to_string()
+    }
+}
+
+fn add_variant(app: &AppHandle, heard: &str) {
+    let heard = heard.trim().to_string();
+    if heard.is_empty() {
+        return;
+    }
+    let mut settings = get_settings(app);
+    if !settings
+        .trigger_variants
+        .iter()
+        .any(|v| v.eq_ignore_ascii_case(&heard))
+    {
+        info!("Trigger word: added a spelling");
+        settings.trigger_variants.push(heard);
+        changed(app, settings, "trigger_variants");
+    }
+}
+
+/// Removes a spelling added from "correct that".
+#[tauri::command]
+#[specta::specta]
+pub fn remove_trigger_variant(app: AppHandle, variant: String) {
+    let mut settings = get_settings(&app);
+    settings
+        .trigger_variants
+        .retain(|v| !v.eq_ignore_ascii_case(variant.trim()));
+    changed(&app, settings, "trigger_variants");
 }
 
 /* ─────────────────────────── choosing a key ─────────────────────────── */
@@ -551,18 +777,133 @@ mod tests {
             "Kuzma, hi",
             "Ku sema, hi",
         ] {
-            assert!(route::after_trigger(said, &forms).is_some(), "{said}");
+            assert!(
+                matches!(
+                    trigger::find(said, &forms),
+                    trigger::TriggerMatch::Found { .. }
+                ),
+                "{said}"
+            );
         }
         // Later in a sentence, Kuzma is just a name.
-        assert!(route::after_trigger("Thanks to Kuzma, the letter went out", &forms).is_none());
+        assert!(!matches!(
+            trigger::find("Thanks to Kuzma, the letter went out", &forms),
+            trigger::TriggerMatch::Found { .. }
+        ));
         // Another trigger word doesn't take Kusema's mishearings.
         let mut other = settings.clone();
         other.voice_edit_trigger = "Computer".into();
         let forms = trigger_forms(&other);
-        assert!(route::after_trigger("Computer, hi", &forms).is_some());
-        assert!(route::after_trigger("Kyzma, hi", &forms).is_none());
+        assert!(matches!(
+            trigger::find("Computer, hi", &forms),
+            trigger::TriggerMatch::Found { .. }
+        ));
+        assert!(!matches!(
+            trigger::find("Kyzma, hi", &forms),
+            trigger::TriggerMatch::Found { .. }
+        ));
         other.voice_edit_trigger = String::new();
         assert!(trigger_forms(&other).is_empty());
+    }
+
+    fn decided(text: &str, forced: bool) -> Decision {
+        let settings = crate::settings::get_default_settings();
+        decide(trigger::find(text, &trigger_forms(&settings)), forced, text)
+    }
+
+    #[test]
+    fn a_space_tap_routes_without_the_trigger_word() {
+        use route::{route, Route, TextHere};
+        let rest = |d: Decision| match d {
+            Decision::Route(rest) => rest,
+            other => panic!("not routed: {other:?}"),
+        };
+        // A question.
+        let q = rest(decided("What's the capital of Ghana?", true));
+        assert!(matches!(route(&q, TextHere::Nothing), Route::Ask { .. }));
+        // The screen, with its confirm card.
+        let s = rest(decided("Look at my screen and tell me what's wrong", true));
+        assert!(matches!(route(&s, TextHere::Nothing), Route::Screen(_)));
+        // With text selected, an instruction is an edit.
+        let e = rest(decided("Make this more formal", true));
+        assert!(matches!(route(&e, TextHere::Selected), Route::Edit(_)));
+        // Saying the trigger word anyway does no harm.
+        assert_eq!(
+            decided("Kusema, what time is it?", true),
+            Decision::Route("what time is it?".into())
+        );
+        // Nothing said: nothing to ask.
+        assert_eq!(decided("", true), Decision::Type { hint: false });
+    }
+
+    #[test]
+    fn a_near_miss_is_typed_with_a_hint() {
+        assert_eq!(
+            decided("Cosmo, what time is it?", false),
+            Decision::Type { hint: true }
+        );
+        assert_eq!(
+            decided("Cosmetics are expensive.", false),
+            Decision::Type { hint: false }
+        );
+        assert_eq!(
+            decided("Kosima, what time is it?", false),
+            Decision::Route("what time is it?".into())
+        );
+        // A Space tap needs no hint: it's routed.
+        assert!(matches!(
+            decided("Cosmo, what time is it?", true),
+            Decision::Route(_)
+        ));
+    }
+
+    #[test]
+    fn variants_added_from_correct_that_are_heard() {
+        let mut settings = crate::settings::get_default_settings();
+        let said = "Koozeymah, what time is it?";
+        assert!(!matches!(
+            trigger::find(said, &trigger_forms(&settings)),
+            trigger::TriggerMatch::Found { .. }
+        ));
+        settings.trigger_variants.push("Koozeymah".into());
+        assert!(matches!(
+            trigger::find(said, &trigger_forms(&settings)),
+            trigger::TriggerMatch::Found { .. }
+        ));
+    }
+
+    #[cfg(target_os = "windows")]
+    #[test]
+    fn the_kusema_key_wins_over_a_classic_shortcut() {
+        let press = |down| hook::RawKey {
+            vk: keys::vk::RCONTROL,
+            down,
+            injected: false,
+            extra_info: 0,
+            win_shift: false,
+        };
+        hook::windows::with_state(|s| {
+            s.key = Some(KusemaKey::RightCtrl);
+            hook::classify(s, press(true));
+        });
+        // Right Ctrl + Space reads as Ctrl+Space to a classic shortcut: it
+        // gives way (and its Space becomes the tap).
+        assert!(classic_while_held("transcribe", "ctrl+space", true));
+        assert!(classic_while_held("transcribe", "ctrl+space", false));
+        assert!(classic_while_held("assistant", "ctrl+alt+space", true));
+        // Not a classic one: Cancel and the Ask box work as usual.
+        assert!(!classic_while_held("cancel", "escape", true));
+        assert!(!classic_while_held(
+            crate::ask_box::BINDING,
+            "ctrl+alt+k",
+            true
+        ));
+        hook::windows::with_state(|s| {
+            hook::classify(s, press(false));
+            s.key = None;
+        });
+        // Key let go: classic shortcuts are theirs again.
+        assert!(!classic_while_held("transcribe", "ctrl+space", true));
     }
 
     #[test]

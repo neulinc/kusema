@@ -1395,7 +1395,9 @@
       "trigger": {
         "label": "Słowo wywołujące",
         "description": "Zacznij od tego słowa, aby zapytać, edytować lub pokazać ekran zamiast pisać: „Kusema, make this more formal”. Działa, gdy przytrzymujesz klawisz Kusema, i w dyktowaniu ciągłym. Zostaw puste, aby wyłączyć.",
-        "placeholder": "Kusema"
+        "placeholder": "Kusema",
+        "variants": "Słyszane też jako:",
+        "removeVariant": "Usuń {{variant}}"
       },
       "simpleKey": {
         "title": "Prostszy skrót",
@@ -1574,7 +1576,9 @@
       "ask": "Pytam Kusema…",
       "ask_screen": "Patrzę na Twój ekran…",
       "edit": "Edytuję…"
-    }
+    },
+    "assistantTake": "Zapytaj Kusema",
+    "triggerHint": "Wpisano jako dyktowanie. Aby zapytać Kusema, naciśnij spację, trzymając {{name}}."
   },
   "screenCard": {
     "title": "Wysłać ten zrzut ekranu?",
@@ -1605,6 +1609,12 @@
       "help": "Popraw i naciśnij Enter. Kusema uczy się zmienionych słów. Shift+Enter zaczyna nowy wiersz, Esc anuluje.",
       "save": "Zapisz",
       "cancel": "Anuluj"
+    },
+    "offer": {
+      "title": "Dodać „{{word}}” jako sposób mówienia „{{trigger}}”?",
+      "body": "Wtedy wszystko, co zaczniesz od „{{word}}”, trafi do Kusema. Dalej w zdaniu słowo zostaje bez zmian.",
+      "yes": "Dodaj",
+      "no": "Nie teraz"
     }
   },
   "secureInput": {
@@ -1664,7 +1674,7 @@
     "trigger": "W dyktowaniu ciągłym zacznij od „{{trigger}},”, aby zmienić tekst w ten sam sposób, np. „{{trigger}}, napisz to bardziej formalnie”. Bez tego słowa wszystko jest wpisywane tak, jak mówisz.",
     "triggerOff": "Aby zmieniać tekst w dyktowaniu ciągłym, ustaw słowo wyzwalające w Ogólne → Edycja głosowa.",
     "selectFirst": "Niektóre aplikacje, takie jak ONLYOFFICE, LibreOffice i Google Docs, nie pokazują Kusemie swojego tekstu. Tam najpierw zaznacz tekst myszą lub klawiaturą; zaznaczanie zdania, akapitu czy słów głosem nie działa.",
-    "introKey": "Przytrzymaj {{key}} i powiedz „{{trigger}}”, a potem jedno z tych poleceń. Polecenia oznaczone „Także w dyktowaniu ciągłym” działają tam, gdy powiesz je osobno."
+    "introKey": "Przytrzymaj {{key}} i naciśnij spację (lub zacznij od „{{trigger}}”), a potem powiedz jedno z tych poleceń. Polecenia oznaczone „Także w dyktowaniu ciągłym” działają tam, gdy powiesz je osobno."
   },
   "voiceEdit": {
     "notice": {
@@ -1716,11 +1726,11 @@
       "title": "Klawisze Kusema",
       "hold": "Przytrzymaj <key/>, aby mówić.",
       "doubleTap": "Naciśnij dwukrotnie <key/>, aby dyktować w trybie ciągłym.",
-      "say": "Powiedz najpierw <q>{{trigger}}</q>, aby zapytać, edytować lub pokazać swój ekran."
+      "ask": "Trzymając, naciśnij <space/>, aby zapytać Kusema, lub zacznij od <q>{{trigger}}</q>: zapytaj, edytuj lub pokaż swój ekran."
     },
     "settings": {
       "title": "Klawisz Kusema",
-      "description": "Jeden klawisz do dyktowania. Przytrzymaj go, aby mówić, naciśnij dwukrotnie, aby dyktować w trybie ciągłym, i zacznij od „Kusema”, aby zapytać, edytować lub pokazać swój ekran. Inne aplikacje nigdy nie widzą tego klawisza.",
+      "description": "Jeden klawisz do dyktowania. Przytrzymaj go, aby mówić; naciśnij dwukrotnie, aby dyktować w trybie ciągłym. Aby zapytać, edytować lub pokazać ekran, naciśnij spację, trzymając go, lub zacznij od „Kusema”. Inne aplikacje nigdy nie widzą tego klawisza.",
       "enabled": {
         "label": "Używaj klawisza Kusema",
         "description": "Po wyłączeniu działają tylko skróty poniżej."
@@ -1749,6 +1759,7 @@
       "body": "Kusema ma teraz jeden klawisz zamiast wielu skrótów. Obowiązują tylko dwie zasady:",
       "keptClassic": "Kusema ma teraz jeden klawisz do wszystkiego. Zmieniłeś skrót, więc Twoje skróty nadal działają. Możesz je wyłączyć w sekcji Klasyczne skróty.",
       "gotIt": "Rozumiem"
-    }
+    },
+    "space": "Spacja"
   }
 }

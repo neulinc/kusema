@@ -125,7 +125,29 @@ pub(super) fn correct_last(app: &AppHandle, target: Target) -> Result<(), Proble
     }
     last_typed::record(&replacement, crate::dictation::current_focus());
     update_history(app, &shown, &corrected);
-    let learned = crate::vocabulary::learn_from(app, &shown, &corrected);
+    // Kusema key: a misheard trigger word is offered as a spelling of it,
+    // for the start of speech only, not learned as vocabulary (which would
+    // change the word everywhere).
+    let settings = crate::settings::get_settings(app);
+    let trigger = settings.voice_edit_trigger.trim().to_string();
+    let heard = (!trigger.is_empty())
+        .then(|| {
+            crate::kusema_key::trigger::misheard_first_word(
+                &shown,
+                &corrected,
+                &crate::kusema_key::trigger_forms(&settings),
+                &trigger,
+            )
+        })
+        .flatten();
+    let learn_from_text = match &heard {
+        Some(word) => shown.replacen(word.as_str(), &trigger, 1),
+        None => shown.clone(),
+    };
+    let learned = crate::vocabulary::learn_from(app, &learn_from_text, &corrected);
+    if let Some(word) = &heard {
+        crate::kusema_key::offer_variant(app, word, target.window);
+    }
     info!("Corrected the last dictation; learned {}", learned.len());
     super::inform(
         app,

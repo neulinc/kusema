@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { X } from "lucide-react";
+import { commands } from "@/bindings";
 import { useSettings } from "../../hooks/useSettings";
 import { useOsType } from "../../hooks/useOsType";
 import { formatKeyCombination } from "../../lib/utils/keyboard";
@@ -32,6 +34,7 @@ export const VoiceEditingSettings: React.FC = () => {
   const classic = getSetting("classic_shortcuts") ?? false;
 
   const saved = getSetting("voice_edit_trigger") ?? "";
+  const variants = getSetting("trigger_variants") ?? [];
   const [trigger, setTrigger] = useState(saved);
   useEffect(() => setTrigger(saved), [saved]);
   const commitTrigger = () => {
@@ -94,6 +97,31 @@ export const VoiceEditingSettings: React.FC = () => {
           className="w-40"
         />
       </SettingContainer>
+      {variants.length > 0 && (
+        <div className="flex flex-wrap items-center gap-1.5 px-4 pb-3">
+          <span className="text-xs text-ink-2">
+            {t("settings.voiceEdit.trigger.variants")}
+          </span>
+          {variants.map((variant) => (
+            <span
+              key={variant}
+              className="flex items-center gap-1 rounded-full bg-wash px-2 py-0.5 text-xs"
+            >
+              {variant}
+              <button
+                type="button"
+                onClick={() => void commands.removeTriggerVariant(variant)}
+                aria-label={t("settings.voiceEdit.trigger.removeVariant", {
+                  variant,
+                })}
+                className="text-ink-2 hover:text-text"
+              >
+                <X className="h-3 w-3" />
+              </button>
+            </span>
+          ))}
+        </div>
+      )}
       <SettingContainer
         title={t("voiceCommands.title")}
         description={t("settings.voiceEdit.description")}

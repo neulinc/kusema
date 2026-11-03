@@ -143,7 +143,7 @@ fn active(settings: &AppSettings, language: Option<&str>) -> (Vec<VocabEntry>, V
 }
 
 /// `written` and every way the vocabulary says it's heard (the trigger word
-/// "Kusema" is also "Kusama", "Cusema"...), any language's packs included.
+/// "Kusema" is also "Cusema", "Kasema"...), any language's packs included.
 pub fn spoken_forms_of(settings: &AppSettings, written: &str) -> Vec<String> {
     let wanted = written.trim().to_lowercase();
     let mut forms = vec![written.trim().to_string()];
@@ -483,7 +483,7 @@ mod tests {
             legal: false,
             medical: false,
         };
-        for heard in ["Kusama", "Cusema", "Kasema", "Cosima"] {
+        for heard in ["Cusema", "Kasema", "Kuzema"] {
             assert_eq!(
                 apply(
                     &format!("{heard}, make this more formal."),
@@ -497,9 +497,16 @@ mod tests {
         }
         // In other languages too: it's a name.
         assert_eq!(
-            apply("Kusama, hazlo formal", &s, Some("es"), false),
+            apply("Cusema, hazlo formal", &s, Some("es"), false),
             "Kusema, hazlo formal"
         );
+        // Real names that sound like it are left alone.
+        for text in [
+            "The artist Yayoi Kusama painted dots.",
+            "Cosima Wagner ran the festival.",
+        ] {
+            assert_eq!(apply(text, &s, Some("en"), false), text);
+        }
     }
 
     #[test]

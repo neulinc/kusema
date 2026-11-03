@@ -1383,7 +1383,9 @@
       "trigger": {
         "label": "Auslösewort",
         "description": "Beginnen Sie mit diesem Wort, um zu fragen, zu bearbeiten oder auf Ihren Bildschirm schauen zu lassen, statt zu tippen: „Kusema, make this more formal“. Das funktioniert, während Sie die Kusema-Taste halten, und beim fortlaufenden Diktieren. Leer lassen, um es auszuschalten.",
-        "placeholder": "Kusema"
+        "placeholder": "Kusema",
+        "variants": "Auch erkannt als:",
+        "removeVariant": "{{variant}} entfernen"
       },
       "simpleKey": {
         "title": "Einfacheres Tastenkürzel",
@@ -1562,7 +1564,9 @@
       "ask": "Kusema wird gefragt …",
       "ask_screen": "Schaut auf Ihren Bildschirm …",
       "edit": "Bearbeitet …"
-    }
+    },
+    "assistantTake": "Kusema fragen",
+    "triggerHint": "Als Diktat getippt. Um Kusema zu fragen, tippen Sie beim Halten von {{name}} auf die Leertaste."
   },
   "screenCard": {
     "title": "Diesen Screenshot senden?",
@@ -1593,6 +1597,12 @@
       "help": "Korrigieren und Enter drücken. Kusema lernt die Wörter, die Sie ändern. Umschalt+Enter beginnt eine neue Zeile, Esc bricht ab.",
       "save": "Speichern",
       "cancel": "Abbrechen"
+    },
+    "offer": {
+      "title": "„{{word}}“ als Schreibweise für „{{trigger}}“ hinzufügen?",
+      "body": "Dann geht alles, was Sie mit „{{word}}“ beginnen, an Kusema. Später im Satz bleibt das Wort, wie es ist.",
+      "yes": "Hinzufügen",
+      "no": "Nicht jetzt"
     }
   },
   "secureInput": {
@@ -1648,7 +1658,7 @@
     "trigger": "Beginnen Sie beim fortlaufenden Diktat mit „{{trigger}},“, um Text auf dieselbe Weise zu ändern, zum Beispiel „{{trigger}}, mach das förmlicher“. Ohne dieses Wort wird alles so geschrieben, wie Sie es sagen.",
     "triggerOff": "Um Text beim fortlaufenden Diktat zu ändern, legen Sie unter Allgemein → Sprachbearbeitung ein Auslösewort fest.",
     "selectFirst": "Manche Apps wie ONLYOFFICE, LibreOffice und Google Docs zeigen Kusema ihren Text nicht. Markieren Sie den Text dort zuerst mit Maus oder Tastatur; Sätze, Absätze oder Wörter per Sprache markieren funktioniert dort nicht.",
-    "introKey": "Halten Sie {{key}} gedrückt und sagen Sie „{{trigger}}“, dann einen dieser Befehle. Befehle mit dem Hinweis „Auch beim fortlaufenden Diktat“ funktionieren dort, wenn sie allein gesagt werden."
+    "introKey": "Halten Sie {{key}} und tippen Sie auf die Leertaste (oder beginnen Sie mit „{{trigger}}“), dann sagen Sie einen dieser Befehle. Befehle mit dem Hinweis „Auch beim fortlaufenden Diktat“ funktionieren dort, wenn sie allein gesagt werden."
   },
   "voiceEdit": {
     "notice": {
@@ -1700,11 +1710,11 @@
       "title": "Kusema-Tasten",
       "hold": "Halten Sie <key/> gedrückt, um zu sprechen.",
       "doubleTap": "Tippen Sie <key/> zweimal für fortlaufendes Diktieren.",
-      "say": "Sagen Sie zuerst <q>{{trigger}}</q>, um zu fragen, zu bearbeiten oder auf Ihren Bildschirm schauen zu lassen."
+      "ask": "Tippen Sie beim Halten auf <space/>, um Kusema zu fragen, oder beginnen Sie mit <q>{{trigger}}</q>: fragen, bearbeiten oder auf Ihren Bildschirm schauen lassen."
     },
     "settings": {
       "title": "Kusema-Taste",
-      "description": "Eine Taste zum Diktieren. Halten Sie sie zum Sprechen, tippen Sie sie zweimal für fortlaufendes Diktieren, und beginnen Sie mit „Kusema“, um zu fragen, zu bearbeiten oder auf Ihren Bildschirm schauen zu lassen. Andere Apps bekommen die Taste nie zu sehen.",
+      "description": "Eine Taste zum Diktieren. Halten Sie sie zum Sprechen, tippen Sie sie zweimal für fortlaufendes Diktieren. Um zu fragen, zu bearbeiten oder auf Ihren Bildschirm schauen zu lassen, tippen Sie beim Halten auf die Leertaste oder beginnen Sie mit „Kusema“. Andere Apps bekommen die Taste nie zu sehen.",
       "enabled": {
         "label": "Kusema-Taste verwenden",
         "description": "Aus: Nur die Tastenkürzel unten funktionieren."
@@ -1733,6 +1743,7 @@
       "body": "Kusema hat jetzt eine Taste statt vieler Tastenkürzel. Es gibt nur diese zwei Regeln:",
       "keptClassic": "Kusema hat jetzt eine Taste für alles. Sie hatten ein Tastenkürzel geändert, daher funktionieren Ihre Tastenkürzel weiterhin. Unter „Klassische Tastenkürzel“ können Sie sie ausschalten.",
       "gotIt": "Verstanden"
-    }
+    },
+    "space": "Leertaste"
   }
 }

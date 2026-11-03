@@ -21,8 +21,11 @@ pub const DOUBLE_TAP_GAP: Duration = Duration::from_millis(350);
 pub enum Effect {
     /// Start push-to-talk dictation.
     StartHold,
-    /// The key was held: finish that dictation as usual.
-    FinishHold,
+    /// The key was held: finish that take as usual. `assistant`: Space was
+    /// tapped during it, so it goes to the Assistant.
+    FinishHold { assistant: bool },
+    /// Space was tapped while holding: this take is for the Assistant.
+    SwitchToAssistant,
     /// It was a tap: drop the recording the press started.
     DiscardHold,
     /// A double-tap: start continuous dictation, or stop it.
@@ -37,6 +40,7 @@ enum State {
     Down {
         at: Instant,
         recording: bool,
+        assistant: bool,
     },
     /// A tap ended at `at`; a press soon is a double-tap.
     Tapped {
@@ -74,7 +78,11 @@ impl Gesture {
             }
             State::Idle | State::Tapped { .. } => {
                 let recording = !continuous;
-                self.state = State::Down { at: now, recording };
+                self.state = State::Down {
+                    at: now,
+                    recording,
+                    assistant: false,
+                };
                 recording.then_some(Effect::StartHold)
             }
         }
@@ -82,13 +90,18 @@ impl Gesture {
 
     pub fn up(&mut self, now: Instant) -> Option<Effect> {
         match self.state {
-            State::Down { at, recording } => {
-                if now.duration_since(at) < TAP_MAX {
+            State::Down {
+                at,
+                recording,
+                assistant,
+            } => {
+                // A take switched to the Assistant is never a tap.
+                if now.duration_since(at) < TAP_MAX && !assistant {
                     self.state = State::Tapped { at: now };
                     recording.then_some(Effect::DiscardHold)
                 } else {
                     self.state = State::Idle;
-                    recording.then_some(Effect::FinishHold)
+                    recording.then_some(Effect::FinishHold { assistant })
                 }
             }
             State::SecondDown => {
@@ -96,6 +109,21 @@ impl Gesture {
                 None
             }
             State::Idle | State::Tapped { .. } => None,
+        }
+    }
+
+    /// Space was tapped. Only a take that's recording can switch, once.
+    pub fn space(&mut self) -> Option<Effect> {
+        match &mut self.state {
+            State::Down {
+                recording: true,
+                assistant,
+                ..
+            } if !*assistant => {
+                *assistant = true;
+                Some(Effect::SwitchToAssistant)
+            }
+            _ => None,
         }
     }
 
@@ -144,11 +172,17 @@ mod tests {
         assert!(g.is_holding());
         // Auto-repeat changes nothing.
         assert_eq!(g.down(t + ms(500), false), None);
-        assert_eq!(g.up(t + ms(1800),), Some(Effect::FinishHold));
+        assert_eq!(
+            g.up(t + ms(1800),),
+            Some(Effect::FinishHold { assistant: false })
+        );
         assert!(!g.is_holding());
         // A short hold just past the tap limit still counts.
         assert_eq!(g.down(t + ms(3000), false), Some(Effect::StartHold));
-        assert_eq!(g.up(t + ms(3000) + TAP_MAX), Some(Effect::FinishHold));
+        assert_eq!(
+            g.up(t + ms(3000) + TAP_MAX),
+            Some(Effect::FinishHold { assistant: false })
+        );
     }
 
     #[test]
@@ -209,9 +243,43 @@ mod tests {
         let t = Instant::now();
         let mut g = Gesture::default();
         g.down(t, false);
-        assert_eq!(g.up(t + ms(400)), Some(Effect::FinishHold));
+        assert_eq!(
+            g.up(t + ms(400)),
+            Some(Effect::FinishHold { assistant: false })
+        );
         // A quick press right after a hold starts a new hold.
         assert_eq!(g.down(t + ms(500), false), Some(Effect::StartHold));
+    }
+
+    #[test]
+    fn space_while_holding_switches_the_take_to_the_assistant() {
+        let t = Instant::now();
+        let mut g = Gesture::default();
+        g.down(t, false);
+        assert_eq!(g.space(), Some(Effect::SwitchToAssistant));
+        // Once per take.
+        assert_eq!(g.space(), None);
+        assert_eq!(
+            g.up(t + ms(2000)),
+            Some(Effect::FinishHold { assistant: true })
+        );
+        // Even a quick one isn't thrown away as a tap.
+        g.down(t + ms(3000), false);
+        g.space();
+        assert_eq!(
+            g.up(t + ms(3100)),
+            Some(Effect::FinishHold { assistant: true })
+        );
+        // The next take starts as dictation again.
+        g.down(t + ms(5000), false);
+        assert_eq!(
+            g.up(t + ms(6000)),
+            Some(Effect::FinishHold { assistant: false })
+        );
+        // Not held, or held during continuous dictation: nothing to switch.
+        assert_eq!(g.space(), None);
+        g.down(t + ms(8000), true);
+        assert_eq!(g.space(), None);
     }
 
     #[test]
