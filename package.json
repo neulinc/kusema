@@ -24,7 +24,11 @@
     "build:cjk-font": "bun scripts/build-cjk-font.ts",
     "check:cjk-font": "bun scripts/build-cjk-font.ts --check",
     "postinstall": "bun scripts/check-nix-deps.ts",
-    "credits": "bun scripts/generate-credits.ts"
+    "credits": "bun scripts/generate-credits.ts",
+    "check:quality": "bun run check:translations && bun run check:model-languages && bun run check:catalog && bun run test:keyboard && bun run lint && bun run format:check",
+    "test:frontend": "bun scripts/run-frontend-tests.ts",
+    "test:rust": "cd src-tauri && cargo test",
+    "check": "bun run check:quality && bun run test:frontend && bun run credits --check && bun run test:rust"
   },
   "dependencies": {
     "@handy-computer/models": "0.2.3",

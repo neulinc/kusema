@@ -1,7 +1,9 @@
 import catalog from "../src-tauri/src/catalog/catalog.json";
 import { LANGUAGES, supportsLanguage } from "../src/lib/constants/languages.ts";
+import { isOfferedByKusema } from "../src/lib/models/removed.ts";
 
 interface CatalogModel {
+  id: string;
   name: string;
   role: string;
   languages?: string[];
@@ -23,9 +25,11 @@ for (const [a, b] of [
 }
 
 // Only transcription models reach the language picker; the catalog also lists
-// the language-ID, VAD and diarization models transcribe.cpp publishes.
+// the language-ID, VAD and diarization models transcribe.cpp publishes. Kusema:
+// and only the ones Kusema offers, the same models the picker's list is built
+// from (src/lib/constants/languages.ts); the removed ones never reach it.
 const transcriptionModels = (catalog.models as CatalogModel[]).filter(
-  (model) => model.role === "asr",
+  (model) => model.role === "asr" && isOfferedByKusema(model),
 );
 
 for (const model of transcriptionModels) {

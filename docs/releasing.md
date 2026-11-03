@@ -73,9 +73,8 @@ endpoint in `tauri.conf.json`.
    short, user-facing lines. Users see them once in the app after updating
    ("What's new"), and the workflow uses the same file as the GitHub Release
    text. The workflow fails if the file is missing.
-3. **Check:** `bun run credits --check` (if it fails, run `bun run credits` and
-   commit the result), `bun run lint`, `bun run format:check`, `bun run
-check:translations`, and `cargo test` in `src-tauri`.
+3. **Check:** `bun run check` (see [Checks and CI](#checks-and-ci) below). If
+   `credits --check` fails, run `bun run credits` and commit the result.
 4. **Commit and tag**, then push both:
 
    ```powershell
@@ -101,6 +100,41 @@ check:translations`, and `cargo test` in `src-tauri`.
    footer shows "Update available" (or use **Check for Updates…** in the tray);
    install it; Kusema restarts on the new version with settings, models,
    Kokoro voices and the API key still there, and shows the release notes.
+
+## Checks and CI
+
+Every push to `main` runs the workflows in `.github/workflows/`. The local
+commands run the same steps, so run them before pushing:
+
+| Workflow                          | Runs on          | Local command           | What it runs                                                                                                                     |
+| --------------------------------- | ---------------- | ----------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| `code quality` (code-quality.yml) | Ubuntu           | `bun run check:quality` | `check:translations`, `check:model-languages`, `check:catalog`, `test:keyboard`, `lint`, `format:check`, in the workflow's order |
+| `test` (test.yml)                 | **Ubuntu 24.04** | `bun run test:rust`     | `cargo test` in `src-tauri`                                                                                                      |
+| (not in CI)                       |                  | `bun run test:frontend` | every standalone `src/**/*.test.ts`                                                                                              |
+
+`bun run check` runs all of them, plus `credits --check`.
+
+**The Rust tests run on Linux in CI, and on Windows here.** A test that passes
+here can still fail there, so keep tests independent of the platform:
+
+- Code that only exists on Windows (`windows` crate calls, UI Automation, the
+  keyboard hook) goes behind `#[cfg(target_os = "windows")]`, with a stub
+  elsewhere, and so do tests that need it.
+- Logic that differs by platform takes the platform as a parameter, so both
+  sides are tested everywhere (`app_styles::normalize_for(name, windows)`:
+  `.exe` on Windows only). A test expecting `notepad.exe` without that is
+  Windows-only by accident.
+- To run the Linux tests yourself before pushing, use WSL (Ubuntu): install
+  the packages listed in `test.yml` and Rust, then run `cargo test` in
+  `src-tauri` with `CARGO_TARGET_DIR` inside the Linux file system (building
+  from `/mnt/d` is slow). Not needed for every change, but worth it for
+  anything touching `cfg(target_os)` code.
+
+**When CI fails:** the run's log has the failing test or check
+(`gh run view <id> -R neulinc/kusema --log-failed`; `-R` matters, since the
+clone also has Handy's repo as a remote). Fix the cause; never weaken a check
+to make it pass. The `check:model-languages` script checks only the models
+Kusema offers, as the language picker does (`src/lib/models/removed.ts`).
 
 ## Pre-release test checklist
 

@@ -67,9 +67,15 @@ pub fn default_styles() -> Vec<AppStyle> {
 
 /// "Outlook", "OUTLOOK.EXE" and "C:\...\outlook.exe" are the same program.
 pub fn normalize_app(name: &str) -> String {
+    normalize_for(name, cfg!(target_os = "windows"))
+}
+
+/// `normalize_app` as on Windows (`windows`), where programs end in .exe, or
+/// elsewhere, where they don't. Apart so both can be tested on either.
+fn normalize_for(name: &str, windows: bool) -> String {
     let name = name.trim().rsplit(['\\', '/']).next().unwrap_or("").trim();
     let lower = name.to_lowercase();
-    if lower.is_empty() || lower.ends_with(".exe") || cfg!(not(target_os = "windows")) {
+    if lower.is_empty() || lower.ends_with(".exe") || !windows {
         lower
     } else {
         format!("{lower}.exe")
@@ -243,13 +249,23 @@ mod tests {
 
     #[test]
     fn program_names_are_compared_loosely() {
-        assert_eq!(normalize_app("  Outlook "), "outlook.exe");
+        // Windows: a name without .exe gets it.
+        assert_eq!(normalize_for("  Outlook ", true), "outlook.exe");
         assert_eq!(
-            normalize_app(r"C:\Program Files\Slack\slack.exe"),
+            normalize_for(r"C:\Program Files\Slack\slack.exe", true),
             "slack.exe"
         );
-        assert_eq!(normalize_app("Notepad.EXE"), "notepad.exe");
-        assert_eq!(normalize_app("   "), "");
+        assert_eq!(normalize_for("Notepad.EXE", true), "notepad.exe");
+        assert_eq!(normalize_for("   ", true), "");
+        // Elsewhere program names have no .exe, so none is added.
+        assert_eq!(normalize_for("  Slack ", false), "slack");
+        assert_eq!(normalize_for("/usr/bin/Slack", false), "slack");
+        assert_eq!(normalize_for("   ", false), "");
+        // And this build uses its own platform's rule.
+        assert_eq!(
+            normalize_app("Notepad"),
+            normalize_for("Notepad", cfg!(target_os = "windows"))
+        );
     }
 
     #[test]
@@ -261,14 +277,15 @@ mod tests {
             name: Some("Notes".to_string()),
             apps: vec![
                 "Notepad".to_string(),
-                "notepad.exe".to_string(),
+                "notepad".to_string(),
                 " ".to_string(),
             ],
             instruction: Some("Bullet points.".to_string()),
         });
         let styles = tidy(styles);
-        assert_eq!(styles[3].apps, ["notepad.exe"]);
-        let notes = style_for(&styles, "notepad.exe").unwrap();
+        // One entry, spelled as this platform names programs; no blank.
+        assert_eq!(styles[3].apps, [normalize_app("notepad")]);
+        let notes = style_for(&styles, "NOTEPAD").unwrap();
         assert_eq!(notes.instruction().as_deref(), Some("Bullet points."));
         let email = style_for(&styles, "outlook.exe").unwrap();
         assert!(email.instruction().unwrap().contains("Ross"));
