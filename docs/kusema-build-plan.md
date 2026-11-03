@@ -272,13 +272,14 @@ If the build fails, open Claude Code in the folder and paste:
 
 ## Roadmap
 
-| Version | Steps                                                                                                                                                    |
-| ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| v0.4    | Step 7 continuous dictation; Step 8 privacy ledger and Local-only mode; Step 9 smart cleanup by default; Step 10 two-minute first-run setup              |
-| v0.4.1  | Step 10b recording indicator, About page cleanup, Assistant page tabs                                                                                    |
-| v0.5    | Step 11: 11a voice editing and navigation ✅; dictionary, legal vocabulary, Dragon import, styles per app, type-to-ask, paste-the-answer, personal stats |
-| v0.6    | Step 12 legal templates and snippets, foot pedal and dictation mics, transcribing recordings, ramble then structure, voice-called snippets               |
-| Launch  | Launch gate: model hosting ✅, Windows code signing, product page, launch                                                                                |
+| Version | Steps                                                                                                                                             |
+| ------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| v0.4    | Step 7 continuous dictation; Step 8 privacy ledger and Local-only mode; Step 9 smart cleanup by default; Step 10 two-minute first-run setup       |
+| v0.4.1  | Step 10b recording indicator, About page cleanup, Assistant page tabs                                                                             |
+| v0.5    | Step 11a voice editing and navigation ✅; 11b vocabulary; 11c type-to-ask, paste-the-answer, tutor style, styles per app. Release 0.5.0 after 11c |
+| v0.5.x  | Step 11d live preview and microphone check; 11e personal stats, beta channel, keyboard access to the settings sidebar                             |
+| v0.6    | Step 12 legal templates and snippets, foot pedal and dictation mics, transcribing recordings, ramble then structure, voice-called snippets        |
+| Launch  | Launch gate: model hosting ✅, Windows code signing, product page, launch                                                                         |
 
 ---
 
@@ -443,25 +444,39 @@ Everything else moves behind a "Show all models" link under Advanced, including 
 - **Testing aid:** the end-to-end tests ran through `scripts/dev_isolated.py` with a temporary transcript hook (never committed) and a mock provider on 127.0.0.1.
 - **Known limits:** commands are English only. Some editors copy a whole line with Ctrl+C when nothing is selected (VS Code); with no text pattern there, an AI edit would work on that line, after the preview. The edit is plain text. A copy through the clipboard lands in Windows' clipboard history, written by the app, not Kusema. The trigger word has to be heard as written: if the model spells it differently, choose another word.
 
-### Rest of Step 11
+### Step 11b — Vocabulary
 
-- **Voice editing:** ✅ Step 11a.
-- **Voice navigation:** ✅ Step 11a.
-- **Learning personal dictionary:** picks up names and terms from the user's corrections.
-- **Learn from corrections:** when I fix a misheard word, remember it for my voice.
-- **Legal vocabulary pack:** legal terms, Latin and citation forms recognized correctly out of the box.
-- **Medical vocabulary pack:** medical terms and drug names recognized correctly out of the box.
+**Goal:** Kusema gets names, legal terms and the user's own way of speaking right, and gets better the more it's corrected.
+
+- **Learning personal dictionary:** picks up names and terms from the user's corrections ("correct that", or from History).
+- **Legal vocabulary pack:** legal terms, Latin and citation forms recognized correctly out of the box. On by default for English.
+- **Medical vocabulary pack:** medical terms and drug names, off by default, with a note that clinicians review dictated records.
 - **Dragon custom-word import:** bring over the word list from Dragon.
-- **Styles per app:** different cleanup for email, a legal document or a chat.
+- **Kusema's own name** in the built-in vocabulary, so the trigger word is recognized.
+
+### Step 11c — Assistant: more ways to ask and answer
+
 - **Type-to-ask:** ask Kusema by typing, when speaking isn't possible.
-- **Tutor style for screen questions:** an option for students that explains step by step rather than just giving the answer.
-- **Keyboard access to the settings sidebar:** reach every settings page without a mouse. Found in Step 10; the setup flow already works by keyboard.
 - **Paste-the-answer:** type the assistant's reply into the active app instead of speaking it ("draft a reply declining this meeting").
-- **"Clean up this dictation session":** AI cleanup of a whole continuous session, with a preview, at its end. Deferred from Step 9 because replacing text already in the document isn't safe: clicking the preview loses the caret, the app can't see the document, and deleting thousands of characters by count could eat other text, the same risk "scratch that" refuses. A version that replaces only the History entry, for the user to copy, is safe if that's enough.
-- **Microphone quality check in setup:** with reassurance that any USB mic or headset works, and a short recommended list.
-- **Beta update channel:** opt-in; testers get new versions a week early.
-- **Personal stats:** words dictated and time saved, kept on the computer. Moved from Step 12.
+- **Tutor style for screen questions:** an option for students that explains step by step rather than just giving the answer.
+- **Styles per app:** different cleanup for email, a legal document or a chat.
+
+**Release 0.5.0 after Step 11c** (11a to 11c). 11d and 11e follow in 0.5.x.
+
+### Step 11d — Live preview and microphone check
+
 - **Live preview while dictating:** show words in the overlay as they're spoken (like Dragon's results box) while still typing into the document only at pauses. Evaluate periodic re-transcription vs. a streaming engine (Moonshine).
+- **Microphone quality check in setup:** with reassurance that any USB mic or headset works, and a short recommended list.
+
+### Step 11e — Stats, beta channel, keyboard access
+
+- **Personal stats:** words dictated and time saved, kept on the computer. Moved from Step 12.
+- **Beta update channel:** opt-in; testers get new versions a week early.
+- **Keyboard access to the settings sidebar:** reach every settings page without a mouse. Found in Step 10; the setup flow already works by keyboard.
+
+### Not scheduled from Step 11
+
+- **"Clean up this dictation session":** AI cleanup of a whole continuous session, with a preview, at its end. Deferred from Step 9 because replacing text already in the document isn't safe: clicking the preview loses the caret, the app can't see the document, and deleting thousands of characters by count could eat other text, the same risk "scratch that" refuses. A version that replaces only the History entry, for the user to copy, is safe if that's enough.
 
 ---
 
@@ -579,6 +594,7 @@ Turn meetings into notes, only with a clear consent step: recording a conversati
 ### Other ideas
 
 - **Local API / MCP server** so other tools can use Kusema's private transcription.
+- **Practice-management integrations:** Clio (built in, through its API) and MyCase (per firm, through the Advanced tier's Open API, configured by Neulinc). First verify in MyCase's official API docs whether notes and time entries can be written.
 - **Redaction**: optional local step stripping names, emails and phone numbers before text goes to a cloud provider.
 - **Chatterbox voice cloning** with a consent step (live recording of a scripted consent line, no uploaded files).
 - **Separate provider settings for Assistant vs. post-processing**, if you want, e.g., Groq for fast cleanup and Claude for questions.
