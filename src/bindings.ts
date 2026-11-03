@@ -1331,6 +1331,20 @@ async dismissScreenCard() : Promise<void> {
 async setScreenCardEnlarged(enlarged: boolean) : Promise<void> {
     await TAURI_INVOKE("set_screen_card_enlarged", { enlarged });
 },
+/**
+ * Every command and its phrases, for the "What can I say?" list.
+ */
+async getVoiceCommands() : Promise<CommandInfo[]> {
+    return await TAURI_INVOKE("get_voice_commands");
+},
+async changeVoiceEditPreviewSetting(enabled: boolean) : Promise<Result<null, string>> {
+    try {
+    return { status: "ok", data: await TAURI_INVOKE("change_voice_edit_preview_setting", { enabled }) };
+} catch (e) {
+    if(e instanceof Error) throw e;
+    else return { status: "error", error: e  as any };
+}
+},
 async getTtsVoices() : Promise<Result<Voice[], string>> {
     try {
     return { status: "ok", data: await TAURI_INVOKE("get_tts_voices") };
@@ -1611,7 +1625,11 @@ glow_intensity?: number; glow_palette?: GlowPalette;
  * Kusema: start and stop sounds for continuous dictation, whatever
  * `audio_feedback` says. A session is too long to start unnoticed.
  */
-dictation_sounds?: boolean }
+dictation_sounds?: boolean; 
+/**
+ * Kusema voice editing: show the AI's edit before it replaces the text.
+ */
+voice_edit_preview?: boolean }
 export type AudioDevice = { index: string; name: string; is_default: boolean }
 export type AutoSubmitKey = "enter" | "ctrl_enter" | "cmd_enter"
 export type AutoUnavailableReason = 
@@ -1659,6 +1677,19 @@ export type ChineseScript =
  */
 "traditional_hk"
 export type ClipboardHandling = "dont_modify" | "copy_to_clipboard"
+/**
+ * Groups for the "What can I say?" list.
+ */
+export type CommandGroup = "select" | "move" | "edit"
+/**
+ * One row of the "What can I say?" list: a stable id for its translated
+ * description, and the English phrases that say it.
+ */
+export type CommandInfo = { id: string; group: CommandGroup; phrases: string[]; 
+/**
+ * Works in continuous dictation too, not only with the editing hotkey.
+ */
+in_dictation: boolean }
 export type CustomSounds = { start: boolean; stop: boolean }
 /**
  * What kind of data a request carries. Audio isn't one: no code path can send
@@ -1910,6 +1941,10 @@ export type PrivacyOverview = { today: DestinationCount[]; last_7_days: Destinat
  */
 export type Purpose = "assistant_question" | "screen_question" | "post_processing" | 
 /**
+ * Voice editing: the selected text and the spoken instruction.
+ */
+"voice_edit" | 
+/**
  * Listing a provider's models in the settings: the API key, no content.
  */
 "provider_models" | "model_download" | "voice_download" | "update_check"
@@ -1944,7 +1979,11 @@ export type RetiredModel = { id: string; name: string; size_mb: number; replacem
 /**
  * What the card shows.
  */
-export type ScreenCard = { kind: "confirm"; image: string; question: string; provider: string; model: string; timeoutSecs: number } | { kind: "notice"; message: string }
+export type ScreenCard = { kind: "confirm"; image: string; question: string; provider: string; model: string; timeoutSecs: number } | { kind: "notice"; message: string; key: string | null; name: string | null } | 
+/**
+ * Kusema voice editing: the selected text and what it would become.
+ */
+{ kind: "edit"; original: string; replacement: string; instruction: string; provider: string; richText: boolean; timeoutSecs: number }
 export type SecretMap = Partial<{ [key in string]: string }>
 export type SecureInputStatus = { 
 /**

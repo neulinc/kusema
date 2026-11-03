@@ -13,15 +13,35 @@ Most voice AI sends a recording of your voice to someone else's servers. Kusema 
 
 ## What it does
 
-| Hotkey (Windows)         | What happens                                                                                                                                                                                                                             |
-| ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Ctrl+Space**           | **Dictate.** Speak, and your words are typed wherever your cursor is: email, Word, a browser, anything.                                                                                                                                  |
-| **Ctrl+Shift+Space**     | **Dictate with AI cleanup.** Same as above, with the text tidied up by AI first. Available once Post Processing is turned on (see below).                                                                                                |
-| **Ctrl+Alt+Space**       | **Ask Kusema.** Ask a question out loud and hear the answer. Follow-up questions remember the conversation.                                                                                                                              |
-| **Ctrl+Alt+Shift+Space** | **Ask about my screen.** Captures the window you're looking at and lets you ask about it ("what do you think of this document?"). You see a preview first, and **nothing is sent until you press Send (or Enter)**. Press Esc to cancel. |
-| **Esc**                  | Cancel recording, cancel a screenshot, or stop Kusema talking.                                                                                                                                                                           |
+| Hotkey (Windows)         | What happens                                                                                                                                                                                                                                                                                |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Ctrl+Space**           | **Dictate.** Speak, and your words are typed wherever your cursor is: email, Word, a browser, anything.                                                                                                                                                                                     |
+| **Ctrl+Shift+Space**     | **Dictate with AI cleanup.** Same as above, with the text tidied up by AI first. Available once Post Processing is turned on (see below).                                                                                                                                                   |
+| **Ctrl+Alt+Space**       | **Ask Kusema.** Ask a question out loud and hear the answer. Follow-up questions remember the conversation.                                                                                                                                                                                 |
+| **Ctrl+Alt+Shift+Space** | **Ask about my screen.** Captures the window you're looking at and lets you ask about it ("what do you think of this document?"). You see a preview first, and **nothing is sent until you press Send (or Enter)**. Press Esc to cancel.                                                    |
+| **Ctrl+Alt+Shift+Enter** | **Edit by voice.** Select text in any app and say how to change it ("make this more formal", "shorten to two sentences", "translate to Spanish"). You see the new text first; Enter replaces it, and Ctrl+Z in the app undoes it. Or say a command like "select last sentence" (see below). |
+| **Esc**                  | Cancel recording, cancel a screenshot, or stop Kusema talking.                                                                                                                                                                                                                              |
 
 Hold the hotkey while you speak and release when you're done, or tap it once to start and again to stop. To allow only one of the two, change **Shortcut Behavior** on the **General** page.
+
+### Voice editing commands
+
+Hold **Ctrl+Alt+Shift+Enter** and say one of these on its own. They run on your computer and send nothing anywhere. The ones marked \* also work during continuous dictation, said alone.
+
+| Say                                                                              | What it does                                                                             |
+| -------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| "select last word" \*, "select last three words" \*                              | Selects words before the cursor, with their punctuation                                  |
+| "select line" \*, "select all" \*                                                | Selects the line, or everything                                                          |
+| "select last sentence" \*, "select last paragraph" \*                            | Selects the sentence or paragraph before the cursor                                      |
+| "select" followed by words, e.g. "select the motion"                             | Selects those words: the nearest before the cursor, else the first after                 |
+| "go to start of line" \*, "go to end of line" \*                                 | Moves the cursor                                                                         |
+| "go to start of document" \*, "go to end of document" \*                         | Moves the cursor                                                                         |
+| "new paragraph" \*, "new line" \*                                                | Starts a new paragraph or line                                                           |
+| "delete that" \*, "cut that" \*, "copy that" \*, "paste that" \*, "undo that" \* | Delete, cut or copy the selection; paste; undo (Ctrl+Z). Delete and cut need a selection |
+
+Anything else you say with this hotkey is an instruction for your AI provider, applied to the selection. With nothing selected, Kusema uses the text it just typed in that window, if it can find it exactly; otherwise it asks you to select the text first. The selection is sent as text to edit, never as instructions, so a document can't take over the request. In Privileged mode only a model on your own computer is used, and every edit is listed in the privacy ledger (sizes only).
+
+The commands are in English. "Select last sentence", "select last paragraph" and "select …" need an app that lets Kusema read its text through Windows UI Automation: Word, Outlook, Notepad and text boxes in Chrome or Edge do. The other commands use standard keys and work almost everywhere. The same list is in the app under **General → Voice Editing → What can I say?**
 
 ## Privacy, in plain terms
 

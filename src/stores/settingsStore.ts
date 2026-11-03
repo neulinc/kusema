@@ -210,6 +210,8 @@ const settingUpdaters: {
     commands.changeGlowPaletteSetting(value as GlowPalette),
   dictation_sounds: (value) =>
     commands.changeDictationSoundsSetting(value as boolean),
+  voice_edit_preview: (value) =>
+    commands.changeVoiceEditPreviewSetting(value as boolean),
   show_all_models: (value) =>
     commands.changeShowAllModelsSetting(value as boolean),
   ledger_retention_days: (value) =>

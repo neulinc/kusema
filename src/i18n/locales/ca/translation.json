@@ -444,6 +444,10 @@
           "toggle_privileged": {
             "name": "Mode Privileged",
             "description": "Premeu per activar o desactivar el mode Privileged."
+          },
+          "voice_edit": {
+            "name": "Editar amb la veu",
+            "description": "Seleccioneu text, després manteniu premuda la drecera i digueu com canviar-lo («fes això més formal»), o digueu una ordre com «select last word»."
           }
         },
         "errors": {
@@ -1214,7 +1218,8 @@
         "provider_models": "Llista de models d'un proveïdor",
         "model_download": "Baixada d'un model de veu",
         "voice_download": "Baixada d'una veu",
-        "update_check": "Comprovació d'actualitzacions"
+        "update_check": "Comprovació d'actualitzacions",
+        "voice_edit": "Edició per veu"
       },
       "data": {
         "text": "Text",
@@ -1320,6 +1325,15 @@
         "label": "Sons del dictat continu",
         "description": "Reprodueix un so curt quan el dictat continu comença i s'atura. Els sons dels altres dictats són a So, més avall."
       }
+    },
+    "voiceEdit": {
+      "title": "Edició per veu",
+      "description": "Canvieu text en qualsevol aplicació amb la veu. Seleccioneu-lo, manteniu premuda la drecera i digueu què cal fer. Les ordres com «select last word» es queden en aquest ordinador; les instruccions com «escurça això» van al vostre proveïdor d'IA.",
+      "preview": {
+        "label": "Previsualitza els canvis de la IA",
+        "description": "Mostra el text nou abans que substitueixi l'antic. Desactiveu-ho per a canvis ràpids: Ctrl+Z a l'aplicació els continua desfent."
+      },
+      "whatCanISay": "Què puc dir?"
     }
   },
   "footer": {
@@ -1415,7 +1429,18 @@
     "send": "Envia",
     "cancel": "Cancel·la",
     "noticeTitle": "Kusema",
-    "close": "Tanca"
+    "close": "Tanca",
+    "edit": {
+      "title": "Substituir el text seleccionat?",
+      "instruction": "«{{instruction}}»",
+      "original": "Ara",
+      "replacement": "Nou",
+      "by": "Editat per {{provider}}",
+      "richText": "Es pot perdre el format de la selecció, com la negreta o els estils.",
+      "apply": "Substitueix",
+      "cancel": "Cancel·la",
+      "keys": "Retorn substitueix, Esc cancel·la. Ctrl+Z a l'aplicació ho desfà."
+    }
   },
   "secureInput": {
     "blockedWithCulprit_one": "{{name}} pot estar blocant 1 drecera",
@@ -1429,5 +1454,60 @@
     "learnMore": "Com es resol",
     "recorderBlocked": "Ara no se'n poden enregistrar dreceres: l'entrada segura del macOS bloca els esdeveniments de tecla. Resol primer l'avís d'entrada segura.",
     "dismiss": "Descarta"
+  },
+  "voiceCommands": {
+    "title": "Què puc dir?",
+    "intro": "Manteniu premuda la drecera Editar amb la veu ({{shortcut}}) i digueu una d'aquestes ordres, sola. Les marcades amb «També en el dictat continu» també hi funcionen quan es diuen soles.",
+    "close": "Tanca",
+    "inDictation": "També en el dictat continu",
+    "groups": {
+      "select": "Seleccionar",
+      "move": "Moure's",
+      "edit": "Editar",
+      "ai": "Canviar-ho amb IA"
+    },
+    "ai": {
+      "description": "Seleccioneu primer el text, o simplement dicteu: si no hi ha res seleccionat, el Kusema fa servir l'últim text que ha escrit en aquella finestra. Tot el que no sigui una ordre és una instrucció per al vostre proveïdor d'IA. Només canvia el que demaneu i no hi afegeix fets.",
+      "examples": "«fes això més formal», «redueix-ho a dues frases», «converteix-ho en una llista», «corregeix la gramàtica», «tradueix-ho a l'anglès»",
+      "privileged": "En el mode Privileged només es pot fer servir un model d'aquest ordinador."
+    },
+    "english": "Les ordres són en anglès, sigui quina sigui la llengua del Kusema.",
+    "support": "«select last sentence», «select last paragraph» i «select <words>» necessiten una aplicació que deixi el Kusema llegir-ne el text, com ara Word, Outlook, el Bloc de notes o un quadre de text a Chrome o Edge. Les altres fan servir tecles estàndard i funcionen gairebé a tot arreu.",
+    "commands": {
+      "selectLastWord": "Selecciona la paraula anterior al cursor.",
+      "selectLastWords": "Selecciona aquest nombre de paraules anteriors al cursor, fins a 50.",
+      "selectLine": "Selecciona la línia del cursor.",
+      "selectAll": "Ho selecciona tot.",
+      "selectLastSentence": "Selecciona la frase anterior al cursor.",
+      "selectLastParagraph": "Selecciona el paràgraf anterior al cursor.",
+      "selectPhrase": "Selecciona aquestes paraules: la coincidència més propera abans del cursor o, si no n'hi ha, la primera després.",
+      "lineStart": "Va al començament de la línia.",
+      "lineEnd": "Va al final de la línia.",
+      "documentStart": "Va al començament del document.",
+      "documentEnd": "Va al final del document.",
+      "newParagraph": "Comença un paràgraf nou.",
+      "newLine": "Comença una línia nova.",
+      "deleteThat": "Suprimeix la selecció.",
+      "undoThat": "Desfà l'últim canvi (Ctrl+Z).",
+      "copyThat": "Copia la selecció.",
+      "cutThat": "Retalla la selecció.",
+      "pasteThat": "Enganxa."
+    }
+  },
+  "voiceEdit": {
+    "notice": {
+      "noWindow": "Feu clic al text que voleu canviar i torneu-ho a provar.",
+      "unsupported": "De moment, l'edició per veu només funciona a Windows.",
+      "selectFirst": "Seleccioneu primer el text que voleu canviar.",
+      "nothingSelected": "No hi ha res seleccionat.",
+      "noTextPattern": "Aquesta aplicació no permet al Kusema trobar text per veu. Seleccioneu-lo amb el ratolí o el teclat.",
+      "nothingBefore": "No hi ha text abans del cursor.",
+      "notFound": "No s'ha trobat «{{name}}».",
+      "windowChanged": "La finestra ha canviat, així que no s'ha modificat res.",
+      "selectionChanged": "La selecció ha canviat, així que no s'ha substituït res.",
+      "noChange": "No calia canviar el text.",
+      "emptyReply": "{{name}} ha retornat una resposta buida.",
+      "failed": "No s'ha pogut fer en aquesta finestra."
+    }
   }
 }

@@ -442,6 +442,10 @@
           "toggle_privileged": {
             "name": "Privileged-modus",
             "description": "Druk om Privileged-modus aan of uit te zetten."
+          },
+          "voice_edit": {
+            "name": "Bewerken met spraak",
+            "description": "Selecteer tekst, houd de sneltoets ingedrukt en zeg hoe die moet veranderen (“maak dit formeler”), of zeg een opdracht zoals “select last word”."
           }
         },
         "errors": {
@@ -1211,7 +1215,8 @@
         "provider_models": "Modellen van een aanbieder opvragen",
         "model_download": "Download van spraakmodel",
         "voice_download": "Download van stem",
-        "update_check": "Updatecontrole"
+        "update_check": "Updatecontrole",
+        "voice_edit": "Spraakbewerking"
       },
       "data": {
         "text": "Tekst",
@@ -1314,6 +1319,15 @@
         "label": "Geluiden bij doorlopend dicteren",
         "description": "Speelt een kort geluid als doorlopend dicteren begint en stopt. Geluiden voor ander dicteren staan onder Geluid, verderop."
       }
+    },
+    "voiceEdit": {
+      "title": "Spraakbewerking",
+      "description": "Wijzig tekst in elke app met je stem. Selecteer de tekst, houd de sneltoets ingedrukt en zeg wat er moet gebeuren. Opdrachten zoals “select last word” blijven op deze computer; instructies zoals “maak dit korter” gaan naar je AI-aanbieder.",
+      "preview": {
+        "label": "Voorbeeld van AI-bewerkingen",
+        "description": "Toont de nieuwe tekst voordat die de oude vervangt. Zet uit voor snelle bewerkingen: Ctrl+Z in de app maakt ze nog steeds ongedaan."
+      },
+      "whatCanISay": "Wat kan ik zeggen?"
     }
   },
   "footer": {
@@ -1409,7 +1423,18 @@
     "send": "Versturen",
     "cancel": "Annuleren",
     "noticeTitle": "Kusema",
-    "close": "Sluiten"
+    "close": "Sluiten",
+    "edit": {
+      "title": "Geselecteerde tekst vervangen?",
+      "instruction": "“{{instruction}}”",
+      "original": "Nu",
+      "replacement": "Nieuw",
+      "by": "Bewerkt door {{provider}}",
+      "richText": "Opmaak zoals vet of stijlen in de selectie kan verloren gaan.",
+      "apply": "Vervangen",
+      "cancel": "Annuleren",
+      "keys": "Enter vervangt, Esc annuleert. Ctrl+Z in de app maakt het ongedaan."
+    }
   },
   "secureInput": {
     "blockedWithCulprit_one": "{{name}} blokkeert mogelijk 1 sneltoets",
@@ -1421,5 +1446,60 @@
     "learnMore": "Hoe je dit oplost",
     "recorderBlocked": "Sneltoetsen kunnen nu niet worden opgenomen — Secure Input van macOS blokkeert toetsgebeurtenissen. Los eerst de Secure Input-waarschuwing op.",
     "dismiss": "Sluiten"
+  },
+  "voiceCommands": {
+    "title": "Wat kan ik zeggen?",
+    "intro": "Houd de sneltoets Bewerken met spraak ({{shortcut}}) ingedrukt en zeg een van deze opdrachten, los. Opdrachten met “Ook bij doorlopend dicteren” werken daar ook als je ze los zegt.",
+    "close": "Sluiten",
+    "inDictation": "Ook bij doorlopend dicteren",
+    "groups": {
+      "select": "Selecteren",
+      "move": "Verplaatsen",
+      "edit": "Bewerken",
+      "ai": "Wijzigen met AI"
+    },
+    "ai": {
+      "description": "Selecteer eerst tekst, of dicteer gewoon: als er niets geselecteerd is, gebruikt Kusema de laatste tekst die het in dat venster typte. Alles wat geen opdracht is, is een instructie voor je AI-aanbieder. Die wijzigt alleen wat je vraagt en voegt geen feiten toe.",
+      "examples": "“maak dit formeler”, “maak er twee zinnen van”, “zet dit in een opsomming”, “verbeter de grammatica”, “vertaal naar het Spaans”",
+      "privileged": "In Privileged-modus kan alleen een model op deze computer worden gebruikt."
+    },
+    "english": "De opdrachten zijn in het Engels, in welke taal Kusema ook staat.",
+    "support": "“select last sentence”, “select last paragraph” en “select <words>” hebben een app nodig waarin Kusema de tekst kan lezen, zoals Word, Outlook, Kladblok of een tekstvak in Chrome of Edge. De andere gebruiken standaardtoetsen en werken bijna overal.",
+    "commands": {
+      "selectLastWord": "Selecteert het woord voor de cursor.",
+      "selectLastWords": "Selecteert zoveel woorden voor de cursor, tot 50.",
+      "selectLine": "Selecteert de regel waarop de cursor staat.",
+      "selectAll": "Selecteert alles.",
+      "selectLastSentence": "Selecteert de zin voor de cursor.",
+      "selectLastParagraph": "Selecteert de alinea voor de cursor.",
+      "selectPhrase": "Selecteert die woorden: de dichtstbijzijnde vóór de cursor, anders de eerste erna.",
+      "lineStart": "Gaat naar het begin van de regel.",
+      "lineEnd": "Gaat naar het einde van de regel.",
+      "documentStart": "Gaat naar het begin van het document.",
+      "documentEnd": "Gaat naar het einde van het document.",
+      "newParagraph": "Begint een nieuwe alinea.",
+      "newLine": "Begint een nieuwe regel.",
+      "deleteThat": "Verwijdert de selectie.",
+      "undoThat": "Maakt de laatste wijziging ongedaan (Ctrl+Z).",
+      "copyThat": "Kopieert de selectie.",
+      "cutThat": "Knipt de selectie.",
+      "pasteThat": "Plakt."
+    }
+  },
+  "voiceEdit": {
+    "notice": {
+      "noWindow": "Klik in de tekst die je wilt wijzigen en probeer het opnieuw.",
+      "unsupported": "Spraakbewerking werkt voorlopig alleen op Windows.",
+      "selectFirst": "Selecteer eerst de tekst die je wilt wijzigen.",
+      "nothingSelected": "Er is niets geselecteerd.",
+      "noTextPattern": "In deze app kan Kusema geen tekst met spraak vinden. Selecteer de tekst met de muis of het toetsenbord.",
+      "nothingBefore": "Er staat geen tekst voor de cursor.",
+      "notFound": "“{{name}}” niet gevonden.",
+      "windowChanged": "Het venster is veranderd, dus er is niets gewijzigd.",
+      "selectionChanged": "De selectie is veranderd, dus er is niets vervangen.",
+      "noChange": "De tekst hoefde niet te veranderen.",
+      "emptyReply": "{{name}} gaf een leeg antwoord.",
+      "failed": "Dat lukte niet in dit venster."
+    }
   }
 }

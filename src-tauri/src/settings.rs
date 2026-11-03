@@ -632,6 +632,13 @@ pub struct AppSettings {
     /// `audio_feedback` says. A session is too long to start unnoticed.
     #[serde(default = "default_dictation_sounds")]
     pub dictation_sounds: bool,
+    /// Kusema voice editing: show the AI's edit before it replaces the text.
+    #[serde(default = "default_voice_edit_preview")]
+    pub voice_edit_preview: bool,
+}
+
+fn default_voice_edit_preview() -> bool {
+    true
 }
 
 fn default_glow_enabled() -> bool {
@@ -1179,6 +1186,22 @@ pub fn get_default_settings() -> AppSettings {
             current_binding: default_privileged_shortcut.to_string(),
         },
     );
+    // Kusema voice editing. Enter, not a letter: Ctrl+Alt+Shift+<letter> is
+    // AltGr+Shift+<letter> on international layouts, which types a character.
+    #[cfg(target_os = "macos")]
+    let default_voice_edit_shortcut = "ctrl+option+shift+enter";
+    #[cfg(not(target_os = "macos"))]
+    let default_voice_edit_shortcut = "ctrl+alt+shift+enter";
+    bindings.insert(
+        crate::voice_edit::BINDING.to_string(),
+        ShortcutBinding {
+            id: crate::voice_edit::BINDING.to_string(),
+            name: "Edit by voice".to_string(),
+            description: "Select text, then hold and say how to change it, or say a command like \"select last word\".".to_string(),
+            default_binding: default_voice_edit_shortcut.to_string(),
+            current_binding: default_voice_edit_shortcut.to_string(),
+        },
+    );
     bindings.insert(
         "cancel".to_string(),
         ShortcutBinding {
@@ -1280,6 +1303,7 @@ pub fn get_default_settings() -> AppSettings {
         glow_intensity: default_glow_intensity(),
         glow_palette: Default::default(),
         dictation_sounds: default_dictation_sounds(),
+        voice_edit_preview: default_voice_edit_preview(),
     }
 }
 

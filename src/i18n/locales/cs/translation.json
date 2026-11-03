@@ -446,6 +446,10 @@
           "toggle_privileged": {
             "name": "Režim Privileged",
             "description": "Stisknutím zapnete nebo vypnete režim Privileged."
+          },
+          "voice_edit": {
+            "name": "Upravit hlasem",
+            "description": "Označte text, pak podržte zkratku a řekněte, jak ho změnit („udělej to formálnější“), nebo řekněte příkaz jako „select last word“."
           }
         },
         "errors": {
@@ -1217,7 +1221,8 @@
         "provider_models": "Načtení modelů poskytovatele",
         "model_download": "Stažení modelu řeči",
         "voice_download": "Stažení hlasu",
-        "update_check": "Kontrola aktualizací"
+        "update_check": "Kontrola aktualizací",
+        "voice_edit": "Hlasové úpravy"
       },
       "data": {
         "text": "Text",
@@ -1326,6 +1331,15 @@
         "label": "Zvuky souvislého diktování",
         "description": "Přehrát krátký zvuk, když souvislé diktování začne a skončí. Zvuky pro jiné diktování najdete níže v sekci Zvuk."
       }
+    },
+    "voiceEdit": {
+      "title": "Hlasové úpravy",
+      "description": "Měňte text v jakékoli aplikaci hlasem. Označte ho, podržte zkratku a řekněte, co udělat. Příkazy jako „select last word“ zůstávají v tomto počítači; pokyny jako „zkrať to“ jdou k vašemu poskytovateli AI.",
+      "preview": {
+        "label": "Náhled úprav AI",
+        "description": "Ukáže nový text dřív, než nahradí starý. Pro rychlé úpravy vypněte: Ctrl+Z v aplikaci je i tak vrátí."
+      },
+      "whatCanISay": "Co můžu říct?"
     }
   },
   "footer": {
@@ -1421,7 +1435,18 @@
     "send": "Odeslat",
     "cancel": "Zrušit",
     "noticeTitle": "Kusema",
-    "close": "Zavřít"
+    "close": "Zavřít",
+    "edit": {
+      "title": "Nahradit označený text?",
+      "instruction": "„{{instruction}}“",
+      "original": "Teď",
+      "replacement": "Nově",
+      "by": "Upraveno pomocí {{provider}}",
+      "richText": "Formátování označeného textu, například tučné písmo nebo styly, se může ztratit.",
+      "apply": "Nahradit",
+      "cancel": "Zrušit",
+      "keys": "Enter nahradí, Esc zruší. Ctrl+Z v aplikaci to vrátí."
+    }
   },
   "secureInput": {
     "blockedWithCulprit_one": "{{name}} může blokovat 1 zkratku",
@@ -1437,5 +1462,60 @@
     "learnMore": "Jak to vyřešit",
     "recorderBlocked": "Zkratky teď nelze nahrát — Secure Input v macOS blokuje události kláves. Nejprve vyřešte upozornění na Secure Input.",
     "dismiss": "Zavřít"
+  },
+  "voiceCommands": {
+    "title": "Co můžu říct?",
+    "intro": "Podržte zkratku Upravit hlasem ({{shortcut}}) a řekněte jeden z těchto příkazů samostatně. Příkazy označené „Také při průběžném diktování“ tam fungují také, když je řeknete samostatně.",
+    "close": "Zavřít",
+    "inDictation": "Také při průběžném diktování",
+    "groups": {
+      "select": "Označování",
+      "move": "Přesun",
+      "edit": "Úpravy",
+      "ai": "Změna pomocí AI"
+    },
+    "ai": {
+      "description": "Nejdřív označte text, nebo prostě diktujte: když není nic označeno, Kusema použije poslední text, který v tom okně napsal. Vše, co není příkaz, je pokyn pro vašeho poskytovatele AI. Změní jen to, o co požádáte, a nepřidá žádná fakta.",
+      "examples": "„udělej to formálnější“, „zkrať to na dvě věty“, „udělej z toho odrážky“, „oprav gramatiku“, „přelož to do angličtiny“",
+      "privileged": "V režimu Privileged lze použít jen model v tomto počítači."
+    },
+    "english": "Příkazy jsou anglicky, ať je Kusema nastavená na jakýkoli jazyk.",
+    "support": "„select last sentence“, „select last paragraph“ a „select <words>“ potřebují aplikaci, která Kusemě dovolí číst její text, například Word, Outlook, Poznámkový blok nebo textové pole v Chrome či Edge. Ostatní používají standardní klávesy a fungují téměř všude.",
+    "commands": {
+      "selectLastWord": "Označí slovo před kurzorem.",
+      "selectLastWords": "Označí tolik slov před kurzorem, nejvýš 50.",
+      "selectLine": "Označí řádek, na kterém je kurzor.",
+      "selectAll": "Označí vše.",
+      "selectLastSentence": "Označí větu před kurzorem.",
+      "selectLastParagraph": "Označí odstavec před kurzorem.",
+      "selectPhrase": "Označí tato slova: nejbližší výskyt před kurzorem, jinak první za ním.",
+      "lineStart": "Přejde na začátek řádku.",
+      "lineEnd": "Přejde na konec řádku.",
+      "documentStart": "Přejde na začátek dokumentu.",
+      "documentEnd": "Přejde na konec dokumentu.",
+      "newParagraph": "Začne nový odstavec.",
+      "newLine": "Začne nový řádek.",
+      "deleteThat": "Smaže označený text.",
+      "undoThat": "Vrátí poslední změnu (Ctrl+Z).",
+      "copyThat": "Zkopíruje označený text.",
+      "cutThat": "Vyjme označený text.",
+      "pasteThat": "Vloží."
+    }
+  },
+  "voiceEdit": {
+    "notice": {
+      "noWindow": "Klikněte do textu, který chcete změnit, a zkuste to znovu.",
+      "unsupported": "Hlasové úpravy zatím fungují jen ve Windows.",
+      "selectFirst": "Nejdřív označte text, který chcete změnit.",
+      "nothingSelected": "Nic není označeno.",
+      "noTextPattern": "Tato aplikace nedovolí Kusemě hledat text hlasem. Označte ho myší nebo klávesnicí.",
+      "nothingBefore": "Před kurzorem není žádný text.",
+      "notFound": "„{{name}}“ se nenašlo.",
+      "windowChanged": "Okno se změnilo, takže se nic nezměnilo.",
+      "selectionChanged": "Označení se změnilo, takže se nic nenahradilo.",
+      "noChange": "Text nebylo třeba měnit.",
+      "emptyReply": "{{name}} vrátil prázdnou odpověď.",
+      "failed": "V tomto okně to nešlo."
+    }
   }
 }

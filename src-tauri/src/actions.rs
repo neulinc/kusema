@@ -470,12 +470,16 @@ impl ShortcutAction for TranscribeAction {
         // Kusema: a new recording interrupts a spoken reply; an assistant
         // question gets the voice ready while the user speaks.
         crate::tts::stop(app);
-        if self.assistant.is_some() {
+        if matches!(self.assistant, Some(AskMode::Plain | AskMode::Screen)) {
             crate::tts::prepare(app);
         }
         // The window is captured now, before any overlay of ours can cover it.
         // If there's nothing that can be captured, say why instead of recording.
         if self.assistant == Some(AskMode::Screen) && !crate::screen::capture_at_press(app) {
+            return;
+        }
+        // Kusema voice editing: the window and control with the caret, likewise.
+        if self.assistant == Some(AskMode::Edit) && !crate::voice_edit::at_press(app) {
             return;
         }
 
@@ -834,10 +838,12 @@ impl ShortcutAction for TranscribeAction {
                             // Save to history if WAV was saved
                             if wav_saved {
                                 // Kusema: only a marker, never the screenshot.
-                                let transcription = if assistant == Some(AskMode::Screen) {
-                                    format!("[screenshot] {transcription}")
-                                } else {
-                                    transcription
+                                let transcription = match assistant {
+                                    Some(AskMode::Screen) => {
+                                        format!("[screenshot] {transcription}")
+                                    }
+                                    Some(AskMode::Edit) => format!("[edit] {transcription}"),
+                                    _ => transcription,
                                 };
                                 if let Err(err) = hm.save_entry(
                                     file_name,
@@ -887,6 +893,14 @@ impl ShortcutAction for TranscribeAction {
                                         )
                                         .await
                                     }
+                                    AskMode::Edit => {
+                                        crate::voice_edit::handle(
+                                            &ah,
+                                            processed.final_text,
+                                            is_cancelled,
+                                        )
+                                        .await
+                                    }
                                 }
                                 // A reply still being spoken keeps the UI until it ends.
                                 if !rm.was_cancelled_since(cancel_generation)
@@ -918,9 +932,13 @@ impl ShortcutAction for TranscribeAction {
                                             return;
                                         }
 
+                                        let typed = final_text.clone();
                                         let outcome =
                                             match utils::paste(final_text, ah_clone.clone()) {
                                                 Ok(()) => {
+                                                    crate::voice_edit::note_pasted(
+                                                        &ah_clone, &typed,
+                                                    );
                                                     debug!(
                                                         "Text pasted successfully in {:?}",
                                                         paste_time.elapsed()
@@ -1086,6 +1104,13 @@ pub static ACTION_MAP: Lazy<HashMap<String, Arc<dyn ShortcutAction>>> = Lazy::ne
         Arc::new(TranscribeAction {
             post_process: false,
             assistant: Some(AskMode::Screen),
+        }) as Arc<dyn ShortcutAction>,
+    );
+    map.insert(
+        crate::voice_edit::BINDING.to_string(),
+        Arc::new(TranscribeAction {
+            post_process: false,
+            assistant: Some(AskMode::Edit),
         }) as Arc<dyn ShortcutAction>,
     );
     map.insert(

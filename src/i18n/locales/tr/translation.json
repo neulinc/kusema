@@ -442,6 +442,10 @@
           "toggle_privileged": {
             "name": "Privileged Modu",
             "description": "Privileged modunu açmak veya kapatmak için basın."
+          },
+          "voice_edit": {
+            "name": "Sesle düzenle",
+            "description": "Metni seçin, sonra kısayolu basılı tutup nasıl değişeceğini söyleyin (“bunu daha resmî yap”) ya da “select last word” gibi bir komut söyleyin."
           }
         },
         "errors": {
@@ -1211,7 +1215,8 @@
         "provider_models": "Bir sağlayıcının modellerini listeleme",
         "model_download": "Konuşma modeli indirme",
         "voice_download": "Ses indirme",
-        "update_check": "Güncelleme denetimi"
+        "update_check": "Güncelleme denetimi",
+        "voice_edit": "Sesle düzenleme"
       },
       "data": {
         "text": "Metin",
@@ -1314,6 +1319,15 @@
         "label": "Sürekli dikte sesleri",
         "description": "Sürekli dikte başlayıp durduğunda kısa bir ses çalar. Diğer dikteler için sesler aşağıda Ses bölümündedir."
       }
+    },
+    "voiceEdit": {
+      "title": "Sesle Düzenleme",
+      "description": "Her uygulamada metni sesinizle değiştirin. Metni seçin, kısayolu basılı tutun ve ne yapılacağını söyleyin. “select last word” gibi komutlar bu bilgisayarda kalır; “bunu kısalt” gibi talimatlar AI sağlayıcınıza gider.",
+      "preview": {
+        "label": "AI Düzenlemelerini Önizle",
+        "description": "Yeni metni eskisinin yerine geçmeden önce gösterir. Hızlı düzenlemeler için kapatın: uygulamada Ctrl+Z yine de geri alır."
+      },
+      "whatCanISay": "Ne söyleyebilirim?"
     }
   },
   "footer": {
@@ -1409,7 +1423,18 @@
     "send": "Gönder",
     "cancel": "İptal",
     "noticeTitle": "Kusema",
-    "close": "Kapat"
+    "close": "Kapat",
+    "edit": {
+      "title": "Seçili metin değiştirilsin mi?",
+      "instruction": "“{{instruction}}”",
+      "original": "Şimdi",
+      "replacement": "Yeni",
+      "by": "{{provider}} ile düzenlendi",
+      "richText": "Seçimdeki kalın yazı veya stiller gibi biçimlendirmeler kaybolabilir.",
+      "apply": "Değiştir",
+      "cancel": "İptal",
+      "keys": "Enter değiştirir, Esc iptal eder. Uygulamada Ctrl+Z geri alır."
+    }
   },
   "secureInput": {
     "blockedWithCulprit_one": "{{name}} 1 kısayolu engelliyor olabilir",
@@ -1421,5 +1446,60 @@
     "learnMore": "Bu nasıl düzeltilir",
     "recorderBlocked": "Şu anda kısayol kaydedilemiyor — macOS Secure Input tuş olaylarını engelliyor. Önce Secure Input uyarısını giderin.",
     "dismiss": "Kapat"
+  },
+  "voiceCommands": {
+    "title": "Ne söyleyebilirim?",
+    "intro": "Sesle düzenle kısayolunu ({{shortcut}}) basılı tutun ve bu komutlardan birini tek başına söyleyin. “Sürekli dikte sırasında da” işaretli komutlar orada da tek başına söylendiğinde çalışır.",
+    "close": "Kapat",
+    "inDictation": "Sürekli dikte sırasında da",
+    "groups": {
+      "select": "Seçme",
+      "move": "Gezinme",
+      "edit": "Düzenleme",
+      "ai": "AI ile değiştir"
+    },
+    "ai": {
+      "description": "Önce metni seçin ya da doğrudan dikte edin: hiçbir şey seçili değilse Kusema o pencereye en son yazdığı metni kullanır. Komut olmayan her şey AI sağlayıcınız için bir talimattır. Yalnızca istediğinizi değiştirir ve bilgi eklemez.",
+      "examples": "“bunu daha resmî yap”, “iki cümleye kısalt”, “madde işaretli listeye çevir”, “dilbilgisini düzelt”, “İngilizceye çevir”",
+      "privileged": "Privileged modunda yalnızca bu bilgisayardaki bir model kullanılabilir."
+    },
+    "english": "Komutlar, Kusema hangi dilde olursa olsun İngilizcedir.",
+    "support": "“select last sentence”, “select last paragraph” ve “select <words>”, Kusema'nın metni okuyabildiği bir uygulama gerektirir; örneğin Word, Outlook, Not Defteri ya da Chrome veya Edge'deki bir metin kutusu. Diğerleri standart tuşları kullanır ve neredeyse her yerde çalışır.",
+    "commands": {
+      "selectLastWord": "İmleçten önceki sözcüğü seçer.",
+      "selectLastWords": "İmleçten önceki o sayıda sözcüğü seçer, en fazla 50.",
+      "selectLine": "İmlecin bulunduğu satırı seçer.",
+      "selectAll": "Tümünü seçer.",
+      "selectLastSentence": "İmleçten önceki cümleyi seçer.",
+      "selectLastParagraph": "İmleçten önceki paragrafı seçer.",
+      "selectPhrase": "Bu sözcükleri seçer: imleçten önceki en yakın eşleşmeyi, yoksa sonraki ilkini.",
+      "lineStart": "Satırın başına gider.",
+      "lineEnd": "Satırın sonuna gider.",
+      "documentStart": "Belgenin başına gider.",
+      "documentEnd": "Belgenin sonuna gider.",
+      "newParagraph": "Yeni paragraf başlatır.",
+      "newLine": "Yeni satır başlatır.",
+      "deleteThat": "Seçimi siler.",
+      "undoThat": "Son değişikliği geri alır (Ctrl+Z).",
+      "copyThat": "Seçimi kopyalar.",
+      "cutThat": "Seçimi keser.",
+      "pasteThat": "Yapıştırır."
+    }
+  },
+  "voiceEdit": {
+    "notice": {
+      "noWindow": "Değiştirmek istediğiniz metne tıklayın ve yeniden deneyin.",
+      "unsupported": "Sesle düzenleme şimdilik yalnızca Windows'ta çalışıyor.",
+      "selectFirst": "Önce değiştirmek istediğiniz metni seçin.",
+      "nothingSelected": "Hiçbir şey seçili değil.",
+      "noTextPattern": "Bu uygulama Kusema'nın sesle metin bulmasına izin vermiyor. Metni fare veya klavyeyle seçin.",
+      "nothingBefore": "İmleçten önce metin yok.",
+      "notFound": "“{{name}}” bulunamadı.",
+      "windowChanged": "Pencere değişti, bu yüzden hiçbir şey değiştirilmedi.",
+      "selectionChanged": "Seçim değişti, bu yüzden hiçbir şey değiştirilmedi.",
+      "noChange": "Metnin değişmesi gerekmiyordu.",
+      "emptyReply": "{{name}} boş bir yanıt döndürdü.",
+      "failed": "Bu pencerede yapılamadı."
+    }
   }
 }

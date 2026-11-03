@@ -442,6 +442,10 @@
           "toggle_privileged": {
             "name": "Privileged-Modus",
             "description": "Drücken, um den Privileged-Modus ein- oder auszuschalten."
+          },
+          "voice_edit": {
+            "name": "Mit der Stimme bearbeiten",
+            "description": "Text markieren, dann gedrückt halten und sagen, wie er sich ändern soll („mach das förmlicher“), oder einen Befehl wie „select last word“ sagen."
           }
         },
         "errors": {
@@ -1211,7 +1215,8 @@
         "provider_models": "Modelle eines Anbieters abrufen",
         "model_download": "Download eines Sprachmodells",
         "voice_download": "Download einer Stimme",
-        "update_check": "Updateprüfung"
+        "update_check": "Updateprüfung",
+        "voice_edit": "Sprachbearbeitung"
       },
       "data": {
         "text": "Text",
@@ -1314,6 +1319,15 @@
         "label": "Töne beim fortlaufenden Diktieren",
         "description": "Einen kurzen Ton abspielen, wenn das fortlaufende Diktieren beginnt und endet. Töne für anderes Diktieren findest du unten unter Ton."
       }
+    },
+    "voiceEdit": {
+      "title": "Sprachbearbeitung",
+      "description": "Ändern Sie Text in jeder App mit der Stimme. Markieren Sie ihn, halten Sie das Tastenkürzel und sagen Sie, was geschehen soll. Befehle wie „select last word“ bleiben auf diesem Computer; Anweisungen wie „kürze das“ gehen an Ihren KI-Anbieter.",
+      "preview": {
+        "label": "KI-Änderungen vorher zeigen",
+        "description": "Zeigt den neuen Text, bevor er den alten ersetzt. Für schnelle Änderungen ausschalten: Strg+Z in der App macht sie trotzdem rückgängig."
+      },
+      "whatCanISay": "Was kann ich sagen?"
     }
   },
   "footer": {
@@ -1409,7 +1423,18 @@
     "send": "Senden",
     "cancel": "Abbrechen",
     "noticeTitle": "Kusema",
-    "close": "Schließen"
+    "close": "Schließen",
+    "edit": {
+      "title": "Markierten Text ersetzen?",
+      "instruction": "„{{instruction}}“",
+      "original": "Jetzt",
+      "replacement": "Neu",
+      "by": "Bearbeitet von {{provider}}",
+      "richText": "Formatierungen wie Fett oder Formatvorlagen in der Markierung können verloren gehen.",
+      "apply": "Ersetzen",
+      "cancel": "Abbrechen",
+      "keys": "Enter ersetzt, Esc bricht ab. Strg+Z in der App macht es rückgängig."
+    }
   },
   "secureInput": {
     "blockedWithCulprit_one": "{{name}} blockiert möglicherweise 1 Tastenkürzel",
@@ -1421,5 +1446,60 @@
     "learnMore": "So behebst du das",
     "recorderBlocked": "Tastenkürzel können gerade nicht aufgezeichnet werden — macOS Secure Input blockiert Tastenereignisse. Behebe zuerst die Secure-Input-Warnung.",
     "dismiss": "Ausblenden"
+  },
+  "voiceCommands": {
+    "title": "Was kann ich sagen?",
+    "intro": "Halten Sie das Tastenkürzel „Mit der Stimme bearbeiten“ ({{shortcut}}) und sagen Sie einen dieser Befehle für sich allein. Befehle mit dem Hinweis „Auch beim fortlaufenden Diktat“ funktionieren dort ebenfalls, wenn sie allein gesagt werden.",
+    "close": "Schließen",
+    "inDictation": "Auch beim fortlaufenden Diktat",
+    "groups": {
+      "select": "Markieren",
+      "move": "Bewegen",
+      "edit": "Bearbeiten",
+      "ai": "Mit KI ändern"
+    },
+    "ai": {
+      "description": "Markieren Sie zuerst Text oder diktieren Sie einfach: Ist nichts markiert, verwendet Kusema den Text, den es zuletzt in diesem Fenster geschrieben hat. Alles, was kein Befehl ist, ist eine Anweisung an Ihren KI-Anbieter. Er ändert nur, worum Sie bitten, und fügt keine Fakten hinzu.",
+      "examples": "„mach das förmlicher“, „kürze auf zwei Sätze“, „mach daraus eine Aufzählung“, „korrigiere die Grammatik“, „übersetze ins Spanische“",
+      "privileged": "Im Privileged-Modus kann nur ein Modell auf diesem Computer verwendet werden."
+    },
+    "english": "Die Befehle sind auf Englisch, egal in welcher Sprache Kusema eingestellt ist.",
+    "support": "„select last sentence“, „select last paragraph“ und „select <words>“ brauchen eine App, in der Kusema den Text lesen kann, etwa Word, Outlook, Editor oder ein Textfeld in Chrome oder Edge. Die anderen nutzen Standardtasten und funktionieren fast überall.",
+    "commands": {
+      "selectLastWord": "Markiert das Wort vor dem Cursor.",
+      "selectLastWords": "Markiert so viele Wörter vor dem Cursor, bis zu 50.",
+      "selectLine": "Markiert die Zeile, in der der Cursor steht.",
+      "selectAll": "Markiert alles.",
+      "selectLastSentence": "Markiert den Satz vor dem Cursor.",
+      "selectLastParagraph": "Markiert den Absatz vor dem Cursor.",
+      "selectPhrase": "Markiert diese Wörter: den nächsten Treffer vor dem Cursor oder sonst den ersten danach.",
+      "lineStart": "Springt an den Zeilenanfang.",
+      "lineEnd": "Springt an das Zeilenende.",
+      "documentStart": "Springt an den Anfang des Dokuments.",
+      "documentEnd": "Springt an das Ende des Dokuments.",
+      "newParagraph": "Beginnt einen neuen Absatz.",
+      "newLine": "Beginnt eine neue Zeile.",
+      "deleteThat": "Löscht die Markierung.",
+      "undoThat": "Macht die letzte Änderung rückgängig (Strg+Z).",
+      "copyThat": "Kopiert die Markierung.",
+      "cutThat": "Schneidet die Markierung aus.",
+      "pasteThat": "Fügt ein."
+    }
+  },
+  "voiceEdit": {
+    "notice": {
+      "noWindow": "Klicken Sie in den Text, den Sie ändern möchten, und versuchen Sie es dann erneut.",
+      "unsupported": "Sprachbearbeitung funktioniert vorerst nur unter Windows.",
+      "selectFirst": "Markieren Sie zuerst den Text, den Sie ändern möchten.",
+      "nothingSelected": "Es ist nichts markiert.",
+      "noTextPattern": "In dieser App kann Kusema keinen Text per Sprache finden. Markieren Sie ihn stattdessen mit Maus oder Tastatur.",
+      "nothingBefore": "Vor dem Cursor steht kein Text.",
+      "notFound": "„{{name}}“ wurde nicht gefunden.",
+      "windowChanged": "Das Fenster hat gewechselt, daher wurde nichts geändert.",
+      "selectionChanged": "Die Markierung hat sich geändert, daher wurde nichts ersetzt.",
+      "noChange": "Der Text musste nicht geändert werden.",
+      "emptyReply": "{{name}} hat eine leere Antwort geliefert.",
+      "failed": "Das ging in diesem Fenster nicht."
+    }
   }
 }

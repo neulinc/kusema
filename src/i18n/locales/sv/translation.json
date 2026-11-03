@@ -442,6 +442,10 @@
           "toggle_privileged": {
             "name": "Privileged-läge",
             "description": "Tryck för att slå på eller av Privileged-läget."
+          },
+          "voice_edit": {
+            "name": "Redigera med rösten",
+            "description": "Markera text, håll sedan ned kortkommandot och säg hur den ska ändras (“gör det här mer formellt”), eller säg ett kommando som “select last word”."
           }
         },
         "errors": {
@@ -1211,7 +1215,8 @@
         "provider_models": "Hämta en leverantörs modeller",
         "model_download": "Nedladdning av talmodell",
         "voice_download": "Nedladdning av röst",
-        "update_check": "Uppdateringskontroll"
+        "update_check": "Uppdateringskontroll",
+        "voice_edit": "Röstredigering"
       },
       "data": {
         "text": "Text",
@@ -1314,6 +1319,15 @@
         "label": "Ljud vid löpande diktat",
         "description": "Spela ett kort ljud när löpande diktat startar och slutar. Ljud för annat diktat finns under Ljud längre ned."
       }
+    },
+    "voiceEdit": {
+      "title": "Röstredigering",
+      "description": "Ändra text i valfri app med rösten. Markera den, håll ned kortkommandot och säg vad som ska göras. Kommandon som “select last word” stannar på den här datorn; instruktioner som “korta ned det här” går till din AI-leverantör.",
+      "preview": {
+        "label": "Förhandsgranska AI-ändringar",
+        "description": "Visar den nya texten innan den ersätter den gamla. Stäng av för snabba ändringar: Ctrl+Z i appen ångrar dem ändå."
+      },
+      "whatCanISay": "Vad kan jag säga?"
     }
   },
   "footer": {
@@ -1409,7 +1423,18 @@
     "send": "Skicka",
     "cancel": "Avbryt",
     "noticeTitle": "Kusema",
-    "close": "Stäng"
+    "close": "Stäng",
+    "edit": {
+      "title": "Ersätta den markerade texten?",
+      "instruction": "“{{instruction}}”",
+      "original": "Nu",
+      "replacement": "Nytt",
+      "by": "Redigerat av {{provider}}",
+      "richText": "Formatering som fetstil eller formatmallar i markeringen kan försvinna.",
+      "apply": "Ersätt",
+      "cancel": "Avbryt",
+      "keys": "Enter ersätter, Esc avbryter. Ctrl+Z i appen ångrar det."
+    }
   },
   "secureInput": {
     "blockedWithCulprit_one": "{{name}} kanske blockerar 1 kortkommando",
@@ -1421,5 +1446,60 @@
     "learnMore": "Så här löser du det",
     "recorderBlocked": "Det går inte att spela in kortkommandon just nu — macOS Secure Input blockerar tangenthändelser. Lös varningen om Secure Input först.",
     "dismiss": "Avfärda"
+  },
+  "voiceCommands": {
+    "title": "Vad kan jag säga?",
+    "intro": "Håll ned kortkommandot Redigera med rösten ({{shortcut}}) och säg ett av de här kommandona, för sig självt. Kommandon märkta “Även vid löpande diktering” fungerar där också när de sägs för sig själva.",
+    "close": "Stäng",
+    "inDictation": "Även vid löpande diktering",
+    "groups": {
+      "select": "Markera",
+      "move": "Flytta",
+      "edit": "Redigera",
+      "ai": "Ändra med AI"
+    },
+    "ai": {
+      "description": "Markera text först, eller diktera bara: om inget är markerat använder Kusema den senaste text det skrev i det fönstret. Allt som inte är ett kommando är en instruktion till din AI-leverantör. Den ändrar bara det du ber om och lägger inte till fakta.",
+      "examples": "“gör det här mer formellt”, “korta till två meningar”, “gör om till en punktlista”, “rätta grammatiken”, “översätt till spanska”",
+      "privileged": "I Privileged-läge kan bara en modell på den här datorn användas."
+    },
+    "english": "Kommandona är på engelska, oavsett vilket språk Kusema använder.",
+    "support": "“select last sentence”, “select last paragraph” och “select <words>” kräver en app som låter Kusema läsa dess text, till exempel Word, Outlook, Anteckningar eller en textruta i Chrome eller Edge. De andra använder vanliga tangenter och fungerar nästan överallt.",
+    "commands": {
+      "selectLastWord": "Markerar ordet före markören.",
+      "selectLastWords": "Markerar så många ord före markören, upp till 50.",
+      "selectLine": "Markerar raden som markören står på.",
+      "selectAll": "Markerar allt.",
+      "selectLastSentence": "Markerar meningen före markören.",
+      "selectLastParagraph": "Markerar stycket före markören.",
+      "selectPhrase": "Markerar de orden: närmaste träff före markören, annars den första efter.",
+      "lineStart": "Går till början av raden.",
+      "lineEnd": "Går till slutet av raden.",
+      "documentStart": "Går till början av dokumentet.",
+      "documentEnd": "Går till slutet av dokumentet.",
+      "newParagraph": "Börjar ett nytt stycke.",
+      "newLine": "Börjar en ny rad.",
+      "deleteThat": "Tar bort markeringen.",
+      "undoThat": "Ångrar den senaste ändringen (Ctrl+Z).",
+      "copyThat": "Kopierar markeringen.",
+      "cutThat": "Klipper ut markeringen.",
+      "pasteThat": "Klistrar in."
+    }
+  },
+  "voiceEdit": {
+    "notice": {
+      "noWindow": "Klicka i texten du vill ändra och försök sedan igen.",
+      "unsupported": "Röstredigering fungerar bara i Windows än så länge.",
+      "selectFirst": "Markera först texten du vill ändra.",
+      "nothingSelected": "Inget är markerat.",
+      "noTextPattern": "Den här appen låter inte Kusema hitta text med rösten. Markera den med musen eller tangentbordet i stället.",
+      "nothingBefore": "Det finns ingen text före markören.",
+      "notFound": "Hittade inte “{{name}}”.",
+      "windowChanged": "Fönstret bytte, så inget ändrades.",
+      "selectionChanged": "Markeringen ändrades, så inget ersattes.",
+      "noChange": "Texten behövde inte ändras.",
+      "emptyReply": "{{name}} gav ett tomt svar.",
+      "failed": "Det gick inte i det här fönstret."
+    }
   }
 }

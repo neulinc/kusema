@@ -442,6 +442,10 @@
           "toggle_privileged": {
             "name": "Mode Privileged",
             "description": "Tekan untuk mengaktifkan atau menonaktifkan mode Privileged."
+          },
+          "voice_edit": {
+            "name": "Edit dengan suara",
+            "description": "Pilih teks, lalu tahan pintasan dan ucapkan cara mengubahnya (“buat ini lebih formal”), atau ucapkan perintah seperti “select last word”."
           }
         },
         "errors": {
@@ -1211,7 +1215,8 @@
         "provider_models": "Mengambil daftar model penyedia",
         "model_download": "Unduhan model ucapan",
         "voice_download": "Unduhan suara",
-        "update_check": "Pemeriksaan pembaruan"
+        "update_check": "Pemeriksaan pembaruan",
+        "voice_edit": "Edit suara"
       },
       "data": {
         "text": "Teks",
@@ -1314,6 +1319,15 @@
         "label": "Suara dikte berkelanjutan",
         "description": "Putar suara singkat saat dikte berkelanjutan dimulai dan berhenti. Suara untuk dikte lainnya ada di bagian Suara di bawah."
       }
+    },
+    "voiceEdit": {
+      "title": "Edit Suara",
+      "description": "Ubah teks di aplikasi apa pun dengan suara. Pilih teksnya, tahan pintasan, lalu ucapkan apa yang harus dilakukan. Perintah seperti “select last word” tetap di komputer ini; instruksi seperti “persingkat ini” dikirim ke penyedia AI Anda.",
+      "preview": {
+        "label": "Pratinjau Edit AI",
+        "description": "Menampilkan teks baru sebelum menggantikan yang lama. Matikan untuk edit cepat: Ctrl+Z di aplikasi tetap membatalkannya."
+      },
+      "whatCanISay": "Apa yang bisa saya ucapkan?"
     }
   },
   "footer": {
@@ -1409,7 +1423,18 @@
     "send": "Kirim",
     "cancel": "Batal",
     "noticeTitle": "Kusema",
-    "close": "Tutup"
+    "close": "Tutup",
+    "edit": {
+      "title": "Ganti teks yang dipilih?",
+      "instruction": "“{{instruction}}”",
+      "original": "Sekarang",
+      "replacement": "Baru",
+      "by": "Diedit oleh {{provider}}",
+      "richText": "Format seperti tebal atau gaya pada pilihan mungkin hilang.",
+      "apply": "Ganti",
+      "cancel": "Batal",
+      "keys": "Enter mengganti, Esc membatalkan. Ctrl+Z di aplikasi membatalkannya."
+    }
   },
   "secureInput": {
     "blockedWithCulprit_one": "{{name}} mungkin memblokir 1 pintasan",
@@ -1421,5 +1446,60 @@
     "learnMore": "Cara memperbaiki",
     "recorderBlocked": "Pintasan tidak dapat direkam saat ini — macOS Secure Input memblokir peristiwa tombol. Selesaikan peringatan Secure Input terlebih dahulu.",
     "dismiss": "Tutup"
+  },
+  "voiceCommands": {
+    "title": "Apa yang bisa saya ucapkan?",
+    "intro": "Tahan pintasan Edit dengan suara ({{shortcut}}) dan ucapkan salah satu perintah ini, sendiri saja. Perintah bertanda “Juga saat dikte berkelanjutan” juga berfungsi di sana jika diucapkan sendiri.",
+    "close": "Tutup",
+    "inDictation": "Juga saat dikte berkelanjutan",
+    "groups": {
+      "select": "Memilih",
+      "move": "Berpindah",
+      "edit": "Mengedit",
+      "ai": "Ubah dengan AI"
+    },
+    "ai": {
+      "description": "Pilih teks dulu, atau langsung saja mendikte: jika tidak ada yang dipilih, Kusema memakai teks terakhir yang diketiknya di jendela itu. Semua yang bukan perintah adalah instruksi untuk penyedia AI Anda. Ia hanya mengubah yang Anda minta dan tidak menambahkan fakta.",
+      "examples": "“buat ini lebih formal”, “persingkat jadi dua kalimat”, “ubah jadi poin-poin”, “perbaiki tata bahasanya”, “terjemahkan ke bahasa Inggris”",
+      "privileged": "Dalam mode Privileged, hanya model di komputer ini yang dapat digunakan."
+    },
+    "english": "Perintahnya dalam bahasa Inggris, apa pun bahasa Kusema.",
+    "support": "“select last sentence”, “select last paragraph”, dan “select <words>” memerlukan aplikasi yang mengizinkan Kusema membaca teksnya, seperti Word, Outlook, Notepad, atau kotak teks di Chrome atau Edge. Yang lain memakai tombol standar dan berfungsi hampir di mana saja.",
+    "commands": {
+      "selectLastWord": "Memilih kata sebelum kursor.",
+      "selectLastWords": "Memilih sejumlah kata sebelum kursor, hingga 50.",
+      "selectLine": "Memilih baris tempat kursor berada.",
+      "selectAll": "Memilih semuanya.",
+      "selectLastSentence": "Memilih kalimat sebelum kursor.",
+      "selectLastParagraph": "Memilih paragraf sebelum kursor.",
+      "selectPhrase": "Memilih kata-kata itu: kecocokan terdekat sebelum kursor, atau yang pertama sesudahnya.",
+      "lineStart": "Pindah ke awal baris.",
+      "lineEnd": "Pindah ke akhir baris.",
+      "documentStart": "Pindah ke awal dokumen.",
+      "documentEnd": "Pindah ke akhir dokumen.",
+      "newParagraph": "Memulai paragraf baru.",
+      "newLine": "Memulai baris baru.",
+      "deleteThat": "Menghapus pilihan.",
+      "undoThat": "Membatalkan perubahan terakhir (Ctrl+Z).",
+      "copyThat": "Menyalin pilihan.",
+      "cutThat": "Memotong pilihan.",
+      "pasteThat": "Menempel."
+    }
+  },
+  "voiceEdit": {
+    "notice": {
+      "noWindow": "Klik di teks yang ingin Anda ubah, lalu coba lagi.",
+      "unsupported": "Untuk saat ini, edit suara hanya berfungsi di Windows.",
+      "selectFirst": "Pilih dulu teks yang ingin Anda ubah.",
+      "nothingSelected": "Tidak ada yang dipilih.",
+      "noTextPattern": "Aplikasi ini tidak mengizinkan Kusema menemukan teks dengan suara. Pilih dengan mouse atau keyboard saja.",
+      "nothingBefore": "Tidak ada teks sebelum kursor.",
+      "notFound": "Tidak menemukan “{{name}}”.",
+      "windowChanged": "Jendelanya berganti, jadi tidak ada yang diubah.",
+      "selectionChanged": "Pilihannya berubah, jadi tidak ada yang diganti.",
+      "noChange": "Teks tidak perlu diubah.",
+      "emptyReply": "{{name}} memberikan balasan kosong.",
+      "failed": "Tidak bisa melakukannya di jendela ini."
+    }
   }
 }

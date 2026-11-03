@@ -442,6 +442,10 @@
           "toggle_privileged": {
             "name": "Privileged 모드",
             "description": "눌러서 Privileged 모드를 켜거나 끕니다."
+          },
+          "voice_edit": {
+            "name": "음성으로 편집",
+            "description": "텍스트를 선택한 뒤 단축키를 누른 채 바꿀 방법을 말하거나(“더 격식 있게 바꿔 줘”), “select last word” 같은 명령을 말하세요."
           }
         },
         "errors": {
@@ -1211,7 +1215,8 @@
         "provider_models": "제공업체 모델 목록 가져오기",
         "model_download": "음성 인식 모델 다운로드",
         "voice_download": "음성 다운로드",
-        "update_check": "업데이트 확인"
+        "update_check": "업데이트 확인",
+        "voice_edit": "음성 편집"
       },
       "data": {
         "text": "텍스트",
@@ -1314,6 +1319,15 @@
         "label": "연속 받아쓰기 소리",
         "description": "연속 받아쓰기가 시작하고 끝날 때 짧은 소리를 냅니다. 다른 받아쓰기 소리는 아래 사운드에 있습니다."
       }
+    },
+    "voiceEdit": {
+      "title": "음성 편집",
+      "description": "어떤 앱에서든 음성으로 텍스트를 바꿀 수 있습니다. 텍스트를 선택하고 단축키를 누른 채 무엇을 할지 말하세요. “select last word” 같은 명령은 이 컴퓨터에서 처리되고, “이걸 줄여 줘” 같은 지시는 AI 제공업체로 전송됩니다.",
+      "preview": {
+        "label": "AI 편집 미리 보기",
+        "description": "새 텍스트가 기존 텍스트를 바꾸기 전에 보여 줍니다. 빠르게 편집하려면 끄세요. 앱에서 Ctrl+Z를 누르면 여전히 되돌릴 수 있습니다."
+      },
+      "whatCanISay": "무엇을 말할 수 있나요?"
     }
   },
   "footer": {
@@ -1409,7 +1423,18 @@
     "send": "보내기",
     "cancel": "취소",
     "noticeTitle": "Kusema",
-    "close": "닫기"
+    "close": "닫기",
+    "edit": {
+      "title": "선택한 텍스트를 바꿀까요?",
+      "instruction": "“{{instruction}}”",
+      "original": "현재",
+      "replacement": "변경 후",
+      "by": "{{provider}}(으)로 편집함",
+      "richText": "선택 영역의 굵게나 스타일 같은 서식이 사라질 수 있습니다.",
+      "apply": "바꾸기",
+      "cancel": "취소",
+      "keys": "Enter는 바꾸기, Esc는 취소. 앱에서 Ctrl+Z로 되돌릴 수 있습니다."
+    }
   },
   "secureInput": {
     "blockedWithCulprit_one": "{{name}}이(가) 단축키 1개를 차단하고 있을 수 있습니다",
@@ -1421,5 +1446,60 @@
     "learnMore": "해결 방법",
     "recorderBlocked": "지금은 단축키를 등록할 수 없습니다. macOS Secure Input이 키 이벤트를 차단하고 있습니다. Secure Input 경고를 먼저 해결하세요.",
     "dismiss": "닫기"
+  },
+  "voiceCommands": {
+    "title": "무엇을 말할 수 있나요?",
+    "intro": "음성으로 편집 단축키({{shortcut}})를 누른 채 다음 중 하나만 말하세요. “연속 받아쓰기에서도 사용 가능”으로 표시된 명령은 단독으로 말하면 그곳에서도 작동합니다.",
+    "close": "닫기",
+    "inDictation": "연속 받아쓰기에서도 사용 가능",
+    "groups": {
+      "select": "선택",
+      "move": "이동",
+      "edit": "편집",
+      "ai": "AI로 바꾸기"
+    },
+    "ai": {
+      "description": "먼저 텍스트를 선택하거나 그냥 받아쓰세요. 선택된 것이 없으면 Kusema는 그 창에 마지막으로 입력한 텍스트를 사용합니다. 명령이 아닌 말은 모두 AI 제공업체에 대한 지시입니다. 요청한 부분만 바꾸고 사실을 덧붙이지 않습니다.",
+      "examples": "“더 격식 있게 바꿔 줘”, “두 문장으로 줄여 줘”, “글머리 기호 목록으로 만들어 줘”, “문법을 고쳐 줘”, “영어로 번역해 줘”",
+      "privileged": "Privileged 모드에서는 이 컴퓨터에 있는 모델만 사용할 수 있습니다."
+    },
+    "english": "명령은 Kusema의 언어 설정과 관계없이 영어입니다.",
+    "support": "“select last sentence”, “select last paragraph”, “select <words>”는 Word, Outlook, 메모장, Chrome이나 Edge의 텍스트 상자처럼 Kusema가 텍스트를 읽을 수 있는 앱에서 작동합니다. 나머지는 표준 키를 사용하므로 거의 어디서나 작동합니다.",
+    "commands": {
+      "selectLastWord": "커서 앞의 단어를 선택합니다.",
+      "selectLastWords": "커서 앞의 그 수만큼의 단어를 선택합니다(최대 50개).",
+      "selectLine": "커서가 있는 줄을 선택합니다.",
+      "selectAll": "모두 선택합니다.",
+      "selectLastSentence": "커서 앞의 문장을 선택합니다.",
+      "selectLastParagraph": "커서 앞의 단락을 선택합니다.",
+      "selectPhrase": "그 단어들을 선택합니다. 커서 앞에서 가장 가까운 것, 없으면 뒤에서 처음 나오는 것입니다.",
+      "lineStart": "줄의 처음으로 이동합니다.",
+      "lineEnd": "줄의 끝으로 이동합니다.",
+      "documentStart": "문서의 처음으로 이동합니다.",
+      "documentEnd": "문서의 끝으로 이동합니다.",
+      "newParagraph": "새 단락을 시작합니다.",
+      "newLine": "새 줄을 시작합니다.",
+      "deleteThat": "선택한 부분을 삭제합니다.",
+      "undoThat": "마지막 변경을 실행 취소합니다(Ctrl+Z).",
+      "copyThat": "선택한 부분을 복사합니다.",
+      "cutThat": "선택한 부분을 잘라냅니다.",
+      "pasteThat": "붙여 넣습니다."
+    }
+  },
+  "voiceEdit": {
+    "notice": {
+      "noWindow": "바꾸려는 텍스트를 클릭한 다음 다시 시도하세요.",
+      "unsupported": "음성 편집은 현재 Windows에서만 작동합니다.",
+      "selectFirst": "먼저 바꾸려는 텍스트를 선택하세요.",
+      "nothingSelected": "선택된 것이 없습니다.",
+      "noTextPattern": "이 앱에서는 Kusema가 음성으로 텍스트를 찾을 수 없습니다. 마우스나 키보드로 선택하세요.",
+      "nothingBefore": "커서 앞에 텍스트가 없습니다.",
+      "notFound": "“{{name}}”을(를) 찾지 못했습니다.",
+      "windowChanged": "창이 바뀌어서 아무것도 변경하지 않았습니다.",
+      "selectionChanged": "선택 영역이 바뀌어서 아무것도 바꾸지 않았습니다.",
+      "noChange": "텍스트를 바꿀 필요가 없었습니다.",
+      "emptyReply": "{{name}}에서 빈 응답이 왔습니다.",
+      "failed": "이 창에서는 할 수 없었습니다."
+    }
   }
 }

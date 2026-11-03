@@ -149,6 +149,8 @@ windows = { version = "0.61.3", features = [
   # Kusema: continuous dictation (detects keyboard and mouse use for "scratch that")
   "Win32_System_SystemInformation",
   "Win32_UI_Input_KeyboardAndMouse",
+  # Kusema: voice editing reads and selects text through UI Automation
+  "Win32_UI_Accessibility",
 ] }
 winreg = "0.55"
 # Kusema: unpacks the ONNX Runtime archive for Kokoro voices

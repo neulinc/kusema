@@ -55,6 +55,23 @@ pub struct CapturedWindow {
     pub rect: ScreenRect,
 }
 
+impl CapturedWindow {
+    pub fn handle(&self) -> isize {
+        self.handle
+    }
+}
+
+/// Kusema voice editing: the window in front, to put cards beside and give
+/// focus back to, refusing the same windows a screenshot would.
+pub fn foreground_target() -> Result<CapturedWindow, CaptureError> {
+    capture::foreground_window()
+}
+
+/// Give focus back to `window`.
+pub fn activate(window: &CapturedWindow) {
+    restore_focus(window);
+}
+
 /// A screenshot of one window, as captured.
 pub struct Capture {
     pub image: RgbImage,

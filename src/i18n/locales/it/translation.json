@@ -444,6 +444,10 @@
           "toggle_privileged": {
             "name": "Modalità Privileged",
             "description": "Premi per attivare o disattivare la modalità Privileged."
+          },
+          "voice_edit": {
+            "name": "Modifica a voce",
+            "description": "Seleziona il testo, poi tieni premuta la scorciatoia e di' come cambiarlo («rendilo più formale»), oppure di' un comando come «select last word»."
           }
         },
         "errors": {
@@ -1214,7 +1218,8 @@
         "provider_models": "Elenco dei modelli di un fornitore",
         "model_download": "Download di un modello vocale",
         "voice_download": "Download di una voce",
-        "update_check": "Controllo degli aggiornamenti"
+        "update_check": "Controllo degli aggiornamenti",
+        "voice_edit": "Modifica vocale"
       },
       "data": {
         "text": "Testo",
@@ -1320,6 +1325,15 @@
         "label": "Suoni della dettatura continua",
         "description": "Riproduce un breve suono quando la dettatura continua inizia e finisce. I suoni delle altre dettature sono in Suono, più in basso."
       }
+    },
+    "voiceEdit": {
+      "title": "Modifica vocale",
+      "description": "Cambia il testo in qualsiasi app con la voce. Selezionalo, tieni premuta la scorciatoia e di' cosa fare. Comandi come «select last word» restano su questo computer; istruzioni come «accorcialo» vanno al tuo fornitore di IA.",
+      "preview": {
+        "label": "Anteprima delle modifiche IA",
+        "description": "Mostra il nuovo testo prima che sostituisca il vecchio. Disattiva per modifiche rapide: Ctrl+Z nell'app le annulla comunque."
+      },
+      "whatCanISay": "Cosa posso dire?"
     }
   },
   "footer": {
@@ -1415,7 +1429,18 @@
     "send": "Invia",
     "cancel": "Annulla",
     "noticeTitle": "Kusema",
-    "close": "Chiudi"
+    "close": "Chiudi",
+    "edit": {
+      "title": "Sostituire il testo selezionato?",
+      "instruction": "«{{instruction}}»",
+      "original": "Ora",
+      "replacement": "Nuovo",
+      "by": "Modificato da {{provider}}",
+      "richText": "La formattazione della selezione, come il grassetto o gli stili, potrebbe andare persa.",
+      "apply": "Sostituisci",
+      "cancel": "Annulla",
+      "keys": "Invio sostituisce, Esc annulla. Ctrl+Z nell'app lo annulla."
+    }
   },
   "secureInput": {
     "blockedWithCulprit_one": "{{name}} potrebbe bloccare 1 scorciatoia",
@@ -1429,5 +1454,60 @@
     "learnMore": "Come risolvere",
     "recorderBlocked": "Non è possibile registrare scorciatoie in questo momento: Secure Input di macOS sta bloccando gli eventi dei tasti. Risolvi prima l'avviso di Secure Input.",
     "dismiss": "Ignora"
+  },
+  "voiceCommands": {
+    "title": "Cosa posso dire?",
+    "intro": "Tieni premuta la scorciatoia Modifica a voce ({{shortcut}}) e di' uno di questi comandi, da solo. Quelli contrassegnati con «Anche nella dettatura continua» funzionano anche lì se detti da soli.",
+    "close": "Chiudi",
+    "inDictation": "Anche nella dettatura continua",
+    "groups": {
+      "select": "Selezionare",
+      "move": "Spostarsi",
+      "edit": "Modificare",
+      "ai": "Cambiarlo con l'IA"
+    },
+    "ai": {
+      "description": "Seleziona prima il testo, oppure detta e basta: se non c'è nulla di selezionato, Kusema usa l'ultimo testo che ha scritto in quella finestra. Tutto ciò che non è un comando è un'istruzione per il tuo fornitore di IA. Cambia solo ciò che chiedi e non aggiunge fatti.",
+      "examples": "«rendilo più formale», «riducilo a due frasi», «trasformalo in un elenco puntato», «correggi la grammatica», «traducilo in spagnolo»",
+      "privileged": "In modalità Privileged si può usare solo un modello su questo computer."
+    },
+    "english": "I comandi sono in inglese, qualunque sia la lingua di Kusema.",
+    "support": "«select last sentence», «select last paragraph» e «select <words>» richiedono un'app che permetta a Kusema di leggerne il testo, come Word, Outlook, Blocco note o una casella di testo in Chrome o Edge. Gli altri usano tasti standard e funzionano quasi ovunque.",
+    "commands": {
+      "selectLastWord": "Seleziona la parola prima del cursore.",
+      "selectLastWords": "Seleziona quel numero di parole prima del cursore, fino a 50.",
+      "selectLine": "Seleziona la riga del cursore.",
+      "selectAll": "Seleziona tutto.",
+      "selectLastSentence": "Seleziona la frase prima del cursore.",
+      "selectLastParagraph": "Seleziona il paragrafo prima del cursore.",
+      "selectPhrase": "Seleziona quelle parole: la corrispondenza più vicina prima del cursore, altrimenti la prima dopo.",
+      "lineStart": "Va all'inizio della riga.",
+      "lineEnd": "Va alla fine della riga.",
+      "documentStart": "Va all'inizio del documento.",
+      "documentEnd": "Va alla fine del documento.",
+      "newParagraph": "Inizia un nuovo paragrafo.",
+      "newLine": "Inizia una nuova riga.",
+      "deleteThat": "Elimina la selezione.",
+      "undoThat": "Annulla l'ultima modifica (Ctrl+Z).",
+      "copyThat": "Copia la selezione.",
+      "cutThat": "Taglia la selezione.",
+      "pasteThat": "Incolla."
+    }
+  },
+  "voiceEdit": {
+    "notice": {
+      "noWindow": "Fai clic nel testo che vuoi cambiare, poi riprova.",
+      "unsupported": "Per ora la modifica vocale funziona solo su Windows.",
+      "selectFirst": "Seleziona prima il testo che vuoi cambiare.",
+      "nothingSelected": "Non è selezionato nulla.",
+      "noTextPattern": "Questa app non permette a Kusema di trovare il testo a voce. Selezionalo con il mouse o la tastiera.",
+      "nothingBefore": "Non c'è testo prima del cursore.",
+      "notFound": "«{{name}}» non trovato.",
+      "windowChanged": "La finestra è cambiata, quindi non è stato modificato nulla.",
+      "selectionChanged": "La selezione è cambiata, quindi non è stato sostituito nulla.",
+      "noChange": "Il testo non aveva bisogno di modifiche.",
+      "emptyReply": "{{name}} ha restituito una risposta vuota.",
+      "failed": "Impossibile farlo in questa finestra."
+    }
   }
 }

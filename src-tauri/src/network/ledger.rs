@@ -14,6 +14,8 @@ pub enum Purpose {
     AssistantQuestion,
     ScreenQuestion,
     PostProcessing,
+    /// Voice editing: the selected text and the spoken instruction.
+    VoiceEdit,
     /// Listing a provider's models in the settings: the API key, no content.
     ProviderModels,
     ModelDownload,
@@ -27,6 +29,7 @@ impl Purpose {
             Purpose::AssistantQuestion => "assistant_question",
             Purpose::ScreenQuestion => "screen_question",
             Purpose::PostProcessing => "post_processing",
+            Purpose::VoiceEdit => "voice_edit",
             Purpose::ProviderModels => "provider_models",
             Purpose::ModelDownload => "model_download",
             Purpose::VoiceDownload => "voice_download",
@@ -39,6 +42,7 @@ impl Purpose {
             "assistant_question" => Purpose::AssistantQuestion,
             "screen_question" => Purpose::ScreenQuestion,
             "post_processing" => Purpose::PostProcessing,
+            "voice_edit" => Purpose::VoiceEdit,
             "provider_models" => Purpose::ProviderModels,
             "model_download" => Purpose::ModelDownload,
             "voice_download" => Purpose::VoiceDownload,

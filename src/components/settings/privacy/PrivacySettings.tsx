@@ -25,6 +25,7 @@ const PURPOSES: Purpose[] = [
   "assistant_question",
   "screen_question",
   "post_processing",
+  "voice_edit",
   "provider_models",
   "model_download",
   "voice_download",

@@ -442,6 +442,10 @@
           "toggle_privileged": {
             "name": "Privileged 模式",
             "description": "按下可開啟或關閉 Privileged 模式。"
+          },
+          "voice_edit": {
+            "name": "語音編輯",
+            "description": "選取文字，然後按住快速鍵說出要怎麼修改（「改得更正式一點」），或說一個指令，例如「select last word」。"
           }
         },
         "errors": {
@@ -1211,7 +1215,8 @@
         "provider_models": "取得供應商的模型清單",
         "model_download": "下載語音辨識模型",
         "voice_download": "下載語音",
-        "update_check": "檢查更新"
+        "update_check": "檢查更新",
+        "voice_edit": "語音編輯"
       },
       "data": {
         "text": "文字",
@@ -1314,6 +1319,15 @@
         "label": "連續聽寫提示音",
         "description": "連續聽寫開始和停止時播放簡短提示音。其他聽寫的提示音在下方的「聲音」中。"
       }
+    },
+    "voiceEdit": {
+      "title": "語音編輯",
+      "description": "在任何應用程式中用語音修改文字。選取文字，按住快速鍵，說出要做什麼。像「select last word」這樣的指令會留在這台電腦上；像「把這段縮短」這樣的指示會傳送給你的 AI 服務提供者。",
+      "preview": {
+        "label": "預覽 AI 修改",
+        "description": "在新文字取代舊文字之前先顯示出來。想快速修改時可以關閉：在應用程式中按 Ctrl+Z 仍可復原。"
+      },
+      "whatCanISay": "我可以說什麼？"
     }
   },
   "footer": {
@@ -1409,7 +1423,18 @@
     "send": "傳送",
     "cancel": "取消",
     "noticeTitle": "Kusema",
-    "close": "關閉"
+    "close": "關閉",
+    "edit": {
+      "title": "要取代選取的文字嗎？",
+      "instruction": "「{{instruction}}」",
+      "original": "目前",
+      "replacement": "修改後",
+      "by": "由 {{provider}} 編輯",
+      "richText": "選取內容的粗體、樣式等格式可能會遺失。",
+      "apply": "取代",
+      "cancel": "取消",
+      "keys": "按 Enter 取代，按 Esc 取消。在應用程式中按 Ctrl+Z 可復原。"
+    }
   },
   "secureInput": {
     "blockedWithCulprit_one": "{{name}} 可能正在阻擋 1 個快捷鍵",
@@ -1421,5 +1446,60 @@
     "learnMore": "如何解決",
     "recorderBlocked": "目前無法錄製快捷鍵——macOS 的 Secure Input 正在阻擋按鍵事件。請先解決 Secure Input 警告。",
     "dismiss": "關閉"
+  },
+  "voiceCommands": {
+    "title": "我可以說什麼？",
+    "intro": "按住「語音編輯」快速鍵（{{shortcut}}），單獨說出下列指令之一。標有「連續聽寫時也可用」的指令，在連續聽寫時單獨說出也有效。",
+    "close": "關閉",
+    "inDictation": "連續聽寫時也可用",
+    "groups": {
+      "select": "選取",
+      "move": "移動",
+      "edit": "編輯",
+      "ai": "用 AI 修改"
+    },
+    "ai": {
+      "description": "先選取文字，或直接聽寫：如果沒有選取任何內容，Kusema 會使用它最近在該視窗中輸入的文字。不是指令的話都會當作指示傳送給你的 AI 服務提供者。它只改你要求改的部分，不會加入事實。",
+      "examples": "「改得更正式一點」、「縮短成兩句」、「改成項目符號清單」、「修正文法」、「翻譯成英文」",
+      "privileged": "在 Privileged 模式下，只能使用這台電腦上的模型。"
+    },
+    "english": "無論 Kusema 設定為哪種語言，指令都用英文說。",
+    "support": "「select last sentence」、「select last paragraph」和「select <words>」需要能讓 Kusema 讀取文字的應用程式，例如 Word、Outlook、記事本，或 Chrome、Edge 中的文字方塊。其他指令使用標準按鍵，幾乎在任何地方都能用。",
+    "commands": {
+      "selectLastWord": "選取游標前的單字。",
+      "selectLastWords": "選取游標前的這麼多個單字，最多 50 個。",
+      "selectLine": "選取游標所在的行。",
+      "selectAll": "全選。",
+      "selectLastSentence": "選取游標前的句子。",
+      "selectLastParagraph": "選取游標前的段落。",
+      "selectPhrase": "選取這些字詞：游標前最近的一處，沒有的話就選游標後的第一處。",
+      "lineStart": "移到行首。",
+      "lineEnd": "移到行尾。",
+      "documentStart": "移到文件開頭。",
+      "documentEnd": "移到文件結尾。",
+      "newParagraph": "開始新段落。",
+      "newLine": "換行。",
+      "deleteThat": "刪除選取的內容。",
+      "undoThat": "復原上一次修改（Ctrl+Z）。",
+      "copyThat": "複製選取的內容。",
+      "cutThat": "剪下選取的內容。",
+      "pasteThat": "貼上。"
+    }
+  },
+  "voiceEdit": {
+    "notice": {
+      "noWindow": "請點選要修改的文字，然後再試一次。",
+      "unsupported": "語音編輯目前只能在 Windows 上使用。",
+      "selectFirst": "請先選取要修改的文字。",
+      "nothingSelected": "沒有選取任何內容。",
+      "noTextPattern": "這個應用程式不允許 Kusema 用語音尋找文字。請用滑鼠或鍵盤選取。",
+      "nothingBefore": "游標前沒有文字。",
+      "notFound": "找不到「{{name}}」。",
+      "windowChanged": "視窗已切換，所以沒有做任何修改。",
+      "selectionChanged": "選取的內容已改變，所以沒有取代任何內容。",
+      "noChange": "這段文字不需要修改。",
+      "emptyReply": "{{name}} 傳回了空白回覆。",
+      "failed": "無法在這個視窗中完成。"
+    }
   }
 }

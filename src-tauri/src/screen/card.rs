@@ -26,6 +26,10 @@ const NOTICE_DURATION: Duration = Duration::from_secs(8);
 /// Card sizes in logical pixels.
 const CONFIRM_SIZE: (f64, f64) = (380.0, 460.0);
 const NOTICE_SIZE: (f64, f64) = (380.0, 150.0);
+const EDIT_SIZE: (f64, f64) = (460.0, 440.0);
+/// A voice edit's preview left unanswered this long is cancelled: there's
+/// more to read than a screenshot question.
+pub const EDIT_TIMEOUT: Duration = Duration::from_secs(60);
 /// Space between the card and the window or screen edge, logical pixels.
 const GAP: f64 = 12.0;
 
@@ -42,8 +46,24 @@ pub enum ScreenCard {
         model: String,
         timeout_secs: u32,
     },
+    #[serde(rename_all = "camelCase")]
     Notice {
         message: String,
+        /// Kusema voice editing: a translation key the card shows instead
+        /// of `message`, with `name` for its placeholder.
+        key: Option<String>,
+        name: Option<String>,
+    },
+    /// Kusema voice editing: the selected text and what it would become.
+    #[serde(rename_all = "camelCase")]
+    Edit {
+        original: String,
+        replacement: String,
+        instruction: String,
+        provider: String,
+        /// The app keeps formatting (bold, styles) the replacement would lose.
+        rich_text: bool,
+        timeout_secs: u32,
     },
 }
 
@@ -196,7 +216,11 @@ fn open(
 ) -> Option<u64> {
     let state = app.try_state::<ScreenState>()?;
     let focus = reply.is_some();
-    let size = if focus { CONFIRM_SIZE } else { NOTICE_SIZE };
+    let size = match card {
+        ScreenCard::Edit { .. } => EDIT_SIZE,
+        _ if focus => CONFIRM_SIZE,
+        _ => NOTICE_SIZE,
+    };
     let near = captured.map(|w| w.rect);
     let (small, large) = placements(app, near, size)?;
 
@@ -319,11 +343,54 @@ pub async fn confirm<C: Fn() -> bool>(
     confirmation
 }
 
+/// Kusema voice editing: show the edit and wait for Apply (`Send`), Cancel,
+/// the timeout or the Cancel hotkey. Focus goes back to the window either way.
+pub async fn confirm_edit<C: Fn() -> bool>(
+    app: &AppHandle,
+    near: CapturedWindow,
+    card: ScreenCard,
+    is_cancelled: C,
+) -> Confirmation {
+    let (tx, rx) = oneshot::channel();
+    if open(app, card, Some(near), Some(tx)).is_none() {
+        return Confirmation::Cancel;
+    }
+    let answer =
+        complete_unless_cancelled(tokio::time::timeout(EDIT_TIMEOUT, rx), is_cancelled).await;
+    let confirmation = match answer {
+        None => Confirmation::Interrupted,
+        Some(Err(_)) => Confirmation::TimedOut,
+        Some(Ok(Ok(true))) => Confirmation::Send,
+        Some(Ok(_)) => Confirmation::Cancel,
+    };
+    if matches!(
+        confirmation,
+        Confirmation::Interrupted | Confirmation::TimedOut
+    ) {
+        close(app, true);
+    }
+    debug!("Voice edit preview: {confirmation:?}");
+    confirmation
+}
+
 /// Show `message` on a card (beside `near`, else at the corner of the
 /// screen) and say it, if replies are spoken. It closes itself.
 pub fn notice(app: &AppHandle, message: String, near: Option<CapturedWindow>) {
+    notice_with_key(app, message, None, None, near);
+}
+
+/// `notice`, shown translated: `key` is a translation key for the card,
+/// `message` the English that's spoken and logged.
+pub fn notice_with_key(
+    app: &AppHandle,
+    message: String,
+    key: Option<String>,
+    name: Option<String>,
+    near: Option<CapturedWindow>,
+) {
     crate::tts::say(app, &message);
-    let Some(counter) = open(app, ScreenCard::Notice { message }, near, None) else {
+    let card = ScreenCard::Notice { message, key, name };
+    let Some(counter) = open(app, card, near, None) else {
         return;
     };
     let app = app.clone();

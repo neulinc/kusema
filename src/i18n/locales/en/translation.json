@@ -442,6 +442,10 @@
           "toggle_privileged": {
             "name": "Privileged Mode",
             "description": "Press to turn Privileged mode on or off."
+          },
+          "voice_edit": {
+            "name": "Edit by Voice",
+            "description": "Select text, then hold and say how to change it (“make this more formal”), or say a command like “select last word”."
           }
         },
         "errors": {
@@ -1211,7 +1215,8 @@
         "provider_models": "Listing a provider's models",
         "model_download": "Speech model download",
         "voice_download": "Voice download",
-        "update_check": "Update check"
+        "update_check": "Update check",
+        "voice_edit": "Voice edit"
       },
       "data": {
         "text": "Text",
@@ -1314,6 +1319,15 @@
         "label": "Continuous dictation sounds",
         "description": "Play a short sound when continuous dictation starts and stops. Sounds for other dictation are under Sound below."
       }
+    },
+    "voiceEdit": {
+      "title": "Voice Editing",
+      "description": "Change text in any app by voice. Select it, hold the shortcut and say what to do. Commands like “select last word” stay on this computer; instructions like “shorten this” go to your AI provider.",
+      "preview": {
+        "label": "Preview AI Edits",
+        "description": "Show the new text before it replaces the old. Turn off for quick edits: Ctrl+Z in the app still undoes them."
+      },
+      "whatCanISay": "What can I say?"
     }
   },
   "footer": {
@@ -1409,7 +1423,18 @@
     "send": "Send",
     "cancel": "Cancel",
     "noticeTitle": "Kusema",
-    "close": "Close"
+    "close": "Close",
+    "edit": {
+      "title": "Replace the selected text?",
+      "instruction": "“{{instruction}}”",
+      "original": "Now",
+      "replacement": "New",
+      "by": "Edited by {{provider}}",
+      "richText": "Formatting like bold or styles in the selection may be lost.",
+      "apply": "Replace",
+      "cancel": "Cancel",
+      "keys": "Enter replaces, Esc cancels. Ctrl+Z in the app undoes it."
+    }
   },
   "secureInput": {
     "blockedWithCulprit_one": "{{name}} may be blocking 1 shortcut",
@@ -1421,5 +1446,60 @@
     "learnMore": "How to fix",
     "recorderBlocked": "Can't record shortcuts right now — macOS Secure Input is blocking key events. Resolve the Secure Input warning first.",
     "dismiss": "Dismiss"
+  },
+  "voiceCommands": {
+    "title": "What can I say?",
+    "intro": "Hold the Edit by Voice shortcut ({{shortcut}}) and say one of these, on its own. Commands marked “Also in continuous dictation” work there too when said alone.",
+    "close": "Close",
+    "inDictation": "Also in continuous dictation",
+    "groups": {
+      "select": "Select",
+      "move": "Move",
+      "edit": "Edit",
+      "ai": "Change it with AI"
+    },
+    "ai": {
+      "description": "Select text first, or just dictate: with nothing selected, Kusema uses the last text it typed in that window. Anything that isn't a command is an instruction for your AI provider. It changes only what you ask and adds no facts.",
+      "examples": "“make this more formal”, “shorten to two sentences”, “turn this into bullet points”, “fix the grammar”, “translate to Spanish”",
+      "privileged": "In Privileged mode, only a model on this computer can be used."
+    },
+    "english": "The commands are in English, whatever language Kusema is set to.",
+    "support": "“Select last sentence”, “select last paragraph” and “select <words>” need an app that lets Kusema read its text, such as Word, Outlook, Notepad or a text box in Chrome or Edge. The others use standard keys and work almost everywhere.",
+    "commands": {
+      "selectLastWord": "Selects the word before the cursor.",
+      "selectLastWords": "Selects that many words before the cursor, up to 50.",
+      "selectLine": "Selects the line the cursor is on.",
+      "selectAll": "Selects everything.",
+      "selectLastSentence": "Selects the sentence before the cursor.",
+      "selectLastParagraph": "Selects the paragraph before the cursor.",
+      "selectPhrase": "Selects those words: the nearest match before the cursor, or the first one after.",
+      "lineStart": "Moves to the start of the line.",
+      "lineEnd": "Moves to the end of the line.",
+      "documentStart": "Moves to the start of the document.",
+      "documentEnd": "Moves to the end of the document.",
+      "newParagraph": "Starts a new paragraph.",
+      "newLine": "Starts a new line.",
+      "deleteThat": "Deletes the selection.",
+      "undoThat": "Undoes the last change (Ctrl+Z).",
+      "copyThat": "Copies the selection.",
+      "cutThat": "Cuts the selection.",
+      "pasteThat": "Pastes."
+    }
+  },
+  "voiceEdit": {
+    "notice": {
+      "noWindow": "Click in the text you want to change, then try again.",
+      "unsupported": "Voice editing only works on Windows for now.",
+      "selectFirst": "Select the text you want to change first.",
+      "nothingSelected": "Nothing is selected.",
+      "noTextPattern": "This app doesn't let Kusema find text by voice. Select it with the mouse or keyboard instead.",
+      "nothingBefore": "There's no text before the cursor.",
+      "notFound": "Couldn't find “{{name}}”.",
+      "windowChanged": "The window changed, so nothing was changed.",
+      "selectionChanged": "The selection changed, so nothing was replaced.",
+      "noChange": "The text didn't need changing.",
+      "emptyReply": "{{name}} returned an empty reply.",
+      "failed": "Couldn't do that in this window."
+    }
   }
 }

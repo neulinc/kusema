@@ -379,6 +379,18 @@ fn handle_text(shared: &Shared, text: &str, started_at: Instant) {
         .voice_commands
         .then(|| voice_commands::parse(text))
         .flatten();
+    // Kusema voice editing: "select last word", "undo that" and the like.
+    if command.is_none() && shared.voice_commands {
+        if let Some(edit) = crate::voice_edit::commands::parse_in_dictation(text) {
+            let target = shared.core.lock().unwrap().guard.target();
+            if let Some(target) = target {
+                crate::voice_edit::run_in_dictation(&shared.app, &edit, target);
+                // The caret moved, or the text changed: nothing to scratch.
+                shared.core.lock().unwrap().last_typed = None;
+            }
+            return;
+        }
+    }
     match command {
         Some(VoiceCommand::StopDictation) => {
             request_stop(&shared.app, shared, StopReason::User);
@@ -520,6 +532,7 @@ fn type_piece(shared: &Shared, piece: Piece, history: Option<HistoryTail>) {
         Ok(TypeOutcome::Typed) => {
             let mut core = shared.core.lock().unwrap();
             core.typed_join = join_after;
+            crate::voice_edit::last_typed::record(&text, platform::focus());
             core.last_typed = platform::focus().map(|focus| LastTyped {
                 chars: text.chars().count(),
                 focus,
@@ -579,6 +592,7 @@ fn scratch(shared: &Shared) {
     };
     let target = last.focus.window;
     drop(core);
+    crate::voice_edit::last_typed::forget();
 
     if let Err(e) = press_backspaces(chars, &shared.app, on_window(target)) {
         error!("Couldn't scratch the last segment: {e}");
@@ -908,7 +922,8 @@ fn copy_session_if_asked(app: &AppHandle, history_id: Option<i64>) {
     }
 }
 
-pub use platform::write_clipboard_private;
+pub use guard::FocusToken;
+pub use platform::{focus as current_focus, write_clipboard_private};
 
 #[cfg(test)]
 pub fn command_phrases() -> impl Iterator<Item = &'static str> {

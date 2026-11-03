@@ -39,6 +39,7 @@ impl Purpose {
             Purpose::AssistantQuestion
             | Purpose::ScreenQuestion
             | Purpose::PostProcessing
+            | Purpose::VoiceEdit
             | Purpose::ProviderModels => Category::Ai,
             Purpose::ModelDownload | Purpose::VoiceDownload | Purpose::UpdateCheck => {
                 Category::Download

@@ -26,6 +26,9 @@ pub enum AskMode {
     Plain,
     /// Ask about my screen: the question plus a screenshot of the window.
     Screen,
+    /// Kusema voice editing: an instruction or command for the selected text
+    /// (see `crate::voice_edit`).
+    Edit,
 }
 
 /// Shown and spoken when a provider rejects an image.
@@ -90,10 +93,10 @@ pub fn is_busy(app: &AppHandle) -> bool {
 }
 
 /// Provider, model and key from the post-processing settings.
-struct Target {
-    provider: PostProcessProvider,
-    model: String,
-    api_key: String,
+pub(crate) struct Target {
+    pub provider: PostProcessProvider,
+    pub model: String,
+    pub api_key: String,
 }
 
 /// Which request a target is for, by whether it's about the screen.
@@ -104,7 +107,7 @@ fn would_be_refused(provider: &PostProcessProvider) -> bool {
     )
 }
 
-fn resolve_target(settings: &AppSettings) -> Result<Target, String> {
+pub(crate) fn resolve_target(settings: &AppSettings) -> Result<Target, String> {
     let provider = settings.active_post_process_provider().cloned().ok_or(
         "No AI provider selected. Choose one in the Post Processing settings.".to_string(),
     )?;
@@ -199,7 +202,11 @@ fn is_image_rejection(error: &str) -> bool {
 
 /// Turn an llm_client error into something worth showing the user.
 /// `with_image`: the request carried a screenshot.
-fn describe_error(provider: &PostProcessProvider, error: &str, with_image: bool) -> String {
+pub(crate) fn describe_error(
+    provider: &PostProcessProvider,
+    error: &str,
+    with_image: bool,
+) -> String {
     let label = &provider.label;
     if crate::network::is_blocked(error) {
         crate::network::refusal_message(label)

@@ -444,6 +444,10 @@
           "toggle_privileged": {
             "name": "Modo Privileged",
             "description": "Pressione para ativar ou desativar o modo Privileged."
+          },
+          "voice_edit": {
+            "name": "Editar por voz",
+            "description": "Selecione um texto, mantenha o atalho pressionado e diga como mudá-lo («deixe isto mais formal»), ou diga um comando como «select last word»."
           }
         },
         "errors": {
@@ -1214,7 +1218,8 @@
         "provider_models": "Listar os modelos de um provedor",
         "model_download": "Download de modelo de voz",
         "voice_download": "Download de voz",
-        "update_check": "Verificação de atualização"
+        "update_check": "Verificação de atualização",
+        "voice_edit": "Edição por voz"
       },
       "data": {
         "text": "Texto",
@@ -1320,6 +1325,15 @@
         "label": "Sons do ditado contínuo",
         "description": "Toca um som curto quando o ditado contínuo começa e termina. Os sons dos outros ditados ficam em Som, mais abaixo."
       }
+    },
+    "voiceEdit": {
+      "title": "Edição por voz",
+      "description": "Altere texto em qualquer aplicativo com a voz. Selecione-o, mantenha o atalho pressionado e diga o que fazer. Comandos como «select last word» ficam neste computador; instruções como «encurte isto» vão para o seu provedor de IA.",
+      "preview": {
+        "label": "Prévia das edições de IA",
+        "description": "Mostra o novo texto antes de substituir o antigo. Desative para edições rápidas: Ctrl+Z no aplicativo ainda as desfaz."
+      },
+      "whatCanISay": "O que posso dizer?"
     }
   },
   "footer": {
@@ -1415,7 +1429,18 @@
     "send": "Enviar",
     "cancel": "Cancelar",
     "noticeTitle": "Kusema",
-    "close": "Fechar"
+    "close": "Fechar",
+    "edit": {
+      "title": "Substituir o texto selecionado?",
+      "instruction": "«{{instruction}}»",
+      "original": "Atual",
+      "replacement": "Novo",
+      "by": "Editado por {{provider}}",
+      "richText": "A formatação da seleção, como negrito ou estilos, pode se perder.",
+      "apply": "Substituir",
+      "cancel": "Cancelar",
+      "keys": "Enter substitui, Esc cancela. Ctrl+Z no aplicativo desfaz."
+    }
   },
   "secureInput": {
     "blockedWithCulprit_one": "{{name}} pode estar bloqueando 1 atalho",
@@ -1429,5 +1454,60 @@
     "learnMore": "Como resolver isso",
     "recorderBlocked": "Não é possível gravar atalhos agora — o Secure Input do macOS está bloqueando os eventos de tecla. Resolva primeiro o aviso do Secure Input.",
     "dismiss": "Dispensar"
+  },
+  "voiceCommands": {
+    "title": "O que posso dizer?",
+    "intro": "Mantenha pressionado o atalho Editar por voz ({{shortcut}}) e diga um destes comandos, sozinho. Os marcados com «Também no ditado contínuo» funcionam lá também quando ditos sozinhos.",
+    "close": "Fechar",
+    "inDictation": "Também no ditado contínuo",
+    "groups": {
+      "select": "Selecionar",
+      "move": "Mover",
+      "edit": "Editar",
+      "ai": "Mudar com IA"
+    },
+    "ai": {
+      "description": "Selecione o texto primeiro, ou simplesmente dite: sem nada selecionado, o Kusema usa o último texto que digitou naquela janela. Tudo o que não for um comando é uma instrução para o seu provedor de IA. Ele muda só o que você pede e não acrescenta fatos.",
+      "examples": "«deixe isto mais formal», «reduza a duas frases», «transforme em tópicos», «corrija a gramática», «traduza para o espanhol»",
+      "privileged": "No modo Privileged, só um modelo neste computador pode ser usado."
+    },
+    "english": "Os comandos são em inglês, seja qual for o idioma do Kusema.",
+    "support": "«select last sentence», «select last paragraph» e «select <words>» precisam de um aplicativo que deixe o Kusema ler o texto, como Word, Outlook, Bloco de Notas ou uma caixa de texto no Chrome ou no Edge. Os outros usam teclas padrão e funcionam quase em todo lugar.",
+    "commands": {
+      "selectLastWord": "Seleciona a palavra antes do cursor.",
+      "selectLastWords": "Seleciona esse número de palavras antes do cursor, até 50.",
+      "selectLine": "Seleciona a linha do cursor.",
+      "selectAll": "Seleciona tudo.",
+      "selectLastSentence": "Seleciona a frase antes do cursor.",
+      "selectLastParagraph": "Seleciona o parágrafo antes do cursor.",
+      "selectPhrase": "Seleciona essas palavras: a ocorrência mais próxima antes do cursor ou, se não houver, a primeira depois.",
+      "lineStart": "Vai para o início da linha.",
+      "lineEnd": "Vai para o fim da linha.",
+      "documentStart": "Vai para o início do documento.",
+      "documentEnd": "Vai para o fim do documento.",
+      "newParagraph": "Começa um novo parágrafo.",
+      "newLine": "Começa uma nova linha.",
+      "deleteThat": "Exclui a seleção.",
+      "undoThat": "Desfaz a última alteração (Ctrl+Z).",
+      "copyThat": "Copia a seleção.",
+      "cutThat": "Recorta a seleção.",
+      "pasteThat": "Cola."
+    }
+  },
+  "voiceEdit": {
+    "notice": {
+      "noWindow": "Clique no texto que deseja alterar e tente de novo.",
+      "unsupported": "Por enquanto, a edição por voz só funciona no Windows.",
+      "selectFirst": "Selecione primeiro o texto que deseja alterar.",
+      "nothingSelected": "Nada está selecionado.",
+      "noTextPattern": "Este aplicativo não deixa o Kusema encontrar texto por voz. Selecione-o com o mouse ou o teclado.",
+      "nothingBefore": "Não há texto antes do cursor.",
+      "notFound": "Não foi possível encontrar «{{name}}».",
+      "windowChanged": "A janela mudou, então nada foi alterado.",
+      "selectionChanged": "A seleção mudou, então nada foi substituído.",
+      "noChange": "O texto não precisava de alterações.",
+      "emptyReply": "{{name}} retornou uma resposta vazia.",
+      "failed": "Não foi possível fazer isso nesta janela."
+    }
   }
 }

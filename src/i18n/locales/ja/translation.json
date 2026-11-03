@@ -442,6 +442,10 @@
           "toggle_privileged": {
             "name": "Privileged モード",
             "description": "押すと Privileged モードのオン・オフを切り替えます。"
+          },
+          "voice_edit": {
+            "name": "音声で編集",
+            "description": "テキストを選択し、ショートカットを押したまま変え方を話すか（「もっとフォーマルにして」）、「select last word」のようなコマンドを話します。"
           }
         },
         "errors": {
@@ -1211,7 +1215,8 @@
         "provider_models": "プロバイダーのモデル一覧の取得",
         "model_download": "音声認識モデルのダウンロード",
         "voice_download": "音声のダウンロード",
-        "update_check": "更新の確認"
+        "update_check": "更新の確認",
+        "voice_edit": "音声編集"
       },
       "data": {
         "text": "テキスト",
@@ -1314,6 +1319,15 @@
         "label": "連続ディクテーションの音",
         "description": "連続ディクテーションの開始時と終了時に短い音を鳴らします。ほかのディクテーションの音は、下の「サウンド」にあります。"
       }
+    },
+    "voiceEdit": {
+      "title": "音声編集",
+      "description": "どのアプリのテキストも声で変更できます。選択してショートカットを押したまま、どうするかを話してください。「select last word」のようなコマンドはこのコンピューター内で処理され、「これを短くして」のような指示は AI プロバイダーに送られます。",
+      "preview": {
+        "label": "AI の編集をプレビュー",
+        "description": "新しいテキストが元のテキストを置き換える前に表示します。素早く編集したいときはオフにしてください。アプリで Ctrl+Z を押せば元に戻せます。"
+      },
+      "whatCanISay": "何と言えばいい？"
     }
   },
   "footer": {
@@ -1409,7 +1423,18 @@
     "send": "送信",
     "cancel": "キャンセル",
     "noticeTitle": "Kusema",
-    "close": "閉じる"
+    "close": "閉じる",
+    "edit": {
+      "title": "選択したテキストを置き換えますか？",
+      "instruction": "「{{instruction}}」",
+      "original": "現在",
+      "replacement": "変更後",
+      "by": "{{provider}} で編集",
+      "richText": "選択範囲の太字やスタイルなどの書式は失われることがあります。",
+      "apply": "置き換える",
+      "cancel": "キャンセル",
+      "keys": "Enter で置き換え、Esc でキャンセル。アプリで Ctrl+Z を押すと元に戻せます。"
+    }
   },
   "secureInput": {
     "blockedWithCulprit_one": "{{name}} が1個のショートカットをブロックしている可能性があります",
@@ -1421,5 +1446,60 @@
     "learnMore": "解決方法",
     "recorderBlocked": "現在ショートカットを記録できません。macOS の Secure Input がキーイベントをブロックしています。先に Secure Input の警告を解消してください。",
     "dismiss": "閉じる"
+  },
+  "voiceCommands": {
+    "title": "何と言えばいい？",
+    "intro": "「音声で編集」のショートカット（{{shortcut}}）を押したまま、次のいずれかだけを話してください。「連続ディクテーションでも使用可」と書かれたコマンドは、単独で話せばそちらでも使えます。",
+    "close": "閉じる",
+    "inDictation": "連続ディクテーションでも使用可",
+    "groups": {
+      "select": "選択",
+      "move": "移動",
+      "edit": "編集",
+      "ai": "AI で変更"
+    },
+    "ai": {
+      "description": "先にテキストを選択するか、そのまま口述してください。何も選択されていなければ、Kusema はそのウィンドウで最後に入力したテキストを使います。コマンド以外はすべて AI プロバイダーへの指示です。頼んだことだけを変え、事実を付け加えることはありません。",
+      "examples": "「もっとフォーマルにして」「2文に短くして」「箇条書きにして」「文法を直して」「英語に翻訳して」",
+      "privileged": "Privileged モードでは、このコンピューター上のモデルだけが使えます。"
+    },
+    "english": "コマンドは、Kusema の表示言語に関係なく英語です。",
+    "support": "「select last sentence」「select last paragraph」「select <words>」は、Word、Outlook、メモ帳、Chrome や Edge のテキストボックスなど、Kusema がテキストを読めるアプリで使えます。ほかのコマンドは標準のキー操作なので、ほぼどこでも使えます。",
+    "commands": {
+      "selectLastWord": "カーソルの前の単語を選択します。",
+      "selectLastWords": "カーソルの前にあるその数の単語を選択します（最大 50）。",
+      "selectLine": "カーソルのある行を選択します。",
+      "selectAll": "すべて選択します。",
+      "selectLastSentence": "カーソルの前の文を選択します。",
+      "selectLastParagraph": "カーソルの前の段落を選択します。",
+      "selectPhrase": "その語句を選択します。カーソルの前でいちばん近いもの、なければ後ろで最初のものです。",
+      "lineStart": "行の先頭へ移動します。",
+      "lineEnd": "行の末尾へ移動します。",
+      "documentStart": "文書の先頭へ移動します。",
+      "documentEnd": "文書の末尾へ移動します。",
+      "newParagraph": "新しい段落を始めます。",
+      "newLine": "改行します。",
+      "deleteThat": "選択した部分を削除します。",
+      "undoThat": "直前の変更を元に戻します（Ctrl+Z）。",
+      "copyThat": "選択した部分をコピーします。",
+      "cutThat": "選択した部分を切り取ります。",
+      "pasteThat": "貼り付けます。"
+    }
+  },
+  "voiceEdit": {
+    "notice": {
+      "noWindow": "変更したいテキストをクリックしてから、もう一度試してください。",
+      "unsupported": "音声編集は今のところ Windows でのみ使えます。",
+      "selectFirst": "変更したいテキストを先に選択してください。",
+      "nothingSelected": "何も選択されていません。",
+      "noTextPattern": "このアプリでは Kusema が声でテキストを探せません。マウスやキーボードで選択してください。",
+      "nothingBefore": "カーソルの前にテキストがありません。",
+      "notFound": "「{{name}}」が見つかりませんでした。",
+      "windowChanged": "ウィンドウが切り替わったため、何も変更しませんでした。",
+      "selectionChanged": "選択範囲が変わったため、何も置き換えませんでした。",
+      "noChange": "テキストを変更する必要はありませんでした。",
+      "emptyReply": "{{name}} から空の応答が返されました。",
+      "failed": "このウィンドウではできませんでした。"
+    }
   }
 }

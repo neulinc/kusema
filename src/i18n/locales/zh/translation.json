@@ -442,6 +442,10 @@
           "toggle_privileged": {
             "name": "Privileged 模式",
             "description": "按下可开启或关闭 Privileged 模式。"
+          },
+          "voice_edit": {
+            "name": "语音编辑",
+            "description": "选中文字，然后按住快捷键说出如何修改（“改得更正式些”），或说一个命令，比如“select last word”。"
           }
         },
         "errors": {
@@ -1211,7 +1215,8 @@
         "provider_models": "获取服务商的模型列表",
         "model_download": "下载语音识别模型",
         "voice_download": "下载语音",
-        "update_check": "检查更新"
+        "update_check": "检查更新",
+        "voice_edit": "语音编辑"
       },
       "data": {
         "text": "文字",
@@ -1314,6 +1319,15 @@
         "label": "连续听写提示音",
         "description": "连续听写开始和停止时播放简短提示音。其他听写的提示音在下方的\"声音\"中。"
       }
+    },
+    "voiceEdit": {
+      "title": "语音编辑",
+      "description": "在任何应用中用语音修改文字。选中文字，按住快捷键，说出要做什么。像“select last word”这样的命令留在这台电脑上；像“把这段缩短”这样的指令会发送给你的 AI 服务商。",
+      "preview": {
+        "label": "预览 AI 修改",
+        "description": "在新文字替换旧文字之前先显示出来。想快速修改时可以关闭：在应用中按 Ctrl+Z 仍可撤销。"
+      },
+      "whatCanISay": "我可以说什么？"
     }
   },
   "footer": {
@@ -1409,7 +1423,18 @@
     "send": "发送",
     "cancel": "取消",
     "noticeTitle": "Kusema",
-    "close": "关闭"
+    "close": "关闭",
+    "edit": {
+      "title": "替换选中的文字？",
+      "instruction": "“{{instruction}}”",
+      "original": "现在",
+      "replacement": "修改后",
+      "by": "由 {{provider}} 编辑",
+      "richText": "选中内容的粗体、样式等格式可能会丢失。",
+      "apply": "替换",
+      "cancel": "取消",
+      "keys": "按 Enter 替换，按 Esc 取消。在应用中按 Ctrl+Z 可撤销。"
+    }
   },
   "secureInput": {
     "blockedWithCulprit_one": "{{name}} 可能正在阻止 1 个快捷键",
@@ -1421,5 +1446,60 @@
     "learnMore": "如何解决",
     "recorderBlocked": "当前无法录制快捷键——macOS 的 Secure Input 正在阻止按键事件。请先解决 Secure Input 警告。",
     "dismiss": "关闭"
+  },
+  "voiceCommands": {
+    "title": "我可以说什么？",
+    "intro": "按住“语音编辑”快捷键（{{shortcut}}），单独说出下列命令之一。标有“连续听写中也可用”的命令，在连续听写时单独说出也有效。",
+    "close": "关闭",
+    "inDictation": "连续听写中也可用",
+    "groups": {
+      "select": "选择",
+      "move": "移动",
+      "edit": "编辑",
+      "ai": "用 AI 修改"
+    },
+    "ai": {
+      "description": "先选中文字，或者直接听写：如果什么都没选中，Kusema 会使用它最近在该窗口中输入的文字。不是命令的话都会作为指令发送给你的 AI 服务商。它只改你要求改的部分，不会添加事实。",
+      "examples": "“改得更正式些”、“缩短成两句话”、“改成项目符号列表”、“修正语法”、“翻译成英文”",
+      "privileged": "在 Privileged 模式下，只能使用这台电脑上的模型。"
+    },
+    "english": "无论 Kusema 设置为哪种语言，命令都用英语说。",
+    "support": "“select last sentence”、“select last paragraph”和“select <words>”需要能让 Kusema 读取文字的应用，例如 Word、Outlook、记事本，或 Chrome、Edge 中的文本框。其他命令使用标准按键，几乎在任何地方都能用。",
+    "commands": {
+      "selectLastWord": "选中光标前的单词。",
+      "selectLastWords": "选中光标前的这么多个单词，最多 50 个。",
+      "selectLine": "选中光标所在的行。",
+      "selectAll": "全选。",
+      "selectLastSentence": "选中光标前的句子。",
+      "selectLastParagraph": "选中光标前的段落。",
+      "selectPhrase": "选中这些词：光标前最近的一处，没有的话就选光标后的第一处。",
+      "lineStart": "移到行首。",
+      "lineEnd": "移到行尾。",
+      "documentStart": "移到文档开头。",
+      "documentEnd": "移到文档末尾。",
+      "newParagraph": "开始新段落。",
+      "newLine": "换行。",
+      "deleteThat": "删除选中的内容。",
+      "undoThat": "撤销上一次修改（Ctrl+Z）。",
+      "copyThat": "复制选中的内容。",
+      "cutThat": "剪切选中的内容。",
+      "pasteThat": "粘贴。"
+    }
+  },
+  "voiceEdit": {
+    "notice": {
+      "noWindow": "请点击要修改的文字，然后重试。",
+      "unsupported": "语音编辑目前只能在 Windows 上使用。",
+      "selectFirst": "请先选中要修改的文字。",
+      "nothingSelected": "没有选中任何内容。",
+      "noTextPattern": "这个应用不允许 Kusema 用语音查找文字。请用鼠标或键盘选中。",
+      "nothingBefore": "光标前没有文字。",
+      "notFound": "找不到“{{name}}”。",
+      "windowChanged": "窗口已切换，所以没有做任何修改。",
+      "selectionChanged": "选中的内容已改变，所以没有替换任何内容。",
+      "noChange": "这段文字不需要修改。",
+      "emptyReply": "{{name}} 返回了空回复。",
+      "failed": "无法在这个窗口中完成。"
+    }
   }
 }

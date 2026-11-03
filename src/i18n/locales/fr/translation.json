@@ -444,6 +444,10 @@
           "toggle_privileged": {
             "name": "Mode Privileged",
             "description": "Appuyez pour activer ou désactiver le mode Privileged."
+          },
+          "voice_edit": {
+            "name": "Modifier à la voix",
+            "description": "Sélectionnez du texte, puis maintenez le raccourci et dites comment le modifier (« rends ce texte plus formel »), ou dites une commande comme « select last word »."
           }
         },
         "errors": {
@@ -1214,7 +1218,8 @@
         "provider_models": "Liste des modèles d'un fournisseur",
         "model_download": "Téléchargement d'un modèle vocal",
         "voice_download": "Téléchargement d'une voix",
-        "update_check": "Vérification de mise à jour"
+        "update_check": "Vérification de mise à jour",
+        "voice_edit": "Modification vocale"
       },
       "data": {
         "text": "Texte",
@@ -1320,6 +1325,15 @@
         "label": "Sons de la dictée continue",
         "description": "Jouer un son court quand la dictée continue démarre et s'arrête. Les sons des autres dictées se trouvent sous Son, plus bas."
       }
+    },
+    "voiceEdit": {
+      "title": "Modification vocale",
+      "description": "Modifiez du texte dans n'importe quelle application à la voix. Sélectionnez-le, maintenez le raccourci et dites quoi faire. Les commandes comme « select last word » restent sur cet ordinateur ; les instructions comme « raccourcis ce texte » vont à votre fournisseur d'IA.",
+      "preview": {
+        "label": "Aperçu des modifications IA",
+        "description": "Affiche le nouveau texte avant qu'il remplace l'ancien. Désactivez pour les modifications rapides : Ctrl+Z dans l'application les annule toujours."
+      },
+      "whatCanISay": "Que puis-je dire ?"
     }
   },
   "footer": {
@@ -1415,7 +1429,18 @@
     "send": "Envoyer",
     "cancel": "Annuler",
     "noticeTitle": "Kusema",
-    "close": "Fermer"
+    "close": "Fermer",
+    "edit": {
+      "title": "Remplacer le texte sélectionné ?",
+      "instruction": "« {{instruction}} »",
+      "original": "Actuel",
+      "replacement": "Nouveau",
+      "by": "Modifié par {{provider}}",
+      "richText": "La mise en forme de la sélection, comme le gras ou les styles, peut être perdue.",
+      "apply": "Remplacer",
+      "cancel": "Annuler",
+      "keys": "Entrée remplace, Échap annule. Ctrl+Z dans l'application l'annule."
+    }
   },
   "secureInput": {
     "blockedWithCulprit_one": "{{name}} bloque peut-être 1 raccourci",
@@ -1429,5 +1454,60 @@
     "learnMore": "Comment résoudre ce problème",
     "recorderBlocked": "Impossible d'enregistrer un raccourci pour le moment : Secure Input de macOS bloque les événements clavier. Résolvez d'abord l'avertissement Secure Input.",
     "dismiss": "Ignorer"
+  },
+  "voiceCommands": {
+    "title": "Que puis-je dire ?",
+    "intro": "Maintenez le raccourci Modifier à la voix ({{shortcut}}) et dites l'une de ces commandes, seule. Les commandes marquées « Aussi en dictée continue » y fonctionnent aussi lorsqu'elles sont dites seules.",
+    "close": "Fermer",
+    "inDictation": "Aussi en dictée continue",
+    "groups": {
+      "select": "Sélectionner",
+      "move": "Se déplacer",
+      "edit": "Modifier",
+      "ai": "Modifier avec l'IA"
+    },
+    "ai": {
+      "description": "Sélectionnez d'abord du texte, ou dictez simplement : si rien n'est sélectionné, Kusema utilise le dernier texte qu'il a saisi dans cette fenêtre. Tout ce qui n'est pas une commande est une instruction pour votre fournisseur d'IA. Il ne change que ce que vous demandez et n'ajoute aucun fait.",
+      "examples": "« rends ce texte plus formel », « réduis à deux phrases », « fais-en une liste à puces », « corrige la grammaire », « traduis en espagnol »",
+      "privileged": "En mode Privileged, seul un modèle sur cet ordinateur peut être utilisé."
+    },
+    "english": "Les commandes sont en anglais, quelle que soit la langue de Kusema.",
+    "support": "« select last sentence », « select last paragraph » et « select <words> » nécessitent une application qui laisse Kusema lire son texte, comme Word, Outlook, le Bloc-notes ou une zone de texte dans Chrome ou Edge. Les autres utilisent des touches standard et fonctionnent presque partout.",
+    "commands": {
+      "selectLastWord": "Sélectionne le mot avant le curseur.",
+      "selectLastWords": "Sélectionne ce nombre de mots avant le curseur, jusqu'à 50.",
+      "selectLine": "Sélectionne la ligne du curseur.",
+      "selectAll": "Sélectionne tout.",
+      "selectLastSentence": "Sélectionne la phrase avant le curseur.",
+      "selectLastParagraph": "Sélectionne le paragraphe avant le curseur.",
+      "selectPhrase": "Sélectionne ces mots : l'occurrence la plus proche avant le curseur, sinon la première après.",
+      "lineStart": "Va au début de la ligne.",
+      "lineEnd": "Va à la fin de la ligne.",
+      "documentStart": "Va au début du document.",
+      "documentEnd": "Va à la fin du document.",
+      "newParagraph": "Commence un nouveau paragraphe.",
+      "newLine": "Commence une nouvelle ligne.",
+      "deleteThat": "Supprime la sélection.",
+      "undoThat": "Annule la dernière modification (Ctrl+Z).",
+      "copyThat": "Copie la sélection.",
+      "cutThat": "Coupe la sélection.",
+      "pasteThat": "Colle."
+    }
+  },
+  "voiceEdit": {
+    "notice": {
+      "noWindow": "Cliquez dans le texte à modifier, puis réessayez.",
+      "unsupported": "La modification vocale ne fonctionne que sous Windows pour l'instant.",
+      "selectFirst": "Sélectionnez d'abord le texte à modifier.",
+      "nothingSelected": "Rien n'est sélectionné.",
+      "noTextPattern": "Cette application ne permet pas à Kusema de trouver du texte à la voix. Sélectionnez-le plutôt à la souris ou au clavier.",
+      "nothingBefore": "Il n'y a pas de texte avant le curseur.",
+      "notFound": "« {{name}} » est introuvable.",
+      "windowChanged": "La fenêtre a changé, rien n'a donc été modifié.",
+      "selectionChanged": "La sélection a changé, rien n'a donc été remplacé.",
+      "noChange": "Le texte n'avait pas besoin d'être modifié.",
+      "emptyReply": "{{name}} a renvoyé une réponse vide.",
+      "failed": "Impossible de faire cela dans cette fenêtre."
+    }
   }
 }

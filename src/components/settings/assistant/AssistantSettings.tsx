@@ -7,6 +7,8 @@ import { SettingsGroup } from "../../ui/SettingsGroup";
 import { Button } from "../../ui/Button";
 import { Alert } from "../../ui/Alert";
 import { ShortcutInput } from "../ShortcutInput";
+import { SettingContainer } from "../../ui/SettingContainer";
+import { VoiceCommandsButton } from "../VoiceCommandsDialog";
 import { AssistantVoiceSettings } from "./AssistantVoiceSettings";
 import { AssistantProviderSettings } from "./AssistantProviderSettings";
 import { AssistantScreenSettings } from "./AssistantScreenSettings";
@@ -144,6 +146,14 @@ export const AssistantSettings: React.FC<{
           >
             <ShortcutInput shortcutId="assistant" grouped={true} />
             <PrivilegedToggle />
+            <SettingContainer
+              title={t("settings.voiceEdit.title")}
+              description={t("settings.voiceEdit.description")}
+              descriptionMode="tooltip"
+              grouped={true}
+            >
+              <VoiceCommandsButton />
+            </SettingContainer>
           </SettingsGroup>
 
           <AssistantProviderSettings

@@ -442,6 +442,10 @@
           "toggle_privileged": {
             "name": "Chế độ Privileged",
             "description": "Nhấn để bật hoặc tắt chế độ Privileged."
+          },
+          "voice_edit": {
+            "name": "Sửa bằng giọng nói",
+            "description": "Chọn văn bản, rồi giữ phím tắt và nói cách sửa (“làm cho trang trọng hơn”), hoặc nói một lệnh như “select last word”."
           }
         },
         "errors": {
@@ -1211,7 +1215,8 @@
         "provider_models": "Lấy danh sách mô hình của nhà cung cấp",
         "model_download": "Tải mô hình giọng nói",
         "voice_download": "Tải giọng đọc",
-        "update_check": "Kiểm tra cập nhật"
+        "update_check": "Kiểm tra cập nhật",
+        "voice_edit": "Sửa bằng giọng nói"
       },
       "data": {
         "text": "Văn bản",
@@ -1314,6 +1319,15 @@
         "label": "Âm thanh đọc chính tả liên tục",
         "description": "Phát một âm thanh ngắn khi đọc chính tả liên tục bắt đầu và dừng. Âm thanh cho kiểu đọc chính tả khác nằm ở mục Âm thanh bên dưới."
       }
+    },
+    "voiceEdit": {
+      "title": "Sửa bằng giọng nói",
+      "description": "Sửa văn bản trong mọi ứng dụng bằng giọng nói. Chọn văn bản, giữ phím tắt và nói cần làm gì. Các lệnh như “select last word” ở lại trên máy tính này; các yêu cầu như “rút gọn đoạn này” được gửi đến nhà cung cấp AI của bạn.",
+      "preview": {
+        "label": "Xem trước thay đổi của AI",
+        "description": "Hiển thị văn bản mới trước khi nó thay thế văn bản cũ. Tắt đi để sửa nhanh: Ctrl+Z trong ứng dụng vẫn hoàn tác được."
+      },
+      "whatCanISay": "Tôi có thể nói gì?"
     }
   },
   "footer": {
@@ -1409,7 +1423,18 @@
     "send": "Gửi",
     "cancel": "Hủy",
     "noticeTitle": "Kusema",
-    "close": "Đóng"
+    "close": "Đóng",
+    "edit": {
+      "title": "Thay thế văn bản đã chọn?",
+      "instruction": "“{{instruction}}”",
+      "original": "Hiện tại",
+      "replacement": "Mới",
+      "by": "Được sửa bởi {{provider}}",
+      "richText": "Định dạng như chữ đậm hoặc kiểu trong vùng chọn có thể bị mất.",
+      "apply": "Thay thế",
+      "cancel": "Hủy",
+      "keys": "Enter để thay thế, Esc để hủy. Ctrl+Z trong ứng dụng sẽ hoàn tác."
+    }
   },
   "secureInput": {
     "blockedWithCulprit_one": "{{name}} có thể đang chặn 1 phím tắt",
@@ -1421,5 +1446,60 @@
     "learnMore": "Cách khắc phục",
     "recorderBlocked": "Hiện không thể ghi phím tắt — Secure Input của macOS đang chặn các sự kiện phím. Hãy xử lý cảnh báo Secure Input trước.",
     "dismiss": "Bỏ qua"
+  },
+  "voiceCommands": {
+    "title": "Tôi có thể nói gì?",
+    "intro": "Giữ phím tắt Sửa bằng giọng nói ({{shortcut}}) và nói riêng một trong các lệnh này. Các lệnh có ghi “Cũng dùng được khi đọc chính tả liên tục” cũng hoạt động ở đó khi nói riêng.",
+    "close": "Đóng",
+    "inDictation": "Cũng dùng được khi đọc chính tả liên tục",
+    "groups": {
+      "select": "Chọn",
+      "move": "Di chuyển",
+      "edit": "Chỉnh sửa",
+      "ai": "Sửa bằng AI"
+    },
+    "ai": {
+      "description": "Hãy chọn văn bản trước, hoặc cứ đọc chính tả: nếu không có gì được chọn, Kusema dùng văn bản cuối cùng nó đã gõ trong cửa sổ đó. Mọi thứ không phải là lệnh đều là yêu cầu cho nhà cung cấp AI của bạn. Nó chỉ sửa đúng điều bạn yêu cầu và không thêm thông tin.",
+      "examples": "“làm cho trang trọng hơn”, “rút gọn còn hai câu”, “chuyển thành danh sách gạch đầu dòng”, “sửa ngữ pháp”, “dịch sang tiếng Anh”",
+      "privileged": "Ở chế độ Privileged, chỉ có thể dùng mô hình trên máy tính này."
+    },
+    "english": "Các lệnh bằng tiếng Anh, dù Kusema đặt ngôn ngữ nào.",
+    "support": "“select last sentence”, “select last paragraph” và “select <words>” cần ứng dụng cho phép Kusema đọc văn bản, như Word, Outlook, Notepad hoặc ô văn bản trong Chrome hay Edge. Các lệnh khác dùng phím chuẩn và hoạt động hầu như ở mọi nơi.",
+    "commands": {
+      "selectLastWord": "Chọn từ trước con trỏ.",
+      "selectLastWords": "Chọn số từ đó trước con trỏ, tối đa 50.",
+      "selectLine": "Chọn dòng có con trỏ.",
+      "selectAll": "Chọn tất cả.",
+      "selectLastSentence": "Chọn câu trước con trỏ.",
+      "selectLastParagraph": "Chọn đoạn trước con trỏ.",
+      "selectPhrase": "Chọn những từ đó: chỗ gần nhất trước con trỏ, nếu không có thì chỗ đầu tiên sau con trỏ.",
+      "lineStart": "Đến đầu dòng.",
+      "lineEnd": "Đến cuối dòng.",
+      "documentStart": "Đến đầu tài liệu.",
+      "documentEnd": "Đến cuối tài liệu.",
+      "newParagraph": "Bắt đầu đoạn mới.",
+      "newLine": "Xuống dòng.",
+      "deleteThat": "Xóa phần đã chọn.",
+      "undoThat": "Hoàn tác thay đổi gần nhất (Ctrl+Z).",
+      "copyThat": "Sao chép phần đã chọn.",
+      "cutThat": "Cắt phần đã chọn.",
+      "pasteThat": "Dán."
+    }
+  },
+  "voiceEdit": {
+    "notice": {
+      "noWindow": "Hãy nhấp vào văn bản bạn muốn sửa rồi thử lại.",
+      "unsupported": "Hiện tại, sửa bằng giọng nói chỉ hoạt động trên Windows.",
+      "selectFirst": "Hãy chọn văn bản bạn muốn sửa trước.",
+      "nothingSelected": "Chưa có gì được chọn.",
+      "noTextPattern": "Ứng dụng này không cho Kusema tìm văn bản bằng giọng nói. Hãy chọn bằng chuột hoặc bàn phím.",
+      "nothingBefore": "Không có văn bản trước con trỏ.",
+      "notFound": "Không tìm thấy “{{name}}”.",
+      "windowChanged": "Cửa sổ đã thay đổi nên không có gì được sửa.",
+      "selectionChanged": "Vùng chọn đã thay đổi nên không có gì được thay thế.",
+      "noChange": "Văn bản không cần sửa.",
+      "emptyReply": "{{name}} trả về câu trả lời trống.",
+      "failed": "Không thể làm việc đó trong cửa sổ này."
+    }
   }
 }

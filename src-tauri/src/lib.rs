@@ -40,6 +40,7 @@ mod tray;
 mod tray_i18n;
 mod tts;
 mod utils;
+mod voice_edit;
 
 pub use cli::CliArgs;
 #[cfg(debug_assertions)]
@@ -859,6 +860,8 @@ pub fn run(cli_args: CliArgs) {
             screen::card::answer_screen_card,
             screen::card::dismiss_screen_card,
             screen::card::set_screen_card_enlarged,
+            voice_edit::get_voice_commands,
+            voice_edit::change_voice_edit_preview_setting,
             tts::get_tts_voices,
             tts::preview_tts_voice,
             tts::change_assistant_speak_replies_setting,

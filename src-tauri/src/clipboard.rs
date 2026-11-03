@@ -967,6 +967,92 @@ pub fn press_backspaces(
     Ok(())
 }
 
+/// Kusema: runs `f` with the shared Enigo, under the paste lock, if `on_target`
+/// still holds right before. `false` if it didn't, and nothing was sent.
+pub(crate) fn input_on_target(
+    app_handle: &AppHandle,
+    on_target: OnTarget,
+    f: impl FnOnce(&mut Enigo) -> Result<(), String> + Send + 'static,
+) -> Result<bool, String> {
+    let _paste = PASTE_LOCK.lock().unwrap_or_else(PoisonError::into_inner);
+    with_enigo(app_handle, move |enigo| {
+        if !on_target() {
+            return Ok(false);
+        }
+        f(enigo)?;
+        Ok(true)
+    })
+}
+
+/// How long `copy_selection` waits for the app to put its selection on the clipboard.
+const COPY_WAIT: Duration = Duration::from_millis(500);
+
+/// Kusema: the selected text in the focused app, copied with Ctrl+C, the
+/// user's clipboard saved first and put back after, as a paste does. `None`
+/// if nothing was copied: nothing selected, or the app doesn't copy.
+pub fn copy_selection(
+    app_handle: &AppHandle,
+    on_target: OnTarget,
+) -> Result<Option<String>, String> {
+    let _paste = PASTE_LOCK.lock().unwrap_or_else(PoisonError::into_inner);
+    refuse_clipboard_in_isolated_run()?;
+    let clipboard = app_handle.clipboard();
+    let saved_text = clipboard.read_text().ok().filter(|t| !t.is_empty());
+    let saved_image = if saved_text.is_none() {
+        clipboard.read_image().ok().map(|image| image.to_owned())
+    } else {
+        None
+    };
+    let restore = || {
+        if let Some(content) = &saved_text {
+            let _ = write_text_to_clipboard(app_handle, content);
+        } else if let Some(image) = &saved_image {
+            let _ = clipboard.write_image(image);
+        } else {
+            let _ = clipboard.clear();
+        }
+    };
+    // Empty, so old content can't pass for the selection.
+    let _ = clipboard.clear();
+    let sent = with_enigo(app_handle, move |enigo| {
+        if !on_target() {
+            return Ok(false);
+        }
+        enigo
+            .key(Key::Control, Direction::Press)
+            .map_err(|e| format!("Failed to press Control: {e}"))?;
+        #[cfg(target_os = "windows")]
+        let c = Key::Other(0x43); // VK_C
+        #[cfg(not(target_os = "windows"))]
+        let c = Key::Unicode('c');
+        let clicked = enigo.key(c, Direction::Click);
+        let _ = enigo.key(Key::Control, Direction::Release);
+        clicked.map_err(|e| format!("Failed to press C: {e}"))?;
+        Ok(true)
+    });
+    let copied = match sent {
+        Ok(true) => {
+            let deadline = std::time::Instant::now() + COPY_WAIT;
+            loop {
+                if let Some(text) = clipboard.read_text().ok().filter(|t| !t.is_empty()) {
+                    break Some(text);
+                }
+                if std::time::Instant::now() >= deadline {
+                    break None;
+                }
+                std::thread::sleep(Duration::from_millis(20));
+            }
+        }
+        Ok(false) => None,
+        Err(e) => {
+            restore();
+            return Err(e);
+        }
+    };
+    restore();
+    Ok(copied)
+}
+
 /// Pastes `text` into the focused app. Call from a worker thread, never the main
 /// thread: it sleeps between steps (input injection hops via `with_enigo`).
 pub fn paste(text: String, app_handle: AppHandle) -> Result<(), String> {

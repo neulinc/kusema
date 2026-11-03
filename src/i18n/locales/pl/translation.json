@@ -446,6 +446,10 @@
           "toggle_privileged": {
             "name": "Tryb Privileged",
             "description": "Naciśnij, aby włączyć lub wyłączyć tryb Privileged."
+          },
+          "voice_edit": {
+            "name": "Edytuj głosem",
+            "description": "Zaznacz tekst, przytrzymaj skrót i powiedz, jak go zmienić („napisz to bardziej formalnie”), albo powiedz polecenie, np. „select last word”."
           }
         },
         "errors": {
@@ -1217,7 +1221,8 @@
         "provider_models": "Pobranie listy modeli dostawcy",
         "model_download": "Pobranie modelu mowy",
         "voice_download": "Pobranie głosu",
-        "update_check": "Sprawdzenie aktualizacji"
+        "update_check": "Sprawdzenie aktualizacji",
+        "voice_edit": "Edycja głosowa"
       },
       "data": {
         "text": "Tekst",
@@ -1326,6 +1331,15 @@
         "label": "Dźwięki dyktowania ciągłego",
         "description": "Odtwarzaj krótki dźwięk, gdy dyktowanie ciągłe się zaczyna i kończy. Dźwięki dla innego dyktowania znajdziesz niżej, w sekcji Dźwięk."
       }
+    },
+    "voiceEdit": {
+      "title": "Edycja głosowa",
+      "description": "Zmieniaj tekst w dowolnej aplikacji głosem. Zaznacz go, przytrzymaj skrót i powiedz, co zrobić. Polecenia takie jak „select last word” zostają na tym komputerze; instrukcje takie jak „skróć to” trafiają do Twojego dostawcy AI.",
+      "preview": {
+        "label": "Podgląd zmian AI",
+        "description": "Pokazuje nowy tekst, zanim zastąpi stary. Wyłącz dla szybkich zmian: Ctrl+Z w aplikacji nadal je cofa."
+      },
+      "whatCanISay": "Co mogę powiedzieć?"
     }
   },
   "footer": {
@@ -1421,7 +1435,18 @@
     "send": "Wyślij",
     "cancel": "Anuluj",
     "noticeTitle": "Kusema",
-    "close": "Zamknij"
+    "close": "Zamknij",
+    "edit": {
+      "title": "Zastąpić zaznaczony tekst?",
+      "instruction": "„{{instruction}}”",
+      "original": "Teraz",
+      "replacement": "Nowy",
+      "by": "Zmienione przez {{provider}}",
+      "richText": "Formatowanie zaznaczenia, takie jak pogrubienie czy style, może zostać utracone.",
+      "apply": "Zastąp",
+      "cancel": "Anuluj",
+      "keys": "Enter zastępuje, Esc anuluje. Ctrl+Z w aplikacji cofa zmianę."
+    }
   },
   "secureInput": {
     "blockedWithCulprit_one": "{{name}} może blokować 1 skrót",
@@ -1437,5 +1462,60 @@
     "learnMore": "Jak to naprawić",
     "recorderBlocked": "Nie można teraz nagrać skrótu — Secure Input w macOS blokuje zdarzenia klawiszy. Najpierw rozwiąż ostrzeżenie o Secure Input.",
     "dismiss": "Odrzuć"
+  },
+  "voiceCommands": {
+    "title": "Co mogę powiedzieć?",
+    "intro": "Przytrzymaj skrót Edytuj głosem ({{shortcut}}) i powiedz jedno z tych poleceń, samo. Polecenia oznaczone „Także w dyktowaniu ciągłym” działają tam również, gdy powiesz je osobno.",
+    "close": "Zamknij",
+    "inDictation": "Także w dyktowaniu ciągłym",
+    "groups": {
+      "select": "Zaznaczanie",
+      "move": "Przechodzenie",
+      "edit": "Edycja",
+      "ai": "Zmiana z pomocą AI"
+    },
+    "ai": {
+      "description": "Najpierw zaznacz tekst albo po prostu dyktuj: jeśli nic nie jest zaznaczone, Kusema użyje ostatniego tekstu wpisanego w tym oknie. Wszystko, co nie jest poleceniem, jest instrukcją dla Twojego dostawcy AI. Zmienia tylko to, o co prosisz, i nie dodaje faktów.",
+      "examples": "„napisz to bardziej formalnie”, „skróć do dwóch zdań”, „zamień na listę punktów”, „popraw gramatykę”, „przetłumacz na angielski”",
+      "privileged": "W trybie Privileged można użyć tylko modelu na tym komputerze."
+    },
+    "english": "Polecenia są po angielsku, niezależnie od języka Kusemy.",
+    "support": "„select last sentence”, „select last paragraph” i „select <words>” wymagają aplikacji, która pozwala Kusemie odczytać tekst, np. Word, Outlook, Notatnik lub pole tekstowe w Chrome albo Edge. Pozostałe używają standardowych klawiszy i działają prawie wszędzie.",
+    "commands": {
+      "selectLastWord": "Zaznacza słowo przed kursorem.",
+      "selectLastWords": "Zaznacza tyle słów przed kursorem, maksymalnie 50.",
+      "selectLine": "Zaznacza wiersz, w którym jest kursor.",
+      "selectAll": "Zaznacza wszystko.",
+      "selectLastSentence": "Zaznacza zdanie przed kursorem.",
+      "selectLastParagraph": "Zaznacza akapit przed kursorem.",
+      "selectPhrase": "Zaznacza te słowa: najbliższe wystąpienie przed kursorem, a jeśli go nie ma, pierwsze za nim.",
+      "lineStart": "Przechodzi na początek wiersza.",
+      "lineEnd": "Przechodzi na koniec wiersza.",
+      "documentStart": "Przechodzi na początek dokumentu.",
+      "documentEnd": "Przechodzi na koniec dokumentu.",
+      "newParagraph": "Zaczyna nowy akapit.",
+      "newLine": "Zaczyna nowy wiersz.",
+      "deleteThat": "Usuwa zaznaczenie.",
+      "undoThat": "Cofa ostatnią zmianę (Ctrl+Z).",
+      "copyThat": "Kopiuje zaznaczenie.",
+      "cutThat": "Wycina zaznaczenie.",
+      "pasteThat": "Wkleja."
+    }
+  },
+  "voiceEdit": {
+    "notice": {
+      "noWindow": "Kliknij w tekst, który chcesz zmienić, i spróbuj ponownie.",
+      "unsupported": "Na razie edycja głosowa działa tylko w systemie Windows.",
+      "selectFirst": "Najpierw zaznacz tekst, który chcesz zmienić.",
+      "nothingSelected": "Nic nie jest zaznaczone.",
+      "noTextPattern": "Ta aplikacja nie pozwala Kusemie znajdować tekstu głosem. Zaznacz go myszą lub klawiaturą.",
+      "nothingBefore": "Przed kursorem nie ma tekstu.",
+      "notFound": "Nie znaleziono „{{name}}”.",
+      "windowChanged": "Okno się zmieniło, więc nic nie zostało zmienione.",
+      "selectionChanged": "Zaznaczenie się zmieniło, więc nic nie zostało zastąpione.",
+      "noChange": "Tekst nie wymagał zmian.",
+      "emptyReply": "{{name}} zwrócił pustą odpowiedź.",
+      "failed": "Nie udało się tego zrobić w tym oknie."
+    }
   }
 }

@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/Button";
 
 type Confirm = Extract<Card, { kind: "confirm" }>;
 type Notice = Extract<Card, { kind: "notice" }>;
+type Edit = Extract<Card, { kind: "edit" }>;
 
 /** The card's page has painted; the backend shows (and focuses) it now. */
 const ready = () =>
@@ -133,7 +134,9 @@ const NoticeCard: React.FC<{ card: Notice }> = ({ card }) => {
       <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0 text-warning" />
       <div className="min-w-0 flex-1 space-y-1">
         <h1 className="text-sm font-semibold">{t("screenCard.noticeTitle")}</h1>
-        <p className="text-sm text-ink-2 select-text">{card.message}</p>
+        <p className="text-sm text-ink-2 select-text">
+          {card.key ? t(card.key, { name: card.name ?? "" }) : card.message}
+        </p>
       </div>
       <button
         type="button"
@@ -143,6 +146,100 @@ const NoticeCard: React.FC<{ card: Notice }> = ({ card }) => {
       >
         <X className="h-4 w-4" />
       </button>
+    </div>
+  );
+};
+
+/** Kusema voice editing: the selection and the AI's version of it. */
+const EditCard: React.FC<{ card: Edit }> = ({ card }) => {
+  const { t } = useTranslation();
+  const [secondsLeft, setSecondsLeft] = useState(card.timeoutSecs);
+  const answered = useRef(false);
+
+  const answer = useCallback((apply: boolean) => {
+    if (answered.current) return;
+    answered.current = true;
+    void commands.answerScreenCard(apply);
+  }, []);
+
+  useEffect(() => {
+    ready();
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        answer(true);
+      } else if (event.key === "Escape") {
+        event.preventDefault();
+        answer(false);
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    const timer = setInterval(
+      () => setSecondsLeft((s) => Math.max(0, s - 1)),
+      1000,
+    );
+    const onFocus = () => document.getElementById("edit-card-apply")?.focus();
+    window.addEventListener("focus", onFocus);
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      window.removeEventListener("focus", onFocus);
+      clearInterval(timer);
+    };
+  }, [answer]);
+
+  const block = (label: string, text: string, strong: boolean) => (
+    <section className="flex min-h-0 flex-1 flex-col gap-1">
+      <h2 className="text-xs font-medium uppercase tracking-wide text-ink-3">
+        {label}
+      </h2>
+      <div
+        className={`min-h-0 flex-1 overflow-auto whitespace-pre-wrap rounded-md border border-line p-2 text-sm select-text ${
+          strong ? "bg-background" : "bg-wash text-ink-2"
+        }`}
+      >
+        {text}
+      </div>
+    </section>
+  );
+
+  return (
+    <div className="flex h-full flex-col gap-3 bg-background p-4 text-text select-none">
+      <div className="flex items-baseline justify-between gap-2">
+        <h1 className="text-sm font-semibold">{t("screenCard.edit.title")}</h1>
+        <span className="text-xs text-ink-3 tabular-nums">
+          {t("screenCard.autoCancel", { seconds: secondsLeft })}
+        </span>
+      </div>
+      <p className="line-clamp-2 text-sm select-text">
+        {t("screenCard.edit.instruction", { instruction: card.instruction })}
+      </p>
+      {block(t("screenCard.edit.original"), card.original, false)}
+      {block(t("screenCard.edit.replacement"), card.replacement, true)}
+      <div className="space-y-1">
+        <p className="text-xs text-ink-2">
+          {t("screenCard.edit.by", { provider: card.provider })}
+        </p>
+        {card.richText && (
+          <p className="text-xs text-warning">
+            {t("screenCard.edit.richText")}
+          </p>
+        )}
+        <p className="text-xs text-ink-3">{t("screenCard.edit.keys")}</p>
+      </div>
+      <div className="flex justify-end gap-2">
+        <Button variant="secondary" size="sm" onClick={() => answer(false)}>
+          {t("screenCard.edit.cancel")}
+        </Button>
+        <Button
+          id="edit-card-apply"
+          variant="primary"
+          size="sm"
+          autoFocus
+          onClick={() => answer(true)}
+        >
+          {t("screenCard.edit.apply")}
+        </Button>
+      </div>
     </div>
   );
 };
@@ -158,6 +255,7 @@ const ScreenCard: React.FC = () => {
   }, []);
 
   if (!card) return null;
+  if (card.kind === "edit") return <EditCard card={card} />;
   return card.kind === "confirm" ? (
     <ConfirmCard card={card} />
   ) : (

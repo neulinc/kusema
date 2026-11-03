@@ -5,6 +5,7 @@ import { MicrophoneSelector } from "../MicrophoneSelector";
 import { ChannelSelector } from "../ChannelSelector";
 import { ShortcutInput } from "../ShortcutInput";
 import { ContinuousDictationSettings } from "../ContinuousDictationSettings";
+import { VoiceEditingSettings } from "../VoiceEditingSettings";
 import { CleanupSettings } from "../CleanupSettings";
 import { RecordingGlowSettings } from "../RecordingGlowSettings";
 import { SettingsGroup } from "../../ui/SettingsGroup";
@@ -41,6 +42,7 @@ export const GeneralSettings: React.FC<{
         {!isLinux && <ShortcutInput shortcutId="cancel" grouped={true} />}
       </SettingsGroup>
       <ContinuousDictationSettings />
+      {isWindows && <VoiceEditingSettings />}
       {isWindows && <RecordingGlowSettings />}
       <CleanupSettings onOpenPostProcessing={onOpenPostProcessing} />
       <SettingsGroup title={t("settings.languages.title")}>
