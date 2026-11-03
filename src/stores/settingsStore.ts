@@ -203,6 +203,10 @@ const settingUpdaters: {
   privileged_hotkey_enabled: (value) =>
     commands.changePrivilegedHotkeyEnabledSetting(value as boolean),
   glow_enabled: (value) => commands.changeGlowEnabledSetting(value as boolean),
+  kusema_key_enabled: (value) =>
+    commands.changeKusemaKeyEnabledSetting(value as boolean),
+  classic_shortcuts: (value) =>
+    commands.changeClassicShortcutsSetting(value as boolean),
   glow_dictation: (value) =>
     commands.changeGlowDictationSetting(value as boolean),
   assistant_speak_typed: (value) =>

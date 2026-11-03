@@ -10,7 +10,9 @@
     "cancel": "Cancel",
     "secureInputWarning": "⚠ Shortcuts blocked by Secure Input",
     "privilegedMode": "Privileged Mode",
-    "privilegedOn": "Privileged mode on"
+    "privilegedOn": "Privileged mode on",
+    "typeToKusema": "Type to Kusema…",
+    "kusemaKeys": "Kusema Keys"
   },
   "sidebar": {
     "general": "General",
@@ -252,7 +254,9 @@
         "waiting": "Your speech model is still downloading. This box will work as soon as it's ready.",
         "continuous": "For longer dictation, press <keys/> to keep listening until you press it again. Used to Dragon? You can set this to Numpad + under General.",
         "continuousRunning": "Continuous dictation is on. Your words appear in the box each time you pause. Press {{stop}} to stop it.",
-        "continuousEnded": "That's continuous dictation. In your other apps, your words are typed at the cursor."
+        "continuousEnded": "That's continuous dictation. In your other apps, your words are typed at the cursor.",
+        "continuousKey": "For longer dictation, double-tap <keys/>: Kusema keeps listening until you double-tap it again.",
+        "continuousRunningKey": "Continuous dictation is on. Your words appear in the box each time you pause. Double-tap {{key}} to stop it."
       },
       "assistant": {
         "title": "Set up the AI assistant (optional)",
@@ -297,7 +301,8 @@
           "continuous": "Continuous dictation: press to start and stop",
           "ask": "Ask Kusema",
           "askScreen": "Ask about my screen"
-        }
+        },
+        "typeToKusema": "To type a question instead:"
       }
     }
   },
@@ -1321,7 +1326,12 @@
       "done": "Done",
       "notDone": "Not done yet",
       "progress": "{{done}} of {{count}} done",
-      "allDone": "All three done. Nice work."
+      "allDone": "All three done. Nice work.",
+      "how": {
+        "hold": "Hold {{key}}",
+        "doubleTap": "Double-tap {{key}}",
+        "say": "Say “{{trigger}}, …”"
+      }
     },
     "glow": {
       "title": "Recording indicator",
@@ -1364,15 +1374,15 @@
     },
     "voiceEdit": {
       "title": "Voice Editing",
-      "description": "Change text in any app by voice. Select it, hold the shortcut and say what to do. Commands like “select last word” stay on this computer; instructions like “shorten this” go to your AI provider.",
+      "description": "Change text in any app by voice. Select it, hold the Kusema key and say “Kusema,” then what to do. Commands like “select last word” stay on this computer; instructions like “shorten this” go to your AI provider.",
       "preview": {
         "label": "Preview AI Edits",
         "description": "Show the new text before it replaces the old. Turn off for quick edits: Ctrl+Z in the app still undoes them."
       },
       "whatCanISay": "What can I say?",
       "trigger": {
-        "label": "Trigger Word in Continuous Dictation",
-        "description": "Start a sentence with this word during continuous dictation to change text instead of typing it: “Kusema, make this more formal”. Leave it empty to turn this off.",
+        "label": "Trigger Word",
+        "description": "Start what you say with this word to ask, edit or look at your screen instead of typing: “Kusema, make this more formal”. It works while you hold the Kusema key and in continuous dictation. Leave it empty to turn this off.",
         "placeholder": "Kusema"
       },
       "simpleKey": {
@@ -1547,6 +1557,11 @@
       "windowChanged": "The window changed, so the answer wasn't typed. Insert it from the Assistant page.",
       "notTyping": "The paste method is set to None, so the answer wasn't typed.",
       "failed": "Couldn't type the answer into this window."
+    },
+    "route": {
+      "ask": "Asking Kusema…",
+      "ask_screen": "Looking at your screen…",
+      "edit": "Editing…"
     }
   },
   "screenCard": {
@@ -1632,7 +1647,8 @@
     },
     "trigger": "During continuous dictation, start with “{{trigger}},” to change text the same way, for example “{{trigger}}, make this more formal”. Without it, everything is typed as you say it.",
     "triggerOff": "To change text during continuous dictation, set a trigger word under General → Voice Editing.",
-    "selectFirst": "Some apps, such as ONLYOFFICE, LibreOffice and Google Docs, don't show their text to Kusema. There, select the text with the mouse or keyboard first, and selecting a sentence, paragraph or phrase by voice doesn't work."
+    "selectFirst": "Some apps, such as ONLYOFFICE, LibreOffice and Google Docs, don't show their text to Kusema. There, select the text with the mouse or keyboard first, and selecting a sentence, paragraph or phrase by voice doesn't work.",
+    "introKey": "Hold {{key}} and say “{{trigger}},” then one of these. Commands marked “Also in continuous dictation” work there when said on their own."
   },
   "voiceEdit": {
     "notice": {
@@ -1673,5 +1689,50 @@
     "close": "Close",
     "hint": "Enter asks · Shift+Enter: new line · Esc closes",
     "noWindow": "Click the window you want to ask about, then open this box again."
+  },
+  "kusemaKey": {
+    "presets": {
+      "right_ctrl": "Right Ctrl",
+      "copilot": "Copilot key",
+      "numpad_plus": "Numpad +"
+    },
+    "card": {
+      "title": "Kusema keys",
+      "hold": "Hold <key/> to talk.",
+      "doubleTap": "Double-tap <key/> for continuous dictation.",
+      "say": "Say <q>{{trigger}}</q> first to ask, edit or look at your screen."
+    },
+    "settings": {
+      "title": "Kusema Key",
+      "description": "One key for dictation. Hold it to talk, double-tap it for continuous dictation, and start with “Kusema” to ask, edit or look at your screen. Other apps never see the key.",
+      "enabled": {
+        "label": "Use the Kusema Key",
+        "description": "Off, only the shortcuts below work."
+      },
+      "key": {
+        "label": "Key",
+        "description": "Right Ctrl suits most keyboards. Laptops without one often have a Copilot key. Numpad + is Dragon's microphone key. The key you choose stops doing anything else.",
+        "press": "Press the key you want",
+        "pressNow": "Press a key now (Esc cancels)"
+      },
+      "copilotSuggest": "This keyboard has a Copilot key, and Kusema hasn't seen a Right Ctrl. Use the Copilot key instead?",
+      "useCopilot": "Use the Copilot key",
+      "laptopHint": "No Right Ctrl on this laptop? Choose the Copilot key, or press the key you want.",
+      "classic": {
+        "label": "Classic Shortcuts",
+        "description": "Also keep a separate shortcut for each action (Ctrl+Space to dictate, Ctrl+Alt+Space to ask and so on), alongside the Kusema key."
+      }
+    },
+    "refusal": {
+      "types": "That key types something, so it can't be the Kusema key. Choose a spare key, like Right Ctrl, Pause or a function key.",
+      "needed": "That key is needed for other things. Choose a spare key, like Right Ctrl, Pause or a function key.",
+      "moves": "That key moves the cursor. Choose a spare key, like Right Ctrl, Pause or a function key."
+    },
+    "news": {
+      "title": "New: simpler keys",
+      "body": "Kusema now has one key instead of many shortcuts. These are the only two rules:",
+      "keptClassic": "Kusema now has one key for everything. You had changed a shortcut, so your shortcuts still work too. Turn them off under Classic Shortcuts if you like.",
+      "gotIt": "Got it"
+    }
   }
 }

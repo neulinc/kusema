@@ -10,7 +10,9 @@
     "secureInputWarning": "⚠ Zkratky blokuje Secure Input",
     "privilegedMode": "Režim Privileged",
     "privilegedOn": "Režim Privileged zapnut",
-    "correctLast": "Opravit poslední diktát…"
+    "correctLast": "Opravit poslední diktát…",
+    "typeToKusema": "Napsat Kusemě…",
+    "kusemaKeys": "Klávesy Kusemy"
   },
   "sidebar": {
     "general": "Obecné",
@@ -254,7 +256,9 @@
         "waiting": "Váš model řeči se stále stahuje. Toto pole začne fungovat, jakmile bude připraven.",
         "continuous": "Pro delší diktování stiskněte <keys/> a Kusema bude poslouchat, dokud klávesu nestisknete znovu. Zvyklí na Dragon? V sekci Obecné můžete nastavit Num +.",
         "continuousRunning": "Souvislé diktování je zapnuté. Vaše slova se objeví v poli po každé pauze. Ukončíte ho klávesou {{stop}}.",
-        "continuousEnded": "To bylo souvislé diktování. V ostatních aplikacích se slova píší na místo kurzoru."
+        "continuousEnded": "To bylo souvislé diktování. V ostatních aplikacích se slova píší na místo kurzoru.",
+        "continuousKey": "Pro delší diktování stiskněte dvakrát <keys/>: Kusema poslouchá, dokud ji znovu nestisknete dvakrát.",
+        "continuousRunningKey": "Průběžné diktování je zapnuté. Vaše slova se objeví v poli po každé pauze. Zastavíte ho dvojitým stiskem {{key}}."
       },
       "assistant": {
         "title": "Nastavte asistenta AI (volitelné)",
@@ -299,7 +303,8 @@
           "continuous": "Souvislé diktování: stisknutím spustit a ukončit",
           "ask": "Zeptat se Kusemy",
           "askScreen": "Zeptat se na obrazovku"
-        }
+        },
+        "typeToKusema": "Chcete-li místo toho otázku napsat:"
       }
     }
   },
@@ -1333,7 +1338,12 @@
       "done": "Hotovo",
       "notDone": "Ještě ne",
       "progress": "Hotovo {{done}} z {{count}}",
-      "allDone": "Všechny tři hotové. Výborně."
+      "allDone": "Všechny tři hotové. Výborně.",
+      "how": {
+        "hold": "Podržte {{key}}",
+        "doubleTap": "Dvakrát stiskněte {{key}}",
+        "say": "Řekněte „{{trigger}}, …“"
+      }
     },
     "glow": {
       "title": "Indikátor nahrávání",
@@ -1376,15 +1386,15 @@
     },
     "voiceEdit": {
       "title": "Hlasové úpravy",
-      "description": "Měňte text v jakékoli aplikaci hlasem. Označte ho, podržte zkratku a řekněte, co udělat. Příkazy jako „select last word“ zůstávají v tomto počítači; pokyny jako „zkrať to“ jdou k vašemu poskytovateli AI.",
+      "description": "Měňte text v jakékoli aplikaci hlasem. Označte ho, podržte klávesu Kusemy a řekněte „Kusema“, pak co udělat. Příkazy jako „select last word“ zůstávají v tomto počítači; pokyny jako „shorten this“ jdou vašemu poskytovateli AI.",
       "preview": {
         "label": "Náhled úprav AI",
         "description": "Ukáže nový text dřív, než nahradí starý. Pro rychlé úpravy vypněte: Ctrl+Z v aplikaci je i tak vrátí."
       },
       "whatCanISay": "Co můžu říct?",
       "trigger": {
-        "label": "Spouštěcí slovo při průběžném diktování",
-        "description": "Při průběžném diktování začněte větu tímto slovem, chcete-li text změnit místo napsání: „Kusema, udělej to formálnější“. Ponechte prázdné, chcete-li funkci vypnout.",
+        "label": "Spouštěcí slovo",
+        "description": "Začněte tímto slovem a místo psaní se můžete ptát, upravovat nebo nechat Kusemu podívat se na obrazovku: „Kusema, make this more formal“. Funguje to při držení klávesy Kusemy a při průběžném diktování. Nechte prázdné, chcete-li to vypnout.",
         "placeholder": "Kusema"
       },
       "simpleKey": {
@@ -1559,6 +1569,11 @@
       "windowChanged": "Okno se změnilo, takže odpověď nebyla napsána. Vložte ji ze stránky Asistent.",
       "notTyping": "Způsob vkládání je nastaven na „Žádné“, takže odpověď nebyla napsána.",
       "failed": "Odpověď se do tohoto okna nepodařilo napsat."
+    },
+    "route": {
+      "ask": "Ptám se Kusemy…",
+      "ask_screen": "Dívám se na obrazovku…",
+      "edit": "Upravuji…"
     }
   },
   "screenCard": {
@@ -1648,7 +1663,8 @@
     },
     "trigger": "Při průběžném diktování začněte slovy „{{trigger}},“ a text se změní stejně, například „{{trigger}}, udělej to formálnější“. Bez toho slova se vše napíše tak, jak to řeknete.",
     "triggerOff": "Chcete-li měnit text při průběžném diktování, nastavte spouštěcí slovo v Obecné → Hlasové úpravy.",
-    "selectFirst": "Některé aplikace, například ONLYOFFICE, LibreOffice a Google Docs, Kusemě svůj text neukazují. Tam nejdřív označte text myší nebo klávesnicí; označování věty, odstavce nebo slov hlasem tam nefunguje."
+    "selectFirst": "Některé aplikace, například ONLYOFFICE, LibreOffice a Google Docs, Kusemě svůj text neukazují. Tam nejdřív označte text myší nebo klávesnicí; označování věty, odstavce nebo slov hlasem tam nefunguje.",
+    "introKey": "Podržte {{key}} a řekněte „{{trigger}}“, pak jeden z těchto příkazů. Příkazy označené „Také při průběžném diktování“ tam fungují, když je řeknete samostatně."
   },
   "voiceEdit": {
     "notice": {
@@ -1689,5 +1705,50 @@
     "close": "Zavřít",
     "hint": "Enter se zeptá · Shift+Enter: nový řádek · Esc zavře",
     "noWindow": "Klikněte do okna, na které se chcete zeptat, a otevřete toto pole znovu."
+  },
+  "kusemaKey": {
+    "presets": {
+      "right_ctrl": "Pravý Ctrl",
+      "copilot": "Klávesa Copilot",
+      "numpad_plus": "Numpad +"
+    },
+    "card": {
+      "title": "Klávesy Kusemy",
+      "hold": "Podržte <key/> a mluvte.",
+      "doubleTap": "Dvojitým stiskem <key/> spustíte průběžné diktování.",
+      "say": "Řekněte nejdřív <q>{{trigger}}</q> a můžete se ptát, upravovat nebo nechat Kusemu podívat se na obrazovku."
+    },
+    "settings": {
+      "title": "Klávesa Kusemy",
+      "description": "Jedna klávesa na diktování. Podržte ji a mluvte, dvojitým stiskem spustíte průběžné diktování a když začnete slovem „Kusema“, můžete se ptát, upravovat nebo nechat Kusemu podívat se na obrazovku. Ostatní aplikace klávesu nikdy neuvidí.",
+      "enabled": {
+        "label": "Používat klávesu Kusemy",
+        "description": "Vypnuto fungují jen zkratky níže."
+      },
+      "key": {
+        "label": "Klávesa",
+        "description": "Pravý Ctrl se hodí pro většinu klávesnic. Notebooky bez něj mají často klávesu Copilot. Numpad + je klávesa mikrofonu v Dragonu. Zvolená klávesa už nebude dělat nic jiného.",
+        "press": "Stiskněte požadovanou klávesu",
+        "pressNow": "Stiskněte teď klávesu (Esc zruší)"
+      },
+      "copilotSuggest": "Tato klávesnice má klávesu Copilot a Kusema neviděla pravý Ctrl. Použít místo toho klávesu Copilot?",
+      "useCopilot": "Použít klávesu Copilot",
+      "laptopHint": "Nemá tento notebook pravý Ctrl? Zvolte klávesu Copilot nebo stiskněte požadovanou klávesu.",
+      "classic": {
+        "label": "Klasické zkratky",
+        "description": "Ponechat i samostatnou zkratku pro každou akci (Ctrl+Mezerník pro diktování, Ctrl+Alt+Mezerník pro dotaz atd.) vedle klávesy Kusemy."
+      }
+    },
+    "refusal": {
+      "types": "Tato klávesa něco píše, takže nemůže být klávesou Kusemy. Zvolte volnou klávesu, například pravý Ctrl, Pause nebo funkční klávesu.",
+      "needed": "Tato klávesa je potřeba k jiným věcem. Zvolte volnou klávesu, například pravý Ctrl, Pause nebo funkční klávesu.",
+      "moves": "Tato klávesa posouvá kurzor. Zvolte volnou klávesu, například pravý Ctrl, Pause nebo funkční klávesu."
+    },
+    "news": {
+      "title": "Novinka: jednodušší klávesy",
+      "body": "Kusema má teď jednu klávesu místo mnoha zkratek. Platí jen tato dvě pravidla:",
+      "keptClassic": "Kusema má teď jednu klávesu na všechno. Změnili jste zkratku, takže vaše zkratky dál fungují. Vypnout je můžete v části Klasické zkratky.",
+      "gotIt": "Rozumím"
+    }
   }
 }

@@ -6,6 +6,8 @@ import { Button } from "../ui/Button";
 import { useSettings } from "../../hooks/useSettings";
 import { formatKeyCombination } from "../../lib/utils/keyboard";
 import { useOsType } from "../../hooks/useOsType";
+import { KusemaKeysCard } from "../shared/KusemaKeysCard";
+import { keyLabel, triggerWord } from "@/lib/kusemaKey";
 
 const GROUPS: CommandGroup[] = ["select", "move", "edit"];
 
@@ -31,13 +33,22 @@ export const VoiceCommandsDialog: React.FC<{
   const binding = getSetting("bindings")?.voice_edit?.current_binding ?? "";
   const shortcut = binding ? formatKeyCombination(binding, osType) : "";
   const trigger = (getSetting("voice_edit_trigger") ?? "").trim();
+  const classic = getSetting("classic_shortcuts") ?? false;
+  const keyName = keyLabel(getSetting("kusema_key"), t);
 
   return (
     <Dialog
       open={open}
       onOpenChange={onOpenChange}
       title={t("voiceCommands.title")}
-      description={t("voiceCommands.intro", { shortcut })}
+      description={
+        classic
+          ? t("voiceCommands.intro", { shortcut })
+          : t("voiceCommands.introKey", {
+              key: keyName,
+              trigger: triggerWord(trigger),
+            })
+      }
       closeLabel={t("voiceCommands.close")}
       className="max-w-2xl"
       footer={
@@ -51,6 +62,7 @@ export const VoiceCommandsDialog: React.FC<{
       }
     >
       <div className="space-y-5 text-sm">
+        <KusemaKeysCard />
         {GROUPS.map((group) => (
           <section key={group} className="space-y-2">
             <h3 className="font-semibold">

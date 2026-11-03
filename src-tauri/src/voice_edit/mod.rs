@@ -290,6 +290,70 @@ pub fn at_press(app: &AppHandle) -> bool {
     }
 }
 
+/// Kusema key: at a dictation press, remember the window and control with
+/// the caret, as the editing hotkey does, but saying nothing if there's
+/// none: the speech is most likely plain dictation.
+pub(crate) fn note_press_quietly() -> bool {
+    pending().take();
+    let Ok(window) = crate::screen::foreground_target() else {
+        return false;
+    };
+    match crate::dictation::current_focus() {
+        Some(focus) if focus.window == window.handle() => {
+            *pending() = Some(Target::new(window, focus, false));
+            true
+        }
+        _ => false,
+    }
+}
+
+/// Whether a press left a window to edit in.
+pub(crate) fn has_pending() -> bool {
+    pending().is_some()
+}
+
+/// Said when speech for an edit came with no window to edit in.
+pub(crate) fn tell_no_window(app: &AppHandle) {
+    tell(app, Problem::NoWindow, None);
+}
+
+/// What there is to work on in `target`: a selection (read through UI
+/// Automation only, never the clipboard), else Kusema's last typed text if
+/// it's still before the caret there.
+fn text_here_in(target: Target) -> (crate::kusema_key::route::TextHere, Option<String>) {
+    use crate::kusema_key::route::TextHere;
+    if !target.hides_text {
+        if let Ok((text, _)) = platform::selection() {
+            if !text.trim().is_empty() {
+                return (TextHere::Selected, Some(text));
+            }
+        }
+    }
+    let typed = last_typed::get();
+    if last_typed::check(typed.as_ref(), Some(target.focus), Instant::now()).is_ok() {
+        return (TextHere::LastTyped, None);
+    }
+    (TextHere::Nothing, None)
+}
+
+/// For the window noted at the press.
+pub(crate) fn text_here() -> (crate::kusema_key::route::TextHere, Option<String>) {
+    match *pending() {
+        Some(target) => text_here_in(target),
+        None => (crate::kusema_key::route::TextHere::Nothing, None),
+    }
+}
+
+/// For continuous dictation's window, if it's still in front.
+pub(crate) fn text_here_in_window(
+    window: isize,
+) -> (crate::kusema_key::route::TextHere, Option<String>) {
+    match dictation_target(window) {
+        Some(target) => text_here_in(target),
+        None => (crate::kusema_key::route::TextHere::Nothing, None),
+    }
+}
+
 /// The lowercase file name of the program that owns `window`.
 pub(crate) fn process_name(window: isize) -> String {
     platform::app_of(window, 0).0

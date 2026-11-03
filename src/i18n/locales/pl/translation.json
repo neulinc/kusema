@@ -10,7 +10,9 @@
     "secureInputWarning": "⚠ Skróty zablokowane przez Secure Input",
     "privilegedMode": "Tryb Privileged",
     "privilegedOn": "Tryb Privileged włączony",
-    "correctLast": "Popraw ostatnie dyktowanie…"
+    "correctLast": "Popraw ostatnie dyktowanie…",
+    "typeToKusema": "Napisz do Kusema…",
+    "kusemaKeys": "Klawisze Kusema"
   },
   "sidebar": {
     "general": "Ogólne",
@@ -254,7 +256,9 @@
         "waiting": "Model mowy nadal się pobiera. To pole zadziała, gdy tylko będzie gotowy.",
         "continuous": "Przy dłuższym dyktowaniu naciśnij <keys/>, a Kusema będzie słuchać, dopóki nie naciśniesz ponownie. Znasz Dragona? W sekcji Ogólne możesz ustawić Numpad +.",
         "continuousRunning": "Dyktowanie ciągłe jest włączone. Twoje słowa pojawiają się w polu po każdej pauzie. Naciśnij {{stop}}, aby zakończyć.",
-        "continuousEnded": "Tak działa dyktowanie ciągłe. W innych aplikacjach słowa są wpisywane w miejscu kursora."
+        "continuousEnded": "Tak działa dyktowanie ciągłe. W innych aplikacjach słowa są wpisywane w miejscu kursora.",
+        "continuousKey": "Aby dyktować dłużej, naciśnij dwukrotnie <keys/>: Kusema słucha, dopóki znów nie naciśniesz go dwukrotnie.",
+        "continuousRunningKey": "Dyktowanie ciągłe jest włączone. Twoje słowa pojawiają się w polu po każdej pauzie. Naciśnij dwukrotnie {{key}}, aby je zatrzymać."
       },
       "assistant": {
         "title": "Skonfiguruj asystenta AI (opcjonalnie)",
@@ -299,7 +303,8 @@
           "continuous": "Dyktowanie ciągłe: naciśnij, aby zacząć i zakończyć",
           "ask": "Zapytaj Kusema",
           "askScreen": "Zapytaj o mój ekran"
-        }
+        },
+        "typeToKusema": "Aby zamiast tego wpisać pytanie:"
       }
     }
   },
@@ -1333,7 +1338,12 @@
       "done": "Zrobione",
       "notDone": "Jeszcze nie",
       "progress": "Zrobione: {{done}} z {{count}}",
-      "allDone": "Wszystkie trzy zrobione. Świetna robota."
+      "allDone": "Wszystkie trzy zrobione. Świetna robota.",
+      "how": {
+        "hold": "Przytrzymaj {{key}}",
+        "doubleTap": "Naciśnij dwukrotnie {{key}}",
+        "say": "Powiedz „{{trigger}}, …”"
+      }
     },
     "glow": {
       "title": "Wskaźnik nagrywania",
@@ -1376,15 +1386,15 @@
     },
     "voiceEdit": {
       "title": "Edycja głosowa",
-      "description": "Zmieniaj tekst w dowolnej aplikacji głosem. Zaznacz go, przytrzymaj skrót i powiedz, co zrobić. Polecenia takie jak „select last word” zostają na tym komputerze; instrukcje takie jak „skróć to” trafiają do Twojego dostawcy AI.",
+      "description": "Zmieniaj tekst w dowolnej aplikacji głosem. Zaznacz go, przytrzymaj klawisz Kusema i powiedz „Kusema”, a potem co zrobić. Polecenia takie jak „select last word” zostają na tym komputerze; instrukcje takie jak „shorten this” trafiają do Twojego dostawcy AI.",
       "preview": {
         "label": "Podgląd zmian AI",
         "description": "Pokazuje nowy tekst, zanim zastąpi stary. Wyłącz dla szybkich zmian: Ctrl+Z w aplikacji nadal je cofa."
       },
       "whatCanISay": "Co mogę powiedzieć?",
       "trigger": {
-        "label": "Słowo wyzwalające w dyktowaniu ciągłym",
-        "description": "W dyktowaniu ciągłym zacznij zdanie od tego słowa, aby zmienić tekst zamiast go wpisać: „Kusema, napisz to bardziej formalnie”. Zostaw puste, aby wyłączyć.",
+        "label": "Słowo wywołujące",
+        "description": "Zacznij od tego słowa, aby zapytać, edytować lub pokazać ekran zamiast pisać: „Kusema, make this more formal”. Działa, gdy przytrzymujesz klawisz Kusema, i w dyktowaniu ciągłym. Zostaw puste, aby wyłączyć.",
         "placeholder": "Kusema"
       },
       "simpleKey": {
@@ -1559,6 +1569,11 @@
       "windowChanged": "Okno się zmieniło, więc odpowiedź nie została wpisana. Wstaw ją ze strony Asystent.",
       "notTyping": "Metoda wklejania jest ustawiona na „Brak”, więc odpowiedź nie została wpisana.",
       "failed": "Nie udało się wpisać odpowiedzi w tym oknie."
+    },
+    "route": {
+      "ask": "Pytam Kusema…",
+      "ask_screen": "Patrzę na Twój ekran…",
+      "edit": "Edytuję…"
     }
   },
   "screenCard": {
@@ -1648,7 +1663,8 @@
     },
     "trigger": "W dyktowaniu ciągłym zacznij od „{{trigger}},”, aby zmienić tekst w ten sam sposób, np. „{{trigger}}, napisz to bardziej formalnie”. Bez tego słowa wszystko jest wpisywane tak, jak mówisz.",
     "triggerOff": "Aby zmieniać tekst w dyktowaniu ciągłym, ustaw słowo wyzwalające w Ogólne → Edycja głosowa.",
-    "selectFirst": "Niektóre aplikacje, takie jak ONLYOFFICE, LibreOffice i Google Docs, nie pokazują Kusemie swojego tekstu. Tam najpierw zaznacz tekst myszą lub klawiaturą; zaznaczanie zdania, akapitu czy słów głosem nie działa."
+    "selectFirst": "Niektóre aplikacje, takie jak ONLYOFFICE, LibreOffice i Google Docs, nie pokazują Kusemie swojego tekstu. Tam najpierw zaznacz tekst myszą lub klawiaturą; zaznaczanie zdania, akapitu czy słów głosem nie działa.",
+    "introKey": "Przytrzymaj {{key}} i powiedz „{{trigger}}”, a potem jedno z tych poleceń. Polecenia oznaczone „Także w dyktowaniu ciągłym” działają tam, gdy powiesz je osobno."
   },
   "voiceEdit": {
     "notice": {
@@ -1689,5 +1705,50 @@
     "close": "Zamknij",
     "hint": "Enter pyta · Shift+Enter: nowy wiersz · Esc zamyka",
     "noWindow": "Kliknij okno, o które chcesz zapytać, i otwórz to pole ponownie."
+  },
+  "kusemaKey": {
+    "presets": {
+      "right_ctrl": "Prawy Ctrl",
+      "copilot": "Klawisz Copilot",
+      "numpad_plus": "Numpad +"
+    },
+    "card": {
+      "title": "Klawisze Kusema",
+      "hold": "Przytrzymaj <key/>, aby mówić.",
+      "doubleTap": "Naciśnij dwukrotnie <key/>, aby dyktować w trybie ciągłym.",
+      "say": "Powiedz najpierw <q>{{trigger}}</q>, aby zapytać, edytować lub pokazać swój ekran."
+    },
+    "settings": {
+      "title": "Klawisz Kusema",
+      "description": "Jeden klawisz do dyktowania. Przytrzymaj go, aby mówić, naciśnij dwukrotnie, aby dyktować w trybie ciągłym, i zacznij od „Kusema”, aby zapytać, edytować lub pokazać swój ekran. Inne aplikacje nigdy nie widzą tego klawisza.",
+      "enabled": {
+        "label": "Używaj klawisza Kusema",
+        "description": "Po wyłączeniu działają tylko skróty poniżej."
+      },
+      "key": {
+        "label": "Klawisz",
+        "description": "Prawy Ctrl pasuje do większości klawiatur. Laptopy bez niego często mają klawisz Copilot. Numpad + to klawisz mikrofonu w Dragonie. Wybrany klawisz przestaje robić cokolwiek innego.",
+        "press": "Naciśnij wybrany klawisz",
+        "pressNow": "Naciśnij teraz klawisz (Esc anuluje)"
+      },
+      "copilotSuggest": "Ta klawiatura ma klawisz Copilot, a Kusema nie widziała prawego Ctrl. Użyć klawisza Copilot?",
+      "useCopilot": "Użyj klawisza Copilot",
+      "laptopHint": "Brak prawego Ctrl w tym laptopie? Wybierz klawisz Copilot lub naciśnij wybrany klawisz.",
+      "classic": {
+        "label": "Klasyczne skróty",
+        "description": "Zachowaj też osobny skrót dla każdej czynności (Ctrl+Spacja do dyktowania, Ctrl+Alt+Spacja do pytań i tak dalej) obok klawisza Kusema."
+      }
+    },
+    "refusal": {
+      "types": "Ten klawisz coś wpisuje, więc nie może być klawiszem Kusema. Wybierz wolny klawisz, np. prawy Ctrl, Pause lub klawisz funkcyjny.",
+      "needed": "Ten klawisz jest potrzebny do innych rzeczy. Wybierz wolny klawisz, np. prawy Ctrl, Pause lub klawisz funkcyjny.",
+      "moves": "Ten klawisz przesuwa kursor. Wybierz wolny klawisz, np. prawy Ctrl, Pause lub klawisz funkcyjny."
+    },
+    "news": {
+      "title": "Nowość: prostsze klawisze",
+      "body": "Kusema ma teraz jeden klawisz zamiast wielu skrótów. Obowiązują tylko dwie zasady:",
+      "keptClassic": "Kusema ma teraz jeden klawisz do wszystkiego. Zmieniłeś skrót, więc Twoje skróty nadal działają. Możesz je wyłączyć w sekcji Klasyczne skróty.",
+      "gotIt": "Rozumiem"
+    }
   }
 }

@@ -10,7 +10,9 @@
     "secureInputWarning": "⚠ Genveje blokeret af Secure Input",
     "privilegedMode": "Privileged-tilstand",
     "privilegedOn": "Privileged-tilstand til",
-    "correctLast": "Ret sidste diktat …"
+    "correctLast": "Ret sidste diktat …",
+    "typeToKusema": "Skriv til Kusema…",
+    "kusemaKeys": "Kusema-taster"
   },
   "sidebar": {
     "general": "Generelt",
@@ -252,7 +254,9 @@
         "waiting": "Din talemodel downloades stadig. Feltet virker, så snart den er klar.",
         "continuous": "Til længere diktat skal du trykke på <keys/>, så lytter Kusema, indtil du trykker igen. Vant til Dragon? Under Generelt kan du bruge Numpad +.",
         "continuousRunning": "Løbende diktat er slået til. Dine ord vises i feltet ved hver pause. Tryk på {{stop}} for at stoppe.",
-        "continuousEnded": "Det var løbende diktat. I dine andre apps skrives dine ord ved markøren."
+        "continuousEnded": "Det var løbende diktat. I dine andre apps skrives dine ord ved markøren.",
+        "continuousKey": "Til længere diktering dobbelttrykker du på <keys/>: Kusema lytter, til du dobbelttrykker igen.",
+        "continuousRunningKey": "Løbende diktering er slået til. Dine ord vises i feltet, hver gang du holder pause. Dobbelttryk på {{key}} for at stoppe."
       },
       "assistant": {
         "title": "Konfigurer AI-assistenten (valgfrit)",
@@ -297,7 +301,8 @@
           "continuous": "Løbende diktat: tryk for at starte og stoppe",
           "ask": "Spørg Kusema",
           "askScreen": "Spørg om min skærm"
-        }
+        },
+        "typeToKusema": "For at skrive et spørgsmål i stedet:"
       }
     }
   },
@@ -1321,7 +1326,12 @@
       "done": "Klaret",
       "notDone": "Ikke endnu",
       "progress": "{{done}} af {{count}} klaret",
-      "allDone": "Alle tre klaret. Godt gået."
+      "allDone": "Alle tre klaret. Godt gået.",
+      "how": {
+        "hold": "Hold {{key}} nede",
+        "doubleTap": "Dobbelttryk på {{key}}",
+        "say": "Sig “{{trigger}}, …”"
+      }
     },
     "glow": {
       "title": "Optagelsesindikator",
@@ -1364,15 +1374,15 @@
     },
     "voiceEdit": {
       "title": "Stemmeredigering",
-      "description": "Ret tekst i enhver app med stemmen. Marker den, hold genvejen nede, og sig, hvad der skal ske. Kommandoer som “select last word” bliver på denne computer; instruktioner som “gør det kortere” går til din AI-udbyder.",
+      "description": "Ret tekst i enhver app med stemmen. Markér den, hold Kusema-tasten nede og sig “Kusema”, og så hvad der skal ske. Kommandoer som “select last word” bliver på denne computer; instruktioner som “shorten this” går til din AI-udbyder.",
       "preview": {
         "label": "Vis AI-ændringer først",
         "description": "Viser den nye tekst, før den erstatter den gamle. Slå fra for hurtige ændringer: Ctrl+Z i appen fortryder dem stadig."
       },
       "whatCanISay": "Hvad kan jeg sige?",
       "trigger": {
-        "label": "Udløserord ved løbende diktat",
-        "description": "Start en sætning med dette ord ved løbende diktat for at ændre tekst i stedet for at skrive den: “Kusema, gør det mere formelt”. Lad det være tomt for at slå det fra.",
+        "label": "Udløserord",
+        "description": "Begynd med dette ord for at spørge, redigere eller få Kusema til at se på din skærm i stedet for at skrive: “Kusema, make this more formal”. Det virker, mens du holder Kusema-tasten nede, og ved løbende diktering. Lad feltet stå tomt for at slå det fra.",
         "placeholder": "Kusema"
       },
       "simpleKey": {
@@ -1547,6 +1557,11 @@
       "windowChanged": "Vinduet skiftede, så svaret blev ikke skrevet ind. Indsæt det fra siden Assistent.",
       "notTyping": "Indsætningsmetoden er sat til “Ingen”, så svaret blev ikke skrevet ind.",
       "failed": "Kunne ikke skrive svaret ind i dette vindue."
+    },
+    "route": {
+      "ask": "Spørger Kusema…",
+      "ask_screen": "Ser på din skærm…",
+      "edit": "Redigerer…"
     }
   },
   "screenCard": {
@@ -1632,7 +1647,8 @@
     },
     "trigger": "Start med “{{trigger}},” ved løbende diktat for at ændre tekst på samme måde, fx “{{trigger}}, gør det mere formelt”. Uden ordet skrives alt, som du siger det.",
     "triggerOff": "Angiv et udløserord under Generelt → Stemmeredigering for at ændre tekst ved løbende diktat.",
-    "selectFirst": "Nogle apps, som ONLYOFFICE, LibreOffice og Google Docs, viser ikke deres tekst til Kusema. Marker teksten med musen eller tastaturet først der; at markere en sætning, et afsnit eller ord med stemmen virker ikke der."
+    "selectFirst": "Nogle apps, som ONLYOFFICE, LibreOffice og Google Docs, viser ikke deres tekst til Kusema. Marker teksten med musen eller tastaturet først der; at markere en sætning, et afsnit eller ord med stemmen virker ikke der.",
+    "introKey": "Hold {{key}} nede og sig “{{trigger}}”, og så en af disse. Kommandoer mærket “Også i løbende diktering” virker der, når de siges alene."
   },
   "voiceEdit": {
     "notice": {
@@ -1673,5 +1689,50 @@
     "close": "Luk",
     "hint": "Enter spørger · Skift+Enter: ny linje · Esc lukker",
     "noWindow": "Klik i det vindue, du vil spørge om, og åbn så boksen igen."
+  },
+  "kusemaKey": {
+    "presets": {
+      "right_ctrl": "Højre Ctrl",
+      "copilot": "Copilot-tast",
+      "numpad_plus": "Numpad +"
+    },
+    "card": {
+      "title": "Kusema-taster",
+      "hold": "Hold <key/> nede for at tale.",
+      "doubleTap": "Dobbelttryk på <key/> for løbende diktering.",
+      "say": "Sig <q>{{trigger}}</q> først for at spørge, redigere eller få Kusema til at se på din skærm."
+    },
+    "settings": {
+      "title": "Kusema-tast",
+      "description": "Én tast til diktering. Hold den nede for at tale, dobbelttryk for løbende diktering, og begynd med “Kusema” for at spørge, redigere eller få Kusema til at se på din skærm. Andre apps ser aldrig tasten.",
+      "enabled": {
+        "label": "Brug Kusema-tasten",
+        "description": "Slået fra virker kun genvejene nedenfor."
+      },
+      "key": {
+        "label": "Tast",
+        "description": "Højre Ctrl passer til de fleste tastaturer. Bærbare uden den har ofte en Copilot-tast. Numpad + er Dragons mikrofontast. Den valgte tast gør ikke andet længere.",
+        "press": "Tryk på den tast, du vil bruge",
+        "pressNow": "Tryk på en tast nu (Esc annullerer)"
+      },
+      "copilotSuggest": "Dette tastatur har en Copilot-tast, og Kusema har ikke set en højre Ctrl. Brug Copilot-tasten i stedet?",
+      "useCopilot": "Brug Copilot-tasten",
+      "laptopHint": "Ingen højre Ctrl på denne bærbare? Vælg Copilot-tasten, eller tryk på den tast, du vil bruge.",
+      "classic": {
+        "label": "Klassiske genveje",
+        "description": "Behold også en genvej til hver handling (Ctrl+Mellemrum for at diktere, Ctrl+Alt+Mellemrum for at spørge og så videre) ved siden af Kusema-tasten."
+      }
+    },
+    "refusal": {
+      "types": "Den tast skriver noget og kan derfor ikke være Kusema-tasten. Vælg en ledig tast som højre Ctrl, Pause eller en funktionstast.",
+      "needed": "Den tast bruges til andet. Vælg en ledig tast som højre Ctrl, Pause eller en funktionstast.",
+      "moves": "Den tast flytter markøren. Vælg en ledig tast som højre Ctrl, Pause eller en funktionstast."
+    },
+    "news": {
+      "title": "Nyt: enklere taster",
+      "body": "Kusema har nu én tast i stedet for mange genveje. Der er kun to regler:",
+      "keptClassic": "Kusema har nu én tast til alt. Du havde ændret en genvej, så dine genveje virker stadig. Slå dem fra under Klassiske genveje, hvis du vil.",
+      "gotIt": "Forstået"
+    }
   }
 }

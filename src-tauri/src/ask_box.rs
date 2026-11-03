@@ -392,6 +392,12 @@ fn open_or_focus(app: &AppHandle, action: HotkeyAction) {
     open(app);
 }
 
+/// The tray's "Type to Kusema…": the box, over whatever was in front.
+pub fn open_from_tray(app: &AppHandle) {
+    let app_for_open = app.clone();
+    let _ = app.run_on_main_thread(move || open(&app_for_open));
+}
+
 /// The page rendered: show the box and give it the keyboard.
 #[tauri::command]
 #[specta::specta]

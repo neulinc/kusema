@@ -44,3 +44,9 @@ assert.equal(
 );
 
 console.log("first wins: ok");
+
+// Kusema key: each win says how, with the key or the trigger word.
+assert.deepEqual(
+  winRows(wins()).map((r) => r.how),
+  ["hold", "doubleTap", "say"],
+);

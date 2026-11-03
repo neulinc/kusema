@@ -10,7 +10,9 @@
     "secureInputWarning": "⚠ Sneltoetsen geblokkeerd door Secure Input",
     "privilegedMode": "Privileged-modus",
     "privilegedOn": "Privileged-modus aan",
-    "correctLast": "Laatste dictaat corrigeren…"
+    "correctLast": "Laatste dictaat corrigeren…",
+    "typeToKusema": "Typ naar Kusema…",
+    "kusemaKeys": "Kusema-toetsen"
   },
   "sidebar": {
     "general": "Algemeen",
@@ -252,7 +254,9 @@
         "waiting": "Je spraakmodel wordt nog gedownload. Dit vak werkt zodra het klaar is.",
         "continuous": "Voor langer dicteren druk je op <keys/>: Kusema luistert tot je opnieuw drukt. Gewend aan Dragon? Onder Algemeen kun je hiervoor Numpad + instellen.",
         "continuousRunning": "Doorlopend dicteren staat aan. Je woorden verschijnen bij elke pauze in het vak. Druk op {{stop}} om te stoppen.",
-        "continuousEnded": "Dat is doorlopend dicteren. In je andere apps worden je woorden getypt waar de cursor staat."
+        "continuousEnded": "Dat is doorlopend dicteren. In je andere apps worden je woorden getypt waar de cursor staat.",
+        "continuousKey": "Voor langer dicteren tik je twee keer op <keys/>: Kusema blijft luisteren tot je weer twee keer tikt.",
+        "continuousRunningKey": "Doorlopend dicteren staat aan. Je woorden verschijnen in het vak telkens als je pauzeert. Tik twee keer op {{key}} om te stoppen."
       },
       "assistant": {
         "title": "AI-assistent instellen (optioneel)",
@@ -297,7 +301,8 @@
           "continuous": "Doorlopend dicteren: druk om te starten en te stoppen",
           "ask": "Vraag het Kusema",
           "askScreen": "Vraag over mijn scherm"
-        }
+        },
+        "typeToKusema": "Om in plaats daarvan een vraag te typen:"
       }
     }
   },
@@ -1321,7 +1326,12 @@
       "done": "Klaar",
       "notDone": "Nog niet gedaan",
       "progress": "{{done}} van {{count}} klaar",
-      "allDone": "Alle drie klaar. Goed gedaan."
+      "allDone": "Alle drie klaar. Goed gedaan.",
+      "how": {
+        "hold": "Houd {{key}} ingedrukt",
+        "doubleTap": "Tik twee keer op {{key}}",
+        "say": "Zeg ‘{{trigger}}, …’"
+      }
     },
     "glow": {
       "title": "Opnamesignaal",
@@ -1364,15 +1374,15 @@
     },
     "voiceEdit": {
       "title": "Spraakbewerking",
-      "description": "Wijzig tekst in elke app met je stem. Selecteer de tekst, houd de sneltoets ingedrukt en zeg wat er moet gebeuren. Opdrachten zoals “select last word” blijven op deze computer; instructies zoals “maak dit korter” gaan naar je AI-aanbieder.",
+      "description": "Wijzig tekst in elke app met je stem. Selecteer hem, houd de Kusema-toets ingedrukt en zeg ‘Kusema’, dan wat er moet gebeuren. Opdrachten zoals ‘select last word’ blijven op deze computer; instructies zoals ‘shorten this’ gaan naar je AI-aanbieder.",
       "preview": {
         "label": "Voorbeeld van AI-bewerkingen",
         "description": "Toont de nieuwe tekst voordat die de oude vervangt. Zet uit voor snelle bewerkingen: Ctrl+Z in de app maakt ze nog steeds ongedaan."
       },
       "whatCanISay": "Wat kan ik zeggen?",
       "trigger": {
-        "label": "Activeringswoord bij doorlopend dicteren",
-        "description": "Begin bij doorlopend dicteren een zin met dit woord om tekst te wijzigen in plaats van te typen: “Kusema, maak dit formeler”. Laat leeg om dit uit te zetten.",
+        "label": "Activeringswoord",
+        "description": "Begin met dit woord om iets te vragen, te bewerken of naar je scherm te laten kijken in plaats van te typen: ‘Kusema, make this more formal’. Dit werkt terwijl je de Kusema-toets ingedrukt houdt en bij doorlopend dicteren. Laat leeg om het uit te zetten.",
         "placeholder": "Kusema"
       },
       "simpleKey": {
@@ -1547,6 +1557,11 @@
       "windowChanged": "Het venster is veranderd, dus het antwoord is niet getypt. Voeg het in vanaf de pagina Assistent.",
       "notTyping": "De plakmethode staat op ‘Geen’, dus het antwoord is niet getypt.",
       "failed": "Kon het antwoord niet in dit venster typen."
+    },
+    "route": {
+      "ask": "Kusema wordt gevraagd…",
+      "ask_screen": "Kijkt naar je scherm…",
+      "edit": "Bewerken…"
     }
   },
   "screenCard": {
@@ -1632,7 +1647,8 @@
     },
     "trigger": "Begin bij doorlopend dicteren met “{{trigger}},” om tekst op dezelfde manier te wijzigen, bijvoorbeeld “{{trigger}}, maak dit formeler”. Zonder dat woord wordt alles getypt zoals je het zegt.",
     "triggerOff": "Stel onder Algemeen → Spraakbewerking een activeringswoord in om tekst tijdens doorlopend dicteren te wijzigen.",
-    "selectFirst": "Sommige apps, zoals ONLYOFFICE, LibreOffice en Google Docs, laten hun tekst niet aan Kusema zien. Selecteer daar eerst de tekst met de muis of het toetsenbord; een zin, alinea of woorden met spraak selecteren werkt daar niet."
+    "selectFirst": "Sommige apps, zoals ONLYOFFICE, LibreOffice en Google Docs, laten hun tekst niet aan Kusema zien. Selecteer daar eerst de tekst met de muis of het toetsenbord; een zin, alinea of woorden met spraak selecteren werkt daar niet.",
+    "introKey": "Houd {{key}} ingedrukt en zeg ‘{{trigger}}’, dan een van deze. Opdrachten met ‘Ook bij doorlopend dicteren’ werken daar als je ze los zegt."
   },
   "voiceEdit": {
     "notice": {
@@ -1673,5 +1689,50 @@
     "close": "Sluiten",
     "hint": "Enter vraagt · Shift+Enter: nieuwe regel · Esc sluit",
     "noWindow": "Klik in het venster waarover je wilt vragen en open dit vak opnieuw."
+  },
+  "kusemaKey": {
+    "presets": {
+      "right_ctrl": "Rechter Ctrl",
+      "copilot": "Copilot-toets",
+      "numpad_plus": "Numpad +"
+    },
+    "card": {
+      "title": "Kusema-toetsen",
+      "hold": "Houd <key/> ingedrukt om te praten.",
+      "doubleTap": "Tik twee keer op <key/> voor doorlopend dicteren.",
+      "say": "Zeg eerst <q>{{trigger}}</q> om iets te vragen, te bewerken of naar je scherm te laten kijken."
+    },
+    "settings": {
+      "title": "Kusema-toets",
+      "description": "Eén toets om te dicteren. Houd hem ingedrukt om te praten, tik twee keer voor doorlopend dicteren en begin met ‘Kusema’ om iets te vragen, te bewerken of naar je scherm te laten kijken. Andere apps zien de toets nooit.",
+      "enabled": {
+        "label": "Kusema-toets gebruiken",
+        "description": "Uit werken alleen de sneltoetsen hieronder."
+      },
+      "key": {
+        "label": "Toets",
+        "description": "Rechter Ctrl past bij de meeste toetsenborden. Laptops zonder die toets hebben vaak een Copilot-toets. Numpad + is de microfoontoets van Dragon. De gekozen toets doet daarna niets anders meer.",
+        "press": "Druk op de toets die je wilt",
+        "pressNow": "Druk nu op een toets (Esc annuleert)"
+      },
+      "copilotSuggest": "Dit toetsenbord heeft een Copilot-toets en Kusema heeft nog geen rechter Ctrl gezien. De Copilot-toets gebruiken?",
+      "useCopilot": "Copilot-toets gebruiken",
+      "laptopHint": "Geen rechter Ctrl op deze laptop? Kies de Copilot-toets of druk op de toets die je wilt.",
+      "classic": {
+        "label": "Klassieke sneltoetsen",
+        "description": "Ook een eigen sneltoets per actie houden (Ctrl+Spatie om te dicteren, Ctrl+Alt+Spatie om te vragen enzovoort), naast de Kusema-toets."
+      }
+    },
+    "refusal": {
+      "types": "Die toets typt iets en kan dus niet de Kusema-toets zijn. Kies een vrije toets, zoals rechter Ctrl, Pause of een functietoets.",
+      "needed": "Die toets is nodig voor andere dingen. Kies een vrije toets, zoals rechter Ctrl, Pause of een functietoets.",
+      "moves": "Die toets verplaatst de cursor. Kies een vrije toets, zoals rechter Ctrl, Pause of een functietoets."
+    },
+    "news": {
+      "title": "Nieuw: eenvoudigere toetsen",
+      "body": "Kusema heeft nu één toets in plaats van veel sneltoetsen. Dit zijn de enige twee regels:",
+      "keptClassic": "Kusema heeft nu één toets voor alles. Je had een sneltoets gewijzigd, dus je sneltoetsen werken nog steeds. Zet ze uit bij Klassieke sneltoetsen als je wilt.",
+      "gotIt": "Begrepen"
+    }
   }
 }

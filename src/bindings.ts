@@ -1325,6 +1325,49 @@ async changeAppStylesEnabledSetting(enabled: boolean) : Promise<Result<null, str
     else return { status: "error", error: e  as any };
 }
 },
+async getKusemaKeyInfo() : Promise<KusemaKeyInfo> {
+    return await TAURI_INVOKE("get_kusema_key_info");
+},
+async setKusemaKey(key: KusemaKey) : Promise<Result<null, string>> {
+    try {
+    return { status: "ok", data: await TAURI_INVOKE("set_kusema_key", { key }) };
+} catch (e) {
+    if(e instanceof Error) throw e;
+    else return { status: "error", error: e  as any };
+}
+},
+async changeKusemaKeyEnabledSetting(enabled: boolean) : Promise<Result<null, string>> {
+    try {
+    return { status: "ok", data: await TAURI_INVOKE("change_kusema_key_enabled_setting", { enabled }) };
+} catch (e) {
+    if(e instanceof Error) throw e;
+    else return { status: "error", error: e  as any };
+}
+},
+/**
+ * Turns the classic per-action shortcuts on or off, registering them or not.
+ */
+async changeClassicShortcutsSetting(enabled: boolean) : Promise<Result<null, string>> {
+    try {
+    return { status: "ok", data: await TAURI_INVOKE("change_classic_shortcuts_setting", { enabled }) };
+} catch (e) {
+    if(e instanceof Error) throw e;
+    else return { status: "error", error: e  as any };
+}
+},
+/**
+ * The next key pressed becomes the Kusema key (Escape cancels). The answer
+ * comes as `kusema-key-captured`.
+ */
+async startKusemaKeyCapture() : Promise<void> {
+    await TAURI_INVOKE("start_kusema_key_capture");
+},
+async cancelKusemaKeyCapture() : Promise<void> {
+    await TAURI_INVOKE("cancel_kusema_key_capture");
+},
+async dismissSimplerKeysCard() : Promise<void> {
+    await TAURI_INVOKE("dismiss_simpler_keys_card");
+},
 async getPrivacyOverview() : Promise<Result<PrivacyOverview, string>> {
     try {
     return { status: "ok", data: await TAURI_INVOKE("get_privacy_overview") };
@@ -1908,7 +1951,23 @@ app_styles?: AppStyle[]; app_styles_enabled?: boolean;
  * Kusema: the edge glow for normal (push-to-talk) dictation as well;
  * continuous dictation and questions follow `glow_enabled` alone.
  */
-glow_dictation?: boolean }
+glow_dictation?: boolean; 
+/**
+ * Kusema key: hold to dictate, double-tap for continuous dictation.
+ */
+kusema_key?: KusemaKey; kusema_key_enabled?: boolean; 
+/**
+ * The per-action hotkeys (Ctrl+Space and the rest), off unless wanted.
+ */
+classic_shortcuts?: boolean; 
+/**
+ * Which key scheme the store has been moved to (see `kusema_key::migrate`).
+ */
+keys_scheme?: number; 
+/**
+ * Show the one-time "New: simpler keys" card.
+ */
+simpler_keys_card?: boolean }
 /**
  * One style and the programs it's for.
  */
@@ -2114,6 +2173,45 @@ supported: boolean; downloaded: boolean; downloading: boolean;
  * Total download size.
  */
 size_mb: number }
+/**
+ * The Kusema key.
+ */
+export type KusemaKey = { kind: "right_ctrl" } | 
+/**
+ * The Copilot key. Copilot keyboards send it as Left Win + Left Shift +
+ * F23 (Microsoft's keyboard requirements for the key); F23 is the part
+ * that's swallowed.
+ */
+{ kind: "copilot" } | 
+/**
+ * Dragon's microphone key.
+ */
+{ kind: "numpad_plus" } | 
+/**
+ * A key the user pressed, by virtual-key code, with its name on the
+ * keyboard as Windows gives it.
+ */
+{ kind: "custom"; vk: number; name: string }
+/**
+ * What settings and setup show about the key.
+ */
+export type KusemaKeyInfo = { key: KusemaKey; enabled: boolean; classic_shortcuts: boolean; 
+/**
+ * This keyboard has sent a Copilot key press since Kusema started.
+ */
+seen_copilot: boolean; 
+/**
+ * ...and a Right Ctrl press.
+ */
+seen_right_ctrl: boolean; 
+/**
+ * A laptop, whose keyboard may have no Right Ctrl.
+ */
+is_laptop: boolean; 
+/**
+ * Suggest the Copilot key: it's been seen and Right Ctrl hasn't.
+ */
+suggest_copilot: boolean }
 export type LLMPrompt = { id: string; name: string; prompt: string }
 /**
  * When Handy's spoken-language detector picks the language for Auto.

@@ -10,7 +10,9 @@
     "secureInputWarning": "⚠ Pintasan diblokir oleh Secure Input",
     "privilegedMode": "Mode Privileged",
     "privilegedOn": "Mode Privileged aktif",
-    "correctLast": "Koreksi dikte terakhir…"
+    "correctLast": "Koreksi dikte terakhir…",
+    "typeToKusema": "Ketik ke Kusema…",
+    "kusemaKeys": "Tombol Kusema"
   },
   "sidebar": {
     "general": "Umum",
@@ -252,7 +254,9 @@
         "waiting": "Model ucapan Anda masih diunduh. Kotak ini akan berfungsi begitu model siap.",
         "continuous": "Untuk dikte yang lebih panjang, tekan <keys/> dan Kusema akan mendengarkan sampai Anda menekannya lagi. Terbiasa dengan Dragon? Anda bisa memakai Numpad + di Umum.",
         "continuousRunning": "Dikte berkelanjutan aktif. Kata-kata Anda muncul di kotak setiap kali Anda jeda. Tekan {{stop}} untuk menghentikannya.",
-        "continuousEnded": "Itulah dikte berkelanjutan. Di aplikasi lain, kata-kata Anda diketik di posisi kursor."
+        "continuousEnded": "Itulah dikte berkelanjutan. Di aplikasi lain, kata-kata Anda diketik di posisi kursor.",
+        "continuousKey": "Untuk dikte yang panjang, ketuk <keys/> dua kali: Kusema terus mendengarkan sampai Anda mengetuknya dua kali lagi.",
+        "continuousRunningKey": "Dikte berkelanjutan aktif. Kata-kata Anda muncul di kotak setiap kali Anda berhenti. Ketuk {{key}} dua kali untuk menghentikannya."
       },
       "assistant": {
         "title": "Siapkan asisten AI (opsional)",
@@ -297,7 +301,8 @@
           "continuous": "Dikte berkelanjutan: tekan untuk mulai dan berhenti",
           "ask": "Tanya Kusema",
           "askScreen": "Tanya tentang layar saya"
-        }
+        },
+        "typeToKusema": "Untuk mengetik pertanyaan:"
       }
     }
   },
@@ -1321,7 +1326,12 @@
       "done": "Selesai",
       "notDone": "Belum selesai",
       "progress": "{{done}} dari {{count}} selesai",
-      "allDone": "Ketiganya selesai. Kerja bagus."
+      "allDone": "Ketiganya selesai. Kerja bagus.",
+      "how": {
+        "hold": "Tahan {{key}}",
+        "doubleTap": "Ketuk {{key}} dua kali",
+        "say": "Ucapkan “{{trigger}}, …”"
+      }
     },
     "glow": {
       "title": "Indikator perekaman",
@@ -1364,15 +1374,15 @@
     },
     "voiceEdit": {
       "title": "Edit Suara",
-      "description": "Ubah teks di aplikasi apa pun dengan suara. Pilih teksnya, tahan pintasan, lalu ucapkan apa yang harus dilakukan. Perintah seperti “select last word” tetap di komputer ini; instruksi seperti “persingkat ini” dikirim ke penyedia AI Anda.",
+      "description": "Ubah teks di aplikasi apa pun dengan suara. Pilih teksnya, tahan tombol Kusema dan ucapkan “Kusema”, lalu apa yang harus dilakukan. Perintah seperti “select last word” tetap di komputer ini; instruksi seperti “shorten this” dikirim ke penyedia AI Anda.",
       "preview": {
         "label": "Pratinjau Edit AI",
         "description": "Menampilkan teks baru sebelum menggantikan yang lama. Matikan untuk edit cepat: Ctrl+Z di aplikasi tetap membatalkannya."
       },
       "whatCanISay": "Apa yang bisa saya ucapkan?",
       "trigger": {
-        "label": "Kata pemicu saat dikte berkelanjutan",
-        "description": "Saat dikte berkelanjutan, mulai kalimat dengan kata ini untuk mengubah teks alih-alih mengetiknya: “Kusema, buat ini lebih formal”. Kosongkan untuk mematikannya.",
+        "label": "Kata pemicu",
+        "description": "Awali dengan kata ini untuk bertanya, mengedit, atau meminta melihat layar Anda alih-alih mengetik: “Kusema, make this more formal”. Berfungsi saat Anda menahan tombol Kusema dan dalam dikte berkelanjutan. Kosongkan untuk mematikan.",
         "placeholder": "Kusema"
       },
       "simpleKey": {
@@ -1547,6 +1557,11 @@
       "windowChanged": "Jendela berganti, jadi jawaban tidak diketik. Sisipkan dari halaman Asisten.",
       "notTyping": "Metode tempel disetel ke “Tidak Ada”, jadi jawaban tidak diketik.",
       "failed": "Tidak dapat mengetik jawaban ke jendela ini."
+    },
+    "route": {
+      "ask": "Bertanya ke Kusema…",
+      "ask_screen": "Melihat layar Anda…",
+      "edit": "Mengedit…"
     }
   },
   "screenCard": {
@@ -1632,7 +1647,8 @@
     },
     "trigger": "Saat dikte berkelanjutan, mulai dengan “{{trigger}},” untuk mengubah teks dengan cara yang sama, misalnya “{{trigger}}, buat ini lebih formal”. Tanpa kata itu, semuanya diketik seperti yang Anda ucapkan.",
     "triggerOff": "Untuk mengubah teks saat dikte berkelanjutan, atur kata pemicu di Umum → Edit Suara.",
-    "selectFirst": "Beberapa aplikasi, seperti ONLYOFFICE, LibreOffice, dan Google Docs, tidak menunjukkan teksnya kepada Kusema. Di sana, pilih teks dengan mouse atau keyboard dulu; memilih kalimat, paragraf, atau kata dengan suara tidak berfungsi di sana."
+    "selectFirst": "Beberapa aplikasi, seperti ONLYOFFICE, LibreOffice, dan Google Docs, tidak menunjukkan teksnya kepada Kusema. Di sana, pilih teks dengan mouse atau keyboard dulu; memilih kalimat, paragraf, atau kata dengan suara tidak berfungsi di sana.",
+    "introKey": "Tahan {{key}} dan ucapkan “{{trigger}}”, lalu salah satu perintah ini. Perintah bertanda “Juga dalam dikte berkelanjutan” berfungsi di sana jika diucapkan sendiri."
   },
   "voiceEdit": {
     "notice": {
@@ -1673,5 +1689,50 @@
     "close": "Tutup",
     "hint": "Enter bertanya · Shift+Enter: baris baru · Esc menutup",
     "noWindow": "Klik jendela yang ingin Anda tanyakan, lalu buka kotak ini lagi."
+  },
+  "kusemaKey": {
+    "presets": {
+      "right_ctrl": "Ctrl kanan",
+      "copilot": "Tombol Copilot",
+      "numpad_plus": "Numpad +"
+    },
+    "card": {
+      "title": "Tombol Kusema",
+      "hold": "Tahan <key/> untuk berbicara.",
+      "doubleTap": "Ketuk <key/> dua kali untuk dikte berkelanjutan.",
+      "say": "Ucapkan <q>{{trigger}}</q> dulu untuk bertanya, mengedit, atau meminta melihat layar Anda."
+    },
+    "settings": {
+      "title": "Tombol Kusema",
+      "description": "Satu tombol untuk dikte. Tahan untuk berbicara, ketuk dua kali untuk dikte berkelanjutan, dan awali dengan “Kusema” untuk bertanya, mengedit, atau meminta melihat layar Anda. Aplikasi lain tidak pernah menerima tombol ini.",
+      "enabled": {
+        "label": "Gunakan tombol Kusema",
+        "description": "Jika mati, hanya pintasan di bawah yang berfungsi."
+      },
+      "key": {
+        "label": "Tombol",
+        "description": "Ctrl kanan cocok untuk sebagian besar keyboard. Laptop tanpa tombol ini sering punya tombol Copilot. Numpad + adalah tombol mikrofon Dragon. Tombol yang Anda pilih tidak akan melakukan hal lain lagi.",
+        "press": "Tekan tombol yang Anda inginkan",
+        "pressNow": "Tekan tombol sekarang (Esc membatalkan)"
+      },
+      "copilotSuggest": "Keyboard ini punya tombol Copilot dan Kusema belum melihat Ctrl kanan. Gunakan tombol Copilot saja?",
+      "useCopilot": "Gunakan tombol Copilot",
+      "laptopHint": "Laptop ini tidak punya Ctrl kanan? Pilih tombol Copilot, atau tekan tombol yang Anda inginkan.",
+      "classic": {
+        "label": "Pintasan klasik",
+        "description": "Tetap simpan pintasan terpisah untuk setiap tindakan (Ctrl+Spasi untuk dikte, Ctrl+Alt+Spasi untuk bertanya, dan seterusnya) di samping tombol Kusema."
+      }
+    },
+    "refusal": {
+      "types": "Tombol itu mengetik sesuatu, jadi tidak bisa menjadi tombol Kusema. Pilih tombol yang tidak terpakai, seperti Ctrl kanan, Pause, atau tombol fungsi.",
+      "needed": "Tombol itu diperlukan untuk hal lain. Pilih tombol yang tidak terpakai, seperti Ctrl kanan, Pause, atau tombol fungsi.",
+      "moves": "Tombol itu menggerakkan kursor. Pilih tombol yang tidak terpakai, seperti Ctrl kanan, Pause, atau tombol fungsi."
+    },
+    "news": {
+      "title": "Baru: tombol yang lebih sederhana",
+      "body": "Kusema kini punya satu tombol, bukan banyak pintasan. Hanya ada dua aturan:",
+      "keptClassic": "Kusema kini punya satu tombol untuk semuanya. Anda pernah mengubah pintasan, jadi pintasan Anda tetap berfungsi. Matikan di Pintasan klasik jika mau.",
+      "gotIt": "Mengerti"
+    }
   }
 }

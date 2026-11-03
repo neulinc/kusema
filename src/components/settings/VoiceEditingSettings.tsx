@@ -28,6 +28,8 @@ export const VoiceEditingSettings: React.FC = () => {
   const simpleKey = SIMPLE_KEY[implementation];
   const usingSimpleKey =
     getSetting("bindings")?.[BINDING]?.current_binding === simpleKey;
+  // Kusema: with the Kusema key, "Kusema, …" edits; this is for the classic key.
+  const classic = getSetting("classic_shortcuts") ?? false;
 
   const saved = getSetting("voice_edit_trigger") ?? "";
   const [trigger, setTrigger] = useState(saved);
@@ -44,23 +46,25 @@ export const VoiceEditingSettings: React.FC = () => {
       description={t("settings.voiceEdit.description")}
     >
       <ShortcutInput shortcutId={BINDING} grouped={true} />
-      <SettingContainer
-        title={t("settings.voiceEdit.simpleKey.title")}
-        description={t("settings.voiceEdit.simpleKey.description")}
-        descriptionMode="tooltip"
-        grouped={true}
-      >
-        <Button
-          variant="secondary"
-          size="sm"
-          disabled={usingSimpleKey}
-          onClick={() => updateBinding(BINDING, simpleKey)}
+      {classic && (
+        <SettingContainer
+          title={t("settings.voiceEdit.simpleKey.title")}
+          description={t("settings.voiceEdit.simpleKey.description")}
+          descriptionMode="tooltip"
+          grouped={true}
         >
-          {t("settings.voiceEdit.simpleKey.button", {
-            key: formatKeyCombination(simpleKey, osType),
-          })}
-        </Button>
-      </SettingContainer>
+          <Button
+            variant="secondary"
+            size="sm"
+            disabled={usingSimpleKey}
+            onClick={() => updateBinding(BINDING, simpleKey)}
+          >
+            {t("settings.voiceEdit.simpleKey.button", {
+              key: formatKeyCombination(simpleKey, osType),
+            })}
+          </Button>
+        </SettingContainer>
+      )}
       <ToggleSwitch
         checked={getSetting("voice_edit_preview") ?? true}
         onChange={(enabled) => updateSetting("voice_edit_preview", enabled)}

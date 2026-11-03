@@ -10,7 +10,9 @@
     "secureInputWarning": "⚠ Dreceres blocades per l'entrada segura",
     "privilegedMode": "Mode Privileged",
     "privilegedOn": "Mode Privileged activat",
-    "correctLast": "Corregeix l'últim dictat…"
+    "correctLast": "Corregeix l'últim dictat…",
+    "typeToKusema": "Escriu al Kusema…",
+    "kusemaKeys": "Tecles del Kusema"
   },
   "sidebar": {
     "general": "General",
@@ -253,7 +255,9 @@
         "waiting": "El model de veu encara s'està baixant. Aquest quadre funcionarà tan bon punt estigui a punt.",
         "continuous": "Per a dictats llargs, premeu <keys/> i el Kusema escoltarà fins que el torneu a prémer. Veniu del Dragon? A General podeu fer servir el + del teclat numèric.",
         "continuousRunning": "El dictat continu està activat. Les vostres paraules apareixen al quadre a cada pausa. Premeu {{stop}} per aturar-lo.",
-        "continuousEnded": "Això és el dictat continu. A les altres aplicacions, les paraules s'escriuen on hi ha el cursor."
+        "continuousEnded": "Això és el dictat continu. A les altres aplicacions, les paraules s'escriuen on hi ha el cursor.",
+        "continuousKey": "Per a dictats llargs, prem dues vegades <keys/>: el Kusema escolta fins que la tornis a prémer dues vegades.",
+        "continuousRunningKey": "El dictat continu és actiu. Les teves paraules apareixen al quadre cada vegada que fas una pausa. Prem dues vegades {{key}} per aturar-lo."
       },
       "assistant": {
         "title": "Configureu l'assistent d'IA (opcional)",
@@ -298,7 +302,8 @@
           "continuous": "Dictat continu: premeu per iniciar i aturar",
           "ask": "Pregunta al Kusema",
           "askScreen": "Pregunta sobre la meva pantalla"
-        }
+        },
+        "typeToKusema": "Per escriure una pregunta:"
       }
     }
   },
@@ -1327,7 +1332,12 @@
       "done": "Fet",
       "notDone": "Encara no",
       "progress": "{{done}} de {{count}} fets",
-      "allDone": "Tots tres fets. Bona feina."
+      "allDone": "Tots tres fets. Bona feina.",
+      "how": {
+        "hold": "Mantén {{key}}",
+        "doubleTap": "Prem dues vegades {{key}}",
+        "say": "Digues «{{trigger}}, …»"
+      }
     },
     "glow": {
       "title": "Indicador d'enregistrament",
@@ -1370,15 +1380,15 @@
     },
     "voiceEdit": {
       "title": "Edició per veu",
-      "description": "Canvieu text en qualsevol aplicació amb la veu. Seleccioneu-lo, manteniu premuda la drecera i digueu què cal fer. Les ordres com «select last word» es queden en aquest ordinador; les instruccions com «escurça això» van al vostre proveïdor d'IA.",
+      "description": "Canvia text a qualsevol aplicació amb la veu. Selecciona'l, mantén premuda la tecla Kusema i digues «Kusema», i després què cal fer. Les ordres com «select last word» es queden en aquest ordinador; les instruccions com «shorten this» van al teu proveïdor d'IA.",
       "preview": {
         "label": "Previsualitza els canvis de la IA",
         "description": "Mostra el text nou abans que substitueixi l'antic. Desactiveu-ho per a canvis ràpids: Ctrl+Z a l'aplicació els continua desfent."
       },
       "whatCanISay": "Què puc dir?",
       "trigger": {
-        "label": "Paraula d'activació en el dictat continu",
-        "description": "En el dictat continu, comenceu una frase amb aquesta paraula per canviar el text en lloc d'escriure'l: «Kusema, fes això més formal». Deixeu-la buida per desactivar-ho.",
+        "label": "Paraula d'activació",
+        "description": "Comença amb aquesta paraula per preguntar, editar o fer que miri la teva pantalla en lloc d'escriure: «Kusema, make this more formal». Funciona mentre mantens premuda la tecla Kusema i en el dictat continu. Deixa-la buida per desactivar-ho.",
         "placeholder": "Kusema"
       },
       "simpleKey": {
@@ -1553,6 +1563,11 @@
       "windowChanged": "La finestra ha canviat, així que la resposta no s'ha escrit. Insereix-la des de la pàgina Assistent.",
       "notTyping": "El mètode d'enganxament és «Cap», així que la resposta no s'ha escrit.",
       "failed": "No s'ha pogut escriure la resposta en aquesta finestra."
+    },
+    "route": {
+      "ask": "Preguntant al Kusema…",
+      "ask_screen": "Mirant la teva pantalla…",
+      "edit": "Editant…"
     }
   },
   "screenCard": {
@@ -1640,7 +1655,8 @@
     },
     "trigger": "En el dictat continu, comenceu amb «{{trigger}},» per canviar el text de la mateixa manera, per exemple «{{trigger}}, fes això més formal». Sense aquesta paraula, tot s'escriu tal com ho dieu.",
     "triggerOff": "Per canviar text durant el dictat continu, definiu una paraula d'activació a General → Edició per veu.",
-    "selectFirst": "Algunes aplicacions, com ONLYOFFICE, LibreOffice i Google Docs, no mostren el seu text al Kusema. Allà, seleccioneu primer el text amb el ratolí o el teclat; seleccionar una frase, un paràgraf o paraules per veu no hi funciona."
+    "selectFirst": "Algunes aplicacions, com ONLYOFFICE, LibreOffice i Google Docs, no mostren el seu text al Kusema. Allà, seleccioneu primer el text amb el ratolí o el teclat; seleccionar una frase, un paràgraf o paraules per veu no hi funciona.",
+    "introKey": "Mantén premuda {{key}} i digues «{{trigger}}», i després una d'aquestes ordres. Les marcades «També en el dictat continu» hi funcionen quan es diuen soles."
   },
   "voiceEdit": {
     "notice": {
@@ -1681,5 +1697,50 @@
     "close": "Tanca",
     "hint": "Retorn pregunta · Maj+Retorn: línia nova · Esc tanca",
     "noWindow": "Fes clic a la finestra sobre la qual vols preguntar i torna a obrir aquest quadre."
+  },
+  "kusemaKey": {
+    "presets": {
+      "right_ctrl": "Ctrl dret",
+      "copilot": "Tecla Copilot",
+      "numpad_plus": "Numpad +"
+    },
+    "card": {
+      "title": "Tecles del Kusema",
+      "hold": "Mantén premuda <key/> per parlar.",
+      "doubleTap": "Prem dues vegades <key/> per al dictat continu.",
+      "say": "Digues primer <q>{{trigger}}</q> per preguntar, editar o fer que miri la teva pantalla."
+    },
+    "settings": {
+      "title": "Tecla Kusema",
+      "description": "Una tecla per dictar. Mantén-la premuda per parlar, prem-la dues vegades per al dictat continu i comença amb «Kusema» per preguntar, editar o fer que miri la teva pantalla. Les altres aplicacions no veuen mai la tecla.",
+      "enabled": {
+        "label": "Fes servir la tecla Kusema",
+        "description": "Desactivada, només funcionen les dreceres de sota."
+      },
+      "key": {
+        "label": "Tecla",
+        "description": "El Ctrl dret va bé a la majoria de teclats. Els portàtils que no en tenen sovint tenen una tecla Copilot. Numpad + és la tecla de micròfon del Dragon. La tecla que triïs deixa de fer qualsevol altra cosa.",
+        "press": "Prem la tecla que vulguis",
+        "pressNow": "Prem una tecla ara (Esc cancel·la)"
+      },
+      "copilotSuggest": "Aquest teclat té una tecla Copilot i el Kusema no ha vist cap Ctrl dret. Vols fer servir la tecla Copilot?",
+      "useCopilot": "Fes servir la tecla Copilot",
+      "laptopHint": "Aquest portàtil no té Ctrl dret? Tria la tecla Copilot o prem la tecla que vulguis.",
+      "classic": {
+        "label": "Dreceres clàssiques",
+        "description": "Conserva també una drecera per a cada acció (Ctrl+Espai per dictar, Ctrl+Alt+Espai per preguntar, etc.) a més de la tecla Kusema."
+      }
+    },
+    "refusal": {
+      "types": "Aquesta tecla escriu alguna cosa, així que no pot ser la tecla Kusema. Tria una tecla lliure, com Ctrl dret, Pausa o una tecla de funció.",
+      "needed": "Aquesta tecla cal per a altres coses. Tria una tecla lliure, com Ctrl dret, Pausa o una tecla de funció.",
+      "moves": "Aquesta tecla mou el cursor. Tria una tecla lliure, com Ctrl dret, Pausa o una tecla de funció."
+    },
+    "news": {
+      "title": "Novetat: tecles més senzilles",
+      "body": "Ara el Kusema té una sola tecla en lloc de moltes dreceres. Aquestes són les dues úniques regles:",
+      "keptClassic": "Ara el Kusema té una tecla per a tot. Havies canviat una drecera, així que les teves dreceres continuen funcionant. Pots desactivar-les a Dreceres clàssiques.",
+      "gotIt": "Entesos"
+    }
   }
 }

@@ -4,16 +4,9 @@ import type { OSType } from "@/lib/utils/keyboard";
 import { useSettings } from "@/hooks/useSettings";
 import { Button } from "../../ui/Button";
 import { Keycaps } from "../../shared/Keycaps";
+import { KusemaKeysCard } from "../../shared/KusemaKeysCard";
 import { useOnboardingStore } from "../onboardingStore";
 import { SetupScreen } from "./SetupScreen";
-
-/** Label key under onboarding.setup.done.keys, and the shortcut's id. */
-const HOTKEYS = [
-  ["dictate", "transcribe"],
-  ["continuous", "dictate_continuous"],
-  ["ask", "assistant"],
-  ["askScreen", "assistant_screen"],
-] as const;
 
 interface SetupDoneProps {
   progress: { index: number; count: number };
@@ -50,25 +43,15 @@ export const SetupDone: React.FC<SetupDoneProps> = ({
         </Button>
       }
     >
-      <dl className="m-0 flex flex-col divide-y divide-line rounded-lg border border-line">
-        {HOTKEYS.map(([label, id]) => (
-          <div
-            key={id}
-            className="flex flex-wrap items-center justify-between gap-x-[16px] gap-y-[4px] px-[14px] py-[10px]"
-          >
-            <dt className="font-medium">
-              {t(`onboarding.setup.done.keys.${label}`)}
-            </dt>
-            <dd className="m-0">
-              <Keycaps
-                binding={bindings?.[id]?.current_binding ?? ""}
-                osType={os}
-                size="line"
-              />
-            </dd>
-          </div>
-        ))}
-      </dl>
+      <KusemaKeysCard />
+      <p className="m-0 flex flex-wrap items-center gap-x-[8px] gap-y-[4px] text-small">
+        {t("onboarding.setup.done.typeToKusema")}
+        <Keycaps
+          binding={bindings?.ask_box?.current_binding ?? ""}
+          osType={os}
+          size="line"
+        />
+      </p>
       <p className="m-0 text-small text-ink-2">
         {t("onboarding.setup.done.wins")}
       </p>

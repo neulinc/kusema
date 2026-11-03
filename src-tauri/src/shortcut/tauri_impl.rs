@@ -28,6 +28,9 @@ pub fn init_shortcuts(app: &AppHandle) {
         if id == crate::network::TOGGLE_BINDING && !user_settings.privileged_hotkey_enabled {
             continue;
         }
+        if crate::kusema_key::skip_binding(&user_settings, &id) {
+            continue;
+        }
         let binding = user_settings
             .bindings
             .get(&id)

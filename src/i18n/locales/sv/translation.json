@@ -10,7 +10,9 @@
     "secureInputWarning": "⚠ Kortkommandon blockeras av Secure Input",
     "privilegedMode": "Privileged-läge",
     "privilegedOn": "Privileged-läge på",
-    "correctLast": "Rätta senaste dikteringen …"
+    "correctLast": "Rätta senaste dikteringen …",
+    "typeToKusema": "Skriv till Kusema…",
+    "kusemaKeys": "Kusema-tangenter"
   },
   "sidebar": {
     "general": "Allmänt",
@@ -252,7 +254,9 @@
         "waiting": "Din talmodell laddas fortfarande ner. Rutan fungerar så snart den är klar.",
         "continuous": "För längre diktat trycker du på <keys/>, så lyssnar Kusema tills du trycker igen. Van vid Dragon? Under Allmänt kan du använda Numpad +.",
         "continuousRunning": "Löpande diktat är på. Dina ord visas i rutan vid varje paus. Tryck på {{stop}} för att stoppa.",
-        "continuousEnded": "Det var löpande diktat. I dina andra appar skrivs orden där markören står."
+        "continuousEnded": "Det var löpande diktat. I dina andra appar skrivs orden där markören står.",
+        "continuousKey": "För längre diktering, dubbeltryck på <keys/>: Kusema lyssnar tills du dubbeltrycker igen.",
+        "continuousRunningKey": "Kontinuerlig diktering är på. Dina ord visas i rutan varje gång du pausar. Dubbeltryck på {{key}} för att stoppa."
       },
       "assistant": {
         "title": "Konfigurera AI-assistenten (valfritt)",
@@ -297,7 +301,8 @@
           "continuous": "Löpande diktat: tryck för att starta och stoppa",
           "ask": "Fråga Kusema",
           "askScreen": "Fråga om min skärm"
-        }
+        },
+        "typeToKusema": "För att skriva en fråga i stället:"
       }
     }
   },
@@ -1321,7 +1326,12 @@
       "done": "Klart",
       "notDone": "Inte klart än",
       "progress": "{{done}} av {{count}} klara",
-      "allDone": "Alla tre klara. Bra jobbat."
+      "allDone": "Alla tre klara. Bra jobbat.",
+      "how": {
+        "hold": "Håll ned {{key}}",
+        "doubleTap": "Dubbeltryck på {{key}}",
+        "say": "Säg ”{{trigger}}, …”"
+      }
     },
     "glow": {
       "title": "Inspelningsindikator",
@@ -1364,15 +1374,15 @@
     },
     "voiceEdit": {
       "title": "Röstredigering",
-      "description": "Ändra text i valfri app med rösten. Markera den, håll ned kortkommandot och säg vad som ska göras. Kommandon som “select last word” stannar på den här datorn; instruktioner som “korta ned det här” går till din AI-leverantör.",
+      "description": "Ändra text i valfri app med rösten. Markera den, håll ned Kusema-tangenten och säg ”Kusema”, sedan vad som ska göras. Kommandon som ”select last word” stannar på den här datorn; instruktioner som ”shorten this” går till din AI-leverantör.",
       "preview": {
         "label": "Förhandsgranska AI-ändringar",
         "description": "Visar den nya texten innan den ersätter den gamla. Stäng av för snabba ändringar: Ctrl+Z i appen ångrar dem ändå."
       },
       "whatCanISay": "Vad kan jag säga?",
       "trigger": {
-        "label": "Utlösarord vid löpande diktering",
-        "description": "Börja en mening med det här ordet vid löpande diktering för att ändra text i stället för att skriva den: “Kusema, gör det här mer formellt”. Lämna tomt för att stänga av.",
+        "label": "Startord",
+        "description": "Börja med det här ordet för att fråga, redigera eller låta Kusema titta på skärmen i stället för att skriva: ”Kusema, make this more formal”. Det fungerar när du håller ned Kusema-tangenten och vid kontinuerlig diktering. Lämna tomt för att stänga av.",
         "placeholder": "Kusema"
       },
       "simpleKey": {
@@ -1547,6 +1557,11 @@
       "windowChanged": "Fönstret ändrades, så svaret skrevs inte in. Infoga det från sidan Assistent.",
       "notTyping": "Inklistringsmetoden är inställd på ”Ingen”, så svaret skrevs inte in.",
       "failed": "Det gick inte att skriva in svaret i det här fönstret."
+    },
+    "route": {
+      "ask": "Frågar Kusema…",
+      "ask_screen": "Tittar på skärmen…",
+      "edit": "Redigerar…"
     }
   },
   "screenCard": {
@@ -1632,7 +1647,8 @@
     },
     "trigger": "Börja med “{{trigger}},” vid löpande diktering för att ändra text på samma sätt, till exempel “{{trigger}}, gör det här mer formellt”. Utan ordet skrivs allt som du säger det.",
     "triggerOff": "Ställ in ett utlösarord under Allmänt → Röstredigering för att ändra text vid löpande diktering.",
-    "selectFirst": "Vissa appar, som ONLYOFFICE, LibreOffice och Google Docs, visar inte sin text för Kusema. Markera texten med musen eller tangentbordet först där; att markera en mening, ett stycke eller ord med rösten fungerar inte där."
+    "selectFirst": "Vissa appar, som ONLYOFFICE, LibreOffice och Google Docs, visar inte sin text för Kusema. Markera texten med musen eller tangentbordet först där; att markera en mening, ett stycke eller ord med rösten fungerar inte där.",
+    "introKey": "Håll ned {{key}} och säg ”{{trigger}}”, sedan något av dessa. Kommandon märkta ”Även i kontinuerlig diktering” fungerar där när de sägs ensamma."
   },
   "voiceEdit": {
     "notice": {
@@ -1673,5 +1689,50 @@
     "close": "Stäng",
     "hint": "Enter frågar · Skift+Enter: ny rad · Esc stänger",
     "noWindow": "Klicka i fönstret du vill fråga om och öppna sedan rutan igen."
+  },
+  "kusemaKey": {
+    "presets": {
+      "right_ctrl": "Höger Ctrl",
+      "copilot": "Copilot-tangent",
+      "numpad_plus": "Numpad +"
+    },
+    "card": {
+      "title": "Kusema-tangenter",
+      "hold": "Håll ned <key/> för att prata.",
+      "doubleTap": "Dubbeltryck på <key/> för kontinuerlig diktering.",
+      "say": "Säg <q>{{trigger}}</q> först för att fråga, redigera eller låta Kusema titta på skärmen."
+    },
+    "settings": {
+      "title": "Kusema-tangent",
+      "description": "En tangent för diktering. Håll ned den för att prata, dubbeltryck för kontinuerlig diktering och börja med ”Kusema” för att fråga, redigera eller låta Kusema titta på skärmen. Andra appar ser aldrig tangenten.",
+      "enabled": {
+        "label": "Använd Kusema-tangenten",
+        "description": "Av fungerar bara kortkommandona nedan."
+      },
+      "key": {
+        "label": "Tangent",
+        "description": "Höger Ctrl passar de flesta tangentbord. Bärbara datorer utan den har ofta en Copilot-tangent. Numpad + är Dragons mikrofontangent. Tangenten du väljer gör inget annat längre.",
+        "press": "Tryck på tangenten du vill ha",
+        "pressNow": "Tryck på en tangent nu (Esc avbryter)"
+      },
+      "copilotSuggest": "Det här tangentbordet har en Copilot-tangent och Kusema har inte sett någon höger Ctrl. Använda Copilot-tangenten i stället?",
+      "useCopilot": "Använd Copilot-tangenten",
+      "laptopHint": "Ingen höger Ctrl på den här datorn? Välj Copilot-tangenten eller tryck på tangenten du vill ha.",
+      "classic": {
+        "label": "Klassiska kortkommandon",
+        "description": "Behåll också ett kortkommando per åtgärd (Ctrl+Blanksteg för att diktera, Ctrl+Alt+Blanksteg för att fråga och så vidare) vid sidan av Kusema-tangenten."
+      }
+    },
+    "refusal": {
+      "types": "Den tangenten skriver något och kan därför inte vara Kusema-tangenten. Välj en ledig tangent, som höger Ctrl, Pause eller en funktionstangent.",
+      "needed": "Den tangenten behövs till annat. Välj en ledig tangent, som höger Ctrl, Pause eller en funktionstangent.",
+      "moves": "Den tangenten flyttar markören. Välj en ledig tangent, som höger Ctrl, Pause eller en funktionstangent."
+    },
+    "news": {
+      "title": "Nytt: enklare tangenter",
+      "body": "Kusema har nu en tangent i stället för många kortkommandon. Det finns bara två regler:",
+      "keptClassic": "Kusema har nu en tangent för allt. Du hade ändrat ett kortkommando, så dina kortkommandon fungerar fortfarande. Stäng av dem under Klassiska kortkommandon om du vill.",
+      "gotIt": "Uppfattat"
+    }
   }
 }

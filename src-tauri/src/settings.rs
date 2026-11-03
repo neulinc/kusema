@@ -663,6 +663,24 @@ pub struct AppSettings {
     /// continuous dictation and questions follow `glow_enabled` alone.
     #[serde(default)]
     pub glow_dictation: bool,
+    /// Kusema key: hold to dictate, double-tap for continuous dictation.
+    #[serde(default)]
+    pub kusema_key: crate::kusema_key::KusemaKey,
+    #[serde(default = "default_kusema_key_enabled")]
+    pub kusema_key_enabled: bool,
+    /// The per-action hotkeys (Ctrl+Space and the rest), off unless wanted.
+    #[serde(default)]
+    pub classic_shortcuts: bool,
+    /// Which key scheme the store has been moved to (see `kusema_key::migrate`).
+    #[serde(default)]
+    pub keys_scheme: u32,
+    /// Show the one-time "New: simpler keys" card.
+    #[serde(default)]
+    pub simpler_keys_card: bool,
+}
+
+fn default_kusema_key_enabled() -> bool {
+    true
 }
 
 fn default_app_styles_enabled() -> bool {
@@ -1238,11 +1256,12 @@ pub fn get_default_settings() -> AppSettings {
             current_binding: default_voice_edit_shortcut.to_string(),
         },
     );
-    // Kusema type-to-ask. Backspace, not a letter, for the same reason.
+    // Kusema type-to-ask. K for Kusema; it's on its own, next to the Kusema
+    // key, so it needn't dodge the per-action keys.
     #[cfg(target_os = "macos")]
-    let default_ask_box_shortcut = "ctrl+option+shift+backspace";
+    let default_ask_box_shortcut = "ctrl+option+k";
     #[cfg(not(target_os = "macos"))]
-    let default_ask_box_shortcut = "ctrl+alt+shift+backspace";
+    let default_ask_box_shortcut = "ctrl+alt+k";
     bindings.insert(
         crate::ask_box::BINDING.to_string(),
         ShortcutBinding {
@@ -1364,6 +1383,11 @@ pub fn get_default_settings() -> AppSettings {
         app_styles: crate::app_styles::default_styles(),
         app_styles_enabled: default_app_styles_enabled(),
         glow_dictation: false,
+        kusema_key: Default::default(),
+        kusema_key_enabled: default_kusema_key_enabled(),
+        classic_shortcuts: false,
+        keys_scheme: crate::kusema_key::migrate::SCHEME,
+        simpler_keys_card: false,
     }
 }
 
@@ -1468,6 +1492,7 @@ pub fn get_settings(app: &AppHandle) -> AppSettings {
     if ensure_post_process_defaults(&mut settings)
         | crate::local_providers::migrate(&mut settings)
         | crate::vocabulary::migrate(&mut settings)
+        | crate::kusema_key::migrate::apply(&mut settings, &get_default_settings())
     {
         crate::secrets::load_keys(&mut settings);
         store.set("settings", crate::secrets::for_disk(&settings));

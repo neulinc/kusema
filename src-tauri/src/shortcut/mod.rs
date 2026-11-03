@@ -312,6 +312,9 @@ pub fn resume_all_shortcuts(app: &AppHandle) {
         if id == crate::network::TOGGLE_BINDING && !settings.privileged_hotkey_enabled {
             continue;
         }
+        if crate::kusema_key::skip_binding(&settings, id) {
+            continue;
+        }
         if let Err(e) = register_shortcut(app, binding.clone()) {
             debug!("resume_all_shortcuts: could not register '{}': {}", id, e);
         }
@@ -505,6 +508,9 @@ fn register_all_shortcuts_for_implementation(
             continue;
         }
         if id == crate::network::TOGGLE_BINDING && !current_settings.privileged_hotkey_enabled {
+            continue;
+        }
+        if crate::kusema_key::skip_binding(&current_settings, id) {
             continue;
         }
 

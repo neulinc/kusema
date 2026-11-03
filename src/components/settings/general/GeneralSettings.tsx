@@ -3,14 +3,14 @@ import { useTranslation } from "react-i18next";
 import { type } from "@tauri-apps/plugin-os";
 import { MicrophoneSelector } from "../MicrophoneSelector";
 import { ChannelSelector } from "../ChannelSelector";
-import { ShortcutInput } from "../ShortcutInput";
+import { KusemaKeySettings } from "../KusemaKeySettings";
+import { SimplerKeysCard } from "./SimplerKeysCard";
 import { ContinuousDictationSettings } from "../ContinuousDictationSettings";
 import { VoiceEditingSettings } from "../VoiceEditingSettings";
 import { CleanupSettings } from "../CleanupSettings";
 import { RecordingGlowSettings } from "../RecordingGlowSettings";
 import { SettingsGroup } from "../../ui/SettingsGroup";
 import { OutputDeviceSelector } from "../OutputDeviceSelector";
-import { ShortcutActivationSetting } from "../ShortcutActivation";
 import { AudioFeedback } from "../AudioFeedback";
 import { useSettings } from "../../../hooks/useSettings";
 import { VolumeSlider } from "../VolumeSlider";
@@ -26,7 +26,6 @@ export const GeneralSettings: React.FC<{
 }> = ({ onOpenPostProcessing }) => {
   const { t } = useTranslation();
   const { audioFeedbackEnabled, getSetting } = useSettings();
-  const isLinux = type() === "linux";
   const isWindows = type() === "windows";
   // Only for Chinese speakers, or anyone who already picked a script.
   const speaksChinese =
@@ -34,13 +33,9 @@ export const GeneralSettings: React.FC<{
     (getSetting("chinese_script") ?? "as_transcribed") !== "as_transcribed";
   return (
     <div className="max-w-3xl w-full mx-auto space-y-6">
+      <SimplerKeysCard />
       <FirstWinsCard />
-      <SettingsGroup title={t("settings.general.title")}>
-        <ShortcutInput shortcutId="transcribe" grouped={true} />
-        <ShortcutActivationSetting descriptionMode="tooltip" grouped={true} />
-        {/* Cancel shortcut remains hidden on Linux because of dynamic shortcut instability. */}
-        {!isLinux && <ShortcutInput shortcutId="cancel" grouped={true} />}
-      </SettingsGroup>
+      <KusemaKeySettings />
       <ContinuousDictationSettings />
       {isWindows && <VoiceEditingSettings />}
       {isWindows && <RecordingGlowSettings />}

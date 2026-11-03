@@ -22,6 +22,8 @@ export const ContinuousDictationSettings: React.FC = () => {
   const dragonKey = DRAGON_KEY[implementation];
   const usingDragonKey =
     getSetting("bindings")?.[BINDING]?.current_binding === dragonKey;
+  // Kusema: with the Kusema key, a double-tap starts and stops it.
+  const classic = getSetting("classic_shortcuts") ?? false;
 
   return (
     <SettingsGroup
@@ -29,21 +31,23 @@ export const ContinuousDictationSettings: React.FC = () => {
       description={t("settings.dictation.description")}
     >
       <ShortcutInput shortcutId={BINDING} grouped={true} />
-      <SettingContainer
-        title={t("settings.dictation.dragonKey.title")}
-        description={t("settings.dictation.dragonKey.description")}
-        descriptionMode="tooltip"
-        grouped={true}
-      >
-        <Button
-          variant="secondary"
-          size="sm"
-          disabled={usingDragonKey}
-          onClick={() => updateBinding(BINDING, dragonKey)}
+      {classic && (
+        <SettingContainer
+          title={t("settings.dictation.dragonKey.title")}
+          description={t("settings.dictation.dragonKey.description")}
+          descriptionMode="tooltip"
+          grouped={true}
         >
-          {t("settings.dictation.dragonKey.button")}
-        </Button>
-      </SettingContainer>
+          <Button
+            variant="secondary"
+            size="sm"
+            disabled={usingDragonKey}
+            onClick={() => updateBinding(BINDING, dragonKey)}
+          >
+            {t("settings.dictation.dragonKey.button")}
+          </Button>
+        </SettingContainer>
+      )}
       <Slider
         value={getSetting("dictation_pause_ms") ?? 700}
         onChange={(ms) => updateSetting("dictation_pause_ms", ms)}

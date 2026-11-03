@@ -5,6 +5,7 @@ import { keycapLabel, type OSType } from "@/lib/utils/keyboard";
 import { useSettings } from "@/hooks/useSettings";
 import { Button } from "../../ui/Button";
 import { Keycaps } from "../../shared/Keycaps";
+import { keyLabel } from "@/lib/kusemaKey";
 import { useTryEngine } from "../useTryEngine";
 import { SetupScreen } from "./SetupScreen";
 
@@ -32,6 +33,26 @@ export const SetupPractice: React.FC<SetupPracticeProps> = ({
   const { getSetting } = useSettings();
   const continuous =
     getSetting("bindings")?.dictate_continuous?.current_binding ?? "";
+  // Kusema: the Kusema key is what's practised, unless it's off.
+  const useKey = getSetting("kusema_key_enabled") ?? true;
+  const keyName = keyLabel(getSetting("kusema_key"), t);
+  const keyCaps = (pressed?: boolean) =>
+    useKey ? (
+      <Keycaps
+        binding=""
+        labels={[keyName]}
+        osType={os}
+        size="line"
+        pressed={pressed}
+      />
+    ) : (
+      <Keycaps
+        binding={pressed === undefined ? continuous : e.shortcut}
+        osType={os}
+        size="line"
+        pressed={pressed}
+      />
+    );
   const kind = e.result.kind;
 
   // Continuous dictation never types into Kusema's own windows, but each piece
@@ -66,9 +87,11 @@ export const SetupPractice: React.FC<SetupPracticeProps> = ({
   }, []);
   const status =
     continuousTry === "running"
-      ? t("onboarding.setup.practice.continuousRunning", {
-          stop: keycapLabel(continuous, os),
-        })
+      ? useKey
+        ? t("onboarding.setup.practice.continuousRunningKey", { key: keyName })
+        : t("onboarding.setup.practice.continuousRunning", {
+            stop: keycapLabel(continuous, os),
+          })
       : continuousTry === "ended"
         ? t("onboarding.setup.practice.continuousEnded")
         : e.phase === "listening"
@@ -111,16 +134,7 @@ export const SetupPractice: React.FC<SetupPracticeProps> = ({
       <p id="practice-how" className="m-0 text-center">
         <Trans
           i18nKey="onboarding.setup.practice.how"
-          components={{
-            keys: (
-              <Keycaps
-                binding={e.shortcut}
-                osType={os}
-                size="line"
-                pressed={e.keysDown}
-              />
-            ),
-          }}
+          components={{ keys: keyCaps(e.keysDown) }}
         />
       </p>
       <blockquote
@@ -146,10 +160,12 @@ export const SetupPractice: React.FC<SetupPracticeProps> = ({
       </p>
       <p className="m-0 text-small text-ink-2">
         <Trans
-          i18nKey="onboarding.setup.practice.continuous"
-          components={{
-            keys: <Keycaps binding={continuous} osType={os} size="line" />,
-          }}
+          i18nKey={
+            useKey
+              ? "onboarding.setup.practice.continuousKey"
+              : "onboarding.setup.practice.continuous"
+          }
+          components={{ keys: keyCaps() }}
         />
       </p>
     </SetupScreen>

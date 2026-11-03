@@ -186,6 +186,9 @@ struct Shared {
     type_held_queued: AtomicBool,
     stop_monitor: AtomicBool,
     stop_reason: Mutex<Option<StopReason>>,
+    /// Kusema: segments that started before this were heard while Kusema
+    /// was busy with a "Kusema, …" request, and aren't typed.
+    quiet_before: Mutex<Option<Instant>>,
 }
 
 struct Session {
@@ -308,6 +311,12 @@ fn request_stop(app: &AppHandle, shared: &Shared, reason: StopReason) {
     }
 }
 
+/// Kusema key: a session is running.
+pub fn is_active(app: &AppHandle) -> bool {
+    app.try_state::<DictationState>()
+        .is_some_and(|state| state.session.lock().unwrap().is_some())
+}
+
 /// Stops the session if one is running (Escape, the overlay's stop button, the
 /// tray, `--cancel`), keeping everything said so far. False if there's none.
 pub fn stop_if_active(app: &AppHandle) -> bool {
@@ -379,15 +388,27 @@ fn handle_text(shared: &Shared, text: &str, started_at: Instant) {
         .voice_commands
         .then(|| voice_commands::parse(text))
         .flatten();
-    // Kusema voice editing: "Kusema, make this more formal" is an edit, with
-    // its preview; typing waits until it's done.
+    // Kusema: speech from while a question was out (or its answer was
+    // spoken, which the microphone hears) isn't typed.
+    if shared
+        .quiet_before
+        .lock()
+        .unwrap()
+        .is_some_and(|quiet| started_at < quiet)
+    {
+        debug!("Dropping a segment heard while Kusema was answering");
+        return;
+    }
+    // Kusema: "Kusema, …" asks, edits or looks at the screen, as in normal
+    // dictation; typing waits until it's done.
     if command.is_none() && shared.voice_commands {
-        let trigger = get_settings(&shared.app).voice_edit_trigger;
-        if let Some(said) = crate::voice_edit::commands::parse_trigger(text, &trigger) {
+        let forms = crate::kusema_key::trigger_forms(&get_settings(&shared.app));
+        if let Some(rest) = crate::kusema_key::route::after_trigger(text, &forms) {
             let target = shared.core.lock().unwrap().guard.target();
             if let Some(target) = target {
-                crate::voice_edit::run_trigger_in_dictation(&shared.app, &said, target);
+                crate::kusema_key::run_in_dictation(&shared.app, &rest, target);
                 shared.core.lock().unwrap().last_typed = None;
+                *shared.quiet_before.lock().unwrap() = Some(Instant::now());
             }
             return;
         }
@@ -734,6 +755,7 @@ fn start(app: &AppHandle) {
         type_held_queued: AtomicBool::new(false),
         stop_monitor: AtomicBool::new(false),
         stop_reason: Mutex::new(None),
+        quiet_before: Mutex::new(None),
     });
     let (tx, rx) = mpsc::channel();
 

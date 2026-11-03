@@ -10,7 +10,9 @@
     "secureInputWarning": "⚠ Kısayollar Secure Input tarafından engelleniyor",
     "privilegedMode": "Privileged Modu",
     "privilegedOn": "Privileged modu açık",
-    "correctLast": "Son dikteyi düzelt…"
+    "correctLast": "Son dikteyi düzelt…",
+    "typeToKusema": "Kusema'ya yaz…",
+    "kusemaKeys": "Kusema tuşları"
   },
   "sidebar": {
     "general": "Genel",
@@ -252,7 +254,9 @@
         "waiting": "Konuşma modeliniz hâlâ indiriliyor. Bu kutu, model hazır olur olmaz çalışacak.",
         "continuous": "Uzun dikteler için <keys/> tuşuna basın; Kusema siz tekrar basana kadar dinler. Dragon'a mı alışkınsınız? Genel bölümünden Num + tuşunu ayarlayabilirsiniz.",
         "continuousRunning": "Sürekli dikte açık. Kelimeleriniz her duraklamada kutuda görünür. Durdurmak için {{stop}} tuşuna basın.",
-        "continuousEnded": "Sürekli dikte budur. Diğer uygulamalarınızda kelimeler imlecin olduğu yere yazılır."
+        "continuousEnded": "Sürekli dikte budur. Diğer uygulamalarınızda kelimeler imlecin olduğu yere yazılır.",
+        "continuousKey": "Daha uzun dikte için <keys/> tuşuna iki kez dokunun: Kusema siz tekrar iki kez dokunana kadar dinler.",
+        "continuousRunningKey": "Sürekli dikte açık. Sözcükleriniz her duraklamada kutuda görünür. Durdurmak için {{key}} tuşuna iki kez dokunun."
       },
       "assistant": {
         "title": "Yapay zekâ asistanını kurun (isteğe bağlı)",
@@ -297,7 +301,8 @@
           "continuous": "Sürekli dikte: başlatmak ve durdurmak için basın",
           "ask": "Kusema'ya sor",
           "askScreen": "Ekranım hakkında sor"
-        }
+        },
+        "typeToKusema": "Bunun yerine soru yazmak için:"
       }
     }
   },
@@ -1321,7 +1326,12 @@
       "done": "Tamam",
       "notDone": "Henüz değil",
       "progress": "{{count}} görevden {{done}} tanesi tamam",
-      "allDone": "Üçü de tamam. Harika iş."
+      "allDone": "Üçü de tamam. Harika iş.",
+      "how": {
+        "hold": "{{key}} basılı tutun",
+        "doubleTap": "{{key}} tuşuna iki kez dokunun",
+        "say": "“{{trigger}}, …” deyin"
+      }
     },
     "glow": {
       "title": "Kayıt göstergesi",
@@ -1364,15 +1374,15 @@
     },
     "voiceEdit": {
       "title": "Sesle Düzenleme",
-      "description": "Her uygulamada metni sesinizle değiştirin. Metni seçin, kısayolu basılı tutun ve ne yapılacağını söyleyin. “select last word” gibi komutlar bu bilgisayarda kalır; “bunu kısalt” gibi talimatlar AI sağlayıcınıza gider.",
+      "description": "Herhangi bir uygulamadaki metni sesle değiştirin. Seçin, Kusema tuşunu basılı tutup “Kusema” deyin, ardından ne yapılacağını söyleyin. “select last word” gibi komutlar bu bilgisayarda kalır; “shorten this” gibi talimatlar yapay zekâ sağlayıcınıza gider.",
       "preview": {
         "label": "AI Düzenlemelerini Önizle",
         "description": "Yeni metni eskisinin yerine geçmeden önce gösterir. Hızlı düzenlemeler için kapatın: uygulamada Ctrl+Z yine de geri alır."
       },
       "whatCanISay": "Ne söyleyebilirim?",
       "trigger": {
-        "label": "Sürekli dikte tetikleyici sözcüğü",
-        "description": "Sürekli dikte sırasında, metni yazmak yerine değiştirmek için cümleye bu sözcükle başlayın: “Kusema, bunu daha resmî yap”. Kapatmak için boş bırakın.",
+        "label": "Tetikleme sözcüğü",
+        "description": "Yazmak yerine soru sormak, düzenlemek veya ekranınıza baktırmak için bu sözcükle başlayın: “Kusema, make this more formal”. Kusema tuşunu basılı tutarken ve sürekli diktede çalışır. Kapatmak için boş bırakın.",
         "placeholder": "Kusema"
       },
       "simpleKey": {
@@ -1547,6 +1557,11 @@
       "windowChanged": "Pencere değişti, bu yüzden yanıt yazılmadı. Asistan sayfasından ekleyin.",
       "notTyping": "Yapıştırma yöntemi “Yok” olarak ayarlı, bu yüzden yanıt yazılmadı.",
       "failed": "Yanıt bu pencereye yazılamadı."
+    },
+    "route": {
+      "ask": "Kusema'ya soruluyor…",
+      "ask_screen": "Ekranınıza bakılıyor…",
+      "edit": "Düzenleniyor…"
     }
   },
   "screenCard": {
@@ -1632,7 +1647,8 @@
     },
     "trigger": "Sürekli dikte sırasında metni aynı şekilde değiştirmek için “{{trigger}},” ile başlayın, örneğin “{{trigger}}, bunu daha resmî yap”. Bu sözcük olmadan her şey söylediğiniz gibi yazılır.",
     "triggerOff": "Sürekli dikte sırasında metni değiştirmek için Genel → Sesle Düzenleme altında bir tetikleyici sözcük belirleyin.",
-    "selectFirst": "ONLYOFFICE, LibreOffice ve Google Docs gibi bazı uygulamalar metinlerini Kusema'ya göstermez. Orada önce metni fare veya klavyeyle seçin; cümle, paragraf veya sözcükleri sesle seçmek orada çalışmaz."
+    "selectFirst": "ONLYOFFICE, LibreOffice ve Google Docs gibi bazı uygulamalar metinlerini Kusema'ya göstermez. Orada önce metni fare veya klavyeyle seçin; cümle, paragraf veya sözcükleri sesle seçmek orada çalışmaz.",
+    "introKey": "{{key}} tuşunu basılı tutup “{{trigger}}” deyin, ardından bunlardan birini söyleyin. “Sürekli diktede de” işaretli komutlar orada tek başına söylendiğinde çalışır."
   },
   "voiceEdit": {
     "notice": {
@@ -1673,5 +1689,50 @@
     "close": "Kapat",
     "hint": "Enter sorar · Shift+Enter: yeni satır · Esc kapatır",
     "noWindow": "Hakkında sormak istediğiniz pencereye tıklayın, sonra bu kutuyu yeniden açın."
+  },
+  "kusemaKey": {
+    "presets": {
+      "right_ctrl": "Sağ Ctrl",
+      "copilot": "Copilot tuşu",
+      "numpad_plus": "Numpad +"
+    },
+    "card": {
+      "title": "Kusema tuşları",
+      "hold": "Konuşmak için <key/> tuşunu basılı tutun.",
+      "doubleTap": "Sürekli dikte için <key/> tuşuna iki kez dokunun.",
+      "say": "Soru sormak, düzenlemek veya ekranınıza baktırmak için önce <q>{{trigger}}</q> deyin."
+    },
+    "settings": {
+      "title": "Kusema tuşu",
+      "description": "Dikte için tek tuş. Konuşmak için basılı tutun, sürekli dikte için iki kez dokunun ve soru sormak, düzenlemek veya ekranınıza baktırmak için “Kusema” ile başlayın. Diğer uygulamalar bu tuşu hiç görmez.",
+      "enabled": {
+        "label": "Kusema tuşunu kullan",
+        "description": "Kapalıyken yalnızca aşağıdaki kısayollar çalışır."
+      },
+      "key": {
+        "label": "Tuş",
+        "description": "Sağ Ctrl çoğu klavyeye uyar. Bu tuşu olmayan dizüstü bilgisayarlarda genellikle Copilot tuşu vardır. Numpad + Dragon'un mikrofon tuşudur. Seçtiğiniz tuş artık başka bir şey yapmaz.",
+        "press": "İstediğiniz tuşa basın",
+        "pressNow": "Şimdi bir tuşa basın (Esc iptal eder)"
+      },
+      "copilotSuggest": "Bu klavyede Copilot tuşu var ve Kusema sağ Ctrl görmedi. Bunun yerine Copilot tuşu kullanılsın mı?",
+      "useCopilot": "Copilot tuşunu kullan",
+      "laptopHint": "Bu dizüstünde sağ Ctrl yok mu? Copilot tuşunu seçin veya istediğiniz tuşa basın.",
+      "classic": {
+        "label": "Klasik kısayollar",
+        "description": "Kusema tuşunun yanında her işlem için ayrı bir kısayol da tut (dikte için Ctrl+Boşluk, soru için Ctrl+Alt+Boşluk vb.)."
+      }
+    },
+    "refusal": {
+      "types": "Bu tuş bir şey yazar, bu yüzden Kusema tuşu olamaz. Sağ Ctrl, Pause veya bir işlev tuşu gibi boş bir tuş seçin.",
+      "needed": "Bu tuş başka işler için gerekli. Sağ Ctrl, Pause veya bir işlev tuşu gibi boş bir tuş seçin.",
+      "moves": "Bu tuş imleci hareket ettirir. Sağ Ctrl, Pause veya bir işlev tuşu gibi boş bir tuş seçin."
+    },
+    "news": {
+      "title": "Yeni: daha basit tuşlar",
+      "body": "Kusema artık birçok kısayol yerine tek bir tuşa sahip. Yalnızca iki kural var:",
+      "keptClassic": "Kusema artık her şey için tek tuşa sahip. Bir kısayolu değiştirmiştiniz, bu yüzden kısayollarınız çalışmaya devam ediyor. İsterseniz Klasik kısayollar'dan kapatabilirsiniz.",
+      "gotIt": "Anladım"
+    }
   }
 }

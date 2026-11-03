@@ -10,6 +10,8 @@ import {
 interface KeycapsProps {
   /** The binding to draw, e.g. "option+space". */
   binding: string;
+  /** Kusema: draw these keys instead of the binding's (the Kusema key). */
+  labels?: string[];
   osType: OSType;
   /** sm: standalone; screen: Demo's drawn screen; line: inline in body text. */
   size?: "sm" | "screen" | "line";
@@ -31,6 +33,7 @@ const SIZES = {
 /** A shortcut binding drawn as physical keycaps. */
 export const Keycaps: React.FC<KeycapsProps> = ({
   binding,
+  labels: given,
   osType,
   size = "sm",
   pressed = false,
@@ -38,7 +41,7 @@ export const Keycaps: React.FC<KeycapsProps> = ({
   lift = false,
   className = "",
 }) => {
-  const labels = keycapLabels(binding, osType);
+  const labels = given ?? keycapLabels(binding, osType);
   const state = pressed
     ? "translate-y-[3px] shadow-none bg-plum text-background border-plum"
     : partial
@@ -53,7 +56,7 @@ export const Keycaps: React.FC<KeycapsProps> = ({
     <span
       className={`inline-flex items-center gap-[4px] align-middle ${className}`}
       role="img"
-      aria-label={keycapLabel(binding, osType)}
+      aria-label={given ? given.join(" + ") : keycapLabel(binding, osType)}
     >
       {labels.map((label, i) => (
         <span

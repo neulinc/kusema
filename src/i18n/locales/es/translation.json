@@ -10,7 +10,9 @@
     "secureInputWarning": "⚠ Atajos bloqueados por Secure Input",
     "privilegedMode": "Modo Privileged",
     "privilegedOn": "Modo Privileged activado",
-    "correctLast": "Corregir el último dictado…"
+    "correctLast": "Corregir el último dictado…",
+    "typeToKusema": "Escribir a Kusema…",
+    "kusemaKeys": "Teclas de Kusema"
   },
   "sidebar": {
     "general": "General",
@@ -253,7 +255,9 @@
         "waiting": "Tu modelo de voz todavía se está descargando. Este cuadro funcionará en cuanto esté listo.",
         "continuous": "Para dictados largos, pulsa <keys/> y Kusema escuchará hasta que lo vuelvas a pulsar. ¿Vienes de Dragon? Puedes usar el + del teclado numérico en General.",
         "continuousRunning": "El dictado continuo está activado. Tus palabras aparecen en el cuadro en cada pausa. Pulsa {{stop}} para detenerlo.",
-        "continuousEnded": "Eso es el dictado continuo. En tus otras aplicaciones, tus palabras se escriben donde está el cursor."
+        "continuousEnded": "Eso es el dictado continuo. En tus otras aplicaciones, tus palabras se escriben donde está el cursor.",
+        "continuousKey": "Para dictados largos, pulsa dos veces <keys/>: Kusema sigue escuchando hasta que vuelvas a pulsarla dos veces.",
+        "continuousRunningKey": "El dictado continuo está activado. Tus palabras aparecen en el cuadro cada vez que haces una pausa. Pulsa dos veces {{key}} para detenerlo."
       },
       "assistant": {
         "title": "Configurar el asistente de IA (opcional)",
@@ -298,7 +302,8 @@
           "continuous": "Dictado continuo: pulsar para iniciar y detener",
           "ask": "Preguntar a Kusema",
           "askScreen": "Preguntar sobre mi pantalla"
-        }
+        },
+        "typeToKusema": "Para escribir una pregunta:"
       }
     }
   },
@@ -1327,7 +1332,12 @@
       "done": "Hecho",
       "notDone": "Aún no",
       "progress": "{{done}} de {{count}} hechos",
-      "allDone": "Los tres hechos. ¡Buen trabajo!"
+      "allDone": "Los tres hechos. ¡Buen trabajo!",
+      "how": {
+        "hold": "Mantén {{key}}",
+        "doubleTap": "Pulsa dos veces {{key}}",
+        "say": "Di «{{trigger}}, …»"
+      }
     },
     "glow": {
       "title": "Indicador de grabación",
@@ -1370,15 +1380,15 @@
     },
     "voiceEdit": {
       "title": "Edición por voz",
-      "description": "Cambia texto en cualquier aplicación con la voz. Selecciónalo, mantén pulsado el atajo y di qué hacer. Los comandos como «select last word» se quedan en este ordenador; las instrucciones como «acorta esto» van a tu proveedor de IA.",
+      "description": "Cambia texto en cualquier aplicación con la voz. Selecciónalo, mantén pulsada la tecla Kusema y di «Kusema», y luego qué hacer. Los comandos como «select last word» se quedan en este equipo; las instrucciones como «shorten this» van a tu proveedor de IA.",
       "preview": {
         "label": "Vista previa de cambios de IA",
         "description": "Muestra el texto nuevo antes de que sustituya al anterior. Desactívalo para cambios rápidos: Ctrl+Z en la aplicación los sigue deshaciendo."
       },
       "whatCanISay": "¿Qué puedo decir?",
       "trigger": {
-        "label": "Palabra de activación en el dictado continuo",
-        "description": "En el dictado continuo, empieza una frase con esta palabra para cambiar el texto en lugar de escribirlo: «Kusema, haz esto más formal». Déjala vacía para desactivarlo.",
+        "label": "Palabra de activación",
+        "description": "Empieza con esta palabra para preguntar, editar o hacer que mire tu pantalla en lugar de escribir: «Kusema, make this more formal». Funciona mientras mantienes pulsada la tecla Kusema y en el dictado continuo. Déjala vacía para desactivarlo.",
         "placeholder": "Kusema"
       },
       "simpleKey": {
@@ -1553,6 +1563,11 @@
       "windowChanged": "La ventana cambió, así que la respuesta no se escribió. Insértala desde la página Asistente.",
       "notTyping": "El método de pegado está en «Ninguno», así que la respuesta no se escribió.",
       "failed": "No se pudo escribir la respuesta en esta ventana."
+    },
+    "route": {
+      "ask": "Preguntando a Kusema…",
+      "ask_screen": "Mirando tu pantalla…",
+      "edit": "Editando…"
     }
   },
   "screenCard": {
@@ -1640,7 +1655,8 @@
     },
     "trigger": "En el dictado continuo, empieza con «{{trigger}},» para cambiar texto de la misma forma, por ejemplo «{{trigger}}, haz esto más formal». Sin esa palabra, todo se escribe tal como lo dices.",
     "triggerOff": "Para cambiar texto durante el dictado continuo, define una palabra de activación en General → Edición por voz.",
-    "selectFirst": "Algunas aplicaciones, como ONLYOFFICE, LibreOffice y Google Docs, no muestran su texto a Kusema. En ellas, selecciona primero el texto con el ratón o el teclado; seleccionar una frase, un párrafo o palabras por voz no funciona allí."
+    "selectFirst": "Algunas aplicaciones, como ONLYOFFICE, LibreOffice y Google Docs, no muestran su texto a Kusema. En ellas, selecciona primero el texto con el ratón o el teclado; seleccionar una frase, un párrafo o palabras por voz no funciona allí.",
+    "introKey": "Mantén pulsada {{key}} y di «{{trigger}}», y luego uno de estos. Los comandos marcados «También en el dictado continuo» funcionan ahí cuando se dicen solos."
   },
   "voiceEdit": {
     "notice": {
@@ -1681,5 +1697,50 @@
     "close": "Cerrar",
     "hint": "Intro pregunta · Mayús+Intro: nueva línea · Esc cierra",
     "noWindow": "Haz clic en la ventana sobre la que quieres preguntar y vuelve a abrir este cuadro."
+  },
+  "kusemaKey": {
+    "presets": {
+      "right_ctrl": "Ctrl derecha",
+      "copilot": "Tecla Copilot",
+      "numpad_plus": "Numpad +"
+    },
+    "card": {
+      "title": "Teclas de Kusema",
+      "hold": "Mantén pulsada <key/> para hablar.",
+      "doubleTap": "Pulsa dos veces <key/> para el dictado continuo.",
+      "say": "Di primero <q>{{trigger}}</q> para preguntar, editar o hacer que mire tu pantalla."
+    },
+    "settings": {
+      "title": "Tecla Kusema",
+      "description": "Una tecla para dictar. Mantenla pulsada para hablar, púlsala dos veces para el dictado continuo y empieza con «Kusema» para preguntar, editar o hacer que mire tu pantalla. Las demás aplicaciones nunca ven la tecla.",
+      "enabled": {
+        "label": "Usar la tecla Kusema",
+        "description": "Desactivada, solo funcionan los atajos de abajo."
+      },
+      "key": {
+        "label": "Tecla",
+        "description": "Ctrl derecha sirve en la mayoría de teclados. Los portátiles que no la tienen suelen tener una tecla Copilot. Numpad + es la tecla de micrófono de Dragon. La tecla que elijas deja de hacer cualquier otra cosa.",
+        "press": "Pulsa la tecla que quieras",
+        "pressNow": "Pulsa una tecla ahora (Esc cancela)"
+      },
+      "copilotSuggest": "Este teclado tiene tecla Copilot y Kusema no ha visto una Ctrl derecha. ¿Usar la tecla Copilot?",
+      "useCopilot": "Usar la tecla Copilot",
+      "laptopHint": "¿Tu portátil no tiene Ctrl derecha? Elige la tecla Copilot o pulsa la tecla que quieras.",
+      "classic": {
+        "label": "Atajos clásicos",
+        "description": "Conservar también un atajo para cada acción (Ctrl+Espacio para dictar, Ctrl+Alt+Espacio para preguntar, etc.) junto a la tecla Kusema."
+      }
+    },
+    "refusal": {
+      "types": "Esa tecla escribe algo, así que no puede ser la tecla Kusema. Elige una tecla libre, como Ctrl derecha, Pausa o una tecla de función.",
+      "needed": "Esa tecla hace falta para otras cosas. Elige una tecla libre, como Ctrl derecha, Pausa o una tecla de función.",
+      "moves": "Esa tecla mueve el cursor. Elige una tecla libre, como Ctrl derecha, Pausa o una tecla de función."
+    },
+    "news": {
+      "title": "Novedad: teclas más sencillas",
+      "body": "Kusema ahora tiene una sola tecla en lugar de muchos atajos. Estas son las dos únicas reglas:",
+      "keptClassic": "Kusema ahora tiene una tecla para todo. Habías cambiado un atajo, así que tus atajos siguen funcionando. Puedes desactivarlos en Atajos clásicos.",
+      "gotIt": "Entendido"
+    }
   }
 }

@@ -10,7 +10,9 @@
     "secureInputWarning": "⚠ 快捷键被 Secure Input 阻止",
     "privilegedMode": "Privileged 模式",
     "privilegedOn": "Privileged 模式已开启",
-    "correctLast": "更正上一次听写…"
+    "correctLast": "更正上一次听写…",
+    "typeToKusema": "向 Kusema 输入…",
+    "kusemaKeys": "Kusema 按键"
   },
   "sidebar": {
     "general": "通用",
@@ -252,7 +254,9 @@
         "waiting": "语音模型仍在下载。准备好后这个框就能用了。",
         "continuous": "要长时间听写，请按 <keys/>，Kusema 会一直听，直到您再按一次。用过 Dragon？可以在\"通用\"中设为数字键盘 +。",
         "continuousRunning": "连续听写已开启。每次停顿时，您说的话会出现在框中。按 {{stop}} 结束。",
-        "continuousEnded": "这就是连续听写。在其他应用中，文字会输入到光标所在位置。"
+        "continuousEnded": "这就是连续听写。在其他应用中，文字会输入到光标所在位置。",
+        "continuousKey": "要长时间听写，请连按两次 <keys/>：Kusema 会一直听，直到你再次连按两次。",
+        "continuousRunningKey": "连续听写已开启。每次停顿时，你的话会出现在框中。连按两次 {{key}} 停止。"
       },
       "assistant": {
         "title": "设置 AI 助手（可选）",
@@ -297,7 +301,8 @@
           "continuous": "连续听写：按一下开始或停止",
           "ask": "问 Kusema",
           "askScreen": "询问我的屏幕"
-        }
+        },
+        "typeToKusema": "改为输入问题："
       }
     }
   },
@@ -1321,7 +1326,12 @@
       "done": "已完成",
       "notDone": "尚未完成",
       "progress": "已完成 {{done}}/{{count}}",
-      "allDone": "三个都完成了。做得好。"
+      "allDone": "三个都完成了。做得好。",
+      "how": {
+        "hold": "按住 {{key}}",
+        "doubleTap": "连按两次 {{key}}",
+        "say": "说“{{trigger}}，…”"
+      }
     },
     "glow": {
       "title": "录音指示",
@@ -1364,15 +1374,15 @@
     },
     "voiceEdit": {
       "title": "语音编辑",
-      "description": "在任何应用中用语音修改文字。选中文字，按住快捷键，说出要做什么。像“select last word”这样的命令留在这台电脑上；像“把这段缩短”这样的指令会发送给你的 AI 服务商。",
+      "description": "在任何应用中用语音修改文字。选中文字，按住 Kusema 键并说“Kusema”，然后说要做什么。“select last word”之类的命令在本机处理；“shorten this”之类的指令会发送给你的 AI 服务商。",
       "preview": {
         "label": "预览 AI 修改",
         "description": "在新文字替换旧文字之前先显示出来。想快速修改时可以关闭：在应用中按 Ctrl+Z 仍可撤销。"
       },
       "whatCanISay": "我可以说什么？",
       "trigger": {
-        "label": "连续听写的触发词",
-        "description": "在连续听写时，用这个词开头说一句话，就会修改文字而不是输入它：“Kusema，改得更正式些”。留空即可关闭。",
+        "label": "唤醒词",
+        "description": "以这个词开头，就会提问、编辑或查看你的屏幕，而不是输入文字：“Kusema, make this more formal”。按住 Kusema 键时和连续听写时都有效。留空即可关闭。",
         "placeholder": "Kusema"
       },
       "simpleKey": {
@@ -1547,6 +1557,11 @@
       "windowChanged": "窗口已切换，因此未输入回答。请从“助手”页面插入。",
       "notTyping": "粘贴方式设为“无”，因此未输入回答。",
       "failed": "无法在此窗口中输入回答。"
+    },
+    "route": {
+      "ask": "正在问 Kusema…",
+      "ask_screen": "正在查看你的屏幕…",
+      "edit": "正在编辑…"
     }
   },
   "screenCard": {
@@ -1632,7 +1647,8 @@
     },
     "trigger": "在连续听写时，以“{{trigger}}，”开头即可用同样的方式修改文字，例如“{{trigger}}，改得更正式些”。不说这个词时，所有内容都会照你说的输入。",
     "triggerOff": "要在连续听写时修改文字，请在“常规 → 语音编辑”中设置触发词。",
-    "selectFirst": "一些应用（如 ONLYOFFICE、LibreOffice 和 Google 文档）不会把文字提供给 Kusema。在这些应用中，请先用鼠标或键盘选中文字；无法用语音选择句子、段落或词语。"
+    "selectFirst": "一些应用（如 ONLYOFFICE、LibreOffice 和 Google 文档）不会把文字提供给 Kusema。在这些应用中，请先用鼠标或键盘选中文字；无法用语音选择句子、段落或词语。",
+    "introKey": "按住 {{key}} 并说“{{trigger}}”，然后说下面的某条命令。标有“连续听写中也可用”的命令，在连续听写中单独说出即可生效。"
   },
   "voiceEdit": {
     "notice": {
@@ -1673,5 +1689,50 @@
     "close": "关闭",
     "hint": "Enter 提问 · Shift+Enter 换行 · Esc 关闭",
     "noWindow": "请点击你想询问的窗口，然后重新打开此框。"
+  },
+  "kusemaKey": {
+    "presets": {
+      "right_ctrl": "右 Ctrl",
+      "copilot": "Copilot 键",
+      "numpad_plus": "小键盘 +"
+    },
+    "card": {
+      "title": "Kusema 按键",
+      "hold": "按住 <key/> 说话。",
+      "doubleTap": "连按两次 <key/> 开始连续听写。",
+      "say": "先说 <q>{{trigger}}</q>，即可提问、编辑或让它查看你的屏幕。"
+    },
+    "settings": {
+      "title": "Kusema 键",
+      "description": "一个键就能听写。按住说话，连按两次开始连续听写，以“Kusema”开头即可提问、编辑或让它查看你的屏幕。其他应用不会收到这个键。",
+      "enabled": {
+        "label": "使用 Kusema 键",
+        "description": "关闭时，只有下面的快捷键有效。"
+      },
+      "key": {
+        "label": "按键",
+        "description": "右 Ctrl 适合大多数键盘。没有右 Ctrl 的笔记本电脑通常有 Copilot 键。小键盘 + 是 Dragon 的麦克风键。选定的键将不再有其他用途。",
+        "press": "按下你想用的键",
+        "pressNow": "现在按一个键（Esc 取消）"
+      },
+      "copilotSuggest": "这个键盘有 Copilot 键，而 Kusema 还没检测到右 Ctrl。改用 Copilot 键吗？",
+      "useCopilot": "使用 Copilot 键",
+      "laptopHint": "这台笔记本没有右 Ctrl？请选择 Copilot 键，或按下你想用的键。",
+      "classic": {
+        "label": "经典快捷键",
+        "description": "在 Kusema 键之外，也为每个操作保留单独的快捷键（Ctrl+空格 听写、Ctrl+Alt+空格 提问等）。"
+      }
+    },
+    "refusal": {
+      "types": "这个键会输入字符，不能作为 Kusema 键。请选择空闲的键，例如右 Ctrl、Pause 或功能键。",
+      "needed": "这个键还有其他用途。请选择空闲的键，例如右 Ctrl、Pause 或功能键。",
+      "moves": "这个键会移动光标。请选择空闲的键，例如右 Ctrl、Pause 或功能键。"
+    },
+    "news": {
+      "title": "新功能：更简单的按键",
+      "body": "Kusema 现在用一个键代替许多快捷键。只有这两条规则：",
+      "keptClassic": "Kusema 现在一个键就能完成所有操作。你改过快捷键，所以原来的快捷键仍然有效。可在“经典快捷键”中关闭。",
+      "gotIt": "知道了"
+    }
   }
 }

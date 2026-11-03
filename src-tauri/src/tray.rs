@@ -554,6 +554,16 @@ fn build_menu(app: &AppHandle, inputs: &MenuInputs) -> tauri::Result<(Menu<tauri
         true,
         None::<&str>,
     )?;
+    // Kusema: the Ask box, and the card of keys to remember.
+    let type_to_kusema_i = MenuItem::with_id(
+        app,
+        "type_to_kusema",
+        &strings.type_to_kusema,
+        true,
+        None::<&str>,
+    )?;
+    let kusema_keys_i =
+        MenuItem::with_id(app, "kusema_keys", &strings.kusema_keys, true, None::<&str>)?;
     let quit_i = MenuItem::with_id(app, "quit", &strings.quit, true, quit_accelerator)?;
     let separator = || PredefinedMenuItem::separator(app);
 
@@ -605,6 +615,9 @@ fn build_menu(app: &AppHandle, inputs: &MenuInputs) -> tauri::Result<(Menu<tauri
             app,
             &[
                 &version_i,
+                &separator()?,
+                &type_to_kusema_i,
+                &kusema_keys_i,
                 &separator()?,
                 &copy_last_transcript_i,
                 &correct_last_i,

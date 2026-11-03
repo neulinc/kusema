@@ -10,7 +10,9 @@
     "secureInputWarning": "⚠ Tastenkürzel durch Secure Input blockiert",
     "privilegedMode": "Privileged-Modus",
     "privilegedOn": "Privileged-Modus an",
-    "correctLast": "Letztes Diktat korrigieren …"
+    "correctLast": "Letztes Diktat korrigieren …",
+    "typeToKusema": "An Kusema schreiben …",
+    "kusemaKeys": "Kusema-Tasten"
   },
   "sidebar": {
     "general": "Allgemein",
@@ -252,7 +254,9 @@
         "waiting": "Dein Sprachmodell wird noch heruntergeladen. Dieses Feld funktioniert, sobald es bereit ist.",
         "continuous": "Für längeres Diktieren drücke <keys/>: Kusema hört zu, bis du die Taste erneut drückst. Von Dragon gewohnt? Unter Allgemein kannst du dafür Num + einstellen.",
         "continuousRunning": "Fortlaufendes Diktieren ist an. Deine Wörter erscheinen bei jeder Pause im Feld. Drücke {{stop}}, um es zu beenden.",
-        "continuousEnded": "Das war fortlaufendes Diktieren. In deinen anderen Apps wird an der Cursorposition geschrieben."
+        "continuousEnded": "Das war fortlaufendes Diktieren. In deinen anderen Apps wird an der Cursorposition geschrieben.",
+        "continuousKey": "Für längeres Diktieren tippe <keys/> zweimal: Kusema hört zu, bis du sie erneut zweimal tippst.",
+        "continuousRunningKey": "Fortlaufendes Diktieren ist an. Deine Wörter erscheinen im Feld, sobald du eine Pause machst. Tippe {{key}} zweimal, um es zu beenden."
       },
       "assistant": {
         "title": "KI-Assistent einrichten (optional)",
@@ -297,7 +301,8 @@
           "continuous": "Fortlaufendes Diktieren: zum Starten und Beenden drücken",
           "ask": "Kusema fragen",
           "askScreen": "Zu meinem Bildschirm fragen"
-        }
+        },
+        "typeToKusema": "Um stattdessen eine Frage zu tippen:"
       }
     }
   },
@@ -1321,7 +1326,12 @@
       "done": "Erledigt",
       "notDone": "Noch offen",
       "progress": "{{done}} von {{count}} erledigt",
-      "allDone": "Alle drei erledigt. Gut gemacht."
+      "allDone": "Alle drei erledigt. Gut gemacht.",
+      "how": {
+        "hold": "{{key}} halten",
+        "doubleTap": "{{key}} zweimal tippen",
+        "say": "„{{trigger}}, …“ sagen"
+      }
     },
     "glow": {
       "title": "Aufnahmeanzeige",
@@ -1364,15 +1374,15 @@
     },
     "voiceEdit": {
       "title": "Sprachbearbeitung",
-      "description": "Ändern Sie Text in jeder App mit der Stimme. Markieren Sie ihn, halten Sie das Tastenkürzel und sagen Sie, was geschehen soll. Befehle wie „select last word“ bleiben auf diesem Computer; Anweisungen wie „kürze das“ gehen an Ihren KI-Anbieter.",
+      "description": "Text in jeder App per Stimme ändern. Markieren Sie ihn, halten Sie die Kusema-Taste und sagen Sie „Kusema“, dann was zu tun ist. Befehle wie „select last word“ bleiben auf diesem Computer; Anweisungen wie „shorten this“ gehen an Ihren KI-Anbieter.",
       "preview": {
         "label": "KI-Änderungen vorher zeigen",
         "description": "Zeigt den neuen Text, bevor er den alten ersetzt. Für schnelle Änderungen ausschalten: Strg+Z in der App macht sie trotzdem rückgängig."
       },
       "whatCanISay": "Was kann ich sagen?",
       "trigger": {
-        "label": "Auslösewort beim fortlaufenden Diktat",
-        "description": "Beginnen Sie beim fortlaufenden Diktat einen Satz mit diesem Wort, um Text zu ändern, statt ihn zu schreiben: „Kusema, mach das förmlicher“. Leer lassen, um das auszuschalten.",
+        "label": "Auslösewort",
+        "description": "Beginnen Sie mit diesem Wort, um zu fragen, zu bearbeiten oder auf Ihren Bildschirm schauen zu lassen, statt zu tippen: „Kusema, make this more formal“. Das funktioniert, während Sie die Kusema-Taste halten, und beim fortlaufenden Diktieren. Leer lassen, um es auszuschalten.",
         "placeholder": "Kusema"
       },
       "simpleKey": {
@@ -1547,6 +1557,11 @@
       "windowChanged": "Das Fenster hat gewechselt, daher wurde die Antwort nicht getippt. Fügen Sie sie auf der Assistent-Seite ein.",
       "notTyping": "Die Einfügemethode ist auf „Keine“ gestellt, daher wurde die Antwort nicht getippt.",
       "failed": "Die Antwort konnte nicht in dieses Fenster getippt werden."
+    },
+    "route": {
+      "ask": "Kusema wird gefragt …",
+      "ask_screen": "Schaut auf Ihren Bildschirm …",
+      "edit": "Bearbeitet …"
     }
   },
   "screenCard": {
@@ -1632,7 +1647,8 @@
     },
     "trigger": "Beginnen Sie beim fortlaufenden Diktat mit „{{trigger}},“, um Text auf dieselbe Weise zu ändern, zum Beispiel „{{trigger}}, mach das förmlicher“. Ohne dieses Wort wird alles so geschrieben, wie Sie es sagen.",
     "triggerOff": "Um Text beim fortlaufenden Diktat zu ändern, legen Sie unter Allgemein → Sprachbearbeitung ein Auslösewort fest.",
-    "selectFirst": "Manche Apps wie ONLYOFFICE, LibreOffice und Google Docs zeigen Kusema ihren Text nicht. Markieren Sie den Text dort zuerst mit Maus oder Tastatur; Sätze, Absätze oder Wörter per Sprache markieren funktioniert dort nicht."
+    "selectFirst": "Manche Apps wie ONLYOFFICE, LibreOffice und Google Docs zeigen Kusema ihren Text nicht. Markieren Sie den Text dort zuerst mit Maus oder Tastatur; Sätze, Absätze oder Wörter per Sprache markieren funktioniert dort nicht.",
+    "introKey": "Halten Sie {{key}} gedrückt und sagen Sie „{{trigger}}“, dann einen dieser Befehle. Befehle mit dem Hinweis „Auch beim fortlaufenden Diktat“ funktionieren dort, wenn sie allein gesagt werden."
   },
   "voiceEdit": {
     "notice": {
@@ -1673,5 +1689,50 @@
     "close": "Schließen",
     "hint": "Eingabe fragt · Umschalt+Eingabe: neue Zeile · Esc schließt",
     "noWindow": "Klicken Sie in das Fenster, zu dem Sie fragen möchten, und öffnen Sie dieses Feld erneut."
+  },
+  "kusemaKey": {
+    "presets": {
+      "right_ctrl": "Strg rechts",
+      "copilot": "Copilot-Taste",
+      "numpad_plus": "Numpad +"
+    },
+    "card": {
+      "title": "Kusema-Tasten",
+      "hold": "Halten Sie <key/> gedrückt, um zu sprechen.",
+      "doubleTap": "Tippen Sie <key/> zweimal für fortlaufendes Diktieren.",
+      "say": "Sagen Sie zuerst <q>{{trigger}}</q>, um zu fragen, zu bearbeiten oder auf Ihren Bildschirm schauen zu lassen."
+    },
+    "settings": {
+      "title": "Kusema-Taste",
+      "description": "Eine Taste zum Diktieren. Halten Sie sie zum Sprechen, tippen Sie sie zweimal für fortlaufendes Diktieren, und beginnen Sie mit „Kusema“, um zu fragen, zu bearbeiten oder auf Ihren Bildschirm schauen zu lassen. Andere Apps bekommen die Taste nie zu sehen.",
+      "enabled": {
+        "label": "Kusema-Taste verwenden",
+        "description": "Aus: Nur die Tastenkürzel unten funktionieren."
+      },
+      "key": {
+        "label": "Taste",
+        "description": "Strg rechts passt zu den meisten Tastaturen. Laptops ohne diese Taste haben oft eine Copilot-Taste. Numpad + ist Dragons Mikrofontaste. Die gewählte Taste macht danach nichts anderes mehr.",
+        "press": "Gewünschte Taste drücken",
+        "pressNow": "Jetzt eine Taste drücken (Esc bricht ab)"
+      },
+      "copilotSuggest": "Diese Tastatur hat eine Copilot-Taste, und Kusema hat noch kein Strg rechts gesehen. Stattdessen die Copilot-Taste verwenden?",
+      "useCopilot": "Copilot-Taste verwenden",
+      "laptopHint": "Kein Strg rechts an diesem Laptop? Wählen Sie die Copilot-Taste oder drücken Sie die gewünschte Taste.",
+      "classic": {
+        "label": "Klassische Tastenkürzel",
+        "description": "Zusätzlich zur Kusema-Taste ein eigenes Tastenkürzel für jede Aktion behalten (Strg+Leertaste zum Diktieren, Strg+Alt+Leertaste zum Fragen und so weiter)."
+      }
+    },
+    "refusal": {
+      "types": "Diese Taste tippt etwas und kann daher nicht die Kusema-Taste sein. Wählen Sie eine freie Taste wie Strg rechts, Pause oder eine Funktionstaste.",
+      "needed": "Diese Taste wird für anderes gebraucht. Wählen Sie eine freie Taste wie Strg rechts, Pause oder eine Funktionstaste.",
+      "moves": "Diese Taste bewegt den Cursor. Wählen Sie eine freie Taste wie Strg rechts, Pause oder eine Funktionstaste."
+    },
+    "news": {
+      "title": "Neu: einfachere Tasten",
+      "body": "Kusema hat jetzt eine Taste statt vieler Tastenkürzel. Es gibt nur diese zwei Regeln:",
+      "keptClassic": "Kusema hat jetzt eine Taste für alles. Sie hatten ein Tastenkürzel geändert, daher funktionieren Ihre Tastenkürzel weiterhin. Unter „Klassische Tastenkürzel“ können Sie sie ausschalten.",
+      "gotIt": "Verstanden"
+    }
   }
 }

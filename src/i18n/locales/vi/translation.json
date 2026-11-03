@@ -10,7 +10,9 @@
     "secureInputWarning": "⚠ Phím tắt bị Secure Input chặn",
     "privilegedMode": "Chế độ Privileged",
     "privilegedOn": "Đã bật chế độ Privileged",
-    "correctLast": "Sửa lần đọc chính tả gần nhất…"
+    "correctLast": "Sửa lần đọc chính tả gần nhất…",
+    "typeToKusema": "Gõ cho Kusema…",
+    "kusemaKeys": "Phím Kusema"
   },
   "sidebar": {
     "general": "Chung",
@@ -252,7 +254,9 @@
         "waiting": "Mô hình giọng nói vẫn đang tải xuống. Ô này sẽ hoạt động ngay khi mô hình sẵn sàng.",
         "continuous": "Để đọc chính tả lâu hơn, nhấn <keys/> và Kusema sẽ nghe cho đến khi bạn nhấn lại. Quen dùng Dragon? Bạn có thể đặt phím Numpad + trong mục Chung.",
         "continuousRunning": "Đang bật đọc chính tả liên tục. Chữ của bạn hiện trong ô mỗi lần bạn ngừng. Nhấn {{stop}} để dừng.",
-        "continuousEnded": "Đó là đọc chính tả liên tục. Trong các ứng dụng khác, chữ được gõ tại vị trí con trỏ."
+        "continuousEnded": "Đó là đọc chính tả liên tục. Trong các ứng dụng khác, chữ được gõ tại vị trí con trỏ.",
+        "continuousKey": "Để đọc chính tả dài, hãy nhấn <keys/> hai lần: Kusema sẽ nghe cho đến khi bạn lại nhấn hai lần.",
+        "continuousRunningKey": "Đọc chính tả liên tục đang bật. Lời bạn nói hiện trong ô mỗi khi bạn ngừng. Nhấn {{key}} hai lần để dừng."
       },
       "assistant": {
         "title": "Thiết lập trợ lý AI (tùy chọn)",
@@ -297,7 +301,8 @@
           "continuous": "Đọc chính tả liên tục: nhấn để bắt đầu và dừng",
           "ask": "Hỏi Kusema",
           "askScreen": "Hỏi về màn hình của tôi"
-        }
+        },
+        "typeToKusema": "Để gõ câu hỏi thay vào đó:"
       }
     }
   },
@@ -1321,7 +1326,12 @@
       "done": "Xong",
       "notDone": "Chưa xong",
       "progress": "Đã xong {{done}}/{{count}}",
-      "allDone": "Đã xong cả ba. Làm tốt lắm."
+      "allDone": "Đã xong cả ba. Làm tốt lắm.",
+      "how": {
+        "hold": "Giữ {{key}}",
+        "doubleTap": "Nhấn {{key}} hai lần",
+        "say": "Nói “{{trigger}}, …”"
+      }
     },
     "glow": {
       "title": "Chỉ báo ghi âm",
@@ -1364,15 +1374,15 @@
     },
     "voiceEdit": {
       "title": "Sửa bằng giọng nói",
-      "description": "Sửa văn bản trong mọi ứng dụng bằng giọng nói. Chọn văn bản, giữ phím tắt và nói cần làm gì. Các lệnh như “select last word” ở lại trên máy tính này; các yêu cầu như “rút gọn đoạn này” được gửi đến nhà cung cấp AI của bạn.",
+      "description": "Sửa văn bản trong mọi ứng dụng bằng giọng nói. Chọn văn bản, giữ phím Kusema và nói “Kusema”, rồi nói việc cần làm. Lệnh như “select last word” chỉ chạy trên máy này; chỉ dẫn như “shorten this” được gửi tới nhà cung cấp AI của bạn.",
       "preview": {
         "label": "Xem trước thay đổi của AI",
         "description": "Hiển thị văn bản mới trước khi nó thay thế văn bản cũ. Tắt đi để sửa nhanh: Ctrl+Z trong ứng dụng vẫn hoàn tác được."
       },
       "whatCanISay": "Tôi có thể nói gì?",
       "trigger": {
-        "label": "Từ kích hoạt khi đọc chính tả liên tục",
-        "description": "Khi đọc chính tả liên tục, hãy bắt đầu câu bằng từ này để sửa văn bản thay vì gõ nó: “Kusema, làm cho trang trọng hơn”. Để trống để tắt.",
+        "label": "Từ kích hoạt",
+        "description": "Bắt đầu bằng từ này để hỏi, chỉnh sửa hoặc nhờ xem màn hình thay vì gõ: “Kusema, make this more formal”. Hoạt động khi bạn giữ phím Kusema và khi đọc chính tả liên tục. Để trống để tắt.",
         "placeholder": "Kusema"
       },
       "simpleKey": {
@@ -1547,6 +1557,11 @@
       "windowChanged": "Cửa sổ đã thay đổi nên câu trả lời không được gõ. Hãy chèn nó từ trang Trợ lý.",
       "notTyping": "Phương thức dán đang đặt là “Không có” nên câu trả lời không được gõ.",
       "failed": "Không thể gõ câu trả lời vào cửa sổ này."
+    },
+    "route": {
+      "ask": "Đang hỏi Kusema…",
+      "ask_screen": "Đang xem màn hình của bạn…",
+      "edit": "Đang chỉnh sửa…"
     }
   },
   "screenCard": {
@@ -1632,7 +1647,8 @@
     },
     "trigger": "Khi đọc chính tả liên tục, hãy bắt đầu bằng “{{trigger}},” để sửa văn bản theo cùng cách, ví dụ “{{trigger}}, làm cho trang trọng hơn”. Không có từ này, mọi thứ được gõ đúng như bạn nói.",
     "triggerOff": "Để sửa văn bản khi đọc chính tả liên tục, hãy đặt từ kích hoạt trong Chung → Sửa bằng giọng nói.",
-    "selectFirst": "Một số ứng dụng như ONLYOFFICE, LibreOffice và Google Docs không cho Kusema thấy văn bản. Ở đó, hãy chọn văn bản bằng chuột hoặc bàn phím trước; chọn câu, đoạn hoặc từ bằng giọng nói không hoạt động ở đó."
+    "selectFirst": "Một số ứng dụng như ONLYOFFICE, LibreOffice và Google Docs không cho Kusema thấy văn bản. Ở đó, hãy chọn văn bản bằng chuột hoặc bàn phím trước; chọn câu, đoạn hoặc từ bằng giọng nói không hoạt động ở đó.",
+    "introKey": "Giữ {{key}} và nói “{{trigger}}”, rồi nói một trong các lệnh sau. Lệnh có ghi “Cũng dùng khi đọc chính tả liên tục” hoạt động ở đó khi được nói riêng."
   },
   "voiceEdit": {
     "notice": {
@@ -1673,5 +1689,50 @@
     "close": "Đóng",
     "hint": "Enter để hỏi · Shift+Enter: xuống dòng · Esc để đóng",
     "noWindow": "Hãy bấm vào cửa sổ bạn muốn hỏi, rồi mở lại hộp này."
+  },
+  "kusemaKey": {
+    "presets": {
+      "right_ctrl": "Ctrl phải",
+      "copilot": "Phím Copilot",
+      "numpad_plus": "Numpad +"
+    },
+    "card": {
+      "title": "Phím Kusema",
+      "hold": "Giữ <key/> để nói.",
+      "doubleTap": "Nhấn <key/> hai lần để đọc chính tả liên tục.",
+      "say": "Nói <q>{{trigger}}</q> trước để hỏi, chỉnh sửa hoặc nhờ xem màn hình của bạn."
+    },
+    "settings": {
+      "title": "Phím Kusema",
+      "description": "Một phím để đọc chính tả. Giữ phím để nói, nhấn hai lần để đọc chính tả liên tục, và bắt đầu bằng “Kusema” để hỏi, chỉnh sửa hoặc nhờ xem màn hình của bạn. Các ứng dụng khác không bao giờ nhận phím này.",
+      "enabled": {
+        "label": "Dùng phím Kusema",
+        "description": "Khi tắt, chỉ các phím tắt bên dưới hoạt động."
+      },
+      "key": {
+        "label": "Phím",
+        "description": "Ctrl phải hợp với hầu hết bàn phím. Máy tính xách tay không có phím này thường có phím Copilot. Numpad + là phím micrô của Dragon. Phím bạn chọn sẽ không làm việc gì khác nữa.",
+        "press": "Nhấn phím bạn muốn",
+        "pressNow": "Hãy nhấn một phím (Esc để hủy)"
+      },
+      "copilotSuggest": "Bàn phím này có phím Copilot và Kusema chưa thấy phím Ctrl phải. Dùng phím Copilot thay thế?",
+      "useCopilot": "Dùng phím Copilot",
+      "laptopHint": "Máy này không có Ctrl phải? Hãy chọn phím Copilot hoặc nhấn phím bạn muốn.",
+      "classic": {
+        "label": "Phím tắt cổ điển",
+        "description": "Giữ cả phím tắt riêng cho từng thao tác (Ctrl+Space để đọc chính tả, Ctrl+Alt+Space để hỏi, v.v.) bên cạnh phím Kusema."
+      }
+    },
+    "refusal": {
+      "types": "Phím đó dùng để gõ chữ nên không thể làm phím Kusema. Hãy chọn một phím trống như Ctrl phải, Pause hoặc phím chức năng.",
+      "needed": "Phím đó cần cho việc khác. Hãy chọn một phím trống như Ctrl phải, Pause hoặc phím chức năng.",
+      "moves": "Phím đó di chuyển con trỏ. Hãy chọn một phím trống như Ctrl phải, Pause hoặc phím chức năng."
+    },
+    "news": {
+      "title": "Mới: phím đơn giản hơn",
+      "body": "Giờ Kusema có một phím thay cho nhiều phím tắt. Chỉ có hai quy tắc:",
+      "keptClassic": "Giờ Kusema có một phím cho mọi việc. Bạn đã đổi một phím tắt nên các phím tắt của bạn vẫn hoạt động. Bạn có thể tắt chúng ở Phím tắt cổ điển.",
+      "gotIt": "Đã hiểu"
+    }
   }
 }

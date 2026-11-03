@@ -10,7 +10,9 @@
     "secureInputWarning": "⚠ Raccourcis bloqués par Secure Input",
     "privilegedMode": "Mode Privileged",
     "privilegedOn": "Mode Privileged activé",
-    "correctLast": "Corriger la dernière dictée…"
+    "correctLast": "Corriger la dernière dictée…",
+    "typeToKusema": "Écrire à Kusema…",
+    "kusemaKeys": "Touches Kusema"
   },
   "sidebar": {
     "general": "Général",
@@ -253,7 +255,9 @@
         "waiting": "Votre modèle vocal est encore en cours de téléchargement. Cette zone fonctionnera dès qu'il sera prêt.",
         "continuous": "Pour dicter plus longtemps, appuyez sur <keys/> : Kusema écoute jusqu'à ce que vous appuyiez à nouveau. Habitué à Dragon ? Vous pouvez choisir la touche + du pavé numérique dans Général.",
         "continuousRunning": "La dictée continue est activée. Vos mots apparaissent dans la zone à chaque pause. Appuyez sur {{stop}} pour l'arrêter.",
-        "continuousEnded": "C'était la dictée continue. Dans vos autres applications, vos mots sont saisis à l'emplacement du curseur."
+        "continuousEnded": "C'était la dictée continue. Dans vos autres applications, vos mots sont saisis à l'emplacement du curseur.",
+        "continuousKey": "Pour une dictée plus longue, appuyez deux fois sur <keys/> : Kusema écoute jusqu'à ce que vous appuyiez de nouveau deux fois.",
+        "continuousRunningKey": "La dictée continue est activée. Vos mots apparaissent dans la zone à chaque pause. Appuyez deux fois sur {{key}} pour l'arrêter."
       },
       "assistant": {
         "title": "Configurer l'assistant IA (facultatif)",
@@ -298,7 +302,8 @@
           "continuous": "Dictée continue : appuyer pour démarrer et arrêter",
           "ask": "Demander à Kusema",
           "askScreen": "Poser une question sur mon écran"
-        }
+        },
+        "typeToKusema": "Pour taper une question à la place :"
       }
     }
   },
@@ -1327,7 +1332,12 @@
       "done": "Fait",
       "notDone": "Pas encore fait",
       "progress": "{{done}} sur {{count}} faits",
-      "allDone": "Les trois sont faits. Bravo."
+      "allDone": "Les trois sont faits. Bravo.",
+      "how": {
+        "hold": "Maintenir {{key}}",
+        "doubleTap": "Appuyer deux fois sur {{key}}",
+        "say": "Dire « {{trigger}}, … »"
+      }
     },
     "glow": {
       "title": "Indicateur d'enregistrement",
@@ -1370,15 +1380,15 @@
     },
     "voiceEdit": {
       "title": "Modification vocale",
-      "description": "Modifiez du texte dans n'importe quelle application à la voix. Sélectionnez-le, maintenez le raccourci et dites quoi faire. Les commandes comme « select last word » restent sur cet ordinateur ; les instructions comme « raccourcis ce texte » vont à votre fournisseur d'IA.",
+      "description": "Modifiez du texte dans n'importe quelle application à la voix. Sélectionnez-le, maintenez la touche Kusema et dites « Kusema », puis ce qu'il faut faire. Les commandes comme « select last word » restent sur cet ordinateur ; les instructions comme « shorten this » vont à votre fournisseur d'IA.",
       "preview": {
         "label": "Aperçu des modifications IA",
         "description": "Affiche le nouveau texte avant qu'il remplace l'ancien. Désactivez pour les modifications rapides : Ctrl+Z dans l'application les annule toujours."
       },
       "whatCanISay": "Que puis-je dire ?",
       "trigger": {
-        "label": "Mot déclencheur en dictée continue",
-        "description": "En dictée continue, commencez une phrase par ce mot pour modifier du texte au lieu de le saisir : « Kusema, rends ce texte plus formel ». Laissez vide pour désactiver.",
+        "label": "Mot déclencheur",
+        "description": "Commencez par ce mot pour poser une question, modifier ou faire regarder votre écran au lieu de taper : « Kusema, make this more formal ». Cela marche quand vous maintenez la touche Kusema et en dictée continue. Laissez vide pour désactiver.",
         "placeholder": "Kusema"
       },
       "simpleKey": {
@@ -1553,6 +1563,11 @@
       "windowChanged": "La fenêtre a changé, la réponse n'a donc pas été saisie. Insérez-la depuis la page Assistant.",
       "notTyping": "La méthode de collage est réglée sur « Aucun », la réponse n'a donc pas été saisie.",
       "failed": "Impossible de saisir la réponse dans cette fenêtre."
+    },
+    "route": {
+      "ask": "Question à Kusema…",
+      "ask_screen": "Regarde votre écran…",
+      "edit": "Modification…"
     }
   },
   "screenCard": {
@@ -1640,7 +1655,8 @@
     },
     "trigger": "En dictée continue, commencez par « {{trigger}}, » pour modifier du texte de la même façon, par exemple « {{trigger}}, rends ce texte plus formel ». Sans ce mot, tout est saisi tel que vous le dites.",
     "triggerOff": "Pour modifier du texte en dictée continue, définissez un mot déclencheur dans Général → Modification vocale.",
-    "selectFirst": "Certaines applications, comme ONLYOFFICE, LibreOffice et Google Docs, ne montrent pas leur texte à Kusema. Sélectionnez-y d'abord le texte à la souris ou au clavier ; la sélection d'une phrase, d'un paragraphe ou de mots à la voix n'y fonctionne pas."
+    "selectFirst": "Certaines applications, comme ONLYOFFICE, LibreOffice et Google Docs, ne montrent pas leur texte à Kusema. Sélectionnez-y d'abord le texte à la souris ou au clavier ; la sélection d'une phrase, d'un paragraphe ou de mots à la voix n'y fonctionne pas.",
+    "introKey": "Maintenez {{key}} et dites « {{trigger}} », puis l'une de ces commandes. Celles marquées « Aussi en dictée continue » y fonctionnent quand elles sont dites seules."
   },
   "voiceEdit": {
     "notice": {
@@ -1681,5 +1697,50 @@
     "close": "Fermer",
     "hint": "Entrée pose la question · Maj+Entrée : nouvelle ligne · Échap ferme",
     "noWindow": "Cliquez dans la fenêtre sur laquelle vous voulez poser une question, puis rouvrez cette zone."
+  },
+  "kusemaKey": {
+    "presets": {
+      "right_ctrl": "Ctrl droite",
+      "copilot": "Touche Copilot",
+      "numpad_plus": "Pavé num. +"
+    },
+    "card": {
+      "title": "Touches Kusema",
+      "hold": "Maintenez <key/> pour parler.",
+      "doubleTap": "Appuyez deux fois sur <key/> pour la dictée continue.",
+      "say": "Dites d'abord <q>{{trigger}}</q> pour poser une question, modifier ou faire regarder votre écran."
+    },
+    "settings": {
+      "title": "Touche Kusema",
+      "description": "Une seule touche pour dicter. Maintenez-la pour parler, appuyez deux fois pour la dictée continue, et commencez par « Kusema » pour poser une question, modifier ou faire regarder votre écran. Les autres applications ne voient jamais la touche.",
+      "enabled": {
+        "label": "Utiliser la touche Kusema",
+        "description": "Désactivée, seuls les raccourcis ci-dessous fonctionnent."
+      },
+      "key": {
+        "label": "Touche",
+        "description": "Ctrl droite convient à la plupart des claviers. Les portables qui n'en ont pas ont souvent une touche Copilot. Pavé num. + est la touche micro de Dragon. La touche choisie ne fait plus rien d'autre.",
+        "press": "Appuyer sur la touche voulue",
+        "pressNow": "Appuyez sur une touche (Échap annule)"
+      },
+      "copilotSuggest": "Ce clavier a une touche Copilot, et Kusema n'a pas vu de Ctrl droite. Utiliser plutôt la touche Copilot ?",
+      "useCopilot": "Utiliser la touche Copilot",
+      "laptopHint": "Pas de Ctrl droite sur ce portable ? Choisissez la touche Copilot ou appuyez sur la touche voulue.",
+      "classic": {
+        "label": "Raccourcis classiques",
+        "description": "Garder aussi un raccourci pour chaque action (Ctrl+Espace pour dicter, Ctrl+Alt+Espace pour poser une question, etc.), en plus de la touche Kusema."
+      }
+    },
+    "refusal": {
+      "types": "Cette touche tape un caractère, elle ne peut donc pas être la touche Kusema. Choisissez une touche libre, comme Ctrl droite, Pause ou une touche de fonction.",
+      "needed": "Cette touche sert à autre chose. Choisissez une touche libre, comme Ctrl droite, Pause ou une touche de fonction.",
+      "moves": "Cette touche déplace le curseur. Choisissez une touche libre, comme Ctrl droite, Pause ou une touche de fonction."
+    },
+    "news": {
+      "title": "Nouveau : des touches plus simples",
+      "body": "Kusema a maintenant une seule touche au lieu de nombreux raccourcis. Il n'y a que deux règles :",
+      "keptClassic": "Kusema a maintenant une touche pour tout. Vous aviez modifié un raccourci, vos raccourcis fonctionnent donc toujours. Vous pouvez les désactiver dans Raccourcis classiques.",
+      "gotIt": "Compris"
+    }
   }
 }

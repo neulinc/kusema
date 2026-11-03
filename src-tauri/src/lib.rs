@@ -18,6 +18,7 @@ pub mod engine_supervisor;
 mod glow;
 mod helpers;
 mod input;
+mod kusema_key;
 mod language_detection;
 mod llm_client;
 mod local_providers;
@@ -115,7 +116,7 @@ fn build_console_filter() -> env_filter::Filter {
     builder.build()
 }
 
-fn show_main_window(app: &AppHandle) {
+pub(crate) fn show_main_window(app: &AppHandle) {
     if let Some(main_window) = app.get_webview_window("main") {
         if let Err(e) = main_window.unminimize() {
             log::error!("Failed to unminimize webview window: {}", e);
@@ -336,6 +337,12 @@ fn initialize_core_logic(app_handle: &AppHandle) {
             "correct_last" => {
                 voice_edit::correct_from_tray(app);
             }
+            "type_to_kusema" => {
+                ask_box::open_from_tray(app);
+            }
+            "kusema_keys" => {
+                kusema_key::show_keys_card(app);
+            }
             "privileged_mode" => {
                 network::toggle_privileged(app);
             }
@@ -409,6 +416,9 @@ fn initialize_core_logic(app_handle: &AppHandle) {
     utils::create_recording_overlay(app_handle);
     #[cfg(target_os = "windows")]
     overlay_recovery::watch(app_handle);
+
+    // Kusema: the one key for dictation, read by its own keyboard hook.
+    kusema_key::init(app_handle);
 }
 
 #[tauri::command]
@@ -863,6 +873,13 @@ pub fn run(cli_args: CliArgs) {
             app_styles::set_app_styles,
             app_styles::reset_app_styles,
             app_styles::change_app_styles_enabled_setting,
+            kusema_key::get_kusema_key_info,
+            kusema_key::set_kusema_key,
+            kusema_key::change_kusema_key_enabled_setting,
+            kusema_key::change_classic_shortcuts_setting,
+            kusema_key::start_kusema_key_capture,
+            kusema_key::cancel_kusema_key_capture,
+            kusema_key::dismiss_simpler_keys_card,
             network::get_privacy_overview,
             network::get_privacy_ledger,
             network::clear_privacy_ledger,

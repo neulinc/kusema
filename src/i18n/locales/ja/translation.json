@@ -10,7 +10,9 @@
     "secureInputWarning": "⚠ Secure Input でショートカットがブロック中",
     "privilegedMode": "Privileged モード",
     "privilegedOn": "Privileged モード オン",
-    "correctLast": "最後の口述を訂正…"
+    "correctLast": "最後の口述を訂正…",
+    "typeToKusema": "Kusema に入力…",
+    "kusemaKeys": "Kusema のキー"
   },
   "sidebar": {
     "general": "一般",
@@ -252,7 +254,9 @@
         "waiting": "音声モデルはまだダウンロード中です。準備ができ次第、この欄が使えるようになります。",
         "continuous": "長いディクテーションには <keys/> を押してください。もう一度押すまで Kusema が聞き続けます。Dragon をお使いでしたか？「一般」でテンキーの + に設定できます。",
         "continuousRunning": "連続ディクテーションがオンです。区切るたびに言葉が欄に表示されます。止めるには {{stop}} を押してください。",
-        "continuousEnded": "これが連続ディクテーションです。ほかのアプリでは、カーソルの位置に入力されます。"
+        "continuousEnded": "これが連続ディクテーションです。ほかのアプリでは、カーソルの位置に入力されます。",
+        "continuousKey": "長い音声入力には <keys/> を 2 回押します。もう一度 2 回押すまで Kusema が聞き取り続けます。",
+        "continuousRunningKey": "連続音声入力がオンです。間を空けるたびに、言葉がボックスに表示されます。止めるには {{key}} を 2 回押します。"
       },
       "assistant": {
         "title": "AI アシスタントを設定 (任意)",
@@ -297,7 +301,8 @@
           "continuous": "連続ディクテーション: 押して開始・停止",
           "ask": "Kusema に質問",
           "askScreen": "画面について質問"
-        }
+        },
+        "typeToKusema": "質問を入力する場合:"
       }
     }
   },
@@ -1321,7 +1326,12 @@
       "done": "完了",
       "notDone": "未完了",
       "progress": "{{count}} 件中 {{done}} 件完了",
-      "allDone": "3 つとも完了しました。お見事です。"
+      "allDone": "3 つとも完了しました。お見事です。",
+      "how": {
+        "hold": "{{key}} を押し続ける",
+        "doubleTap": "{{key}} を 2 回押す",
+        "say": "「{{trigger}}、…」と言う"
+      }
     },
     "glow": {
       "title": "録音インジケーター",
@@ -1364,15 +1374,15 @@
     },
     "voiceEdit": {
       "title": "音声編集",
-      "description": "どのアプリのテキストも声で変更できます。選択してショートカットを押したまま、どうするかを話してください。「select last word」のようなコマンドはこのコンピューター内で処理され、「これを短くして」のような指示は AI プロバイダーに送られます。",
+      "description": "どのアプリでも声で文章を変更できます。選択して Kusema キーを押しながら「Kusema」と言い、続けて操作を言います。「select last word」のようなコマンドはこのコンピューター内で処理され、「shorten this」のような指示は AI プロバイダーに送られます。",
       "preview": {
         "label": "AI の編集をプレビュー",
         "description": "新しいテキストが元のテキストを置き換える前に表示します。素早く編集したいときはオフにしてください。アプリで Ctrl+Z を押せば元に戻せます。"
       },
       "whatCanISay": "何と言えばいい？",
       "trigger": {
-        "label": "連続ディクテーションのトリガーワード",
-        "description": "連続ディクテーション中に、この単語で文を始めると、入力する代わりにテキストを変更します（「Kusema、もっとフォーマルにして」）。空にするとオフになります。",
+        "label": "呼びかけの言葉",
+        "description": "この言葉で始めると、入力せずに質問、編集、画面の確認ができます (例:「Kusema, make this more formal」)。Kusema キーを押している間と連続音声入力中に使えます。空にするとオフになります。",
         "placeholder": "Kusema"
       },
       "simpleKey": {
@@ -1547,6 +1557,11 @@
       "windowChanged": "ウィンドウが変わったため、回答は入力されませんでした。アシスタント ページから挿入してください。",
       "notTyping": "貼り付け方法が「なし」に設定されているため、回答は入力されませんでした。",
       "failed": "このウィンドウに回答を入力できませんでした。"
+    },
+    "route": {
+      "ask": "Kusema に質問中…",
+      "ask_screen": "画面を確認中…",
+      "edit": "編集中…"
     }
   },
   "screenCard": {
@@ -1632,7 +1647,8 @@
     },
     "trigger": "連続ディクテーション中は「{{trigger}}、」で始めると同じようにテキストを変更できます（例：「{{trigger}}、もっとフォーマルにして」）。この単語がなければ、話したとおりに入力されます。",
     "triggerOff": "連続ディクテーション中にテキストを変更するには、［一般］→［音声編集］でトリガーワードを設定してください。",
-    "selectFirst": "ONLYOFFICE、LibreOffice、Google ドキュメントなど一部のアプリは、テキストを Kusema に見せません。そこでは先にマウスやキーボードでテキストを選択してください。文・段落・語句を声で選択することはできません。"
+    "selectFirst": "ONLYOFFICE、LibreOffice、Google ドキュメントなど一部のアプリは、テキストを Kusema に見せません。そこでは先にマウスやキーボードでテキストを選択してください。文・段落・語句を声で選択することはできません。",
+    "introKey": "{{key}} を押しながら「{{trigger}}」と言い、続けて次のいずれかを言います。「連続音声入力でも可」と記したコマンドは、単独で言えば連続音声入力中にも使えます。"
   },
   "voiceEdit": {
     "notice": {
@@ -1673,5 +1689,50 @@
     "close": "閉じる",
     "hint": "Enter で質問 · Shift+Enter で改行 · Esc で閉じる",
     "noWindow": "質問したいウィンドウをクリックしてから、このボックスをもう一度開いてください。"
+  },
+  "kusemaKey": {
+    "presets": {
+      "right_ctrl": "右 Ctrl",
+      "copilot": "Copilot キー",
+      "numpad_plus": "テンキー +"
+    },
+    "card": {
+      "title": "Kusema のキー",
+      "hold": "<key/> を押している間に話します。",
+      "doubleTap": "<key/> を 2 回押すと連続音声入力になります。",
+      "say": "最初に <q>{{trigger}}</q> と言うと、質問、編集、画面の確認ができます。"
+    },
+    "settings": {
+      "title": "Kusema キー",
+      "description": "音声入力用のキーは 1 つだけ。押している間に話し、2 回押すと連続音声入力、「Kusema」で始めると質問、編集、画面の確認ができます。このキーはほかのアプリには届きません。",
+      "enabled": {
+        "label": "Kusema キーを使う",
+        "description": "オフのときは、下のショートカットだけが使えます。"
+      },
+      "key": {
+        "label": "キー",
+        "description": "右 Ctrl はほとんどのキーボードに合います。右 Ctrl がないノート PC には、Copilot キーがあることがよくあります。テンキー + は Dragon のマイク キーです。選んだキーはほかの用途には使えなくなります。",
+        "press": "使いたいキーを押す",
+        "pressNow": "キーを押してください (Esc で取り消し)"
+      },
+      "copilotSuggest": "このキーボードには Copilot キーがあり、右 Ctrl はまだ検出されていません。Copilot キーを使いますか?",
+      "useCopilot": "Copilot キーを使う",
+      "laptopHint": "このノート PC に右 Ctrl がない場合は、Copilot キーを選ぶか、使いたいキーを押してください。",
+      "classic": {
+        "label": "従来のショートカット",
+        "description": "Kusema キーに加えて、操作ごとのショートカット (Ctrl+Space で音声入力、Ctrl+Alt+Space で質問など) も残します。"
+      }
+    },
+    "refusal": {
+      "types": "そのキーは文字を入力するため、Kusema キーにはできません。右 Ctrl、Pause、ファンクション キーなど、空いているキーを選んでください。",
+      "needed": "そのキーはほかの操作に必要です。右 Ctrl、Pause、ファンクション キーなど、空いているキーを選んでください。",
+      "moves": "そのキーはカーソルを動かします。右 Ctrl、Pause、ファンクション キーなど、空いているキーを選んでください。"
+    },
+    "news": {
+      "title": "新機能: もっと簡単なキー",
+      "body": "Kusema は多数のショートカットの代わりに、キー 1 つになりました。ルールは次の 2 つだけです。",
+      "keptClassic": "Kusema はすべてを 1 つのキーで操作できるようになりました。ショートカットを変更していたので、これまでのショートカットも引き続き使えます。「従来のショートカット」でオフにできます。",
+      "gotIt": "わかりました"
+    }
   }
 }

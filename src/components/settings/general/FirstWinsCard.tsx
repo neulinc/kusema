@@ -2,19 +2,18 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { Check } from "lucide-react";
 import { commands } from "@/bindings";
-import { useOsType } from "@/hooks/useOsType";
+import { keyLabel, triggerWord } from "@/lib/kusemaKey";
 import { useSettings } from "@/hooks/useSettings";
 import { Button } from "../../ui/Button";
-import { Keycaps } from "../../shared/Keycaps";
 import { showWinsCard, winRows, winsDone } from "./firstWins";
 
 /** Three things to try after setup. Ticks itself; goes when it's dismissed. */
 export const FirstWinsCard: React.FC = () => {
   const { t } = useTranslation();
   const { getSetting } = useSettings();
-  const os = useOsType();
   const wins = getSetting("first_wins");
-  const bindings = getSetting("bindings");
+  const keyName = keyLabel(getSetting("kusema_key"), t);
+  const trigger = triggerWord(getSetting("voice_edit_trigger"));
   if (!wins || !showWinsCard(wins)) return null;
 
   const rows = winRows(wins);
@@ -57,11 +56,12 @@ export const FirstWinsCard: React.FC = () => {
               </span>
               {t(`settings.firstWins.${row.id}`)}
             </span>
-            <Keycaps
-              binding={bindings?.[row.binding]?.current_binding ?? ""}
-              osType={os}
-              size="line"
-            />
+            <span className="shrink-0 text-small text-ink-2">
+              {t(`settings.firstWins.how.${row.how}`, {
+                key: keyName,
+                trigger,
+              })}
+            </span>
           </li>
         ))}
       </ul>

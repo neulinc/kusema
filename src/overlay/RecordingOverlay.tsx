@@ -162,6 +162,8 @@ const RecordingOverlay: React.FC = () => {
   // moment the pill is leaving (its "done" flourish).
   const [mode, setMode] = useState<PillMode>("dictation");
   const [appStyle, setAppStyle] = useState<AppStyleEvent | null>(null);
+  // Kusema: where "Kusema, …" went (ask, ask_screen, edit), for the label.
+  const [route, setRoute] = useState<string | null>(null);
   const [leaving, setLeaving] = useState(false);
   const leavingTimerRef = useRef<ReturnType<typeof setTimeout>>();
   // Bumped on each new streaming session so the Live card remounts fresh (replays
@@ -193,6 +195,7 @@ const RecordingOverlay: React.FC = () => {
         setLeaving(false);
         if (overlayState !== "processing" && overlayState !== "notice") {
           setAppStyle(null);
+          setRoute(null);
         }
         if (overlayState === "dictating") {
           setDictation(null);
@@ -254,6 +257,10 @@ const RecordingOverlay: React.FC = () => {
 
       const unlistenStyle = await listen<AppStyleEvent>("app-style", (event) =>
         setAppStyle(event.payload),
+      );
+
+      const unlistenRoute = await listen<string>("overlay-route", (event) =>
+        setRoute(event.payload),
       );
 
       const unlistenEditNotice = await listen<EditNotice>(
@@ -342,6 +349,7 @@ const RecordingOverlay: React.FC = () => {
         unlistenHide();
         unlistenMode();
         unlistenStyle();
+        unlistenRoute();
         unlistenReady();
         unlistenEditNotice();
         unlistenLevel();
@@ -424,7 +432,11 @@ const RecordingOverlay: React.FC = () => {
       }))
     : null;
   const styledLabel = (label: string) =>
-    styleName ? t("overlay.withStyle", { name: styleName }) : label;
+    route
+      ? t(`overlay.route.${route}`)
+      : styleName
+        ? t("overlay.withStyle", { name: styleName })
+        : label;
   const stageStyle = { "--lvl": level.toFixed(3) } as React.CSSProperties;
   const glow = <span className="sglow" aria-hidden="true" />;
   const modeIcon = (pillMode: PillMode) => (

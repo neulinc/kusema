@@ -496,6 +496,11 @@ impl ShortcutAction for TranscribeAction {
             // Kusema paste-the-answer: where "…and type it" would type.
             crate::assistant::note_target_at_press(app);
         }
+        // Kusema: dictation that starts "Kusema, …" is routed when it's
+        // transcribed; note where the user is now.
+        if self.assistant.is_none() {
+            crate::kusema_key::note_press(app);
+        }
         // The window is captured now, before any overlay of ours can cover it.
         // If there's nothing that can be captured, say why instead of recording.
         PRESS_REFUSED.store(false, Ordering::SeqCst);
@@ -847,6 +852,39 @@ impl ShortcutAction for TranscribeAction {
                                 transcription_time.elapsed(),
                                 utils::redact_text(&transcription)
                             );
+
+                            // Kusema: "Kusema, …" asks, edits or looks at the
+                            // screen instead of being typed.
+                            let mut assistant = assistant;
+                            let mut post_process = post_process;
+                            let mut screenshot = screenshot;
+                            let mut transcription = transcription;
+                            if assistant.is_none() {
+                                let app_for_route = ah.clone();
+                                let said = transcription.clone();
+                                let routed = tauri::async_runtime::spawn_blocking(move || {
+                                    crate::kusema_key::route_dictation(&app_for_route, &said)
+                                })
+                                .await
+                                .ok()
+                                .flatten();
+                                match routed {
+                                    Some(crate::kusema_key::Routed::As(mode, text, capture)) => {
+                                        assistant = Some(mode);
+                                        post_process = false;
+                                        transcription = text;
+                                        if capture.is_some() {
+                                            screenshot = capture;
+                                        }
+                                    }
+                                    Some(crate::kusema_key::Routed::Done) => {
+                                        utils::hide_recording_overlay(&ah);
+                                        set_tray_state(&ah, TrayIconState::Idle);
+                                        return;
+                                    }
+                                    None => {}
+                                }
+                            }
 
                             // Kusema: local cleanup, for text that gets typed.
                             // A question to the Assistant is left as spoken.

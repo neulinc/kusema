@@ -142,6 +142,24 @@ fn active(settings: &AppSettings, language: Option<&str>) -> (Vec<VocabEntry>, V
     (own, packs)
 }
 
+/// `written` and every way the vocabulary says it's heard (the trigger word
+/// "Kusema" is also "Kusama", "Cusema"...), any language's packs included.
+pub fn spoken_forms_of(settings: &AppSettings, written: &str) -> Vec<String> {
+    let wanted = written.trim().to_lowercase();
+    let mut forms = vec![written.trim().to_string()];
+    let (own, packs) = active(settings, None);
+    for entry in own.iter().chain(packs.iter()) {
+        if entry.written.trim().to_lowercase() == wanted {
+            for form in &entry.sounds_like {
+                if !forms.iter().any(|f| f.eq_ignore_ascii_case(form)) {
+                    forms.push(form.clone());
+                }
+            }
+        }
+    }
+    forms
+}
+
 /// Applies the vocabulary to transcribed text. `prompted`: the model was
 /// already given the terms, so the loose matching is left out.
 pub fn apply(text: &str, settings: &AppSettings, language: Option<&str>, prompted: bool) -> String {

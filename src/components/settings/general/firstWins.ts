@@ -3,21 +3,19 @@ import type { FirstWins } from "@/bindings";
 
 export type WinId = "dictated" | "newParagraph" | "asked";
 
+/** How it's done with the Kusema key: hold it, double-tap it, or say the trigger word. */
+export type WinHow = "hold" | "doubleTap" | "say";
+
 export interface WinRow {
   id: WinId;
   done: boolean;
-  /** The shortcut that does it. */
-  binding: string;
+  how: WinHow;
 }
 
 export const winRows = (wins: FirstWins): WinRow[] => [
-  { id: "dictated", done: wins.dictated, binding: "transcribe" },
-  {
-    id: "newParagraph",
-    done: wins.new_paragraph,
-    binding: "dictate_continuous",
-  },
-  { id: "asked", done: wins.asked, binding: "assistant" },
+  { id: "dictated", done: wins.dictated, how: "hold" },
+  { id: "newParagraph", done: wins.new_paragraph, how: "doubleTap" },
+  { id: "asked", done: wins.asked, how: "say" },
 ];
 
 export const showWinsCard = (wins: FirstWins | undefined): boolean =>

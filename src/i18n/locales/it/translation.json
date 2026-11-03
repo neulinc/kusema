@@ -10,7 +10,9 @@
     "secureInputWarning": "⚠ Scorciatoie bloccate da Secure Input",
     "privilegedMode": "Modalità Privileged",
     "privilegedOn": "Modalità Privileged attiva",
-    "correctLast": "Correggi l'ultima dettatura…"
+    "correctLast": "Correggi l'ultima dettatura…",
+    "typeToKusema": "Scrivi a Kusema…",
+    "kusemaKeys": "Tasti di Kusema"
   },
   "sidebar": {
     "general": "Generale",
@@ -253,7 +255,9 @@
         "waiting": "Il modello vocale si sta ancora scaricando. Questo riquadro funzionerà appena sarà pronto.",
         "continuous": "Per dettature lunghe, premi <keys/> e Kusema ascolta finché non lo premi di nuovo. Abituato a Dragon? In Generale puoi impostare il tasto + del tastierino numerico.",
         "continuousRunning": "La dettatura continua è attiva. Le tue parole compaiono nel riquadro a ogni pausa. Premi {{stop}} per fermarla.",
-        "continuousEnded": "Questa è la dettatura continua. Nelle altre app, le tue parole vengono scritte dove si trova il cursore."
+        "continuousEnded": "Questa è la dettatura continua. Nelle altre app, le tue parole vengono scritte dove si trova il cursore.",
+        "continuousKey": "Per dettature lunghe, premi due volte <keys/>: Kusema ascolta finché non lo premi di nuovo due volte.",
+        "continuousRunningKey": "La dettatura continua è attiva. Le tue parole compaiono nel riquadro a ogni pausa. Premi due volte {{key}} per fermarla."
       },
       "assistant": {
         "title": "Configura l'assistente IA (facoltativo)",
@@ -298,7 +302,8 @@
           "continuous": "Dettatura continua: premi per avviare e fermare",
           "ask": "Chiedi a Kusema",
           "askScreen": "Chiedi del mio schermo"
-        }
+        },
+        "typeToKusema": "Per scrivere una domanda invece:"
       }
     }
   },
@@ -1327,7 +1332,12 @@
       "done": "Fatto",
       "notDone": "Non ancora",
       "progress": "{{done}} su {{count}} fatti",
-      "allDone": "Tutti e tre fatti. Ottimo lavoro."
+      "allDone": "Tutti e tre fatti. Ottimo lavoro.",
+      "how": {
+        "hold": "Tieni premuto {{key}}",
+        "doubleTap": "Premi due volte {{key}}",
+        "say": "Di' «{{trigger}}, …»"
+      }
     },
     "glow": {
       "title": "Indicatore di registrazione",
@@ -1370,15 +1380,15 @@
     },
     "voiceEdit": {
       "title": "Modifica vocale",
-      "description": "Cambia il testo in qualsiasi app con la voce. Selezionalo, tieni premuta la scorciatoia e di' cosa fare. Comandi come «select last word» restano su questo computer; istruzioni come «accorcialo» vanno al tuo fornitore di IA.",
+      "description": "Modifica il testo in qualsiasi app con la voce. Selezionalo, tieni premuto il tasto Kusema e di' «Kusema», poi cosa fare. I comandi come «select last word» restano su questo computer; le istruzioni come «shorten this» vanno al tuo fornitore di IA.",
       "preview": {
         "label": "Anteprima delle modifiche IA",
         "description": "Mostra il nuovo testo prima che sostituisca il vecchio. Disattiva per modifiche rapide: Ctrl+Z nell'app le annulla comunque."
       },
       "whatCanISay": "Cosa posso dire?",
       "trigger": {
-        "label": "Parola di attivazione nella dettatura continua",
-        "description": "Nella dettatura continua, inizia una frase con questa parola per cambiare il testo invece di scriverlo: «Kusema, rendilo più formale». Lascia vuoto per disattivare.",
+        "label": "Parola di attivazione",
+        "description": "Inizia con questa parola per chiedere, modificare o far guardare il tuo schermo invece di scrivere: «Kusema, make this more formal». Funziona mentre tieni premuto il tasto Kusema e nella dettatura continua. Lascia vuoto per disattivarlo.",
         "placeholder": "Kusema"
       },
       "simpleKey": {
@@ -1553,6 +1563,11 @@
       "windowChanged": "La finestra è cambiata, quindi la risposta non è stata digitata. Inseriscila dalla pagina Assistente.",
       "notTyping": "Il metodo di incolla è impostato su «Nessuno», quindi la risposta non è stata digitata.",
       "failed": "Impossibile digitare la risposta in questa finestra."
+    },
+    "route": {
+      "ask": "Chiedo a Kusema…",
+      "ask_screen": "Guardo il tuo schermo…",
+      "edit": "Modifica in corso…"
     }
   },
   "screenCard": {
@@ -1640,7 +1655,8 @@
     },
     "trigger": "Nella dettatura continua, inizia con «{{trigger}},» per cambiare il testo allo stesso modo, ad esempio «{{trigger}}, rendilo più formale». Senza questa parola, tutto viene scritto come lo dici.",
     "triggerOff": "Per cambiare il testo durante la dettatura continua, imposta una parola di attivazione in Generale → Modifica vocale.",
-    "selectFirst": "Alcune app, come ONLYOFFICE, LibreOffice e Google Docs, non mostrano il loro testo a Kusema. Lì seleziona prima il testo con il mouse o la tastiera; selezionare una frase, un paragrafo o delle parole a voce non funziona."
+    "selectFirst": "Alcune app, come ONLYOFFICE, LibreOffice e Google Docs, non mostrano il loro testo a Kusema. Lì seleziona prima il testo con il mouse o la tastiera; selezionare una frase, un paragrafo o delle parole a voce non funziona.",
+    "introKey": "Tieni premuto {{key}} e di' «{{trigger}}», poi uno di questi. I comandi segnati «Anche nella dettatura continua» funzionano lì quando sono detti da soli."
   },
   "voiceEdit": {
     "notice": {
@@ -1681,5 +1697,50 @@
     "close": "Chiudi",
     "hint": "Invio chiede · Maiusc+Invio: nuova riga · Esc chiude",
     "noWindow": "Fai clic sulla finestra di cui vuoi chiedere, poi riapri questo riquadro."
+  },
+  "kusemaKey": {
+    "presets": {
+      "right_ctrl": "Ctrl destro",
+      "copilot": "Tasto Copilot",
+      "numpad_plus": "Tastierino +"
+    },
+    "card": {
+      "title": "Tasti di Kusema",
+      "hold": "Tieni premuto <key/> per parlare.",
+      "doubleTap": "Premi due volte <key/> per la dettatura continua.",
+      "say": "Di' prima <q>{{trigger}}</q> per chiedere, modificare o far guardare il tuo schermo."
+    },
+    "settings": {
+      "title": "Tasto Kusema",
+      "description": "Un solo tasto per dettare. Tienilo premuto per parlare, premilo due volte per la dettatura continua e inizia con «Kusema» per chiedere, modificare o far guardare il tuo schermo. Le altre app non vedono mai il tasto.",
+      "enabled": {
+        "label": "Usa il tasto Kusema",
+        "description": "Disattivato, funzionano solo le scorciatoie qui sotto."
+      },
+      "key": {
+        "label": "Tasto",
+        "description": "Ctrl destro va bene per la maggior parte delle tastiere. I portatili che non lo hanno spesso hanno un tasto Copilot. Tastierino + è il tasto microfono di Dragon. Il tasto scelto non fa più nient'altro.",
+        "press": "Premi il tasto che vuoi",
+        "pressNow": "Premi un tasto ora (Esc annulla)"
+      },
+      "copilotSuggest": "Questa tastiera ha un tasto Copilot e Kusema non ha visto un Ctrl destro. Usare il tasto Copilot?",
+      "useCopilot": "Usa il tasto Copilot",
+      "laptopHint": "Niente Ctrl destro su questo portatile? Scegli il tasto Copilot o premi il tasto che vuoi.",
+      "classic": {
+        "label": "Scorciatoie classiche",
+        "description": "Mantieni anche una scorciatoia per ogni azione (Ctrl+Spazio per dettare, Ctrl+Alt+Spazio per chiedere e così via), oltre al tasto Kusema."
+      }
+    },
+    "refusal": {
+      "types": "Quel tasto scrive qualcosa, quindi non può essere il tasto Kusema. Scegli un tasto libero, come Ctrl destro, Pausa o un tasto funzione.",
+      "needed": "Quel tasto serve ad altro. Scegli un tasto libero, come Ctrl destro, Pausa o un tasto funzione.",
+      "moves": "Quel tasto sposta il cursore. Scegli un tasto libero, come Ctrl destro, Pausa o un tasto funzione."
+    },
+    "news": {
+      "title": "Novità: tasti più semplici",
+      "body": "Ora Kusema ha un solo tasto invece di tante scorciatoie. Le regole sono solo due:",
+      "keptClassic": "Ora Kusema ha un tasto per tutto. Avevi cambiato una scorciatoia, quindi le tue scorciatoie funzionano ancora. Puoi disattivarle in Scorciatoie classiche.",
+      "gotIt": "Ho capito"
+    }
   }
 }

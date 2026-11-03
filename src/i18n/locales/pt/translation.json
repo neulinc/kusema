@@ -10,7 +10,9 @@
     "secureInputWarning": "⚠ Atalhos bloqueados pelo Secure Input",
     "privilegedMode": "Modo Privileged",
     "privilegedOn": "Modo Privileged ativado",
-    "correctLast": "Corrigir o último ditado…"
+    "correctLast": "Corrigir o último ditado…",
+    "typeToKusema": "Escrever para o Kusema…",
+    "kusemaKeys": "Teclas do Kusema"
   },
   "sidebar": {
     "general": "Geral",
@@ -253,7 +255,9 @@
         "waiting": "Seu modelo de voz ainda está sendo baixado. Esta área vai funcionar assim que ele estiver pronto.",
         "continuous": "Para ditados longos, pressione <keys/> e o Kusema ouve até você pressionar de novo. Acostumado com o Dragon? Em Geral, dá para usar o + do teclado numérico.",
         "continuousRunning": "O ditado contínuo está ativado. Suas palavras aparecem na área a cada pausa. Pressione {{stop}} para parar.",
-        "continuousEnded": "Isso é o ditado contínuo. Nos seus outros apps, suas palavras são digitadas onde está o cursor."
+        "continuousEnded": "Isso é o ditado contínuo. Nos seus outros apps, suas palavras são digitadas onde está o cursor.",
+        "continuousKey": "Para ditados longos, toque duas vezes em <keys/>: o Kusema continua ouvindo até você tocar duas vezes de novo.",
+        "continuousRunningKey": "O ditado contínuo está ligado. Suas palavras aparecem na caixa a cada pausa. Toque duas vezes em {{key}} para parar."
       },
       "assistant": {
         "title": "Configurar o assistente de IA (opcional)",
@@ -298,7 +302,8 @@
           "continuous": "Ditado contínuo: pressione para iniciar e parar",
           "ask": "Perguntar ao Kusema",
           "askScreen": "Perguntar sobre minha tela"
-        }
+        },
+        "typeToKusema": "Para digitar uma pergunta:"
       }
     }
   },
@@ -1327,7 +1332,12 @@
       "done": "Feito",
       "notDone": "Ainda não",
       "progress": "{{done}} de {{count}} feitas",
-      "allDone": "As três feitas. Muito bem."
+      "allDone": "As três feitas. Muito bem.",
+      "how": {
+        "hold": "Segure {{key}}",
+        "doubleTap": "Toque duas vezes em {{key}}",
+        "say": "Diga “{{trigger}}, …”"
+      }
     },
     "glow": {
       "title": "Indicador de gravação",
@@ -1370,15 +1380,15 @@
     },
     "voiceEdit": {
       "title": "Edição por voz",
-      "description": "Altere texto em qualquer aplicativo com a voz. Selecione-o, mantenha o atalho pressionado e diga o que fazer. Comandos como «select last word» ficam neste computador; instruções como «encurte isto» vão para o seu provedor de IA.",
+      "description": "Altere texto em qualquer aplicativo por voz. Selecione-o, segure a tecla Kusema e diga “Kusema”, depois o que fazer. Comandos como “select last word” ficam neste computador; instruções como “shorten this” vão para o seu provedor de IA.",
       "preview": {
         "label": "Prévia das edições de IA",
         "description": "Mostra o novo texto antes de substituir o antigo. Desative para edições rápidas: Ctrl+Z no aplicativo ainda as desfaz."
       },
       "whatCanISay": "O que posso dizer?",
       "trigger": {
-        "label": "Palavra de ativação no ditado contínuo",
-        "description": "No ditado contínuo, comece uma frase com esta palavra para alterar o texto em vez de digitá-lo: «Kusema, deixe isto mais formal». Deixe em branco para desativar.",
+        "label": "Palavra de ativação",
+        "description": "Comece com esta palavra para perguntar, editar ou fazer o Kusema olhar sua tela em vez de digitar: “Kusema, make this more formal”. Funciona enquanto você segura a tecla Kusema e no ditado contínuo. Deixe em branco para desligar.",
         "placeholder": "Kusema"
       },
       "simpleKey": {
@@ -1553,6 +1563,11 @@
       "windowChanged": "A janela mudou, então a resposta não foi digitada. Insira-a pela página Assistente.",
       "notTyping": "O método de colagem está em “Nenhum”, então a resposta não foi digitada.",
       "failed": "Não foi possível digitar a resposta nesta janela."
+    },
+    "route": {
+      "ask": "Perguntando ao Kusema…",
+      "ask_screen": "Olhando sua tela…",
+      "edit": "Editando…"
     }
   },
   "screenCard": {
@@ -1640,7 +1655,8 @@
     },
     "trigger": "No ditado contínuo, comece com «{{trigger}},» para alterar texto do mesmo jeito, por exemplo «{{trigger}}, deixe isto mais formal». Sem essa palavra, tudo é digitado como você diz.",
     "triggerOff": "Para alterar texto durante o ditado contínuo, defina uma palavra de ativação em Geral → Edição por voz.",
-    "selectFirst": "Alguns aplicativos, como ONLYOFFICE, LibreOffice e Google Docs, não mostram seu texto ao Kusema. Neles, selecione o texto primeiro com o mouse ou o teclado; selecionar uma frase, um parágrafo ou palavras por voz não funciona."
+    "selectFirst": "Alguns aplicativos, como ONLYOFFICE, LibreOffice e Google Docs, não mostram seu texto ao Kusema. Neles, selecione o texto primeiro com o mouse ou o teclado; selecionar uma frase, um parágrafo ou palavras por voz não funciona.",
+    "introKey": "Segure {{key}} e diga “{{trigger}}”, depois um destes. Os comandos marcados “Também no ditado contínuo” funcionam lá quando ditos sozinhos."
   },
   "voiceEdit": {
     "notice": {
@@ -1681,5 +1697,50 @@
     "close": "Fechar",
     "hint": "Enter pergunta · Shift+Enter: nova linha · Esc fecha",
     "noWindow": "Clique na janela sobre a qual quer perguntar e abra esta caixa de novo."
+  },
+  "kusemaKey": {
+    "presets": {
+      "right_ctrl": "Ctrl direito",
+      "copilot": "Tecla Copilot",
+      "numpad_plus": "Numpad +"
+    },
+    "card": {
+      "title": "Teclas do Kusema",
+      "hold": "Segure <key/> para falar.",
+      "doubleTap": "Toque duas vezes em <key/> para o ditado contínuo.",
+      "say": "Diga primeiro <q>{{trigger}}</q> para perguntar, editar ou fazer o Kusema olhar sua tela."
+    },
+    "settings": {
+      "title": "Tecla Kusema",
+      "description": "Uma tecla para ditar. Segure para falar, toque duas vezes para o ditado contínuo e comece com “Kusema” para perguntar, editar ou fazer o Kusema olhar sua tela. Os outros aplicativos nunca veem a tecla.",
+      "enabled": {
+        "label": "Usar a tecla Kusema",
+        "description": "Desligada, só funcionam os atalhos abaixo."
+      },
+      "key": {
+        "label": "Tecla",
+        "description": "Ctrl direito serve para a maioria dos teclados. Notebooks sem ele costumam ter uma tecla Copilot. Numpad + é a tecla de microfone do Dragon. A tecla escolhida deixa de fazer qualquer outra coisa.",
+        "press": "Pressione a tecla que quiser",
+        "pressNow": "Pressione uma tecla agora (Esc cancela)"
+      },
+      "copilotSuggest": "Este teclado tem uma tecla Copilot e o Kusema não viu um Ctrl direito. Usar a tecla Copilot?",
+      "useCopilot": "Usar a tecla Copilot",
+      "laptopHint": "Sem Ctrl direito neste notebook? Escolha a tecla Copilot ou pressione a tecla que quiser.",
+      "classic": {
+        "label": "Atalhos clássicos",
+        "description": "Manter também um atalho para cada ação (Ctrl+Espaço para ditar, Ctrl+Alt+Espaço para perguntar e assim por diante), além da tecla Kusema."
+      }
+    },
+    "refusal": {
+      "types": "Essa tecla digita algo, então não pode ser a tecla Kusema. Escolha uma tecla livre, como Ctrl direito, Pause ou uma tecla de função.",
+      "needed": "Essa tecla é necessária para outras coisas. Escolha uma tecla livre, como Ctrl direito, Pause ou uma tecla de função.",
+      "moves": "Essa tecla move o cursor. Escolha uma tecla livre, como Ctrl direito, Pause ou uma tecla de função."
+    },
+    "news": {
+      "title": "Novidade: teclas mais simples",
+      "body": "O Kusema agora tem uma tecla em vez de muitos atalhos. São só duas regras:",
+      "keptClassic": "O Kusema agora tem uma tecla para tudo. Você tinha mudado um atalho, então seus atalhos continuam funcionando. Desligue-os em Atalhos clássicos, se quiser.",
+      "gotIt": "Entendi"
+    }
   }
 }
