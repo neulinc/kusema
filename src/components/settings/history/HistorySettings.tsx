@@ -13,6 +13,7 @@ import {
   FileAudio,
   FilePlus,
   FolderOpen,
+  Pencil,
   RotateCcw,
   Star,
   Trash2,
@@ -361,6 +362,25 @@ const HistoryEntryComponent: React.FC<HistoryEntryProps> = ({
   const [cancelling, setCancelling] = useState(false);
   const [expanded, setExpanded] = useState(false);
   const [overflows, setOverflows] = useState(false);
+  // Kusema vocabulary: correcting this entry's text, and learning from it.
+  const [correcting, setCorrecting] = useState(false);
+  const [draft, setDraft] = useState("");
+  const saveCorrection = async () => {
+    const result = await commands.correctHistoryEntry(entry.id, draft);
+    if (result.status === "error") {
+      toast.error(result.error);
+      return;
+    }
+    setCorrecting(false);
+    const learned = result.data
+      .map((w) => `${w.heard} \u2192 ${w.written}`)
+      .join(", ");
+    toast.success(
+      learned
+        ? t("settings.history.correct.learned", { words: learned })
+        : t("settings.history.correct.saved"),
+    );
+  };
   const textRef = useRef<HTMLParagraphElement>(null);
 
   // Queued or being transcribed in the background.
@@ -452,6 +472,16 @@ const HistoryEntryComponent: React.FC<HistoryEntryProps> = ({
             )}
           </IconButton>
           <IconButton
+            onClick={() => {
+              setDraft(entry.transcription_text);
+              setCorrecting(true);
+            }}
+            disabled={!hasTranscription || retrying || correcting}
+            title={t("settings.history.correct.button")}
+          >
+            <Pencil width={16} height={16} />
+          </IconButton>
+          <IconButton
             onClick={onToggleSaved}
             active={entry.saved}
             title={
@@ -494,7 +524,43 @@ const HistoryEntryComponent: React.FC<HistoryEntryProps> = ({
         </div>
       </div>
 
-      <div className="flex flex-col items-start gap-1 pb-2">
+      {correcting && (
+        <div className="flex flex-col gap-2">
+          <textarea
+            value={draft}
+            autoFocus
+            aria-label={t("settings.history.correct.button")}
+            onChange={(e) => setDraft(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Escape") setCorrecting(false);
+            }}
+            rows={Math.min(8, Math.max(3, Math.ceil(draft.length / 70)))}
+            className="w-full rounded-md border border-line bg-background p-2 text-sm"
+          />
+          <p className="text-xs text-ink-3">
+            {t("settings.history.correct.help")}
+          </p>
+          <div className="flex justify-end gap-2">
+            <Button
+              variant="secondary"
+              size="sm"
+              onClick={() => setCorrecting(false)}
+            >
+              {t("settings.history.correct.cancel")}
+            </Button>
+            <Button
+              variant="primary"
+              size="sm"
+              onClick={() => void saveCorrection()}
+            >
+              {t("settings.history.correct.save")}
+            </Button>
+          </div>
+        </div>
+      )}
+      <div
+        className={`flex flex-col items-start gap-1 pb-2 ${correcting ? "hidden" : ""}`}
+      >
         <p
           ref={textRef}
           className={`italic text-sm w-full ${

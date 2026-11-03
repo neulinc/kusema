@@ -74,9 +74,8 @@ pub fn chords(command: &EditCommand) -> Option<Vec<Chord>> {
         CopyThat => vec![ctrl(C)],
         CutThat => vec![ctrl(X)],
         PasteThat => vec![ctrl(V)],
-        NewParagraph | NewLine | SelectLastSentence | SelectLastParagraph | SelectPhrase(_) => {
-            return None
-        }
+        NewParagraph | NewLine | CorrectThat | SelectLastSentence | SelectLastParagraph
+        | SelectPhrase(_) => return None,
     })
 }
 

@@ -9,7 +9,8 @@
     "cancel": "Hủy",
     "secureInputWarning": "⚠ Phím tắt bị Secure Input chặn",
     "privilegedMode": "Chế độ Privileged",
-    "privilegedOn": "Đã bật chế độ Privileged"
+    "privilegedOn": "Đã bật chế độ Privileged",
+    "correctLast": "Sửa lần đọc chính tả gần nhất…"
   },
   "sidebar": {
     "general": "Chung",
@@ -20,7 +21,8 @@
     "history": "Lịch sử",
     "debug": "Gỡ lỗi",
     "about": "Giới thiệu",
-    "privacy": "Quyền riêng tư"
+    "privacy": "Quyền riêng tư",
+    "vocabulary": "Từ vựng"
   },
   "onboarding": {
     "customModelDescription": "Không được hỗ trợ chính thức",
@@ -224,7 +226,9 @@
       "welcome": {
         "title": "Kusema chuyển giọng nói của bạn thành văn bản ngay trên máy tính này.",
         "privacy": "Giọng nói của bạn không bao giờ rời khỏi máy.",
-        "language": "Ngôn ngữ bạn sẽ đọc chính tả"
+        "language": "Ngôn ngữ bạn sẽ đọc chính tả",
+        "medical": "Tôi đọc chính tả hồ sơ y tế.",
+        "medicalNote": "Thêm tên thuốc và thuật ngữ lâm sàng. Luôn kiểm tra hồ sơ đã đọc chính tả."
       },
       "microphone": {
         "title": "Chọn micrô của bạn",
@@ -959,7 +963,15 @@
       "showMore": "Xem thêm",
       "showLess": "Thu gọn",
       "dropTitle": "Thả để chép lời",
-      "dropDescription": "Nó sẽ xuất hiện trong Lịch sử."
+      "dropDescription": "Nó sẽ xuất hiện trong Lịch sử.",
+      "correct": {
+        "button": "Sửa",
+        "help": "Sửa văn bản. Kusema học các từ bạn thay đổi. Chỉ Lịch sử thay đổi, tài liệu thì không.",
+        "save": "Lưu",
+        "cancel": "Hủy",
+        "saved": "Đã lưu.",
+        "learned": "Đã lưu. Kusema đã học: {{words}}"
+      }
     },
     "debug": {
       "title": "Gỡ lỗi",
@@ -1338,6 +1350,49 @@
         "description": "Giữ một phím thay vì bốn. Phím Ctrl phải sẽ không còn hoạt động như Ctrl.",
         "button": "Dùng {{key}}"
       }
+    },
+    "vocabulary": {
+      "soundsLikeList": "Nghe thành: {{forms}}",
+      "remove": "Xóa {{word}}",
+      "packs": {
+        "title": "Từ vựng tích hợp",
+        "description": "Thuật ngữ Kusema viết đúng ngay từ đầu khi đọc chính tả tiếng Anh. Tên của chính Kusema luôn có sẵn.",
+        "legal": {
+          "label": "Pháp lý",
+          "description": "{{number}} thuật ngữ Latinh và pháp lý, cùng cách viết trích dẫn: “42 U.S.C.”, “123 F.3d 456”, “Smith v. Jones”, “Rule 12(b)(6)”."
+        },
+        "medical": {
+          "label": "Y khoa",
+          "description": "{{number}} tên thuốc và thuật ngữ lâm sàng. Luôn kiểm tra hồ sơ y tế được đọc chính tả: từ vựng giúp nhận dạng tốt hơn, không đảm bảo chính xác."
+        }
+      },
+      "own": {
+        "title": "Từ của bạn",
+        "description": "Tên và thuật ngữ bạn dùng. Thêm cách viết một từ và, nếu Kusema nghe nhầm, nó viết thành gì.",
+        "add": "Thêm một từ",
+        "addHelp": "“Nghe thành” là thứ Kusema viết khi nghe nhầm, ví dụ “Canela” thay vì “Kanella”. Ngăn cách nhiều dạng bằng dấu phẩy. Nếu bỏ trống, các cách viết gần giống sẽ được sửa.",
+        "written": "Cách viết",
+        "writtenPlaceholder": "Kanella",
+        "soundsLike": "Nghe thành",
+        "soundsLikePlaceholder": "Nghe thành (không bắt buộc): Canela",
+        "addButton": "Thêm",
+        "empty": "Chưa có từ nào."
+      },
+      "learned": {
+        "title": "Học từ các lần sửa của bạn",
+        "description": "Khi bạn sửa một từ bị nghe nhầm bằng “correct that” hoặc trong Lịch sử, Kusema ghi nhớ nó ở đây. Việc học chỉ diễn ra trên máy tính này.",
+        "empty": "Chưa học được gì. Nói “correct that” sau khi đọc chính tả để sửa một từ bị nghe nhầm."
+      },
+      "files": {
+        "title": "Nhập và xuất",
+        "description": "Chia sẻ danh sách từ với đồng nghiệp, hoặc mang danh sách của bạn từ Dragon (danh sách từ đã xuất, kèm dạng đọc). Tệp là JSON, CSV (cách viết, nghe thành) hoặc định dạng văn bản của Dragon.",
+        "filterName": "Danh sách từ",
+        "import": "Nhập…",
+        "exportJson": "Xuất dạng JSON…",
+        "exportCsv": "Xuất dạng CSV…",
+        "imported": "Đã nhập {{added}} từ mới ({{existing}} từ đã có).",
+        "exported": "Đã xuất {{number}} từ."
+      }
     }
   },
   "footer": {
@@ -1445,6 +1500,12 @@
       "apply": "Thay thế",
       "cancel": "Hủy",
       "keys": "Enter để thay thế, Esc để hủy. Ctrl+Z trong ứng dụng sẽ hoàn tác."
+    },
+    "correct": {
+      "title": "Sửa lần đọc chính tả gần nhất",
+      "help": "Sửa rồi nhấn Enter. Kusema học các từ bạn thay đổi. Shift+Enter xuống dòng, Esc để hủy.",
+      "save": "Lưu",
+      "cancel": "Hủy"
     }
   },
   "secureInput": {
@@ -1494,7 +1555,8 @@
       "undoThat": "Hoàn tác thay đổi gần nhất (Ctrl+Z).",
       "copyThat": "Sao chép phần đã chọn.",
       "cutThat": "Cắt phần đã chọn.",
-      "pasteThat": "Dán."
+      "pasteThat": "Dán.",
+      "correctThat": "Mở lần đọc chính tả gần nhất để sửa thủ công, và học các từ bạn thay đổi."
     },
     "trigger": "Khi đọc chính tả liên tục, hãy bắt đầu bằng “{{trigger}},” để sửa văn bản theo cùng cách, ví dụ “{{trigger}}, làm cho trang trọng hơn”. Không có từ này, mọi thứ được gõ đúng như bạn nói.",
     "triggerOff": "Để sửa văn bản khi đọc chính tả liên tục, hãy đặt từ kích hoạt trong Chung → Sửa bằng giọng nói.",
@@ -1518,7 +1580,11 @@
       "cantRead": "Không đọc được văn bản đã chọn trong ứng dụng này.",
       "cantConfirm": "Không xác định được có gì đang được chọn trong ứng dụng này hay không, nên không có gì bị xóa.",
       "timedOut": "Hết thời gian xem trước, nên không có gì được thay thế.",
-      "working": "Đang sửa…"
+      "working": "Đang sửa…",
+      "correctNotFound": "Không có gì Kusema đã gõ ở đây để sửa. Hãy sửa trong Lịch sử.",
+      "correctChanged": "Văn bản Kusema đã gõ đã thay đổi từ đó, nên không thể sửa ở đây. Hãy sửa trong Lịch sử.",
+      "corrected": "Đã sửa.",
+      "learned": "Đã sửa. Kusema đã học: {{name}}"
     }
   }
 }

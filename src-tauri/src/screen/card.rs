@@ -54,6 +54,9 @@ pub enum ScreenCard {
         key: Option<String>,
         name: Option<String>,
     },
+    /// Kusema vocabulary: the last dictated text, to correct ("correct that").
+    #[serde(rename_all = "camelCase")]
+    Correct { text: String, timeout_secs: u32 },
     /// Kusema voice editing: the selected text and what it would become.
     #[serde(rename_all = "camelCase")]
     Edit {
@@ -90,6 +93,8 @@ struct Placement {
 struct Inner {
     card: Option<ScreenCard>,
     reply: Option<oneshot::Sender<bool>>,
+    /// Kusema: the corrected text, or `None` for Cancel.
+    correction: Option<oneshot::Sender<Option<String>>>,
     captured: Option<CapturedWindow>,
     label: Option<String>,
     focus: bool,
@@ -217,7 +222,7 @@ fn open(
     let state = app.try_state::<ScreenState>()?;
     let focus = reply.is_some();
     let size = match card {
-        ScreenCard::Edit { .. } => EDIT_SIZE,
+        ScreenCard::Edit { .. } | ScreenCard::Correct { .. } => EDIT_SIZE,
         _ if focus => CONFIRM_SIZE,
         _ => NOTICE_SIZE,
     };
@@ -232,9 +237,13 @@ fn open(
         if let Some(previous) = inner.reply.take() {
             let _ = previous.send(false);
         }
+        if let Some(previous) = inner.correction.take() {
+            let _ = previous.send(None);
+        }
         *inner = Inner {
             card: Some(card),
             reply,
+            correction: None,
             captured,
             label: Some(label.clone()),
             focus,
@@ -458,19 +467,71 @@ pub fn cancel_open(app: &AppHandle) -> bool {
     let Some(state) = app.try_state::<ScreenState>() else {
         return false;
     };
-    let (reply, captured) = {
+    let (reply, correction, captured) = {
         let mut inner = state.card.lock();
-        (inner.reply.take(), inner.captured)
+        (inner.reply.take(), inner.correction.take(), inner.captured)
     };
-    let Some(reply) = reply else {
+    if reply.is_none() && correction.is_none() {
         return false;
-    };
+    }
     if let Some(window) = captured {
         restore_focus(&window);
     }
     close(app, false);
-    let _ = reply.send(false);
+    if let Some(reply) = reply {
+        let _ = reply.send(false);
+    }
+    if let Some(correction) = correction {
+        let _ = correction.send(None);
+    }
     true
+}
+
+/// Kusema vocabulary: shows `text` to correct and waits for the corrected
+/// text (`None`: Cancel, the timeout or the Cancel hotkey). Focus goes back
+/// to the window either way.
+pub async fn confirm_correction(
+    app: &AppHandle,
+    near: CapturedWindow,
+    text: &str,
+) -> Option<String> {
+    let (tx, rx) = oneshot::channel();
+    let card = ScreenCard::Correct {
+        text: text.to_string(),
+        timeout_secs: EDIT_TIMEOUT.as_secs() as u32,
+    };
+    // Opened as a card that takes focus; the answer comes on its own channel.
+    let (focus_tx, _focus_rx) = oneshot::channel();
+    open(app, card, Some(near), Some(focus_tx))?;
+    if let Some(state) = app.try_state::<ScreenState>() {
+        let mut inner = state.card.lock();
+        inner.reply = None;
+        inner.correction = Some(tx);
+    }
+    match tokio::time::timeout(EDIT_TIMEOUT, rx).await {
+        Ok(Ok(corrected)) => corrected,
+        _ => {
+            close(app, true);
+            None
+        }
+    }
+}
+
+/// Kusema vocabulary: the correction card's Save (`Some`) or Cancel (`None`).
+#[tauri::command]
+#[specta::specta]
+pub fn answer_correction_card(app: AppHandle, state: State<'_, ScreenState>, text: Option<String>) {
+    let (reply, captured) = {
+        let mut inner = state.card.lock();
+        (inner.correction.take(), inner.captured)
+    };
+    if let Some(window) = captured {
+        restore_focus(&window);
+    }
+    close(&app, false);
+    if let Some(reply) = reply {
+        let _ = reply.send(text);
+    }
 }
 
 /// Close a notice card.

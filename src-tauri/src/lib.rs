@@ -40,6 +40,7 @@ mod tray;
 mod tray_i18n;
 mod tts;
 mod utils;
+mod vocabulary;
 mod voice_edit;
 
 pub use cli::CliArgs;
@@ -329,6 +330,9 @@ fn initialize_core_logic(app_handle: &AppHandle) {
             }
             "copy_last_transcript" => {
                 tray::copy_last_transcript(app);
+            }
+            "correct_last" => {
+                voice_edit::correct_from_tray(app);
             }
             "privileged_mode" => {
                 network::toggle_privileged(app);
@@ -863,6 +867,14 @@ pub fn run(cli_args: CliArgs) {
             voice_edit::get_voice_commands,
             voice_edit::change_voice_edit_preview_setting,
             voice_edit::change_voice_edit_trigger_setting,
+            vocabulary::get_vocabulary,
+            vocabulary::add_vocabulary_entry,
+            vocabulary::remove_vocabulary_entry,
+            vocabulary::set_vocabulary_pack,
+            vocabulary::import_vocabulary,
+            vocabulary::export_vocabulary,
+            vocabulary::correct_history_entry,
+            screen::card::answer_correction_card,
             tts::get_tts_voices,
             tts::preview_tts_voice,
             tts::change_assistant_speak_replies_setting,

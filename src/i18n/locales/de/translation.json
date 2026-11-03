@@ -9,7 +9,8 @@
     "cancel": "Abbrechen",
     "secureInputWarning": "⚠ Tastenkürzel durch Secure Input blockiert",
     "privilegedMode": "Privileged-Modus",
-    "privilegedOn": "Privileged-Modus an"
+    "privilegedOn": "Privileged-Modus an",
+    "correctLast": "Letztes Diktat korrigieren …"
   },
   "sidebar": {
     "general": "Allgemein",
@@ -20,7 +21,8 @@
     "history": "Verlauf",
     "debug": "Debug",
     "about": "Info",
-    "privacy": "Datenschutz"
+    "privacy": "Datenschutz",
+    "vocabulary": "Wortschatz"
   },
   "onboarding": {
     "customModelDescription": "Nicht offiziell unterstützt",
@@ -224,7 +226,9 @@
       "welcome": {
         "title": "Kusema wandelt deine Stimme auf diesem Computer in Text um.",
         "privacy": "Deine Stimme verlässt ihn nie.",
-        "language": "Sprache, in der du diktierst"
+        "language": "Sprache, in der du diktierst",
+        "medical": "Ich diktiere medizinische Unterlagen.",
+        "medicalNote": "Fügt Arzneimittelnamen und klinische Begriffe hinzu. Prüfen Sie diktierte Unterlagen immer."
       },
       "microphone": {
         "title": "Mikrofon auswählen",
@@ -959,7 +963,15 @@
       "showMore": "Mehr anzeigen",
       "showLess": "Weniger anzeigen",
       "dropTitle": "Zum Transkribieren ablegen",
-      "dropDescription": "Es erscheint im Verlauf."
+      "dropDescription": "Es erscheint im Verlauf.",
+      "correct": {
+        "button": "Korrigieren",
+        "help": "Text korrigieren. Kusema lernt die Wörter, die Sie ändern. Das ändert nur den Verlauf, nicht das Dokument.",
+        "save": "Speichern",
+        "cancel": "Abbrechen",
+        "saved": "Gespeichert.",
+        "learned": "Gespeichert. Kusema hat gelernt: {{words}}"
+      }
     },
     "debug": {
       "title": "Debug",
@@ -1338,6 +1350,49 @@
         "description": "Eine Taste halten statt vier. Die rechte Strg-Taste funktioniert dann nicht mehr als Strg.",
         "button": "{{key}} verwenden"
       }
+    },
+    "vocabulary": {
+      "soundsLikeList": "Gehört als: {{forms}}",
+      "remove": "{{word}} entfernen",
+      "packs": {
+        "title": "Eingebauter Wortschatz",
+        "description": "Begriffe, die Kusema beim Diktieren auf Englisch von Anfang an richtig schreibt. Sein eigener Name ist immer dabei.",
+        "legal": {
+          "label": "Recht",
+          "description": "{{number}} lateinische und juristische Begriffe sowie die Schreibweise von Zitaten: „42 U.S.C.“, „123 F.3d 456“, „Smith v. Jones“, „Rule 12(b)(6)“."
+        },
+        "medical": {
+          "label": "Medizin",
+          "description": "{{number}} Arzneimittelnamen und klinische Begriffe. Prüfen Sie diktierte medizinische Unterlagen immer: Ein Wortschatz verbessert die Erkennung, macht sie aber nicht sicher."
+        }
+      },
+      "own": {
+        "title": "Ihre Wörter",
+        "description": "Namen und Begriffe, die Sie verwenden. Tragen Sie ein, wie ein Wort geschrieben wird, und falls Kusema es falsch versteht, was es stattdessen schreibt.",
+        "add": "Wort hinzufügen",
+        "addHelp": "„Gehört als“ ist das, was Kusema schreibt, wenn es das Wort falsch versteht, zum Beispiel „Canela“ statt „Kanella“. Mehrere durch Kommas trennen. Ohne Angabe werden ähnliche Schreibweisen korrigiert.",
+        "written": "Geschrieben als",
+        "writtenPlaceholder": "Kanella",
+        "soundsLike": "Gehört als",
+        "soundsLikePlaceholder": "Gehört als (optional): Canela",
+        "addButton": "Hinzufügen",
+        "empty": "Noch keine Wörter."
+      },
+      "learned": {
+        "title": "Aus Ihren Korrekturen gelernt",
+        "description": "Wenn Sie ein falsch verstandenes Wort mit „correct that“ oder im Verlauf korrigieren, merkt Kusema es sich hier. Das Lernen bleibt auf diesem Computer.",
+        "empty": "Noch nichts gelernt. Sagen Sie nach dem Diktieren „correct that“, um ein falsch verstandenes Wort zu korrigieren."
+      },
+      "files": {
+        "title": "Importieren und exportieren",
+        "description": "Teilen Sie eine Wortliste mit Kollegen oder übernehmen Sie Ihre aus Dragon (die exportierte Wortliste mit gesprochenen Formen). Dateien sind JSON, CSV (geschrieben, gehört als) oder Dragons Textformat.",
+        "filterName": "Wortlisten",
+        "import": "Importieren …",
+        "exportJson": "Als JSON exportieren …",
+        "exportCsv": "Als CSV exportieren …",
+        "imported": "{{added}} neue Wörter importiert ({{existing}} waren schon vorhanden).",
+        "exported": "{{number}} Wörter exportiert."
+      }
     }
   },
   "footer": {
@@ -1445,6 +1500,12 @@
       "apply": "Ersetzen",
       "cancel": "Abbrechen",
       "keys": "Enter ersetzt, Esc bricht ab. Strg+Z in der App macht es rückgängig."
+    },
+    "correct": {
+      "title": "Letztes Diktat korrigieren",
+      "help": "Korrigieren und Enter drücken. Kusema lernt die Wörter, die Sie ändern. Umschalt+Enter beginnt eine neue Zeile, Esc bricht ab.",
+      "save": "Speichern",
+      "cancel": "Abbrechen"
     }
   },
   "secureInput": {
@@ -1494,7 +1555,8 @@
       "undoThat": "Macht die letzte Änderung rückgängig (Strg+Z).",
       "copyThat": "Kopiert die Markierung.",
       "cutThat": "Schneidet die Markierung aus.",
-      "pasteThat": "Fügt ein."
+      "pasteThat": "Fügt ein.",
+      "correctThat": "Öffnet das letzte Diktat zum Korrigieren und lernt die Wörter, die Sie ändern."
     },
     "trigger": "Beginnen Sie beim fortlaufenden Diktat mit „{{trigger}},“, um Text auf dieselbe Weise zu ändern, zum Beispiel „{{trigger}}, mach das förmlicher“. Ohne dieses Wort wird alles so geschrieben, wie Sie es sagen.",
     "triggerOff": "Um Text beim fortlaufenden Diktat zu ändern, legen Sie unter Allgemein → Sprachbearbeitung ein Auslösewort fest.",
@@ -1518,7 +1580,11 @@
       "cantRead": "Der markierte Text in dieser App konnte nicht gelesen werden.",
       "cantConfirm": "Es ließ sich nicht feststellen, ob in dieser App etwas markiert ist, daher wurde nichts gelöscht.",
       "timedOut": "Die Vorschau ist abgelaufen, daher wurde nichts ersetzt.",
-      "working": "Wird bearbeitet …"
+      "working": "Wird bearbeitet …",
+      "correctNotFound": "Hier gibt es nichts von Kusema Geschriebenes zu korrigieren. Korrigieren Sie es stattdessen im Verlauf.",
+      "correctChanged": "Der von Kusema geschriebene Text wurde inzwischen geändert und kann hier nicht korrigiert werden. Korrigieren Sie ihn stattdessen im Verlauf.",
+      "corrected": "Korrigiert.",
+      "learned": "Korrigiert. Kusema hat gelernt: {{name}}"
     }
   }
 }

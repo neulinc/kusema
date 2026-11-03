@@ -1,0 +1,88 @@
+# Medical vocabulary pack, off by default. Kusema's own list, written for
+# this project: common generic drug names and clinical terms. Names are
+# facts; no drug database (RxNorm, the FDA's NDC directory or others) was
+# copied, so no third-party license applies. Clinicians must review every
+# dictated record: a vocabulary makes recognition better, not certain.
+# Written form<TAB>sounds like|sounds like (lowercase; matched as whole words)
+# A line without sounds-like forms is matched loosely (long, distinctive words only).
+acetaminophen	a seat a minophen|acetaminofen
+albuterol	al butyrol|albuterall
+amiodarone	amio darone
+amlodipine	am low da peen|amlodapine|amlodipene
+amoxicillin	a moxie cillin|amoxacillin
+anticoagulation
+apixaban	a pixaban|apixiban
+atorvastatin	a tour vastatin|atorvastatine
+azithromycin	a zithromycin|azithromiacin
+buprenorphine	bupe renorphine
+carvedilol	car vedilol|carvedilal
+cefazolin
+ceftriaxone	ceftriaxzone
+cephalexin	sef a lexin
+ciprofloxacin	cipro floxacin
+citalopram	sita lopram
+clopidogrel	clopidogrill|clo pidogrel
+dexamethasone
+diclofenac	die clofenac
+doxycycline	doxy cycline
+duloxetine	du loxetine
+enoxaparin	enox aparin
+escitalopram
+furosemide	furo semide|furosimide
+gabapentin	gaba pentin|gabapenton
+glipizide
+hydrochlorothiazide	hydro chloro thiazide|hydrochlorothiazine
+hydrocodone
+ibuprofen
+insulin glargine	insulin glargene|insulin glargeen
+levetiracetam	leveti racetam
+levothyroxine	levo thyroxine|levothyroxin
+lisinopril	lice in a pril|lysine april|lisinapril
+losartan	low sartan
+meloxicam	melox a cam
+metformin	met for min|metforman
+methylprednisolone
+metoprolol	meto pro lol|metoprolal
+montelukast	monte lukast
+naloxone	nal oxone
+omeprazole	omeprazol|ome prazole
+ondansetron	on dan setron
+oxycodone
+pantoprazole	panto prazole
+prednisone	predna zone
+quetiapine	que tia peen
+rivaroxaban	riva roxaban
+rosuvastatin	rosu vastatin
+sertraline	sir tra lean|sertralene
+simvastatin	sim vastatin
+spironolactone	spiro no lactone
+tamsulosin	tam sue losin
+tramadol	tram a dol
+trazodone	traz o done
+vancomycin	vanco mycin
+warfarin	war farin
+anaphylaxis
+arrhythmia
+atrial fibrillation	atrial fibulation
+bradycardia
+cholecystectomy
+dyspnea	disp nia|dysp nea|disknea
+echocardiogram
+erythema
+hematuria
+hemoptysis
+hyperlipidemia
+hypertension
+hypothyroidism
+leukocytosis
+myocardial infarction
+nephrolithiasis
+osteoarthritis
+paresthesia
+pneumothorax
+pyelonephritis
+rhabdomyolysis
+tachycardia
+thrombocytopenia
+COPD	c o p d|c.o.p.d.
+CHF	c h f

@@ -9,7 +9,8 @@
     "cancel": "Annuller",
     "secureInputWarning": "⚠ Genveje blokeret af Secure Input",
     "privilegedMode": "Privileged-tilstand",
-    "privilegedOn": "Privileged-tilstand til"
+    "privilegedOn": "Privileged-tilstand til",
+    "correctLast": "Ret sidste diktat …"
   },
   "sidebar": {
     "general": "Generelt",
@@ -20,7 +21,8 @@
     "history": "Historik",
     "debug": "Fejlfinding",
     "about": "Om",
-    "privacy": "Privatliv"
+    "privacy": "Privatliv",
+    "vocabulary": "Ordforråd"
   },
   "onboarding": {
     "customModelDescription": "Ikke officielt understøttet",
@@ -224,7 +226,9 @@
       "welcome": {
         "title": "Kusema omdanner din stemme til tekst på denne computer.",
         "privacy": "Din stemme forlader den aldrig.",
-        "language": "Sprog, du dikterer på"
+        "language": "Sprog, du dikterer på",
+        "medical": "Jeg dikterer journaler.",
+        "medicalNote": "Tilføjer lægemiddelnavne og kliniske termer. Gennemgå altid dikterede journaler."
       },
       "microphone": {
         "title": "Vælg din mikrofon",
@@ -959,7 +963,15 @@
       "showMore": "Vis mere",
       "showLess": "Vis mindre",
       "dropTitle": "Slip for at transskribere",
-      "dropDescription": "Den vises i historikken."
+      "dropDescription": "Den vises i historikken.",
+      "correct": {
+        "button": "Ret",
+        "help": "Ret teksten. Kusema lærer de ord, du ændrer. Kun Historik ændres, ikke dokumentet.",
+        "save": "Gem",
+        "cancel": "Annuller",
+        "saved": "Gemt.",
+        "learned": "Gemt. Kusema lærte: {{words}}"
+      }
     },
     "debug": {
       "title": "Fejlfinding",
@@ -1338,6 +1350,49 @@
         "description": "Hold én tast nede i stedet for fire. Højre Ctrl virker så ikke længere som Ctrl.",
         "button": "Brug {{key}}"
       }
+    },
+    "vocabulary": {
+      "soundsLikeList": "Høres som: {{forms}}",
+      "remove": "Fjern {{word}}",
+      "packs": {
+        "title": "Indbygget ordforråd",
+        "description": "Termer, som Kusema skriver rigtigt fra start ved diktat på engelsk. Dets eget navn er altid med.",
+        "legal": {
+          "label": "Juridisk",
+          "description": "{{number}} latinske og juridiske termer samt hvordan henvisninger skrives: “42 U.S.C.”, “123 F.3d 456”, “Smith v. Jones”, “Rule 12(b)(6)”."
+        },
+        "medical": {
+          "label": "Medicinsk",
+          "description": "{{number}} lægemiddelnavne og kliniske termer. Gennemgå altid dikterede journaler: et ordforråd gør genkendelsen bedre, ikke sikker."
+        }
+      },
+      "own": {
+        "title": "Dine ord",
+        "description": "Navne og termer, du bruger. Tilføj, hvordan et ord skrives, og hvis Kusema hører forkert, hvad det skriver i stedet.",
+        "add": "Tilføj et ord",
+        "addHelp": "“Høres som” er det, Kusema skriver, når det hører forkert, fx “Canela” for “Kanella”. Adskil flere med kommaer. Uden det rettes lignende stavemåder.",
+        "written": "Skrives",
+        "writtenPlaceholder": "Kanella",
+        "soundsLike": "Høres som",
+        "soundsLikePlaceholder": "Høres som (valgfrit): Canela",
+        "addButton": "Tilføj",
+        "empty": "Ingen ord endnu."
+      },
+      "learned": {
+        "title": "Lært af dine rettelser",
+        "description": "Når du retter et forkert hørt ord med “correct that” eller i Historik, husker Kusema det her. Indlæringen bliver på denne computer.",
+        "empty": "Intet lært endnu. Sig “correct that” efter diktat for at rette et forkert hørt ord."
+      },
+      "files": {
+        "title": "Importér og eksportér",
+        "description": "Del en ordliste med kolleger, eller tag din med fra Dragon (dens eksporterede ordliste med talte former). Filerne er JSON, CSV (skrives, høres som) eller Dragons tekstformat.",
+        "filterName": "Ordlister",
+        "import": "Importér …",
+        "exportJson": "Eksportér som JSON …",
+        "exportCsv": "Eksportér som CSV …",
+        "imported": "Importerede {{added}} nye ord ({{existing}} fandtes allerede).",
+        "exported": "Eksporterede {{number}} ord."
+      }
     }
   },
   "footer": {
@@ -1445,6 +1500,12 @@
       "apply": "Erstat",
       "cancel": "Annuller",
       "keys": "Enter erstatter, Esc annullerer. Ctrl+Z i appen fortryder det."
+    },
+    "correct": {
+      "title": "Ret sidste diktat",
+      "help": "Ret og tryk Enter. Kusema lærer de ord, du ændrer. Skift+Enter giver ny linje, Esc annullerer.",
+      "save": "Gem",
+      "cancel": "Annuller"
     }
   },
   "secureInput": {
@@ -1494,7 +1555,8 @@
       "undoThat": "Fortryder den seneste ændring (Ctrl+Z).",
       "copyThat": "Kopierer markeringen.",
       "cutThat": "Klipper markeringen.",
-      "pasteThat": "Indsætter."
+      "pasteThat": "Indsætter.",
+      "correctThat": "Åbner sidste diktat til rettelse i hånden og lærer de ord, du ændrer."
     },
     "trigger": "Start med “{{trigger}},” ved løbende diktat for at ændre tekst på samme måde, fx “{{trigger}}, gør det mere formelt”. Uden ordet skrives alt, som du siger det.",
     "triggerOff": "Angiv et udløserord under Generelt → Stemmeredigering for at ændre tekst ved løbende diktat.",
@@ -1518,7 +1580,11 @@
       "cantRead": "Den markerede tekst i denne app kunne ikke læses.",
       "cantConfirm": "Det kunne ikke afgøres, om noget er markeret i denne app, så intet blev slettet.",
       "timedOut": "Forhåndsvisningen udløb, så intet blev erstattet.",
-      "working": "Redigerer …"
+      "working": "Redigerer …",
+      "correctNotFound": "Der er intet, Kusema har skrevet her, at rette. Ret det i Historik i stedet.",
+      "correctChanged": "Teksten, Kusema skrev, er ændret siden, så den kan ikke rettes her. Ret den i Historik i stedet.",
+      "corrected": "Rettet.",
+      "learned": "Rettet. Kusema lærte: {{name}}"
     }
   }
 }

@@ -9,7 +9,8 @@
     "cancel": "Annuleren",
     "secureInputWarning": "⚠ Sneltoetsen geblokkeerd door Secure Input",
     "privilegedMode": "Privileged-modus",
-    "privilegedOn": "Privileged-modus aan"
+    "privilegedOn": "Privileged-modus aan",
+    "correctLast": "Laatste dictaat corrigeren…"
   },
   "sidebar": {
     "general": "Algemeen",
@@ -20,7 +21,8 @@
     "history": "Geschiedenis",
     "debug": "Probleemoplossing",
     "about": "Over Kusema",
-    "privacy": "Privacy"
+    "privacy": "Privacy",
+    "vocabulary": "Woordenschat"
   },
   "onboarding": {
     "customModelDescription": "Niet officieel ondersteund",
@@ -224,7 +226,9 @@
       "welcome": {
         "title": "Kusema zet je stem om in tekst op deze computer.",
         "privacy": "Je stem verlaat hem nooit.",
-        "language": "Taal waarin je dicteert"
+        "language": "Taal waarin je dicteert",
+        "medical": "Ik dicteer medische dossiers.",
+        "medicalNote": "Voegt geneesmiddelnamen en klinische termen toe. Controleer gedicteerde dossiers altijd."
       },
       "microphone": {
         "title": "Kies je microfoon",
@@ -959,7 +963,15 @@
       "showMore": "Meer tonen",
       "showLess": "Minder tonen",
       "dropTitle": "Loslaten om te transcriberen",
-      "dropDescription": "Het verschijnt in de geschiedenis."
+      "dropDescription": "Het verschijnt in de geschiedenis.",
+      "correct": {
+        "button": "Corrigeren",
+        "help": "Corrigeer de tekst. Kusema leert de woorden die je wijzigt. Alleen Geschiedenis verandert, niet het document.",
+        "save": "Opslaan",
+        "cancel": "Annuleren",
+        "saved": "Opgeslagen.",
+        "learned": "Opgeslagen. Kusema heeft geleerd: {{words}}"
+      }
     },
     "debug": {
       "title": "Probleemoplossing",
@@ -1338,6 +1350,49 @@
         "description": "Houd één toets ingedrukt in plaats van vier. De rechter Ctrl-toets werkt dan niet meer als Ctrl.",
         "button": "{{key}} gebruiken"
       }
+    },
+    "vocabulary": {
+      "soundsLikeList": "Gehoord als: {{forms}}",
+      "remove": "{{word}} verwijderen",
+      "packs": {
+        "title": "Ingebouwde woordenschat",
+        "description": "Termen die Kusema bij Engels dicteren meteen goed schrijft. Zijn eigen naam zit er altijd bij.",
+        "legal": {
+          "label": "Juridisch",
+          "description": "{{number}} Latijnse en juridische termen, plus hoe verwijzingen worden geschreven: “42 U.S.C.”, “123 F.3d 456”, “Smith v. Jones”, “Rule 12(b)(6)”."
+        },
+        "medical": {
+          "label": "Medisch",
+          "description": "{{number}} geneesmiddelnamen en klinische termen. Controleer gedicteerde medische dossiers altijd: een woordenschat maakt herkenning beter, niet zeker."
+        }
+      },
+      "own": {
+        "title": "Jouw woorden",
+        "description": "Namen en termen die je gebruikt. Voeg toe hoe een woord wordt geschreven en, als Kusema het verkeerd verstaat, wat het in plaats daarvan schrijft.",
+        "add": "Woord toevoegen",
+        "addHelp": "“Gehoord als” is wat Kusema schrijft als het het woord verkeerd verstaat, bijvoorbeeld “Canela” voor “Kanella”. Scheid meerdere met komma's. Zonder dit worden vergelijkbare spellingen gecorrigeerd.",
+        "written": "Geschreven als",
+        "writtenPlaceholder": "Kanella",
+        "soundsLike": "Gehoord als",
+        "soundsLikePlaceholder": "Gehoord als (optioneel): Canela",
+        "addButton": "Toevoegen",
+        "empty": "Nog geen woorden."
+      },
+      "learned": {
+        "title": "Geleerd van je correcties",
+        "description": "Als je een verkeerd verstaan woord corrigeert met “correct that” of in Geschiedenis, onthoudt Kusema het hier. Het leren blijft op deze computer.",
+        "empty": "Nog niets geleerd. Zeg na het dicteren “correct that” om een verkeerd verstaan woord te corrigeren."
+      },
+      "files": {
+        "title": "Importeren en exporteren",
+        "description": "Deel een woordenlijst met collega's, of neem de jouwe mee uit Dragon (de geëxporteerde woordenlijst, met gesproken vormen). Bestanden zijn JSON, CSV (geschreven, gehoord als) of de tekstindeling van Dragon.",
+        "filterName": "Woordenlijsten",
+        "import": "Importeren…",
+        "exportJson": "Exporteren als JSON…",
+        "exportCsv": "Exporteren als CSV…",
+        "imported": "{{added}} nieuwe woorden geïmporteerd ({{existing}} stonden er al).",
+        "exported": "{{number}} woorden geëxporteerd."
+      }
     }
   },
   "footer": {
@@ -1445,6 +1500,12 @@
       "apply": "Vervangen",
       "cancel": "Annuleren",
       "keys": "Enter vervangt, Esc annuleert. Ctrl+Z in de app maakt het ongedaan."
+    },
+    "correct": {
+      "title": "Laatste dictaat corrigeren",
+      "help": "Corrigeer en druk op Enter. Kusema leert de woorden die je wijzigt. Shift+Enter begint een nieuwe regel, Esc annuleert.",
+      "save": "Opslaan",
+      "cancel": "Annuleren"
     }
   },
   "secureInput": {
@@ -1494,7 +1555,8 @@
       "undoThat": "Maakt de laatste wijziging ongedaan (Ctrl+Z).",
       "copyThat": "Kopieert de selectie.",
       "cutThat": "Knipt de selectie.",
-      "pasteThat": "Plakt."
+      "pasteThat": "Plakt.",
+      "correctThat": "Opent het laatste dictaat om met de hand te corrigeren, en leert de woorden die je wijzigt."
     },
     "trigger": "Begin bij doorlopend dicteren met “{{trigger}},” om tekst op dezelfde manier te wijzigen, bijvoorbeeld “{{trigger}}, maak dit formeler”. Zonder dat woord wordt alles getypt zoals je het zegt.",
     "triggerOff": "Stel onder Algemeen → Spraakbewerking een activeringswoord in om tekst tijdens doorlopend dicteren te wijzigen.",
@@ -1518,7 +1580,11 @@
       "cantRead": "De geselecteerde tekst in deze app kon niet worden gelezen.",
       "cantConfirm": "Niet duidelijk of er in deze app iets geselecteerd is, dus er is niets verwijderd.",
       "timedOut": "Het voorbeeld is verlopen, dus er is niets vervangen.",
-      "working": "Bezig met bewerken…"
+      "working": "Bezig met bewerken…",
+      "correctNotFound": "Er is hier niets dat Kusema typte om te corrigeren. Corrigeer het in Geschiedenis.",
+      "correctChanged": "De tekst die Kusema typte is inmiddels veranderd, dus hij kan hier niet worden gecorrigeerd. Corrigeer het in Geschiedenis.",
+      "corrected": "Gecorrigeerd.",
+      "learned": "Gecorrigeerd. Kusema heeft geleerd: {{name}}"
     }
   }
 }

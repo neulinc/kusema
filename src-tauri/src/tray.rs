@@ -546,6 +546,14 @@ fn build_menu(app: &AppHandle, inputs: &MenuInputs) -> tauri::Result<(Menu<tauri
         true,
         None::<&str>,
     )?;
+    // Kusema vocabulary: "correct that" for the last dictation.
+    let correct_last_i = MenuItem::with_id(
+        app,
+        "correct_last",
+        &strings.correct_last,
+        true,
+        None::<&str>,
+    )?;
     let quit_i = MenuItem::with_id(app, "quit", &strings.quit, true, quit_accelerator)?;
     let separator = || PredefinedMenuItem::separator(app);
 
@@ -559,6 +567,7 @@ fn build_menu(app: &AppHandle, inputs: &MenuInputs) -> tauri::Result<(Menu<tauri
                 &cancel_i,
                 &separator()?,
                 &copy_last_transcript_i,
+                &correct_last_i,
                 &separator()?,
                 &settings_i,
                 &check_updates_i,
@@ -598,6 +607,7 @@ fn build_menu(app: &AppHandle, inputs: &MenuInputs) -> tauri::Result<(Menu<tauri
                 &version_i,
                 &separator()?,
                 &copy_last_transcript_i,
+                &correct_last_i,
                 &separator()?,
                 &model_submenu,
                 &unload_model_i,

@@ -9,7 +9,8 @@
     "cancel": "Batal",
     "secureInputWarning": "⚠ Pintasan diblokir oleh Secure Input",
     "privilegedMode": "Mode Privileged",
-    "privilegedOn": "Mode Privileged aktif"
+    "privilegedOn": "Mode Privileged aktif",
+    "correctLast": "Koreksi dikte terakhir…"
   },
   "sidebar": {
     "general": "Umum",
@@ -20,7 +21,8 @@
     "history": "Riwayat",
     "debug": "Debug",
     "about": "Tentang",
-    "privacy": "Privasi"
+    "privacy": "Privasi",
+    "vocabulary": "Kosakata"
   },
   "onboarding": {
     "customModelDescription": "Tidak didukung secara resmi",
@@ -224,7 +226,9 @@
       "welcome": {
         "title": "Kusema mengubah suara Anda menjadi teks di komputer ini.",
         "privacy": "Suara Anda tidak pernah meninggalkan komputer ini.",
-        "language": "Bahasa yang akan Anda diktekan"
+        "language": "Bahasa yang akan Anda diktekan",
+        "medical": "Saya mendiktekan catatan medis.",
+        "medicalNote": "Menambahkan nama obat dan istilah klinis. Selalu periksa catatan yang didiktekan."
       },
       "microphone": {
         "title": "Pilih mikrofon Anda",
@@ -959,7 +963,15 @@
       "showMore": "Tampilkan lebih banyak",
       "showLess": "Tampilkan lebih sedikit",
       "dropTitle": "Lepaskan untuk mentranskripsi",
-      "dropDescription": "Akan muncul di Riwayat."
+      "dropDescription": "Akan muncul di Riwayat.",
+      "correct": {
+        "button": "Koreksi",
+        "help": "Koreksi teksnya. Kusema mempelajari kata yang Anda ubah. Hanya Riwayat yang berubah, bukan dokumennya.",
+        "save": "Simpan",
+        "cancel": "Batal",
+        "saved": "Tersimpan.",
+        "learned": "Tersimpan. Kusema mempelajari: {{words}}"
+      }
     },
     "debug": {
       "title": "Debug",
@@ -1338,6 +1350,49 @@
         "description": "Tahan satu tombol, bukan empat. Ctrl kanan tidak lagi berfungsi sebagai Ctrl.",
         "button": "Gunakan {{key}}"
       }
+    },
+    "vocabulary": {
+      "soundsLikeList": "Terdengar sebagai: {{forms}}",
+      "remove": "Hapus {{word}}",
+      "packs": {
+        "title": "Kosakata bawaan",
+        "description": "Istilah yang langsung ditulis benar oleh Kusema saat dikte bahasa Inggris. Namanya sendiri selalu disertakan.",
+        "legal": {
+          "label": "Hukum",
+          "description": "{{number}} istilah Latin dan hukum, serta cara menulis kutipan: “42 U.S.C.”, “123 F.3d 456”, “Smith v. Jones”, “Rule 12(b)(6)”."
+        },
+        "medical": {
+          "label": "Medis",
+          "description": "{{number}} nama obat dan istilah klinis. Selalu periksa catatan medis yang didiktekan: kosakata membuat pengenalan lebih baik, bukan pasti benar."
+        }
+      },
+      "own": {
+        "title": "Kata Anda",
+        "description": "Nama dan istilah yang Anda gunakan. Tambahkan cara penulisan kata dan, jika Kusema salah dengar, apa yang ditulisnya.",
+        "add": "Tambah kata",
+        "addHelp": "“Terdengar sebagai” adalah tulisan Kusema saat salah dengar, misalnya “Canela” untuk “Kanella”. Pisahkan beberapa dengan koma. Tanpa itu, ejaan yang mirip dikoreksi.",
+        "written": "Ditulis",
+        "writtenPlaceholder": "Kanella",
+        "soundsLike": "Terdengar sebagai",
+        "soundsLikePlaceholder": "Terdengar sebagai (opsional): Canela",
+        "addButton": "Tambah",
+        "empty": "Belum ada kata."
+      },
+      "learned": {
+        "title": "Dipelajari dari koreksi Anda",
+        "description": "Saat Anda mengoreksi kata yang salah dengar dengan “correct that” atau di Riwayat, Kusema mengingatnya di sini. Pembelajaran tetap di komputer ini.",
+        "empty": "Belum ada yang dipelajari. Ucapkan “correct that” setelah dikte untuk mengoreksi kata yang salah dengar."
+      },
+      "files": {
+        "title": "Impor dan ekspor",
+        "description": "Bagikan daftar kata dengan rekan kerja, atau bawa daftar Anda dari Dragon (daftar kata yang diekspor, dengan bentuk ucapannya). File berupa JSON, CSV (ditulis, terdengar sebagai) atau format teks Dragon.",
+        "filterName": "Daftar kata",
+        "import": "Impor…",
+        "exportJson": "Ekspor sebagai JSON…",
+        "exportCsv": "Ekspor sebagai CSV…",
+        "imported": "{{added}} kata baru diimpor ({{existing}} sudah ada).",
+        "exported": "{{number}} kata diekspor."
+      }
     }
   },
   "footer": {
@@ -1445,6 +1500,12 @@
       "apply": "Ganti",
       "cancel": "Batal",
       "keys": "Enter mengganti, Esc membatalkan. Ctrl+Z di aplikasi membatalkannya."
+    },
+    "correct": {
+      "title": "Koreksi dikte terakhir",
+      "help": "Koreksi lalu tekan Enter. Kusema mempelajari kata yang Anda ubah. Shift+Enter untuk baris baru, Esc untuk batal.",
+      "save": "Simpan",
+      "cancel": "Batal"
     }
   },
   "secureInput": {
@@ -1494,7 +1555,8 @@
       "undoThat": "Membatalkan perubahan terakhir (Ctrl+Z).",
       "copyThat": "Menyalin pilihan.",
       "cutThat": "Memotong pilihan.",
-      "pasteThat": "Menempel."
+      "pasteThat": "Menempel.",
+      "correctThat": "Membuka dikte terakhir untuk dikoreksi manual, dan mempelajari kata yang Anda ubah."
     },
     "trigger": "Saat dikte berkelanjutan, mulai dengan “{{trigger}},” untuk mengubah teks dengan cara yang sama, misalnya “{{trigger}}, buat ini lebih formal”. Tanpa kata itu, semuanya diketik seperti yang Anda ucapkan.",
     "triggerOff": "Untuk mengubah teks saat dikte berkelanjutan, atur kata pemicu di Umum → Edit Suara.",
@@ -1518,7 +1580,11 @@
       "cantRead": "Tidak dapat membaca teks yang dipilih di aplikasi ini.",
       "cantConfirm": "Tidak dapat memastikan apakah ada yang dipilih di aplikasi ini, jadi tidak ada yang dihapus.",
       "timedOut": "Waktu pratinjau habis, jadi tidak ada yang diganti.",
-      "working": "Mengedit…"
+      "working": "Mengedit…",
+      "correctNotFound": "Tidak ada ketikan Kusema di sini untuk dikoreksi. Koreksi dari Riwayat saja.",
+      "correctChanged": "Teks yang diketik Kusema sudah berubah, jadi tidak bisa dikoreksi di sini. Koreksi dari Riwayat saja.",
+      "corrected": "Dikoreksi.",
+      "learned": "Dikoreksi. Kusema mempelajari: {{name}}"
     }
   }
 }

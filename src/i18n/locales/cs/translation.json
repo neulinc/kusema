@@ -9,7 +9,8 @@
     "cancel": "Zrušit",
     "secureInputWarning": "⚠ Zkratky blokuje Secure Input",
     "privilegedMode": "Režim Privileged",
-    "privilegedOn": "Režim Privileged zapnut"
+    "privilegedOn": "Režim Privileged zapnut",
+    "correctLast": "Opravit poslední diktát…"
   },
   "sidebar": {
     "general": "Obecné",
@@ -20,7 +21,8 @@
     "history": "Historie",
     "debug": "Ladění",
     "about": "O aplikaci",
-    "privacy": "Soukromí"
+    "privacy": "Soukromí",
+    "vocabulary": "Slovník"
   },
   "onboarding": {
     "customModelDescription": "Oficiálně nepodporováno",
@@ -226,7 +228,9 @@
       "welcome": {
         "title": "Kusema převádí váš hlas na text přímo v tomto počítači.",
         "privacy": "Váš hlas ho nikdy neopustí.",
-        "language": "Jazyk, ve kterém budete diktovat"
+        "language": "Jazyk, ve kterém budete diktovat",
+        "medical": "Diktuji zdravotnickou dokumentaci.",
+        "medicalNote": "Přidá názvy léků a klinické termíny. Diktovanou dokumentaci vždy zkontrolujte."
       },
       "microphone": {
         "title": "Vyberte mikrofon",
@@ -965,7 +969,15 @@
       "showMore": "Zobrazit více",
       "showLess": "Zobrazit méně",
       "dropTitle": "Pusťte pro přepis",
-      "dropDescription": "Zobrazí se v historii."
+      "dropDescription": "Zobrazí se v historii.",
+      "correct": {
+        "button": "Opravit",
+        "help": "Opravte text. Kusema se naučí slova, která změníte. Změní se jen Historie, ne dokument.",
+        "save": "Uložit",
+        "cancel": "Zrušit",
+        "saved": "Uloženo.",
+        "learned": "Uloženo. Kusema se naučila: {{words}}"
+      }
     },
     "debug": {
       "title": "Ladění",
@@ -1350,6 +1362,49 @@
         "description": "Držte jednu klávesu místo čtyř. Pravý Ctrl pak přestane fungovat jako Ctrl.",
         "button": "Použít {{key}}"
       }
+    },
+    "vocabulary": {
+      "soundsLikeList": "Slyšeno jako: {{forms}}",
+      "remove": "Odebrat {{word}}",
+      "packs": {
+        "title": "Vestavěný slovník",
+        "description": "Termíny, které Kusema hned píše správně při diktování v angličtině. Jeho vlastní jméno je vždy zahrnuto.",
+        "legal": {
+          "label": "Právní",
+          "description": "{{number}} latinských a právních termínů a způsob psaní citací: „42 U.S.C.“, „123 F.3d 456“, „Smith v. Jones“, „Rule 12(b)(6)“."
+        },
+        "medical": {
+          "label": "Lékařský",
+          "description": "{{number}} názvů léků a klinických termínů. Diktovanou zdravotnickou dokumentaci vždy zkontrolujte: slovník zlepšuje rozpoznávání, ale nezaručuje ho."
+        }
+      },
+      "own": {
+        "title": "Vaše slova",
+        "description": "Jména a termíny, které používáte. Přidejte, jak se slovo píše, a pokud ho Kusema slyší špatně, co místo něj píše.",
+        "add": "Přidat slovo",
+        "addHelp": "„Slyšeno jako“ je to, co Kusema napíše, když se splete, například „Canela“ místo „Kanella“. Více tvarů oddělte čárkami. Bez toho se opravují podobné zápisy.",
+        "written": "Píše se",
+        "writtenPlaceholder": "Kanella",
+        "soundsLike": "Slyšeno jako",
+        "soundsLikePlaceholder": "Slyšeno jako (volitelné): Canela",
+        "addButton": "Přidat",
+        "empty": "Zatím žádná slova."
+      },
+      "learned": {
+        "title": "Naučeno z vašich oprav",
+        "description": "Když opravíte špatně slyšené slovo příkazem „correct that“ nebo v Historii, Kusema si ho zapamatuje tady. Učení zůstává v tomto počítači.",
+        "empty": "Zatím nic naučeno. Po diktování řekněte „correct that“ a opravte špatně slyšené slovo."
+      },
+      "files": {
+        "title": "Import a export",
+        "description": "Sdílejte seznam slov s kolegy nebo si převezměte svůj z Dragonu (jeho exportovaný seznam slov s mluvenými tvary). Soubory jsou JSON, CSV (píše se, slyšeno jako) nebo textový formát Dragonu.",
+        "filterName": "Seznamy slov",
+        "import": "Importovat…",
+        "exportJson": "Exportovat jako JSON…",
+        "exportCsv": "Exportovat jako CSV…",
+        "imported": "Importována nová slova: {{added}} (už tam bylo: {{existing}}).",
+        "exported": "Exportována slova: {{number}}."
+      }
     }
   },
   "footer": {
@@ -1457,6 +1512,12 @@
       "apply": "Nahradit",
       "cancel": "Zrušit",
       "keys": "Enter nahradí, Esc zruší. Ctrl+Z v aplikaci to vrátí."
+    },
+    "correct": {
+      "title": "Opravit poslední diktát",
+      "help": "Opravte a stiskněte Enter. Kusema se naučí slova, která změníte. Shift+Enter začne nový řádek, Esc zruší.",
+      "save": "Uložit",
+      "cancel": "Zrušit"
     }
   },
   "secureInput": {
@@ -1510,7 +1571,8 @@
       "undoThat": "Vrátí poslední změnu (Ctrl+Z).",
       "copyThat": "Zkopíruje označený text.",
       "cutThat": "Vyjme označený text.",
-      "pasteThat": "Vloží."
+      "pasteThat": "Vloží.",
+      "correctThat": "Otevře poslední diktát k ruční opravě a naučí se slova, která změníte."
     },
     "trigger": "Při průběžném diktování začněte slovy „{{trigger}},“ a text se změní stejně, například „{{trigger}}, udělej to formálnější“. Bez toho slova se vše napíše tak, jak to řeknete.",
     "triggerOff": "Chcete-li měnit text při průběžném diktování, nastavte spouštěcí slovo v Obecné → Hlasové úpravy.",
@@ -1534,7 +1596,11 @@
       "cantRead": "Označený text v této aplikaci se nepodařilo přečíst.",
       "cantConfirm": "Nepodařilo se zjistit, zda je v této aplikaci něco označeno, takže se nic nesmazalo.",
       "timedOut": "Čas na náhled vypršel, takže se nic nenahradilo.",
-      "working": "Upravuje se…"
+      "working": "Upravuje se…",
+      "correctNotFound": "Není tu nic, co Kusema napsala, k opravě. Opravte to v Historii.",
+      "correctChanged": "Text, který Kusema napsala, se mezitím změnil, takže ho tu nelze opravit. Opravte ho v Historii.",
+      "corrected": "Opraveno.",
+      "learned": "Opraveno. Kusema se naučila: {{name}}"
     }
   }
 }

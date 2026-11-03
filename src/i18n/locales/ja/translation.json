@@ -9,7 +9,8 @@
     "cancel": "キャンセル",
     "secureInputWarning": "⚠ Secure Input でショートカットがブロック中",
     "privilegedMode": "Privileged モード",
-    "privilegedOn": "Privileged モード オン"
+    "privilegedOn": "Privileged モード オン",
+    "correctLast": "最後の口述を訂正…"
   },
   "sidebar": {
     "general": "一般",
@@ -20,7 +21,8 @@
     "history": "履歴",
     "debug": "デバッグ",
     "about": "概要",
-    "privacy": "プライバシー"
+    "privacy": "プライバシー",
+    "vocabulary": "語彙"
   },
   "onboarding": {
     "customModelDescription": "公式サポート対象外",
@@ -224,7 +226,9 @@
       "welcome": {
         "title": "Kusema は、このコンピューター上であなたの声をテキストに変換します。",
         "privacy": "あなたの声がこのコンピューターの外に出ることはありません。",
-        "language": "ディクテーションする言語"
+        "language": "ディクテーションする言語",
+        "medical": "医療記録を口述します。",
+        "medicalNote": "薬品名と臨床用語を追加します。口述した記録は必ず確認してください。"
       },
       "microphone": {
         "title": "マイクを選択",
@@ -959,7 +963,15 @@
       "showMore": "もっと見る",
       "showLess": "閉じる",
       "dropTitle": "ドロップして文字起こし",
-      "dropDescription": "履歴に表示されます。"
+      "dropDescription": "履歴に表示されます。",
+      "correct": {
+        "button": "訂正",
+        "help": "テキストを訂正します。変更した単語を Kusema が学びます。変わるのは履歴だけで、文書は変わりません。",
+        "save": "保存",
+        "cancel": "キャンセル",
+        "saved": "保存しました。",
+        "learned": "保存しました。Kusema が学んだ単語: {{words}}"
+      }
     },
     "debug": {
       "title": "デバッグ",
@@ -1338,6 +1350,49 @@
         "description": "4 つではなく 1 つのキーを押し続けます。右 Ctrl は Ctrl として使えなくなります。",
         "button": "{{key}} を使う"
       }
+    },
+    "vocabulary": {
+      "soundsLikeList": "聞き取られ方: {{forms}}",
+      "remove": "{{word}} を削除",
+      "packs": {
+        "title": "組み込みの語彙",
+        "description": "英語の口述で Kusema が最初から正しく書く用語です。Kusema 自身の名前は常に含まれます。",
+        "legal": {
+          "label": "法律",
+          "description": "ラテン語と法律用語 {{number}} 語、および引用の書き方：「42 U.S.C.」「123 F.3d 456」「Smith v. Jones」「Rule 12(b)(6)」。"
+        },
+        "medical": {
+          "label": "医療",
+          "description": "薬品名と臨床用語 {{number}} 語。口述した医療記録は必ず確認してください。語彙で認識は良くなりますが、確実にはなりません。"
+        }
+      },
+      "own": {
+        "title": "あなたの単語",
+        "description": "使う名前や用語です。単語の書き方と、Kusema が聞き間違える場合に代わりに書いてしまう言葉を追加します。",
+        "add": "単語を追加",
+        "addHelp": "「聞き取られ方」は Kusema が聞き間違えたときに書く言葉です（例：「Kanella」を「Canela」）。複数ある場合はカンマで区切ります。指定しない場合は、近い綴りが訂正されます。",
+        "written": "書き方",
+        "writtenPlaceholder": "Kanella",
+        "soundsLike": "聞き取られ方",
+        "soundsLikePlaceholder": "聞き取られ方（任意）: Canela",
+        "addButton": "追加",
+        "empty": "まだ単語はありません。"
+      },
+      "learned": {
+        "title": "訂正から学んだ単語",
+        "description": "聞き間違えた単語を「correct that」や履歴で訂正すると、Kusema がここで覚えます。学習はこのコンピューター内にとどまります。",
+        "empty": "まだ何も学んでいません。口述の後に「correct that」と言って、聞き間違えた単語を訂正してください。"
+      },
+      "files": {
+        "title": "インポートとエクスポート",
+        "description": "単語リストを同僚と共有したり、Dragon からエクスポートした単語リスト（話し方つき）を取り込んだりできます。ファイル形式は JSON、CSV（書き方、聞き取られ方）、Dragon のテキスト形式です。",
+        "filterName": "単語リスト",
+        "import": "インポート…",
+        "exportJson": "JSON でエクスポート…",
+        "exportCsv": "CSV でエクスポート…",
+        "imported": "新しい単語を {{added}} 語インポートしました（既存: {{existing}} 語）。",
+        "exported": "{{number}} 語をエクスポートしました。"
+      }
     }
   },
   "footer": {
@@ -1445,6 +1500,12 @@
       "apply": "置き換える",
       "cancel": "キャンセル",
       "keys": "Enter で置き換え、Esc でキャンセル。アプリで Ctrl+Z を押すと元に戻せます。"
+    },
+    "correct": {
+      "title": "最後の口述を訂正",
+      "help": "訂正して Enter を押してください。変更した単語を Kusema が学びます。Shift+Enter で改行、Esc でキャンセル。",
+      "save": "保存",
+      "cancel": "キャンセル"
     }
   },
   "secureInput": {
@@ -1494,7 +1555,8 @@
       "undoThat": "直前の変更を元に戻します（Ctrl+Z）。",
       "copyThat": "選択した部分をコピーします。",
       "cutThat": "選択した部分を切り取ります。",
-      "pasteThat": "貼り付けます。"
+      "pasteThat": "貼り付けます。",
+      "correctThat": "最後の口述を開いて手で訂正し、変更した単語を学びます。"
     },
     "trigger": "連続ディクテーション中は「{{trigger}}、」で始めると同じようにテキストを変更できます（例：「{{trigger}}、もっとフォーマルにして」）。この単語がなければ、話したとおりに入力されます。",
     "triggerOff": "連続ディクテーション中にテキストを変更するには、［一般］→［音声編集］でトリガーワードを設定してください。",
@@ -1518,7 +1580,11 @@
       "cantRead": "このアプリでは選択したテキストを読み取れませんでした。",
       "cantConfirm": "このアプリで何かが選択されているか判断できなかったため、何も削除しませんでした。",
       "timedOut": "プレビューの時間切れのため、何も置き換えませんでした。",
-      "working": "編集中…"
+      "working": "編集中…",
+      "correctNotFound": "ここには Kusema が入力した訂正できるテキストがありません。履歴から訂正してください。",
+      "correctChanged": "Kusema が入力したテキストがその後変更されたため、ここでは訂正できません。履歴から訂正してください。",
+      "corrected": "訂正しました。",
+      "learned": "訂正しました。Kusema が学んだ単語: {{name}}"
     }
   }
 }

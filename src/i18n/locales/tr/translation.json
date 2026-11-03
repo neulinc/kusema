@@ -9,7 +9,8 @@
     "cancel": "İptal",
     "secureInputWarning": "⚠ Kısayollar Secure Input tarafından engelleniyor",
     "privilegedMode": "Privileged Modu",
-    "privilegedOn": "Privileged modu açık"
+    "privilegedOn": "Privileged modu açık",
+    "correctLast": "Son dikteyi düzelt…"
   },
   "sidebar": {
     "general": "Genel",
@@ -20,7 +21,8 @@
     "history": "Geçmiş",
     "debug": "Hata Ayıklama",
     "about": "Hakkında",
-    "privacy": "Gizlilik"
+    "privacy": "Gizlilik",
+    "vocabulary": "Sözcük dağarcığı"
   },
   "onboarding": {
     "customModelDescription": "Resmi olarak desteklenmiyor",
@@ -224,7 +226,9 @@
       "welcome": {
         "title": "Kusema sesinizi bu bilgisayarda metne dönüştürür.",
         "privacy": "Sesiniz bilgisayardan hiç çıkmaz.",
-        "language": "Dikte edeceğiniz dil"
+        "language": "Dikte edeceğiniz dil",
+        "medical": "Tıbbi kayıt dikte ediyorum.",
+        "medicalNote": "İlaç adlarını ve klinik terimleri ekler. Dikte edilen kayıtları her zaman gözden geçirin."
       },
       "microphone": {
         "title": "Mikrofonunuzu seçin",
@@ -959,7 +963,15 @@
       "showMore": "Daha fazla göster",
       "showLess": "Daha az göster",
       "dropTitle": "Yazıya dökmek için bırakın",
-      "dropDescription": "Geçmiş'te görünecek."
+      "dropDescription": "Geçmiş'te görünecek.",
+      "correct": {
+        "button": "Düzelt",
+        "help": "Metni düzeltin. Kusema değiştirdiğiniz sözcükleri öğrenir. Yalnızca Geçmiş değişir, belge değişmez.",
+        "save": "Kaydet",
+        "cancel": "İptal",
+        "saved": "Kaydedildi.",
+        "learned": "Kaydedildi. Kusema öğrendi: {{words}}"
+      }
     },
     "debug": {
       "title": "Hata Ayıklama",
@@ -1338,6 +1350,49 @@
         "description": "Dört yerine tek bir tuşu basılı tutun. Sağ Ctrl artık Ctrl olarak çalışmaz.",
         "button": "{{key}} kullan"
       }
+    },
+    "vocabulary": {
+      "soundsLikeList": "Şöyle duyuluyor: {{forms}}",
+      "remove": "{{word}} öğesini kaldır",
+      "packs": {
+        "title": "Yerleşik sözcük dağarcığı",
+        "description": "İngilizce dikte ederken Kusema'nın baştan doğru yazdığı terimler. Kusema'nın kendi adı her zaman dahildir.",
+        "legal": {
+          "label": "Hukuk",
+          "description": "{{number}} Latince ve hukuki terim, ayrıca atıfların yazılışı: “42 U.S.C.”, “123 F.3d 456”, “Smith v. Jones”, “Rule 12(b)(6)”."
+        },
+        "medical": {
+          "label": "Tıp",
+          "description": "{{number}} ilaç adı ve klinik terim. Dikte edilen tıbbi kayıtları her zaman gözden geçirin: sözcük dağarcığı tanımayı iyileştirir, kesinleştirmez."
+        }
+      },
+      "own": {
+        "title": "Sözcükleriniz",
+        "description": "Kullandığınız adlar ve terimler. Sözcüğün nasıl yazıldığını ve Kusema yanlış duyuyorsa yerine ne yazdığını ekleyin.",
+        "add": "Sözcük ekle",
+        "addHelp": "“Şöyle duyuluyor”, Kusema'nın yanlış duyduğunda yazdığı şeydir; örneğin “Kanella” yerine “Canela”. Birden çok biçimi virgülle ayırın. Boş bırakılırsa benzer yazımlar düzeltilir.",
+        "written": "Yazılışı",
+        "writtenPlaceholder": "Kanella",
+        "soundsLike": "Şöyle duyuluyor",
+        "soundsLikePlaceholder": "Şöyle duyuluyor (isteğe bağlı): Canela",
+        "addButton": "Ekle",
+        "empty": "Henüz sözcük yok."
+      },
+      "learned": {
+        "title": "Düzeltmelerinizden öğrenilenler",
+        "description": "Yanlış duyulan bir sözcüğü “correct that” ile ya da Geçmiş'te düzelttiğinizde Kusema onu burada hatırlar. Öğrenme bu bilgisayarda kalır.",
+        "empty": "Henüz bir şey öğrenilmedi. Yanlış duyulan bir sözcüğü düzeltmek için dikteden sonra “correct that” deyin."
+      },
+      "files": {
+        "title": "İçe ve dışa aktarma",
+        "description": "Bir sözcük listesini meslektaşlarınızla paylaşın veya kendi listenizi Dragon'dan getirin (söylenen biçimleriyle dışa aktarılan sözcük listesi). Dosyalar JSON, CSV (yazılışı, şöyle duyuluyor) veya Dragon'un metin biçimindedir.",
+        "filterName": "Sözcük listeleri",
+        "import": "İçe aktar…",
+        "exportJson": "JSON olarak dışa aktar…",
+        "exportCsv": "CSV olarak dışa aktar…",
+        "imported": "{{added}} yeni sözcük içe aktarıldı ({{existing}} tanesi zaten vardı).",
+        "exported": "{{number}} sözcük dışa aktarıldı."
+      }
     }
   },
   "footer": {
@@ -1445,6 +1500,12 @@
       "apply": "Değiştir",
       "cancel": "İptal",
       "keys": "Enter değiştirir, Esc iptal eder. Uygulamada Ctrl+Z geri alır."
+    },
+    "correct": {
+      "title": "Son dikteyi düzelt",
+      "help": "Düzeltin ve Enter'a basın. Kusema değiştirdiğiniz sözcükleri öğrenir. Shift+Enter yeni satır açar, Esc iptal eder.",
+      "save": "Kaydet",
+      "cancel": "İptal"
     }
   },
   "secureInput": {
@@ -1494,7 +1555,8 @@
       "undoThat": "Son değişikliği geri alır (Ctrl+Z).",
       "copyThat": "Seçimi kopyalar.",
       "cutThat": "Seçimi keser.",
-      "pasteThat": "Yapıştırır."
+      "pasteThat": "Yapıştırır.",
+      "correctThat": "Son dikteyi elle düzeltmek için açar ve değiştirdiğiniz sözcükleri öğrenir."
     },
     "trigger": "Sürekli dikte sırasında metni aynı şekilde değiştirmek için “{{trigger}},” ile başlayın, örneğin “{{trigger}}, bunu daha resmî yap”. Bu sözcük olmadan her şey söylediğiniz gibi yazılır.",
     "triggerOff": "Sürekli dikte sırasında metni değiştirmek için Genel → Sesle Düzenleme altında bir tetikleyici sözcük belirleyin.",
@@ -1518,7 +1580,11 @@
       "cantRead": "Bu uygulamada seçili metin okunamadı.",
       "cantConfirm": "Bu uygulamada bir şeyin seçili olup olmadığı anlaşılamadı, bu yüzden hiçbir şey silinmedi.",
       "timedOut": "Önizlemenin süresi doldu, bu yüzden hiçbir şey değiştirilmedi.",
-      "working": "Düzenleniyor…"
+      "working": "Düzenleniyor…",
+      "correctNotFound": "Burada Kusema'nın yazdığı düzeltilecek bir şey yok. Geçmiş'ten düzeltin.",
+      "correctChanged": "Kusema'nın yazdığı metin o zamandan beri değişti, bu yüzden burada düzeltilemiyor. Geçmiş'ten düzeltin.",
+      "corrected": "Düzeltildi.",
+      "learned": "Düzeltildi. Kusema öğrendi: {{name}}"
     }
   }
 }

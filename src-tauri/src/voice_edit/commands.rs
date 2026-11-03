@@ -24,6 +24,8 @@ pub enum EditCommand {
     CopyThat,
     CutThat,
     PasteThat,
+    /// Opens the last dictated text to correct, and learns from the fix.
+    CorrectThat,
     SelectLastSentence,
     SelectLastParagraph,
     /// "select <phrase>": the nearest match before the caret. Only with the
@@ -108,6 +110,7 @@ const PHRASES: &[(&str, &str, Fixed)] = &[
     ("copyThat", "copy that", Fixed::CopyThat),
     ("cutThat", "cut that", Fixed::CutThat),
     ("pasteThat", "paste that", Fixed::PasteThat),
+    ("correctThat", "correct that", Fixed::CorrectThat),
 ];
 
 /// The open-ended forms, for the list. Parsed in `parse_hotkey`.
@@ -134,6 +137,7 @@ enum Fixed {
     CopyThat,
     CutThat,
     PasteThat,
+    CorrectThat,
 }
 
 impl Fixed {
@@ -155,6 +159,7 @@ impl Fixed {
             Fixed::CopyThat => EditCommand::CopyThat,
             Fixed::CutThat => EditCommand::CutThat,
             Fixed::PasteThat => EditCommand::PasteThat,
+            Fixed::CorrectThat => EditCommand::CorrectThat,
         }
     }
 

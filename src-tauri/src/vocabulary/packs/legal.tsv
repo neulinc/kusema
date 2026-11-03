@@ -1,0 +1,64 @@
+# Legal vocabulary pack, on by default for English. Kusema's own list,
+# written for this project (no third-party source): common Latin and legal
+# terms, with the ways speech recognition tends to mishear them.
+# Citation forms (reporters like "F.3d", "U.S.C.", "v." in case names) are
+# rules in legal.rs, not entries here.
+# Written form<TAB>sounds like|sounds like (lowercase; matched as whole words)
+# A line without sounds-like forms is matched loosely (long, distinctive words only).
+habeas corpus	habeus corpus|habius corpus|hey bus corpus|habeas corpse
+voir dire	bois dyer|bois dire|voir dyer|voir deer|voir dear|vwar dire|vwa dire|war dire|voire dire
+pro se	pro sae|pro say|pro sei|prosay
+pro bono	pro bone oh
+et al.	et al|et all|et. al|et alia
+res judicata	residential judicata|res judicatta|race judicata|res judicada
+res ipsa loquitur	res ipsa loquitor|race ipsa loquitur|res ipsa locator
+certiorari	certiorary|certiorarri|sir sure rary|searcher rary
+amicus curiae	amicus curie|amicus curry|amicus curia
+in limine	in limonay|in lemony|in liminy|in lumine
+de novo	de nova|day novo
+de minimis	de minimus|the minimis|day minimis
+mens rea	mens ray|men's rea|mens reya
+actus reus	actus rayus|actus reeus|actus reus's
+sua sponte	sua spont|sue a spont|sua sponty|sue a sponte|sua spontay
+stare decisis	starry decisis|stare decises|stare decisus
+prima facie	prima facey|prima fascia|prima facia
+a nunc pro tunc	anunk pro tunk|a nunk pro tunk
+nunc pro tunc	nunk pro tunk|nonc pro tonc|nunc pro tunk
+per curiam	per curium|per curia
+ab initio	ab inicio|ab initium
+bona fide	bona fida|bona fied|bonafide
+quid pro quo	quid pro qua
+ultra vires	ultra virus|ultra viris
+lis pendens	liz pendens|lis pendants|list pendens
+ex parte	ex parti|ex partay
+forum non conveniens	forum non convenience|forum non conveniance
+pendente lite	pendente light|pendant a light|pendente lighty
+mandamus	man damus|mandamas
+quantum meruit	quantum merit|quantum mirror it|quantum meroit
+nolo contendere	no low contendere|nolo contender
+in forma pauperis	in forma pauper is|in forma paupers
+caveat emptor	caveat emptour|caviat emptor
+ex post facto	ex post fact o|ex post facto's
+corpus delicti	corpus delicto|corpus delikti
+res gestae	res gesty|race gestae
+inter alia	inter alea
+mutatis mutandis	mutatis mutandus|mutatus mutandis
+pari passu	parry passu|pari pasu
+sine qua non	sina qua non|sine qua nun
+subpoena duces tecum	subpoena duces tikum|subpoena doo cheese tecum
+subpoena	subpena|sub peena|supena
+estoppel	estople|estopel
+promissory estoppel	promissory estople
+interrogatories	interrogatory's
+indemnification	indemnafication
+indemnitor	indemnator
+affiant	a fiant
+tortfeasor	tort feezer|tort feaser|tortfeaser
+arbitrability
+justiciability
+remittitur	remititur|remit it her
+cross-claim	cross claim
+motion in limine	motion in lemony
+Daubert hearing	dauber hearing|dowbert hearing|dobert hearing
+Daubert motion	dauber motion|dowbert motion|dobert motion
+indemnitee	indemnatee|indemnity tee

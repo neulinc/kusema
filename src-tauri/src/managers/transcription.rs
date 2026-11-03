@@ -1,7 +1,7 @@
 use crate::audio_toolkit::chunking;
 use crate::audio_toolkit::{
-    apply_custom_words, detect_output_language, normalize_transcription_output,
-    remove_filler_words, OutputLanguageEvidence,
+    detect_output_language, normalize_transcription_output, remove_filler_words,
+    OutputLanguageEvidence,
 };
 use crate::chinese_script::{convert_chinese_script, ChineseVariety};
 use crate::engine_supervisor::{
@@ -1329,7 +1329,11 @@ fn run_setup(info: &LoadedInfo, settings: &AppSettings, language: LanguageDecisi
         task: run_plan.task,
         language: run_plan.language,
         target_language: run_plan.target_language,
-        vocabulary: vocabulary_for_model(info.supports_vocabulary, &settings.custom_words),
+        // Kusema: the vocabulary's terms (custom words moved into it).
+        vocabulary: vocabulary_for_model(
+            info.supports_vocabulary,
+            &crate::vocabulary::engine_terms(settings),
+        ),
         ..Default::default()
     };
 
@@ -1652,15 +1656,14 @@ fn post_process_transcription_text(
             _ => raw,
         };
 
-        let corrected = if !settings.custom_words.is_empty() && !custom_words_already_prompted {
-            apply_custom_words(
-                &raw,
-                &settings.custom_words,
-                settings.word_correction_threshold,
-            )
-        } else {
-            raw
-        };
+        // Kusema: the vocabulary (sounds-like forms, custom words, packs and
+        // citation rules) in place of Handy's custom words alone.
+        let corrected = crate::vocabulary::apply(
+            &raw,
+            settings,
+            output_language.language(),
+            custom_words_already_prompted,
+        );
 
         let without_fillers = remove_filler_words(
             &corrected,

@@ -9,7 +9,8 @@
     "cancel": "Cancelar",
     "secureInputWarning": "⚠ Atajos bloqueados por Secure Input",
     "privilegedMode": "Modo Privileged",
-    "privilegedOn": "Modo Privileged activado"
+    "privilegedOn": "Modo Privileged activado",
+    "correctLast": "Corregir el último dictado…"
   },
   "sidebar": {
     "general": "General",
@@ -20,7 +21,8 @@
     "history": "Historial",
     "debug": "Depuración",
     "about": "Acerca de",
-    "privacy": "Privacidad"
+    "privacy": "Privacidad",
+    "vocabulary": "Vocabulario"
   },
   "onboarding": {
     "customModelDescription": "Sin soporte oficial",
@@ -225,7 +227,9 @@
       "welcome": {
         "title": "Kusema convierte tu voz en texto en este equipo.",
         "privacy": "Tu voz nunca sale de él.",
-        "language": "Idioma en el que vas a dictar"
+        "language": "Idioma en el que vas a dictar",
+        "medical": "Dicto historias clínicas.",
+        "medicalNote": "Añade nombres de medicamentos y términos clínicos. Revisa siempre los registros dictados."
       },
       "microphone": {
         "title": "Elige tu micrófono",
@@ -962,7 +966,15 @@
       "showMore": "Mostrar más",
       "showLess": "Mostrar menos",
       "dropTitle": "Suelta para transcribir",
-      "dropDescription": "Aparecerá en el historial."
+      "dropDescription": "Aparecerá en el historial.",
+      "correct": {
+        "button": "Corregir",
+        "help": "Corrige el texto. Kusema aprende las palabras que cambies. Solo cambia el Historial, no el documento.",
+        "save": "Guardar",
+        "cancel": "Cancelar",
+        "saved": "Guardado.",
+        "learned": "Guardado. Kusema aprendió: {{words}}"
+      }
     },
     "debug": {
       "title": "Depuración",
@@ -1344,6 +1356,49 @@
         "description": "Mantén una sola tecla en lugar de cuatro. La tecla Ctrl derecha dejará de funcionar como Ctrl.",
         "button": "Usar {{key}}"
       }
+    },
+    "vocabulary": {
+      "soundsLikeList": "Se oye como: {{forms}}",
+      "remove": "Quitar {{word}}",
+      "packs": {
+        "title": "Vocabulario incluido",
+        "description": "Términos que Kusema escribe bien desde el principio al dictar en inglés. Su propio nombre siempre está incluido.",
+        "legal": {
+          "label": "Jurídico",
+          "description": "{{number}} términos latinos y jurídicos, y cómo se escriben las citas: «42 U.S.C.», «123 F.3d 456», «Smith v. Jones», «Rule 12(b)(6)»."
+        },
+        "medical": {
+          "label": "Médico",
+          "description": "{{number}} nombres de medicamentos y términos clínicos. Revisa siempre los registros médicos dictados: un vocabulario mejora el reconocimiento, no lo hace seguro."
+        }
+      },
+      "own": {
+        "title": "Tus palabras",
+        "description": "Nombres y términos que usas. Añade cómo se escribe una palabra y, si Kusema la entiende mal, qué escribe en su lugar.",
+        "add": "Añadir una palabra",
+        "addHelp": "«Se oye como» es lo que Kusema escribe cuando se equivoca, por ejemplo «Canela» por «Kanella». Separa varias con comas. Sin ello, se corrigen las grafías parecidas.",
+        "written": "Se escribe",
+        "writtenPlaceholder": "Kanella",
+        "soundsLike": "Se oye como",
+        "soundsLikePlaceholder": "Se oye como (opcional): Canela",
+        "addButton": "Añadir",
+        "empty": "Aún no hay palabras."
+      },
+      "learned": {
+        "title": "Aprendido de tus correcciones",
+        "description": "Cuando corriges una palabra mal entendida con «correct that» o en el Historial, Kusema la recuerda aquí. El aprendizaje se queda en este ordenador.",
+        "empty": "Aún no ha aprendido nada. Di «correct that» tras dictar para corregir una palabra mal entendida."
+      },
+      "files": {
+        "title": "Importar y exportar",
+        "description": "Comparte una lista de palabras con tus compañeros o trae la tuya de Dragon (su lista de palabras exportada, con formas habladas). Los archivos son JSON, CSV (escrito, se oye como) o el formato de texto de Dragon.",
+        "filterName": "Listas de palabras",
+        "import": "Importar…",
+        "exportJson": "Exportar como JSON…",
+        "exportCsv": "Exportar como CSV…",
+        "imported": "Se importaron {{added}} palabras nuevas ({{existing}} ya estaban).",
+        "exported": "Se exportaron {{number}} palabras."
+      }
     }
   },
   "footer": {
@@ -1451,6 +1506,12 @@
       "apply": "Sustituir",
       "cancel": "Cancelar",
       "keys": "Intro sustituye, Esc cancela. Ctrl+Z en la aplicación lo deshace."
+    },
+    "correct": {
+      "title": "Corregir el último dictado",
+      "help": "Corrígelo y pulsa Intro. Kusema aprende las palabras que cambies. Mayús+Intro inicia una línea nueva, Esc cancela.",
+      "save": "Guardar",
+      "cancel": "Cancelar"
     }
   },
   "secureInput": {
@@ -1502,7 +1563,8 @@
       "undoThat": "Deshace el último cambio (Ctrl+Z).",
       "copyThat": "Copia la selección.",
       "cutThat": "Corta la selección.",
-      "pasteThat": "Pega."
+      "pasteThat": "Pega.",
+      "correctThat": "Abre el último dictado para corregirlo a mano y aprende las palabras que cambies."
     },
     "trigger": "En el dictado continuo, empieza con «{{trigger}},» para cambiar texto de la misma forma, por ejemplo «{{trigger}}, haz esto más formal». Sin esa palabra, todo se escribe tal como lo dices.",
     "triggerOff": "Para cambiar texto durante el dictado continuo, define una palabra de activación en General → Edición por voz.",
@@ -1526,7 +1588,11 @@
       "cantRead": "No se pudo leer el texto seleccionado en esta aplicación.",
       "cantConfirm": "No se pudo saber si hay algo seleccionado en esta aplicación, así que no se ha eliminado nada.",
       "timedOut": "La vista previa caducó, así que no se ha sustituido nada.",
-      "working": "Editando…"
+      "working": "Editando…",
+      "correctNotFound": "No hay nada que Kusema haya escrito aquí para corregir. Corrígelo en el Historial.",
+      "correctChanged": "El texto que escribió Kusema ha cambiado desde entonces, así que no se puede corregir aquí. Corrígelo en el Historial.",
+      "corrected": "Corregido.",
+      "learned": "Corregido. Kusema aprendió: {{name}}"
     }
   }
 }

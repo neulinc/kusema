@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/Button";
 type Confirm = Extract<Card, { kind: "confirm" }>;
 type Notice = Extract<Card, { kind: "notice" }>;
 type Edit = Extract<Card, { kind: "edit" }>;
+type Correct = Extract<Card, { kind: "correct" }>;
 
 /** The card's page has painted; the backend shows (and focuses) it now. */
 const ready = () =>
@@ -244,6 +245,80 @@ const EditCard: React.FC<{ card: Edit }> = ({ card }) => {
   );
 };
 
+/** Kusema vocabulary: the last dictated text, to fix by hand. */
+const CorrectCard: React.FC<{ card: Correct }> = ({ card }) => {
+  const { t } = useTranslation();
+  const [text, setText] = useState(card.text);
+  const [secondsLeft, setSecondsLeft] = useState(card.timeoutSecs);
+  const answered = useRef(false);
+  const boxRef = useRef<HTMLTextAreaElement>(null);
+
+  const answer = useCallback((value: string | null) => {
+    if (answered.current) return;
+    answered.current = true;
+    void commands.answerCorrectionCard(value);
+  }, []);
+
+  useEffect(() => {
+    ready();
+    const timer = setInterval(
+      () => setSecondsLeft((s) => Math.max(0, s - 1)),
+      1000,
+    );
+    const onFocus = () => {
+      const box = boxRef.current;
+      if (box && document.activeElement !== box) {
+        box.focus();
+        box.setSelectionRange(box.value.length, box.value.length);
+      }
+    };
+    window.addEventListener("focus", onFocus);
+    return () => {
+      clearInterval(timer);
+      window.removeEventListener("focus", onFocus);
+    };
+  }, []);
+
+  return (
+    <div className="flex h-full flex-col gap-3 bg-background p-4 text-text">
+      <div className="flex items-baseline justify-between gap-2">
+        <h1 className="text-sm font-semibold">
+          {t("screenCard.correct.title")}
+        </h1>
+        <span className="text-xs text-ink-3 tabular-nums">
+          {t("screenCard.autoCancel", { seconds: secondsLeft })}
+        </span>
+      </div>
+      <textarea
+        ref={boxRef}
+        value={text}
+        autoFocus
+        aria-label={t("screenCard.correct.title")}
+        onChange={(e) => setText(e.target.value)}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" && !e.shiftKey) {
+            e.preventDefault();
+            answer(text);
+          } else if (e.key === "Escape") {
+            e.preventDefault();
+            answer(null);
+          }
+        }}
+        className="min-h-0 flex-1 resize-none rounded-md border border-line bg-background p-2 text-sm focus:outline-none focus:ring-1 focus:ring-logo-primary"
+      />
+      <p className="text-xs text-ink-3">{t("screenCard.correct.help")}</p>
+      <div className="flex justify-end gap-2">
+        <Button variant="secondary" size="sm" onClick={() => answer(null)}>
+          {t("screenCard.correct.cancel")}
+        </Button>
+        <Button variant="primary" size="sm" onClick={() => answer(text)}>
+          {t("screenCard.correct.save")}
+        </Button>
+      </div>
+    </div>
+  );
+};
+
 const ScreenCard: React.FC = () => {
   const [card, setCard] = useState<Card | null>(null);
 
@@ -256,6 +331,7 @@ const ScreenCard: React.FC = () => {
 
   if (!card) return null;
   if (card.kind === "edit") return <EditCard card={card} />;
+  if (card.kind === "correct") return <CorrectCard card={card} />;
   return card.kind === "confirm" ? (
     <ConfirmCard card={card} />
   ) : (

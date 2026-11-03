@@ -15,6 +15,7 @@
 //! overlay is off), and aloud when replies are spoken.
 
 pub mod commands;
+mod correct;
 mod keys;
 pub mod last_typed;
 mod platform;
@@ -22,6 +23,7 @@ pub mod prompt;
 pub mod text;
 
 use commands::EditCommand;
+pub use correct::correct_from_tray;
 use log::{debug, info};
 use platform::{Selection, UiaError};
 use serde::Serialize;
@@ -114,6 +116,10 @@ enum Problem {
     EmptyReply(String),
     TimedOut,
     Failed,
+    /// "Correct that" with nothing Kusema typed here to correct.
+    CorrectNotFound,
+    /// What Kusema typed has been changed or moved since.
+    CorrectChanged,
     /// Already worded (no provider, AI provider errors, Privileged mode).
     Said(String),
 }
@@ -176,6 +182,15 @@ impl Problem {
                 "The preview timed out, so nothing was replaced.".to_string(),
             ),
             Problem::Failed => ("failed", "Couldn't do that in this window.".to_string()),
+            Problem::CorrectNotFound => (
+                "correctNotFound",
+                "There's nothing Kusema typed here to correct. Correct it from History instead."
+                    .to_string(),
+            ),
+            Problem::CorrectChanged => (
+                "correctChanged",
+                "The text Kusema typed has changed since, so it can't be corrected here. Correct it from History instead.".to_string(),
+            ),
             Problem::Said(message) => return (None, message.clone()),
         };
         (Some(key), english)
@@ -222,6 +237,28 @@ fn tell(app: &AppHandle, problem: Problem, target: Option<Target>) -> bool {
     } else {
         card::notice_with_key(app, english, key, problem.name(), target.map(|t| t.window));
         false
+    }
+}
+
+/// Something that went right, in the overlay like a problem would be.
+fn inform(
+    app: &AppHandle,
+    key: &str,
+    name: Option<String>,
+    english: String,
+    target: Option<Target>,
+) {
+    info!("Voice edit: {english}");
+    let in_dictation = target.is_some_and(|t| t.in_dictation);
+    let key = format!("voiceEdit.notice.{key}");
+    let notice = EditNotice {
+        key: Some(key.clone()),
+        name: name.clone(),
+        message: english.clone(),
+        in_dictation,
+    };
+    if !crate::overlay::show_edit_notice(app, &notice, in_dictation, NOTICE_SECS) {
+        card::notice_with_key(app, english, Some(key), name, target.map(|t| t.window));
     }
 }
 
@@ -347,14 +384,19 @@ pub async fn handle<C: Fn() -> bool>(app: &AppHandle, said: String, is_cancelled
     }
 }
 
-/// The window continuous dictation types into, if it's still in front.
-fn dictation_target(window: isize) -> Option<Target> {
+/// `window`, if it's in front, with the control focused in it.
+fn window_target(window: isize, in_dictation: bool) -> Option<Target> {
     let window = crate::screen::foreground_target()
         .ok()
         .filter(|w| w.handle() == window)?;
     crate::dictation::current_focus()
         .filter(|focus| focus.window == window.handle())
-        .map(|focus| Target::new(window, focus, true))
+        .map(|focus| Target::new(window, focus, in_dictation))
+}
+
+/// The window continuous dictation types into, if it's still in front.
+fn dictation_target(window: isize) -> Option<Target> {
+    window_target(window, true)
 }
 
 /// A command said alone during continuous dictation, typing into `window`.
@@ -506,6 +548,7 @@ fn run_command(app: &AppHandle, command: &EditCommand, target: Target) -> Result
             }
         }
         EditCommand::SelectLine if uia && select(Selection::Line, None).is_ok() => Ok(()),
+        EditCommand::CorrectThat => correct::correct_last(app, target),
         EditCommand::SelectLastSentence | EditCommand::SelectLastParagraph if !uia => {
             Err(Problem::NoTextPattern)
         }
@@ -860,6 +903,8 @@ mod tests {
             Problem::EmptyReply("x".into()),
             Problem::TimedOut,
             Problem::Failed,
+            Problem::CorrectNotFound,
+            Problem::CorrectChanged,
         ] {
             let (key, english) = problem.key_and_english();
             let key = key.unwrap();
@@ -869,7 +914,9 @@ mod tests {
                 "voiceEdit.notice.{key} is missing"
             );
         }
-        assert!(en["voiceEdit"]["notice"]["working"].is_string());
+        for key in ["working", "corrected", "learned"] {
+            assert!(en["voiceEdit"]["notice"][key].is_string(), "{key}");
+        }
         assert_eq!(
             Problem::Said("Privileged mode is on".into()).key_and_english(),
             (None, "Privileged mode is on".to_string())

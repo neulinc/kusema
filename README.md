@@ -45,6 +45,10 @@ The commands are in English. "Select last sentence", "select last paragraph" and
 
 During continuous dictation, start a sentence with **"Kusema,"** to edit instead of typing: "Kusema, make this more formal". Without that word, everything is typed as you say it. The word can be changed under **General → Voice Editing**, where **Use Right Ctrl** also sets a one-key shortcut for editing. The same list is in the app under **General → Voice Editing → What can I say?**
 
+### Vocabulary and corrections
+
+Kusema writes legal terms and citations correctly out of the box ("habeas corpus", "voir dire", "42 U.S.C.", "123 F.3d 456", "Smith v. Jones"), with an optional medical pack. Add your own names and terms on the **Vocabulary** page, or import a word list from Dragon. When Kusema mishears a word, say **"correct that"** (or use **Correct Last Dictation** in the tray, or **Correct** in History), fix it, and Kusema learns it for next time. Learning stays on your computer.
+
 ## Privacy, in plain terms
 
 - **Your voice stays on your computer.** Speech recognition runs locally (Parakeet or Whisper models). No audio is uploaded, ever.

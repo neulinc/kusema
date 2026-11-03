@@ -9,6 +9,7 @@ import {
   Cpu,
   MessageCircle,
   Shield,
+  BookOpen,
 } from "lucide-react";
 import HandyTextLogo from "./icons/HandyTextLogo";
 import HandyHand from "./icons/HandyHand";
@@ -22,6 +23,7 @@ import {
   ModelsSettings,
   PrivacySettings,
 } from "./settings";
+import { VocabularySettings } from "./settings/vocabulary/VocabularySettings";
 
 export type SidebarSection = keyof typeof SECTIONS_CONFIG;
 
@@ -59,6 +61,12 @@ export const SECTIONS_CONFIG = {
     labelKey: "sidebar.privacy",
     icon: Shield,
     component: PrivacySettings,
+    enabled: () => true,
+  },
+  vocabulary: {
+    labelKey: "sidebar.vocabulary",
+    icon: BookOpen,
+    component: VocabularySettings,
     enabled: () => true,
   },
   history: {

@@ -67,6 +67,11 @@ pub fn foreground_target() -> Result<CapturedWindow, CaptureError> {
     capture::foreground_window()
 }
 
+/// Kusema vocabulary: brings the window with this handle to the front.
+pub fn activate_handle(handle: isize) {
+    capture::activate(handle);
+}
+
 /// Give focus back to `window`.
 pub fn activate(window: &CapturedWindow) {
     restore_focus(window);

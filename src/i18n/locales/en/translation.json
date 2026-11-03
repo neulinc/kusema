@@ -3,6 +3,7 @@
     "settings": "Settings...",
     "checkUpdates": "Check for Updates...",
     "copyLastTranscript": "Copy Last Transcript",
+    "correctLast": "Correct Last Dictation…",
     "unloadModel": "Unload Model",
     "model": "Model",
     "quit": "Quit",
@@ -20,7 +21,8 @@
     "history": "History",
     "debug": "Debug",
     "about": "About",
-    "privacy": "Privacy"
+    "privacy": "Privacy",
+    "vocabulary": "Vocabulary"
   },
   "onboarding": {
     "customModelDescription": "Not officially supported",
@@ -224,7 +226,9 @@
       "welcome": {
         "title": "Kusema turns your voice into text on this computer.",
         "privacy": "Your voice never leaves it.",
-        "language": "Language you'll dictate in"
+        "language": "Language you'll dictate in",
+        "medical": "I dictate medical records.",
+        "medicalNote": "Adds drug names and clinical terms. Always review dictated records."
       },
       "microphone": {
         "title": "Choose your microphone",
@@ -959,7 +963,15 @@
       "showMore": "Show more",
       "showLess": "Show less",
       "dropTitle": "Drop to transcribe",
-      "dropDescription": "It'll show up in History."
+      "dropDescription": "It'll show up in History.",
+      "correct": {
+        "button": "Correct",
+        "help": "Fix the text. Kusema learns the words you change. This changes History only, not the document.",
+        "save": "Save",
+        "cancel": "Cancel",
+        "saved": "Saved.",
+        "learned": "Saved. Kusema learned: {{words}}"
+      }
     },
     "debug": {
       "title": "Debug",
@@ -1338,6 +1350,49 @@
         "description": "Hold one key instead of four. Right Ctrl then no longer works as Ctrl.",
         "button": "Use {{key}}"
       }
+    },
+    "vocabulary": {
+      "soundsLikeList": "Heard as: {{forms}}",
+      "remove": "Remove {{word}}",
+      "packs": {
+        "title": "Built-in Vocabulary",
+        "description": "Terms Kusema writes correctly out of the box, in English dictation. Its own name is always included.",
+        "legal": {
+          "label": "Legal",
+          "description": "{{number}} Latin and legal terms, plus how citations are written: “42 U.S.C.”, “123 F.3d 456”, “Smith v. Jones”, “Rule 12(b)(6)”."
+        },
+        "medical": {
+          "label": "Medical",
+          "description": "{{number}} drug names and clinical terms. Always review dictated medical records: a vocabulary makes recognition better, not certain."
+        }
+      },
+      "own": {
+        "title": "Your Words",
+        "description": "Names and terms you use. Add how a word is written and, if Kusema mishears it, what it writes instead.",
+        "add": "Add a Word",
+        "addHelp": "“Heard as” is what Kusema writes when it gets the word wrong, for example “Canela” for “Kanella”. Separate several with commas. Without it, close matches are corrected.",
+        "written": "Written as",
+        "writtenPlaceholder": "Kanella",
+        "soundsLike": "Heard as",
+        "soundsLikePlaceholder": "Heard as (optional): Canela",
+        "addButton": "Add",
+        "empty": "No words yet."
+      },
+      "learned": {
+        "title": "Learned from Your Corrections",
+        "description": "When you fix a misheard word with “correct that” or in History, Kusema remembers it here. Learning stays on this computer.",
+        "empty": "Nothing learned yet. Say “correct that” after dictating to fix a misheard word."
+      },
+      "files": {
+        "title": "Import and Export",
+        "description": "Share a word list with colleagues, or bring yours over from Dragon (its exported word list, with spoken forms). Files are JSON, CSV (written, sounds like) or Dragon's text format.",
+        "filterName": "Word lists",
+        "exportJson": "Export as JSON…",
+        "exportCsv": "Export as CSV…",
+        "imported": "Imported {{added}} new words ({{existing}} were already there).",
+        "exported": "Exported {{number}} words.",
+        "import": "Import…"
+      }
     }
   },
   "footer": {
@@ -1445,6 +1500,12 @@
       "apply": "Replace",
       "cancel": "Cancel",
       "keys": "Enter replaces, Esc cancels. Ctrl+Z in the app undoes it."
+    },
+    "correct": {
+      "title": "Correct the last dictation",
+      "help": "Fix it and press Enter. Kusema learns the words you change. Shift+Enter starts a new line, Esc cancels.",
+      "save": "Save",
+      "cancel": "Cancel"
     }
   },
   "secureInput": {
@@ -1494,7 +1555,8 @@
       "undoThat": "Undoes the last change (Ctrl+Z).",
       "copyThat": "Copies the selection.",
       "cutThat": "Cuts the selection.",
-      "pasteThat": "Pastes."
+      "pasteThat": "Pastes.",
+      "correctThat": "Opens the last dictated text to fix by hand, and learns the words you change."
     },
     "trigger": "During continuous dictation, start with “{{trigger}},” to change text the same way, for example “{{trigger}}, make this more formal”. Without it, everything is typed as you say it.",
     "triggerOff": "To change text during continuous dictation, set a trigger word under General → Voice Editing.",
@@ -1518,7 +1580,11 @@
       "cantRead": "Couldn't read the selected text in this app.",
       "cantConfirm": "Couldn't tell whether anything is selected in this app, so nothing was deleted.",
       "timedOut": "The preview timed out, so nothing was replaced.",
-      "working": "Editing…"
+      "working": "Editing…",
+      "correctNotFound": "There's nothing Kusema typed here to correct. Correct it from History instead.",
+      "correctChanged": "The text Kusema typed has changed since, so it can't be corrected here. Correct it from History instead.",
+      "corrected": "Corrected.",
+      "learned": "Corrected. Kusema learned: {{name}}"
     }
   }
 }

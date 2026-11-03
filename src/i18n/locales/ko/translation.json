@@ -9,7 +9,8 @@
     "cancel": "취소",
     "secureInputWarning": "⚠ Secure Input으로 단축키가 차단됨",
     "privilegedMode": "Privileged 모드",
-    "privilegedOn": "Privileged 모드 켜짐"
+    "privilegedOn": "Privileged 모드 켜짐",
+    "correctLast": "마지막 받아쓰기 고치기…"
   },
   "sidebar": {
     "general": "일반",
@@ -20,7 +21,8 @@
     "history": "히스토리",
     "debug": "디버그",
     "about": "정보",
-    "privacy": "개인정보 보호"
+    "privacy": "개인정보 보호",
+    "vocabulary": "어휘"
   },
   "onboarding": {
     "customModelDescription": "공식 지원되지 않음",
@@ -224,7 +226,9 @@
       "welcome": {
         "title": "Kusema는 이 컴퓨터에서 음성을 텍스트로 바꿔 줍니다.",
         "privacy": "음성은 이 컴퓨터 밖으로 나가지 않습니다.",
-        "language": "받아쓰기할 언어"
+        "language": "받아쓰기할 언어",
+        "medical": "의료 기록을 받아씁니다.",
+        "medicalNote": "약품명과 임상 용어를 추가합니다. 받아쓴 기록은 항상 검토하세요."
       },
       "microphone": {
         "title": "마이크 선택",
@@ -959,7 +963,15 @@
       "showMore": "더 보기",
       "showLess": "간략히 보기",
       "dropTitle": "놓아서 받아쓰기",
-      "dropDescription": "기록에 표시됩니다."
+      "dropDescription": "기록에 표시됩니다.",
+      "correct": {
+        "button": "고치기",
+        "help": "텍스트를 고치세요. 바꾼 단어를 Kusema가 배웁니다. 기록만 바뀌고 문서는 바뀌지 않습니다.",
+        "save": "저장",
+        "cancel": "취소",
+        "saved": "저장했습니다.",
+        "learned": "저장했습니다. Kusema가 배운 단어: {{words}}"
+      }
     },
     "debug": {
       "title": "디버그",
@@ -1338,6 +1350,49 @@
         "description": "키 네 개 대신 하나만 누르고 있습니다. 오른쪽 Ctrl은 더 이상 Ctrl로 작동하지 않습니다.",
         "button": "{{key}} 사용"
       }
+    },
+    "vocabulary": {
+      "soundsLikeList": "들린 형태: {{forms}}",
+      "remove": "{{word}} 삭제",
+      "packs": {
+        "title": "기본 제공 어휘",
+        "description": "영어로 받아쓸 때 Kusema가 처음부터 올바르게 쓰는 용어입니다. Kusema 자체 이름은 항상 포함됩니다.",
+        "legal": {
+          "label": "법률",
+          "description": "라틴어 및 법률 용어 {{number}}개와 인용 표기법: “42 U.S.C.”, “123 F.3d 456”, “Smith v. Jones”, “Rule 12(b)(6)”."
+        },
+        "medical": {
+          "label": "의료",
+          "description": "약품명과 임상 용어 {{number}}개. 받아쓴 의료 기록은 항상 검토하세요. 어휘는 인식을 개선할 뿐 정확성을 보장하지 않습니다."
+        }
+      },
+      "own": {
+        "title": "내 단어",
+        "description": "사용하는 이름과 용어입니다. 단어를 어떻게 쓰는지, 그리고 Kusema가 잘못 들을 때 대신 무엇을 쓰는지 추가하세요.",
+        "add": "단어 추가",
+        "addHelp": "“들린 형태”는 Kusema가 잘못 들었을 때 쓰는 말입니다(예: “Kanella” 대신 “Canela”). 여러 개는 쉼표로 구분하세요. 비워 두면 비슷한 철자가 고쳐집니다.",
+        "written": "쓰는 법",
+        "writtenPlaceholder": "Kanella",
+        "soundsLike": "들린 형태",
+        "soundsLikePlaceholder": "들린 형태(선택): Canela",
+        "addButton": "추가",
+        "empty": "아직 단어가 없습니다."
+      },
+      "learned": {
+        "title": "내 수정에서 배운 단어",
+        "description": "잘못 들린 단어를 “correct that”이나 기록에서 고치면 Kusema가 여기에 기억합니다. 학습은 이 컴퓨터 안에만 머뭅니다.",
+        "empty": "아직 배운 것이 없습니다. 받아쓴 뒤 “correct that”이라고 말해 잘못 들린 단어를 고치세요."
+      },
+      "files": {
+        "title": "가져오기 및 내보내기",
+        "description": "동료와 단어 목록을 공유하거나 Dragon에서 내보낸 단어 목록(발음 형태 포함)을 가져오세요. 파일 형식은 JSON, CSV(쓰는 법, 들린 형태) 또는 Dragon 텍스트 형식입니다.",
+        "filterName": "단어 목록",
+        "import": "가져오기…",
+        "exportJson": "JSON으로 내보내기…",
+        "exportCsv": "CSV로 내보내기…",
+        "imported": "새 단어 {{added}}개를 가져왔습니다(이미 있던 단어: {{existing}}개).",
+        "exported": "단어 {{number}}개를 내보냈습니다."
+      }
     }
   },
   "footer": {
@@ -1445,6 +1500,12 @@
       "apply": "바꾸기",
       "cancel": "취소",
       "keys": "Enter는 바꾸기, Esc는 취소. 앱에서 Ctrl+Z로 되돌릴 수 있습니다."
+    },
+    "correct": {
+      "title": "마지막 받아쓰기 고치기",
+      "help": "고친 뒤 Enter를 누르세요. 바꾼 단어를 Kusema가 배웁니다. Shift+Enter는 줄 바꿈, Esc는 취소입니다.",
+      "save": "저장",
+      "cancel": "취소"
     }
   },
   "secureInput": {
@@ -1494,7 +1555,8 @@
       "undoThat": "마지막 변경을 실행 취소합니다(Ctrl+Z).",
       "copyThat": "선택한 부분을 복사합니다.",
       "cutThat": "선택한 부분을 잘라냅니다.",
-      "pasteThat": "붙여 넣습니다."
+      "pasteThat": "붙여 넣습니다.",
+      "correctThat": "마지막 받아쓰기를 열어 직접 고치고, 바꾼 단어를 배웁니다."
     },
     "trigger": "연속 받아쓰기 중에 “{{trigger}},”로 시작하면 같은 방식으로 텍스트를 바꿀 수 있습니다. 예: “{{trigger}}, 더 격식 있게 바꿔 줘”. 이 단어가 없으면 말한 그대로 입력됩니다.",
     "triggerOff": "연속 받아쓰기 중에 텍스트를 바꾸려면 일반 → 음성 편집에서 트리거 단어를 설정하세요.",
@@ -1518,7 +1580,11 @@
       "cantRead": "이 앱에서 선택한 텍스트를 읽을 수 없습니다.",
       "cantConfirm": "이 앱에서 선택된 것이 있는지 알 수 없어 아무것도 삭제하지 않았습니다.",
       "timedOut": "미리 보기 시간이 지나 아무것도 바꾸지 않았습니다.",
-      "working": "편집 중…"
+      "working": "편집 중…",
+      "correctNotFound": "여기에는 Kusema가 입력한 고칠 텍스트가 없습니다. 기록에서 고치세요.",
+      "correctChanged": "Kusema가 입력한 텍스트가 그 뒤로 바뀌어 여기서 고칠 수 없습니다. 기록에서 고치세요.",
+      "corrected": "고쳤습니다.",
+      "learned": "고쳤습니다. Kusema가 배운 단어: {{name}}"
     }
   }
 }

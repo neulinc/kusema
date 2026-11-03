@@ -9,7 +9,8 @@
     "cancel": "Annulla",
     "secureInputWarning": "⚠ Scorciatoie bloccate da Secure Input",
     "privilegedMode": "Modalità Privileged",
-    "privilegedOn": "Modalità Privileged attiva"
+    "privilegedOn": "Modalità Privileged attiva",
+    "correctLast": "Correggi l'ultima dettatura…"
   },
   "sidebar": {
     "general": "Generale",
@@ -20,7 +21,8 @@
     "history": "Cronologia",
     "debug": "Debug",
     "about": "Informazioni",
-    "privacy": "Privacy"
+    "privacy": "Privacy",
+    "vocabulary": "Vocabolario"
   },
   "onboarding": {
     "customModelDescription": "Non ufficialmente supportato",
@@ -225,7 +227,9 @@
       "welcome": {
         "title": "Kusema trasforma la tua voce in testo su questo computer.",
         "privacy": "La tua voce non ne esce mai.",
-        "language": "Lingua in cui detti"
+        "language": "Lingua in cui detti",
+        "medical": "Detto cartelle cliniche.",
+        "medicalNote": "Aggiunge nomi di farmaci e termini clinici. Rivedi sempre le cartelle dettate."
       },
       "microphone": {
         "title": "Scegli il microfono",
@@ -962,7 +966,15 @@
       "showMore": "Mostra di più",
       "showLess": "Mostra di meno",
       "dropTitle": "Rilascia per trascrivere",
-      "dropDescription": "Comparirà nella cronologia."
+      "dropDescription": "Comparirà nella cronologia.",
+      "correct": {
+        "button": "Correggi",
+        "help": "Correggi il testo. Kusema impara le parole che cambi. Cambia solo la Cronologia, non il documento.",
+        "save": "Salva",
+        "cancel": "Annulla",
+        "saved": "Salvato.",
+        "learned": "Salvato. Kusema ha imparato: {{words}}"
+      }
     },
     "debug": {
       "title": "Debug",
@@ -1344,6 +1356,49 @@
         "description": "Tieni premuto un solo tasto invece di quattro. Il tasto Ctrl destro non funzionerà più come Ctrl.",
         "button": "Usa {{key}}"
       }
+    },
+    "vocabulary": {
+      "soundsLikeList": "Sentito come: {{forms}}",
+      "remove": "Rimuovi {{word}}",
+      "packs": {
+        "title": "Vocabolario integrato",
+        "description": "Termini che Kusema scrive correttamente fin da subito nella dettatura in inglese. Il suo nome è sempre incluso.",
+        "legal": {
+          "label": "Legale",
+          "description": "{{number}} termini latini e giuridici, e come si scrivono le citazioni: «42 U.S.C.», «123 F.3d 456», «Smith v. Jones», «Rule 12(b)(6)»."
+        },
+        "medical": {
+          "label": "Medico",
+          "description": "{{number}} nomi di farmaci e termini clinici. Rivedi sempre le cartelle cliniche dettate: un vocabolario migliora il riconoscimento, non lo rende certo."
+        }
+      },
+      "own": {
+        "title": "Le tue parole",
+        "description": "Nomi e termini che usi. Aggiungi come si scrive una parola e, se Kusema la capisce male, cosa scrive al suo posto.",
+        "add": "Aggiungi una parola",
+        "addHelp": "«Sentito come» è ciò che Kusema scrive quando sbaglia, ad esempio «Canela» per «Kanella». Separa più forme con virgole. Senza, vengono corrette le grafie simili.",
+        "written": "Si scrive",
+        "writtenPlaceholder": "Kanella",
+        "soundsLike": "Sentito come",
+        "soundsLikePlaceholder": "Sentito come (facoltativo): Canela",
+        "addButton": "Aggiungi",
+        "empty": "Ancora nessuna parola."
+      },
+      "learned": {
+        "title": "Imparato dalle tue correzioni",
+        "description": "Quando correggi una parola capita male con «correct that» o nella Cronologia, Kusema la ricorda qui. L'apprendimento resta su questo computer.",
+        "empty": "Ancora niente di imparato. Di' «correct that» dopo la dettatura per correggere una parola capita male."
+      },
+      "files": {
+        "title": "Importa ed esporta",
+        "description": "Condividi un elenco di parole con i colleghi o porta il tuo da Dragon (il suo elenco di parole esportato, con le forme parlate). I file sono JSON, CSV (scritto, sentito come) o il formato testo di Dragon.",
+        "filterName": "Elenchi di parole",
+        "import": "Importa…",
+        "exportJson": "Esporta come JSON…",
+        "exportCsv": "Esporta come CSV…",
+        "imported": "Importate {{added}} parole nuove ({{existing}} c'erano già).",
+        "exported": "Esportate {{number}} parole."
+      }
     }
   },
   "footer": {
@@ -1451,6 +1506,12 @@
       "apply": "Sostituisci",
       "cancel": "Annulla",
       "keys": "Invio sostituisce, Esc annulla. Ctrl+Z nell'app lo annulla."
+    },
+    "correct": {
+      "title": "Correggi l'ultima dettatura",
+      "help": "Correggi e premi Invio. Kusema impara le parole che cambi. Maiusc+Invio va a capo, Esc annulla.",
+      "save": "Salva",
+      "cancel": "Annulla"
     }
   },
   "secureInput": {
@@ -1502,7 +1563,8 @@
       "undoThat": "Annulla l'ultima modifica (Ctrl+Z).",
       "copyThat": "Copia la selezione.",
       "cutThat": "Taglia la selezione.",
-      "pasteThat": "Incolla."
+      "pasteThat": "Incolla.",
+      "correctThat": "Apre l'ultima dettatura da correggere a mano e impara le parole che cambi."
     },
     "trigger": "Nella dettatura continua, inizia con «{{trigger}},» per cambiare il testo allo stesso modo, ad esempio «{{trigger}}, rendilo più formale». Senza questa parola, tutto viene scritto come lo dici.",
     "triggerOff": "Per cambiare il testo durante la dettatura continua, imposta una parola di attivazione in Generale → Modifica vocale.",
@@ -1526,7 +1588,11 @@
       "cantRead": "Impossibile leggere il testo selezionato in questa app.",
       "cantConfirm": "Impossibile capire se in questa app c'è qualcosa di selezionato, quindi non è stato eliminato nulla.",
       "timedOut": "L'anteprima è scaduta, quindi non è stato sostituito nulla.",
-      "working": "Modifica in corso…"
+      "working": "Modifica in corso…",
+      "correctNotFound": "Qui non c'è niente scritto da Kusema da correggere. Correggilo dalla Cronologia.",
+      "correctChanged": "Il testo scritto da Kusema è cambiato nel frattempo, quindi non si può correggere qui. Correggilo dalla Cronologia.",
+      "corrected": "Corretto.",
+      "learned": "Corretto. Kusema ha imparato: {{name}}"
     }
   }
 }

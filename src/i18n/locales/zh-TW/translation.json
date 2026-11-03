@@ -9,7 +9,8 @@
     "cancel": "取消",
     "secureInputWarning": "⚠ 快捷鍵被 Secure Input 阻擋",
     "privilegedMode": "Privileged 模式",
-    "privilegedOn": "Privileged 模式已開啟"
+    "privilegedOn": "Privileged 模式已開啟",
+    "correctLast": "更正上一次聽寫…"
   },
   "sidebar": {
     "general": "一般",
@@ -20,7 +21,8 @@
     "history": "歷史紀錄",
     "debug": "偵錯",
     "about": "關於",
-    "privacy": "隱私"
+    "privacy": "隱私",
+    "vocabulary": "詞彙"
   },
   "onboarding": {
     "customModelDescription": "官方不支援",
@@ -224,7 +226,9 @@
       "welcome": {
         "title": "Kusema 會在這台電腦上把您的語音轉成文字。",
         "privacy": "您的語音絕不會離開這台電腦。",
-        "language": "您要聽寫的語言"
+        "language": "您要聽寫的語言",
+        "medical": "我會聽寫醫療紀錄。",
+        "medicalNote": "加入藥品名稱和臨床術語。請務必檢查聽寫的紀錄。"
       },
       "microphone": {
         "title": "選擇麥克風",
@@ -959,7 +963,15 @@
       "showMore": "顯示更多",
       "showLess": "收合",
       "dropTitle": "拖放到此處進行轉錄",
-      "dropDescription": "它會出現在歷史記錄中。"
+      "dropDescription": "它會出現在歷史記錄中。",
+      "correct": {
+        "button": "更正",
+        "help": "更正文字。Kusema 會學習你改動的字詞。只會變更歷史紀錄，不會變更文件。",
+        "save": "儲存",
+        "cancel": "取消",
+        "saved": "已儲存。",
+        "learned": "已儲存。Kusema 學到了：{{words}}"
+      }
     },
     "debug": {
       "title": "偵錯",
@@ -1338,6 +1350,49 @@
         "description": "按住一個鍵，而不是四個鍵。右 Ctrl 將不再當作 Ctrl 使用。",
         "button": "使用 {{key}}"
       }
+    },
+    "vocabulary": {
+      "soundsLikeList": "被聽成：{{forms}}",
+      "remove": "刪除 {{word}}",
+      "packs": {
+        "title": "內建詞彙",
+        "description": "以英文聽寫時 Kusema 一開始就能寫對的術語。Kusema 本身的名稱一律包含在內。",
+        "legal": {
+          "label": "法律",
+          "description": "{{number}} 個拉丁文和法律術語，以及引註的寫法：「42 U.S.C.」、「123 F.3d 456」、「Smith v. Jones」、「Rule 12(b)(6)」。"
+        },
+        "medical": {
+          "label": "醫療",
+          "description": "{{number}} 個藥品名稱和臨床術語。請務必檢查聽寫的醫療紀錄：詞彙能提升辨識效果，但無法保證正確。"
+        }
+      },
+      "own": {
+        "title": "你的字詞",
+        "description": "你常用的名稱和術語。加入字詞的寫法；如果 Kusema 常聽錯，再加入它寫成的樣子。",
+        "add": "新增字詞",
+        "addHelp": "「被聽成」是 Kusema 聽錯時寫出的內容，例如把「Kanella」寫成「Canela」。多個請用逗號分隔。不填時，會更正相近的拼寫。",
+        "written": "寫法",
+        "writtenPlaceholder": "Kanella",
+        "soundsLike": "被聽成",
+        "soundsLikePlaceholder": "被聽成（選填）：Canela",
+        "addButton": "新增",
+        "empty": "尚無字詞。"
+      },
+      "learned": {
+        "title": "從你的更正中學到的",
+        "description": "當你用「correct that」或在歷史紀錄中更正聽錯的字時，Kusema 會記在這裡。學習只在這台電腦上進行。",
+        "empty": "尚未學到任何內容。聽寫後說「correct that」來更正聽錯的字。"
+      },
+      "files": {
+        "title": "匯入與匯出",
+        "description": "與同事分享字詞清單，或從 Dragon 匯入你的清單（匯出的字詞清單，含讀法）。檔案格式為 JSON、CSV（寫法、被聽成）或 Dragon 的文字格式。",
+        "filterName": "字詞清單",
+        "import": "匯入…",
+        "exportJson": "匯出為 JSON…",
+        "exportCsv": "匯出為 CSV…",
+        "imported": "已匯入 {{added}} 個新字詞（{{existing}} 個已存在）。",
+        "exported": "已匯出 {{number}} 個字詞。"
+      }
     }
   },
   "footer": {
@@ -1445,6 +1500,12 @@
       "apply": "取代",
       "cancel": "取消",
       "keys": "按 Enter 取代，按 Esc 取消。在應用程式中按 Ctrl+Z 可復原。"
+    },
+    "correct": {
+      "title": "更正上一次聽寫",
+      "help": "改好後按 Enter。Kusema 會學習你改動的字詞。Shift+Enter 換行，Esc 取消。",
+      "save": "儲存",
+      "cancel": "取消"
     }
   },
   "secureInput": {
@@ -1494,7 +1555,8 @@
       "undoThat": "復原上一次修改（Ctrl+Z）。",
       "copyThat": "複製選取的內容。",
       "cutThat": "剪下選取的內容。",
-      "pasteThat": "貼上。"
+      "pasteThat": "貼上。",
+      "correctThat": "開啟上一次聽寫的內容以手動更正，並學習你改動的字詞。"
     },
     "trigger": "在連續聽寫時，以「{{trigger}}，」開頭即可用同樣方式修改文字，例如「{{trigger}}，改得更正式一點」。不說這個詞時，所有內容都會照你說的輸入。",
     "triggerOff": "若要在連續聽寫時修改文字，請在「一般 → 語音編輯」中設定觸發詞。",
@@ -1518,7 +1580,11 @@
       "cantRead": "無法讀取這個應用程式中選取的文字。",
       "cantConfirm": "無法判斷這個應用程式中是否有選取內容，所以沒有刪除任何內容。",
       "timedOut": "預覽已逾時，所以沒有取代任何內容。",
-      "working": "正在編輯…"
+      "working": "正在編輯…",
+      "correctNotFound": "這裡沒有 Kusema 輸入過、可以更正的文字。請在歷史紀錄中更正。",
+      "correctChanged": "Kusema 輸入的文字之後已被變更，無法在這裡更正。請在歷史紀錄中更正。",
+      "corrected": "已更正。",
+      "learned": "已更正。Kusema 學到了：{{name}}"
     }
   }
 }

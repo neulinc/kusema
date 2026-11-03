@@ -4,6 +4,7 @@ import { Button } from "../../ui/Button";
 import { AppLanguageMenu } from "../AppLanguageMenu";
 import { useOnboardingStore } from "../onboardingStore";
 import { useSettings } from "@/hooks/useSettings";
+import { commands } from "@/bindings";
 import { CURATED_ASR } from "@/lib/models/catalog";
 import { languageName } from "@/lib/constants/languages";
 import { getSupportedLanguage } from "@/i18n";
@@ -23,7 +24,14 @@ export const SetupWelcome: React.FC<SetupWelcomeProps> = ({
   onContinue,
 }) => {
   const { t, i18n } = useTranslation();
-  const { updateSetting } = useSettings();
+  const { updateSetting, getSetting, refreshSettings } = useSettings();
+  const medicalId = useId();
+  const medical = getSetting("vocabulary_packs")?.medical ?? false;
+  const setMedical = async (enabled: boolean) => {
+    if (preview) return;
+    await commands.setVocabularyPack("medical", enabled);
+    await refreshSettings();
+  };
   const { languages, preview, set } = useOnboardingStore();
   const fieldId = useId();
   const ui = i18n.language;
@@ -70,6 +78,23 @@ export const SetupWelcome: React.FC<SetupWelcomeProps> = ({
             </option>
           ))}
         </select>
+      </div>
+      <div className="flex items-start gap-2">
+        <input
+          id={medicalId}
+          type="checkbox"
+          className="mt-1"
+          checked={medical}
+          onChange={(ev) => void setMedical(ev.target.checked)}
+        />
+        <label htmlFor={medicalId} className="text-sm">
+          <span className="font-medium">
+            {t("onboarding.setup.welcome.medical")}
+          </span>{" "}
+          <span className="text-ink-2">
+            {t("onboarding.setup.welcome.medicalNote")}
+          </span>
+        </label>
       </div>
     </SetupScreen>
   );

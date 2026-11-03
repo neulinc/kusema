@@ -9,7 +9,8 @@
     "cancel": "Cancel·la",
     "secureInputWarning": "⚠ Dreceres blocades per l'entrada segura",
     "privilegedMode": "Mode Privileged",
-    "privilegedOn": "Mode Privileged activat"
+    "privilegedOn": "Mode Privileged activat",
+    "correctLast": "Corregeix l'últim dictat…"
   },
   "sidebar": {
     "general": "General",
@@ -20,7 +21,8 @@
     "history": "Historial",
     "debug": "Depuració",
     "about": "Quant a",
-    "privacy": "Privadesa"
+    "privacy": "Privadesa",
+    "vocabulary": "Vocabulari"
   },
   "onboarding": {
     "customModelDescription": "Sense suport oficial",
@@ -225,7 +227,9 @@
       "welcome": {
         "title": "El Kusema converteix la vostra veu en text en aquest ordinador.",
         "privacy": "La vostra veu no en surt mai.",
-        "language": "Llengua en què dictareu"
+        "language": "Llengua en què dictareu",
+        "medical": "Dicto informes mèdics.",
+        "medicalNote": "Afegeix noms de medicaments i termes clínics. Reviseu sempre els informes dictats."
       },
       "microphone": {
         "title": "Trieu el micròfon",
@@ -962,7 +966,15 @@
       "showMore": "Mostra'n més",
       "showLess": "Mostra'n menys",
       "dropTitle": "Deixa anar per transcriure",
-      "dropDescription": "Apareixerà a l'historial."
+      "dropDescription": "Apareixerà a l'historial.",
+      "correct": {
+        "button": "Corregeix",
+        "help": "Corregiu el text. El Kusema aprèn les paraules que canvieu. Només canvia l'Historial, no el document.",
+        "save": "Desa",
+        "cancel": "Cancel·la",
+        "saved": "Desat.",
+        "learned": "Desat. El Kusema ha après: {{words}}"
+      }
     },
     "debug": {
       "title": "Depuració",
@@ -1344,6 +1356,49 @@
         "description": "Manteniu premuda una sola tecla en lloc de quatre. La tecla Ctrl dreta deixarà de funcionar com a Ctrl.",
         "button": "Fes servir {{key}}"
       }
+    },
+    "vocabulary": {
+      "soundsLikeList": "Sentit com: {{forms}}",
+      "remove": "Elimina {{word}}",
+      "packs": {
+        "title": "Vocabulari integrat",
+        "description": "Termes que el Kusema escriu bé des del principi en el dictat en anglès. El seu propi nom sempre hi és.",
+        "legal": {
+          "label": "Jurídic",
+          "description": "{{number}} termes llatins i jurídics, i com s'escriuen les citacions: «42 U.S.C.», «123 F.3d 456», «Smith v. Jones», «Rule 12(b)(6)»."
+        },
+        "medical": {
+          "label": "Mèdic",
+          "description": "{{number}} noms de medicaments i termes clínics. Reviseu sempre els informes mèdics dictats: un vocabulari millora el reconeixement, no el fa segur."
+        }
+      },
+      "own": {
+        "title": "Les vostres paraules",
+        "description": "Noms i termes que feu servir. Afegiu com s'escriu una paraula i, si el Kusema l'entén malament, què escriu en lloc seu.",
+        "add": "Afegeix una paraula",
+        "addHelp": "«Sentit com» és el que el Kusema escriu quan s'equivoca, per exemple «Canela» per «Kanella». Separeu-ne diverses amb comes. Sense això, es corregeixen les grafies semblants.",
+        "written": "S'escriu",
+        "writtenPlaceholder": "Kanella",
+        "soundsLike": "Sentit com",
+        "soundsLikePlaceholder": "Sentit com (opcional): Canela",
+        "addButton": "Afegeix",
+        "empty": "Encara no hi ha paraules."
+      },
+      "learned": {
+        "title": "Après de les vostres correccions",
+        "description": "Quan corregiu una paraula mal entesa amb «correct that» o a l'Historial, el Kusema la recorda aquí. L'aprenentatge es queda en aquest ordinador.",
+        "empty": "Encara no ha après res. Digueu «correct that» després de dictar per corregir una paraula mal entesa."
+      },
+      "files": {
+        "title": "Importa i exporta",
+        "description": "Compartiu una llista de paraules amb els companys o porteu la vostra des del Dragon (la seva llista exportada, amb formes parlades). Els fitxers són JSON, CSV (escrit, sentit com) o el format de text del Dragon.",
+        "filterName": "Llistes de paraules",
+        "import": "Importa…",
+        "exportJson": "Exporta com a JSON…",
+        "exportCsv": "Exporta com a CSV…",
+        "imported": "S'han importat {{added}} paraules noves ({{existing}} ja hi eren).",
+        "exported": "S'han exportat {{number}} paraules."
+      }
     }
   },
   "footer": {
@@ -1451,6 +1506,12 @@
       "apply": "Substitueix",
       "cancel": "Cancel·la",
       "keys": "Retorn substitueix, Esc cancel·la. Ctrl+Z a l'aplicació ho desfà."
+    },
+    "correct": {
+      "title": "Corregeix l'últim dictat",
+      "help": "Corregiu-lo i premeu Retorn. El Kusema aprèn les paraules que canvieu. Maj+Retorn comença una línia nova, Esc cancel·la.",
+      "save": "Desa",
+      "cancel": "Cancel·la"
     }
   },
   "secureInput": {
@@ -1502,7 +1563,8 @@
       "undoThat": "Desfà l'últim canvi (Ctrl+Z).",
       "copyThat": "Copia la selecció.",
       "cutThat": "Retalla la selecció.",
-      "pasteThat": "Enganxa."
+      "pasteThat": "Enganxa.",
+      "correctThat": "Obre l'últim dictat per corregir-lo a mà i aprèn les paraules que canvieu."
     },
     "trigger": "En el dictat continu, comenceu amb «{{trigger}},» per canviar el text de la mateixa manera, per exemple «{{trigger}}, fes això més formal». Sense aquesta paraula, tot s'escriu tal com ho dieu.",
     "triggerOff": "Per canviar text durant el dictat continu, definiu una paraula d'activació a General → Edició per veu.",
@@ -1526,7 +1588,11 @@
       "cantRead": "No s'ha pogut llegir el text seleccionat en aquesta aplicació.",
       "cantConfirm": "No s'ha pogut saber si hi ha res seleccionat en aquesta aplicació, així que no s'ha suprimit res.",
       "timedOut": "La previsualització ha caducat, així que no s'ha substituït res.",
-      "working": "S'està editant…"
+      "working": "S'està editant…",
+      "correctNotFound": "Aquí no hi ha res escrit pel Kusema per corregir. Corregiu-ho des de l'Historial.",
+      "correctChanged": "El text que va escriure el Kusema ha canviat des d'aleshores, així que no es pot corregir aquí. Corregiu-ho des de l'Historial.",
+      "corrected": "Corregit.",
+      "learned": "Corregit. El Kusema ha après: {{name}}"
     }
   }
 }

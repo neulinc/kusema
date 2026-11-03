@@ -350,6 +350,17 @@ impl HistoryManager {
         Ok(updated > 0)
     }
 
+    /// Kusema: replaces an entry's text (a correction). False if it's gone.
+    pub fn set_text(&self, id: i64, text: &str) -> Result<bool> {
+        let conn = self.get_connection()?;
+        let found = conn.execute(
+            "UPDATE transcription_history SET transcription_text = ?1 WHERE id = ?2",
+            params![text, id],
+        )? > 0;
+        self.announce_text_change(&conn, id, found);
+        Ok(found)
+    }
+
     /// Kusema: an entry's text, `None` if the entry is gone.
     pub fn entry_text(&self, id: i64) -> Result<Option<String>> {
         let conn = self.get_connection()?;

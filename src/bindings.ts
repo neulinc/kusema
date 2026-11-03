@@ -1357,6 +1357,73 @@ async changeVoiceEditTriggerSetting(trigger: string) : Promise<Result<null, stri
     else return { status: "error", error: e  as any };
 }
 },
+async getVocabulary() : Promise<VocabularyView> {
+    return await TAURI_INVOKE("get_vocabulary");
+},
+async addVocabularyEntry(written: string, soundsLike: string[]) : Promise<Result<null, string>> {
+    try {
+    return { status: "ok", data: await TAURI_INVOKE("add_vocabulary_entry", { written, soundsLike }) };
+} catch (e) {
+    if(e instanceof Error) throw e;
+    else return { status: "error", error: e  as any };
+}
+},
+async removeVocabularyEntry(written: string) : Promise<Result<null, string>> {
+    try {
+    return { status: "ok", data: await TAURI_INVOKE("remove_vocabulary_entry", { written }) };
+} catch (e) {
+    if(e instanceof Error) throw e;
+    else return { status: "error", error: e  as any };
+}
+},
+async setVocabularyPack(pack: Pack, enabled: boolean) : Promise<Result<null, string>> {
+    try {
+    return { status: "ok", data: await TAURI_INVOKE("set_vocabulary_pack", { pack, enabled }) };
+} catch (e) {
+    if(e instanceof Error) throw e;
+    else return { status: "error", error: e  as any };
+}
+},
+/**
+ * Imports a Kusema JSON or CSV file, or a Dragon word list.
+ */
+async importVocabulary(path: string) : Promise<Result<ImportResult, string>> {
+    try {
+    return { status: "ok", data: await TAURI_INVOKE("import_vocabulary", { path }) };
+} catch (e) {
+    if(e instanceof Error) throw e;
+    else return { status: "error", error: e  as any };
+}
+},
+/**
+ * Writes the user's and learned entries (not the packs) to `path`.
+ */
+async exportVocabulary(path: string, format: ExportFormat) : Promise<Result<number, string>> {
+    try {
+    return { status: "ok", data: await TAURI_INVOKE("export_vocabulary", { path, format }) };
+} catch (e) {
+    if(e instanceof Error) throw e;
+    else return { status: "error", error: e  as any };
+}
+},
+/**
+ * Corrects a History entry's text (History only, not the document it was
+ * typed into) and learns from the fix.
+ */
+async correctHistoryEntry(id: number, text: string) : Promise<Result<LearnedWord[], string>> {
+    try {
+    return { status: "ok", data: await TAURI_INVOKE("correct_history_entry", { id, text }) };
+} catch (e) {
+    if(e instanceof Error) throw e;
+    else return { status: "error", error: e  as any };
+}
+},
+/**
+ * Kusema vocabulary: the correction card's Save (`Some`) or Cancel (`None`).
+ */
+async answerCorrectionCard(text: string | null) : Promise<void> {
+    await TAURI_INVOKE("answer_correction_card", { text });
+},
 async getTtsVoices() : Promise<Result<Voice[], string>> {
     try {
     return { status: "ok", data: await TAURI_INVOKE("get_tts_voices") };
@@ -1646,7 +1713,15 @@ voice_edit_preview?: boolean;
  * Kusema voice editing: said first in continuous dictation ("Kusema,
  * shorten that"), it makes the rest an edit. Empty turns that off.
  */
-voice_edit_trigger?: string }
+voice_edit_trigger?: string; 
+/**
+ * Kusema vocabulary: the user's and learned entries.
+ */
+vocabulary?: VocabEntry[]; 
+/**
+ * Kusema vocabulary: which built-in packs are on.
+ */
+vocabulary_packs?: VocabPacks }
 export type AudioDevice = { index: string; name: string; is_default: boolean }
 export type AutoSubmitKey = "enter" | "ctrl_enter" | "cmd_enter"
 export type AutoUnavailableReason = 
@@ -1750,6 +1825,10 @@ export type DictationStatusEvent = { phase: DictationPhase; notice: DictationNot
  * When the session started, in milliseconds since the epoch.
  */
 started_at_ms: number }
+/**
+ * The file formats Kusema writes.
+ */
+export type ExportFormat = "json" | "csv"
 export type FirstWins = { 
 /**
  * Setup finished, so wins count. Practice in setup doesn't.
@@ -1793,6 +1872,10 @@ export type ImplementationChangeResult = { success: boolean;
  * List of binding IDs that were reset to defaults due to incompatibility
  */
 reset_bindings: string[] }
+/**
+ * How an import went.
+ */
+export type ImportResult = { added: number; already_there: number }
 export type KeyboardDiagnosticReport = { secure_input_enabled: boolean; culprit_pid: number | null; culprit_name: string | null; 
 /**
  * Counts only — key identity is deliberately never captured.
@@ -1868,6 +1951,10 @@ export type LanguageStatus =
  */
 { kind: "auto_unavailable"; language: string; reason: AutoUnavailableReason }
 /**
+ * What was learned from a correction, for the History page to show.
+ */
+export type LearnedWord = { heard: string; written: string }
+/**
  * One request, as listed.
  */
 export type LedgerEntry = { id: number; 
@@ -1932,6 +2019,7 @@ export type OverlayPosition = "top" | "bottom"
  * streaming mode (that is driven purely by model capability).
  */
 export type OverlayStyle = "none" | "minimal" | "live"
+export type Pack = "legal" | "medical"
 export type PaginatedHistory = { entries: HistoryEntry[]; has_more: boolean }
 export type PasteMethod = "ctrl_v" | "direct" | "none" | "shift_insert" | "ctrl_shift_v" | "external_script"
 export type PermissionAccess = "allowed" | "denied" | "unknown"
@@ -1997,6 +2085,10 @@ export type RetiredModel = { id: string; name: string; size_mb: number; replacem
  * What the card shows.
  */
 export type ScreenCard = { kind: "confirm"; image: string; question: string; provider: string; model: string; timeoutSecs: number } | { kind: "notice"; message: string; key: string | null; name: string | null } | 
+/**
+ * Kusema vocabulary: the last dictated text, to correct ("correct that").
+ */
+{ kind: "correct"; text: string; timeoutSecs: number } | 
 /**
  * Kusema voice editing: the selected text and what it would become.
  */
@@ -2135,6 +2227,30 @@ export type TranscriptionOutcome =
 "failed"
 export type TypingTool = "auto" | "wtype" | "kwtype" | "dotool" | "ydotool" | "xdotool"
 export type VadBackend = "silero" | "earshot"
+/**
+ * One vocabulary entry.
+ */
+export type VocabEntry = { 
+/**
+ * How it's written: "Kanella", "habeas corpus".
+ */
+written: string; 
+/**
+ * What the model writes when it's said, lowercase ("canela").
+ */
+sounds_like?: string[]; 
+/**
+ * Learned from a correction, rather than added by the user.
+ */
+learned?: boolean }
+/**
+ * Which built-in packs are on. Kusema's own name is always on.
+ */
+export type VocabPacks = { legal?: boolean; medical?: boolean }
+/**
+ * What the Vocabulary page shows.
+ */
+export type VocabularyView = { entries: VocabEntry[]; packs: VocabPacks; legal_count: number; medical_count: number }
 export type Voice = { id: string; name: string; 
 /**
  * BCP-47 tag, e.g. "en-US".

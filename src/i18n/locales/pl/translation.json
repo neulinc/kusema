@@ -9,7 +9,8 @@
     "cancel": "Anuluj",
     "secureInputWarning": "⚠ Skróty zablokowane przez Secure Input",
     "privilegedMode": "Tryb Privileged",
-    "privilegedOn": "Tryb Privileged włączony"
+    "privilegedOn": "Tryb Privileged włączony",
+    "correctLast": "Popraw ostatnie dyktowanie…"
   },
   "sidebar": {
     "general": "Ogólne",
@@ -20,7 +21,8 @@
     "history": "Historia",
     "debug": "Debugowanie",
     "about": "O programie",
-    "privacy": "Prywatność"
+    "privacy": "Prywatność",
+    "vocabulary": "Słownictwo"
   },
   "onboarding": {
     "customModelDescription": "Nieoficjalnie wspierane",
@@ -226,7 +228,9 @@
       "welcome": {
         "title": "Kusema zamienia Twój głos na tekst na tym komputerze.",
         "privacy": "Twój głos nigdy go nie opuszcza.",
-        "language": "Język, w którym będziesz dyktować"
+        "language": "Język, w którym będziesz dyktować",
+        "medical": "Dyktuję dokumentację medyczną.",
+        "medicalNote": "Dodaje nazwy leków i terminy kliniczne. Zawsze sprawdzaj dyktowaną dokumentację."
       },
       "microphone": {
         "title": "Wybierz mikrofon",
@@ -965,7 +969,15 @@
       "showMore": "Pokaż więcej",
       "showLess": "Pokaż mniej",
       "dropTitle": "Upuść, aby transkrybować",
-      "dropDescription": "Pojawi się w historii."
+      "dropDescription": "Pojawi się w historii.",
+      "correct": {
+        "button": "Popraw",
+        "help": "Popraw tekst. Kusema uczy się zmienionych słów. Zmienia się tylko Historia, nie dokument.",
+        "save": "Zapisz",
+        "cancel": "Anuluj",
+        "saved": "Zapisano.",
+        "learned": "Zapisano. Kusema nauczyła się: {{words}}"
+      }
     },
     "debug": {
       "title": "Debugowanie",
@@ -1350,6 +1362,49 @@
         "description": "Przytrzymaj jeden klawisz zamiast czterech. Prawy Ctrl przestanie wtedy działać jako Ctrl.",
         "button": "Użyj {{key}}"
       }
+    },
+    "vocabulary": {
+      "soundsLikeList": "Słyszane jako: {{forms}}",
+      "remove": "Usuń {{word}}",
+      "packs": {
+        "title": "Wbudowane słownictwo",
+        "description": "Terminy, które Kusema od razu pisze poprawnie podczas dyktowania po angielsku. Jego własna nazwa jest zawsze uwzględniona.",
+        "legal": {
+          "label": "Prawnicze",
+          "description": "{{number}} terminów łacińskich i prawniczych oraz zapis cytowań: „42 U.S.C.”, „123 F.3d 456”, „Smith v. Jones”, „Rule 12(b)(6)”."
+        },
+        "medical": {
+          "label": "Medyczne",
+          "description": "{{number}} nazw leków i terminów klinicznych. Zawsze sprawdzaj dyktowaną dokumentację medyczną: słownictwo poprawia rozpoznawanie, ale nie daje pewności."
+        }
+      },
+      "own": {
+        "title": "Twoje słowa",
+        "description": "Nazwy i terminy, których używasz. Dodaj, jak słowo się pisze, a jeśli Kusema źle je słyszy, co pisze zamiast niego.",
+        "add": "Dodaj słowo",
+        "addHelp": "„Słyszane jako” to to, co Kusema pisze, gdy się myli, np. „Canela” zamiast „Kanella”. Kilka form oddziel przecinkami. Bez tego poprawiane są podobne zapisy.",
+        "written": "Pisane jako",
+        "writtenPlaceholder": "Kanella",
+        "soundsLike": "Słyszane jako",
+        "soundsLikePlaceholder": "Słyszane jako (opcjonalnie): Canela",
+        "addButton": "Dodaj",
+        "empty": "Brak słów."
+      },
+      "learned": {
+        "title": "Nauczone z Twoich poprawek",
+        "description": "Gdy poprawiasz źle usłyszane słowo poleceniem „correct that” lub w Historii, Kusema zapamiętuje je tutaj. Nauka zostaje na tym komputerze.",
+        "empty": "Jeszcze nic się nie nauczyło. Po dyktowaniu powiedz „correct that”, aby poprawić źle usłyszane słowo."
+      },
+      "files": {
+        "title": "Import i eksport",
+        "description": "Udostępnij listę słów współpracownikom lub przenieś swoją z Dragona (wyeksportowaną listę słów z formami mówionymi). Pliki to JSON, CSV (pisane, słyszane jako) lub format tekstowy Dragona.",
+        "filterName": "Listy słów",
+        "import": "Importuj…",
+        "exportJson": "Eksportuj jako JSON…",
+        "exportCsv": "Eksportuj jako CSV…",
+        "imported": "Zaimportowano nowe słowa: {{added}} (już były: {{existing}}).",
+        "exported": "Wyeksportowano słowa: {{number}}."
+      }
     }
   },
   "footer": {
@@ -1457,6 +1512,12 @@
       "apply": "Zastąp",
       "cancel": "Anuluj",
       "keys": "Enter zastępuje, Esc anuluje. Ctrl+Z w aplikacji cofa zmianę."
+    },
+    "correct": {
+      "title": "Popraw ostatnie dyktowanie",
+      "help": "Popraw i naciśnij Enter. Kusema uczy się zmienionych słów. Shift+Enter zaczyna nowy wiersz, Esc anuluje.",
+      "save": "Zapisz",
+      "cancel": "Anuluj"
     }
   },
   "secureInput": {
@@ -1510,7 +1571,8 @@
       "undoThat": "Cofa ostatnią zmianę (Ctrl+Z).",
       "copyThat": "Kopiuje zaznaczenie.",
       "cutThat": "Wycina zaznaczenie.",
-      "pasteThat": "Wkleja."
+      "pasteThat": "Wkleja.",
+      "correctThat": "Otwiera ostatnie dyktowanie do ręcznej poprawki i uczy się zmienionych słów."
     },
     "trigger": "W dyktowaniu ciągłym zacznij od „{{trigger}},”, aby zmienić tekst w ten sam sposób, np. „{{trigger}}, napisz to bardziej formalnie”. Bez tego słowa wszystko jest wpisywane tak, jak mówisz.",
     "triggerOff": "Aby zmieniać tekst w dyktowaniu ciągłym, ustaw słowo wyzwalające w Ogólne → Edycja głosowa.",
@@ -1534,7 +1596,11 @@
       "cantRead": "Nie udało się odczytać zaznaczonego tekstu w tej aplikacji.",
       "cantConfirm": "Nie udało się ustalić, czy w tej aplikacji coś jest zaznaczone, więc nic nie zostało usunięte.",
       "timedOut": "Czas na podgląd minął, więc nic nie zostało zastąpione.",
-      "working": "Edytowanie…"
+      "working": "Edytowanie…",
+      "correctNotFound": "Nie ma tu nic wpisanego przez Kusemę do poprawienia. Popraw to w Historii.",
+      "correctChanged": "Tekst wpisany przez Kusemę od tego czasu się zmienił, więc nie można go tu poprawić. Popraw go w Historii.",
+      "corrected": "Poprawiono.",
+      "learned": "Poprawiono. Kusema nauczyła się: {{name}}"
     }
   }
 }

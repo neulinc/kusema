@@ -639,6 +639,12 @@ pub struct AppSettings {
     /// shorten that"), it makes the rest an edit. Empty turns that off.
     #[serde(default = "default_voice_edit_trigger")]
     pub voice_edit_trigger: String,
+    /// Kusema vocabulary: the user's and learned entries.
+    #[serde(default)]
+    pub vocabulary: Vec<crate::vocabulary::VocabEntry>,
+    /// Kusema vocabulary: which built-in packs are on.
+    #[serde(default)]
+    pub vocabulary_packs: crate::vocabulary::VocabPacks,
 }
 
 fn default_voice_edit_trigger() -> String {
@@ -1313,6 +1319,8 @@ pub fn get_default_settings() -> AppSettings {
         dictation_sounds: default_dictation_sounds(),
         voice_edit_preview: default_voice_edit_preview(),
         voice_edit_trigger: default_voice_edit_trigger(),
+        vocabulary: Vec::new(),
+        vocabulary_packs: crate::vocabulary::VocabPacks::default(),
     }
 }
 
@@ -1414,7 +1422,9 @@ pub fn get_settings(app: &AppHandle) -> AppSettings {
     };
 
     // Kusema: then move a Custom provider on Ollama or LM Studio to the built-in one.
-    if ensure_post_process_defaults(&mut settings) | crate::local_providers::migrate(&mut settings)
+    if ensure_post_process_defaults(&mut settings)
+        | crate::local_providers::migrate(&mut settings)
+        | crate::vocabulary::migrate(&mut settings)
     {
         crate::secrets::load_keys(&mut settings);
         store.set("settings", crate::secrets::for_disk(&settings));
