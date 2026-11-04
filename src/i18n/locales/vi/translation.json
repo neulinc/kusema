@@ -1566,7 +1566,26 @@
       "edit": "Đang chỉnh sửa…"
     },
     "assistantTake": "Hỏi Kusema",
-    "triggerHint": "Đã gõ như đọc chính tả. Để hỏi Kusema, hãy chạm Space trong khi giữ {{name}}."
+    "triggerHint": "Đã gõ như đọc chính tả. Để hỏi Kusema, hãy chạm Space trong khi giữ {{name}}.",
+    "ai": {
+      "noProvider": "Kusema cần một AI để trả lời. Hãy thiết lập trong Trợ lý → Cài đặt.",
+      "noKey": "Chưa có khóa API cho {{name}}. Hãy thêm trong Trợ lý → Cài đặt.",
+      "noModel": "Chưa chọn mô hình cho {{name}}. Hãy chọn trong Trợ lý → Cài đặt.",
+      "providerUnsupported": "{{name}} chưa trả lời câu hỏi được. Hãy chọn AI khác trong Trợ lý → Cài đặt.",
+      "screenProviderGone": "AI được chọn cho câu hỏi về màn hình không còn nữa. Hãy chọn AI khác trong Trợ lý → Cài đặt.",
+      "keyRejected": "{{name}} không chấp nhận khóa API. Hãy kiểm tra trong Trợ lý → Cài đặt.",
+      "localNotRunning": "{{name}} không chạy trên máy tính này. Hãy khởi động rồi hỏi lại.",
+      "unreachable": "Không kết nối được {{name}}. Hãy kiểm tra kết nối internet và địa chỉ của AI trong Trợ lý → Cài đặt.",
+      "privileged": "Chế độ Privileged đang bật nên AI đám mây bị chặn. Hãy dùng AI cục bộ, hoặc tắt chế độ Privileged.",
+      "rateLimited": "{{name}} đang bận. Hãy đợi một lát rồi hỏi lại.",
+      "notFound": "{{name}} không tìm thấy mô hình đó. Hãy kiểm tra trong Trợ lý → Cài đặt.",
+      "noVision": "AI này không nhìn được màn hình. Hãy chọn AI xem được hình ảnh, như Claude hoặc một mô hình thị giác trong Ollama.",
+      "emptyReply": "{{name}} không gửi câu trả lời. Hãy thử hỏi lại.",
+      "nothingHeard": "Kusema không nghe thấy câu hỏi. Giữ phím, chạm Space, rồi nói.",
+      "other": "Kusema không nhận được câu trả lời: {{name}}"
+    },
+    "setUp": "Thiết lập",
+    "dismiss": "Đóng"
   },
   "screenCard": {
     "title": "Gửi ảnh chụp màn hình này?",
@@ -1658,7 +1677,7 @@
     "trigger": "Khi đọc chính tả liên tục, hãy bắt đầu bằng “{{trigger}},” để sửa văn bản theo cùng cách, ví dụ “{{trigger}}, làm cho trang trọng hơn”. Không có từ này, mọi thứ được gõ đúng như bạn nói.",
     "triggerOff": "Để sửa văn bản khi đọc chính tả liên tục, hãy đặt từ kích hoạt trong Chung → Sửa bằng giọng nói.",
     "selectFirst": "Một số ứng dụng như ONLYOFFICE, LibreOffice và Google Docs không cho Kusema thấy văn bản. Ở đó, hãy chọn văn bản bằng chuột hoặc bàn phím trước; chọn câu, đoạn hoặc từ bằng giọng nói không hoạt động ở đó.",
-    "introKey": "Giữ {{key}} và chạm Space (hoặc bắt đầu bằng “{{trigger}}”), rồi nói một trong các lệnh sau. Lệnh có ghi “Cũng dùng khi đọc chính tả liên tục” hoạt động ở đó khi được nói riêng."
+    "introKey": "Giữ {{key}} và chạm Space (hoặc bắt đầu bằng “{{trigger}},”), rồi nói một trong các lệnh này. Để gõ câu hỏi thay vào đó, chạm T trong khi giữ. Các lệnh có ghi “Cũng dùng khi đọc chính tả liên tục” hoạt động ở đó khi được nói riêng."
   },
   "voiceEdit": {
     "notice": {
@@ -1710,11 +1729,11 @@
       "title": "Phím Kusema",
       "hold": "Giữ <key/> để nói.",
       "doubleTap": "Nhấn <key/> hai lần để đọc chính tả liên tục.",
-      "ask": "Trong khi giữ phím, chạm <space/> để hỏi Kusema, hoặc bắt đầu bằng <q>{{trigger}}</q>: hỏi, chỉnh sửa hoặc nhờ xem màn hình."
+      "askOrType": "Trong khi giữ phím, chạm <space/> để hỏi bằng giọng nói, hoặc <t/> để gõ. Hoặc bắt đầu bằng <q>{{trigger}}</q>: hỏi, chỉnh sửa hoặc nhờ xem màn hình."
     },
     "settings": {
       "title": "Phím Kusema",
-      "description": "Một phím để đọc chính tả. Giữ phím để nói; nhấn hai lần để đọc chính tả liên tục. Để hỏi, chỉnh sửa hoặc nhờ xem màn hình, hãy chạm Space trong khi giữ phím, hoặc bắt đầu bằng “Kusema”. Các ứng dụng khác không bao giờ nhận phím này.",
+      "description": "Một phím để đọc chính tả. Giữ phím để nói; chạm hai lần để đọc chính tả liên tục. Trong khi giữ, chạm Space để hỏi bằng giọng nói, hoặc T để gõ câu hỏi. Hoặc bắt đầu bằng “Kusema” để hỏi, chỉnh sửa hoặc nhờ xem màn hình. Các ứng dụng khác không bao giờ thấy phím này.",
       "enabled": {
         "label": "Dùng phím Kusema",
         "description": "Khi tắt, chỉ các phím tắt bên dưới hoạt động."

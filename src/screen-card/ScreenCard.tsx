@@ -193,6 +193,18 @@ const NoticeCard: React.FC<{ card: Notice }> = ({ card }) => {
         <p className="text-sm text-ink-2 select-text">
           {card.key ? t(card.key, { name: card.name ?? "" }) : card.message}
         </p>
+        {card.setup && (
+          <Button
+            variant="secondary"
+            size="sm"
+            onClick={() => {
+              void commands.openSetupPage(card.setup!);
+              void commands.dismissScreenCard();
+            }}
+          >
+            {t("overlay.setUp")}
+          </Button>
+        )}
       </div>
       <button
         type="button"

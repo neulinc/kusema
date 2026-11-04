@@ -54,6 +54,8 @@ pub enum ScreenCard {
         /// of `message`, with `name` for its placeholder.
         key: Option<String>,
         name: Option<String>,
+        /// Kusema: where its "Set up" button goes, if it has one.
+        setup: Option<crate::assistant::failure::SetupPage>,
     },
     /// Kusema vocabulary: the last dictated text, to correct ("correct that").
     #[serde(rename_all = "camelCase")]
@@ -407,8 +409,25 @@ pub fn notice_with_key(
     name: Option<String>,
     near: Option<CapturedWindow>,
 ) {
+    notice_with_setup(app, message, key, name, None, near);
+}
+
+/// `notice_with_key`, with a "Set up" button that opens `setup`.
+pub fn notice_with_setup(
+    app: &AppHandle,
+    message: String,
+    key: Option<String>,
+    name: Option<String>,
+    setup: Option<crate::assistant::failure::SetupPage>,
+    near: Option<CapturedWindow>,
+) {
     crate::tts::say(app, &message);
-    let card = ScreenCard::Notice { message, key, name };
+    let card = ScreenCard::Notice {
+        message,
+        key,
+        name,
+        setup,
+    };
     let Some(counter) = open(app, card, near, None) else {
         return;
     };

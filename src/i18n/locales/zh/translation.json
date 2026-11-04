@@ -1566,7 +1566,26 @@
       "edit": "正在编辑…"
     },
     "assistantTake": "问 Kusema",
-    "triggerHint": "已作为听写输入。要问 Kusema，请按住 {{name}} 时点一下空格键。"
+    "triggerHint": "已作为听写输入。要问 Kusema，请按住 {{name}} 时点一下空格键。",
+    "ai": {
+      "noProvider": "Kusema 需要一个 AI 来回答。请在助手 → 设置中设置一个。",
+      "noKey": "{{name}} 没有 API 密钥。请在助手 → 设置中添加。",
+      "noModel": "没有为 {{name}} 选择模型。请在助手 → 设置中选择。",
+      "providerUnsupported": "{{name}} 还不能回答问题。请在助手 → 设置中选择其他 AI。",
+      "screenProviderGone": "为屏幕问题选择的 AI 已不存在。请在助手 → 设置中另选一个。",
+      "keyRejected": "{{name}} 没有接受该 API 密钥。请在助手 → 设置中检查。",
+      "localNotRunning": "{{name}} 没有在这台电脑上运行。请先启动它，然后再问一次。",
+      "unreachable": "无法连接 {{name}}。请检查网络连接，以及助手 → 设置中 AI 的地址。",
+      "privileged": "Privileged 模式已开启，因此云端 AI 被阻止。请使用本地 AI，或关闭 Privileged 模式。",
+      "rateLimited": "{{name}} 正忙。请稍等片刻，然后再问一次。",
+      "notFound": "{{name}} 找不到该模型。请在助手 → 设置中检查。",
+      "noVision": "这个 AI 看不到屏幕。请选择能看图片的 AI，例如 Claude 或 Ollama 中的视觉模型。",
+      "emptyReply": "{{name}} 没有发回答案。请再问一次。",
+      "nothingHeard": "Kusema 没有听到问题。按住按键，点一下空格，然后说话。",
+      "other": "Kusema 没能获得答案：{{name}}"
+    },
+    "setUp": "设置",
+    "dismiss": "关闭"
   },
   "screenCard": {
     "title": "发送这张截图？",
@@ -1658,7 +1677,7 @@
     "trigger": "在连续听写时，以“{{trigger}}，”开头即可用同样的方式修改文字，例如“{{trigger}}，改得更正式些”。不说这个词时，所有内容都会照你说的输入。",
     "triggerOff": "要在连续听写时修改文字，请在“常规 → 语音编辑”中设置触发词。",
     "selectFirst": "一些应用（如 ONLYOFFICE、LibreOffice 和 Google 文档）不会把文字提供给 Kusema。在这些应用中，请先用鼠标或键盘选中文字；无法用语音选择句子、段落或词语。",
-    "introKey": "按住 {{key}} 并点一下空格键（或以“{{trigger}}”开头），然后说下面的某条命令。标有“连续听写中也可用”的命令，在连续听写中单独说出即可生效。"
+    "introKey": "按住 {{key}} 并点一下空格（或以“{{trigger}}，”开头），然后说出以下任一命令。若要改为打字提问，请在按住时点 T。标有“连续听写中也可用”的命令，单独说出时在连续听写中也有效。"
   },
   "voiceEdit": {
     "notice": {
@@ -1710,11 +1729,11 @@
       "title": "Kusema 按键",
       "hold": "按住 <key/> 说话。",
       "doubleTap": "连按两次 <key/> 开始连续听写。",
-      "ask": "按住时点一下 <space/> 即可问 Kusema，或以 <q>{{trigger}}</q> 开头：提问、编辑或查看你的屏幕。"
+      "askOrType": "按住时点一下 <space/> 用语音提问，或点 <t/> 打字提问。也可以以 <q>{{trigger}}</q> 开头：提问、编辑或查看你的屏幕。"
     },
     "settings": {
       "title": "Kusema 键",
-      "description": "一个键就能听写。按住说话；连按两次开始连续听写。要提问、编辑或让它查看你的屏幕，请在按住时点一下空格键，或以“Kusema”开头。其他应用不会收到这个键。",
+      "description": "一个键用于听写。按住它说话；点两下进入连续听写。按住时点一下空格用语音提问，或点 T 打字提问。也可以以“Kusema”开头来提问、编辑或查看你的屏幕。其他应用永远看不到这个键。",
       "enabled": {
         "label": "使用 Kusema 键",
         "description": "关闭时，只有下面的快捷键有效。"

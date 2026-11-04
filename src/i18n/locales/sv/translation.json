@@ -1566,7 +1566,26 @@
       "edit": "Redigerar…"
     },
     "assistantTake": "Fråga Kusema",
-    "triggerHint": "Skrevs som diktering. För att fråga Kusema, tryck på Blanksteg medan du håller ned {{name}}."
+    "triggerHint": "Skrevs som diktering. För att fråga Kusema, tryck på Blanksteg medan du håller ned {{name}}.",
+    "ai": {
+      "noProvider": "Kusema behöver en AI för att svara. Ställ in en under Assistent → Inställningar.",
+      "noKey": "Ingen API-nyckel för {{name}}. Lägg till en under Assistent → Inställningar.",
+      "noModel": "Ingen modell vald för {{name}}. Välj en under Assistent → Inställningar.",
+      "providerUnsupported": "{{name}} kan inte svara på frågor än. Välj en annan AI under Assistent → Inställningar.",
+      "screenProviderGone": "AI:n som valts för frågor om skärmen finns inte längre. Välj en annan under Assistent → Inställningar.",
+      "keyRejected": "{{name}} godtog inte API-nyckeln. Kontrollera den under Assistent → Inställningar.",
+      "localNotRunning": "{{name}} körs inte på den här datorn. Starta det och fråga igen.",
+      "unreachable": "Kunde inte nå {{name}}. Kontrollera internetanslutningen och AI:ns adress under Assistent → Inställningar.",
+      "privileged": "Privileged-läget är på, så moln-AI är blockerad. Använd en lokal AI eller slå av Privileged-läget.",
+      "rateLimited": "{{name}} är upptaget. Vänta en stund och fråga igen.",
+      "notFound": "{{name}} hittade inte den modellen. Kontrollera den under Assistent → Inställningar.",
+      "noVision": "Den här AI:n kan inte se skärmen. Välj en som kan se bilder, till exempel Claude eller en bildmodell i Ollama.",
+      "emptyReply": "{{name}} skickade inget svar. Försök fråga igen.",
+      "nothingHeard": "Kusema hörde ingen fråga. Håll ned tangenten, tryck på Blanksteg och tala sedan.",
+      "other": "Kusema fick inget svar: {{name}}"
+    },
+    "setUp": "Ställ in",
+    "dismiss": "Stäng"
   },
   "screenCard": {
     "title": "Skicka den här skärmbilden?",
@@ -1658,7 +1677,7 @@
     "trigger": "Börja med “{{trigger}},” vid löpande diktering för att ändra text på samma sätt, till exempel “{{trigger}}, gör det här mer formellt”. Utan ordet skrivs allt som du säger det.",
     "triggerOff": "Ställ in ett utlösarord under Allmänt → Röstredigering för att ändra text vid löpande diktering.",
     "selectFirst": "Vissa appar, som ONLYOFFICE, LibreOffice och Google Docs, visar inte sin text för Kusema. Markera texten med musen eller tangentbordet först där; att markera en mening, ett stycke eller ord med rösten fungerar inte där.",
-    "introKey": "Håll ned {{key}} och tryck på Blanksteg (eller börja med ”{{trigger}}”), säg sedan något av dessa. Kommandon märkta ”Även i kontinuerlig diktering” fungerar där när de sägs ensamma."
+    "introKey": "Håll ned {{key}} och tryck på Blanksteg (eller börja med ”{{trigger}},”) och säg sedan något av detta. Tryck på T medan du håller ned för att skriva en fråga i stället. Kommandon märkta ”Även vid löpande diktering” fungerar där när de sägs för sig."
   },
   "voiceEdit": {
     "notice": {
@@ -1710,11 +1729,11 @@
       "title": "Kusema-tangenter",
       "hold": "Håll ned <key/> för att prata.",
       "doubleTap": "Dubbeltryck på <key/> för kontinuerlig diktering.",
-      "ask": "Tryck på <space/> medan du håller ned för att fråga Kusema, eller börja med <q>{{trigger}}</q>: fråga, redigera eller låta Kusema titta på skärmen."
+      "askOrType": "Tryck på <space/> medan du håller ned för att fråga med rösten, eller <t/> för att skriva. Eller börja med <q>{{trigger}}</q>: fråga, redigera eller låta Kusema titta på skärmen."
     },
     "settings": {
       "title": "Kusema-tangent",
-      "description": "En tangent för diktering. Håll ned den för att prata; dubbeltryck för kontinuerlig diktering. För att fråga, redigera eller låta Kusema titta på skärmen trycker du på Blanksteg medan du håller ned den, eller börjar med ”Kusema”. Andra appar ser aldrig tangenten.",
+      "description": "En tangent för diktering. Håll ned den för att prata; tryck två gånger för löpande diktering. Tryck på Blanksteg medan du håller ned för att fråga med rösten, eller T för att skriva en fråga. Eller börja med ”Kusema” för att fråga, redigera eller låta Kusema titta på skärmen. Andra appar ser aldrig tangenten.",
       "enabled": {
         "label": "Använd Kusema-tangenten",
         "description": "Av fungerar bara kortkommandona nedan."

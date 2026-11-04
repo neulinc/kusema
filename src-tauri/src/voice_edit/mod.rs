@@ -120,8 +120,9 @@ enum Problem {
     CorrectNotFound,
     /// What Kusema typed has been changed or moved since.
     CorrectChanged,
-    /// Already worded (no provider, AI provider errors, Privileged mode).
-    Said(String),
+    /// The AI couldn't be asked, or failed (no provider, key or model, a
+    /// provider error, Privileged mode): told with "Set up" where it helps.
+    Ai(crate::assistant::failure::Failure),
 }
 
 impl Problem {
@@ -191,7 +192,7 @@ impl Problem {
                 "correctChanged",
                 "The text Kusema typed has changed since, so it can't be corrected here. Correct it from History instead.".to_string(),
             ),
-            Problem::Said(message) => return (None, message.clone()),
+            Problem::Ai(failure) => return (None, failure.english()),
         };
         (Some(key), english)
     }
@@ -222,6 +223,14 @@ pub struct EditNotice {
 /// showing it, so it mustn't be hidden right away.
 fn tell(app: &AppHandle, problem: Problem, target: Option<Target>) -> bool {
     info!("Voice edit: {problem:?}");
+    if let Problem::Ai(failure) = &problem {
+        return crate::assistant::tell_failure(
+            app,
+            failure,
+            target.is_some_and(|t| t.in_dictation),
+            target.map(|t| t.window),
+        );
+    }
     let (key, english) = problem.key_and_english();
     let key = key.map(|k| format!("voiceEdit.notice.{k}"));
     let in_dictation = target.is_some_and(|t| t.in_dictation);
@@ -730,7 +739,7 @@ async fn ai_edit<C: Fn() -> bool>(
     is_cancelled: C,
 ) -> Result<(), Problem> {
     let settings = get_settings(app);
-    let ai = crate::assistant::resolve_target(&settings).map_err(Problem::Said)?;
+    let ai = crate::assistant::resolve_target(&settings).map_err(Problem::Ai)?;
 
     let app_for_find = app.clone();
     let (original, selected_by_us) =
@@ -814,7 +823,7 @@ async fn edit_text<C: Fn() -> bool>(
     let reply = match result {
         Ok(reply) => reply.unwrap_or_default(),
         Err(e) => {
-            return Err(Problem::Said(crate::assistant::describe_error(
+            return Err(Problem::Ai(crate::assistant::failure::classify(
                 &ai.provider,
                 &e,
                 false,
@@ -997,10 +1006,13 @@ mod tests {
         for key in ["working", "corrected", "learned"] {
             assert!(en["voiceEdit"]["notice"][key].is_string(), "{key}");
         }
+        // AI failures have their own keys (overlay.ai.*), told with "Set up".
+        let failure = crate::assistant::failure::Failure::Privileged("Anthropic".into());
         assert_eq!(
-            Problem::Said("Privileged mode is on".into()).key_and_english(),
-            (None, "Privileged mode is on".to_string())
+            Problem::Ai(failure.clone()).key_and_english(),
+            (None, failure.english())
         );
+        assert!(en["overlay"]["ai"][failure.key()].is_string());
     }
 
     fn copied(text: Option<&str>) -> impl FnOnce() -> Result<Option<String>, String> {

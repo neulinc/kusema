@@ -878,7 +878,10 @@ impl ShortcutAction for TranscribeAction {
                                         }
                                     }
                                     Some(crate::kusema_key::Routed::Done) => {
-                                        utils::hide_recording_overlay(&ah);
+                                        // A message about it keeps the pill a while.
+                                        if !crate::overlay::notice_showing() {
+                                            utils::hide_recording_overlay(&ah);
+                                        }
                                         set_tray_state(&ah, TrayIconState::Idle);
                                         return;
                                     }
@@ -946,9 +949,20 @@ impl ShortcutAction for TranscribeAction {
                                 }
                             }
 
-                            // Kusema: an edit heard as nothing says so.
+                            // Kusema: an edit heard as nothing says so, and so
+                            // does a question.
+                            let unheard_question = processed.final_text.is_empty()
+                                && matches!(assistant, Some(AskMode::Plain | AskMode::Screen))
+                                && crate::assistant::tell_failure(
+                                    &ah,
+                                    &crate::assistant::failure::Failure::NothingHeard,
+                                    false,
+                                    None,
+                                );
                             if processed.final_text.is_empty() && assistant != Some(AskMode::Edit) {
-                                utils::hide_recording_overlay(&ah);
+                                if !unheard_question {
+                                    utils::hide_recording_overlay(&ah);
+                                }
                                 set_tray_state(&ah, TrayIconState::Idle);
                                 emit_transcription_complete(
                                     &ah,
@@ -1000,6 +1014,7 @@ impl ShortcutAction for TranscribeAction {
                                 if !rm.was_cancelled_since(cancel_generation)
                                     && !crate::tts::is_speaking(&ah)
                                     && !keep_overlay
+                                    && !crate::overlay::notice_showing()
                                 {
                                     shortcut::unregister_cancel_shortcut(&ah);
                                     utils::hide_recording_overlay(&ah);

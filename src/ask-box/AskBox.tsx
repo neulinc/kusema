@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { listen } from "@tauri-apps/api/event";
 import { FileInput, Monitor, Square, X } from "lucide-react";
-import { commands, type AskBoxInfo } from "@/bindings";
+import { commands, type AskBoxInfo, type SetupPage } from "@/bindings";
 import { Button } from "@/components/ui/Button";
 import i18n, { syncLanguageFromSettings } from "@/i18n";
 import { getLanguageDirection } from "@/lib/utils/rtl";
@@ -23,6 +23,7 @@ const AskBox: React.FC = () => {
   const [draft, setDraft] = useState("");
   const [answer, setAnswer] = useState<AnswerState>(EMPTY);
   const [problem, setProblem] = useState<string | null>(null);
+  const [errorSetup, setErrorSetup] = useState<SetupPage | null>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const rootRef = useRef<HTMLDivElement>(null);
   const answerRef = useRef(answer);
@@ -58,11 +59,22 @@ const AskBox: React.FC = () => {
       "assistant-reply",
       (e) => apply({ kind: "reply", id: e.payload.id, text: e.payload.answer }),
     );
-    const error = listen<{ id: number; message: string }>(
-      "assistant-error",
-      (e) =>
-        apply({ kind: "error", id: e.payload.id, text: e.payload.message }),
-    );
+    const error = listen<{
+      id: number;
+      message: string;
+      key?: string;
+      name?: string | null;
+      setup?: SetupPage | null;
+    }>("assistant-error", (e) => {
+      setErrorSetup(e.payload.setup ?? null);
+      apply({
+        kind: "error",
+        id: e.payload.id,
+        text: e.payload.key
+          ? i18n.t(e.payload.key, { name: e.payload.name ?? "" })
+          : e.payload.message,
+      });
+    });
     const ended = listen<number>("assistant-ended", (e) =>
       apply({ kind: "ended", id: e.payload, text: "" }),
     );
@@ -247,6 +259,18 @@ const AskBox: React.FC = () => {
               <Button variant="secondary" size="sm" onClick={stop}>
                 <Square className="me-1 h-3 w-3" />
                 {t("askBox.stop")}
+              </Button>
+            )}
+            {answer.status === "error" && errorSetup && (
+              <Button
+                variant="secondary"
+                size="sm"
+                onClick={() => {
+                  void commands.askBoxClose();
+                  void commands.openSetupPage(errorSetup);
+                }}
+              >
+                {t("overlay.setUp")}
               </Button>
             )}
             {canInsert && (

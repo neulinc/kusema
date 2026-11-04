@@ -1224,6 +1224,26 @@ async askTyped(question: string) : Promise<Result<number, string>> {
 }
 },
 /**
+ * "Set up" in the pill or on a card: the main window, on that page.
+ */
+async openSetupPage(page: SetupPage) : Promise<void> {
+    await TAURI_INVOKE("open_setup_page", { page });
+},
+/**
+ * Kusema: the pill's message was dismissed (its close button).
+ */
+async dismissOverlayNotice() : Promise<void> {
+    await TAURI_INVOKE("dismiss_overlay_notice");
+},
+/**
+ * Kusema: the pill's label row is `height` tall (0 when it's gone). The
+ * window grows (or shrinks) by that much on the side away from the screen
+ * edge, so the pill and its animation stay where they are.
+ */
+async setOverlayLabelHeight(height: number) : Promise<void> {
+    await TAURI_INVOKE("set_overlay_label_height", { height });
+},
+/**
  * Stop a typed question waiting for its answer, and any reply being spoken.
  */
 async cancelTypedQuestion(id: number) : Promise<void> {
@@ -2416,7 +2436,7 @@ export type RetiredModel = { id: string; name: string; size_mb: number; replacem
 /**
  * What the card shows.
  */
-export type ScreenCard = { kind: "confirm"; image: string; question: string; provider: string; model: string; timeoutSecs: number } | { kind: "notice"; message: string; key: string | null; name: string | null } | 
+export type ScreenCard = { kind: "confirm"; image: string; question: string; provider: string; model: string; timeoutSecs: number } | { kind: "notice"; message: string; key: string | null; name: string | null; setup: SetupPage | null } | 
 /**
  * Kusema vocabulary: the last dictated text, to correct ("correct that").
  */
@@ -2463,6 +2483,18 @@ uncovered_bindings: string[];
  * warning banner appears and explains why recording refused.
  */
 recorder_blocked: boolean }
+/**
+ * Where "Set up" goes.
+ */
+export type SetupPage = 
+/**
+ * Assistant → Settings: the provider, its key and model.
+ */
+"assistant" | 
+/**
+ * Privacy: Privileged mode.
+ */
+"privacy"
 /**
  * How the transcribe shortcut's key events drive a recording.
  */

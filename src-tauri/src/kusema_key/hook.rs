@@ -33,6 +33,8 @@ pub enum Edge {
     Up,
     /// Space was pressed while the key is held: this take is for the Assistant.
     Space,
+    /// T was pressed while the key is held: type a question instead.
+    Type,
 }
 
 #[derive(Debug, Clone, Default, PartialEq, Eq)]
@@ -70,6 +72,8 @@ pub struct HookState {
     /// A Space pressed while the key was held, until it's let go: all of it
     /// is swallowed, the release too.
     space_down: bool,
+    /// The same for T.
+    t_down: bool,
     /// What the keyboard has shown so far.
     pub seen_right_ctrl: bool,
     pub seen_copilot: bool,
@@ -125,18 +129,26 @@ pub fn classify(state: &mut HookState, key: RawKey) -> Action {
 
     // Space while the key is held switches the take to the Assistant. It never
     // reaches the app (or a classic Ctrl+Space shortcut behind this hook).
-    if key.vk == vk::SPACE {
-        if key.down && state.held.is_some() {
-            let first = !state.space_down;
-            state.space_down = true;
+    // T while it's held opens the Ask box, the same way.
+    let held = state.held.is_some();
+    for (code, edge, down) in [
+        (vk::SPACE, Edge::Space, &mut state.space_down),
+        (vk::T, Edge::Type, &mut state.t_down),
+    ] {
+        if key.vk != code {
+            continue;
+        }
+        if key.down && held {
+            let first = !*down;
+            *down = true;
             return Action {
                 swallow: true,
-                edge: first.then_some(Edge::Space),
+                edge: first.then_some(edge),
                 ..Default::default()
             };
         }
-        if !key.down && state.space_down {
-            state.space_down = false;
+        if !key.down && *down {
+            *down = false;
             return Action {
                 swallow: true,
                 ..Default::default()
@@ -426,6 +438,21 @@ mod tests {
         // Without the key held, Space is just Space.
         assert_eq!(classify(&mut s, press(vk::SPACE, true)), Action::default());
         assert_eq!(classify(&mut s, press(vk::SPACE, false)), Action::default());
+    }
+
+    #[test]
+    fn t_while_held_is_swallowed_and_reported_once() {
+        let mut s = state(KusemaKey::RightCtrl);
+        classify(&mut s, press(vk::RCONTROL, true));
+        let t = classify(&mut s, press(vk::T, true));
+        assert!(t.swallow);
+        assert_eq!(t.edge, Some(Edge::Type));
+        assert_eq!(classify(&mut s, press(vk::T, true)).edge, None);
+        assert!(classify(&mut s, press(vk::T, false)).swallow);
+        classify(&mut s, press(vk::RCONTROL, false));
+        // Without the key, T types t.
+        assert_eq!(classify(&mut s, press(vk::T, true)), Action::default());
+        assert_eq!(classify(&mut s, press(vk::T, false)), Action::default());
     }
 
     #[test]

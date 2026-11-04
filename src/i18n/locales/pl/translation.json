@@ -1578,7 +1578,26 @@
       "edit": "Edytuję…"
     },
     "assistantTake": "Zapytaj Kusema",
-    "triggerHint": "Wpisano jako dyktowanie. Aby zapytać Kusema, naciśnij spację, trzymając {{name}}."
+    "triggerHint": "Wpisano jako dyktowanie. Aby zapytać Kusema, naciśnij spację, trzymając {{name}}.",
+    "ai": {
+      "noProvider": "Kusema potrzebuje AI, żeby odpowiadać. Skonfiguruj ją w Asystent → Ustawienia.",
+      "noKey": "Brak klucza API dla {{name}}. Dodaj go w Asystent → Ustawienia.",
+      "noModel": "Nie wybrano modelu dla {{name}}. Wybierz go w Asystent → Ustawienia.",
+      "providerUnsupported": "{{name}} nie może jeszcze odpowiadać na pytania. Wybierz inną AI w Asystent → Ustawienia.",
+      "screenProviderGone": "AI wybrana do pytań o ekran już nie istnieje. Wybierz inną w Asystent → Ustawienia.",
+      "keyRejected": "{{name}} nie przyjął klucza API. Sprawdź go w Asystent → Ustawienia.",
+      "localNotRunning": "{{name}} nie działa na tym komputerze. Uruchom go i zapytaj ponownie.",
+      "unreachable": "Nie można połączyć się z {{name}}. Sprawdź połączenie z internetem i adres AI w Asystent → Ustawienia.",
+      "privileged": "Tryb Privileged jest włączony, więc AI w chmurze jest zablokowana. Użyj lokalnej AI albo wyłącz tryb Privileged.",
+      "rateLimited": "{{name}} jest zajęty. Poczekaj chwilę i zapytaj ponownie.",
+      "notFound": "{{name}} nie znalazł tego modelu. Sprawdź go w Asystent → Ustawienia.",
+      "noVision": "Ta AI nie widzi ekranu. Wybierz taką, która widzi obrazy, na przykład Claude albo model wizyjny w Ollama.",
+      "emptyReply": "{{name}} nie przysłał odpowiedzi. Zapytaj ponownie.",
+      "nothingHeard": "Kusema nie usłyszała pytania. Przytrzymaj klawisz, naciśnij Spację, a potem mów.",
+      "other": "Kusema nie dostała odpowiedzi: {{name}}"
+    },
+    "setUp": "Skonfiguruj",
+    "dismiss": "Zamknij"
   },
   "screenCard": {
     "title": "Wysłać ten zrzut ekranu?",
@@ -1674,7 +1693,7 @@
     "trigger": "W dyktowaniu ciągłym zacznij od „{{trigger}},”, aby zmienić tekst w ten sam sposób, np. „{{trigger}}, napisz to bardziej formalnie”. Bez tego słowa wszystko jest wpisywane tak, jak mówisz.",
     "triggerOff": "Aby zmieniać tekst w dyktowaniu ciągłym, ustaw słowo wyzwalające w Ogólne → Edycja głosowa.",
     "selectFirst": "Niektóre aplikacje, takie jak ONLYOFFICE, LibreOffice i Google Docs, nie pokazują Kusemie swojego tekstu. Tam najpierw zaznacz tekst myszą lub klawiaturą; zaznaczanie zdania, akapitu czy słów głosem nie działa.",
-    "introKey": "Przytrzymaj {{key}} i naciśnij spację (lub zacznij od „{{trigger}}”), a potem powiedz jedno z tych poleceń. Polecenia oznaczone „Także w dyktowaniu ciągłym” działają tam, gdy powiesz je osobno."
+    "introKey": "Przytrzymaj {{key}} i naciśnij Spację (albo zacznij od „{{trigger}},”), a potem powiedz jedno z tych poleceń. Aby zamiast tego wpisać pytanie, naciśnij T, trzymając klawisz. Polecenia oznaczone „Także przy ciągłym dyktowaniu” działają tam, gdy powiesz je osobno."
   },
   "voiceEdit": {
     "notice": {
@@ -1726,11 +1745,11 @@
       "title": "Klawisze Kusema",
       "hold": "Przytrzymaj <key/>, aby mówić.",
       "doubleTap": "Naciśnij dwukrotnie <key/>, aby dyktować w trybie ciągłym.",
-      "ask": "Trzymając, naciśnij <space/>, aby zapytać Kusema, lub zacznij od <q>{{trigger}}</q>: zapytaj, edytuj lub pokaż swój ekran."
+      "askOrType": "Trzymając, naciśnij <space/>, aby zapytać głosem, lub <t/>, aby pisać. Albo zacznij od <q>{{trigger}}</q>: zapytaj, edytuj lub pokaż swój ekran."
     },
     "settings": {
       "title": "Klawisz Kusema",
-      "description": "Jeden klawisz do dyktowania. Przytrzymaj go, aby mówić; naciśnij dwukrotnie, aby dyktować w trybie ciągłym. Aby zapytać, edytować lub pokazać ekran, naciśnij spację, trzymając go, lub zacznij od „Kusema”. Inne aplikacje nigdy nie widzą tego klawisza.",
+      "description": "Jeden klawisz do dyktowania. Przytrzymaj go, aby mówić; naciśnij dwa razy, aby dyktować bez przerwy. Trzymając, naciśnij Spację, aby zapytać głosem, lub T, aby wpisać pytanie. Albo zacznij od „Kusema”, aby zapytać, edytować lub pokazać ekran. Inne aplikacje nigdy nie widzą tego klawisza.",
       "enabled": {
         "label": "Używaj klawisza Kusema",
         "description": "Po wyłączeniu działają tylko skróty poniżej."

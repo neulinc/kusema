@@ -1572,7 +1572,26 @@
       "edit": "Modifica in corso…"
     },
     "assistantTake": "Chiedi a Kusema",
-    "triggerHint": "Scritto come dettatura. Per chiedere a Kusema, tocca Spazio tenendo premuto {{name}}."
+    "triggerHint": "Scritto come dettatura. Per chiedere a Kusema, tocca Spazio tenendo premuto {{name}}.",
+    "ai": {
+      "noProvider": "Kusema ha bisogno di un'IA per rispondere. Configurane una in Assistente → Impostazioni.",
+      "noKey": "Nessuna chiave API per {{name}}. Aggiungine una in Assistente → Impostazioni.",
+      "noModel": "Nessun modello scelto per {{name}}. Scegline uno in Assistente → Impostazioni.",
+      "providerUnsupported": "{{name}} non può ancora rispondere alle domande. Scegli un'altra IA in Assistente → Impostazioni.",
+      "screenProviderGone": "L'IA scelta per le domande sullo schermo non c'è più. Scegline un'altra in Assistente → Impostazioni.",
+      "keyRejected": "{{name}} non ha accettato la chiave API. Controllala in Assistente → Impostazioni.",
+      "localNotRunning": "{{name}} non è in esecuzione su questo computer. Avvialo, poi chiedi di nuovo.",
+      "unreachable": "Impossibile raggiungere {{name}}. Controlla la connessione a internet e l'indirizzo dell'IA in Assistente → Impostazioni.",
+      "privileged": "La modalità Privileged è attiva, quindi l'IA nel cloud è bloccata. Usa un'IA locale o disattiva la modalità Privileged.",
+      "rateLimited": "{{name}} è occupato. Attendi un momento, poi chiedi di nuovo.",
+      "notFound": "{{name}} non ha trovato quel modello. Controllalo in Assistente → Impostazioni.",
+      "noVision": "Questa IA non può vedere lo schermo. Scegline una che veda le immagini, come Claude o un modello di visione in Ollama.",
+      "emptyReply": "{{name}} non ha inviato una risposta. Prova a chiedere di nuovo.",
+      "nothingHeard": "Kusema non ha sentito una domanda. Tieni premuto il tasto, tocca Spazio, poi parla.",
+      "other": "Kusema non ha ottenuto una risposta: {{name}}"
+    },
+    "setUp": "Configura",
+    "dismiss": "Chiudi"
   },
   "screenCard": {
     "title": "Inviare questo screenshot?",
@@ -1666,7 +1685,7 @@
     "trigger": "Nella dettatura continua, inizia con «{{trigger}},» per cambiare il testo allo stesso modo, ad esempio «{{trigger}}, rendilo più formale». Senza questa parola, tutto viene scritto come lo dici.",
     "triggerOff": "Per cambiare il testo durante la dettatura continua, imposta una parola di attivazione in Generale → Modifica vocale.",
     "selectFirst": "Alcune app, come ONLYOFFICE, LibreOffice e Google Docs, non mostrano il loro testo a Kusema. Lì seleziona prima il testo con il mouse o la tastiera; selezionare una frase, un paragrafo o delle parole a voce non funziona.",
-    "introKey": "Tieni premuto {{key}} e tocca Spazio (o inizia con «{{trigger}}»), poi di' uno di questi. I comandi segnati «Anche nella dettatura continua» funzionano lì quando sono detti da soli."
+    "introKey": "Tieni premuto {{key}} e tocca Spazio (o inizia con «{{trigger}},»), poi di' uno di questi comandi. Per scrivere una domanda, tocca T tenendolo premuto. I comandi segnati con «Anche nella dettatura continua» funzionano lì se detti da soli."
   },
   "voiceEdit": {
     "notice": {
@@ -1718,11 +1737,11 @@
       "title": "Tasti di Kusema",
       "hold": "Tieni premuto <key/> per parlare.",
       "doubleTap": "Premi due volte <key/> per la dettatura continua.",
-      "ask": "Tenendolo premuto, tocca <space/> per chiedere a Kusema, o inizia con <q>{{trigger}}</q>: chiedere, modificare o far guardare il tuo schermo."
+      "askOrType": "Tenendolo premuto, tocca <space/> per chiedere a voce, o <t/> per scrivere. Oppure inizia con <q>{{trigger}}</q>: chiedere, modificare o far guardare il tuo schermo."
     },
     "settings": {
       "title": "Tasto Kusema",
-      "description": "Un solo tasto per dettare. Tienilo premuto per parlare; premilo due volte per la dettatura continua. Per chiedere, modificare o far guardare il tuo schermo, tocca Spazio tenendolo premuto, o inizia con «Kusema». Le altre app non vedono mai il tasto.",
+      "description": "Un tasto per dettare. Tienilo premuto per parlare; toccalo due volte per la dettatura continua. Tenendolo premuto, tocca Spazio per chiedere a voce, o T per scrivere una domanda. Oppure inizia con «Kusema» per chiedere, modificare o far guardare il tuo schermo. Le altre app non vedono mai il tasto.",
       "enabled": {
         "label": "Usa il tasto Kusema",
         "description": "Disattivato, funzionano solo le scorciatoie qui sotto."

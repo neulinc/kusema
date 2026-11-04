@@ -15,7 +15,14 @@ import i18n, { syncLanguageFromSettings } from "@/i18n";
 import type { ModelStateEvent } from "@/lib/types/events";
 import { getLanguageDirection } from "@/lib/utils/rtl";
 import { keyLabel } from "@/lib/kusemaKey";
-import type { KusemaKey } from "@/bindings";
+import {
+  LABEL_MS,
+  labelRoom,
+  noticeRoom,
+  pillLabels,
+  type PillLabel,
+} from "./pillLayout";
+import type { KusemaKey, SetupPage } from "@/bindings";
 
 type OverlayState =
   | "recording"
@@ -34,6 +41,8 @@ type EditNotice = {
   name: string | null;
   message: string;
   in_dictation: boolean;
+  /** Kusema: where "Set up" goes, if settings can fix it. */
+  setup?: SetupPage | null;
 };
 
 /** How long a voice editing message replaces continuous dictation's status. */
@@ -160,6 +169,14 @@ const RecordingOverlay: React.FC = () => {
   // Kusema voice editing: the message shown, and until when in dictation.
   const [editNotice, setEditNotice] = useState("");
   const [editNoticeUntil, setEditNoticeUntil] = useState(0);
+  const [noticeSetup, setNoticeSetup] = useState<SetupPage | null>(null);
+  // The label row's room, px: the Live panel's text gives it up.
+  const [labelPx, setLabelPx] = useState(0);
+  // Kusema: the label row above the animation, and the message's content,
+  // measured so the window grows by just as much.
+  const labelRef = useRef<HTMLDivElement>(null);
+  const noticeRef = useRef<HTMLDivElement>(null);
+  const labelCloseTimer = useRef<ReturnType<typeof setTimeout>>();
   // Kusema: the mode being listened for, the app style in use, and the
   // moment the pill is leaving (its "done" flourish).
   const [mode, setMode] = useState<PillMode>("dictation");
@@ -289,6 +306,7 @@ const RecordingOverlay: React.FC = () => {
           setEditNoticeUntil(
             notice.in_dictation ? Date.now() + EDIT_NOTICE_MS : 0,
           );
+          setNoticeSetup(notice.in_dictation ? null : (notice.setup ?? null));
         },
       );
 
@@ -417,6 +435,53 @@ const RecordingOverlay: React.FC = () => {
     setOverflowing(false);
   }, [session]);
 
+  const styleName = appStyle
+    ? (appStyle.name ??
+      t(`settings.appStyles.builtIn.${appStyle.id}.name`, {
+        defaultValue: appStyle.id,
+      }))
+    : null;
+  // Kusema: the label row's chips, and in continuous dictation a message.
+  const inDictationNotice =
+    state === "dictating" && !!editNotice && now < editNoticeUntil;
+  const labels: PillLabel[] =
+    state === "notice" || state === "dictating"
+      ? []
+      : pillLabels(
+          {
+            assistantTake,
+            editing: state === "editing",
+            styleName,
+            privileged,
+          },
+          (key, options) => t(key, options),
+        );
+  const labelOpen = isVisible && (labels.length > 0 || inDictationNotice);
+  const labelKey = `${state}|${labelOpen}|${labels.map((l) => l.text).join("|")}|${
+    inDictationNotice ? editNotice : ""
+  }`;
+
+  // The window grows for the label row before it opens, and shrinks only
+  // once it has closed, so nothing is ever clipped.
+  useLayoutEffect(() => {
+    clearTimeout(labelCloseTimer.current);
+    if (state === "notice") {
+      const h = noticeRef.current?.scrollHeight ?? 0;
+      void commands.setOverlayLabelHeight(noticeRoom(h));
+      return;
+    }
+    if (labelOpen) {
+      const h = labelRef.current?.scrollHeight ?? 0;
+      setLabelPx(labelRoom(h, true));
+      void commands.setOverlayLabelHeight(labelRoom(h, true));
+    } else {
+      labelCloseTimer.current = setTimeout(() => {
+        setLabelPx(0);
+        void commands.setOverlayLabelHeight(0);
+      }, LABEL_MS);
+    }
+  }, [labelKey]);
+
   // Kusema: kept mounted for a moment after hiding, for the "done" look.
   if (!isVisible && !leaving) return null;
 
@@ -440,19 +505,14 @@ const RecordingOverlay: React.FC = () => {
     1,
     (levels.reduce((sum, v) => sum + v, 0) / Math.max(1, levels.length)) * 1.6,
   );
-  const styleName = appStyle
-    ? (appStyle.name ??
-      t(`settings.appStyles.builtIn.${appStyle.id}.name`, {
-        defaultValue: appStyle.id,
-      }))
-    : null;
+  // The style's name goes in the label row; the working label says what's
+  // happening.
   const styledLabel = (label: string) =>
-    route
-      ? t(`overlay.route.${route}`)
-      : styleName
-        ? t("overlay.withStyle", { name: styleName })
-        : label;
-  const stageStyle = { "--lvl": level.toFixed(3) } as React.CSSProperties;
+    route ? t(`overlay.route.${route}`) : label;
+  const stageStyle = {
+    "--lvl": level.toFixed(3),
+    "--ov-label-h": `${labelPx}px`,
+  } as React.CSSProperties;
   const glow = <span className="sglow" aria-hidden="true" />;
   const modeIcon = (pillMode: PillMode) => (
     <PillIcon
@@ -475,8 +535,31 @@ const RecordingOverlay: React.FC = () => {
     </div>
   );
 
+  // Continuous dictation's card is wide: its chip stays in the row.
   const privilegedChip = privileged && (
     <span className="pchip">{t("overlay.privileged")}</span>
+  );
+
+  // The label row: above the animation (below it for a pill at the top),
+  // inside the card, so the glow wraps both.
+  const labelRow = (
+    <div className={`slabel ${labelOpen ? "open" : ""}`} aria-live="polite">
+      <div className="slabel-clip">
+        <div className="slabel-inner" ref={labelRef}>
+          {inDictationNotice ? (
+            <span className="slabel-text" role="status">
+              {editNotice}
+            </span>
+          ) : (
+            labels.map((label) => (
+              <span key={label.kind} className={`pchip pchip-${label.kind}`}>
+                {label.text}
+              </span>
+            ))
+          )}
+        </div>
+      </div>
+    </div>
   );
 
   const cancelBtn = (
@@ -502,13 +585,6 @@ const RecordingOverlay: React.FC = () => {
     <div className="sbase">
       <div className="sbase-l">
         {modeIcon(state === "editing" ? "edit" : mode)}
-        {state === "editing" && (
-          <span className="pchip">{t("overlay.editing")}</span>
-        )}
-        {assistantTake && state !== "editing" && (
-          <span className="pchip">{t("overlay.assistantTake")}</span>
-        )}
-        {privilegedChip}
       </div>
       {waveform}
       <div className="sbase-r">
@@ -528,7 +604,6 @@ const RecordingOverlay: React.FC = () => {
         ) : (
           <span className="sspinner" />
         )}
-        {privilegedChip}
       </div>
       <span className="swork-label" role="status" title={label}>
         {label}
@@ -540,18 +615,16 @@ const RecordingOverlay: React.FC = () => {
   // ---- Continuous dictation: what's happening, how long, and a way out ----
   if (state === "dictating") {
     const phase = dictation?.phase ?? "dictating";
-    const label =
-      editNotice && now < editNoticeUntil
-        ? editNotice
-        : dictation?.notice
-          ? t(DICTATION_NOTICES[dictation.notice])
-          : phase === "paused"
-            ? t("overlay.dictation.paused")
-            : phase === "no_target"
-              ? t("overlay.dictation.noTarget")
-              : phase === "dictating"
-                ? t("overlay.dictation.dictating")
-                : t("overlay.dictation.finishing");
+    // A message goes in the label row above, wrapped; this says the status.
+    const label = dictation?.notice
+      ? t(DICTATION_NOTICES[dictation.notice])
+      : phase === "paused"
+        ? t("overlay.dictation.paused")
+        : phase === "no_target"
+          ? t("overlay.dictation.noTarget")
+          : phase === "dictating"
+            ? t("overlay.dictation.dictating")
+            : t("overlay.dictation.finishing");
     const seconds = dictation
       ? Math.max(0, Math.floor((now - dictation.started_at_ms) / 1000))
       : 0;
@@ -577,7 +650,10 @@ const RecordingOverlay: React.FC = () => {
       >
         <div className="spill">
           {glow}
-          <div className={`scard compact dictating look-${look}`}>
+          <div
+            className={`scard compact dictating look-${look} ${labelOpen ? "labelled" : ""}`}
+          >
+            {labelRow}
             <div className="drow">
               {look === "error" ? (
                 <PillIcon d={ICONS.warn} className="ready" />
@@ -632,11 +708,36 @@ const RecordingOverlay: React.FC = () => {
         <div className="spill">
           {glow}
           <div className="scard compact notice look-notice">
-            <div className="snotice-row">
+            <div className="snotice-row" ref={noticeRef}>
               <PillIcon d={ICONS.info} className="ready" />
-              <p className="snotice" role="status">
-                {editNotice}
-              </p>
+              <div className="snotice-body">
+                <p className="snotice" role="status">
+                  {editNotice}
+                </p>
+                {noticeSetup && (
+                  <button
+                    className="dstop snotice-setup"
+                    onClick={() => void commands.openSetupPage(noticeSetup)}
+                  >
+                    {t("overlay.setUp")}
+                  </button>
+                )}
+              </div>
+              <button
+                className="sx"
+                aria-label={t("overlay.dismiss")}
+                title={t("overlay.dismiss")}
+                onClick={() => void commands.dismissOverlayNotice()}
+              >
+                <svg viewBox="0 0 16 16" aria-hidden="true">
+                  <path
+                    d="M4 4 L12 12 M12 4 L4 12"
+                    stroke="currentColor"
+                    strokeWidth="1.6"
+                    strokeLinecap="round"
+                  />
+                </svg>
+              </button>
             </div>
           </div>
         </div>
@@ -672,7 +773,7 @@ const RecordingOverlay: React.FC = () => {
             key={session}
             className={`scard ${open ? "open" : ""} ${collapsed ? "working" : ""} ${
               isVisible ? "" : "leaving"
-            }`}
+            } ${labelOpen ? "labelled" : ""}`}
           >
             <div className="stext">
               <div className="stext-clip">
@@ -698,6 +799,7 @@ const RecordingOverlay: React.FC = () => {
                 </div>
               </div>
             </div>
+            {labelRow}
             {working
               ? workingRow(
                   workKind === "polishing"
@@ -745,8 +847,9 @@ const RecordingOverlay: React.FC = () => {
         <div
           className={`scard compact ${working && (isVisible || leaving) ? "cworking" : ""} ${
             state === "editing" ? "editing" : ""
-          }`}
+          } ${labelOpen ? "labelled" : ""}`}
         >
+          {labelRow}
           {working ? workingRow(workLabel, true) : listeningRow(false, true)}
         </div>
       </div>

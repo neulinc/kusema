@@ -474,6 +474,7 @@ pub fn ask_box_submit(app: AppHandle, question: String, screen: bool) -> Result<
         source: Source::AskBox,
         target,
         id,
+        in_dictation: false,
     };
     let cancelled = cancel_flag(&app, id);
     let app_for_task = app.clone();
@@ -500,6 +501,9 @@ pub fn ask_box_submit(app: AppHandle, question: String, screen: bool) -> Result<
                             question,
                             message: e.message(),
                             id,
+                            key: "askBox.noWindow".to_string(),
+                            name: None,
+                            setup: None,
                         },
                     );
                 }

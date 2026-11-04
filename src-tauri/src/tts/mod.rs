@@ -183,6 +183,7 @@ pub fn say(app: &AppHandle, text: &str) {
         return;
     };
     let (voice, rate) = configure(state.engine.as_ref(), &settings);
+    debug!("Saying a notice aloud");
     if let Err(e) = state.engine.speak(text, voice.as_deref(), rate) {
         warn!("Could not speak: {e}");
     }

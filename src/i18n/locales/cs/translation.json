@@ -1578,7 +1578,26 @@
       "edit": "Upravuji…"
     },
     "assistantTake": "Zeptat se Kusemy",
-    "triggerHint": "Napsáno jako diktát. Chcete-li se zeptat Kusemy, klepněte na mezerník při držení {{name}}."
+    "triggerHint": "Napsáno jako diktát. Chcete-li se zeptat Kusemy, klepněte na mezerník při držení {{name}}.",
+    "ai": {
+      "noProvider": "Kusema potřebuje k odpovědím AI. Nastavte ji v Asistent → Nastavení.",
+      "noKey": "Pro {{name}} chybí klíč API. Přidejte ho v Asistent → Nastavení.",
+      "noModel": "Pro {{name}} není vybraný model. Vyberte ho v Asistent → Nastavení.",
+      "providerUnsupported": "{{name}} zatím neumí odpovídat na otázky. Vyberte jinou AI v Asistent → Nastavení.",
+      "screenProviderGone": "AI vybraná pro otázky k obrazovce už neexistuje. Vyberte jinou v Asistent → Nastavení.",
+      "keyRejected": "{{name}} nepřijal klíč API. Zkontrolujte ho v Asistent → Nastavení.",
+      "localNotRunning": "{{name}} na tomto počítači neběží. Spusťte ho a zeptejte se znovu.",
+      "unreachable": "Nepodařilo se spojit s {{name}}. Zkontrolujte připojení k internetu a adresu AI v Asistent → Nastavení.",
+      "privileged": "Režim Privileged je zapnutý, takže cloudová AI je blokovaná. Použijte místní AI nebo režim Privileged vypněte.",
+      "rateLimited": "{{name}} je vytížený. Chvíli počkejte a zeptejte se znovu.",
+      "notFound": "{{name}} ten model nenašel. Zkontrolujte ho v Asistent → Nastavení.",
+      "noVision": "Tato AI nevidí obrazovku. Vyberte takovou, která vidí obrázky, třeba Claude nebo model s viděním v Ollama.",
+      "emptyReply": "{{name}} neposlal odpověď. Zkuste se zeptat znovu.",
+      "nothingHeard": "Kusema neslyšela otázku. Podržte klávesu, klepněte na mezerník a pak mluvte.",
+      "other": "Kusema nedostala odpověď: {{name}}"
+    },
+    "setUp": "Nastavit",
+    "dismiss": "Zavřít"
   },
   "screenCard": {
     "title": "Odeslat tento snímek obrazovky?",
@@ -1674,7 +1693,7 @@
     "trigger": "Při průběžném diktování začněte slovy „{{trigger}},“ a text se změní stejně, například „{{trigger}}, udělej to formálnější“. Bez toho slova se vše napíše tak, jak to řeknete.",
     "triggerOff": "Chcete-li měnit text při průběžném diktování, nastavte spouštěcí slovo v Obecné → Hlasové úpravy.",
     "selectFirst": "Některé aplikace, například ONLYOFFICE, LibreOffice a Google Docs, Kusemě svůj text neukazují. Tam nejdřív označte text myší nebo klávesnicí; označování věty, odstavce nebo slov hlasem tam nefunguje.",
-    "introKey": "Podržte {{key}} a klepněte na mezerník (nebo začněte slovem „{{trigger}}“), pak řekněte jeden z těchto příkazů. Příkazy označené „Také při průběžném diktování“ tam fungují, když je řeknete samostatně."
+    "introKey": "Podržte {{key}} a klepněte na mezerník (nebo začněte slovem „{{trigger}},“), pak řekněte jeden z těchto příkazů. Chcete-li otázku napsat, klepněte při držení na T. Příkazy označené „Také při souvislém diktování“ tam fungují, když je řeknete samostatně."
   },
   "voiceEdit": {
     "notice": {
@@ -1726,11 +1745,11 @@
       "title": "Klávesy Kusemy",
       "hold": "Podržte <key/> a mluvte.",
       "doubleTap": "Dvojitým stiskem <key/> spustíte průběžné diktování.",
-      "ask": "Při držení klepněte na <space/> a zeptejte se Kusemy, nebo začněte slovem <q>{{trigger}}</q>: dotaz, úprava nebo pohled na obrazovku."
+      "askOrType": "Při držení klepněte na <space/> a zeptejte se hlasem, nebo na <t/> a pište. Nebo začněte slovem <q>{{trigger}}</q>: dotaz, úprava nebo pohled na obrazovku."
     },
     "settings": {
       "title": "Klávesa Kusemy",
-      "description": "Jedna klávesa na diktování. Podržte ji a mluvte; dvojitým stiskem spustíte průběžné diktování. Chcete-li se ptát, upravovat nebo nechat Kusemu podívat se na obrazovku, klepněte při držení na mezerník, nebo začněte slovem „Kusema“. Ostatní aplikace klávesu nikdy neuvidí.",
+      "description": "Jedna klávesa pro diktování. Podržením mluvíte; dvojitým klepnutím spustíte souvislé diktování. Při držení klepněte na mezerník a zeptejte se hlasem, nebo na T a napište otázku. Nebo začněte slovem „Kusema“ pro dotaz, úpravu nebo pohled na obrazovku. Ostatní aplikace klávesu nikdy neuvidí.",
       "enabled": {
         "label": "Používat klávesu Kusemy",
         "description": "Vypnuto fungují jen zkratky níže."

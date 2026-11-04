@@ -17,6 +17,7 @@ pub mod vk {
     pub const CAPITAL: u16 = 0x14;
     pub const ESCAPE: u16 = 0x1B;
     pub const SPACE: u16 = 0x20;
+    pub const T: u16 = 0x54;
     pub const PRIOR: u16 = 0x21;
     pub const LEFT: u16 = 0x25;
     pub const DOWN: u16 = 0x28;

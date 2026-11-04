@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { listen } from "@tauri-apps/api/event";
 import { FileInput, Image } from "lucide-react";
-import { commands, type ChatTurn } from "@/bindings";
+import { commands, type ChatTurn, type SetupPage } from "@/bindings";
 import { SettingsGroup } from "../../ui/SettingsGroup";
 import { Button } from "../../ui/Button";
 import { Alert } from "../../ui/Alert";
@@ -28,6 +28,9 @@ interface AssistantErrorPayload {
   question: string;
   message: string;
   id?: number;
+  key?: string;
+  name?: string | null;
+  setup?: SetupPage | null;
 }
 
 /** Kusema type-to-ask: a question typed here, while its answer streams in. */
@@ -57,6 +60,14 @@ export const AssistantSettings: React.FC<{
     setTab(next);
     saveTab(next);
   };
+
+  // Kusema: "Set up" from the pill opens the Settings tab.
+  useEffect(() => {
+    const follow = (event: Event) =>
+      setTab((event as CustomEvent<AssistantTab>).detail);
+    window.addEventListener("kusema-assistant-tab", follow);
+    return () => window.removeEventListener("kusema-assistant-tab", follow);
+  }, []);
 
   const onTabKey = (ev: React.KeyboardEvent) => {
     const next = tabForKey(tab, ev.key, document.documentElement.dir === "rtl");
@@ -326,7 +337,31 @@ export const AssistantSettings: React.FC<{
                     {error.question}
                   </div>
                 </div>
-                <Alert variant="error">{error.message}</Alert>
+                <Alert variant="error">
+                  {error.key
+                    ? t(error.key, { name: error.name ?? "" })
+                    : error.message}
+                  {error.setup === "assistant" && (
+                    <Button
+                      variant="secondary"
+                      size="sm"
+                      className="ms-2"
+                      onClick={() => chooseTab("settings")}
+                    >
+                      {t("overlay.setUp")}
+                    </Button>
+                  )}
+                  {error.setup === "privacy" && (
+                    <Button
+                      variant="secondary"
+                      size="sm"
+                      className="ms-2"
+                      onClick={() => void commands.openSetupPage("privacy")}
+                    >
+                      {t("overlay.setUp")}
+                    </Button>
+                  )}
+                </Alert>
               </>
             )}
             <div ref={bottomRef} />

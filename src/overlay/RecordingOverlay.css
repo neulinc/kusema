@@ -30,7 +30,6 @@
                          center longer labels; shared by Live (collapsed) + minimal */
   --ov-open-w: 392px; /* Live panel, expanded */
   --ov-dictation-w: 412px; /* continuous dictation (OVERLAY_DICTATION_WIDTH) */
-  --ov-chip-w: 76px; /* room for the Privileged chip */
   --ov-base-h: 40px; /* control-row height (.sbase) */
   --ov-cap-max-h: 64px; /* max height of the scrolling live-text region */
 }
@@ -163,8 +162,8 @@
   width: var(--ov-dictation-w);
 }
 
-/* Privileged mode: a chip beside the dot, in cards widened to hold it. Keep the
-   widest (--ov-work-w + --ov-chip-w) within OVERLAY_WIDTH in overlay.rs. */
+/* A label chip ("Ask Kusema", Privileged, a style): in the label row above
+   the animation, or beside the dot in continuous dictation's wide card. */
 .pchip {
   flex: none;
   margin-inline-start: 6px;
@@ -175,24 +174,6 @@
   line-height: 16px;
   color: var(--color-text);
   white-space: nowrap;
-}
-.ov-stage.privileged .scard {
-  width: calc(var(--ov-pill-w) + var(--ov-chip-w));
-}
-.ov-stage.privileged .scard.open {
-  width: var(--ov-open-w);
-}
-.ov-stage.privileged .scard.working {
-  width: calc(var(--ov-work-w) + var(--ov-chip-w));
-}
-.ov-stage.privileged .scard.compact {
-  width: calc(var(--ov-rest-w) + var(--ov-chip-w));
-}
-.ov-stage.privileged .scard.compact.cworking {
-  width: calc(var(--ov-work-w) + var(--ov-chip-w));
-}
-.ov-stage.privileged .scard.compact.dictating {
-  width: var(--ov-dictation-w);
 }
 
 /* Continuous dictation: dot | waveform | status (takes the room) | timer | stop */
@@ -251,7 +232,10 @@
 .stext-cap {
   /* Vertical counterpart of the .scard clamp: show fewer lines rather than clip.
      20px = cap padding (12) + card borders (2) + 6px slack for zoom rounding. */
-  max-height: min(var(--ov-cap-max-h), calc(100vh - var(--ov-base-h) - 20px));
+  max-height: min(
+    var(--ov-cap-max-h),
+    calc(100vh - var(--ov-base-h) - var(--ov-label-h, 0px) - 20px)
+  );
   overflow-y: auto;
   overscroll-behavior: contain;
   display: flex;
@@ -481,10 +465,6 @@
   text-overflow: ellipsis;
 }
 
-/* Kusema voice editing: the editing hotkey's chip, and its messages. */
-.scard.compact.editing {
-  width: calc(var(--ov-rest-w) + var(--ov-chip-w));
-}
 .scard.compact.notice {
   width: var(--ov-dictation-w);
 }
@@ -521,7 +501,10 @@
 .stext-cap {
   max-height: min(
     var(--ov-cap-max-h),
-    calc(100vh - var(--ov-base-h) - 20px - 2 * var(--ov-glow-pad))
+    calc(
+      100vh - var(--ov-base-h) - var(--ov-label-h, 0px) - 20px - 2 *
+        var(--ov-glow-pad)
+    )
   );
 }
 .spill {
@@ -718,9 +701,6 @@
 
 /* Kusema key: Space tapped while holding, so the take is a question. The
    chip widens the pill like the Editing chip; the glow turns warm. */
-.ov-stage.assistant-take .scard.compact {
-  width: calc(var(--ov-rest-w) + var(--ov-chip-w) + 20px);
-}
 .ov-stage.assistant-take .sglow::before {
   background: linear-gradient(
     90deg,
@@ -730,4 +710,72 @@
     var(--kz-amber) 75%,
     var(--kz-violet) 100%
   );
+}
+
+/* Kusema: the label row ("Ask Kusema", "Editing", a style's name, Privileged,
+   or a message in continuous dictation). It opens above the animation (below
+   it for a pill at the top), inside the card, so the glow wraps the grown
+   pill; the row below keeps its size and place. Labels wrap within the card. */
+.slabel {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition:
+    grid-template-rows 260ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 200ms ease;
+}
+.slabel.open {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+.slabel-clip {
+  overflow: hidden;
+  min-height: 0;
+}
+.slabel-inner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4px 6px;
+  padding: 8px 12px 0;
+  text-align: center;
+}
+.ov-stage.top .slabel-inner {
+  padding: 0 12px 8px;
+}
+.slabel-inner .pchip {
+  margin: 0;
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.slabel-text {
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--color-text);
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.scard.labelled {
+  border-radius: 18px;
+}
+/* A message's actions: Set up, and the close button. */
+.snotice-body {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+}
+.snotice-setup {
+  height: 24px;
+}
+.snotice-row .sx {
+  flex: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .slabel {
+    transition: none;
+  }
 }

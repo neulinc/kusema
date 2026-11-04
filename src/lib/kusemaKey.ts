@@ -18,9 +18,24 @@ export const PRESETS: KusemaKey["kind"][] = [
   "numpad_plus",
 ];
 
-/** A classic shortcut's control is hidden while they're off. */
-export const hiddenShortcut = (id: string, classicOn: boolean): boolean =>
-  !classicOn && CLASSIC_SHORTCUTS.includes(id);
+/** A classic shortcut's control is hidden while they're off. The Ask box's
+ * Ctrl+Alt+K is classic too (T while holding the key opens it), unless it was
+ * changed (`askBoxCustomized`): then it stays the user's own. */
+export const hiddenShortcut = (
+  id: string,
+  classicOn: boolean,
+  askBoxCustomized = false,
+): boolean =>
+  !classicOn &&
+  (CLASSIC_SHORTCUTS.includes(id) || (id === "ask_box" && !askBoxCustomized));
+
+/** The Ask box's key was changed from its default. */
+export const askBoxCustomized = (
+  binding: { current_binding: string; default_binding: string } | undefined,
+): boolean =>
+  !!binding &&
+  binding.current_binding.trim().toLowerCase() !==
+    binding.default_binding.toLowerCase();
 
 /** The key's label: a translation for the presets, Windows' name otherwise. */
 export const keyLabel = (

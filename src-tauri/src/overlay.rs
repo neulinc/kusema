@@ -45,8 +45,9 @@ tauri_panel! {
 //
 // Compact overlay (Minimal / transcribing / processing): the 40h pill animates
 // width from 172 (--ov-rest-w) to 216 (--ov-work-w) and expands from center, so
-// the window must fit the widest state plus a little slack. Kusema: plus 76
-// (--ov-chip-w) for the Privileged chip.
+// the window must fit the widest state plus a little slack. Kusema: labels
+// (Privileged, "Ask Kusema", a style) have their own row above, which grows
+// the window's height instead (`set_overlay_label_height`).
 const OVERLAY_WIDTH: f64 = 300.0;
 const OVERLAY_HEIGHT: f64 = 50.0;
 
@@ -63,10 +64,71 @@ const OVERLAY_DICTATION_WIDTH: f64 = 420.0;
 /// out by it, so the card itself stays exactly where it was.
 const PILL_GLOW_PAD: f64 = 14.0;
 
-/// Overlay window size (logical) for a given UI state, with the glow's room.
+/// Overlay window size (logical) for a given UI state, with the glow's room
+/// and the label row's.
 fn overlay_dimensions(state: &str) -> (f64, f64) {
     let (width, height) = card_dimensions(state);
-    (width + 2.0 * PILL_GLOW_PAD, height + 2.0 * PILL_GLOW_PAD)
+    let label = label_room(f64::from_bits(LABEL_HEIGHT.load(Ordering::Relaxed)));
+    (
+        width + 2.0 * PILL_GLOW_PAD,
+        height + 2.0 * PILL_GLOW_PAD + label,
+    )
+}
+
+/// Kusema: the tallest label row the pill grows by ("Ask Kusema", "Editing",
+/// a style's name, a message wrapped over a few lines), logical pixels.
+const MAX_LABEL_HEIGHT: f64 = 120.0;
+
+/// Kusema: room the page asked for, for the label row above the pill's
+/// animation (`set_overlay_label_height`), as f64 bits.
+static LABEL_HEIGHT: AtomicU64 = AtomicU64::new(0);
+
+/// Kusema: the state the pill was last shown in, to re-size it in place.
+static LAST_STATE: std::sync::Mutex<String> = std::sync::Mutex::new(String::new());
+
+/// How much taller the window is for the label row: what the page asked for,
+/// within bounds. The Live panel's text keeps its room: the page takes the row
+/// off it (`--ov-label-h`).
+fn label_room(requested: f64) -> f64 {
+    if !requested.is_finite() {
+        return 0.0;
+    }
+    requested.clamp(0.0, MAX_LABEL_HEIGHT).round()
+}
+
+/// Kusema: the pill's label row is `height` tall (0 when it's gone). The
+/// window grows (or shrinks) by that much on the side away from the screen
+/// edge, so the pill and its animation stay where they are.
+#[tauri::command]
+#[specta::specta]
+pub fn set_overlay_label_height(app: AppHandle, height: f64) {
+    let previous = f64::from_bits(LABEL_HEIGHT.swap(height.to_bits(), Ordering::Relaxed));
+    let state = LAST_STATE.lock().unwrap_or_else(|e| e.into_inner()).clone();
+    if state.is_empty() || label_room(previous) == label_room(height) {
+        return;
+    }
+    let handle = app.clone();
+    let _ = app.run_on_main_thread(move || {
+        let Some(window) = handle.get_webview_window("recording_overlay") else {
+            return;
+        };
+        if !window.is_visible().unwrap_or(false) {
+            return;
+        }
+        let (width, height) = overlay_dimensions(&state);
+        #[cfg(target_os = "windows")]
+        if let Err(error) = place_windows_overlay(&handle, &window, width, height) {
+            log::error!("Failed to resize the pill for its label: {error}");
+        }
+        #[cfg(not(target_os = "windows"))]
+        {
+            let _ = window.set_size(tauri::Size::Logical(tauri::LogicalSize { width, height }));
+            if let Some((x, y)) = calculate_overlay_position(&handle, width, height) {
+                let _ =
+                    window.set_position(tauri::Position::Logical(tauri::LogicalPosition { x, y }));
+            }
+        }
+    });
 }
 
 /// The window's y moved out by the glow's room, away from the card's edge.
@@ -545,6 +607,11 @@ fn show_overlay_state(app_handle: &AppHandle, state: &str) {
 }
 
 fn show_overlay_state_on_main(app_handle: &AppHandle, state: &str) {
+    // Kusema: a new take starts without a label row; the page asks for one.
+    if matches!(state, "recording" | "streaming" | "editing" | "dictating") {
+        LABEL_HEIGHT.store(0f64.to_bits(), Ordering::Relaxed);
+    }
+    *LAST_STATE.lock().unwrap_or_else(|e| e.into_inner()) = state.to_string();
     // Size the overlay for this state (compact vs. streaming), then position it.
     let (width, height) = overlay_dimensions(state);
     if let Some(overlay_window) = app_handle.get_webview_window("recording_overlay") {
@@ -766,6 +833,8 @@ pub fn show_edit_notice<T: serde::Serialize + Clone>(
     if in_dictation {
         return true;
     }
+    *NOTICE_UNTIL.lock().unwrap_or_else(|e| e.into_inner()) =
+        Some(std::time::Instant::now() + std::time::Duration::from_secs(seconds));
     show_overlay_state(app_handle, "notice");
     let app = app_handle.clone();
     std::thread::spawn(move || {
@@ -779,6 +848,26 @@ pub fn show_edit_notice<T: serde::Serialize + Clone>(
         }
     });
     true
+}
+
+/// Kusema: until when the pill shows a message on its own (`show_edit_notice`).
+static NOTICE_UNTIL: std::sync::Mutex<Option<std::time::Instant>> = std::sync::Mutex::new(None);
+
+/// Kusema: the pill is showing a message, which hides itself: whoever was
+/// about to hide the pill leaves it up.
+pub fn notice_showing() -> bool {
+    NOTICE_UNTIL
+        .lock()
+        .unwrap_or_else(|e| e.into_inner())
+        .is_some_and(|until| std::time::Instant::now() < until)
+}
+
+/// Kusema: the pill's message was dismissed (its close button).
+#[tauri::command]
+#[specta::specta]
+pub fn dismiss_overlay_notice(app: AppHandle) {
+    *NOTICE_UNTIL.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    hide_recording_overlay(&app);
 }
 
 /// Hides the recording overlay window with fade-out animation
@@ -867,6 +956,22 @@ pub fn emit_levels(app_handle: &AppHandle, levels: &[f32]) {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn the_label_row_grows_the_pill_within_bounds() {
+        // No label, no extra room.
+        assert_eq!(label_room(0.0), 0.0);
+        // A label row: as tall as it is.
+        assert_eq!(label_room(26.4), 26.0);
+        assert_eq!(label_room(60.0), 60.0);
+        assert_eq!(label_room(44.0), 44.0);
+        // Never more than a few wrapped lines, never negative or nonsense.
+        assert_eq!(label_room(900.0), MAX_LABEL_HEIGHT);
+        assert_eq!(label_room(-5.0), 0.0);
+        assert_eq!(label_room(f64::NAN), 0.0);
+        // Live too: its text keeps its room.
+        assert_eq!(label_room(40.0), 40.0);
+    }
 
     #[test]
     fn monitor_hit_test_uses_half_open_physical_bounds() {

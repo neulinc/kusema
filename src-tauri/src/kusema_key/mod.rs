@@ -43,9 +43,27 @@ pub const CLASSIC: &[&str] = &[
 /// What the coordinator is told presses came from.
 const SOURCE: &str = "kusema_key";
 
-/// A classic shortcut that isn't registered, because they're off.
+/// A classic shortcut that isn't registered, because they're off. The Ask
+/// box's Ctrl+Alt+K is one too (T while holding the key replaces it), unless
+/// it was changed: then it's the user's own and stays.
 pub fn skip_binding(settings: &AppSettings, id: &str) -> bool {
-    !settings.classic_shortcuts && CLASSIC.contains(&id)
+    if settings.classic_shortcuts {
+        return false;
+    }
+    if id == crate::ask_box::BINDING {
+        return !ask_box_customized(settings);
+    }
+    CLASSIC.contains(&id)
+}
+
+/// The Ask box's key was changed from its default.
+fn ask_box_customized(settings: &AppSettings) -> bool {
+    settings
+        .bindings
+        .get(crate::ask_box::BINDING)
+        .is_some_and(|b| {
+            b.current_binding.trim().to_lowercase() != b.default_binding.to_lowercase()
+        })
 }
 
 /// The window in front when a dictation key went down, for "Kusema, look at
@@ -141,6 +159,8 @@ pub enum Decision {
     /// Dictation. `hint`: it began close to the trigger word, so the pill
     /// says how to reach Kusema for sure.
     Type { hint: bool },
+    /// Switched to the Assistant with Space, then nothing was said.
+    NothingHeard,
 }
 
 pub fn decide(found: trigger::TriggerMatch, forced: bool, text: &str) -> Decision {
@@ -153,6 +173,8 @@ pub fn decide(found: trigger::TriggerMatch, forced: bool, text: &str) -> Decisio
     };
     if rest.chars().any(char::is_alphanumeric) {
         Decision::Route(rest)
+    } else if forced {
+        Decision::NothingHeard
     } else {
         Decision::Type { hint: false }
     }
@@ -201,6 +223,15 @@ pub fn route_dictation(app: &AppHandle, text: &str) -> Option<Routed> {
         Decision::Type { hint } => {
             NEAR_MISS.store(hint, Ordering::SeqCst);
             return None;
+        }
+        Decision::NothingHeard => {
+            crate::assistant::tell_failure(
+                app,
+                &crate::assistant::failure::Failure::NothingHeard,
+                false,
+                None,
+            );
+            return Some(Routed::Done);
         }
     };
     let (here, selection) = crate::voice_edit::text_here();
@@ -255,6 +286,7 @@ pub fn run_in_dictation(app: &AppHandle, rest: &str, window: isize) {
         source: crate::assistant::Source::Spoken,
         target: crate::assistant::insert::at_press(),
         id: crate::assistant::next_id(app),
+        in_dictation: true,
     };
     match routed {
         Route::Command(_) => crate::voice_edit::run_trigger_in_dictation(app, rest, window),
@@ -386,6 +418,16 @@ fn run(app: &AppHandle, effect: gesture::Effect, binding: &mut &'static str) {
                 }
             });
         }
+        gesture::Effect::OpenAskBox {
+            discard: drop_recording,
+        } => {
+            info!("Kusema key: T tapped, opening the Ask box");
+            ASSIST_HELD.store(false, Ordering::SeqCst);
+            if drop_recording {
+                discard(app);
+            }
+            crate::ask_box::open_from_tray(app);
+        }
         gesture::Effect::ToggleContinuous => {
             crate::tts::stop(app);
             coordinator.send_input(
@@ -451,6 +493,7 @@ pub fn init(app: &AppHandle) {
                                 hook::Edge::Down => gesture.down(at, continuous),
                                 hook::Edge::Up => gesture.up(at),
                                 hook::Edge::Space => gesture.space(),
+                                hook::Edge::Type => gesture.type_key(),
                             }
                         }
                         Some(hook::windows::Event::Captured(captured)) => {
@@ -832,8 +875,9 @@ mod tests {
             decided("Kusema, what time is it?", true),
             Decision::Route("what time is it?".into())
         );
-        // Nothing said: nothing to ask.
-        assert_eq!(decided("", true), Decision::Type { hint: false });
+        // Nothing said: say so, rather than closing the pill.
+        assert_eq!(decided("", true), Decision::NothingHeard);
+        assert_eq!(decided("", false), Decision::Type { hint: false });
     }
 
     #[test]
@@ -921,13 +965,18 @@ mod tests {
         assert!(skip_binding(&settings, "transcribe"));
         assert!(skip_binding(&settings, crate::dictation::BINDING));
         // These keep their own keys either way.
-        for id in [
-            crate::ask_box::BINDING,
-            "cancel",
-            crate::network::TOGGLE_BINDING,
-        ] {
+        for id in ["cancel", crate::network::TOGGLE_BINDING] {
             assert!(!skip_binding(&settings, id), "{id}");
         }
+        // Ctrl+Alt+K is classic now (T while holding opens the box)...
+        assert!(skip_binding(&settings, crate::ask_box::BINDING));
+        // ...unless the user changed it: then it stays theirs.
+        settings
+            .bindings
+            .get_mut(crate::ask_box::BINDING)
+            .unwrap()
+            .current_binding = "ctrl+alt+shift+q".into();
+        assert!(!skip_binding(&settings, crate::ask_box::BINDING));
         settings.classic_shortcuts = true;
         assert!(!skip_binding(&settings, "transcribe"));
     }

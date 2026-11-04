@@ -1572,7 +1572,26 @@
       "edit": "Modification…"
     },
     "assistantTake": "Demander à Kusema",
-    "triggerHint": "Saisi comme dictée. Pour demander à Kusema, touchez Espace en maintenant {{name}}."
+    "triggerHint": "Saisi comme dictée. Pour demander à Kusema, touchez Espace en maintenant {{name}}.",
+    "ai": {
+      "noProvider": "Kusema a besoin d'une IA pour répondre. Configurez-en une dans Assistant → Réglages.",
+      "noKey": "Aucune clé d'API pour {{name}}. Ajoutez-en une dans Assistant → Réglages.",
+      "noModel": "Aucun modèle choisi pour {{name}}. Choisissez-en un dans Assistant → Réglages.",
+      "providerUnsupported": "{{name}} ne peut pas encore répondre aux questions. Choisissez une autre IA dans Assistant → Réglages.",
+      "screenProviderGone": "L'IA choisie pour les questions sur l'écran n'existe plus. Choisissez-en une autre dans Assistant → Réglages.",
+      "keyRejected": "{{name}} n'a pas accepté la clé d'API. Vérifiez-la dans Assistant → Réglages.",
+      "localNotRunning": "{{name}} ne tourne pas sur cet ordinateur. Lancez-le, puis reposez la question.",
+      "unreachable": "Impossible de joindre {{name}}. Vérifiez votre connexion internet et l'adresse de l'IA dans Assistant → Réglages.",
+      "privileged": "Le mode Privileged est actif : l'IA dans le cloud est bloquée. Utilisez une IA locale ou désactivez le mode Privileged.",
+      "rateLimited": "{{name}} est occupé. Patientez un instant, puis reposez la question.",
+      "notFound": "{{name}} n'a pas trouvé ce modèle. Vérifiez-le dans Assistant → Réglages.",
+      "noVision": "Cette IA ne peut pas voir l'écran. Choisissez-en une qui voit les images, comme Claude ou un modèle de vision dans Ollama.",
+      "emptyReply": "{{name}} n'a envoyé aucune réponse. Reposez la question.",
+      "nothingHeard": "Kusema n'a entendu aucune question. Maintenez la touche, touchez Espace, puis parlez.",
+      "other": "Kusema n'a pas pu obtenir de réponse : {{name}}"
+    },
+    "setUp": "Configurer",
+    "dismiss": "Fermer"
   },
   "screenCard": {
     "title": "Envoyer cette capture d'écran ?",
@@ -1666,7 +1685,7 @@
     "trigger": "En dictée continue, commencez par « {{trigger}}, » pour modifier du texte de la même façon, par exemple « {{trigger}}, rends ce texte plus formel ». Sans ce mot, tout est saisi tel que vous le dites.",
     "triggerOff": "Pour modifier du texte en dictée continue, définissez un mot déclencheur dans Général → Modification vocale.",
     "selectFirst": "Certaines applications, comme ONLYOFFICE, LibreOffice et Google Docs, ne montrent pas leur texte à Kusema. Sélectionnez-y d'abord le texte à la souris ou au clavier ; la sélection d'une phrase, d'un paragraphe ou de mots à la voix n'y fonctionne pas.",
-    "introKey": "Maintenez {{key}} et touchez Espace (ou commencez par « {{trigger}} »), puis dites l'une de ces commandes. Celles marquées « Aussi en dictée continue » y fonctionnent quand elles sont dites seules."
+    "introKey": "Maintenez {{key}} et touchez Espace (ou commencez par « {{trigger}}, »), puis dites l'une de ces commandes. Pour écrire une question à la place, touchez T en la maintenant. Les commandes marquées « Aussi en dictée continue » y fonctionnent quand elles sont dites seules."
   },
   "voiceEdit": {
     "notice": {
@@ -1718,11 +1737,11 @@
       "title": "Touches Kusema",
       "hold": "Maintenez <key/> pour parler.",
       "doubleTap": "Appuyez deux fois sur <key/> pour la dictée continue.",
-      "ask": "En la maintenant, touchez <space/> pour demander à Kusema, ou commencez par <q>{{trigger}}</q> : poser une question, modifier ou faire regarder votre écran."
+      "askOrType": "En la maintenant, touchez <space/> pour demander à voix haute, ou <t/> pour écrire. Ou commencez par <q>{{trigger}}</q> : poser une question, modifier ou faire regarder votre écran."
     },
     "settings": {
       "title": "Touche Kusema",
-      "description": "Une seule touche pour dicter. Maintenez-la pour parler ; appuyez deux fois pour la dictée continue. Pour poser une question, modifier ou faire regarder votre écran, touchez Espace en la maintenant, ou commencez par « Kusema ». Les autres applications ne voient jamais la touche.",
+      "description": "Une touche pour dicter. Maintenez-la pour parler ; touchez-la deux fois pour la dictée continue. En la maintenant, touchez Espace pour demander à voix haute, ou T pour écrire une question. Ou commencez par « Kusema » pour poser une question, modifier ou faire regarder votre écran. Les autres applis ne voient jamais la touche.",
       "enabled": {
         "label": "Utiliser la touche Kusema",
         "description": "Désactivée, seuls les raccourcis ci-dessous fonctionnent."

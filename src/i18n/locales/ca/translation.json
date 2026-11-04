@@ -1572,7 +1572,26 @@
       "edit": "Editant…"
     },
     "assistantTake": "Pregunta al Kusema",
-    "triggerHint": "S'ha escrit com a dictat. Per preguntar al Kusema, toca Espai mentre mantens premuda {{name}}."
+    "triggerHint": "S'ha escrit com a dictat. Per preguntar al Kusema, toca Espai mentre mantens premuda {{name}}.",
+    "ai": {
+      "noProvider": "El Kusema necessita una IA per respondre. Configureu-ne una a Assistent → Configuració.",
+      "noKey": "No hi ha cap clau d'API per a {{name}}. Afegiu-ne una a Assistent → Configuració.",
+      "noModel": "No s'ha triat cap model per a {{name}}. Trieu-ne un a Assistent → Configuració.",
+      "providerUnsupported": "{{name}} encara no pot respondre preguntes. Trieu una altra IA a Assistent → Configuració.",
+      "screenProviderGone": "La IA triada per a les preguntes sobre la pantalla ja no hi és. Trieu-ne una altra a Assistent → Configuració.",
+      "keyRejected": "{{name}} no ha acceptat la clau d'API. Reviseu-la a Assistent → Configuració.",
+      "localNotRunning": "{{name}} no s'està executant en aquest ordinador. Inicieu-lo i torneu a preguntar.",
+      "unreachable": "No s'ha pogut connectar amb {{name}}. Reviseu la connexió a internet i l'adreça de la IA a Assistent → Configuració.",
+      "privileged": "El mode Privileged està activat, així que la IA al núvol està bloquejada. Feu servir una IA local o desactiveu el mode Privileged.",
+      "rateLimited": "{{name}} està ocupat. Espereu un moment i torneu a preguntar.",
+      "notFound": "{{name}} no ha trobat aquest model. Reviseu-lo a Assistent → Configuració.",
+      "noVision": "Aquesta IA no pot veure la pantalla. Trieu-ne una que vegi imatges, com Claude o un model de visió a Ollama.",
+      "emptyReply": "{{name}} no ha enviat cap resposta. Torneu a preguntar.",
+      "nothingHeard": "El Kusema no ha sentit cap pregunta. Manteniu premuda la tecla, toqueu Espai i després parleu.",
+      "other": "El Kusema no ha pogut obtenir resposta: {{name}}"
+    },
+    "setUp": "Configura",
+    "dismiss": "Tanca"
   },
   "screenCard": {
     "title": "Voleu enviar aquesta captura?",
@@ -1666,7 +1685,7 @@
     "trigger": "En el dictat continu, comenceu amb «{{trigger}},» per canviar el text de la mateixa manera, per exemple «{{trigger}}, fes això més formal». Sense aquesta paraula, tot s'escriu tal com ho dieu.",
     "triggerOff": "Per canviar text durant el dictat continu, definiu una paraula d'activació a General → Edició per veu.",
     "selectFirst": "Algunes aplicacions, com ONLYOFFICE, LibreOffice i Google Docs, no mostren el seu text al Kusema. Allà, seleccioneu primer el text amb el ratolí o el teclat; seleccionar una frase, un paràgraf o paraules per veu no hi funciona.",
-    "introKey": "Mantén premuda {{key}} i toca Espai (o comença amb «{{trigger}}»), i després digues una d'aquestes ordres. Les marcades «També en el dictat continu» hi funcionen quan es diuen soles."
+    "introKey": "Mantén premuda {{key}} i toca Espai (o comença amb «{{trigger}},»), i després digues una d'aquestes ordres. Per escriure una pregunta, toca T mentre la mantens premuda. Les ordres marcades amb «També en el dictat continu» hi funcionen quan es diuen soles."
   },
   "voiceEdit": {
     "notice": {
@@ -1718,11 +1737,11 @@
       "title": "Tecles del Kusema",
       "hold": "Mantén premuda <key/> per parlar.",
       "doubleTap": "Prem dues vegades <key/> per al dictat continu.",
-      "ask": "Mentre la mantens premuda, toca <space/> per preguntar al Kusema, o comença amb <q>{{trigger}}</q>: preguntar, editar o fer que miri la teva pantalla."
+      "askOrType": "Mentre la mantens premuda, toca <space/> per preguntar amb la veu, o <t/> per escriure. O comença amb <q>{{trigger}}</q>: preguntar, editar o fer que miri la teva pantalla."
     },
     "settings": {
       "title": "Tecla Kusema",
-      "description": "Una tecla per dictar. Mantén-la premuda per parlar; prem-la dues vegades per al dictat continu. Per preguntar, editar o fer que miri la teva pantalla, toca Espai mentre la mantens premuda, o comença amb «Kusema». Les altres aplicacions no veuen mai la tecla.",
+      "description": "Una tecla per dictar. Mantén-la premuda per parlar; toca-la dues vegades per al dictat continu. Mentre la mantens premuda, toca Espai per preguntar amb la veu, o T per escriure una pregunta. O comença amb «Kusema» per preguntar, editar o fer que miri la teva pantalla. Les altres aplicacions mai no veuen la tecla.",
       "enabled": {
         "label": "Fes servir la tecla Kusema",
         "description": "Desactivada, només funcionen les dreceres de sota."

@@ -1566,7 +1566,26 @@
       "edit": "Bewerken…"
     },
     "assistantTake": "Vraag het Kusema",
-    "triggerHint": "Getypt als dictaat. Om Kusema iets te vragen, tik je op Spatie terwijl je {{name}} ingedrukt houdt."
+    "triggerHint": "Getypt als dictaat. Om Kusema iets te vragen, tik je op Spatie terwijl je {{name}} ingedrukt houdt.",
+    "ai": {
+      "noProvider": "Kusema heeft een AI nodig om te antwoorden. Stel er een in bij Assistent → Instellingen.",
+      "noKey": "Geen API-sleutel voor {{name}}. Voeg er een toe bij Assistent → Instellingen.",
+      "noModel": "Geen model gekozen voor {{name}}. Kies er een bij Assistent → Instellingen.",
+      "providerUnsupported": "{{name}} kan nog geen vragen beantwoorden. Kies een andere AI bij Assistent → Instellingen.",
+      "screenProviderGone": "De AI die gekozen was voor vragen over het scherm bestaat niet meer. Kies een andere bij Assistent → Instellingen.",
+      "keyRejected": "{{name}} accepteerde de API-sleutel niet. Controleer hem bij Assistent → Instellingen.",
+      "localNotRunning": "{{name}} draait niet op deze computer. Start het en vraag het opnieuw.",
+      "unreachable": "Kan {{name}} niet bereiken. Controleer je internetverbinding en het adres van de AI bij Assistent → Instellingen.",
+      "privileged": "Privileged-modus staat aan, dus cloud-AI is geblokkeerd. Gebruik een lokale AI of zet Privileged-modus uit.",
+      "rateLimited": "{{name}} is druk. Wacht even en vraag het opnieuw.",
+      "notFound": "{{name}} kon dat model niet vinden. Controleer het bij Assistent → Instellingen.",
+      "noVision": "Deze AI kan het scherm niet zien. Kies er een die afbeeldingen kan zien, zoals Claude of een vision-model in Ollama.",
+      "emptyReply": "{{name}} stuurde geen antwoord. Vraag het opnieuw.",
+      "nothingHeard": "Kusema hoorde geen vraag. Houd de toets vast, tik op Spatie en spreek dan.",
+      "other": "Kusema kreeg geen antwoord: {{name}}"
+    },
+    "setUp": "Instellen",
+    "dismiss": "Sluiten"
   },
   "screenCard": {
     "title": "Deze schermafbeelding versturen?",
@@ -1658,7 +1677,7 @@
     "trigger": "Begin bij doorlopend dicteren met “{{trigger}},” om tekst op dezelfde manier te wijzigen, bijvoorbeeld “{{trigger}}, maak dit formeler”. Zonder dat woord wordt alles getypt zoals je het zegt.",
     "triggerOff": "Stel onder Algemeen → Spraakbewerking een activeringswoord in om tekst tijdens doorlopend dicteren te wijzigen.",
     "selectFirst": "Sommige apps, zoals ONLYOFFICE, LibreOffice en Google Docs, laten hun tekst niet aan Kusema zien. Selecteer daar eerst de tekst met de muis of het toetsenbord; een zin, alinea of woorden met spraak selecteren werkt daar niet.",
-    "introKey": "Houd {{key}} ingedrukt en tik op Spatie (of begin met ‘{{trigger}}’), zeg dan een van deze. Opdrachten met ‘Ook bij doorlopend dicteren’ werken daar als je ze los zegt."
+    "introKey": "Houd {{key}} vast en tik op Spatie (of begin met ‘{{trigger}},’) en zeg dan een van deze opdrachten. Om in plaats daarvan een vraag te typen, tik je tijdens het vasthouden op T. Opdrachten met ‘Ook bij doorlopend dicteren’ werken daar als je ze los zegt."
   },
   "voiceEdit": {
     "notice": {
@@ -1710,11 +1729,11 @@
       "title": "Kusema-toetsen",
       "hold": "Houd <key/> ingedrukt om te praten.",
       "doubleTap": "Tik twee keer op <key/> voor doorlopend dicteren.",
-      "ask": "Tik tijdens het vasthouden op <space/> om Kusema iets te vragen, of begin met <q>{{trigger}}</q>: vragen, bewerken of naar je scherm laten kijken."
+      "askOrType": "Tik tijdens het vasthouden op <space/> om met je stem te vragen, of op <t/> om te typen. Of begin met <q>{{trigger}}</q>: vragen, bewerken of naar je scherm laten kijken."
     },
     "settings": {
       "title": "Kusema-toets",
-      "description": "Eén toets om te dicteren. Houd hem ingedrukt om te praten; tik twee keer voor doorlopend dicteren. Om iets te vragen, te bewerken of naar je scherm te laten kijken, tik je tijdens het vasthouden op Spatie, of begin je met ‘Kusema’. Andere apps zien de toets nooit.",
+      "description": "Eén toets om te dicteren. Houd hem vast om te praten; tik twee keer voor doorlopend dicteren. Tik tijdens het vasthouden op Spatie om met je stem te vragen, of op T om een vraag te typen. Of begin met ‘Kusema’ om te vragen, te bewerken of naar je scherm te laten kijken. Andere apps zien de toets nooit.",
       "enabled": {
         "label": "Kusema-toets gebruiken",
         "description": "Uit werken alleen de sneltoetsen hieronder."

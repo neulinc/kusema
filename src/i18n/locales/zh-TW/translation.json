@@ -1566,7 +1566,26 @@
       "edit": "正在編輯…"
     },
     "assistantTake": "問 Kusema",
-    "triggerHint": "已作為聽寫輸入。要問 Kusema，請按住 {{name}} 時點一下空白鍵。"
+    "triggerHint": "已作為聽寫輸入。要問 Kusema，請按住 {{name}} 時點一下空白鍵。",
+    "ai": {
+      "noProvider": "Kusema 需要一個 AI 來回答。請在助理 → 設定中設定一個。",
+      "noKey": "{{name}} 沒有 API 金鑰。請在助理 → 設定中新增。",
+      "noModel": "沒有為 {{name}} 選擇模型。請在助理 → 設定中選擇。",
+      "providerUnsupported": "{{name}} 還不能回答問題。請在助理 → 設定中選擇其他 AI。",
+      "screenProviderGone": "為螢幕問題選擇的 AI 已不存在。請在助理 → 設定中另選一個。",
+      "keyRejected": "{{name}} 沒有接受該 API 金鑰。請在助理 → 設定中檢查。",
+      "localNotRunning": "{{name}} 沒有在這台電腦上執行。請先啟動它，然後再問一次。",
+      "unreachable": "無法連線到 {{name}}。請檢查網路連線，以及助理 → 設定中 AI 的位址。",
+      "privileged": "Privileged 模式已開啟，因此雲端 AI 已封鎖。請使用本機 AI，或關閉 Privileged 模式。",
+      "rateLimited": "{{name}} 正忙。請稍等片刻，然後再問一次。",
+      "notFound": "{{name}} 找不到該模型。請在助理 → 設定中檢查。",
+      "noVision": "這個 AI 看不到螢幕。請選擇能看圖片的 AI，例如 Claude 或 Ollama 中的視覺模型。",
+      "emptyReply": "{{name}} 沒有傳回答案。請再問一次。",
+      "nothingHeard": "Kusema 沒有聽到問題。按住按鍵，點一下空白鍵，然後說話。",
+      "other": "Kusema 沒能取得答案：{{name}}"
+    },
+    "setUp": "設定",
+    "dismiss": "關閉"
   },
   "screenCard": {
     "title": "要傳送這張螢幕擷圖嗎？",
@@ -1658,7 +1677,7 @@
     "trigger": "在連續聽寫時，以「{{trigger}}，」開頭即可用同樣方式修改文字，例如「{{trigger}}，改得更正式一點」。不說這個詞時，所有內容都會照你說的輸入。",
     "triggerOff": "若要在連續聽寫時修改文字，請在「一般 → 語音編輯」中設定觸發詞。",
     "selectFirst": "部分應用程式（例如 ONLYOFFICE、LibreOffice 和 Google 文件）不會把文字提供給 Kusema。在這些應用程式中，請先用滑鼠或鍵盤選取文字；無法用語音選取句子、段落或字詞。",
-    "introKey": "按住 {{key}} 並點一下空白鍵（或以「{{trigger}}」開頭），然後說下列其中一個命令。標有「連續聽寫中也可用」的命令，在連續聽寫中單獨說出即可生效。"
+    "introKey": "按住 {{key}} 並點一下空白鍵（或以「{{trigger}}，」開頭），然後說出以下任一命令。若要改為打字提問，請在按住時點 T。標有「連續聽寫中也可用」的命令，單獨說出時在連續聽寫中也有效。"
   },
   "voiceEdit": {
     "notice": {
@@ -1710,11 +1729,11 @@
       "title": "Kusema 按鍵",
       "hold": "按住 <key/> 說話。",
       "doubleTap": "連按兩下 <key/> 開始連續聽寫。",
-      "ask": "按住時點一下 <space/> 即可問 Kusema，或以 <q>{{trigger}}</q> 開頭：提問、編輯或查看你的螢幕。"
+      "askOrType": "按住時點一下 <space/> 用語音提問，或點 <t/> 打字提問。也可以以 <q>{{trigger}}</q> 開頭：提問、編輯或查看你的螢幕。"
     },
     "settings": {
       "title": "Kusema 鍵",
-      "description": "一個鍵就能聽寫。按住說話；連按兩下開始連續聽寫。要提問、編輯或讓它查看你的螢幕，請在按住時點一下空白鍵，或以「Kusema」開頭。其他應用程式不會收到這個鍵。",
+      "description": "一個鍵用於聽寫。按住它說話；點兩下進入連續聽寫。按住時點一下空白鍵用語音提問，或點 T 打字提問。也可以以「Kusema」開頭來提問、編輯或查看你的螢幕。其他應用程式永遠看不到這個鍵。",
       "enabled": {
         "label": "使用 Kusema 鍵",
         "description": "關閉時，只有下方的快速鍵有效。"

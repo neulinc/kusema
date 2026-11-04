@@ -159,7 +159,9 @@ export const KusemaKeySettings: React.FC = () => {
             {t("kusemaKey.settings.laptopHint")}
           </p>
         )}
-      <ShortcutInput shortcutId="ask_box" grouped={true} />
+      {/* T while holding opens the Ask box; its own key shows here only if
+          it was changed, otherwise with the classic shortcuts. */}
+      {!classic && <ShortcutInput shortcutId="ask_box" grouped={true} />}
       {!isLinux && <ShortcutInput shortcutId="cancel" grouped={true} />}
       <ToggleSwitch
         checked={classic}
@@ -170,6 +172,7 @@ export const KusemaKeySettings: React.FC = () => {
         descriptionMode="tooltip"
         grouped
       />
+      {classic && <ShortcutInput shortcutId="ask_box" grouped={true} />}
       {classic &&
         CLASSIC_SHORTCUTS.filter(
           (id) => id !== "transcribe_with_post_process" || postProcess,

@@ -1566,7 +1566,26 @@
       "edit": "편집 중…"
     },
     "assistantTake": "Kusema에게 묻기",
-    "triggerHint": "받아쓰기로 입력했습니다. Kusema에게 물으려면 {{name}}를 누른 채 Space를 누르세요."
+    "triggerHint": "받아쓰기로 입력했습니다. Kusema에게 물으려면 {{name}}를 누른 채 Space를 누르세요.",
+    "ai": {
+      "noProvider": "Kusema가 답하려면 AI가 필요합니다. 어시스턴트 → 설정에서 설정하세요.",
+      "noKey": "{{name}}의 API 키가 없습니다. 어시스턴트 → 설정에서 추가하세요.",
+      "noModel": "{{name}}의 모델이 선택되지 않았습니다. 어시스턴트 → 설정에서 선택하세요.",
+      "providerUnsupported": "{{name}}은(는) 아직 질문에 답할 수 없습니다. 어시스턴트 → 설정에서 다른 AI를 선택하세요.",
+      "screenProviderGone": "화면 질문용으로 선택한 AI가 더 이상 없습니다. 어시스턴트 → 설정에서 다른 AI를 선택하세요.",
+      "keyRejected": "{{name}}이(가) API 키를 받아들이지 않았습니다. 어시스턴트 → 설정에서 확인하세요.",
+      "localNotRunning": "{{name}}이(가) 이 컴퓨터에서 실행 중이 아닙니다. 실행한 다음 다시 물어보세요.",
+      "unreachable": "{{name}}에 연결할 수 없습니다. 인터넷 연결과 어시스턴트 → 설정의 AI 주소를 확인하세요.",
+      "privileged": "Privileged 모드가 켜져 있어 클라우드 AI가 차단됩니다. 로컬 AI를 쓰거나 Privileged 모드를 끄세요.",
+      "rateLimited": "{{name}}이(가) 바쁩니다. 잠시 기다린 다음 다시 물어보세요.",
+      "notFound": "{{name}}이(가) 그 모델을 찾지 못했습니다. 어시스턴트 → 설정에서 확인하세요.",
+      "noVision": "이 AI는 화면을 볼 수 없습니다. Claude나 Ollama의 비전 모델처럼 이미지를 볼 수 있는 AI를 선택하세요.",
+      "emptyReply": "{{name}}이(가) 답을 보내지 않았습니다. 다시 물어보세요.",
+      "nothingHeard": "Kusema가 질문을 듣지 못했습니다. 키를 누른 채 Space를 누른 다음 말하세요.",
+      "other": "Kusema가 답을 받지 못했습니다: {{name}}"
+    },
+    "setUp": "설정",
+    "dismiss": "닫기"
   },
   "screenCard": {
     "title": "이 스크린샷을 보낼까요?",
@@ -1658,7 +1677,7 @@
     "trigger": "연속 받아쓰기 중에 “{{trigger}},”로 시작하면 같은 방식으로 텍스트를 바꿀 수 있습니다. 예: “{{trigger}}, 더 격식 있게 바꿔 줘”. 이 단어가 없으면 말한 그대로 입력됩니다.",
     "triggerOff": "연속 받아쓰기 중에 텍스트를 바꾸려면 일반 → 음성 편집에서 트리거 단어를 설정하세요.",
     "selectFirst": "ONLYOFFICE, LibreOffice, Google Docs 같은 일부 앱은 Kusema에 텍스트를 보여 주지 않습니다. 그런 앱에서는 먼저 마우스나 키보드로 텍스트를 선택하세요. 음성으로 문장, 단락, 단어를 선택할 수는 없습니다.",
-    "introKey": "{{key}}를 누른 채 Space를 누르고(또는 '{{trigger}}'로 시작하고) 아래 중 하나를 말하세요. '연속 받아쓰기에서도'라고 표시된 명령은 단독으로 말하면 연속 받아쓰기 중에도 작동합니다."
+    "introKey": "{{key}}를 누른 채 Space를 누르고(또는 “{{trigger}},”로 시작하고) 다음 중 하나를 말하세요. 대신 질문을 입력하려면 누른 채 T를 누르세요. “연속 받아쓰기에서도”라고 표시된 명령은 그것만 말하면 거기서도 작동합니다."
   },
   "voiceEdit": {
     "notice": {
@@ -1710,11 +1729,11 @@
       "title": "Kusema 키",
       "hold": "<key/>를 누르고 있는 동안 말하세요.",
       "doubleTap": "<key/>를 두 번 누르면 연속 받아쓰기가 됩니다.",
-      "ask": "누른 채 <space/>를 누르면 Kusema에게 물을 수 있습니다. <q>{{trigger}}</q>로 시작해도 질문, 편집, 화면 보기를 할 수 있습니다."
+      "askOrType": "누른 채 <space/>를 누르면 음성으로, <t/>를 누르면 입력으로 물을 수 있습니다. <q>{{trigger}}</q>로 시작해도 질문, 편집, 화면 보기를 할 수 있습니다."
     },
     "settings": {
       "title": "Kusema 키",
-      "description": "받아쓰기는 키 하나로. 누르고 있는 동안 말하고, 두 번 누르면 연속 받아쓰기가 됩니다. 질문, 편집, 화면 보기를 하려면 누른 채 Space를 누르거나 'Kusema'로 시작하세요. 다른 앱에는 이 키가 전달되지 않습니다.",
+      "description": "받아쓰기용 키 하나. 누르고 있는 동안 말하고, 두 번 누르면 연속 받아쓰기입니다. 누른 채 Space를 누르면 음성으로 묻고, T를 누르면 질문을 입력합니다. “Kusema”로 시작해도 질문, 편집, 화면 보기를 할 수 있습니다. 다른 앱은 이 키를 전혀 보지 못합니다.",
       "enabled": {
         "label": "Kusema 키 사용",
         "description": "끄면 아래 단축키만 작동합니다."

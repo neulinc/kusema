@@ -7,7 +7,7 @@ import { useSettings } from "../../hooks/useSettings";
 import { useOsType } from "../../hooks/useOsType";
 import { useShortcutCapture } from "../../hooks/useShortcutCapture";
 import { usePressAway } from "../../hooks/usePressAway";
-import { hiddenShortcut } from "@/lib/kusemaKey";
+import { askBoxCustomized, hiddenShortcut } from "@/lib/kusemaKey";
 
 interface ShortcutInputProps {
   descriptionMode?: "inline" | "tooltip";
@@ -40,7 +40,13 @@ export const ShortcutInput: React.FC<ShortcutInputProps> = ({
   usePressAway(capturing, shortcutRef, cancel);
 
   // Kusema: the per-action shortcuts show only while they're turned on.
-  if (hiddenShortcut(shortcutId, getSetting("classic_shortcuts") ?? false)) {
+  if (
+    hiddenShortcut(
+      shortcutId,
+      getSetting("classic_shortcuts") ?? false,
+      askBoxCustomized(bindings["ask_box"]),
+    )
+  ) {
     return null;
   }
 

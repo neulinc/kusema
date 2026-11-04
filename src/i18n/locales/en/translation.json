@@ -1566,7 +1566,26 @@
       "edit": "Editing…"
     },
     "assistantTake": "Ask Kusema",
-    "triggerHint": "Typed as dictation. To ask Kusema, tap Space while holding {{name}}."
+    "triggerHint": "Typed as dictation. To ask Kusema, tap Space while holding {{name}}.",
+    "ai": {
+      "noProvider": "Kusema needs an AI to answer. Set one up in Assistant → Settings.",
+      "noKey": "No API key for {{name}}. Add one in Assistant → Settings.",
+      "noModel": "No model chosen for {{name}}. Choose one in Assistant → Settings.",
+      "providerUnsupported": "{{name}} can't answer questions yet. Choose another AI in Assistant → Settings.",
+      "screenProviderGone": "The AI chosen for screen questions is gone. Choose another in Assistant → Settings.",
+      "keyRejected": "{{name}} didn't accept the API key. Check it in Assistant → Settings.",
+      "localNotRunning": "{{name}} isn't running on this computer. Start it, then ask again.",
+      "unreachable": "Couldn't reach {{name}}. Check your internet connection and the AI's address in Assistant → Settings.",
+      "privileged": "Privileged mode is on, so cloud AI is blocked. Use a local AI, or turn Privileged mode off.",
+      "rateLimited": "{{name}} is busy. Wait a moment, then ask again.",
+      "notFound": "{{name}} couldn't find that model. Check it in Assistant → Settings.",
+      "noVision": "This AI can't see the screen. Choose one that can see images, like Claude or a vision model in Ollama.",
+      "emptyReply": "{{name}} didn't send an answer. Try asking again.",
+      "nothingHeard": "Kusema didn't hear a question. Hold the key, tap Space, then speak.",
+      "other": "Kusema couldn't get an answer: {{name}}"
+    },
+    "setUp": "Set up",
+    "dismiss": "Dismiss"
   },
   "screenCard": {
     "title": "Send this screenshot?",
@@ -1658,7 +1677,7 @@
     "trigger": "During continuous dictation, start with “{{trigger}},” to change text the same way, for example “{{trigger}}, make this more formal”. Without it, everything is typed as you say it.",
     "triggerOff": "To change text during continuous dictation, set a trigger word under General → Voice Editing.",
     "selectFirst": "Some apps, such as ONLYOFFICE, LibreOffice and Google Docs, don't show their text to Kusema. There, select the text with the mouse or keyboard first, and selecting a sentence, paragraph or phrase by voice doesn't work.",
-    "introKey": "Hold {{key}} and tap Space (or start with “{{trigger}},”), then say one of these. Commands marked “Also in continuous dictation” work there when said on their own."
+    "introKey": "Hold {{key}} and tap Space (or start with “{{trigger}},”), then say one of these. To type a question instead, tap T while holding. Commands marked “Also in continuous dictation” work there when said on their own."
   },
   "voiceEdit": {
     "notice": {
@@ -1710,11 +1729,11 @@
       "title": "Kusema keys",
       "hold": "Hold <key/> to talk.",
       "doubleTap": "Double-tap <key/> for continuous dictation.",
-      "ask": "Tap <space/> while holding to ask Kusema, or start with <q>{{trigger}}</q>: ask, edit or look at your screen."
+      "askOrType": "Tap <space/> while holding to ask by voice, or <t/> to type. Or start with <q>{{trigger}}</q>: ask, edit or look at your screen."
     },
     "settings": {
       "title": "Kusema Key",
-      "description": "One key for dictation. Hold it to talk; double-tap it for continuous dictation. To ask, edit or look at your screen, tap Space while holding it, or start with “Kusema”. Other apps never see the key.",
+      "description": "One key for dictation. Hold it to talk; double-tap it for continuous dictation. Tap Space while holding it to ask by voice, or T to type a question. Or start with “Kusema” to ask, edit or look at your screen. Other apps never see the key.",
       "enabled": {
         "label": "Use the Kusema Key",
         "description": "Off, only the shortcuts below work."

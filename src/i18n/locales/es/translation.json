@@ -1572,7 +1572,26 @@
       "edit": "Editando…"
     },
     "assistantTake": "Preguntar a Kusema",
-    "triggerHint": "Se escribió como dictado. Para preguntar a Kusema, toca Espacio mientras mantienes pulsada {{name}}."
+    "triggerHint": "Se escribió como dictado. Para preguntar a Kusema, toca Espacio mientras mantienes pulsada {{name}}.",
+    "ai": {
+      "noProvider": "Kusema necesita una IA para responder. Configura una en Asistente → Ajustes.",
+      "noKey": "No hay clave de API para {{name}}. Añade una en Asistente → Ajustes.",
+      "noModel": "No se ha elegido modelo para {{name}}. Elige uno en Asistente → Ajustes.",
+      "providerUnsupported": "{{name}} aún no puede responder preguntas. Elige otra IA en Asistente → Ajustes.",
+      "screenProviderGone": "La IA elegida para las preguntas sobre la pantalla ya no existe. Elige otra en Asistente → Ajustes.",
+      "keyRejected": "{{name}} no aceptó la clave de API. Revísala en Asistente → Ajustes.",
+      "localNotRunning": "{{name}} no se está ejecutando en este ordenador. Inícialo y vuelve a preguntar.",
+      "unreachable": "No se pudo conectar con {{name}}. Revisa tu conexión a internet y la dirección de la IA en Asistente → Ajustes.",
+      "privileged": "El modo Privileged está activado, así que la IA en la nube está bloqueada. Usa una IA local o desactiva el modo Privileged.",
+      "rateLimited": "{{name}} está ocupado. Espera un momento y vuelve a preguntar.",
+      "notFound": "{{name}} no encontró ese modelo. Revísalo en Asistente → Ajustes.",
+      "noVision": "Esta IA no puede ver la pantalla. Elige una que vea imágenes, como Claude o un modelo de visión en Ollama.",
+      "emptyReply": "{{name}} no envió ninguna respuesta. Vuelve a preguntar.",
+      "nothingHeard": "Kusema no oyó ninguna pregunta. Mantén pulsada la tecla, toca Espacio y luego habla.",
+      "other": "Kusema no pudo obtener respuesta: {{name}}"
+    },
+    "setUp": "Configurar",
+    "dismiss": "Cerrar"
   },
   "screenCard": {
     "title": "¿Enviar esta captura?",
@@ -1666,7 +1685,7 @@
     "trigger": "En el dictado continuo, empieza con «{{trigger}},» para cambiar texto de la misma forma, por ejemplo «{{trigger}}, haz esto más formal». Sin esa palabra, todo se escribe tal como lo dices.",
     "triggerOff": "Para cambiar texto durante el dictado continuo, define una palabra de activación en General → Edición por voz.",
     "selectFirst": "Algunas aplicaciones, como ONLYOFFICE, LibreOffice y Google Docs, no muestran su texto a Kusema. En ellas, selecciona primero el texto con el ratón o el teclado; seleccionar una frase, un párrafo o palabras por voz no funciona allí.",
-    "introKey": "Mantén pulsada {{key}} y toca Espacio (o empieza con «{{trigger}}»), y luego di uno de estos. Los comandos marcados «También en el dictado continuo» funcionan ahí cuando se dicen solos."
+    "introKey": "Mantén pulsada {{key}} y toca Espacio (o empieza con «{{trigger}},»), y luego di uno de estos comandos. Para escribir una pregunta, toca T mientras la mantienes pulsada. Los comandos marcados con «También en el dictado continuo» funcionan allí cuando se dicen solos."
   },
   "voiceEdit": {
     "notice": {
@@ -1718,11 +1737,11 @@
       "title": "Teclas de Kusema",
       "hold": "Mantén pulsada <key/> para hablar.",
       "doubleTap": "Pulsa dos veces <key/> para el dictado continuo.",
-      "ask": "Mientras la mantienes pulsada, toca <space/> para preguntar a Kusema, o empieza con <q>{{trigger}}</q>: preguntar, editar o hacer que mire tu pantalla."
+      "askOrType": "Mientras la mantienes pulsada, toca <space/> para preguntar con la voz, o <t/> para escribir. O empieza con <q>{{trigger}}</q>: preguntar, editar o hacer que mire tu pantalla."
     },
     "settings": {
       "title": "Tecla Kusema",
-      "description": "Una tecla para dictar. Mantenla pulsada para hablar; púlsala dos veces para el dictado continuo. Para preguntar, editar o hacer que mire tu pantalla, toca Espacio mientras la mantienes pulsada, o empieza con «Kusema». Las demás aplicaciones nunca ven la tecla.",
+      "description": "Una tecla para dictar. Mantenla pulsada para hablar; púlsala dos veces para el dictado continuo. Mientras la mantienes pulsada, toca Espacio para preguntar con la voz, o T para escribir una pregunta. O empieza con «Kusema» para preguntar, editar o hacer que mire tu pantalla. Las demás aplicaciones nunca ven la tecla.",
       "enabled": {
         "label": "Usar la tecla Kusema",
         "description": "Desactivada, solo funcionan los atajos de abajo."

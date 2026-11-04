@@ -39,6 +39,8 @@ import { FileDropOverlay } from "./components/FileDropOverlay";
 import { Sidebar, SidebarSection, SECTIONS_CONFIG } from "./components/Sidebar";
 import { WhatsNewGate } from "./components/whats-new";
 import { KusemaKeysDialog } from "./components/shared/KusemaKeysDialog";
+import { saveTab } from "./components/settings/assistant/assistantTabs";
+import type { SetupPage } from "./bindings";
 import { useSettings } from "./hooks/useSettings";
 import { useSettingsStore } from "./stores/settingsStore";
 import { commands } from "@/bindings";
@@ -107,6 +109,24 @@ function App() {
   const [currentSection, setCurrentSection] =
     useState<SidebarSection>("general");
   const showHistory = useCallback(() => setCurrentSection("history"), []);
+
+  // Kusema: "Set up" in the pill, a card or the Ask box.
+  useEffect(() => {
+    const off = listen<SetupPage>("open-settings-page", (event) => {
+      if (event.payload === "assistant") {
+        saveTab("settings");
+        window.dispatchEvent(
+          new CustomEvent("kusema-assistant-tab", { detail: "settings" }),
+        );
+        setCurrentSection("assistant");
+      } else {
+        setCurrentSection("privacy");
+      }
+    });
+    return () => {
+      void off.then((fn) => fn());
+    };
+  }, []);
   const { settings, updateSetting } = useSettings();
   const direction = getLanguageDirection(i18n.language);
   const refreshAudioDevices = useSettingsStore(

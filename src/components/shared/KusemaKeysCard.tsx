@@ -34,7 +34,7 @@ export const KusemaKeysCard: React.FC<{ className?: string }> = ({
         </li>
         <li>
           <Trans
-            i18nKey="kusemaKey.card.ask"
+            i18nKey="kusemaKey.card.askOrType"
             values={{ trigger }}
             components={{
               space: (
@@ -45,6 +45,7 @@ export const KusemaKeysCard: React.FC<{ className?: string }> = ({
                   size="line"
                 />
               ),
+              t: <Keycaps binding="" labels={["T"]} osType={os} size="line" />,
               q: <q className="font-semibold" />,
             }}
           />

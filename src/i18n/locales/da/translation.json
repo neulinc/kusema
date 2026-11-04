@@ -1566,7 +1566,26 @@
       "edit": "Redigerer…"
     },
     "assistantTake": "Spørg Kusema",
-    "triggerHint": "Skrevet som diktering. For at spørge Kusema skal du trykke på Mellemrum, mens du holder {{name}} nede."
+    "triggerHint": "Skrevet som diktering. For at spørge Kusema skal du trykke på Mellemrum, mens du holder {{name}} nede.",
+    "ai": {
+      "noProvider": "Kusema skal bruge en AI for at svare. Sæt en op under Assistent → Indstillinger.",
+      "noKey": "Ingen API-nøgle til {{name}}. Tilføj en under Assistent → Indstillinger.",
+      "noModel": "Ingen model valgt til {{name}}. Vælg en under Assistent → Indstillinger.",
+      "providerUnsupported": "{{name}} kan ikke svare på spørgsmål endnu. Vælg en anden AI under Assistent → Indstillinger.",
+      "screenProviderGone": "Den AI, der var valgt til spørgsmål om skærmen, findes ikke længere. Vælg en anden under Assistent → Indstillinger.",
+      "keyRejected": "{{name}} accepterede ikke API-nøglen. Tjek den under Assistent → Indstillinger.",
+      "localNotRunning": "{{name}} kører ikke på denne computer. Start den, og spørg igen.",
+      "unreachable": "Kunne ikke nå {{name}}. Tjek din internetforbindelse og AI'ens adresse under Assistent → Indstillinger.",
+      "privileged": "Privileged-tilstand er slået til, så cloud-AI er blokeret. Brug en lokal AI, eller slå Privileged-tilstand fra.",
+      "rateLimited": "{{name}} har travlt. Vent et øjeblik, og spørg igen.",
+      "notFound": "{{name}} kunne ikke finde den model. Tjek den under Assistent → Indstillinger.",
+      "noVision": "Denne AI kan ikke se skærmen. Vælg en, der kan se billeder, som Claude eller en visionsmodel i Ollama.",
+      "emptyReply": "{{name}} sendte ikke noget svar. Prøv at spørge igen.",
+      "nothingHeard": "Kusema hørte ikke noget spørgsmål. Hold tasten nede, tryk på Mellemrum, og tal så.",
+      "other": "Kusema kunne ikke få et svar: {{name}}"
+    },
+    "setUp": "Sæt op",
+    "dismiss": "Luk"
   },
   "screenCard": {
     "title": "Send dette skærmbillede?",
@@ -1658,7 +1677,7 @@
     "trigger": "Start med “{{trigger}},” ved løbende diktat for at ændre tekst på samme måde, fx “{{trigger}}, gør det mere formelt”. Uden ordet skrives alt, som du siger det.",
     "triggerOff": "Angiv et udløserord under Generelt → Stemmeredigering for at ændre tekst ved løbende diktat.",
     "selectFirst": "Nogle apps, som ONLYOFFICE, LibreOffice og Google Docs, viser ikke deres tekst til Kusema. Marker teksten med musen eller tastaturet først der; at markere en sætning, et afsnit eller ord med stemmen virker ikke der.",
-    "introKey": "Hold {{key}} nede og tryk på Mellemrum (eller begynd med “{{trigger}}”), og sig så en af disse. Kommandoer mærket “Også i løbende diktering” virker der, når de siges alene."
+    "introKey": "Hold {{key}} nede, og tryk på Mellemrum (eller begynd med “{{trigger}},”), og sig så en af disse. Tryk på T, mens du holder tasten nede, for at skrive et spørgsmål i stedet. Kommandoer markeret med “Også i løbende diktering” virker der, når de siges alene."
   },
   "voiceEdit": {
     "notice": {
@@ -1710,11 +1729,11 @@
       "title": "Kusema-taster",
       "hold": "Hold <key/> nede for at tale.",
       "doubleTap": "Dobbelttryk på <key/> for løbende diktering.",
-      "ask": "Tryk på <space/>, mens du holder tasten nede, for at spørge Kusema, eller begynd med <q>{{trigger}}</q>: spørg, rediger eller få Kusema til at se på din skærm."
+      "askOrType": "Tryk på <space/>, mens du holder tasten nede, for at spørge med stemmen, eller <t/> for at skrive. Eller begynd med <q>{{trigger}}</q>: spørg, rediger eller få Kusema til at se på din skærm."
     },
     "settings": {
       "title": "Kusema-tast",
-      "description": "Én tast til diktering. Hold den nede for at tale; dobbelttryk for løbende diktering. For at spørge, redigere eller få Kusema til at se på din skærm trykker du på Mellemrum, mens du holder den nede, eller begynder med “Kusema”. Andre apps ser aldrig tasten.",
+      "description": "Én tast til diktering. Hold den nede for at tale; tryk to gange for løbende diktering. Tryk på Mellemrum, mens du holder den nede, for at spørge med stemmen, eller T for at skrive et spørgsmål. Eller begynd med “Kusema” for at spørge, redigere eller få Kusema til at se på din skærm. Andre apps ser aldrig tasten.",
       "enabled": {
         "label": "Brug Kusema-tasten",
         "description": "Slået fra virker kun genvejene nedenfor."

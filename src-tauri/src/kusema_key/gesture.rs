@@ -26,6 +26,9 @@ pub enum Effect {
     FinishHold { assistant: bool },
     /// Space was tapped while holding: this take is for the Assistant.
     SwitchToAssistant,
+    /// T was tapped while holding: open the Ask box. `discard`: drop the
+    /// recording the press started.
+    OpenAskBox { discard: bool },
     /// It was a tap: drop the recording the press started.
     DiscardHold,
     /// A double-tap: start continuous dictation, or stop it.
@@ -48,6 +51,8 @@ enum State {
     },
     /// The second press of a double-tap is down; its release means nothing.
     SecondDown,
+    /// T opened the Ask box; the key's release means nothing.
+    Typing,
 }
 
 #[derive(Debug)]
@@ -71,7 +76,7 @@ impl Gesture {
     pub fn down(&mut self, now: Instant, continuous: bool) -> Option<Effect> {
         match self.state {
             // Auto-repeat while held.
-            State::Down { .. } | State::SecondDown => None,
+            State::Down { .. } | State::SecondDown | State::Typing => None,
             State::Tapped { at } if now.duration_since(at) <= DOUBLE_TAP_GAP => {
                 self.state = State::SecondDown;
                 Some(Effect::ToggleContinuous)
@@ -104,7 +109,7 @@ impl Gesture {
                     recording.then_some(Effect::FinishHold { assistant })
                 }
             }
-            State::SecondDown => {
+            State::SecondDown | State::Typing => {
                 self.state = State::Idle;
                 None
             }
@@ -122,6 +127,17 @@ impl Gesture {
             } if !*assistant => {
                 *assistant = true;
                 Some(Effect::SwitchToAssistant)
+            }
+            _ => None,
+        }
+    }
+
+    /// T was tapped while the key is down: the take becomes the Ask box.
+    pub fn type_key(&mut self) -> Option<Effect> {
+        match self.state {
+            State::Down { recording, .. } => {
+                self.state = State::Typing;
+                Some(Effect::OpenAskBox { discard: recording })
             }
             _ => None,
         }
@@ -280,6 +296,27 @@ mod tests {
         assert_eq!(g.space(), None);
         g.down(t + ms(8000), true);
         assert_eq!(g.space(), None);
+    }
+
+    #[test]
+    fn t_while_holding_opens_the_ask_box_and_drops_the_recording() {
+        let t = Instant::now();
+        let mut g = Gesture::default();
+        assert_eq!(g.down(t, false), Some(Effect::StartHold));
+        assert_eq!(g.type_key(), Some(Effect::OpenAskBox { discard: true }));
+        // Once; and the release neither finishes nor discards anything more.
+        assert_eq!(g.type_key(), None);
+        assert_eq!(g.space(), None);
+        assert_eq!(g.up(t + ms(1500)), None);
+        // It isn't half a double-tap either.
+        assert_eq!(g.down(t + ms(1600), false), Some(Effect::StartHold));
+        g.up(t + ms(2600));
+        // During continuous dictation there's no recording to drop.
+        g.down(t + ms(5000), true);
+        assert_eq!(g.type_key(), Some(Effect::OpenAskBox { discard: false }));
+        // Not held: nothing.
+        g.up(t + ms(5100));
+        assert_eq!(g.type_key(), None);
     }
 
     #[test]

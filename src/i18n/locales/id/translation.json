@@ -1566,7 +1566,26 @@
       "edit": "Mengedit…"
     },
     "assistantTake": "Tanya Kusema",
-    "triggerHint": "Diketik sebagai dikte. Untuk bertanya ke Kusema, ketuk Spasi sambil menahan {{name}}."
+    "triggerHint": "Diketik sebagai dikte. Untuk bertanya ke Kusema, ketuk Spasi sambil menahan {{name}}.",
+    "ai": {
+      "noProvider": "Kusema butuh AI untuk menjawab. Siapkan satu di Asisten → Pengaturan.",
+      "noKey": "Tidak ada kunci API untuk {{name}}. Tambahkan di Asisten → Pengaturan.",
+      "noModel": "Belum ada model yang dipilih untuk {{name}}. Pilih di Asisten → Pengaturan.",
+      "providerUnsupported": "{{name}} belum bisa menjawab pertanyaan. Pilih AI lain di Asisten → Pengaturan.",
+      "screenProviderGone": "AI yang dipilih untuk pertanyaan tentang layar sudah tidak ada. Pilih yang lain di Asisten → Pengaturan.",
+      "keyRejected": "{{name}} tidak menerima kunci API. Periksa di Asisten → Pengaturan.",
+      "localNotRunning": "{{name}} tidak berjalan di komputer ini. Jalankan, lalu tanya lagi.",
+      "unreachable": "Tidak dapat menjangkau {{name}}. Periksa koneksi internet Anda dan alamat AI di Asisten → Pengaturan.",
+      "privileged": "Mode Privileged aktif, jadi AI cloud diblokir. Gunakan AI lokal, atau nonaktifkan mode Privileged.",
+      "rateLimited": "{{name}} sedang sibuk. Tunggu sebentar, lalu tanya lagi.",
+      "notFound": "{{name}} tidak menemukan model itu. Periksa di Asisten → Pengaturan.",
+      "noVision": "AI ini tidak bisa melihat layar. Pilih yang bisa melihat gambar, seperti Claude atau model visi di Ollama.",
+      "emptyReply": "{{name}} tidak mengirim jawaban. Coba tanya lagi.",
+      "nothingHeard": "Kusema tidak mendengar pertanyaan. Tahan tombolnya, ketuk Spasi, lalu bicara.",
+      "other": "Kusema tidak bisa mendapat jawaban: {{name}}"
+    },
+    "setUp": "Siapkan",
+    "dismiss": "Tutup"
   },
   "screenCard": {
     "title": "Kirim tangkapan layar ini?",
@@ -1658,7 +1677,7 @@
     "trigger": "Saat dikte berkelanjutan, mulai dengan “{{trigger}},” untuk mengubah teks dengan cara yang sama, misalnya “{{trigger}}, buat ini lebih formal”. Tanpa kata itu, semuanya diketik seperti yang Anda ucapkan.",
     "triggerOff": "Untuk mengubah teks saat dikte berkelanjutan, atur kata pemicu di Umum → Edit Suara.",
     "selectFirst": "Beberapa aplikasi, seperti ONLYOFFICE, LibreOffice, dan Google Docs, tidak menunjukkan teksnya kepada Kusema. Di sana, pilih teks dengan mouse atau keyboard dulu; memilih kalimat, paragraf, atau kata dengan suara tidak berfungsi di sana.",
-    "introKey": "Tahan {{key}} dan ketuk Spasi (atau awali dengan “{{trigger}}”), lalu ucapkan salah satu perintah ini. Perintah bertanda “Juga dalam dikte berkelanjutan” berfungsi di sana jika diucapkan sendiri."
+    "introKey": "Tahan {{key}} dan ketuk Spasi (atau awali dengan “{{trigger}},”), lalu ucapkan salah satu perintah ini. Untuk mengetik pertanyaan, ketuk T sambil menahan. Perintah bertanda “Juga dalam dikte terus-menerus” berfungsi di sana jika diucapkan sendiri."
   },
   "voiceEdit": {
     "notice": {
@@ -1710,11 +1729,11 @@
       "title": "Tombol Kusema",
       "hold": "Tahan <key/> untuk berbicara.",
       "doubleTap": "Ketuk <key/> dua kali untuk dikte berkelanjutan.",
-      "ask": "Sambil menahan, ketuk <space/> untuk bertanya ke Kusema, atau awali dengan <q>{{trigger}}</q>: bertanya, mengedit, atau meminta melihat layar Anda."
+      "askOrType": "Sambil menahan, ketuk <space/> untuk bertanya dengan suara, atau <t/> untuk mengetik. Atau awali dengan <q>{{trigger}}</q>: bertanya, mengedit, atau meminta melihat layar Anda."
     },
     "settings": {
       "title": "Tombol Kusema",
-      "description": "Satu tombol untuk dikte. Tahan untuk berbicara; ketuk dua kali untuk dikte berkelanjutan. Untuk bertanya, mengedit, atau meminta melihat layar Anda, ketuk Spasi sambil menahannya, atau awali dengan “Kusema”. Aplikasi lain tidak pernah menerima tombol ini.",
+      "description": "Satu tombol untuk dikte. Tahan untuk berbicara; ketuk dua kali untuk dikte terus-menerus. Sambil menahan, ketuk Spasi untuk bertanya dengan suara, atau T untuk mengetik pertanyaan. Atau awali dengan “Kusema” untuk bertanya, mengedit, atau meminta melihat layar Anda. Aplikasi lain tidak pernah melihat tombol ini.",
       "enabled": {
         "label": "Gunakan tombol Kusema",
         "description": "Jika mati, hanya pintasan di bawah yang berfungsi."

@@ -1566,7 +1566,26 @@
       "edit": "Bearbeitet …"
     },
     "assistantTake": "Kusema fragen",
-    "triggerHint": "Als Diktat getippt. Um Kusema zu fragen, tippen Sie beim Halten von {{name}} auf die Leertaste."
+    "triggerHint": "Als Diktat getippt. Um Kusema zu fragen, tippen Sie beim Halten von {{name}} auf die Leertaste.",
+    "ai": {
+      "noProvider": "Kusema braucht eine KI, um zu antworten. Richten Sie eine unter Assistent → Einstellungen ein.",
+      "noKey": "Kein API-Schlüssel für {{name}}. Fügen Sie einen unter Assistent → Einstellungen hinzu.",
+      "noModel": "Kein Modell für {{name}} gewählt. Wählen Sie eines unter Assistent → Einstellungen.",
+      "providerUnsupported": "{{name}} kann noch keine Fragen beantworten. Wählen Sie unter Assistent → Einstellungen eine andere KI.",
+      "screenProviderGone": "Die für Bildschirmfragen gewählte KI gibt es nicht mehr. Wählen Sie unter Assistent → Einstellungen eine andere.",
+      "keyRejected": "{{name}} hat den API-Schlüssel nicht angenommen. Prüfen Sie ihn unter Assistent → Einstellungen.",
+      "localNotRunning": "{{name}} läuft auf diesem Computer nicht. Starten Sie es und fragen Sie dann erneut.",
+      "unreachable": "{{name}} ist nicht erreichbar. Prüfen Sie Ihre Internetverbindung und die Adresse der KI unter Assistent → Einstellungen.",
+      "privileged": "Der Privileged-Modus ist an, daher ist Cloud-KI gesperrt. Verwenden Sie eine lokale KI oder schalten Sie den Privileged-Modus aus.",
+      "rateLimited": "{{name}} ist ausgelastet. Warten Sie einen Moment und fragen Sie dann erneut.",
+      "notFound": "{{name}} hat dieses Modell nicht gefunden. Prüfen Sie es unter Assistent → Einstellungen.",
+      "noVision": "Diese KI kann den Bildschirm nicht sehen. Wählen Sie eine, die Bilder erkennt, etwa Claude oder ein Bildmodell in Ollama.",
+      "emptyReply": "{{name}} hat keine Antwort geschickt. Fragen Sie noch einmal.",
+      "nothingHeard": "Kusema hat keine Frage gehört. Halten Sie die Taste, tippen Sie auf die Leertaste und sprechen Sie dann.",
+      "other": "Kusema hat keine Antwort bekommen: {{name}}"
+    },
+    "setUp": "Einrichten",
+    "dismiss": "Schließen"
   },
   "screenCard": {
     "title": "Diesen Screenshot senden?",
@@ -1658,7 +1677,7 @@
     "trigger": "Beginnen Sie beim fortlaufenden Diktat mit „{{trigger}},“, um Text auf dieselbe Weise zu ändern, zum Beispiel „{{trigger}}, mach das förmlicher“. Ohne dieses Wort wird alles so geschrieben, wie Sie es sagen.",
     "triggerOff": "Um Text beim fortlaufenden Diktat zu ändern, legen Sie unter Allgemein → Sprachbearbeitung ein Auslösewort fest.",
     "selectFirst": "Manche Apps wie ONLYOFFICE, LibreOffice und Google Docs zeigen Kusema ihren Text nicht. Markieren Sie den Text dort zuerst mit Maus oder Tastatur; Sätze, Absätze oder Wörter per Sprache markieren funktioniert dort nicht.",
-    "introKey": "Halten Sie {{key}} und tippen Sie auf die Leertaste (oder beginnen Sie mit „{{trigger}}“), dann sagen Sie einen dieser Befehle. Befehle mit dem Hinweis „Auch beim fortlaufenden Diktat“ funktionieren dort, wenn sie allein gesagt werden."
+    "introKey": "Halten Sie {{key}} und tippen Sie auf die Leertaste (oder beginnen Sie mit „{{trigger}},“), dann sagen Sie einen dieser Befehle. Um stattdessen eine Frage zu tippen, tippen Sie beim Halten auf T. Befehle mit dem Hinweis „Auch beim fortlaufenden Diktat“ funktionieren dort, wenn sie allein gesagt werden."
   },
   "voiceEdit": {
     "notice": {
@@ -1710,11 +1729,11 @@
       "title": "Kusema-Tasten",
       "hold": "Halten Sie <key/> gedrückt, um zu sprechen.",
       "doubleTap": "Tippen Sie <key/> zweimal für fortlaufendes Diktieren.",
-      "ask": "Tippen Sie beim Halten auf <space/>, um Kusema zu fragen, oder beginnen Sie mit <q>{{trigger}}</q>: fragen, bearbeiten oder auf Ihren Bildschirm schauen lassen."
+      "askOrType": "Tippen Sie beim Halten auf <space/>, um per Sprache zu fragen, oder auf <t/>, um zu tippen. Oder beginnen Sie mit <q>{{trigger}}</q>: fragen, bearbeiten oder auf Ihren Bildschirm schauen lassen."
     },
     "settings": {
       "title": "Kusema-Taste",
-      "description": "Eine Taste zum Diktieren. Halten Sie sie zum Sprechen, tippen Sie sie zweimal für fortlaufendes Diktieren. Um zu fragen, zu bearbeiten oder auf Ihren Bildschirm schauen zu lassen, tippen Sie beim Halten auf die Leertaste oder beginnen Sie mit „Kusema“. Andere Apps bekommen die Taste nie zu sehen.",
+      "description": "Eine Taste zum Diktieren. Halten Sie sie zum Sprechen, tippen Sie sie zweimal für fortlaufendes Diktieren. Tippen Sie beim Halten auf die Leertaste, um per Sprache zu fragen, oder auf T, um eine Frage zu tippen. Oder beginnen Sie mit „Kusema“, um zu fragen, zu bearbeiten oder auf Ihren Bildschirm schauen zu lassen. Andere Apps bekommen die Taste nie zu sehen.",
       "enabled": {
         "label": "Kusema-Taste verwenden",
         "description": "Aus: Nur die Tastenkürzel unten funktionieren."

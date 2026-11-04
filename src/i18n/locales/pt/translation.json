@@ -1572,7 +1572,26 @@
       "edit": "Editando…"
     },
     "assistantTake": "Perguntar ao Kusema",
-    "triggerHint": "Digitado como ditado. Para perguntar ao Kusema, toque em Espaço enquanto segura {{name}}."
+    "triggerHint": "Digitado como ditado. Para perguntar ao Kusema, toque em Espaço enquanto segura {{name}}.",
+    "ai": {
+      "noProvider": "O Kusema precisa de uma IA para responder. Configure uma em Assistente → Configurações.",
+      "noKey": "Não há chave de API para {{name}}. Adicione uma em Assistente → Configurações.",
+      "noModel": "Nenhum modelo escolhido para {{name}}. Escolha um em Assistente → Configurações.",
+      "providerUnsupported": "{{name}} ainda não consegue responder perguntas. Escolha outra IA em Assistente → Configurações.",
+      "screenProviderGone": "A IA escolhida para perguntas sobre a tela não existe mais. Escolha outra em Assistente → Configurações.",
+      "keyRejected": "{{name}} não aceitou a chave de API. Verifique-a em Assistente → Configurações.",
+      "localNotRunning": "{{name}} não está rodando neste computador. Inicie-o e pergunte de novo.",
+      "unreachable": "Não foi possível acessar {{name}}. Verifique sua conexão com a internet e o endereço da IA em Assistente → Configurações.",
+      "privileged": "O modo Privileged está ativado, então a IA na nuvem está bloqueada. Use uma IA local ou desative o modo Privileged.",
+      "rateLimited": "{{name}} está ocupado. Aguarde um momento e pergunte de novo.",
+      "notFound": "{{name}} não encontrou esse modelo. Verifique-o em Assistente → Configurações.",
+      "noVision": "Esta IA não consegue ver a tela. Escolha uma que veja imagens, como o Claude ou um modelo de visão no Ollama.",
+      "emptyReply": "{{name}} não enviou uma resposta. Tente perguntar de novo.",
+      "nothingHeard": "O Kusema não ouviu uma pergunta. Segure a tecla, toque em Espaço e então fale.",
+      "other": "O Kusema não conseguiu uma resposta: {{name}}"
+    },
+    "setUp": "Configurar",
+    "dismiss": "Fechar"
   },
   "screenCard": {
     "title": "Enviar esta captura de tela?",
@@ -1666,7 +1685,7 @@
     "trigger": "No ditado contínuo, comece com «{{trigger}},» para alterar texto do mesmo jeito, por exemplo «{{trigger}}, deixe isto mais formal». Sem essa palavra, tudo é digitado como você diz.",
     "triggerOff": "Para alterar texto durante o ditado contínuo, defina uma palavra de ativação em Geral → Edição por voz.",
     "selectFirst": "Alguns aplicativos, como ONLYOFFICE, LibreOffice e Google Docs, não mostram seu texto ao Kusema. Neles, selecione o texto primeiro com o mouse ou o teclado; selecionar uma frase, um parágrafo ou palavras por voz não funciona.",
-    "introKey": "Segure {{key}} e toque em Espaço (ou comece com “{{trigger}}”), depois diga um destes. Os comandos marcados “Também no ditado contínuo” funcionam lá quando ditos sozinhos."
+    "introKey": "Segure {{key}} e toque em Espaço (ou comece com “{{trigger}},”) e diga um destes comandos. Para digitar uma pergunta, toque em T enquanto segura. Os comandos marcados com “Também no ditado contínuo” funcionam lá quando ditos sozinhos."
   },
   "voiceEdit": {
     "notice": {
@@ -1718,11 +1737,11 @@
       "title": "Teclas do Kusema",
       "hold": "Segure <key/> para falar.",
       "doubleTap": "Toque duas vezes em <key/> para o ditado contínuo.",
-      "ask": "Enquanto segura, toque em <space/> para perguntar ao Kusema, ou comece com <q>{{trigger}}</q>: perguntar, editar ou fazer o Kusema olhar sua tela."
+      "askOrType": "Enquanto segura, toque em <space/> para perguntar por voz, ou em <t/> para digitar. Ou comece com <q>{{trigger}}</q>: perguntar, editar ou fazer o Kusema olhar sua tela."
     },
     "settings": {
       "title": "Tecla Kusema",
-      "description": "Uma tecla para ditar. Segure para falar; toque duas vezes para o ditado contínuo. Para perguntar, editar ou fazer o Kusema olhar sua tela, toque em Espaço enquanto segura, ou comece com “Kusema”. Os outros aplicativos nunca veem a tecla.",
+      "description": "Uma tecla para ditar. Segure-a para falar; toque duas vezes para o ditado contínuo. Enquanto segura, toque em Espaço para perguntar por voz, ou em T para digitar uma pergunta. Ou comece com “Kusema” para perguntar, editar ou fazer o Kusema olhar sua tela. Os outros apps nunca veem a tecla.",
       "enabled": {
         "label": "Usar a tecla Kusema",
         "description": "Desligada, só funcionam os atalhos abaixo."
