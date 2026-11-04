@@ -1481,6 +1481,11 @@
       "add": "Dodaj styl",
       "reset": "Przywróć domyślne",
       "neutral": "Programy spoza listy dostają neutralny tekst."
+    },
+    "livePreview": {
+      "label": "Podgląd na żywo",
+      "description": "Pokazuje twoje słowa w pigułce, gdy mówisz. To, co zostaje wpisane, się nie zmienia. Wymaga modelu z tekstem na żywo, np. Parakeet Unified lub Nemotron Streaming.",
+      "autoOff": "Wyłączony, bo ten komputer nie nadążał. Włącz go, aby spróbować ponownie."
     }
   },
   "footer": {
@@ -1597,7 +1602,8 @@
       "other": "Kusema nie dostała odpowiedzi: {{name}}"
     },
     "setUp": "Skonfiguruj",
-    "dismiss": "Zamknij"
+    "dismiss": "Zamknij",
+    "previewOff": "Podgląd na żywo jest wyłączony: ten komputer nie nadążał. Możesz go znów włączyć w Ustawieniach."
   },
   "screenCard": {
     "title": "Wysłać ten zrzut ekranu?",
@@ -1780,5 +1786,39 @@
       "gotIt": "Rozumiem"
     },
     "space": "Spacja"
+  },
+  "micCheck": {
+    "title": "Test mikrofonu",
+    "intro": "Kusema słucha twojego pokoju, a potem ciebie czytającego zdanie, i mówi, co by pomogło. Nic nie jest zapisywane ani wysyłane.",
+    "start": "Sprawdź mój mikrofon",
+    "meter": "Poziom mikrofonu",
+    "quiet": "Zachowaj chwilę ciszy… {{seconds}}",
+    "read": "Teraz przeczytaj to na głos:",
+    "sentence": "Proszę wysłać podpisaną umowę do klienta do piątkowego popołudnia.",
+    "done": "Gotowe",
+    "cancel": "Anuluj",
+    "again": "Sprawdź ponownie",
+    "play": "Odtwórz mój test",
+    "failed": "Kusema nie mogła otworzyć mikrofonu. Wybierz inny albo sprawdź, czy jest podłączony.",
+    "numbers": "Pokój {{noise}} dB · Twój głos {{speech}} dB · różnica {{snr}} dB",
+    "adapted": "Kusema ignoruje teraz dźwięki cichsze niż hałas w twoim pokoju, więc wpisuje mniej przypadkowych słów.",
+    "anyMic": "Działa każdy mikrofon USB i zestaw słuchawkowy. Jeśli coś kupujesz, szukaj:",
+    "tips": {
+      "not_heard": "Kusema nie usłyszała, jak czytasz. Sprawdź, czy to mikrofon, do którego mówisz, i czy nie jest wyciszony.",
+      "clipping": "Twój mikrofon jest tak głośny, że zniekształca. Odsuń go trochę albo zmniejsz jego poziom w ustawieniach dźwięku Windows.",
+      "quiet": "Twój mikrofon jest cichy. Przybliż się albo zwiększ jego poziom w ustawieniach dźwięku Windows.",
+      "noisy": "W twoim pokoju jest trochę hałasu. Zestaw słuchawkowy poprawi dokładność i zatrzyma przypadkowe słowa.",
+      "bluetooth_hands_free": "Ten zestaw Bluetooth wysyła dźwięk niższej jakości, gdy używany jest jego mikrofon. Zestaw przewodowy lub USB albo wbudowany mikrofon komputera może brzmieć wyraźniej.",
+      "good": "Twój mikrofon brzmi dobrze."
+    },
+    "adaptive": {
+      "label": "Ignoruj hałas w pokoju",
+      "description": "Na podstawie testu mikrofonu ignoruje dźwięki cichsze od twojego głosu, np. telewizor albo ludzi rozmawiających w pobliżu."
+    },
+    "look": {
+      "boom": "Zestaw słuchawkowy z mikrofonem na wysięgniku przy ustach",
+      "usb": "Biurkowy mikrofon USB ustawiony blisko ciebie",
+      "wired": "Połączenie przewodowe lub USB zamiast Bluetooth, które obniża jakość mikrofonu podczas mówienia"
+    }
   }
 }

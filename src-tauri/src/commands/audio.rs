@@ -246,10 +246,13 @@ pub async fn set_selected_microphone(app: AppHandle, device_name: String) -> Res
     // can restart the cpal stream (blocking CoreAudio) — run it on a blocking
     // thread, not inline on the webview/main run loop.
     let rm = app.state::<Arc<AudioRecordingManager>>().inner().clone();
-    tokio::task::spawn_blocking(move || rm.update_selected_device())
+    let updated = tokio::task::spawn_blocking(move || rm.update_selected_device())
         .await
         .map_err(|e| format!("audio task join failed: {}", e))?
-        .map_err(|e| format!("Failed to update selected device: {}", e))
+        .map_err(|e| format!("Failed to update selected device: {}", e));
+    // Kusema: the voice detector follows this microphone's measured noise.
+    crate::mic_check::refresh_gate(&app);
+    updated
 }
 
 #[tauri::command]

@@ -24,12 +24,14 @@ mod llm_client;
 mod local_providers;
 mod managers;
 mod memory;
+mod mic_check;
 mod network;
 mod overlay;
 #[cfg(target_os = "windows")]
 mod overlay_recovery;
 mod paste_tx;
 pub mod portable;
+mod preview;
 mod screen;
 mod secrets;
 mod secure_input;
@@ -731,6 +733,14 @@ pub fn run(cli_args: CliArgs) {
             setup::local_ai::detect_local_provider,
             setup::mic_test::start_mic_test,
             setup::mic_test::stop_mic_test,
+            mic_check::start_mic_check,
+            mic_check::mark_mic_check_speech,
+            mic_check::finish_mic_check,
+            mic_check::cancel_mic_check,
+            mic_check::play_mic_check,
+            mic_check::get_mic_profile,
+            mic_check::change_adaptive_vad_setting,
+            preview::change_live_preview_setting,
             shortcut::change_autostart_setting,
             shortcut::change_translate_to_english_setting,
             shortcut::change_selected_language_setting,
@@ -1059,6 +1069,7 @@ pub fn run(cli_args: CliArgs) {
         .manage(screen::ScreenState::default())
         .manage(dictation::DictationState::default())
         .manage(setup::mic_test::MicTestState::default())
+        .manage(mic_check::MicCheckState::default())
         .setup(move |app| {
             #[cfg(target_os = "windows")]
             log::info!(

@@ -1469,6 +1469,11 @@
       "add": "Stil ekle",
       "reset": "Varsayılanları geri yükle",
       "neutral": "Listede olmayan programlar nötr metin alır."
+    },
+    "livePreview": {
+      "label": "Canlı önizleme",
+      "description": "Konuşurken sözlerinizi hapta gösterir. Yazılan değişmez. Parakeet Unified veya Nemotron Streaming gibi canlı metin veren bir model gerekir.",
+      "autoOff": "Bu bilgisayar yetişemediği için kapatıldı. Yeniden denemek için açın."
     }
   },
   "footer": {
@@ -1585,7 +1590,8 @@
       "other": "Kusema yanıt alamadı: {{name}}"
     },
     "setUp": "Kur",
-    "dismiss": "Kapat"
+    "dismiss": "Kapat",
+    "previewOff": "Canlı önizleme kapalı: bu bilgisayar yetişemedi. Ayarlar'dan yeniden açabilirsiniz."
   },
   "screenCard": {
     "title": "Bu ekran görüntüsü gönderilsin mi?",
@@ -1764,5 +1770,39 @@
       "gotIt": "Anladım"
     },
     "space": "Boşluk"
+  },
+  "micCheck": {
+    "title": "Mikrofon kontrolü",
+    "intro": "Kusema önce odanızı, sonra bir cümle okuyuşunuzu dinler ve neyin işe yarayacağını söyler. Hiçbir şey kaydedilmez veya gönderilmez.",
+    "start": "Mikrofonumu kontrol et",
+    "meter": "Mikrofon seviyesi",
+    "quiet": "Bir an sessiz kalın… {{seconds}}",
+    "read": "Şimdi bunu sesli okuyun:",
+    "sentence": "Lütfen imzalı sözleşmeyi cuma öğleden sonraya kadar müşteriye gönderin.",
+    "done": "Bitti",
+    "cancel": "İptal",
+    "again": "Yeniden kontrol et",
+    "play": "Testimi çal",
+    "failed": "Kusema mikrofonu açamadı. Başka bir mikrofon seçin veya takılı olup olmadığını kontrol edin.",
+    "numbers": "Oda {{noise}} dB · Sesiniz {{speech}} dB · {{snr}} dB fark",
+    "adapted": "Kusema artık odanızın gürültüsünden daha sessiz sesleri yok sayıyor; böylece daha az başıboş sözcük yazıyor.",
+    "anyMic": "Her USB mikrofon veya kulaklık çalışır. Bir tane alacaksanız şunlara bakın:",
+    "tips": {
+      "not_heard": "Kusema okuyuşunuzu duyamadı. Konuştuğunuz mikrofonun bu olduğundan ve sesinin kapalı olmadığından emin olun.",
+      "clipping": "Mikrofonunuz o kadar yüksek ki ses bozuluyor. Biraz uzaklaştırın veya Windows ses ayarlarından seviyesini düşürün.",
+      "quiet": "Mikrofonunuz kısık. Yaklaşın veya Windows ses ayarlarından seviyesini yükseltin.",
+      "noisy": "Odanız biraz gürültülü. Mikrofonlu kulaklık doğruluğu artırır ve başıboş sözcükleri önler.",
+      "bluetooth_hands_free": "Bu Bluetooth kulaklık, mikrofonu kullanılırken daha düşük kalitede ses gönderir. Kablolu veya USB kulaklık ya da bilgisayarın kendi mikrofonu daha net olabilir.",
+      "good": "Mikrofonunuzun sesi iyi."
+    },
+    "adaptive": {
+      "label": "Oda gürültüsünü yok say",
+      "description": "Mikrofon kontrolünü kullanarak televizyon veya yakında konuşan insanlar gibi sesinizden daha sessiz sesleri yok sayar."
+    },
+    "look": {
+      "boom": "Ağzınıza yakın duran, kollu mikrofonlu bir kulaklık",
+      "usb": "Size yakın konan bir USB masa mikrofonu",
+      "wired": "Konuşurken mikrofon kalitesini düşüren Bluetooth yerine kablolu veya USB bağlantı"
+    }
   }
 }

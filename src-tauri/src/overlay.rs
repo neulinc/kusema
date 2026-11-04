@@ -51,8 +51,11 @@ tauri_panel! {
 const OVERLAY_WIDTH: f64 = 300.0;
 const OVERLAY_HEIGHT: f64 = 50.0;
 
-// Actual is 394x118, just a little extra
+// Handy's Live panel (394x118, a little extra). Kusema's Live is the compact
+// pill; the size stays as a sample for the placement tests.
+#[cfg(test)]
 const OVERLAY_STREAM_WIDTH: f64 = 400.0;
+#[cfg(test)]
 const OVERLAY_STREAM_HEIGHT: f64 = 120.0;
 
 // Kusema: continuous dictation's pill (--ov-dictation-w) holds its status, timer
@@ -140,9 +143,9 @@ fn glow_shift(position: OverlayPosition) -> f64 {
 }
 
 fn card_dimensions(state: &str) -> (f64, f64) {
-    if state == "streaming" {
-        (OVERLAY_STREAM_WIDTH, OVERLAY_STREAM_HEIGHT)
-    } else if state == "dictating" {
+    // Kusema: Live is the compact pill too; its preview grows it upward, in
+    // the label row (`set_overlay_label_height`).
+    if state == "dictating" {
         (OVERLAY_DICTATION_WIDTH, OVERLAY_HEIGHT)
     } else if state == "notice" {
         // Kusema voice editing: a message of a line or two.

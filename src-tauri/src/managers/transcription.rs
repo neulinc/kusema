@@ -37,6 +37,8 @@ mod chunked;
 mod job;
 mod live;
 pub mod policy;
+// Kusema live preview in continuous dictation.
+mod preview_stream;
 
 pub use job::ChunkControl;
 
@@ -844,10 +846,11 @@ impl TranscriptionManager {
             caps.supports_translate,
             caps.languages,
         );
-        let mode = live_decode(
-            ModelTraits::of(&info),
-            get_settings(&self.app_handle).long_form_chunking,
-        );
+        let settings = get_settings(&self.app_handle);
+        let mut traits = ModelTraits::of(&info);
+        // Kusema: a model's stream is only the live preview; off with it.
+        traits.streaming &= crate::preview::enabled(&settings);
+        let mode = live_decode(traits, settings.long_form_chunking);
         let Some(mut session) = LiveSession::begin(self, mode, &info, &model_id) else {
             // Nothing to decode live: the recording is transcribed in batch.
             self.router.clear();
@@ -1383,14 +1386,6 @@ fn agreed_language(transcripts: &[Transcript]) -> Option<String> {
         .next()
         .flatten()
         .filter(|first| detected.all(|language| language.as_ref() == Some(first)))
-}
-
-fn emit_stream_text(app_handle: &AppHandle, committed: &str, tentative: &str) {
-    let _ = StreamTextEvent {
-        committed: committed.to_string(),
-        tentative: tentative.to_string(),
-    }
-    .emit(app_handle);
 }
 
 fn lock_perf(perf: &Mutex<StreamPerf>) -> MutexGuard<'_, StreamPerf> {

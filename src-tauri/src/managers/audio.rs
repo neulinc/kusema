@@ -357,6 +357,8 @@ pub fn create_smoothed_detector(
     app_handle: &tauri::AppHandle,
 ) -> Result<SmoothedVad, anyhow::Error> {
     let detector: Box<dyn VoiceActivityDetector> = create_detector(backend, app_handle)?;
+    // Kusema: sound under the measured room noise isn't speech.
+    let detector = crate::mic_check::gated(detector, app_handle);
 
     // Earshot uses 16 ms frames while Silero uses 32 ms. Convert the existing
     // time-based capture profile to each detector's frame size so selecting a

@@ -13,6 +13,7 @@ import { Button } from "../ui/Button";
 import { Alert } from "../ui/Alert";
 import { KusemaKeysCard } from "../shared/KusemaKeysCard";
 import { ShortcutInput } from "./ShortcutInput";
+import { LivePreviewSetting } from "./LivePreviewSetting";
 import { ShortcutActivationSetting } from "./ShortcutActivation";
 
 const CUSTOM = "custom";
@@ -159,6 +160,7 @@ export const KusemaKeySettings: React.FC = () => {
             {t("kusemaKey.settings.laptopHint")}
           </p>
         )}
+      <LivePreviewSetting />
       {/* T while holding opens the Ask box; its own key shows here only if
           it was changed, otherwise with the classic shortcuts. */}
       {!classic && <ShortcutInput shortcutId="ask_box" grouped={true} />}

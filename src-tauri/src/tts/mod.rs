@@ -20,6 +20,21 @@ use tauri::{AppHandle, Manager, State};
 
 pub use player::Speaker;
 
+/// Plays mono `samples` once on the chosen output device, and waits until
+/// they've played. For the microphone check's "Play my test back".
+pub fn play_samples(device: Option<String>, rate: u32, samples: Vec<f32>) -> Result<(), String> {
+    let rate = std::num::NonZero::new(rate).ok_or("Invalid sample rate")?;
+    let sink = player::open_output(device)?;
+    let player = rodio::Player::connect_new(sink.mixer());
+    player.append(rodio::buffer::SamplesBuffer::new(
+        std::num::NonZero::<u16>::MIN,
+        rate,
+        samples,
+    ));
+    player.sleep_until_end();
+    Ok(())
+}
+
 /// Lowest and highest speaking rate offered (1.0 is the voice's normal speed).
 pub const MIN_RATE: f32 = 0.5;
 pub const MAX_RATE: f32 = 2.0;

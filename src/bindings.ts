@@ -195,6 +195,71 @@ async startMicTest() : Promise<Result<null, string>> {
 async stopMicTest() : Promise<void> {
     await TAURI_INVOKE("stop_mic_test");
 },
+/**
+ * Starts a check on the selected microphone: the quiet part begins now.
+ */
+async startMicCheck() : Promise<Result<null, string>> {
+    try {
+    return { status: "ok", data: await TAURI_INVOKE("start_mic_check") };
+} catch (e) {
+    if(e instanceof Error) throw e;
+    else return { status: "error", error: e  as any };
+}
+},
+/**
+ * The quiet part is over: the sentence starts now.
+ */
+async markMicCheckSpeech() : Promise<void> {
+    await TAURI_INVOKE("mark_mic_check_speech");
+},
+/**
+ * Ends the check and says what it found. The room's noise is kept for this
+ * microphone, so the voice detector can ignore it.
+ */
+async finishMicCheck() : Promise<Result<MicReport, string>> {
+    try {
+    return { status: "ok", data: await TAURI_INVOKE("finish_mic_check") };
+} catch (e) {
+    if(e instanceof Error) throw e;
+    else return { status: "error", error: e  as any };
+}
+},
+/**
+ * Stops a check without measuring, and forgets its audio.
+ */
+async cancelMicCheck() : Promise<void> {
+    await TAURI_INVOKE("cancel_mic_check");
+},
+/**
+ * Plays the last check back, from memory, on the chosen output device.
+ */
+async playMicCheck() : Promise<Result<null, string>> {
+    try {
+    return { status: "ok", data: await TAURI_INVOKE("play_mic_check") };
+} catch (e) {
+    if(e instanceof Error) throw e;
+    else return { status: "error", error: e  as any };
+}
+},
+async getMicProfile() : Promise<MicProfileStatus> {
+    return await TAURI_INVOKE("get_mic_profile");
+},
+async changeAdaptiveVadSetting(enabled: boolean) : Promise<Result<null, string>> {
+    try {
+    return { status: "ok", data: await TAURI_INVOKE("change_adaptive_vad_setting", { enabled }) };
+} catch (e) {
+    if(e instanceof Error) throw e;
+    else return { status: "error", error: e  as any };
+}
+},
+async changeLivePreviewSetting(enabled: boolean) : Promise<Result<null, string>> {
+    try {
+    return { status: "ok", data: await TAURI_INVOKE("change_live_preview_setting", { enabled }) };
+} catch (e) {
+    if(e instanceof Error) throw e;
+    else return { status: "error", error: e  as any };
+}
+},
 async changeAutostartSetting(enabled: boolean) : Promise<Result<null, string>> {
     try {
     return { status: "ok", data: await TAURI_INVOKE("change_autostart_setting", { enabled }) };
@@ -1998,7 +2063,23 @@ simpler_keys_card?: boolean;
  * Spellings of the trigger word added from "correct that", recognized
  * only at the start of what's said.
  */
-trigger_variants?: string[] }
+trigger_variants?: string[]; 
+/**
+ * Kusema live preview: the words in the pill while you speak.
+ */
+live_preview?: boolean; 
+/**
+ * Live preview was turned off because this computer couldn't keep up.
+ */
+live_preview_auto_off?: boolean; 
+/**
+ * Kusema microphone check: what each microphone measured, by name.
+ */
+mic_profiles?: Partial<{ [key in string]: MicProfile }>; 
+/**
+ * Ignore sound quieter than the measured room noise allows.
+ */
+adaptive_vad?: boolean }
 /**
  * One style and the programs it's for.
  */
@@ -2336,6 +2417,52 @@ export type LocalAiStatus = { found: boolean;
  */
 models: string[]; base_url: string }
 export type LogLevel = "trace" | "debug" | "info" | "warn" | "error"
+/**
+ * What a microphone measured, kept per microphone for the VAD gate.
+ */
+export type MicProfile = { 
+/**
+ * The room with nobody speaking (dBFS).
+ */
+noise_db: number; 
+/**
+ * The loud parts of speech (dBFS).
+ */
+speech_db: number }
+/**
+ * The measured profile of the current microphone, and the level the voice
+ * detector ignores sound under (`None` when no gate applies).
+ */
+export type MicProfileStatus = { profile: MicProfile | null; gate_db: number | null }
+export type MicReport = { noise_db: number; speech_db: number; snr_db: number; clipped_percent: number; bluetooth_hands_free: boolean; tips: MicTip[] }
+/**
+ * One thing to tell the user, most important first.
+ */
+export type MicTip = 
+/**
+ * Nobody was heard reading: the wrong microphone, or muted.
+ */
+"not_heard" | 
+/**
+ * Loud enough to distort.
+ */
+"clipping" | 
+/**
+ * Too quiet.
+ */
+"quiet" | 
+/**
+ * The room's noise is close to the speech.
+ */
+"noisy" | 
+/**
+ * A Bluetooth headset's mic in hands-free mode.
+ */
+"bluetooth_hands_free" | 
+/**
+ * Nothing to change.
+ */
+"good"
 export type ModelInfo = { id: string; name: string; description: string; filename: string; source: ModelSource; size_mb: number; is_downloaded: boolean; is_downloading: boolean; partial_size: number; accuracy_score: number; speed_score: number; supports_translation: boolean; is_recommended: boolean; supported_languages: string[]; supports_language_selection: boolean; is_custom: boolean; supports_streaming: boolean; supports_language_detection: boolean }
 export type ModelLoadStatus = { is_loaded: boolean; current_model: string | null }
 /**

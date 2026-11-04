@@ -563,7 +563,9 @@ impl ShortcutAction for TranscribeAction {
         let model_supports_streaming = selected_model_info
             .as_ref()
             .map(|m| m.supports_streaming)
-            .unwrap_or(false);
+            .unwrap_or(false)
+            // Kusema: a model's stream is only the live preview; off with it.
+            && crate::preview::enabled(&settings);
         let vad_policy = if !settings.vad_enabled {
             VadPolicy::Disabled
         } else if model_supports_streaming {

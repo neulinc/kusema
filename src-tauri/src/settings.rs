@@ -681,6 +681,26 @@ pub struct AppSettings {
     /// only at the start of what's said.
     #[serde(default)]
     pub trigger_variants: Vec<String>,
+    /// Kusema live preview: the words in the pill while you speak.
+    #[serde(default = "default_live_preview")]
+    pub live_preview: bool,
+    /// Live preview was turned off because this computer couldn't keep up.
+    #[serde(default)]
+    pub live_preview_auto_off: bool,
+    /// Kusema microphone check: what each microphone measured, by name.
+    #[serde(default)]
+    pub mic_profiles: std::collections::BTreeMap<String, crate::mic_check::MicProfile>,
+    /// Ignore sound quieter than the measured room noise allows.
+    #[serde(default = "default_adaptive_vad")]
+    pub adaptive_vad: bool,
+}
+
+fn default_live_preview() -> bool {
+    true
+}
+
+fn default_adaptive_vad() -> bool {
+    true
 }
 
 fn default_kusema_key_enabled() -> bool {
@@ -1393,6 +1413,10 @@ pub fn get_default_settings() -> AppSettings {
         keys_scheme: crate::kusema_key::migrate::SCHEME,
         simpler_keys_card: false,
         trigger_variants: Vec::new(),
+        live_preview: default_live_preview(),
+        live_preview_auto_off: false,
+        mic_profiles: Default::default(),
+        adaptive_vad: default_adaptive_vad(),
     }
 }
 

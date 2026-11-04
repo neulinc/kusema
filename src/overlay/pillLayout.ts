@@ -31,6 +31,21 @@ export const MAX_LABEL_HEIGHT = 120;
 export const NOTICE_CARD_ROOM = 100;
 /** How long the row takes to open or close, ms (RecordingOverlay.css). */
 export const LABEL_MS = 260;
+/** How long "Live preview is off" stays in the row, ms. */
+export const PREVIEW_OFF_MS = 6000;
+
+/** The pill's states where the live preview shows what's been said. */
+const PREVIEW_STATES = ["streaming", "recording", "dictating", "transcribing"];
+
+/** Whether the live preview shows: there are words, in a state that listens
+ * (or is just turning the take into text). Never on a message, a question's
+ * answer or the AI's rewrite: those aren't the words being typed. */
+export const previewShown = (
+  state: string,
+  text: { committed: string; tentative: string },
+): boolean =>
+  PREVIEW_STATES.includes(state) &&
+  `${text.committed}${text.tentative}`.trim() !== "";
 
 /** The labels to show, most important first. */
 export const pillLabels = (

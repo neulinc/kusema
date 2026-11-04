@@ -249,7 +249,7 @@ fn play(
 
 /// Open the selected output device, falling back to the default one. Mirrors
 /// `audio_feedback::play_audio_file`.
-fn open_output(selected_device: Option<String>) -> Result<MixerDeviceSink, String> {
+pub(super) fn open_output(selected_device: Option<String>) -> Result<MixerDeviceSink, String> {
     let builder = match selected_device.filter(|name| name != "Default") {
         Some(name) => {
             let found = crate::audio_toolkit::get_cpal_host()

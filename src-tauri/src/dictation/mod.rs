@@ -189,6 +189,8 @@ struct Shared {
     /// Kusema: segments that started before this were heard while Kusema
     /// was busy with a "Kusema, …" request, and aren't typed.
     quiet_before: Mutex<Option<Instant>>,
+    /// Kusema: the words of the segment being spoken, in the pill.
+    preview: crate::preview::dictation::SegmentPreview,
 }
 
 struct Session {
@@ -226,6 +228,7 @@ impl SegmentTap {
 
     fn send(&self, segment: Option<Vec<f32>>) {
         if let Some(samples) = segment {
+            self.shared.preview.segment_end();
             self.shared
                 .backlog_samples
                 .fetch_add(samples.len(), Ordering::Relaxed);
@@ -242,6 +245,7 @@ impl FrameTap for SegmentTap {
         if !self.cutter.is_collecting() {
             self.started_at = Instant::now();
         }
+        self.shared.preview.speech(frame);
         let segment = self.cutter.push_speech(frame);
         self.send(segment);
     }
@@ -347,7 +351,11 @@ fn worker(shared: Arc<Shared>, rx: Receiver<Message>) {
                     .fetch_sub(samples.len(), Ordering::Relaxed);
                 // Waits out a load in progress, and recovers from an unload.
                 tm.initiate_model_load();
-                match tm.transcribe(samples) {
+                // The full run would end the preview's stream: it waits.
+                shared.preview.pause();
+                let result = tm.transcribe(samples);
+                shared.preview.resume();
+                match result {
                     Ok(text) => {
                         failures = 0;
                         if !text.trim().is_empty() {
@@ -356,6 +364,7 @@ fn worker(shared: Arc<Shared>, rx: Receiver<Message>) {
                                 .store(shared.now_ms(), Ordering::Relaxed);
                         }
                         handle_text(&shared, text.trim(), started_at);
+                        shared.preview.typed();
                     }
                     Err(e) => {
                         failures += 1;
@@ -755,6 +764,7 @@ fn start(app: &AppHandle) {
         stop_monitor: AtomicBool::new(false),
         stop_reason: Mutex::new(None),
         quiet_before: Mutex::new(None),
+        preview: crate::preview::dictation::SegmentPreview::start(app),
     });
     let (tx, rx) = mpsc::channel();
 
@@ -897,6 +907,7 @@ fn finish(app: &AppHandle, session: Session, rm: &AudioRecordingManager) {
     if worker.join().is_err() {
         error!("The dictation worker panicked");
     }
+    shared.preview.stop();
     shared.stop_monitor.store(true, Ordering::Release);
     if monitor.join().is_err() {
         error!("The dictation monitor panicked");

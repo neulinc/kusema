@@ -1475,6 +1475,11 @@
       "add": "Adicionar estilo",
       "reset": "Restaurar padrões",
       "neutral": "Programas que não estão na lista recebem texto neutro."
+    },
+    "livePreview": {
+      "label": "Visualização ao vivo",
+      "description": "Mostra suas palavras na pílula enquanto você fala. O que é digitado não muda. Precisa de um modelo com texto ao vivo, como Parakeet Unified ou Nemotron Streaming.",
+      "autoOff": "Desligada porque este computador não conseguiu acompanhar. Ligue-a para tentar de novo."
     }
   },
   "footer": {
@@ -1591,7 +1596,8 @@
       "other": "O Kusema não conseguiu uma resposta: {{name}}"
     },
     "setUp": "Configurar",
-    "dismiss": "Fechar"
+    "dismiss": "Fechar",
+    "previewOff": "A visualização ao vivo está desligada: este computador não conseguiu acompanhar. Você pode ligá-la de novo nas Configurações."
   },
   "screenCard": {
     "title": "Enviar esta captura de tela?",
@@ -1772,5 +1778,39 @@
       "gotIt": "Entendi"
     },
     "space": "Espaço"
+  },
+  "micCheck": {
+    "title": "Teste do microfone",
+    "intro": "O Kusema escuta o seu ambiente, depois você lendo uma frase, e diz o que ajudaria. Nada é salvo ou enviado.",
+    "start": "Testar meu microfone",
+    "meter": "Nível do microfone",
+    "quiet": "Fique em silêncio por um momento… {{seconds}}",
+    "read": "Agora leia isto em voz alta:",
+    "sentence": "Por favor, envie o contrato assinado ao cliente até sexta-feira à tarde.",
+    "done": "Concluído",
+    "cancel": "Cancelar",
+    "again": "Testar de novo",
+    "play": "Ouvir meu teste",
+    "failed": "O Kusema não conseguiu abrir o microfone. Escolha outro ou verifique se ele está conectado.",
+    "numbers": "Ambiente {{noise}} dB · Sua voz {{speech}} dB · {{snr}} dB de diferença",
+    "adapted": "Agora o Kusema ignora sons mais baixos que o ruído do seu ambiente, então digita menos palavras soltas.",
+    "anyMic": "Qualquer microfone USB ou headset funciona. Se for comprar um, procure:",
+    "tips": {
+      "not_heard": "O Kusema não ouviu você lendo. Verifique se este é o microfone em que você está falando e se ele não está mudo.",
+      "clipping": "Seu microfone está tão alto que distorce. Afaste-o um pouco ou abaixe o nível nas configurações de som do Windows.",
+      "quiet": "Seu microfone está baixo. Chegue mais perto ou aumente o nível nas configurações de som do Windows.",
+      "noisy": "Seu ambiente está um pouco barulhento. Um headset vai melhorar a precisão e evitar palavras soltas.",
+      "bluetooth_hands_free": "Este headset Bluetooth envia áudio de qualidade menor enquanto o microfone está em uso. Um headset com fio ou USB, ou o microfone do próprio computador, pode soar mais claro.",
+      "good": "Seu microfone soa bem."
+    },
+    "adaptive": {
+      "label": "Ignorar o ruído do ambiente",
+      "description": "Usa o teste do microfone para ignorar sons mais baixos que a sua voz, como uma televisão ou pessoas conversando por perto."
+    },
+    "look": {
+      "boom": "Um headset com microfone de haste perto da boca",
+      "usb": "Um microfone USB de mesa, colocado perto de você",
+      "wired": "Uma conexão com fio ou USB em vez de Bluetooth, que reduz a qualidade do microfone enquanto você fala"
+    }
   }
 }

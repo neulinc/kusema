@@ -1475,6 +1475,11 @@
       "add": "Afegeix un estil",
       "reset": "Restaura els valors per defecte",
       "neutral": "Els programes que no són a la llista reben text neutre."
+    },
+    "livePreview": {
+      "label": "Previsualització en directe",
+      "description": "Mostra les vostres paraules a la píndola mentre parleu. El que s'escriu no canvia. Cal un model amb text en directe, com Parakeet Unified o Nemotron Streaming.",
+      "autoOff": "Desactivada perquè aquest ordinador no podia seguir el ritme. Activeu-la per tornar-ho a provar."
     }
   },
   "footer": {
@@ -1591,7 +1596,8 @@
       "other": "El Kusema no ha pogut obtenir resposta: {{name}}"
     },
     "setUp": "Configura",
-    "dismiss": "Tanca"
+    "dismiss": "Tanca",
+    "previewOff": "La previsualització en directe està desactivada: aquest ordinador no podia seguir el ritme. La podeu tornar a activar a Configuració."
   },
   "screenCard": {
     "title": "Voleu enviar aquesta captura?",
@@ -1772,5 +1778,39 @@
       "gotIt": "Entesos"
     },
     "space": "Espai"
+  },
+  "micCheck": {
+    "title": "Comprovació del micròfon",
+    "intro": "El Kusema escolta la vostra sala i després a vós llegint una frase, i us diu què us ajudaria. No es desa ni s'envia res.",
+    "start": "Comprova el micròfon",
+    "meter": "Nivell del micròfon",
+    "quiet": "Feu silenci un moment… {{seconds}}",
+    "read": "Ara llegiu això en veu alta:",
+    "sentence": "Si us plau, envieu el contracte signat al client abans de divendres a la tarda.",
+    "done": "Fet",
+    "cancel": "Cancel·la",
+    "again": "Torna a comprovar",
+    "play": "Reprodueix la prova",
+    "failed": "El Kusema no ha pogut obrir el micròfon. Trieu-ne un altre o comproveu que estigui connectat.",
+    "numbers": "Sala {{noise}} dB · La vostra veu {{speech}} dB · {{snr}} dB de diferència",
+    "adapted": "Ara el Kusema ignora els sons més fluixos que el soroll de la sala, i escriu menys paraules soltes.",
+    "anyMic": "Qualsevol micròfon o auricular USB funciona. Si n'heu d'aconseguir un, busqueu:",
+    "tips": {
+      "not_heard": "El Kusema no us ha sentit llegir. Comproveu que aquest sigui el micròfon on parleu i que no estigui silenciat.",
+      "clipping": "El micròfon és tan fort que distorsiona. Allunyeu-lo una mica o abaixeu-ne el nivell a la configuració de so de Windows.",
+      "quiet": "El micròfon és fluix. Apropeu-vos-hi o pugeu-ne el nivell a la configuració de so de Windows.",
+      "noisy": "La sala és una mica sorollosa. Uns auriculars amb micròfon milloraran la precisió i evitaran paraules soltes.",
+      "bluetooth_hands_free": "Aquests auriculars Bluetooth envien àudio de menys qualitat mentre se n'usa el micròfon. Uns auriculars amb cable o USB, o el micròfon de l'ordinador, poden sonar més clars.",
+      "good": "El micròfon sona bé."
+    },
+    "adaptive": {
+      "label": "Ignora el soroll de la sala",
+      "description": "Fa servir la comprovació del micròfon per ignorar sons més fluixos que la vostra veu, com una televisió o gent parlant a prop."
+    },
+    "look": {
+      "boom": "Uns auriculars amb micròfon de braç a prop de la boca",
+      "usb": "Un micròfon USB de taula, a prop vostre",
+      "wired": "Una connexió amb cable o USB en lloc de Bluetooth, que redueix la qualitat del micròfon mentre parleu"
+    }
   }
 }

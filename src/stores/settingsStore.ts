@@ -211,6 +211,8 @@ const settingUpdaters: {
     commands.changeGlowDictationSetting(value as boolean),
   assistant_speak_typed: (value) =>
     commands.changeAssistantSpeakTypedSetting(value as boolean),
+  live_preview: (value) => commands.changeLivePreviewSetting(value as boolean),
+  adaptive_vad: (value) => commands.changeAdaptiveVadSetting(value as boolean),
   assistant_answer_to: (value) =>
     commands.changeAssistantAnswerToSetting(value as AnswerTo),
   assistant_tutor: (value) =>

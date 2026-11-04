@@ -6,6 +6,7 @@ import { useSettings } from "@/hooks/useSettings";
 import { Button } from "../../ui/Button";
 import { useOnboardingStore } from "../onboardingStore";
 import { FIELD_CLASS, SetupScreen } from "./SetupScreen";
+import { MicCheck } from "../../shared/MicCheck";
 
 /** On the meter's 0 to 1 scale: louder than a quiet room, about speech level. */
 const HEARD_LEVEL = 0.35;
@@ -153,6 +154,12 @@ export const SetupMicrophone: React.FC<SetupMicrophoneProps> = ({
       <p className="m-0 rounded-lg bg-wash px-[12px] py-[10px] text-small text-ink-2">
         {t("onboarding.setup.microphone.tip")}
       </p>
+      {/* Kusema: the microphone check; the meter reopens when it's done. */}
+      {!preview && (
+        <div className="-mx-4">
+          <MicCheck onFinished={() => setOpened((n) => n + 1)} />
+        </div>
+      )}
     </SetupScreen>
   );
 };

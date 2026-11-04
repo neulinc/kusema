@@ -30,6 +30,10 @@ Right Ctrl is the default **Kusema key**: Kusema keeps it, and Space and T while
 
 **When Kusema can't answer,** it says why instead of just closing: no AI set up yet, no API key, no model chosen, Ollama or LM Studio not running, or Privileged mode blocking cloud AI. The message stays in the pill for a few seconds (× closes it sooner), is read aloud if spoken replies are on, and **Set up** opens the setting that fixes it.
 
+**Live preview.** While you hold the key, or during continuous dictation, the pill shows your words as you speak them, the last two lines, like Dragon's results box. Spoken punctuation shows as it'll be typed ("comma" as ","; "new paragraph" as ¶). It's only a preview: what's typed is still worked out from the whole recording (or, in continuous dictation, the whole phrase) when you let go or pause, for the best accuracy. It needs a model with live text (Parakeet Unified, the default, or Nemotron Streaming) and runs on your computer. If your computer can't keep up, it updates less often, then turns itself off and says so once. Turn it on or off under **General → Kusema Key → Live preview**.
+
+**Microphone check.** Under **General → Sound** (and on setup's microphone screen), Kusema listens to your room for 3 seconds, then to you reading a sentence, and tells you in plain words what would help: a noisy room, a quiet or distorting microphone, or a Bluetooth headset in its low-quality hands-free mode. It also uses your room's noise level to ignore quieter sounds, such as a television or people talking nearby, so they don't turn into stray words (**Ignore room noise**, on by default). Any USB microphone or headset works. The test audio stays in memory for **Play my test back** and is never saved or sent.
+
 ### Voice editing commands
 
 Hold the Kusema key, tap **Space** (or start with **"Kusema,"**), then say one of these. They run on your computer and send nothing anywhere. The ones marked \* also work during continuous dictation, said alone.
@@ -69,6 +73,7 @@ Kusema writes legal terms and citations correctly out of the box ("habeas corpus
 - **Or keep everything local.** Point Kusema at a model running on your own machine (for example through [Ollama](https://ollama.com)) and nothing leaves the computer at all.
 - **Screenshots are opt-in, every time.** "Ask about my screen" captures only the active window, shows you exactly what will be sent and where, and waits for you to confirm (you can turn the confirmation off, but it's on unless you do). Screenshots are kept in memory only, never saved to disk or history. You can also send screen questions to a local model while normal questions go to the cloud.
 - **Spoken replies are generated locally** with Kokoro voices or your built-in Windows voices.
+- **The live preview and the microphone check run on your computer.** The check's audio is kept in memory only, for playback, and dropped when you leave the page.
 - **Your API key is stored in Windows Credential Manager**, not in a plain-text settings file.
 - **Open source.** Every claim above can be checked in this repository.
 

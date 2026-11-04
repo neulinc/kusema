@@ -6,6 +6,7 @@ import {
   labelRoom,
   noticeRoom,
   pillLabels,
+  previewShown,
 } from "./pillLayout";
 
 const t = (key: string, options?: Record<string, string>) =>
@@ -50,5 +51,21 @@ assert.equal(labelRoom(900, true), MAX_LABEL_HEIGHT);
 assert.equal(noticeRoom(60), 0);
 assert.equal(noticeRoom(130.5), 31);
 assert.equal(noticeRoom(1000), MAX_LABEL_HEIGHT);
+
+// The live preview shows words while listening, and while the take turns
+// into text; never with nothing said, on a message or the AI's rewrite.
+const said = { committed: "Please send ", tentative: "the contract" };
+const nothing = { committed: "", tentative: " " };
+for (const state of ["streaming", "recording", "dictating", "transcribing"]) {
+  assert.equal(previewShown(state, said), true, state);
+  assert.equal(previewShown(state, nothing), false, state);
+}
+for (const state of ["notice", "processing", "speaking", "editing"]) {
+  assert.equal(previewShown(state, said), false, state);
+}
+assert.equal(
+  previewShown("streaming", { committed: "", tentative: "So" }),
+  true,
+);
 
 console.log("pillLayout: ok");

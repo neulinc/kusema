@@ -30,6 +30,7 @@
                          center longer labels; shared by Live (collapsed) + minimal */
   --ov-open-w: 392px; /* Live panel, expanded */
   --ov-dictation-w: 412px; /* continuous dictation (OVERLAY_DICTATION_WIDTH) */
+  --ov-preview-w: 268px; /* Kusema: the pill with the live preview (within OVERLAY_WIDTH) */
   --ov-base-h: 40px; /* control-row height (.sbase) */
   --ov-cap-max-h: 64px; /* max height of the scrolling live-text region */
 }
@@ -755,6 +756,33 @@
   color: var(--color-text);
   white-space: normal;
   overflow-wrap: anywhere;
+}
+/* Kusema live preview: the last two lines of what's been said, newest at the
+   bottom; older words slide out of the top. What may still change is dimmer. */
+.spreview {
+  flex-basis: 100%;
+  width: 100%;
+  height: 32px; /* two lines: the window grows once, not with every word */
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  text-align: start;
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--color-text);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 7px);
+  mask-image: linear-gradient(to bottom, transparent 0, #000 7px);
+}
+.spreview p {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+.spreview .tentative {
+  opacity: 0.55;
+}
+.scard.compact.previewing {
+  width: var(--ov-preview-w);
 }
 .scard.labelled {
   border-radius: 18px;

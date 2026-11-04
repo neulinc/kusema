@@ -1481,6 +1481,11 @@
       "add": "Přidat styl",
       "reset": "Obnovit výchozí",
       "neutral": "Programy, které nejsou v seznamu, dostanou neutrální text."
+    },
+    "livePreview": {
+      "label": "Živý náhled",
+      "description": "Při mluvení ukazuje vaše slova v panelu. Napsaný text se nemění. Potřebuje model s živým textem, například Parakeet Unified nebo Nemotron Streaming.",
+      "autoOff": "Vypnuto, protože tento počítač nestíhal. Zapněte ho a zkuste to znovu."
     }
   },
   "footer": {
@@ -1597,7 +1602,8 @@
       "other": "Kusema nedostala odpověď: {{name}}"
     },
     "setUp": "Nastavit",
-    "dismiss": "Zavřít"
+    "dismiss": "Zavřít",
+    "previewOff": "Živý náhled je vypnutý: tento počítač nestíhal. Znovu ho můžete zapnout v Nastavení."
   },
   "screenCard": {
     "title": "Odeslat tento snímek obrazovky?",
@@ -1780,5 +1786,39 @@
       "gotIt": "Rozumím"
     },
     "space": "Mezerník"
+  },
+  "micCheck": {
+    "title": "Kontrola mikrofonu",
+    "intro": "Kusema poslouchá vaši místnost, pak vás, jak čtete větu, a řekne vám, co by pomohlo. Nic se neukládá ani neodesílá.",
+    "start": "Zkontrolovat mikrofon",
+    "meter": "Úroveň mikrofonu",
+    "quiet": "Chvíli buďte potichu… {{seconds}}",
+    "read": "Teď přečtěte nahlas:",
+    "sentence": "Pošlete prosím podepsanou smlouvu klientovi do pátečního odpoledne.",
+    "done": "Hotovo",
+    "cancel": "Zrušit",
+    "again": "Zkontrolovat znovu",
+    "play": "Přehrát můj test",
+    "failed": "Kusema nemohla otevřít mikrofon. Vyberte jiný nebo zkontrolujte, že je připojený.",
+    "numbers": "Místnost {{noise}} dB · Váš hlas {{speech}} dB · rozdíl {{snr}} dB",
+    "adapted": "Kusema teď přehlíží zvuky tišší než hluk ve vaší místnosti, takže napíše méně zbloudilých slov.",
+    "anyMic": "Funguje jakýkoli USB mikrofon nebo náhlavní souprava. Pokud nějaký pořizujete, hledejte:",
+    "tips": {
+      "not_heard": "Kusema vás neslyšela číst. Zkontrolujte, že je to mikrofon, do kterého mluvíte, a že není ztlumený.",
+      "clipping": "Mikrofon je tak hlasitý, že zkresluje. Oddalte ho trochu nebo snižte jeho úroveň v nastavení zvuku Windows.",
+      "quiet": "Mikrofon je tichý. Přibližte se nebo zvyšte jeho úroveň v nastavení zvuku Windows.",
+      "noisy": "Ve vaší místnosti je trochu hluk. Náhlavní souprava zlepší přesnost a zastaví zbloudilá slova.",
+      "bluetooth_hands_free": "Tato Bluetooth souprava posílá při použití mikrofonu zvuk nižší kvality. Kabelová nebo USB souprava, případně mikrofon počítače, může být čistší.",
+      "good": "Mikrofon zní dobře."
+    },
+    "adaptive": {
+      "label": "Přehlížet hluk v místnosti",
+      "description": "Podle kontroly mikrofonu přehlíží zvuky tišší než váš hlas, třeba televizi nebo lidi, kteří mluví poblíž."
+    },
+    "look": {
+      "boom": "Náhlavní soupravu s mikrofonem na raménku u úst",
+      "usb": "Stolní USB mikrofon umístěný blízko vás",
+      "wired": "Kabelové nebo USB připojení místo Bluetooth, které při mluvení snižuje kvalitu mikrofonu"
+    }
   }
 }

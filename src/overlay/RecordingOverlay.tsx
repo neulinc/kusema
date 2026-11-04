@@ -17,9 +17,11 @@ import { getLanguageDirection } from "@/lib/utils/rtl";
 import { keyLabel } from "@/lib/kusemaKey";
 import {
   LABEL_MS,
+  PREVIEW_OFF_MS,
   labelRoom,
   noticeRoom,
   pillLabels,
+  previewShown,
   type PillLabel,
 } from "./pillLayout";
 import type { KusemaKey, SetupPage } from "@/bindings";
@@ -152,9 +154,6 @@ const RecordingOverlay: React.FC = () => {
   const [modelLoading, setModelLoading] = useState(false);
   const [modelLoadSlow, setModelLoadSlow] = useState(false);
   const modelLoadTimerRef = useRef<ReturnType<typeof setTimeout>>();
-  // Latched per Live session: once the loading notice has opened the panel, keep
-  // it open after the load so it doesn't collapse and reopen when text arrives.
-  const [loadNoticeShown, setLoadNoticeShown] = useState(false);
   const [levels, setLevels] = useState<number[]>(Array(WAVE_BARS).fill(0));
   const [streamText, setStreamText] = useState<StreamTextEvent>({
     committed: "",
@@ -170,8 +169,10 @@ const RecordingOverlay: React.FC = () => {
   const [editNotice, setEditNotice] = useState("");
   const [editNoticeUntil, setEditNoticeUntil] = useState(0);
   const [noticeSetup, setNoticeSetup] = useState<SetupPage | null>(null);
-  // The label row's room, px: the Live panel's text gives it up.
-  const [labelPx, setLabelPx] = useState(0);
+  // Kusema live preview: it turned itself off (this computer couldn't keep
+  // up), said once in the label row.
+  const [previewOff, setPreviewOff] = useState(false);
+  const previewOffTimer = useRef<ReturnType<typeof setTimeout>>();
   // Kusema: the label row above the animation, and the message's content,
   // measured so the window grows by just as much.
   const labelRef = useRef<HTMLDivElement>(null);
@@ -188,22 +189,11 @@ const RecordingOverlay: React.FC = () => {
   const kusemaKeyRef = useRef<KusemaKey | undefined>(undefined);
   const [leaving, setLeaving] = useState(false);
   const leavingTimerRef = useRef<ReturnType<typeof setTimeout>>();
-  // Bumped on each new streaming session so the Live card remounts fresh (replays
-  // the pop-in, and never animates in from the previous panel's open size).
-  const [session, setSession] = useState(0);
-  // Overlay placement (top vs bottom of the screen). The Live panel grows downward
-  // from a top overlay (oldest line under the pill) and upward from a bottom one.
+  // Overlay placement (top vs bottom of the screen). The label row opens away
+  // from the screen's edge: above a pill at the bottom, below one at the top.
   const [position, setPosition] = useState<"top" | "bottom">("bottom");
-  // True once live text overflows the cap. A top overlay fades its top edge only
-  // while overflowing, so the resting first line stays crisp flush under the pill.
-  const [overflowing, setOverflowing] = useState(false);
 
   const smoothedLevelsRef = useRef<number[]>(Array(16).fill(0));
-  // Live-text scroll-back: the text region "sticks" to the newest line while the
-  // user is at the bottom; if they scroll up to read history, auto-follow pauses
-  // until they scroll back down.
-  const capRef = useRef<HTMLDivElement>(null);
-  const pinnedRef = useRef(true);
   const direction = getLanguageDirection(i18n.language);
 
   useEffect(() => {
@@ -237,8 +227,8 @@ const RecordingOverlay: React.FC = () => {
         }
 
         await syncLanguageFromSettings();
-        // The Live panel flows downward from a top overlay and upward from a
-        // bottom one; read the placement so the layout can flip to match.
+        // The label row opens away from the screen's edge; read the
+        // placement so the layout can flip to match.
         try {
           const settings = await commands.getAppSettings();
           if (settings.status === "ok") {
@@ -256,8 +246,6 @@ const RecordingOverlay: React.FC = () => {
           setPhase("listening");
           setWorkKind("transcribing");
           setElapsed(0);
-          setLoadNoticeShown(false);
-          setSession((s) => s + 1); // remount the card fresh for this session
         }
         setIsVisible(true);
       });
@@ -336,6 +324,15 @@ const RecordingOverlay: React.FC = () => {
         setStreamText(event.payload);
       });
 
+      const unlistenPreviewOff = await listen("live-preview-off", () => {
+        clearTimeout(previewOffTimer.current);
+        setPreviewOff(true);
+        previewOffTimer.current = setTimeout(
+          () => setPreviewOff(false),
+          PREVIEW_OFF_MS,
+        );
+      });
+
       const unlistenDictation = await events.dictationStatusEvent.listen(
         (event) => {
           setDictation(event.payload);
@@ -387,6 +384,8 @@ const RecordingOverlay: React.FC = () => {
         unlistenEditNotice();
         unlistenLevel();
         unlistenStream();
+        unlistenPreviewOff();
+        clearTimeout(previewOffTimer.current);
         unlistenPrivileged();
         unlistenDictation();
         unlistenPhase();
@@ -413,28 +412,6 @@ const RecordingOverlay: React.FC = () => {
     return () => clearInterval(id);
   }, [state, isVisible]);
 
-  // Stick to the bottom as text streams in — but only while pinned, so a user who
-  // has scrolled up to read history isn't yanked back down by the next chunk.
-  useLayoutEffect(() => {
-    const el = capRef.current;
-    if (!el) return;
-    // Fade the top edge only once text actually overflows the cap.
-    setOverflowing(el.scrollHeight > el.clientHeight + 1);
-    if (pinnedRef.current) el.scrollTop = el.scrollHeight;
-  }, [streamText]);
-
-  // `session` re-runs this when a new Live session starts mid-load (e.g. a
-  // retry during a cold load), since the reset doesn't change the other deps.
-  useEffect(() => {
-    if (modelLoadSlow && state === "streaming") setLoadNoticeShown(true);
-  }, [modelLoadSlow, state, session]);
-
-  // Each fresh streaming session starts pinned to the bottom, fade cleared.
-  useEffect(() => {
-    pinnedRef.current = true;
-    setOverflowing(false);
-  }, [session]);
-
   const styleName = appStyle
     ? (appStyle.name ??
       t(`settings.appStyles.builtIn.${appStyle.id}.name`, {
@@ -456,10 +433,23 @@ const RecordingOverlay: React.FC = () => {
           },
           (key, options) => t(key, options),
         );
-  const labelOpen = isVisible && (labels.length > 0 || inDictationNotice);
-  const labelKey = `${state}|${labelOpen}|${labels.map((l) => l.text).join("|")}|${
-    inDictationNotice ? editNotice : ""
-  }`;
+  // Kusema live preview: the words so far, in the label row; and what it
+  // says when there's nothing to show yet.
+  const previewing = previewShown(state, streamText);
+  const listeningLive =
+    (state === "streaming" && phase === "listening") || state === "recording";
+  const labelMessage = inDictationNotice
+    ? editNotice
+    : previewOff
+      ? t("overlay.previewOff")
+      : modelLoadSlow && listeningLive && !previewing
+        ? t("overlay.loadingModel")
+        : "";
+  const labelOpen =
+    isVisible && (labels.length > 0 || !!labelMessage || previewing);
+  // The preview's box is two lines from its first word, so the window grows
+  // once, not with every word.
+  const labelKey = `${state}|${labelOpen}|${labels.map((l) => l.text).join("|")}|${labelMessage}|${previewing}`;
 
   // The window grows for the label row before it opens, and shrinks only
   // once it has closed, so nothing is ever clipped.
@@ -472,25 +462,17 @@ const RecordingOverlay: React.FC = () => {
     }
     if (labelOpen) {
       const h = labelRef.current?.scrollHeight ?? 0;
-      setLabelPx(labelRoom(h, true));
       void commands.setOverlayLabelHeight(labelRoom(h, true));
     } else {
-      labelCloseTimer.current = setTimeout(() => {
-        setLabelPx(0);
-        void commands.setOverlayLabelHeight(0);
-      }, LABEL_MS);
+      labelCloseTimer.current = setTimeout(
+        () => void commands.setOverlayLabelHeight(0),
+        LABEL_MS,
+      );
     }
   }, [labelKey]);
 
   // Kusema: kept mounted for a moment after hiding, for the "done" look.
   if (!isVisible && !leaving) return null;
-
-  // Re-pin when the user is within ~a line of the bottom; unpin otherwise.
-  const handleStreamScroll = () => {
-    const el = capRef.current;
-    if (!el) return;
-    pinnedRef.current = el.scrollHeight - el.scrollTop - el.clientHeight <= 16;
-  };
 
   const fmtTime = (s: number) =>
     `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`;
@@ -509,10 +491,7 @@ const RecordingOverlay: React.FC = () => {
   // happening.
   const styledLabel = (label: string) =>
     route ? t(`overlay.route.${route}`) : label;
-  const stageStyle = {
-    "--lvl": level.toFixed(3),
-    "--ov-label-h": `${labelPx}px`,
-  } as React.CSSProperties;
+  const stageStyle = { "--lvl": level.toFixed(3) } as React.CSSProperties;
   const glow = <span className="sglow" aria-hidden="true" />;
   const modeIcon = (pillMode: PillMode) => (
     <PillIcon
@@ -546,16 +525,24 @@ const RecordingOverlay: React.FC = () => {
     <div className={`slabel ${labelOpen ? "open" : ""}`} aria-live="polite">
       <div className="slabel-clip">
         <div className="slabel-inner" ref={labelRef}>
-          {inDictationNotice ? (
-            <span className="slabel-text" role="status">
-              {editNotice}
+          {labels.map((label) => (
+            <span key={label.kind} className={`pchip pchip-${label.kind}`}>
+              {label.text}
             </span>
-          ) : (
-            labels.map((label) => (
-              <span key={label.kind} className={`pchip pchip-${label.kind}`}>
-                {label.text}
-              </span>
-            ))
+          ))}
+          {labelMessage && (
+            <span className="slabel-text" role="status">
+              {labelMessage}
+            </span>
+          )}
+          {previewing && (
+            // The last two lines; what may still change is dimmer.
+            <div className="spreview">
+              <p>
+                <span className="committed">{streamText.committed}</span>
+                <span className="tentative">{streamText.tentative}</span>
+              </p>
+            </div>
           )}
         </div>
       </div>
@@ -745,83 +732,19 @@ const RecordingOverlay: React.FC = () => {
     );
   }
 
-  // ---- Live overlay: a pill that sculpts open into a panel ----
-  if (state === "streaming") {
-    const hasText =
-      streamText.committed.length > 0 || streamText.tentative.length > 0;
-    const working = phase === "working";
-    // While listening, a slow model load opens the panel with a notice where the
-    // text would be, so speech that isn't transcribing yet doesn't look ignored.
-    const loadingNotice = modelLoadSlow && !working && !hasText;
-    // Keep the panel open whenever there's text — even while finalizing — so the
-    // transcript stays put under a working spinner instead of collapsing and
-    // squishing the text mid-stream. Only fall back to the small working pill
-    // when there was no text to preserve.
-    const open = hasText || loadingNotice || (loadNoticeShown && !working);
-    const collapsed = working && !hasText;
-
-    const look: Look = leaving ? "done" : working ? "thinking" : "listening";
-    return (
-      <div
-        dir={direction}
-        className={`ov-stage ${position} ${privileged ? "privileged" : ""} look-${look}`}
-        style={stageStyle}
-      >
-        <div className="spill">
-          {glow}
-          <div
-            key={session}
-            className={`scard ${open ? "open" : ""} ${collapsed ? "working" : ""} ${
-              isVisible ? "" : "leaving"
-            } ${labelOpen ? "labelled" : ""}`}
-          >
-            <div className="stext">
-              <div className="stext-clip">
-                <div
-                  className={`stext-cap ${overflowing ? "overflowing" : ""}`}
-                  ref={capRef}
-                  onScroll={handleStreamScroll}
-                >
-                  <p>
-                    {loadingNotice && (
-                      <span className="sloading">
-                        {t("overlay.loadingModel")}
-                      </span>
-                    )}
-                    <span className="committed">
-                      {streamText.committed ? streamText.committed + " " : ""}
-                    </span>
-                    <span className="tentative">{streamText.tentative}</span>
-                    {/* Drop the blinking caret once finalizing — it's no longer
-                      capturing, and a static spinner conveys the work. */}
-                    {!working && !loadingNotice && <span className="scaret" />}
-                  </p>
-                </div>
-              </div>
-            </div>
-            {labelRow}
-            {working
-              ? workingRow(
-                  workKind === "polishing"
-                    ? styledLabel(t("overlay.processing"))
-                    : transcribingLabel,
-                  true,
-                )
-              : listeningRow(open, true)}
-          </div>
-        </div>
-      </div>
-    );
-  }
-
   // ---- Minimal overlay: exactly one row at a time — waveform (recording), or a
   // spinner + label (transcribing / processing / speaking). Never both. The pill
   // animates its width between them; the cancel button is in both rows so it
   // stays put.
+  // Kusema: Live is this pill too, working once the key is let go.
   const working =
-    state === "transcribing" || state === "processing" || state === "speaking";
+    state === "transcribing" ||
+    state === "processing" ||
+    state === "speaking" ||
+    (state === "streaming" && phase === "working");
   const workLabel =
-    state === "processing"
+    state === "processing" ||
+    (state === "streaming" && workKind === "polishing")
       ? styledLabel(t("overlay.processing"))
       : state === "speaking"
         ? t("overlay.speaking")
@@ -847,7 +770,7 @@ const RecordingOverlay: React.FC = () => {
         <div
           className={`scard compact ${working && (isVisible || leaving) ? "cworking" : ""} ${
             state === "editing" ? "editing" : ""
-          } ${labelOpen ? "labelled" : ""}`}
+          } ${labelOpen ? "labelled" : ""} ${previewing ? "previewing" : ""}`}
         >
           {labelRow}
           {working ? workingRow(workLabel, true) : listeningRow(false, true)}

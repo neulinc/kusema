@@ -1469,6 +1469,11 @@
       "add": "Stijl toevoegen",
       "reset": "Standaard herstellen",
       "neutral": "Programma's die niet in de lijst staan krijgen neutrale tekst."
+    },
+    "livePreview": {
+      "label": "Live voorbeeld",
+      "description": "Toont je woorden in de pil terwijl je praat. Wat getypt wordt verandert niet. Vereist een model met live tekst, zoals Parakeet Unified of Nemotron Streaming.",
+      "autoOff": "Uitgezet omdat deze computer het niet kon bijhouden. Zet het aan om het opnieuw te proberen."
     }
   },
   "footer": {
@@ -1585,7 +1590,8 @@
       "other": "Kusema kreeg geen antwoord: {{name}}"
     },
     "setUp": "Instellen",
-    "dismiss": "Sluiten"
+    "dismiss": "Sluiten",
+    "previewOff": "Live voorbeeld staat uit: deze computer kon het niet bijhouden. Je kunt het weer aanzetten bij Instellingen."
   },
   "screenCard": {
     "title": "Deze schermafbeelding versturen?",
@@ -1764,5 +1770,39 @@
       "gotIt": "Begrepen"
     },
     "space": "Spatie"
+  },
+  "micCheck": {
+    "title": "Microfooncheck",
+    "intro": "Kusema luistert naar je kamer, dan naar jou terwijl je een zin voorleest, en vertelt wat zou helpen. Er wordt niets opgeslagen of verstuurd.",
+    "start": "Controleer mijn microfoon",
+    "meter": "Microfoonniveau",
+    "quiet": "Wees even stil… {{seconds}}",
+    "read": "Lees dit nu hardop voor:",
+    "sentence": "Stuur het ondertekende contract alsjeblieft vóór vrijdagmiddag naar de klant.",
+    "done": "Klaar",
+    "cancel": "Annuleren",
+    "again": "Opnieuw controleren",
+    "play": "Mijn test afspelen",
+    "failed": "Kusema kon de microfoon niet openen. Kies een andere, of controleer of hij is aangesloten.",
+    "numbers": "Kamer {{noise}} dB · Je stem {{speech}} dB · {{snr}} dB verschil",
+    "adapted": "Kusema negeert nu geluid dat zachter is dan het geluid in je kamer, dus typt het minder losse woorden.",
+    "anyMic": "Elke USB-microfoon of headset werkt. Als je er een gaat halen, let dan op:",
+    "tips": {
+      "not_heard": "Kusema hoorde je niet voorlezen. Controleer of dit de microfoon is waarin je praat en of hij niet gedempt is.",
+      "clipping": "Je microfoon is zo hard dat hij vervormt. Zet hem iets verder weg, of verlaag het niveau in de geluidsinstellingen van Windows.",
+      "quiet": "Je microfoon is zacht. Kom dichterbij of verhoog het niveau in de geluidsinstellingen van Windows.",
+      "noisy": "Je kamer is wat rumoerig. Een headset verbetert de nauwkeurigheid en houdt losse woorden tegen.",
+      "bluetooth_hands_free": "Deze Bluetooth-headset stuurt geluid van lagere kwaliteit zolang de microfoon in gebruik is. Een bedrade of USB-headset, of de eigen microfoon van je computer, klinkt misschien helderder.",
+      "good": "Je microfoon klinkt goed."
+    },
+    "adaptive": {
+      "label": "Kamergeluid negeren",
+      "description": "Gebruikt de microfooncheck om geluid te negeren dat zachter is dan je stem, zoals een televisie of mensen die in de buurt praten."
+    },
+    "look": {
+      "boom": "Een headset met een microfoonarm vlak bij je mond",
+      "usb": "Een USB-tafelmicrofoon, dicht bij je neergezet",
+      "wired": "Een bedrade of USB-verbinding in plaats van Bluetooth, dat de microfoonkwaliteit verlaagt terwijl je praat"
+    }
   }
 }

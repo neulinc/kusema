@@ -1469,6 +1469,11 @@
       "add": "Stil hinzufügen",
       "reset": "Standard wiederherstellen",
       "neutral": "Nicht aufgeführte Programme erhalten neutralen Text."
+    },
+    "livePreview": {
+      "label": "Live-Vorschau",
+      "description": "Zeigt Ihre Worte beim Sprechen in der Leiste. Was getippt wird, ändert sich nicht. Braucht ein Modell mit Live-Text, etwa Parakeet Unified oder Nemotron Streaming.",
+      "autoOff": "Ausgeschaltet, weil dieser Computer nicht mitkam. Schalten Sie sie ein, um es noch einmal zu versuchen."
     }
   },
   "footer": {
@@ -1585,7 +1590,8 @@
       "other": "Kusema hat keine Antwort bekommen: {{name}}"
     },
     "setUp": "Einrichten",
-    "dismiss": "Schließen"
+    "dismiss": "Schließen",
+    "previewOff": "Die Live-Vorschau ist aus: Dieser Computer kam nicht mit. Sie können sie in den Einstellungen wieder einschalten."
   },
   "screenCard": {
     "title": "Diesen Screenshot senden?",
@@ -1764,5 +1770,39 @@
       "gotIt": "Verstanden"
     },
     "space": "Leertaste"
+  },
+  "micCheck": {
+    "title": "Mikrofon-Check",
+    "intro": "Kusema hört erst Ihren Raum, dann Sie beim Vorlesen eines Satzes, und sagt Ihnen, was helfen würde. Nichts wird gespeichert oder gesendet.",
+    "start": "Mein Mikrofon prüfen",
+    "meter": "Mikrofonpegel",
+    "quiet": "Bitte kurz still sein… {{seconds}}",
+    "read": "Lesen Sie jetzt laut vor:",
+    "sentence": "Bitte senden Sie den unterschriebenen Vertrag bis Freitagnachmittag an den Mandanten.",
+    "done": "Fertig",
+    "cancel": "Abbrechen",
+    "again": "Noch einmal prüfen",
+    "play": "Meinen Test abspielen",
+    "failed": "Kusema konnte das Mikrofon nicht öffnen. Wählen Sie ein anderes, oder prüfen Sie, ob es angeschlossen ist.",
+    "numbers": "Raum {{noise}} dB · Ihre Stimme {{speech}} dB · {{snr}} dB Abstand",
+    "adapted": "Kusema ignoriert jetzt Geräusche, die leiser sind als Ihr Raum, und tippt so weniger verirrte Wörter.",
+    "anyMic": "Jedes USB-Mikrofon und Headset funktioniert. Wenn Sie eines anschaffen, achten Sie auf:",
+    "tips": {
+      "not_heard": "Kusema hat Sie beim Vorlesen nicht gehört. Prüfen Sie, ob Sie in dieses Mikrofon sprechen und ob es stummgeschaltet ist.",
+      "clipping": "Ihr Mikrofon ist so laut, dass es verzerrt. Rücken Sie es etwas weg, oder senken Sie den Pegel in den Soundeinstellungen von Windows.",
+      "quiet": "Ihr Mikrofon ist leise. Gehen Sie näher heran, oder erhöhen Sie den Pegel in den Soundeinstellungen von Windows.",
+      "noisy": "Ihr Raum ist etwas laut. Ein Headset verbessert die Genauigkeit und verhindert verirrte Wörter.",
+      "bluetooth_hands_free": "Dieses Bluetooth-Headset sendet schlechteren Ton, solange sein Mikrofon benutzt wird. Ein kabelgebundenes oder USB-Headset oder das eigene Mikrofon des Computers klingt womöglich klarer.",
+      "good": "Ihr Mikrofon klingt gut."
+    },
+    "adaptive": {
+      "label": "Raumgeräusche ignorieren",
+      "description": "Nutzt den Mikrofon-Check, um Geräusche zu ignorieren, die leiser sind als Ihre Stimme, etwa einen Fernseher oder Leute, die in der Nähe reden."
+    },
+    "look": {
+      "boom": "Ein Headset mit Mikrofonarm nah am Mund",
+      "usb": "Ein USB-Tischmikrofon, nah bei Ihnen",
+      "wired": "Eine Kabel- oder USB-Verbindung statt Bluetooth, das die Mikrofonqualität beim Sprechen senkt"
+    }
   }
 }

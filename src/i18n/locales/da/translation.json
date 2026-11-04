@@ -1469,6 +1469,11 @@
       "add": "Tilføj stil",
       "reset": "Gendan standard",
       "neutral": "Programmer, der ikke står på listen, får neutral tekst."
+    },
+    "livePreview": {
+      "label": "Live forhåndsvisning",
+      "description": "Viser dine ord i pillen, mens du taler. Det, der skrives, ændres ikke. Kræver en model med live tekst, som Parakeet Unified eller Nemotron Streaming.",
+      "autoOff": "Slået fra, fordi denne computer ikke kunne følge med. Slå den til for at prøve igen."
     }
   },
   "footer": {
@@ -1585,7 +1590,8 @@
       "other": "Kusema kunne ikke få et svar: {{name}}"
     },
     "setUp": "Sæt op",
-    "dismiss": "Luk"
+    "dismiss": "Luk",
+    "previewOff": "Live forhåndsvisning er slået fra: denne computer kunne ikke følge med. Du kan slå den til igen under Indstillinger."
   },
   "screenCard": {
     "title": "Send dette skærmbillede?",
@@ -1764,5 +1770,39 @@
       "gotIt": "Forstået"
     },
     "space": "Mellemrum"
+  },
+  "micCheck": {
+    "title": "Mikrofontjek",
+    "intro": "Kusema lytter til dit rum og derefter til dig, mens du læser en sætning, og fortæller dig, hvad der vil hjælpe. Intet gemmes eller sendes.",
+    "start": "Tjek min mikrofon",
+    "meter": "Mikrofonniveau",
+    "quiet": "Vær stille et øjeblik… {{seconds}}",
+    "read": "Læs nu dette højt:",
+    "sentence": "Send venligst den underskrevne kontrakt til kunden inden fredag eftermiddag.",
+    "done": "Færdig",
+    "cancel": "Annuller",
+    "again": "Tjek igen",
+    "play": "Afspil min test",
+    "failed": "Kusema kunne ikke åbne mikrofonen. Vælg en anden, eller tjek at den er tilsluttet.",
+    "numbers": "Rum {{noise}} dB · Din stemme {{speech}} dB · {{snr}} dB forskel",
+    "adapted": "Kusema ignorerer nu lyd, der er svagere end støjen i dit rum, så den skriver færre løse ord.",
+    "anyMic": "Alle USB-mikrofoner og headsets virker. Hvis du skal have en, så kig efter:",
+    "tips": {
+      "not_heard": "Kusema kunne ikke høre dig læse. Tjek at det er den mikrofon, du taler i, og at den ikke er slået fra.",
+      "clipping": "Din mikrofon er så høj, at den forvrænger. Flyt den lidt væk, eller sænk niveauet i Windows' lydindstillinger.",
+      "quiet": "Din mikrofon er svag. Ryk tættere på, eller hæv niveauet i Windows' lydindstillinger.",
+      "noisy": "Der er lidt støj i dit rum. Et headset vil forbedre nøjagtigheden og stoppe løse ord.",
+      "bluetooth_hands_free": "Dette Bluetooth-headset sender lyd i lavere kvalitet, mens mikrofonen bruges. Et kablet eller USB-headset, eller computerens egen mikrofon, kan være tydeligere.",
+      "good": "Din mikrofon lyder godt."
+    },
+    "adaptive": {
+      "label": "Ignorer støj i rummet",
+      "description": "Bruger mikrofontjekket til at ignorere lyd, der er svagere end din stemme, som et fjernsyn eller folk, der taler i nærheden."
+    },
+    "look": {
+      "boom": "Et headset med en mikrofonarm tæt på munden",
+      "usb": "En USB-bordmikrofon placeret tæt på dig",
+      "wired": "En kablet eller USB-forbindelse i stedet for Bluetooth, som sænker mikrofonkvaliteten, mens du taler"
+    }
   }
 }

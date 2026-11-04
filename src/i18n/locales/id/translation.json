@@ -1469,6 +1469,11 @@
       "add": "Tambah gaya",
       "reset": "Pulihkan bawaan",
       "neutral": "Program yang tidak ada di daftar mendapat teks netral."
+    },
+    "livePreview": {
+      "label": "Pratinjau langsung",
+      "description": "Menampilkan kata-kata Anda di pil saat Anda berbicara. Yang diketik tidak berubah. Perlu model dengan teks langsung, seperti Parakeet Unified atau Nemotron Streaming.",
+      "autoOff": "Dinonaktifkan karena komputer ini tidak bisa mengikuti. Aktifkan untuk mencoba lagi."
     }
   },
   "footer": {
@@ -1585,7 +1590,8 @@
       "other": "Kusema tidak bisa mendapat jawaban: {{name}}"
     },
     "setUp": "Siapkan",
-    "dismiss": "Tutup"
+    "dismiss": "Tutup",
+    "previewOff": "Pratinjau langsung nonaktif: komputer ini tidak bisa mengikuti. Anda bisa mengaktifkannya lagi di Pengaturan."
   },
   "screenCard": {
     "title": "Kirim tangkapan layar ini?",
@@ -1764,5 +1770,39 @@
       "gotIt": "Mengerti"
     },
     "space": "Spasi"
+  },
+  "micCheck": {
+    "title": "Pemeriksaan mikrofon",
+    "intro": "Kusema mendengarkan ruangan Anda, lalu Anda membaca sebuah kalimat, dan memberi tahu apa yang akan membantu. Tidak ada yang disimpan atau dikirim.",
+    "start": "Periksa mikrofon saya",
+    "meter": "Level mikrofon",
+    "quiet": "Diam sebentar… {{seconds}}",
+    "read": "Sekarang bacakan ini dengan keras:",
+    "sentence": "Tolong kirim kontrak yang sudah ditandatangani ke klien paling lambat Jumat sore.",
+    "done": "Selesai",
+    "cancel": "Batal",
+    "again": "Periksa lagi",
+    "play": "Putar ulang tes saya",
+    "failed": "Kusema tidak bisa membuka mikrofon. Pilih yang lain, atau pastikan mikrofon tersambung.",
+    "numbers": "Ruangan {{noise}} dB · Suara Anda {{speech}} dB · selisih {{snr}} dB",
+    "adapted": "Kusema kini mengabaikan suara yang lebih pelan dari kebisingan ruangan Anda, sehingga lebih sedikit kata nyasar yang diketik.",
+    "anyMic": "Mikrofon USB atau headset apa pun bisa dipakai. Jika Anda akan membeli, carilah:",
+    "tips": {
+      "not_heard": "Kusema tidak mendengar Anda membaca. Pastikan ini mikrofon tempat Anda berbicara, dan tidak dibisukan.",
+      "clipping": "Mikrofon Anda terlalu keras hingga suaranya pecah. Jauhkan sedikit, atau turunkan levelnya di pengaturan suara Windows.",
+      "quiet": "Mikrofon Anda pelan. Mendekatlah atau naikkan levelnya di pengaturan suara Windows.",
+      "noisy": "Ruangan Anda agak bising. Headset akan meningkatkan akurasi dan mencegah kata nyasar.",
+      "bluetooth_hands_free": "Headset Bluetooth ini mengirim audio berkualitas lebih rendah saat mikrofonnya dipakai. Headset kabel atau USB, atau mikrofon bawaan komputer, mungkin lebih jernih.",
+      "good": "Mikrofon Anda terdengar bagus."
+    },
+    "adaptive": {
+      "label": "Abaikan kebisingan ruangan",
+      "description": "Memakai pemeriksaan mikrofon untuk mengabaikan suara yang lebih pelan dari suara Anda, seperti televisi atau orang yang berbicara di dekat Anda."
+    },
+    "look": {
+      "boom": "Headset dengan mikrofon boom di dekat mulut",
+      "usb": "Mikrofon meja USB yang diletakkan dekat Anda",
+      "wired": "Sambungan kabel atau USB, bukan Bluetooth, yang menurunkan kualitas mikrofon saat Anda berbicara"
+    }
   }
 }

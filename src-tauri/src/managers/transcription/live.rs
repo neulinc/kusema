@@ -10,11 +10,12 @@ use transcribe_cpp::StreamOptions;
 use super::chunked::{ChunkSetup, ChunkedDecode, PendingSetup};
 use super::policy::LiveDecode;
 use super::{
-    emit_stream_text, join_chunks, lock_perf, PreviewScript, RunOutcome, RunSetup,
-    StreamFinalizeReply, StreamPerf, TranscriptionManager,
+    join_chunks, lock_perf, PreviewScript, RunOutcome, RunSetup, StreamFinalizeReply, StreamPerf,
+    TranscriptionManager,
 };
-use crate::audio_toolkit::OutputLanguageEvidence;
 use crate::engine_supervisor::{EngineError, LoadedInfo, StreamHandle, StreamProgress};
+use crate::preview::throttle::Throttle;
+use crate::preview::{Feeder, Progress};
 use crate::settings::{get_settings, AppSettings};
 
 /// One recording's live decode.
@@ -28,9 +29,6 @@ enum LiveDecoder<'a> {
     /// Its setup is resolved by its first chunk.
     Chunked(Box<ChunkedDecode<'a>>),
 }
-
-/// A decoded text and the language the model detected in it, if any.
-type Decoded = (String, Option<String>);
 
 impl<'a> LiveSession<'a> {
     /// Begins the live decode `mode` picks on the loaded model. `None` when
@@ -88,14 +86,12 @@ impl<'a> LiveSession<'a> {
     /// `recorded_samples` is the whole recording's length.
     pub(super) fn finish(self, recorded_samples: usize) -> StreamFinalizeReply {
         match self.decoder {
-            LiveDecoder::Stream(stream, setup) => {
-                Ok(stream
-                    .finish()?
-                    .map(|(text, model_detected_language)| RunOutcome {
-                        setup: *setup,
-                        text,
-                        model_detected_language,
-                    }))
+            // Kusema: the stream is the live preview, never the typed text:
+            // the whole recording is transcribed in one run instead, for the
+            // best accuracy. Dropping it resets the stream.
+            LiveDecoder::Stream(stream, _setup) => {
+                stream.drop_for_batch();
+                Ok(None)
             }
             LiveDecoder::Chunked(chunks) => finish_chunks(*chunks, recorded_samples),
         }
@@ -144,12 +140,11 @@ fn finish_chunks(
 /// to the overlay.
 struct StreamSession<'a> {
     tm: &'a TranscriptionManager,
-    model_id: String,
     stream: StreamHandle,
     perf: Arc<Mutex<StreamPerf>>,
-    /// In auto mode the model's own LID is the best remaining evidence; the
-    /// snapshot is only materialized when it can change the outcome.
-    want_language: bool,
+    /// Kusema: the preview's pace, and the audio gathered for its next feed.
+    throttle: Arc<Mutex<Throttle>>,
+    feeder: Feeder,
 }
 
 impl<'a> StreamSession<'a> {
@@ -165,22 +160,27 @@ impl<'a> StreamSession<'a> {
         // Feed results arrive on the engine's thread; this callback only
         // converts and emits preview text.
         let perf = Arc::new(Mutex::new(StreamPerf::new()));
+        let throttle = Arc::new(Mutex::new(Throttle::new()));
         let on_progress = {
             let perf = Arc::clone(&perf);
-            let app_handle = tm.app_handle.clone();
             let languages = setup.languages.clone();
             let mut preview_script = PreviewScript::new(settings.chinese_script, &output_language);
+            // Kusema: watches the pace, and shows the text as it will be typed.
+            let mut preview = Progress::new(&tm.app_handle, Arc::clone(&throttle));
             move |progress: StreamProgress| {
                 let mut perf = lock_perf(&perf);
                 perf.record_compute(progress.elapsed);
                 perf.record_update(&progress.update);
-                if let Some(text) = progress.text {
+                let text = progress.text.map(|text| {
                     perf.record_emit();
-                    let (committed, tentative) =
-                        preview_script.convert(&text.committed, &text.tentative, &languages);
-                    emit_stream_text(&app_handle, &committed, &tentative);
-                }
+                    preview_script.convert(&text.committed, &text.tentative, &languages)
+                });
                 perf.maybe_log();
+                drop(perf);
+                preview.answer(
+                    progress.update.input_received_ms,
+                    text.as_ref().map(|(c, t)| (c.as_str(), t.as_str())),
+                );
             }
         };
 
@@ -189,11 +189,19 @@ impl<'a> StreamSession<'a> {
         // result, and the caller falls back to batch transcription.
         // StreamOptions::default() uses CommitPolicy::Auto and lets the
         // family pick its own streaming strategy (no family-specific ext).
-        let stream = match tm.engine.start_stream(
-            setup.run_options.clone(),
-            StreamOptions::default(),
-            on_progress,
-        ) {
+        // Kusema: the quicker setting for the preview, or the model's own if
+        // it refuses it.
+        let on_progress = Arc::new(Mutex::new(on_progress));
+        let begin = |options: StreamOptions| {
+            let on_progress = Arc::clone(&on_progress);
+            tm.engine
+                .start_stream(setup.run_options.clone(), options, move |p| {
+                    (crate::preview::lock(&on_progress))(p)
+                })
+        };
+        let started = begin(crate::preview::stream_options(model_id))
+            .or_else(|_| begin(StreamOptions::default()));
+        let stream = match started {
             Ok(stream) => stream,
             Err(e) => {
                 error!("Failed to begin stream: {}", e);
@@ -209,56 +217,27 @@ impl<'a> StreamSession<'a> {
         );
         Some(Self {
             tm,
-            model_id: model_id.to_string(),
             stream,
             perf,
-            want_language: matches!(output_language, OutputLanguageEvidence::Unknown),
+            throttle,
+            feeder: Feeder::default(),
         })
     }
 
     fn feed(&mut self, pcm: Vec<f32>) {
-        lock_perf(&self.perf).record_feed(pcm.len());
-        self.stream.feed(pcm);
+        // Kusema: in the throttle's chunks, and not at all once it's off.
+        let Some(chunk) = self.feeder.push(&self.throttle, &pcm) else {
+            return;
+        };
+        lock_perf(&self.perf).record_feed(chunk.len());
+        self.stream.feed(chunk);
     }
 
-    fn finish(self) -> Result<Option<Decoded>, EngineError> {
-        let result = match self.stream.finalize(self.want_language) {
-            // After finalize the committed prefix holds the full text;
-            // display() = committed + tentative is the safe read.
-            Ok(Some(finalized)) => {
-                let mut perf = lock_perf(&self.perf);
-                perf.record_compute(finalized.elapsed);
-                perf.record_update(&finalized.update);
-                if finalized.text.full.trim().is_empty() {
-                    // A stream can miss what a run over the whole recording
-                    // finds, so empty text retries in batch.
-                    info!("Live transcription produced no text; retrying in batch");
-                    Ok(None)
-                } else {
-                    Ok(Some((finalized.text.full, finalized.language)))
-                }
-            }
-            Ok(None) => {
-                error!(
-                    "Live transcription could not be finalized; \
-                     falling back to batch transcription"
-                );
-                self.tm.forget_model_if_engine_dropped(
-                    &self.model_id,
-                    "live transcription failed and the model could not be restarted",
-                );
-                Ok(None)
-            }
-            Err(e) => {
-                info!("Live transcription finalize stopped: {}", e);
-                Err(e)
-            }
-        };
-        let chars = match &result {
-            Ok(Some((text, _))) => text.len(),
-            _ => 0,
-        };
-        lock_perf(&self.perf).log_finalized(chars);
-        result
+    /// Kusema: the recording is over and goes to a full run instead.
+    fn drop_for_batch(self) {
+        // What the preview cost, against the audio it covered.
+        lock_perf(&self.perf).log_finalized(0);
+        debug!("Live preview over; transcribing the whole recording");
+        self.tm.stream_active.store(false, Ordering::Release);
     }
 }

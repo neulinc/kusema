@@ -1469,6 +1469,11 @@
       "add": "Add style",
       "reset": "Restore defaults",
       "neutral": "Programs that aren't listed get neutral text."
+    },
+    "livePreview": {
+      "label": "Live preview",
+      "description": "Shows your words in the pill as you speak. What's typed doesn't change. Needs a model with live text, such as Parakeet Unified or Nemotron Streaming.",
+      "autoOff": "Turned off because this computer couldn't keep up. Turn it on to try again."
     }
   },
   "footer": {
@@ -1585,7 +1590,8 @@
       "other": "Kusema couldn't get an answer: {{name}}"
     },
     "setUp": "Set up",
-    "dismiss": "Dismiss"
+    "dismiss": "Dismiss",
+    "previewOff": "Live preview is off: this computer couldn't keep up. You can turn it back on in Settings."
   },
   "screenCard": {
     "title": "Send this screenshot?",
@@ -1764,5 +1770,39 @@
       "gotIt": "Got it"
     },
     "space": "Space"
+  },
+  "micCheck": {
+    "title": "Microphone check",
+    "intro": "Kusema listens to your room, then to you reading a sentence, and tells you what would help. Nothing is saved or sent.",
+    "start": "Check my microphone",
+    "meter": "Microphone level",
+    "quiet": "Stay quiet for a moment… {{seconds}}",
+    "read": "Now read this aloud:",
+    "sentence": "Please send the signed contract to the client by Friday afternoon.",
+    "done": "Done",
+    "cancel": "Cancel",
+    "again": "Check again",
+    "play": "Play my test back",
+    "failed": "Kusema couldn't open the microphone. Choose another one, or check that it's plugged in.",
+    "numbers": "Room {{noise}} dB · Your voice {{speech}} dB · {{snr}} dB apart",
+    "adapted": "Kusema now ignores sound quieter than your room's noise, so it types fewer stray words.",
+    "anyMic": "Any USB microphone or headset works. If you're getting one, look for:",
+    "tips": {
+      "not_heard": "Kusema couldn't hear you reading. Check that this is the microphone you're speaking into, and that it isn't muted.",
+      "clipping": "Your microphone is so loud that it distorts. Move it a little away, or lower its level in Windows sound settings.",
+      "quiet": "Your microphone is quiet. Move closer or raise its level in Windows sound settings.",
+      "noisy": "Your room is a bit noisy. A headset will improve accuracy and stop stray words.",
+      "bluetooth_hands_free": "This Bluetooth headset sends lower-quality audio while its mic is in use. A wired or USB headset, or your computer's own microphone, may be clearer.",
+      "good": "Your microphone sounds good."
+    },
+    "adaptive": {
+      "label": "Ignore room noise",
+      "description": "Uses the microphone check to ignore sound quieter than your voice, like a television or people talking nearby."
+    },
+    "look": {
+      "boom": "A headset with a boom mic that sits near your mouth",
+      "usb": "A USB desk microphone, placed close to you",
+      "wired": "A wired or USB connection rather than Bluetooth, which lowers mic quality while you talk"
+    }
   }
 }

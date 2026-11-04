@@ -1475,6 +1475,11 @@
       "add": "Ajouter un style",
       "reset": "Rétablir les valeurs par défaut",
       "neutral": "Les programmes qui ne sont pas listés reçoivent un texte neutre."
+    },
+    "livePreview": {
+      "label": "Aperçu en direct",
+      "description": "Affiche vos mots dans la pastille pendant que vous parlez. Ce qui est tapé ne change pas. Nécessite un modèle avec texte en direct, comme Parakeet Unified ou Nemotron Streaming.",
+      "autoOff": "Désactivé parce que cet ordinateur n'arrivait pas à suivre. Activez-le pour réessayer."
     }
   },
   "footer": {
@@ -1591,7 +1596,8 @@
       "other": "Kusema n'a pas pu obtenir de réponse : {{name}}"
     },
     "setUp": "Configurer",
-    "dismiss": "Fermer"
+    "dismiss": "Fermer",
+    "previewOff": "L'aperçu en direct est désactivé : cet ordinateur n'arrivait pas à suivre. Vous pouvez le réactiver dans les Réglages."
   },
   "screenCard": {
     "title": "Envoyer cette capture d'écran ?",
@@ -1772,5 +1778,39 @@
       "gotIt": "Compris"
     },
     "space": "Espace"
+  },
+  "micCheck": {
+    "title": "Test du micro",
+    "intro": "Kusema écoute votre pièce, puis vous pendant que vous lisez une phrase, et vous dit ce qui aiderait. Rien n'est enregistré ni envoyé.",
+    "start": "Tester mon micro",
+    "meter": "Niveau du micro",
+    "quiet": "Faites silence un instant… {{seconds}}",
+    "read": "Lisez maintenant ceci à voix haute :",
+    "sentence": "Merci d'envoyer le contrat signé au client avant vendredi après-midi.",
+    "done": "Terminé",
+    "cancel": "Annuler",
+    "again": "Tester à nouveau",
+    "play": "Réécouter mon test",
+    "failed": "Kusema n'a pas pu ouvrir le micro. Choisissez-en un autre, ou vérifiez qu'il est branché.",
+    "numbers": "Pièce {{noise}} dB · Votre voix {{speech}} dB · {{snr}} dB d'écart",
+    "adapted": "Kusema ignore désormais les sons plus faibles que le bruit de votre pièce, et tape moins de mots parasites.",
+    "anyMic": "N'importe quel micro USB ou casque fonctionne. Si vous en prenez un, cherchez :",
+    "tips": {
+      "not_heard": "Kusema ne vous a pas entendu lire. Vérifiez que c'est bien le micro dans lequel vous parlez et qu'il n'est pas coupé.",
+      "clipping": "Votre micro est si fort qu'il sature. Éloignez-le un peu, ou baissez son niveau dans les paramètres de son de Windows.",
+      "quiet": "Votre micro est faible. Rapprochez-vous, ou montez son niveau dans les paramètres de son de Windows.",
+      "noisy": "Votre pièce est un peu bruyante. Un casque améliorera la précision et évitera les mots parasites.",
+      "bluetooth_hands_free": "Ce casque Bluetooth envoie un son de moindre qualité pendant que son micro est utilisé. Un casque filaire ou USB, ou le micro de l'ordinateur, peut être plus clair.",
+      "good": "Votre micro sonne bien."
+    },
+    "adaptive": {
+      "label": "Ignorer le bruit de la pièce",
+      "description": "Utilise le test du micro pour ignorer les sons plus faibles que votre voix, comme une télévision ou des gens qui parlent à côté."
+    },
+    "look": {
+      "boom": "Un casque avec micro sur perche, près de la bouche",
+      "usb": "Un micro USB de bureau, placé près de vous",
+      "wired": "Une connexion filaire ou USB plutôt que Bluetooth, qui dégrade le micro pendant que vous parlez"
+    }
   }
 }

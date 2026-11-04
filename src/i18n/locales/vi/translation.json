@@ -1469,6 +1469,11 @@
       "add": "Thêm phong cách",
       "reset": "Khôi phục mặc định",
       "neutral": "Chương trình không có trong danh sách sẽ nhận văn bản trung tính."
+    },
+    "livePreview": {
+      "label": "Xem trước trực tiếp",
+      "description": "Hiển thị lời bạn nói trong viên thuốc khi bạn nói. Nội dung được gõ không thay đổi. Cần một mô hình có văn bản trực tiếp, như Parakeet Unified hoặc Nemotron Streaming.",
+      "autoOff": "Đã tắt vì máy tính này không theo kịp. Bật lên để thử lại."
     }
   },
   "footer": {
@@ -1585,7 +1590,8 @@
       "other": "Kusema không nhận được câu trả lời: {{name}}"
     },
     "setUp": "Thiết lập",
-    "dismiss": "Đóng"
+    "dismiss": "Đóng",
+    "previewOff": "Xem trước trực tiếp đã tắt: máy tính này không theo kịp. Bạn có thể bật lại trong Cài đặt."
   },
   "screenCard": {
     "title": "Gửi ảnh chụp màn hình này?",
@@ -1764,5 +1770,39 @@
       "gotIt": "Đã hiểu"
     },
     "space": "Space"
+  },
+  "micCheck": {
+    "title": "Kiểm tra micrô",
+    "intro": "Kusema nghe căn phòng của bạn, rồi nghe bạn đọc một câu, và cho bạn biết điều gì sẽ giúp ích. Không có gì được lưu hay gửi đi.",
+    "start": "Kiểm tra micrô của tôi",
+    "meter": "Mức micrô",
+    "quiet": "Hãy giữ yên lặng một lát… {{seconds}}",
+    "read": "Bây giờ hãy đọc to câu này:",
+    "sentence": "Vui lòng gửi hợp đồng đã ký cho khách hàng trước chiều thứ Sáu.",
+    "done": "Xong",
+    "cancel": "Hủy",
+    "again": "Kiểm tra lại",
+    "play": "Phát lại bài kiểm tra",
+    "failed": "Kusema không mở được micrô. Hãy chọn micrô khác, hoặc kiểm tra xem đã cắm chưa.",
+    "numbers": "Phòng {{noise}} dB · Giọng bạn {{speech}} dB · chênh {{snr}} dB",
+    "adapted": "Giờ Kusema bỏ qua âm thanh nhỏ hơn tiếng ồn trong phòng bạn, nên gõ ít từ lạc hơn.",
+    "anyMic": "Micrô USB hay tai nghe nào cũng dùng được. Nếu bạn định mua, hãy tìm:",
+    "tips": {
+      "not_heard": "Kusema không nghe thấy bạn đọc. Hãy kiểm tra đây có đúng là micrô bạn đang nói vào và nó không bị tắt tiếng.",
+      "clipping": "Micrô của bạn to đến mức bị méo. Hãy để xa ra một chút, hoặc giảm mức của nó trong cài đặt âm thanh của Windows.",
+      "quiet": "Micrô của bạn nhỏ. Hãy đến gần hơn hoặc tăng mức của nó trong cài đặt âm thanh của Windows.",
+      "noisy": "Phòng của bạn hơi ồn. Tai nghe có micrô sẽ cải thiện độ chính xác và ngăn từ lạc.",
+      "bluetooth_hands_free": "Tai nghe Bluetooth này gửi âm thanh chất lượng thấp hơn khi đang dùng micrô. Tai nghe có dây hoặc USB, hay micrô của chính máy tính, có thể rõ hơn.",
+      "good": "Micrô của bạn nghe tốt."
+    },
+    "adaptive": {
+      "label": "Bỏ qua tiếng ồn trong phòng",
+      "description": "Dùng kết quả kiểm tra micrô để bỏ qua âm thanh nhỏ hơn giọng bạn, như tivi hay người nói chuyện gần đó."
+    },
+    "look": {
+      "boom": "Tai nghe có cần micrô đặt gần miệng",
+      "usb": "Micrô để bàn USB đặt gần bạn",
+      "wired": "Kết nối có dây hoặc USB thay vì Bluetooth, vốn làm giảm chất lượng micrô khi bạn nói"
+    }
   }
 }

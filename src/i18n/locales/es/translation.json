@@ -1475,6 +1475,11 @@
       "add": "Añadir estilo",
       "reset": "Restaurar valores predeterminados",
       "neutral": "Los programas que no están en la lista reciben texto neutro."
+    },
+    "livePreview": {
+      "label": "Vista previa en directo",
+      "description": "Muestra tus palabras en la píldora mientras hablas. Lo que se escribe no cambia. Necesita un modelo con texto en directo, como Parakeet Unified o Nemotron Streaming.",
+      "autoOff": "Desactivada porque este ordenador no podía seguir el ritmo. Actívala para volver a intentarlo."
     }
   },
   "footer": {
@@ -1591,7 +1596,8 @@
       "other": "Kusema no pudo obtener respuesta: {{name}}"
     },
     "setUp": "Configurar",
-    "dismiss": "Cerrar"
+    "dismiss": "Cerrar",
+    "previewOff": "La vista previa en directo está desactivada: este ordenador no podía seguir el ritmo. Puedes volver a activarla en Ajustes."
   },
   "screenCard": {
     "title": "¿Enviar esta captura?",
@@ -1772,5 +1778,39 @@
       "gotIt": "Entendido"
     },
     "space": "Espacio"
+  },
+  "micCheck": {
+    "title": "Prueba del micrófono",
+    "intro": "Kusema escucha tu habitación y luego a ti leyendo una frase, y te dice qué te ayudaría. No se guarda ni se envía nada.",
+    "start": "Probar mi micrófono",
+    "meter": "Nivel del micrófono",
+    "quiet": "Haz silencio un momento… {{seconds}}",
+    "read": "Ahora lee esto en voz alta:",
+    "sentence": "Por favor, envía el contrato firmado al cliente antes del viernes por la tarde.",
+    "done": "Listo",
+    "cancel": "Cancelar",
+    "again": "Probar de nuevo",
+    "play": "Reproducir mi prueba",
+    "failed": "Kusema no pudo abrir el micrófono. Elige otro o comprueba que esté conectado.",
+    "numbers": "Habitación {{noise}} dB · Tu voz {{speech}} dB · {{snr}} dB de diferencia",
+    "adapted": "Ahora Kusema ignora los sonidos más bajos que el ruido de tu habitación, así escribe menos palabras sueltas.",
+    "anyMic": "Cualquier micrófono USB o auricular sirve. Si vas a conseguir uno, busca:",
+    "tips": {
+      "not_heard": "Kusema no te oyó leer. Comprueba que este sea el micrófono en el que hablas y que no esté silenciado.",
+      "clipping": "Tu micrófono está tan alto que distorsiona. Aléjalo un poco o baja su nivel en la configuración de sonido de Windows.",
+      "quiet": "Tu micrófono está bajo. Acércate o sube su nivel en la configuración de sonido de Windows.",
+      "noisy": "Tu habitación tiene algo de ruido. Unos auriculares con micrófono mejorarán la precisión y evitarán palabras sueltas.",
+      "bluetooth_hands_free": "Estos auriculares Bluetooth envían audio de menor calidad mientras se usa su micrófono. Unos auriculares con cable o USB, o el micrófono del propio ordenador, pueden sonar más claros.",
+      "good": "Tu micrófono suena bien."
+    },
+    "adaptive": {
+      "label": "Ignorar el ruido de la habitación",
+      "description": "Usa la prueba del micrófono para ignorar sonidos más bajos que tu voz, como una televisión o gente hablando cerca."
+    },
+    "look": {
+      "boom": "Unos auriculares con micrófono de brazo cerca de la boca",
+      "usb": "Un micrófono USB de escritorio, cerca de ti",
+      "wired": "Una conexión con cable o USB en lugar de Bluetooth, que baja la calidad del micrófono mientras hablas"
+    }
   }
 }
