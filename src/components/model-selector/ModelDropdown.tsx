@@ -29,7 +29,7 @@ const ModelDropdown: React.FC<ModelDropdownProps> = ({
   };
 
   return (
-    <div className="absolute bottom-full start-0 mb-2 w-64 max-h-[60vh] overflow-y-auto bg-background border border-line rounded-lg shadow-lg py-2 z-50">
+    <div className="absolute bottom-full start-0 mb-2 w-64 max-h-[60vh] overflow-y-auto bg-surface border border-line rounded-lg shadow-lg py-2 z-50">
       {locked && (
         <div className="px-3 pb-2 mb-1 text-xs text-ink-2 border-b border-line">
           {t("modelSelector.lockedWhileTranscribing")}
@@ -54,11 +54,7 @@ const ModelDropdown: React.FC<ModelDropdownProps> = ({
                 locked
                   ? "opacity-50 cursor-not-allowed"
                   : "hover:bg-wash cursor-pointer"
-              } ${
-                currentModelId === model.id
-                  ? "bg-logo-primary/10 text-logo-primary"
-                  : ""
-              }`}
+              } ${currentModelId === model.id ? "bg-selected text-text" : ""}`}
             >
               <div className="flex items-center justify-between">
                 <div>
@@ -70,7 +66,7 @@ const ModelDropdown: React.FC<ModelDropdownProps> = ({
                       </span>
                     )}
                     {model.supports_streaming && (
-                      <span className="ms-1.5 text-[10px] font-medium text-logo-primary uppercase">
+                      <span className="ms-1.5 text-[10px] font-medium text-ink-2 uppercase">
                         {t("modelSelector.streaming")}
                       </span>
                     )}
@@ -80,7 +76,7 @@ const ModelDropdown: React.FC<ModelDropdownProps> = ({
                   </div>
                 </div>
                 {currentModelId === model.id && (
-                  <div className="text-xs text-logo-primary">
+                  <div className="text-xs text-ink-2">
                     {t("modelSelector.active")}
                   </div>
                 )}

@@ -5,6 +5,7 @@ import { useSettings } from "../../hooks/useSettings";
 import { Input } from "../ui/Input";
 import { Button } from "../ui/Button";
 import { SettingContainer } from "../ui/SettingContainer";
+import { Xmark } from "iconoir-react";
 
 interface CustomWordsProps {
   descriptionMode?: "inline" | "tooltip";
@@ -89,7 +90,7 @@ export const CustomWords: React.FC<CustomWordsProps> = React.memo(
         </SettingContainer>
         {customWords.length > 0 && (
           <div
-            className={`px-4 p-2 ${grouped ? "" : "rounded-lg border border-line"} flex flex-wrap gap-1`}
+            className={`px-4 p-2 ${grouped ? "" : "rounded-xl border border-line bg-surface"} flex flex-wrap gap-1`}
           >
             {customWords.map((word) => (
               <Button
@@ -102,19 +103,7 @@ export const CustomWords: React.FC<CustomWordsProps> = React.memo(
                 aria-label={t("settings.advanced.customWords.remove", { word })}
               >
                 <span>{word}</span>
-                <svg
-                  className="w-3 h-3"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
+                <Xmark className="w-3 h-3" aria-hidden="true" />
               </Button>
             ))}
           </div>

@@ -25,9 +25,9 @@ interface KeycapsProps {
 }
 
 const SIZES = {
-  sm: "h-[30px] min-w-[30px] px-[9px] rounded-[7px] text-small",
+  sm: "h-[28px] min-w-[28px] px-[9px] rounded-[6px] text-[13px]/5",
   screen: "h-[24px] min-w-[24px] px-[7px] rounded-[6px] text-[11px]",
-  line: "h-[25px] min-w-[25px] px-[7px] rounded-[6px] text-[13px]",
+  line: "h-[22px] min-w-[22px] px-[7px] rounded-[5px] text-[12px]",
 };
 
 /** A shortcut binding drawn as physical keycaps. */
@@ -42,13 +42,15 @@ export const Keycaps: React.FC<KeycapsProps> = ({
   className = "",
 }) => {
   const labels = given ?? keycapLabels(binding, osType);
+  // Kusema: a quiet chip, not a drawn key: a subtle surface and a hairline
+  // edge, with the faintest drop.
   const state = pressed
-    ? "translate-y-[3px] shadow-none bg-plum text-background border-plum"
+    ? "translate-y-[1px] shadow-none bg-selected text-text border-line-strong"
     : partial
-      ? "translate-y-[3px] shadow-none border-dashed bg-background text-plum border-plum"
-      : `shadow-[0_3px_0_0_var(--color-plum)] bg-background text-plum border-plum ${
+      ? "shadow-none border-dashed bg-surface text-text border-line-strong"
+      : `shadow-[0_1px_0_0_var(--color-line-strong)] bg-hover text-text border-line ${
           lift
-            ? "group-hover/keycaps:-translate-y-[2px] group-hover/keycaps:shadow-[0_5px_0_0_var(--color-plum)] group-focus-visible/keycaps:-translate-y-[2px] group-focus-visible/keycaps:shadow-[0_5px_0_0_var(--color-plum)]"
+            ? "group-hover/keycaps:-translate-y-[1px] group-hover/keycaps:shadow-[0_2px_0_0_var(--color-line-strong)] group-focus-visible/keycaps:-translate-y-[1px] group-focus-visible/keycaps:shadow-[0_2px_0_0_var(--color-line-strong)]"
             : ""
         }`;
 
@@ -62,7 +64,7 @@ export const Keycaps: React.FC<KeycapsProps> = ({
         <span
           key={i}
           aria-hidden="true"
-          className={`relative inline-flex items-center justify-center border font-display font-semibold leading-none select-none transition-[transform,box-shadow,background-color] duration-[70ms] ease-out ${SIZES[size]} ${state}`}
+          className={`relative inline-flex items-center justify-center border font-ui font-medium tabular-nums leading-none select-none transition-[transform,box-shadow,background-color] duration-[70ms] ease-out motion-reduce:transition-none ${SIZES[size]} ${state}`}
         >
           {label}
         </span>
@@ -72,8 +74,8 @@ export const Keycaps: React.FC<KeycapsProps> = ({
 };
 
 const SLOT_SIZES = {
-  sm: "h-[30px] min-w-[88px] px-[9px] rounded-[7px] text-small",
-  line: "h-[25px] min-w-[64px] px-[8px] rounded-[6px] text-[13px]",
+  sm: "h-[28px] min-w-[88px] px-[9px] rounded-[6px] text-[13px]/5",
+  line: "h-[22px] min-w-[64px] px-[8px] rounded-[5px] text-[12px]",
 };
 
 /** Placeholder key shown while a shortcut is being captured. */
@@ -83,7 +85,7 @@ export const KeySlot: React.FC<
   <span
     aria-hidden={children ? undefined : true}
     {...rest}
-    className={`inline-flex translate-y-[3px] items-center justify-center whitespace-nowrap border border-dashed border-plum-pick font-display font-semibold leading-none text-ink-2 animate-key-slot motion-reduce:animate-none ${SLOT_SIZES[size]} ${className}`}
+    className={`inline-flex items-center justify-center whitespace-nowrap border border-dashed border-line-strong font-ui font-medium leading-none text-ink-2 animate-key-slot motion-reduce:animate-none ${SLOT_SIZES[size]} ${className}`}
   >
     {children}
   </span>

@@ -19,12 +19,13 @@
     "assistant": "Asystent",
     "models": "Modele",
     "advanced": "Zaawansowane",
-    "postProcessing": "Postproces",
+    "postProcessing": "Dostawca AI",
     "history": "Historia",
     "debug": "Debugowanie",
     "about": "O programie",
     "privacy": "Prywatność",
-    "vocabulary": "Słownictwo"
+    "vocabulary": "Słownictwo",
+    "label": "Sekcje ustawień"
   },
   "onboarding": {
     "customModelDescription": "Nieoficjalnie wspierane",
@@ -437,8 +438,8 @@
             "description": "Skrót klawiaturowy do anulowania bieżącego nagrywania."
           },
           "transcribe_with_post_process": {
-            "name": "Skrót postprocessingu",
-            "description": "Opcjonalnie: Dedykowany skrót klawiszowy, który zawsze stosuje postprocessing AI do transkrypcji."
+            "name": "Skrót porządkowania przez AI",
+            "description": "Opcjonalnie: osobny skrót, który zawsze stosuje porządkowanie przez AI do transkrypcji."
           },
           "assistant": {
             "name": "Zapytaj Kusema",
@@ -806,16 +807,16 @@
       "provider": {
         "title": "Dostawca AI",
         "provider": "Dostawca",
-        "description": "Asystent korzysta z tego samego dostawcy i klucza API co Postproces.",
+        "description": "Asystent korzysta z tego samego dostawcy i klucza API co porządkowanie przez AI, ustawionych na stronie Dostawca AI.",
         "model": "Model",
-        "modelDescription": "Model, który odpowiada na pytania. Zmienisz go na stronie Postproces.",
+        "modelDescription": "Model, który odpowiada na twoje pytania. Zmienisz go na stronie Dostawca AI.",
         "notSet": "Nie wybrano",
-        "open": "Otwórz ustawienia Postprocesu",
-        "disabled": "Asystent potrzebuje dostawcy AI (np. Anthropic, OpenAI lub lokalnego modelu Ollamy), aby odpowiadać. Dostawców konfiguruje się na stronie Postproces, która pojawia się po włączeniu postprocesu. Włączenie go nie zmienia zwykłego dyktowania.",
-        "enable": "Włącz postproces",
-        "noProvider": "Wybierz dostawcę na stronie Postproces.",
-        "noKey": "Brak klucza API dla {{provider}}. Dodaj go na stronie Postproces.",
-        "noModel": "Wybierz model na stronie Postproces."
+        "open": "Otwórz ustawienia dostawcy AI",
+        "disabled": "Aby odpowiadać na pytania, Asystent potrzebuje dostawcy AI (np. Anthropic, OpenAI albo lokalnego modelu Ollama). Dostawców ustawia się na stronie Dostawca AI, która pojawia się po włączeniu porządkowania przez AI. Włączenie nie zmienia zwykłego dyktowania.",
+        "enable": "Włącz porządkowanie przez AI",
+        "noProvider": "Wybierz dostawcę na stronie Dostawca AI.",
+        "noKey": "Brak klucza API dla {{provider}}. Dodaj go na stronie Dostawca AI.",
+        "noModel": "Wybierz model na stronie Dostawca AI."
       },
       "screen": {
         "title": "Zapytaj o mój ekran",
@@ -834,7 +835,7 @@
         },
         "model": {
           "label": "Model do pytań o ekran",
-          "description": "Model, który widzi obrazy. Zostaw puste, aby użyć modelu wybranego dla tego dostawcy na stronie Postproces.",
+          "description": "Model, który widzi obrazy. Zostaw puste, aby użyć modelu wybranego dla tego dostawcy na stronie Dostawca AI.",
           "placeholder": "np. qwen2.5vl"
         }
       },
@@ -971,7 +972,7 @@
         "createPrompt": "Utwórz prompt",
         "cancel": "Anuluj",
         "selectToEdit": "Wybierz prompt powyżej, aby zobaczyć i edytować jego szczegóły.",
-        "createFirst": "Kliknij 'Utwórz nowy prompt' powyżej, aby utworzyć pierwszy prompt postprocessingu."
+        "createFirst": "Kliknij 'Utwórz nowy prompt' powyżej, aby utworzyć pierwszy prompt porządkowania przez AI."
       }
     },
     "history": {

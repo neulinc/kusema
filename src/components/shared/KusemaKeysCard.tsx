@@ -23,7 +23,7 @@ export const KusemaKeysCard: React.FC<{ className?: string }> = ({
   return (
     <section
       aria-label={t("kusemaKey.card.title")}
-      className={`rounded-lg border border-line p-[14px] ${className}`}
+      className={`rounded-xl bg-hover p-[14px] ${className}`}
     >
       <ul className="m-0 flex list-none flex-col gap-[10px] p-0">
         <li>

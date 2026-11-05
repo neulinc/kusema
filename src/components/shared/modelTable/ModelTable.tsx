@@ -7,7 +7,7 @@ import React, {
   type SetStateAction,
 } from "react";
 import { useTranslation } from "react-i18next";
-import { Search } from "lucide-react";
+import { Search } from "iconoir-react";
 import { Tooltip } from "@/components/ui/Tooltip";
 import { languageName } from "@/lib/constants/languages";
 import { CAPABILITIES, CAPABILITY_KEYS, type Capability } from "./capabilities";
@@ -270,7 +270,7 @@ export const ModelTable: React.FC<ModelTableProps> = ({
           <div className="flex h-[46px] items-center gap-[4px] ps-[14px] pe-[4px]">
             <label className="flex h-full min-w-0 flex-1 cursor-text items-center gap-[10px]">
               <span className="grid w-[18px] shrink-0 place-items-center text-ink-3">
-                <Search size={15} aria-hidden="true" />
+                <Search width={15} height={15} aria-hidden="true" />
               </span>
               {/* No clear button: Escape clears. */}
               <input

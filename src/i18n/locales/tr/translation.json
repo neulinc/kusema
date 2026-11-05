@@ -19,12 +19,13 @@
     "assistant": "Asistan",
     "models": "Modeller",
     "advanced": "Gelişmiş",
-    "postProcessing": "Son İşlem",
+    "postProcessing": "Yapay Zekâ Sağlayıcısı",
     "history": "Geçmiş",
     "debug": "Hata Ayıklama",
     "about": "Hakkında",
     "privacy": "Gizlilik",
-    "vocabulary": "Sözcük dağarcığı"
+    "vocabulary": "Sözcük dağarcığı",
+    "label": "Ayar bölümleri"
   },
   "onboarding": {
     "customModelDescription": "Resmi olarak desteklenmiyor",
@@ -433,8 +434,8 @@
             "description": "Mevcut kaydı iptal etmek için klavye kısayolu."
           },
           "transcribe_with_post_process": {
-            "name": "Son İşlem Kısayolu",
-            "description": "İsteğe bağlı: Transkripsiyonunuza her zaman yapay zekâ ile son işlem uygulayan özel bir kısayol tuşu."
+            "name": "Yapay Zekâ Temizliği kısayolu",
+            "description": "İsteğe bağlı: dökümünüze her zaman Yapay Zekâ Temizliği uygulayan ayrı bir kısayol."
           },
           "assistant": {
             "name": "Kusema'ya sor",
@@ -800,16 +801,16 @@
       "provider": {
         "title": "Yapay Zekâ Sağlayıcısı",
         "provider": "Sağlayıcı",
-        "description": "Asistan, Son İşlem ile aynı sağlayıcıyı ve API anahtarını kullanır.",
+        "description": "Asistan, Yapay Zekâ Temizliği ile aynı sağlayıcıyı ve API anahtarını kullanır; bunlar Yapay Zekâ Sağlayıcısı sayfasında ayarlanır.",
         "model": "Model",
-        "modelDescription": "Sorularınızı yanıtlayan model. Son İşlem sayfasından değiştirin.",
+        "modelDescription": "Sorularınızı yanıtlayan model. Yapay Zekâ Sağlayıcısı sayfasından değiştirin.",
         "notSet": "Seçilmedi",
-        "open": "Son İşlem ayarlarını aç",
-        "disabled": "Asistanın soruları yanıtlamak için bir yapay zekâ sağlayıcısına (Anthropic, OpenAI veya yerel bir Ollama modeli gibi) ihtiyacı vardır. Sağlayıcılar, son işlem açıldığında görünen Son İşlem sayfasında ayarlanır. Açmak normal dikteyi değiştirmez.",
-        "enable": "Son işlemi aç",
-        "noProvider": "Son İşlem sayfasında bir sağlayıcı seçin.",
-        "noKey": "{{provider}} için API anahtarı yok. Son İşlem sayfasında bir tane ekleyin.",
-        "noModel": "Son İşlem sayfasında bir model seçin."
+        "open": "Yapay Zekâ Sağlayıcısı ayarlarını aç",
+        "disabled": "Soruları yanıtlamak için Asistan'ın bir yapay zekâ sağlayıcısına (Anthropic, OpenAI veya yerel bir Ollama modeli gibi) ihtiyacı vardır. Sağlayıcılar, Yapay Zekâ Temizliği açıldığında görünen Yapay Zekâ Sağlayıcısı sayfasında ayarlanır. Açmak normal dikteyi değiştirmez.",
+        "enable": "Yapay Zekâ Temizliği'ni aç",
+        "noProvider": "Yapay Zekâ Sağlayıcısı sayfasından bir sağlayıcı seçin.",
+        "noKey": "{{provider}} için API anahtarı yok. Yapay Zekâ Sağlayıcısı sayfasından ekleyin.",
+        "noModel": "Yapay Zekâ Sağlayıcısı sayfasından bir model seçin."
       },
       "screen": {
         "title": "Ekranım Hakkında Sor",
@@ -828,7 +829,7 @@
         },
         "model": {
           "label": "Ekran Soruları İçin Model",
-          "description": "Görüntüleri görebilen bir model. Son İşlem sayfasında bu sağlayıcı için seçilen modeli kullanmak için boş bırakın.",
+          "description": "Görselleri görebilen bir model. Bu sağlayıcı için Yapay Zekâ Sağlayıcısı sayfasında seçilen modeli kullanmak için boş bırakın.",
           "placeholder": "ör. qwen2.5vl"
         }
       },
@@ -965,7 +966,7 @@
         "createPrompt": "Prompt Oluştur",
         "cancel": "İptal",
         "selectToEdit": "Ayrıntılarını görüntülemek ve düzenlemek için yukarıdan bir prompt seçin.",
-        "createFirst": "İlk son işlem promptunuzu oluşturmak için yukarıdaki “Yeni Prompt Oluştur” seçeneğine tıklayın."
+        "createFirst": "İlk Yapay Zekâ Temizliği promptunuzu oluşturmak için yukarıdaki “Yeni Prompt Oluştur” seçeneğine tıklayın."
       }
     },
     "history": {

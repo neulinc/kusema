@@ -1,6 +1,6 @@
 import React, { useEffect, useId, useRef, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
-import { Check, ChevronDown, Globe } from "lucide-react";
+import { Check, NavArrowDown as ChevronDown, Globe } from "iconoir-react";
 import { SUPPORTED_LANGUAGES } from "@/i18n";
 import { cjkSubsetFont } from "@/lib/utils/cjkFont";
 
@@ -125,7 +125,7 @@ export const AppLanguageMenu: React.FC<AppLanguageMenuProps> = ({
           open ? "bg-wash text-text" : "text-ink-2"
         }`}
       >
-        <Globe size={16} aria-hidden="true" />
+        <Globe width={16} height={16} aria-hidden="true" />
         <span>
           <Trans
             i18nKey="onboarding.welcome.menusIn"
@@ -141,7 +141,8 @@ export const AppLanguageMenu: React.FC<AppLanguageMenuProps> = ({
           />
         </span>
         <ChevronDown
-          size={14}
+          width={14}
+          height={14}
           aria-hidden="true"
           className={`transition-transform duration-200 ease-glide ${open ? "rotate-180" : ""}`}
         />
@@ -156,7 +157,7 @@ export const AppLanguageMenu: React.FC<AppLanguageMenuProps> = ({
           aria-label={t("onboarding.welcome.appLanguage")}
           aria-activedescendant={`${id}-${active}`}
           onKeyDown={onListKeyDown}
-          className="absolute end-0 top-[calc(100%+6px)] z-50 max-h-[372px] w-[208px] origin-top-right animate-drop overflow-y-auto overscroll-contain rounded-card border border-line-strong bg-background p-[5px] shadow-[0_14px_36px_-10px_rgb(0_0_0/0.35),0_2px_6px_rgb(0_0_0/0.08)] outline-none rtl:origin-top-left"
+          className="absolute end-0 top-[calc(100%+6px)] z-50 max-h-[372px] w-[208px] origin-top-right animate-drop overflow-y-auto overscroll-contain rounded-card border border-line-strong bg-surface p-[5px] shadow-[0_14px_36px_-10px_rgb(0_0_0/0.35),0_2px_6px_rgb(0_0_0/0.08)] outline-none rtl:origin-top-left"
         >
           {SUPPORTED_LANGUAGES.map((l, i) => {
             const selected = l.code === value;
@@ -174,7 +175,12 @@ export const AppLanguageMenu: React.FC<AppLanguageMenuProps> = ({
               >
                 <span className="grid place-items-center text-plum">
                   {selected && (
-                    <Check size={15} strokeWidth={2.5} aria-hidden="true" />
+                    <Check
+                      width={15}
+                      height={15}
+                      strokeWidth={2.5}
+                      aria-hidden="true"
+                    />
                   )}
                 </span>
                 {/* Span keeps RTL names aligned with the rest. */}

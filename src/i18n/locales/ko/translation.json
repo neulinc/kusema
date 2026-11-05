@@ -19,12 +19,13 @@
     "assistant": "어시스턴트",
     "models": "모델",
     "advanced": "고급",
-    "postProcessing": "후처리",
+    "postProcessing": "AI 제공자",
     "history": "히스토리",
     "debug": "디버그",
     "about": "정보",
     "privacy": "개인정보 보호",
-    "vocabulary": "어휘"
+    "vocabulary": "어휘",
+    "label": "설정 섹션"
   },
   "onboarding": {
     "customModelDescription": "공식 지원되지 않음",
@@ -433,8 +434,8 @@
             "description": "현재 녹음을 취소하는 키보드 단축키입니다."
           },
           "transcribe_with_post_process": {
-            "name": "후처리 단축키",
-            "description": "선택 사항: 항상 AI 후처리를 적용하는 전용 단축키입니다."
+            "name": "AI 정리 단축키",
+            "description": "선택 사항: 받아쓴 내용에 항상 AI 정리를 적용하는 전용 단축키입니다."
           },
           "assistant": {
             "name": "Kusema에게 묻기",
@@ -800,16 +801,16 @@
       "provider": {
         "title": "AI 제공업체",
         "provider": "제공업체",
-        "description": "어시스턴트는 후처리와 같은 제공업체와 API 키를 사용합니다.",
+        "description": "어시스턴트는 AI 정리와 같은 제공자와 API 키를 사용하며, AI 제공자 페이지에서 설정합니다.",
         "model": "모델",
-        "modelDescription": "질문에 답하는 모델입니다. 후처리 페이지에서 바꿀 수 있습니다.",
+        "modelDescription": "질문에 답하는 모델입니다. AI 제공자 페이지에서 바꿀 수 있습니다.",
         "notSet": "선택 안 됨",
-        "open": "후처리 설정 열기",
-        "disabled": "어시스턴트가 질문에 답하려면 AI 제공업체(Anthropic, OpenAI 또는 로컬 Ollama 모델 등)가 필요합니다. 제공업체는 후처리 페이지에서 설정하며, 이 페이지는 후처리를 켜면 나타납니다. 켜도 일반 받아쓰기는 달라지지 않습니다.",
-        "enable": "후처리 켜기",
-        "noProvider": "후처리 페이지에서 제공업체를 선택하세요.",
-        "noKey": "{{provider}}의 API 키가 설정되지 않았습니다. 후처리 페이지에서 추가하세요.",
-        "noModel": "후처리 페이지에서 모델을 선택하세요."
+        "open": "AI 제공자 설정 열기",
+        "disabled": "질문에 답하려면 어시스턴트에 AI 제공자(Anthropic, OpenAI 또는 로컬 Ollama 모델 등)가 필요합니다. 제공자는 AI 정리를 켜면 나타나는 AI 제공자 페이지에서 설정합니다. 켜도 일반 받아쓰기는 바뀌지 않습니다.",
+        "enable": "AI 정리 켜기",
+        "noProvider": "AI 제공자 페이지에서 제공자를 선택하세요.",
+        "noKey": "{{provider}}의 API 키가 없습니다. AI 제공자 페이지에서 추가하세요.",
+        "noModel": "AI 제공자 페이지에서 모델을 선택하세요."
       },
       "screen": {
         "title": "내 화면에 대해 묻기",
@@ -828,7 +829,7 @@
         },
         "model": {
           "label": "화면 질문용 모델",
-          "description": "이미지를 볼 수 있는 모델입니다. 비워 두면 후처리 페이지에서 이 제공업체에 선택한 모델을 사용합니다.",
+          "description": "이미지를 볼 수 있는 모델입니다. 비워 두면 AI 제공자 페이지에서 이 제공자에 선택한 모델을 사용합니다.",
           "placeholder": "예: qwen2.5vl"
         }
       },
@@ -965,7 +966,7 @@
         "createPrompt": "프롬프트 만들기",
         "cancel": "취소",
         "selectToEdit": "세부 정보를 보고 편집하려면 위에서 프롬프트를 선택하세요.",
-        "createFirst": "첫 번째 후처리 프롬프트를 만들려면 위의 '새 프롬프트 만들기'를 클릭하세요."
+        "createFirst": "첫 번째 AI 정리 프롬프트를 만들려면 위의 '새 프롬프트 만들기'를 클릭하세요."
       }
     },
     "history": {

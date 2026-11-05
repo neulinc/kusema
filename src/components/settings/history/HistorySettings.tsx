@@ -10,15 +10,15 @@ import { readFile } from "@tauri-apps/plugin-fs";
 import {
   Check,
   Copy,
-  FileAudio,
-  FilePlus,
-  FolderOpen,
-  Pencil,
-  RotateCcw,
+  MusicDoubleNote as FileAudio,
+  PagePlus as FilePlus,
+  Folder as FolderOpen,
+  EditPencil as Pencil,
+  Refresh as RotateCcw,
   Star,
-  Trash2,
-  X,
-} from "lucide-react";
+  Trash as Trash2,
+  Xmark as X,
+} from "iconoir-react";
 import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
 import {
@@ -49,9 +49,7 @@ const IconButton: React.FC<{
     onClick={onClick}
     disabled={disabled}
     className={`p-1.5 rounded-md flex items-center justify-center transition-colors cursor-pointer disabled:cursor-not-allowed disabled:text-text/20 ${
-      active
-        ? "text-logo-primary hover:text-logo-primary"
-        : "text-ink-3 hover:text-logo-primary"
+      active ? "text-text hover:text-text" : "text-ink-3 hover:text-text"
     }`}
     title={title}
   >
@@ -327,7 +325,7 @@ export const HistorySettings: React.FC = () => {
             />
           </div>
         </div>
-        <div className="bg-background border border-line rounded-lg overflow-visible">
+        <div className="bg-surface border border-line rounded-xl overflow-visible">
           {content}
         </div>
       </div>
@@ -535,7 +533,7 @@ const HistoryEntryComponent: React.FC<HistoryEntryProps> = ({
               if (e.key === "Escape") setCorrecting(false);
             }}
             rows={Math.min(8, Math.max(3, Math.ceil(draft.length / 70)))}
-            className="w-full rounded-md border border-line bg-background p-2 text-sm"
+            className="w-full rounded-lg border border-line-strong bg-surface p-2 text-sm"
           />
           <p className="text-xs text-ink-3">
             {t("settings.history.correct.help")}
@@ -604,7 +602,7 @@ const HistoryEntryComponent: React.FC<HistoryEntryProps> = ({
           <button
             type="button"
             onClick={() => setExpanded(!expanded)}
-            className="text-xs font-medium text-ink-3 hover:text-logo-primary cursor-pointer"
+            className="text-xs font-medium text-ink-3 hover:text-text cursor-pointer"
           >
             {expanded
               ? t("settings.history.showLess")

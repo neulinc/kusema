@@ -19,12 +19,13 @@
     "assistant": "助手",
     "models": "模型",
     "advanced": "高级",
-    "postProcessing": "后处理",
+    "postProcessing": "AI 提供方",
     "history": "历史记录",
     "debug": "调试",
     "about": "关于",
     "privacy": "隐私",
-    "vocabulary": "词汇"
+    "vocabulary": "词汇",
+    "label": "设置分区"
   },
   "onboarding": {
     "customModelDescription": "非官方支持",
@@ -433,8 +434,8 @@
             "description": "用于取消当前录制的键盘快捷键。"
           },
           "transcribe_with_post_process": {
-            "name": "后处理快捷键",
-            "description": "可选：一个专用快捷键，始终对您的转录应用 AI 后处理。"
+            "name": "AI 整理快捷键",
+            "description": "可选：一个专用快捷键，总是对你的转写应用 AI 整理。"
           },
           "assistant": {
             "name": "问 Kusema",
@@ -800,16 +801,16 @@
       "provider": {
         "title": "AI 服务商",
         "provider": "服务商",
-        "description": "助手使用与\"后处理\"相同的服务商和 API 密钥。",
+        "description": "助手使用与 AI 整理相同的提供方和 API 密钥，在“AI 提供方”页面设置。",
         "model": "模型",
-        "modelDescription": "回答您问题的模型。可在\"后处理\"页面更改。",
+        "modelDescription": "回答你问题的模型。可在“AI 提供方”页面更改。",
         "notSet": "未选择",
-        "open": "打开\"后处理\"设置",
-        "disabled": "助手需要一个 AI 服务商（例如 Anthropic、OpenAI 或本地 Ollama 模型）来回答问题。服务商在\"后处理\"页面设置，开启后处理后该页面才会出现。开启它不会改变普通听写。",
-        "enable": "开启后处理",
-        "noProvider": "请在\"后处理\"页面选择服务商。",
-        "noKey": "{{provider}} 还没有设置 API 密钥。请在\"后处理\"页面添加。",
-        "noModel": "请在\"后处理\"页面选择模型。"
+        "open": "打开 AI 提供方设置",
+        "disabled": "助手需要一个 AI 提供方（如 Anthropic、OpenAI 或本地 Ollama 模型）才能回答问题。提供方在“AI 提供方”页面设置，开启 AI 整理后该页面才会出现。开启它不会改变普通听写。",
+        "enable": "开启 AI 整理",
+        "noProvider": "请在“AI 提供方”页面选择提供方。",
+        "noKey": "{{provider}} 没有设置 API 密钥。请在“AI 提供方”页面添加。",
+        "noModel": "请在“AI 提供方”页面选择模型。"
       },
       "screen": {
         "title": "询问我的屏幕",
@@ -828,7 +829,7 @@
         },
         "model": {
           "label": "屏幕提问使用的模型",
-          "description": "能看懂图片的模型。留空则使用在\"后处理\"页面为该服务商选择的模型。",
+          "description": "能看图片的模型。留空则使用在“AI 提供方”页面为此提供方选择的模型。",
           "placeholder": "例如 qwen2.5vl"
         }
       },
@@ -965,7 +966,7 @@
         "createPrompt": "创建提示词",
         "cancel": "取消",
         "selectToEdit": "选择上方的提示词以查看和编辑其详细信息。",
-        "createFirst": "点击上方的「创建新提示词」来创建您的第一个后处理提示词。"
+        "createFirst": "点击上方的「创建新提示词」来创建您的第一个 AI 整理提示词。"
       }
     },
     "history": {

@@ -19,12 +19,13 @@
     "assistant": "Asisten",
     "models": "Model",
     "advanced": "Lanjutan",
-    "postProcessing": "Pascaproses",
+    "postProcessing": "Penyedia AI",
     "history": "Riwayat",
     "debug": "Debug",
     "about": "Tentang",
     "privacy": "Privasi",
-    "vocabulary": "Kosakata"
+    "vocabulary": "Kosakata",
+    "label": "Bagian pengaturan"
   },
   "onboarding": {
     "customModelDescription": "Tidak didukung secara resmi",
@@ -433,8 +434,8 @@
             "description": "Pintasan keyboard untuk membatalkan perekaman saat ini."
           },
           "transcribe_with_post_process": {
-            "name": "Pintasan Pascaproses",
-            "description": "Opsional: pintasan khusus yang selalu menerapkan pascaproses AI pada transkripsi Anda."
+            "name": "Pintasan pembersihan AI",
+            "description": "Opsional: pintasan khusus yang selalu menerapkan pembersihan AI pada transkripsi Anda."
           },
           "assistant": {
             "name": "Tanya Kusema",
@@ -800,16 +801,16 @@
       "provider": {
         "title": "Penyedia AI",
         "provider": "Penyedia",
-        "description": "Asisten memakai penyedia dan kunci API yang sama dengan Pascaproses.",
+        "description": "Asisten memakai penyedia dan kunci API yang sama dengan pembersihan AI, yang diatur di halaman Penyedia AI.",
         "model": "Model",
-        "modelDescription": "Model yang menjawab pertanyaan Anda. Ubah di halaman Pascaproses.",
+        "modelDescription": "Model yang menjawab pertanyaan Anda. Ubah di halaman Penyedia AI.",
         "notSet": "Belum dipilih",
-        "open": "Buka pengaturan Pascaproses",
-        "disabled": "Asisten memerlukan penyedia AI (seperti Anthropic, OpenAI, atau model Ollama lokal) untuk menjawab. Penyedia diatur di halaman Pascaproses, yang muncul setelah pascaproses diaktifkan. Mengaktifkannya tidak mengubah dikte biasa.",
-        "enable": "Aktifkan pascaproses",
-        "noProvider": "Pilih penyedia di halaman Pascaproses.",
-        "noKey": "Belum ada kunci API untuk {{provider}}. Tambahkan di halaman Pascaproses.",
-        "noModel": "Pilih model di halaman Pascaproses."
+        "open": "Buka pengaturan Penyedia AI",
+        "disabled": "Untuk menjawab pertanyaan, Asisten memerlukan penyedia AI (seperti Anthropic, OpenAI, atau model Ollama lokal). Penyedia diatur di halaman Penyedia AI, yang muncul setelah pembersihan AI diaktifkan. Mengaktifkannya tidak mengubah dikte biasa.",
+        "enable": "Aktifkan pembersihan AI",
+        "noProvider": "Pilih penyedia di halaman Penyedia AI.",
+        "noKey": "Belum ada kunci API untuk {{provider}}. Tambahkan di halaman Penyedia AI.",
+        "noModel": "Pilih model di halaman Penyedia AI."
       },
       "screen": {
         "title": "Tanya Tentang Layar Saya",
@@ -828,7 +829,7 @@
         },
         "model": {
           "label": "Model untuk Pertanyaan Layar",
-          "description": "Model yang dapat melihat gambar. Biarkan kosong untuk memakai model yang dipilih untuk penyedia ini di halaman Pascaproses.",
+          "description": "Model yang bisa melihat gambar. Biarkan kosong untuk memakai model yang dipilih untuk penyedia ini di halaman Penyedia AI.",
           "placeholder": "mis. qwen2.5vl"
         }
       },
@@ -965,7 +966,7 @@
         "createPrompt": "Buat Prompt",
         "cancel": "Batal",
         "selectToEdit": "Pilih prompt di atas untuk melihat dan mengedit detailnya.",
-        "createFirst": "Klik 'Buat Prompt Baru' di atas untuk membuat prompt pascaproses pertama Anda."
+        "createFirst": "Klik 'Buat Prompt Baru' di atas untuk membuat prompt pembersihan AI pertama Anda."
       }
     },
     "history": {

@@ -84,7 +84,7 @@ export const KeyboardDiagnostic: React.FC = () => {
         <button
           onClick={runDiagnostic}
           disabled={running}
-          className="px-2 py-1 text-sm font-semibold bg-wash border border-line-strong hover:bg-logo-primary/10 rounded cursor-pointer hover:border-logo-primary disabled:opacity-50 disabled:cursor-default whitespace-nowrap"
+          className="px-2 py-1 text-sm font-semibold bg-wash border border-line-strong hover:bg-hover rounded cursor-pointer hover:border-line-strong disabled:opacity-50 disabled:cursor-default whitespace-nowrap"
         >
           {t("settings.debug.keyboardDiagnostic.run")}
         </button>

@@ -176,7 +176,7 @@ export const PrivacySettings: React.FC = () => {
 
   return (
     <div className="max-w-3xl w-full mx-auto space-y-6">
-      <div className="rounded-lg border border-line px-4 py-4">
+      <div className="rounded-xl border border-line bg-surface px-4 py-4">
         <p className="text-lg font-semibold">
           {t("settings.privacy.audio.title")}
         </p>

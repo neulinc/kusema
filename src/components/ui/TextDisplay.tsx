@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { SettingContainer } from "./SettingContainer";
+import { Check } from "iconoir-react";
 
 interface TextDisplayProps {
   label: string;
@@ -63,24 +64,12 @@ export const TextDisplay: React.FC<TextDisplayProps> = ({
         {copyable && value && (
           <button
             onClick={handleCopy}
-            className="flex items-center justify-center px-2 py-1 w-12 min-h-8 text-xs font-semibold bg-wash hover:bg-logo-primary/10 border border-line-strong hover:border-logo-primary hover:text-logo-primary rounded-md transition-all duration-150 flex-shrink-0 cursor-pointer"
+            className="flex items-center justify-center px-2 py-1 w-12 min-h-8 text-xs font-semibold bg-wash hover:bg-hover border border-line-strong hover:border-line-strong hover:text-logo-primary rounded-md transition-all duration-150 flex-shrink-0 cursor-pointer"
             title="Copy to clipboard"
           >
             {showCopied ? (
               <div className="flex items-center space-x-1">
-                <svg
-                  className="w-4 h-4"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M5 13l4 4L19 7"
-                  />
-                </svg>
+                <Check className="w-4 h-4" aria-hidden="true" />
               </div>
             ) : (
               "Copy"

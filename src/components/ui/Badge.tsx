@@ -12,7 +12,7 @@ const Badge: React.FC<BadgeProps> = ({
   className = "",
 }) => {
   const variantClasses = {
-    primary: "bg-logo-primary",
+    primary: "bg-selected text-text",
     secondary: "bg-line text-ink-2",
   };
 

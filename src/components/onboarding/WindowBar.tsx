@@ -11,7 +11,7 @@ export const WindowBar: React.FC<{
   size: keyof typeof SIZES;
 }> = ({ title, size }) => (
   <div
-    className={`relative flex flex-none items-center text-[13px] font-semibold text-ink-3 ${SIZES[size].bar}`}
+    className={`relative flex flex-none items-center text-[13px]/5 font-semibold text-ink-3 ${SIZES[size].bar}`}
   >
     <span className="flex gap-[6px]" aria-hidden="true">
       {[0, 1, 2].map((i) => (

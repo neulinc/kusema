@@ -1,22 +1,45 @@
 @import "../styles/theme.css";
 
+/* Kusema: the pill keeps its own colours. The app's palette went calm and
+   neutral in 0.5.3; the pill and its glow are Kusema's signature and stay as
+   they were, so they read these instead of theme.css's tokens. */
+:root {
+  --pill-text: #0f0f0f;
+  --pill-bg: #fbfbfb;
+  --pill-brand: #a9a6ff;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --pill-text: #fbfbfb;
+    --pill-bg: #2c2b29;
+    --pill-brand: #9b97fb;
+  }
+}
+:root[data-theme="dark"] {
+  --pill-text: #fbfbfb;
+  --pill-bg: #2c2b29;
+  --pill-brand: #9b97fb;
+}
+:root {
+  --pill-ink-2: color-mix(in srgb, var(--pill-text) 60%, transparent);
+  --pill-ink-3: #808080;
+  --pill-line: color-mix(in srgb, #808080 20%, transparent);
+  --pill-wash: color-mix(in srgb, #808080 10%, transparent);
+}
+
 :root {
   --s-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  /* Near-opaque app surface (theme.css --color-background at 98%). Auto-flips
-     light/dark with --color-background, so no dark-mode override is needed. */
-  --s-surface: color-mix(in srgb, var(--color-background) 98%, transparent);
-  /* Accent = brand color; flips automatically via --color-logo-primary. */
-  --s-accent: var(--color-logo-primary);
-  /* The rest come from theme.css, which already follows the theme setting. */
-  --s-accent-soft: color-mix(
-    in srgb,
-    var(--color-logo-primary) 20%,
-    transparent
-  );
-  --s-muted: var(--color-ink-2);
-  --s-faint: var(--color-ink-3);
-  --s-border: var(--color-line);
-  --s-hair: var(--color-wash);
+  /* Near-opaque surface (the pill's own background at 98%). Auto-flips
+     light/dark with --pill-bg, so no dark-mode override is needed. */
+  --s-surface: color-mix(in srgb, var(--pill-bg) 98%, transparent);
+  /* Accent = brand color; flips automatically via --pill-brand. */
+  --s-accent: var(--pill-brand);
+  /* The rest follow the theme setting the same way. */
+  --s-accent-soft: color-mix(in srgb, var(--pill-brand) 20%, transparent);
+  --s-muted: var(--pill-ink-2);
+  --s-faint: var(--pill-ink-3);
+  --s-border: var(--pill-line);
+  --s-hair: var(--pill-wash);
 
   /* Card geometry — single source of truth for the visible overlay sizes. The
      native overlay window (overlay.rs) is sized from these: it must be at least
@@ -173,7 +196,7 @@
   background: var(--s-accent-soft);
   font-size: 11px;
   line-height: 16px;
-  color: var(--color-text);
+  color: var(--pill-text);
   white-space: nowrap;
 }
 
@@ -195,7 +218,7 @@
   white-space: nowrap;
   text-overflow: ellipsis;
   font-size: 13px;
-  color: var(--color-text);
+  color: var(--pill-text);
 }
 .dstop {
   flex: none;
@@ -206,7 +229,7 @@
   background: transparent;
   font: inherit;
   font-size: 12px;
-  color: var(--color-text);
+  color: var(--pill-text);
   cursor: pointer;
 }
 .dstop:hover {
@@ -249,7 +272,7 @@
   font-style: italic;
   line-height: 1.35;
   letter-spacing: -0.003em;
-  color: var(--color-text);
+  color: var(--pill-text);
   -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 18px);
   mask-image: linear-gradient(to bottom, transparent 0, #000 18px);
   scrollbar-width: none; /* Firefox */
@@ -433,7 +456,7 @@
 }
 .sx:hover {
   background: var(--s-accent-soft);
-  color: var(--color-text);
+  color: var(--pill-text);
   transform: scale(1.05);
 }
 .sx:active {
@@ -475,7 +498,7 @@
   font-size: 13px;
   line-height: 1.35;
   white-space: normal;
-  color: var(--color-text);
+  color: var(--pill-text);
 }
 
 /* ============================================================
@@ -653,7 +676,7 @@
   color: var(--kz-amber);
 }
 .look-paused .sicon {
-  color: var(--color-text);
+  color: var(--pill-text);
 }
 .swave.ready i {
   background: linear-gradient(to top, var(--kz-indigo), var(--kz-violet));
@@ -753,7 +776,7 @@
 .slabel-text {
   font-size: 12px;
   line-height: 16px;
-  color: var(--color-text);
+  color: var(--pill-text);
   white-space: normal;
   overflow-wrap: anywhere;
 }
@@ -770,7 +793,7 @@
   text-align: start;
   font-size: 12px;
   line-height: 16px;
-  color: var(--color-text);
+  color: var(--pill-text);
   -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 7px);
   mask-image: linear-gradient(to bottom, transparent 0, #000 7px);
 }

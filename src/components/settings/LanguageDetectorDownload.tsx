@@ -1,6 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { X } from "lucide-react";
+import { Xmark as X } from "iconoir-react";
 import { DownloadMark } from "../shared/DownloadMark";
 import { ProgressRing } from "../shared/ProgressRing";
 import { Tooltip } from "../ui/Tooltip";

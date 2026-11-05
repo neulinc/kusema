@@ -19,12 +19,13 @@
     "assistant": "Trợ lý",
     "models": "Mô hình",
     "advanced": "Nâng cao",
-    "postProcessing": "Xử lý sau",
+    "postProcessing": "Nhà cung cấp AI",
     "history": "Lịch sử",
     "debug": "Gỡ lỗi",
     "about": "Giới thiệu",
     "privacy": "Quyền riêng tư",
-    "vocabulary": "Từ vựng"
+    "vocabulary": "Từ vựng",
+    "label": "Các mục cài đặt"
   },
   "onboarding": {
     "customModelDescription": "Không được hỗ trợ chính thức",
@@ -433,8 +434,8 @@
             "description": "Phím tắt để hủy bản ghi hiện tại."
           },
           "transcribe_with_post_process": {
-            "name": "Phím tắt xử lý sau",
-            "description": "Tùy chọn: Phím tắt chuyên dụng luôn áp dụng xử lý sau bằng AI cho bản chuyển đổi của bạn."
+            "name": "Phím tắt Dọn Dẹp Bằng AI",
+            "description": "Tùy chọn: một phím tắt riêng luôn áp dụng Dọn Dẹp Bằng AI cho bản chép lời của bạn."
           },
           "assistant": {
             "name": "Hỏi Kusema",
@@ -800,16 +801,16 @@
       "provider": {
         "title": "Nhà Cung Cấp AI",
         "provider": "Nhà cung cấp",
-        "description": "Trợ lý dùng cùng nhà cung cấp và khóa API với Xử lý sau.",
+        "description": "Trợ lý dùng cùng nhà cung cấp và khóa API với Dọn Dẹp Bằng AI, được đặt ở trang Nhà cung cấp AI.",
         "model": "Mô hình",
-        "modelDescription": "Mô hình trả lời câu hỏi của bạn. Đổi ở trang Xử lý sau.",
+        "modelDescription": "Mô hình trả lời câu hỏi của bạn. Đổi nó ở trang Nhà cung cấp AI.",
         "notSet": "Chưa chọn",
-        "open": "Mở cài đặt Xử lý sau",
-        "disabled": "Trợ lý cần một nhà cung cấp AI (như Anthropic, OpenAI hoặc một mô hình Ollama cục bộ) để trả lời. Nhà cung cấp được thiết lập ở trang Xử lý sau, trang này xuất hiện khi bật xử lý sau. Bật nó không thay đổi cách đọc chính tả thông thường.",
-        "enable": "Bật xử lý sau",
-        "noProvider": "Chọn nhà cung cấp ở trang Xử lý sau.",
-        "noKey": "Chưa có khóa API cho {{provider}}. Hãy thêm một khóa ở trang Xử lý sau.",
-        "noModel": "Chọn mô hình ở trang Xử lý sau."
+        "open": "Mở cài đặt Nhà cung cấp AI",
+        "disabled": "Để trả lời câu hỏi, Trợ lý cần một nhà cung cấp AI (như Anthropic, OpenAI hoặc một mô hình Ollama cục bộ). Nhà cung cấp được thiết lập ở trang Nhà cung cấp AI, trang này hiện ra khi bật Dọn Dẹp Bằng AI. Bật nó không thay đổi cách đọc chính tả thông thường.",
+        "enable": "Bật Dọn Dẹp Bằng AI",
+        "noProvider": "Chọn một nhà cung cấp ở trang Nhà cung cấp AI.",
+        "noKey": "Chưa có khóa API cho {{provider}}. Hãy thêm ở trang Nhà cung cấp AI.",
+        "noModel": "Chọn một mô hình ở trang Nhà cung cấp AI."
       },
       "screen": {
         "title": "Hỏi Về Màn Hình Của Tôi",
@@ -828,7 +829,7 @@
         },
         "model": {
           "label": "Mô Hình Cho Câu Hỏi Về Màn Hình",
-          "description": "Một mô hình có thể nhìn hình ảnh. Để trống để dùng mô hình đã chọn cho nhà cung cấp này ở trang Xử lý sau.",
+          "description": "Một mô hình xem được hình ảnh. Để trống để dùng mô hình đã chọn cho nhà cung cấp này ở trang Nhà cung cấp AI.",
           "placeholder": "vd: qwen2.5vl"
         }
       },
@@ -965,7 +966,7 @@
         "createPrompt": "Tạo Prompt",
         "cancel": "Hủy",
         "selectToEdit": "Chọn một prompt ở trên để xem và chỉnh sửa chi tiết.",
-        "createFirst": "Nhấn 'Tạo Prompt mới' ở trên để tạo prompt xử lý sau đầu tiên của bạn."
+        "createFirst": "Nhấn 'Tạo Prompt mới' ở trên để tạo prompt Dọn Dẹp Bằng AI đầu tiên của bạn."
       }
     },
     "history": {

@@ -21,6 +21,7 @@ import {
   languagesOf,
   searchLanguages,
 } from "../../lib/constants/languages";
+import { NavArrowDown } from "iconoir-react";
 
 interface LanguageSelectorProps {
   descriptionMode?: "inline" | "tooltip";
@@ -211,31 +212,22 @@ export const LanguageSelector: React.FC<LanguageSelectorProps> = ({
             className={`px-2 py-1 text-sm font-semibold bg-wash border border-line-strong rounded min-w-[200px] text-start flex items-center justify-between transition-all duration-150 ${
               isUpdating("selected_language")
                 ? "opacity-50 cursor-not-allowed"
-                : "hover:bg-logo-primary/10 cursor-pointer hover:border-logo-primary"
+                : "hover:bg-hover cursor-pointer hover:border-line-strong"
             }`}
             onClick={handleToggle}
             disabled={isUpdating("selected_language")}
           >
             <span className="truncate">{selectedLanguageName}</span>
-            <svg
+            <NavArrowDown
               className={`w-4 h-4 ms-2 transition-transform duration-200 ${
                 isOpen ? "transform rotate-180" : ""
               }`}
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M19 9l-7 7-7-7"
-              />
-            </svg>
+              aria-hidden="true"
+            />
           </button>
 
           {isOpen && !isUpdating("selected_language") && (
-            <div className="absolute top-full left-0 right-0 mt-1 bg-background border border-line-strong rounded shadow-lg z-50 max-h-60 overflow-hidden">
+            <div className="absolute top-full left-0 right-0 mt-1 bg-surface border border-line rounded-lg shadow-lg z-50 max-h-60 overflow-hidden">
               {/* Search input */}
               <div className="p-2 border-b border-line-strong">
                 <input
@@ -245,7 +237,7 @@ export const LanguageSelector: React.FC<LanguageSelectorProps> = ({
                   onChange={handleSearchChange}
                   onKeyDown={handleKeyDown}
                   placeholder={t("settings.general.language.searchPlaceholder")}
-                  className="w-full px-2 py-1 text-sm bg-wash border border-line rounded focus:outline-none focus:ring-1 focus:ring-logo-primary focus:border-logo-primary"
+                  className="w-full px-2 py-1 text-sm bg-surface border border-line-strong rounded-md focus:outline-none focus:ring-1 focus:ring-logo-primary focus:border-accent"
                 />
               </div>
 
@@ -283,7 +275,7 @@ export const LanguageSelector: React.FC<LanguageSelectorProps> = ({
                           <button
                             type="button"
                             onClick={detector.download}
-                            className="group flex w-full items-center justify-between gap-2 px-2 py-1 text-sm text-ink-3 transition-colors duration-150 hover:bg-logo-primary/10 hover:text-text"
+                            className="group flex w-full items-center justify-between gap-2 px-2 py-1 text-sm text-ink-3 transition-colors duration-150 hover:bg-hover hover:text-text"
                           >
                             <span className="truncate">{language.label}</span>
                             <LanguageDetectorDownload
@@ -314,8 +306,8 @@ export const LanguageSelector: React.FC<LanguageSelectorProps> = ({
                         type="button"
                         className={`w-full px-2 py-1 text-sm text-start transition-colors duration-150 ${
                           selectedLanguage === language.value
-                            ? "bg-logo-primary/20 text-logo-primary font-semibold"
-                            : "hover:bg-logo-primary/10"
+                            ? "bg-selected text-text font-semibold"
+                            : "hover:bg-hover"
                         }`}
                         onClick={() => handleLanguageSelect(language.value)}
                       >

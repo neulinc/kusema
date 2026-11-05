@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { listen } from "@tauri-apps/api/event";
-import { FileInput, Image } from "lucide-react";
+import { Import as FileInput, MediaImage as Image } from "iconoir-react";
 import { commands, type ChatTurn, type SetupPage } from "@/bindings";
 import { SettingsGroup } from "../../ui/SettingsGroup";
 import { Button } from "../../ui/Button";
@@ -185,10 +185,10 @@ export const AssistantSettings: React.FC<{
               // One stop for Tab; the arrow keys move between tabs.
               tabIndex={tab === name ? 0 : -1}
               onClick={() => chooseTab(name)}
-              className={`cursor-pointer rounded-lg border-b-2 px-3 py-1.5 text-sm font-medium transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-logo-primary ${
+              className={`cursor-pointer rounded-lg px-3 py-1.5 text-sm font-medium transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
                 tab === name
-                  ? "border-background-ui text-text"
-                  : "border-transparent text-ink-2 hover:bg-wash hover:text-text"
+                  ? "bg-selected text-text"
+                  : "text-ink-2 hover:bg-hover hover:text-text"
               }`}
             >
               {t(`settings.assistant.tabs.${name}`)}
@@ -286,7 +286,7 @@ export const AssistantSettings: React.FC<{
                 <div
                   className={`max-w-[80%] rounded-lg px-3 py-2 text-sm whitespace-pre-wrap select-text ${
                     message.role === "user"
-                      ? "bg-logo-primary/20"
+                      ? "bg-selected"
                       : "bg-wash border border-line"
                   }`}
                 >
@@ -316,7 +316,7 @@ export const AssistantSettings: React.FC<{
             {typed && (
               <>
                 <div className="flex justify-end">
-                  <div className="max-w-[80%] rounded-lg px-3 py-2 text-sm whitespace-pre-wrap select-text bg-logo-primary/20">
+                  <div className="max-w-[80%] rounded-lg px-3 py-2 text-sm whitespace-pre-wrap select-text bg-selected">
                     {typed.question}
                   </div>
                 </div>
@@ -333,7 +333,7 @@ export const AssistantSettings: React.FC<{
             {error && (
               <>
                 <div className="flex justify-end">
-                  <div className="max-w-[80%] rounded-lg px-3 py-2 text-sm whitespace-pre-wrap select-text bg-logo-primary/20">
+                  <div className="max-w-[80%] rounded-lg px-3 py-2 text-sm whitespace-pre-wrap select-text bg-selected">
                     {error.question}
                   </div>
                 </div>
@@ -376,7 +376,7 @@ export const AssistantSettings: React.FC<{
               placeholder={t("settings.assistant.conversation.typePlaceholder")}
               aria-label={t("settings.assistant.conversation.typePlaceholder")}
               disabled={!hasModel}
-              className="min-h-9 flex-1 resize-none rounded-lg border border-line bg-wash px-3 py-2 text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-logo-primary disabled:opacity-50"
+              className="min-h-9 flex-1 resize-none rounded-lg border border-line-strong bg-surface px-3 py-2 text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-logo-primary disabled:opacity-50"
             />
             {typed ? (
               <Button

@@ -30,8 +30,8 @@ export const SettingContainer: React.FC<SettingContainerProps> = ({
   );
 
   const containerClasses = grouped
-    ? "px-4 p-2"
-    : "px-4 p-2 rounded-lg border border-line";
+    ? "px-4 py-2.5"
+    : "px-4 py-2.5 rounded-xl border border-line bg-surface";
 
   if (layout === "stacked") {
     if (descriptionMode === "tooltip") {
@@ -56,7 +56,9 @@ export const SettingContainer: React.FC<SettingContainerProps> = ({
           <h3 className={`text-sm font-medium ${disabled ? "opacity-50" : ""}`}>
             {title}
           </h3>
-          <p className={`text-sm ${disabled ? "opacity-50" : ""}`}>
+          <p
+            className={`text-[13px]/5 text-ink-2 ${disabled ? "opacity-50" : ""}`}
+          >
             {description}
           </p>
         </div>
@@ -67,8 +69,8 @@ export const SettingContainer: React.FC<SettingContainerProps> = ({
 
   // Horizontal layout (default)
   const horizontalContainerClasses = grouped
-    ? "flex items-center justify-between min-h-12 px-4 p-2"
-    : "flex items-center justify-between min-h-12 px-4 p-2 rounded-lg border border-line";
+    ? "flex items-center justify-between gap-4 min-h-12 px-4 py-2.5"
+    : "flex items-center justify-between gap-4 min-h-12 px-4 py-2.5 rounded-xl border border-line bg-surface";
 
   if (descriptionMode === "tooltip") {
     return (
@@ -94,7 +96,9 @@ export const SettingContainer: React.FC<SettingContainerProps> = ({
         <h3 className={`text-sm font-medium ${disabled ? "opacity-50" : ""}`}>
           {title}
         </h3>
-        <p className={`text-sm ${disabled ? "opacity-50" : ""}`}>
+        <p
+          className={`text-[13px]/5 text-ink-2 ${disabled ? "opacity-50" : ""}`}
+        >
           {description}
         </p>
       </div>

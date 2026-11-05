@@ -19,12 +19,13 @@
     "assistant": "Assistente",
     "models": "Modelli",
     "advanced": "Avanzate",
-    "postProcessing": "Post-Elaborazione",
+    "postProcessing": "Fornitore IA",
     "history": "Cronologia",
     "debug": "Debug",
     "about": "Informazioni",
     "privacy": "Privacy",
-    "vocabulary": "Vocabolario"
+    "vocabulary": "Vocabolario",
+    "label": "Sezioni delle impostazioni"
   },
   "onboarding": {
     "customModelDescription": "Non ufficialmente supportato",
@@ -435,8 +436,8 @@
             "description": "La scorciatoia da tastiera per annullare la registrazione in corso."
           },
           "transcribe_with_post_process": {
-            "name": "Tasto di post-elaborazione",
-            "description": "Facoltativo: Un tasto di scelta rapida dedicato che applica sempre la post-elaborazione IA alla trascrizione."
+            "name": "Scorciatoia per la pulizia con IA",
+            "description": "Facoltativo: una scorciatoia dedicata che applica sempre la pulizia con IA alla trascrizione."
           },
           "assistant": {
             "name": "Chiedi a Kusema",
@@ -803,16 +804,16 @@
       "provider": {
         "title": "Fornitore di IA",
         "provider": "Fornitore",
-        "description": "L'assistente usa lo stesso fornitore e la stessa chiave API della post-elaborazione.",
+        "description": "L'Assistente usa lo stesso fornitore e la stessa chiave API della pulizia con IA, impostati nella pagina Fornitore IA.",
         "model": "Modello",
-        "modelDescription": "Il modello che risponde alle tue domande. Si cambia nella pagina Post-Elaborazione.",
+        "modelDescription": "Il modello che risponde alle tue domande. Cambialo nella pagina Fornitore IA.",
         "notSet": "Non scelto",
-        "open": "Apri le impostazioni della post-elaborazione",
-        "disabled": "L'assistente ha bisogno di un fornitore di IA (come Anthropic, OpenAI o un modello Ollama locale) per rispondere. I fornitori si configurano nella pagina Post-Elaborazione, che compare quando la post-elaborazione è attiva. Attivarla non cambia la dettatura normale.",
-        "enable": "Attiva la post-elaborazione",
-        "noProvider": "Scegli un fornitore nella pagina Post-Elaborazione.",
-        "noKey": "Nessuna chiave API impostata per {{provider}}. Aggiungine una nella pagina Post-Elaborazione.",
-        "noModel": "Scegli un modello nella pagina Post-Elaborazione."
+        "open": "Apri le impostazioni del fornitore IA",
+        "disabled": "Per rispondere alle domande, l'Assistente ha bisogno di un fornitore IA (come Anthropic, OpenAI o un modello Ollama locale). I fornitori si impostano nella pagina Fornitore IA, che compare quando la pulizia con IA è attiva. Attivarla non cambia la dettatura normale.",
+        "enable": "Attiva la pulizia con IA",
+        "noProvider": "Scegli un fornitore nella pagina Fornitore IA.",
+        "noKey": "Nessuna chiave API per {{provider}}. Aggiungine una nella pagina Fornitore IA.",
+        "noModel": "Scegli un modello nella pagina Fornitore IA."
       },
       "screen": {
         "title": "Chiedi del mio schermo",
@@ -831,7 +832,7 @@
         },
         "model": {
           "label": "Modello per le domande sullo schermo",
-          "description": "Un modello in grado di vedere le immagini. Lascia vuoto per usare il modello scelto per questo fornitore nella pagina Post-Elaborazione.",
+          "description": "Un modello che vede le immagini. Lascia vuoto per usare il modello scelto per questo fornitore nella pagina Fornitore IA.",
           "placeholder": "es. qwen2.5vl"
         }
       },
@@ -968,7 +969,7 @@
         "createPrompt": "Crea Prompt",
         "cancel": "Annulla",
         "selectToEdit": "Scegli un prompt qui sopra per visualizzare o modificare i dettagli.",
-        "createFirst": "Clicca 'Crea un nuovo prompt' qui sopra per creare il tuo primo prompt di post-elaborazione."
+        "createFirst": "Clicca 'Crea un nuovo prompt' qui sopra per creare il tuo primo prompt di pulizia con IA."
       }
     },
     "history": {

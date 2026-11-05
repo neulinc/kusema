@@ -19,12 +19,13 @@
     "assistant": "Assistent",
     "models": "Modeller",
     "advanced": "Avancerat",
-    "postProcessing": "Efterbearbetning",
+    "postProcessing": "AI-leverantör",
     "history": "Historik",
     "debug": "Felsökning",
     "about": "Om",
     "privacy": "Integritet",
-    "vocabulary": "Ordförråd"
+    "vocabulary": "Ordförråd",
+    "label": "Inställningsavsnitt"
   },
   "onboarding": {
     "customModelDescription": "Stöds inte officiellt",
@@ -433,8 +434,8 @@
             "description": "Kortkommandot för att avbryta den aktuella inspelningen."
           },
           "transcribe_with_post_process": {
-            "name": "Snabbkommando för efterbearbetning",
-            "description": "Valfritt: En dedikerad snabbknapp som alltid tillämpar AI-efterbearbetning på din transkription."
+            "name": "Kortkommando för AI-städning",
+            "description": "Valfritt: ett eget kortkommando som alltid tillämpar AI-städning på din transkription."
           },
           "assistant": {
             "name": "Fråga Kusema",
@@ -800,16 +801,16 @@
       "provider": {
         "title": "AI-leverantör",
         "provider": "Leverantör",
-        "description": "Assistenten använder samma leverantör och API-nyckel som Efterbearbetning.",
+        "description": "Assistenten använder samma leverantör och API-nyckel som AI-städningen, inställda på sidan AI-leverantör.",
         "model": "Modell",
-        "modelDescription": "Modellen som svarar på dina frågor. Ändra den på sidan Efterbearbetning.",
+        "modelDescription": "Modellen som besvarar dina frågor. Ändra den på sidan AI-leverantör.",
         "notSet": "Inte vald",
-        "open": "Öppna inställningarna för Efterbearbetning",
-        "disabled": "Assistenten behöver en AI-leverantör (till exempel Anthropic, OpenAI eller en lokal Ollama-modell) för att svara. Leverantörer konfigureras på sidan Efterbearbetning, som visas när efterbearbetning är påslagen. Att slå på den ändrar inte vanligt diktat.",
-        "enable": "Slå på efterbearbetning",
-        "noProvider": "Välj en leverantör på sidan Efterbearbetning.",
-        "noKey": "Ingen API-nyckel är angiven för {{provider}}. Lägg till en på sidan Efterbearbetning.",
-        "noModel": "Välj en modell på sidan Efterbearbetning."
+        "open": "Öppna inställningar för AI-leverantör",
+        "disabled": "För att besvara frågor behöver Assistenten en AI-leverantör (som Anthropic, OpenAI eller en lokal Ollama-modell). Leverantörer ställs in på sidan AI-leverantör, som visas när AI-städning är påslagen. Att slå på den ändrar inte vanlig diktering.",
+        "enable": "Slå på AI-städning",
+        "noProvider": "Välj en leverantör på sidan AI-leverantör.",
+        "noKey": "Det finns ingen API-nyckel för {{provider}}. Lägg till en på sidan AI-leverantör.",
+        "noModel": "Välj en modell på sidan AI-leverantör."
       },
       "screen": {
         "title": "Fråga om min skärm",
@@ -828,7 +829,7 @@
         },
         "model": {
           "label": "Modell för skärmfrågor",
-          "description": "En modell som kan se bilder. Lämna tomt för att använda modellen som valts för den här leverantören på sidan Efterbearbetning.",
+          "description": "En modell som kan se bilder. Lämna tomt för att använda modellen som valts för den här leverantören på sidan AI-leverantör.",
           "placeholder": "t.ex. qwen2.5vl"
         }
       },
@@ -965,7 +966,7 @@
         "createPrompt": "Skapa prompt",
         "cancel": "Avbryt",
         "selectToEdit": "Välj en prompt ovan för att visa och redigera dess detaljer.",
-        "createFirst": "Klicka på 'Skapa ny prompt' ovan för att skapa din första prompt för efterbearbetning."
+        "createFirst": "Klicka på 'Skapa ny prompt' ovan för att skapa din första prompt för AI-städning."
       }
     },
     "history": {

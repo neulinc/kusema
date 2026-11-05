@@ -1,31 +1,74 @@
-/* Kusema Colors: every color the app uses comes from here. Pick by job:
- * greys (ink-2, ink-3, line-strong, line, wash) for text, edges and fills;
- * logo-primary / background-ui for brand and primary actions; plum for keys
- * and picks (onboarding); moss / warning / error (+ -wash) for status.
+/* Kusema Colors: every color the app uses comes from here. Calm and nearly
+ * monochrome: greys for nearly everything, the brand indigo kept for a few
+ * jobs (toggles that are on, focus rings, links, progress, the logo).
+ *
+ * Pick by job:
+ *   background    the window            sidebar   the navigation column
+ *   surface       cards, groups, inputs, dropdowns, dialogs (raised)
+ *   hover         a row or control under the pointer
+ *   selected      the chosen sidebar item, option or tab
+ *   line          hairline dividers and card edges (decorative)
+ *   line-strong   a field's or control's own edge (3:1 against surface)
+ *   text / ink-2 / ink-3   primary, secondary and tertiary text
+ *   accent        toggles on, progress, radios, sliders, focus rings
+ *   accent-text   links
+ *   primary / on-primary   the main button: near-white on dark, near-black on light
+ *   moss / warning / error (+ -wash) for status.
  * demo-*, wordmark and mascot are illustration, not UI.
+ *
+ * Contrast (WCAG 2.2 AA), measured: text 13-15:1, ink-2 5.3-7.7:1, ink-3
+ * 4.6-5.5:1 on background and surface; accent 4.1-6.0:1 against surface;
+ * line-strong 3.2:1 against surface; status text 4.5:1 or more on its wash.
  */
 
 :root {
   /* Palette source of truth. Each themed color is defined once as a
      light/dark pair; the active tokens below and the `data-theme` overrides
-     in App.css reference these, so a hex value lives in exactly one place. */
-  --light-color-text: #0f0f0f;
-  --light-color-background: #fbfbfb;
+     reference these, so a hex value lives in exactly one place. */
+  --light-color-text: #18181b;
+  --light-color-background: #f6f6f7;
+  --light-color-sidebar: #efeff1;
+  --light-color-surface: #ffffff;
+  --light-color-hover: #f0f0f2;
+  --light-color-selected: #e4e4e8;
+  --light-color-line: #e4e4e7;
+  --light-color-line-strong: #8e8e96;
+  --light-color-ink-2: #52525b;
+  --light-color-ink-3: #6b6b73;
+  --light-color-accent: #5b4fd0;
+  --light-color-accent-text: #4c41c0;
+  --light-color-primary: #18181b;
+  --light-color-on-primary: #fafafa;
+  --light-color-track: #8e8e96;
+  /* The brand mark's own colors (branding/), for the logo only. */
   --light-color-logo-primary: #a9a6ff;
   --light-color-logo-stroke: #24204f;
 
-  --dark-color-text: #fbfbfb;
-  --dark-color-background: #2c2b29;
+  --dark-color-text: #ececee;
+  --dark-color-background: #18181b;
+  --dark-color-sidebar: #1c1c1f;
+  --dark-color-surface: #232327;
+  --dark-color-hover: #2a2a2e;
+  --dark-color-selected: #2e2e33;
+  --dark-color-line: #2e2e33;
+  --dark-color-line-strong: #71717a;
+  --dark-color-ink-2: #a1a1aa;
+  --dark-color-ink-3: #8e8e97;
+  --dark-color-accent: #7c74e0;
+  --dark-color-accent-text: #aca5f2;
+  --dark-color-primary: #ececee;
+  --dark-color-on-primary: #18181b;
+  --dark-color-track: #71717a;
   --dark-color-logo-primary: #9b97fb;
 
   /* Status colors. Each has a -wash tint below. */
-  --light-color-warning: #d97706;
-  --light-color-error: #dc2626;
+  --light-color-warning: #9a4a07;
+  --light-color-error: #c81e1e;
   --dark-color-warning: #fbbf24;
   --dark-color-error: #f87171;
 
   /* Success. The brand color already means "recording", so it gets its own hue. */
-  --light-color-moss: #2f7d5b;
+  --light-color-moss: #2b7353;
   --dark-color-moss: #86c9a4;
 
   /* Plum: the ink for keycaps and picked items. */
@@ -37,7 +80,7 @@
   --dark-color-demo-window: color-mix(
     in srgb,
     #fff 4%,
-    var(--dark-color-background)
+    var(--dark-color-surface)
   );
 
   /* Demo's laptop: lid, base gradient and wallpaper. */
@@ -95,44 +138,43 @@
   --light-color-moss-wash: color-mix(
     in srgb,
     var(--light-color-moss) 12%,
-    var(--light-color-background)
+    var(--light-color-surface)
   );
   --dark-color-moss-wash: color-mix(
     in srgb,
     var(--dark-color-moss) 14%,
-    var(--dark-color-background)
+    var(--dark-color-surface)
   );
   --light-color-warning-wash: color-mix(
     in srgb,
     var(--light-color-warning) 12%,
-    var(--light-color-background)
+    var(--light-color-surface)
   );
   --dark-color-warning-wash: color-mix(
     in srgb,
     var(--dark-color-warning) 14%,
-    var(--dark-color-background)
+    var(--dark-color-surface)
   );
   --light-color-error-wash: color-mix(
     in srgb,
     var(--light-color-error) 12%,
-    var(--light-color-background)
+    var(--light-color-surface)
   );
   --dark-color-error-wash: color-mix(
     in srgb,
     var(--dark-color-error) 14%,
-    var(--dark-color-background)
+    var(--dark-color-surface)
   );
 
   /* Tokens that do not change between light and dark */
-  /* Primary buttons; the deep end of the app icon gradient (branding/). */
-  --color-background-ui: #6d5ce8;
   --color-mid-gray: #808080;
 
   /* Active palette — defaults to light, follows the OS via the media query
      below, or is forced by `data-theme` (see the overrides below). */
   --color-text: var(--light-color-text);
   --color-background: var(--light-color-background);
-  --color-logo-primary: var(--light-color-logo-primary);
+  --color-logo-primary: var(--light-color-accent);
+  --color-brand: var(--light-color-logo-primary);
   --color-warning: var(--light-color-warning);
   --color-error: var(--light-color-error);
   --color-moss: var(--light-color-moss);
@@ -149,17 +191,24 @@
   --color-moss-wash: var(--light-color-moss-wash);
   --color-warning-wash: var(--light-color-warning-wash);
   --color-error-wash: var(--light-color-error-wash);
+  --color-sidebar: var(--light-color-sidebar);
+  --color-surface: var(--light-color-surface);
+  --color-hover: var(--light-color-hover);
+  --color-selected: var(--light-color-selected);
+  --color-line: var(--light-color-line);
+  --color-line-strong: var(--light-color-line-strong);
+  --color-ink-2: var(--light-color-ink-2);
+  --color-ink-3: var(--light-color-ink-3);
+  --color-accent: var(--light-color-accent);
+  --color-accent-text: var(--light-color-accent-text);
+  --color-primary: var(--light-color-primary);
+  --color-on-primary: var(--light-color-on-primary);
+  --color-track: var(--light-color-track);
 
-  /* Grey steps: secondary text, hints/icons, control edges, dividers, hover fill. */
-  --color-ink-2: color-mix(in srgb, var(--color-text) 60%, transparent);
-  --color-ink-3: var(--color-mid-gray);
-  --color-line-strong: color-mix(
-    in srgb,
-    var(--color-mid-gray) 80%,
-    transparent
-  );
-  --color-line: color-mix(in srgb, var(--color-mid-gray) 20%, transparent);
-  --color-wash: color-mix(in srgb, var(--color-mid-gray) 10%, transparent);
+  /* Older names, kept: a subtle fill is the hover color; the brand UI color
+     is the accent. */
+  --color-wash: var(--color-hover);
+  --color-background-ui: var(--color-accent);
   /* Edge of a picked card or option. */
   --color-plum-pick: color-mix(in srgb, var(--color-plum) 60%, transparent);
   /* The far end of a capture slot's breathing edge (KeySlot). */
@@ -170,7 +219,8 @@
   :root {
     --color-text: var(--dark-color-text);
     --color-background: var(--dark-color-background);
-    --color-logo-primary: var(--dark-color-logo-primary);
+    --color-logo-primary: var(--dark-color-accent);
+    --color-brand: var(--dark-color-logo-primary);
     --color-warning: var(--dark-color-warning);
     --color-error: var(--dark-color-error);
     --color-moss: var(--dark-color-moss);
@@ -187,6 +237,19 @@
     --color-moss-wash: var(--dark-color-moss-wash);
     --color-warning-wash: var(--dark-color-warning-wash);
     --color-error-wash: var(--dark-color-error-wash);
+    --color-sidebar: var(--dark-color-sidebar);
+    --color-surface: var(--dark-color-surface);
+    --color-hover: var(--dark-color-hover);
+    --color-selected: var(--dark-color-selected);
+    --color-line: var(--dark-color-line);
+    --color-line-strong: var(--dark-color-line-strong);
+    --color-ink-2: var(--dark-color-ink-2);
+    --color-ink-3: var(--dark-color-ink-3);
+    --color-accent: var(--dark-color-accent);
+    --color-accent-text: var(--dark-color-accent-text);
+    --color-primary: var(--dark-color-primary);
+    --color-on-primary: var(--dark-color-on-primary);
+    --color-track: var(--dark-color-track);
   }
 }
 
@@ -203,7 +266,8 @@
 :root[data-theme="light"] {
   --color-text: var(--light-color-text);
   --color-background: var(--light-color-background);
-  --color-logo-primary: var(--light-color-logo-primary);
+  --color-logo-primary: var(--light-color-accent);
+  --color-brand: var(--light-color-logo-primary);
   --color-warning: var(--light-color-warning);
   --color-error: var(--light-color-error);
   --color-moss: var(--light-color-moss);
@@ -220,12 +284,26 @@
   --color-moss-wash: var(--light-color-moss-wash);
   --color-warning-wash: var(--light-color-warning-wash);
   --color-error-wash: var(--light-color-error-wash);
+  --color-sidebar: var(--light-color-sidebar);
+  --color-surface: var(--light-color-surface);
+  --color-hover: var(--light-color-hover);
+  --color-selected: var(--light-color-selected);
+  --color-line: var(--light-color-line);
+  --color-line-strong: var(--light-color-line-strong);
+  --color-ink-2: var(--light-color-ink-2);
+  --color-ink-3: var(--light-color-ink-3);
+  --color-accent: var(--light-color-accent);
+  --color-accent-text: var(--light-color-accent-text);
+  --color-primary: var(--light-color-primary);
+  --color-on-primary: var(--light-color-on-primary);
+  --color-track: var(--light-color-track);
 }
 
 :root[data-theme="dark"] {
   --color-text: var(--dark-color-text);
   --color-background: var(--dark-color-background);
-  --color-logo-primary: var(--dark-color-logo-primary);
+  --color-logo-primary: var(--dark-color-accent);
+  --color-brand: var(--dark-color-logo-primary);
   --color-warning: var(--dark-color-warning);
   --color-error: var(--dark-color-error);
   --color-moss: var(--dark-color-moss);
@@ -242,4 +320,17 @@
   --color-moss-wash: var(--dark-color-moss-wash);
   --color-warning-wash: var(--dark-color-warning-wash);
   --color-error-wash: var(--dark-color-error-wash);
+  --color-sidebar: var(--dark-color-sidebar);
+  --color-surface: var(--dark-color-surface);
+  --color-hover: var(--dark-color-hover);
+  --color-selected: var(--dark-color-selected);
+  --color-line: var(--dark-color-line);
+  --color-line-strong: var(--dark-color-line-strong);
+  --color-ink-2: var(--dark-color-ink-2);
+  --color-ink-3: var(--dark-color-ink-3);
+  --color-accent: var(--dark-color-accent);
+  --color-accent-text: var(--dark-color-accent-text);
+  --color-primary: var(--dark-color-primary);
+  --color-on-primary: var(--dark-color-on-primary);
+  --color-track: var(--dark-color-track);
 }

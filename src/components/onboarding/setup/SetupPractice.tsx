@@ -150,7 +150,7 @@ export const SetupPractice: React.FC<SetupPracticeProps> = ({
         aria-describedby="practice-how practice-sentence"
         placeholder={t("onboarding.setup.practice.placeholder")}
         spellCheck={false}
-        className="w-full resize-none rounded-lg border border-line-strong bg-background px-[12px] py-[10px] text-body text-text select-text focus:outline-none focus-visible:ring-2 focus-visible:ring-logo-primary"
+        className="w-full resize-none rounded-lg border border-line-strong bg-surface px-[12px] py-[10px] text-body text-text select-text focus:outline-none focus-visible:ring-2 focus-visible:ring-logo-primary"
       />
       <p
         role="status"

@@ -2,6 +2,7 @@ import React, { useId } from "react";
 import { useTranslation } from "react-i18next";
 import type { OSType } from "@/lib/utils/keyboard";
 import { useSettings } from "@/hooks/useSettings";
+import { askBoxCustomized, hiddenShortcut } from "@/lib/kusemaKey";
 import { Button } from "../../ui/Button";
 import { Keycaps } from "../../shared/Keycaps";
 import { KusemaKeysCard } from "../../shared/KusemaKeysCard";
@@ -44,14 +45,20 @@ export const SetupDone: React.FC<SetupDoneProps> = ({
       }
     >
       <KusemaKeysCard />
-      <p className="m-0 flex flex-wrap items-center gap-x-[8px] gap-y-[4px] text-small">
-        {t("onboarding.setup.done.typeToKusema")}
-        <Keycaps
-          binding={bindings?.ask_box?.current_binding ?? ""}
-          osType={os}
-          size="line"
-        />
-      </p>
+      {!hiddenShortcut(
+        "ask_box",
+        getSetting("classic_shortcuts") ?? false,
+        askBoxCustomized(bindings?.ask_box),
+      ) && (
+        <p className="m-0 flex flex-wrap items-center gap-x-[8px] gap-y-[4px] text-small">
+          {t("onboarding.setup.done.typeToKusema")}
+          <Keycaps
+            binding={bindings?.ask_box?.current_binding ?? ""}
+            osType={os}
+            size="line"
+          />
+        </p>
+      )}
       <p className="m-0 text-small text-ink-2">
         {t("onboarding.setup.done.wins")}
       </p>

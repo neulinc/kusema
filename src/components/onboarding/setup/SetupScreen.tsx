@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 import { OnboardingShell } from "../OnboardingShell";
 
 export const FIELD_CLASS =
-  "w-full cursor-pointer rounded-lg border border-line-strong bg-background px-[12px] py-[8px] text-body text-text focus:outline-none focus-visible:ring-2 focus-visible:ring-logo-primary";
+  "w-full cursor-pointer rounded-lg border border-line-strong bg-surface px-[12px] py-[8px] text-body text-text focus:outline-none focus-visible:ring-2 focus-visible:ring-logo-primary";
 
 interface SetupScreenProps {
   progress: { index: number; count: number };

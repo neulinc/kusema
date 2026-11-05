@@ -119,7 +119,7 @@ export const CuratedModels: React.FC = () => {
 
   const { curated, others } = splitCurated(models, repoIdOf);
   const listClass =
-    "m-0 flex list-none flex-col divide-y divide-line rounded-lg border border-line p-0";
+    "m-0 flex list-none flex-col divide-y divide-line rounded-xl border border-line bg-surface p-0";
 
   return (
     <div className="mx-auto w-full max-w-3xl space-y-[16px] overflow-y-auto">

@@ -1,5 +1,5 @@
 import React from "react";
-import { ArrowDown } from "lucide-react";
+import { ArrowDown } from "iconoir-react";
 
 /**
  * Marks something not downloaded yet; turns solid while its `group` row is
@@ -10,7 +10,7 @@ export const DownloadMark: React.FC<{ accent?: boolean }> = ({ accent }) => (
     aria-hidden="true"
     className={`grid size-[18px] shrink-0 place-items-center rounded-full border-[1.5px] border-dashed border-line-strong text-ink-3 transition-colors group-hover:border-solid ${
       accent
-        ? "group-hover:border-logo-primary group-hover:text-logo-primary"
+        ? "group-hover:border-line-strong group-hover:text-text"
         : "group-hover:border-text group-hover:text-text"
     }`}
   >

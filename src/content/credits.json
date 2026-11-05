@@ -4089,6 +4089,12 @@
    "url": "https://github.com/i18next/i18next"
   },
   {
+   "name": "iconoir-react",
+   "version": "7.12.2",
+   "license": "MIT",
+   "url": "https://github.com/iconoir-icons/iconoir"
+  },
+  {
    "name": "immer",
    "version": "11.1.3",
    "license": "MIT",
@@ -4195,12 +4201,6 @@
    "version": "1.4.0",
    "license": "MIT",
    "url": "https://github.com/zertosh/loose-envify"
-  },
-  {
-   "name": "lucide-react",
-   "version": "0.542.0",
-   "license": "ISC",
-   "url": "https://github.com/lucide-icons/lucide"
   },
   {
    "name": "magic-string",

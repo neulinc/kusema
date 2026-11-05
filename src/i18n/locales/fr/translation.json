@@ -19,12 +19,13 @@
     "assistant": "Assistant",
     "models": "Modèles",
     "advanced": "Avancé",
-    "postProcessing": "Post-traitement",
+    "postProcessing": "Fournisseur d'IA",
     "history": "Historique",
     "debug": "Débogage",
     "about": "À propos",
     "privacy": "Confidentialité",
-    "vocabulary": "Vocabulaire"
+    "vocabulary": "Vocabulaire",
+    "label": "Sections des réglages"
   },
   "onboarding": {
     "customModelDescription": "Non officiellement pris en charge",
@@ -435,8 +436,8 @@
             "description": "Le raccourci clavier pour annuler l'enregistrement en cours."
           },
           "transcribe_with_post_process": {
-            "name": "Raccourci de post-traitement",
-            "description": "Facultatif : Un raccourci dédié qui applique toujours le post-traitement IA à votre transcription."
+            "name": "Raccourci de nettoyage par IA",
+            "description": "Facultatif : un raccourci dédié qui applique toujours le nettoyage par IA à votre transcription."
           },
           "assistant": {
             "name": "Demander à Kusema",
@@ -803,16 +804,16 @@
       "provider": {
         "title": "Fournisseur d'IA",
         "provider": "Fournisseur",
-        "description": "L'assistant utilise le même fournisseur et la même clé API que le post-traitement.",
+        "description": "L'Assistant utilise le même fournisseur et la même clé d'API que le nettoyage par IA, réglés sur la page Fournisseur d'IA.",
         "model": "Modèle",
-        "modelDescription": "Le modèle qui répond à vos questions. Modifiez-le sur la page Post-traitement.",
+        "modelDescription": "Le modèle qui répond à vos questions. Changez-le sur la page Fournisseur d'IA.",
         "notSet": "Non choisi",
-        "open": "Ouvrir les réglages du post-traitement",
-        "disabled": "L'assistant a besoin d'un fournisseur d'IA (comme Anthropic, OpenAI ou un modèle Ollama local) pour répondre aux questions. Les fournisseurs se configurent sur la page Post-traitement, qui apparaît une fois le post-traitement activé. L'activer ne change rien à la dictée normale.",
-        "enable": "Activer le post-traitement",
-        "noProvider": "Choisissez un fournisseur sur la page Post-traitement.",
-        "noKey": "Aucune clé API n'est définie pour {{provider}}. Ajoutez-en une sur la page Post-traitement.",
-        "noModel": "Choisissez un modèle sur la page Post-traitement."
+        "open": "Ouvrir les réglages du fournisseur d'IA",
+        "disabled": "Pour répondre aux questions, l'Assistant a besoin d'un fournisseur d'IA (comme Anthropic, OpenAI ou un modèle Ollama local). Les fournisseurs se règlent sur la page Fournisseur d'IA, qui apparaît une fois le nettoyage par IA activé. L'activer ne change rien à la dictée habituelle.",
+        "enable": "Activer le nettoyage par IA",
+        "noProvider": "Choisissez un fournisseur sur la page Fournisseur d'IA.",
+        "noKey": "Aucune clé d'API pour {{provider}}. Ajoutez-en une sur la page Fournisseur d'IA.",
+        "noModel": "Choisissez un modèle sur la page Fournisseur d'IA."
       },
       "screen": {
         "title": "Poser une question sur mon écran",
@@ -831,7 +832,7 @@
         },
         "model": {
           "label": "Modèle pour les questions sur l'écran",
-          "description": "Un modèle capable de voir les images. Laissez vide pour utiliser le modèle choisi pour ce fournisseur sur la page Post-traitement.",
+          "description": "Un modèle capable de voir les images. Laissez vide pour utiliser le modèle choisi pour ce fournisseur sur la page Fournisseur d'IA.",
           "placeholder": "p. ex. qwen2.5vl"
         }
       },
@@ -968,7 +969,7 @@
         "createPrompt": "Créer le prompt",
         "cancel": "Annuler",
         "selectToEdit": "Sélectionnez un prompt ci-dessus pour voir et modifier ses détails.",
-        "createFirst": "Cliquez sur 'Créer un nouveau prompt' ci-dessus pour créer votre premier prompt de post-traitement."
+        "createFirst": "Cliquez sur 'Créer un nouveau prompt' ci-dessus pour créer votre premier prompt de nettoyage par IA."
       }
     },
     "history": {

@@ -19,12 +19,13 @@
     "assistant": "Asistent",
     "models": "Modely",
     "advanced": "Pokročilé",
-    "postProcessing": "Následné zpracování",
+    "postProcessing": "Poskytovatel AI",
     "history": "Historie",
     "debug": "Ladění",
     "about": "O aplikaci",
     "privacy": "Soukromí",
-    "vocabulary": "Slovník"
+    "vocabulary": "Slovník",
+    "label": "Části nastavení"
   },
   "onboarding": {
     "customModelDescription": "Oficiálně nepodporováno",
@@ -437,8 +438,8 @@
             "description": "Klávesová zkratka pro zrušení aktuálního nahrávání."
           },
           "transcribe_with_post_process": {
-            "name": "Klávesa pro následné zpracování",
-            "description": "Volitelné: Vyhrazená klávesová zkratka, která vždy použije AI následné zpracování na váš přepis."
+            "name": "Zkratka pro úpravu pomocí AI",
+            "description": "Volitelné: vlastní zkratka, která na přepis vždy použije úpravu pomocí AI."
           },
           "assistant": {
             "name": "Zeptat se Kusemy",
@@ -806,16 +807,16 @@
       "provider": {
         "title": "Poskytovatel AI",
         "provider": "Poskytovatel",
-        "description": "Asistent používá stejného poskytovatele a klíč API jako Následné zpracování.",
+        "description": "Asistent používá stejného poskytovatele a klíč API jako úprava pomocí AI; nastavíte je na stránce Poskytovatel AI.",
         "model": "Model",
-        "modelDescription": "Model, který odpovídá na vaše otázky. Změníte ho na stránce Následné zpracování.",
+        "modelDescription": "Model, který odpovídá na vaše otázky. Změníte ho na stránce Poskytovatel AI.",
         "notSet": "Nevybráno",
-        "open": "Otevřít nastavení Následného zpracování",
-        "disabled": "Asistent potřebuje poskytovatele AI (například Anthropic, OpenAI nebo místní model v Ollamě), aby mohl odpovídat. Poskytovatelé se nastavují na stránce Následné zpracování, která se objeví po zapnutí následného zpracování. Zapnutí nemění běžné diktování.",
-        "enable": "Zapnout následné zpracování",
-        "noProvider": "Vyberte poskytovatele na stránce Následné zpracování.",
-        "noKey": "Pro {{provider}} není nastaven žádný klíč API. Přidejte ho na stránce Následné zpracování.",
-        "noModel": "Vyberte model na stránce Následné zpracování."
+        "open": "Otevřít nastavení poskytovatele AI",
+        "disabled": "Aby mohl odpovídat na otázky, potřebuje Asistent poskytovatele AI (například Anthropic, OpenAI nebo místní model v Ollama). Poskytovatelé se nastavují na stránce Poskytovatel AI, která se zobrazí po zapnutí úpravy pomocí AI. Zapnutí nemění běžné diktování.",
+        "enable": "Zapnout úpravu pomocí AI",
+        "noProvider": "Vyberte poskytovatele na stránce Poskytovatel AI.",
+        "noKey": "Pro {{provider}} chybí klíč API. Přidejte ho na stránce Poskytovatel AI.",
+        "noModel": "Vyberte model na stránce Poskytovatel AI."
       },
       "screen": {
         "title": "Zeptat se na obrazovku",
@@ -834,7 +835,7 @@
         },
         "model": {
           "label": "Model pro otázky na obrazovku",
-          "description": "Model, který vidí obrázky. Ponechte prázdné, chcete-li použít model vybraný pro tohoto poskytovatele na stránce Následné zpracování.",
+          "description": "Model, který vidí obrázky. Ponechte prázdné a použije se model vybraný pro tohoto poskytovatele na stránce Poskytovatel AI.",
           "placeholder": "např. qwen2.5vl"
         }
       },
@@ -971,7 +972,7 @@
         "createPrompt": "Vytvořit prompt",
         "cancel": "Zrušit",
         "selectToEdit": "Vyberte výše prompt, abyste zobrazili a upravili jeho podrobnosti.",
-        "createFirst": "Klikněte nahoře na 'Vytvořit nový prompt' a vytvořte svůj první prompt pro následné zpracování."
+        "createFirst": "Klikněte nahoře na 'Vytvořit nový prompt' a vytvořte svůj první prompt pro úpravu pomocí AI."
       }
     },
     "history": {

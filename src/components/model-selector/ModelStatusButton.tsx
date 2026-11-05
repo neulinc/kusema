@@ -1,4 +1,5 @@
 import React from "react";
+import { NavArrowDown } from "iconoir-react";
 
 type ModelStatus =
   | "ready"
@@ -58,19 +59,10 @@ const ModelStatusButton: React.FC<ModelStatusButtonProps> = ({
     >
       <div className={`w-2 h-2 rounded-full ${getStatusColor(status)}`} />
       <span className="max-w-28 truncate">{displayText}</span>
-      <svg
+      <NavArrowDown
         className={`w-3 h-3 transition-transform ${isDropdownOpen ? "rotate-180" : ""}`}
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M19 9l-7 7-7-7"
-        />
-      </svg>
+        aria-hidden="true"
+      />
     </button>
   );
 };

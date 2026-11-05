@@ -8,23 +8,11 @@ import {
   type Language,
 } from "@/lib/constants/languages";
 import { cjkSubsetFont } from "@/lib/utils/cjkFont";
+import { Xmark } from "iconoir-react";
 
 /** Spoken-language picker pieces shared by onboarding's Welcome and the Preferred Languages setting. */
 
-const RemoveIcon = () => (
-  <svg
-    width="10"
-    height="10"
-    viewBox="0 0 10 10"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="1.6"
-    strokeLinecap="round"
-    aria-hidden="true"
-  >
-    <path d="M2 2l6 6M8 2L2 8" />
-  </svg>
-);
+const RemoveIcon = () => <Xmark width={10} height={10} aria-hidden="true" />;
 
 interface LanguageChipProps {
   code: string;

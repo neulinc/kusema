@@ -1,4 +1,7 @@
-import { Languages, Radio as LiveIcon } from "lucide-react";
+import {
+  Translate as Languages,
+  AntennaSignal as LiveIcon,
+} from "iconoir-react";
 
 /**
  * What a model can do besides transcribe: its icon, and its flag on a table

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
-import { RefreshCcw } from "lucide-react";
+import { Refresh as RefreshCcw } from "iconoir-react";
 import { commands, type PostProcessApiFormat } from "@/bindings";
 
 import { Alert } from "../../ui/Alert";
@@ -21,6 +21,7 @@ import { ModelSelect } from "../PostProcessingSettingsApi/ModelSelect";
 import { usePostProcessProviderState } from "../PostProcessingSettingsApi/usePostProcessProviderState";
 import { LocalProviderStatus } from "../PostProcessingSettingsApi/LocalProviderStatus";
 import { ShortcutInput } from "../ShortcutInput";
+import { hiddenShortcut } from "@/lib/kusemaKey";
 import { useSettings } from "../../../hooks/useSettings";
 
 const PostProcessingSettingsApiComponent: React.FC = () => {
@@ -473,16 +474,23 @@ PostProcessingSettingsPrompts.displayName = "PostProcessingSettingsPrompts";
 
 export const PostProcessingSettings: React.FC = () => {
   const { t } = useTranslation();
+  const { getSetting } = useSettings();
+  const hotkeyShown = !hiddenShortcut(
+    "transcribe_with_post_process",
+    getSetting("classic_shortcuts") ?? false,
+  );
 
   return (
     <div className="max-w-3xl w-full mx-auto space-y-6">
-      <SettingsGroup title={t("settings.postProcessing.hotkey.title")}>
-        <ShortcutInput
-          shortcutId="transcribe_with_post_process"
-          descriptionMode="tooltip"
-          grouped={true}
-        />
-      </SettingsGroup>
+      {hotkeyShown && (
+        <SettingsGroup title={t("settings.postProcessing.hotkey.title")}>
+          <ShortcutInput
+            shortcutId="transcribe_with_post_process"
+            descriptionMode="tooltip"
+            grouped={true}
+          />
+        </SettingsGroup>
+      )}
 
       <SettingsGroup title={t("settings.postProcessing.api.title")}>
         <PostProcessingSettingsApi />

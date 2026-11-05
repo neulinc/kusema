@@ -19,12 +19,13 @@
     "assistant": "Assistant",
     "models": "Models",
     "advanced": "Advanced",
-    "postProcessing": "Post Process",
+    "postProcessing": "AI Provider",
     "history": "History",
     "debug": "Debug",
     "about": "About",
     "privacy": "Privacy",
-    "vocabulary": "Vocabulary"
+    "vocabulary": "Vocabulary",
+    "label": "Settings sections"
   },
   "onboarding": {
     "customModelDescription": "Not officially supported",
@@ -433,8 +434,8 @@
             "description": "The keyboard shortcut to cancel the current recording."
           },
           "transcribe_with_post_process": {
-            "name": "Post-Processing Hotkey",
-            "description": "Optional: A dedicated hotkey that always applies AI post-processing to your transcription."
+            "name": "AI Cleanup Hotkey",
+            "description": "Optional: a dedicated hotkey that always applies AI cleanup to your transcription."
           },
           "assistant": {
             "name": "Ask Kusema",
@@ -800,16 +801,16 @@
       "provider": {
         "title": "AI Provider",
         "provider": "Provider",
-        "description": "Assistant mode uses the same provider and API key as Post Process.",
+        "description": "Assistant mode uses the same provider and API key as AI cleanup, set on the AI Provider page.",
         "model": "Model",
-        "modelDescription": "The model that answers your questions. Change it on the Post Process page.",
+        "modelDescription": "The model that answers your questions. Change it on the AI Provider page.",
         "notSet": "Not chosen",
-        "open": "Open Post Process settings",
-        "disabled": "Assistant mode needs an AI provider (such as Anthropic, OpenAI or a local Ollama model) to answer questions. Providers are set up on the Post Process page, which appears once Post Processing is turned on. Turning it on doesn't change how normal dictation works.",
-        "enable": "Turn on Post Processing",
-        "noProvider": "Choose a provider on the Post Process page.",
-        "noKey": "No API key is set for {{provider}}. Add one on the Post Process page.",
-        "noModel": "Choose a model on the Post Process page."
+        "open": "Open AI Provider settings",
+        "disabled": "Assistant mode needs an AI provider (such as Anthropic, OpenAI or a local Ollama model) to answer questions. Providers are set up on the AI Provider page, which appears once AI cleanup is turned on. Turning it on doesn't change how normal dictation works.",
+        "enable": "Turn on AI cleanup",
+        "noProvider": "Choose a provider on the AI Provider page.",
+        "noKey": "No API key is set for {{provider}}. Add one on the AI Provider page.",
+        "noModel": "Choose a model on the AI Provider page."
       },
       "screen": {
         "title": "Ask About My Screen",
@@ -828,7 +829,7 @@
         },
         "model": {
           "label": "Model for Screen Questions",
-          "description": "A model that can see images. Leave empty to use the model chosen for this provider on the Post Process page.",
+          "description": "A model that can see images. Leave empty to use the model chosen for this provider on the AI Provider page.",
           "placeholder": "e.g. qwen2.5vl"
         }
       },
@@ -965,7 +966,7 @@
         "createPrompt": "Create Prompt",
         "cancel": "Cancel",
         "selectToEdit": "Select a prompt above to view and edit its details.",
-        "createFirst": "Click 'Create New Prompt' above to create your first post-processing prompt."
+        "createFirst": "Click 'Create New Prompt' above to create your first AI cleanup prompt."
       }
     },
     "history": {

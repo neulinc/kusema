@@ -15,7 +15,7 @@ export const SimplerKeysCard: React.FC = () => {
   return (
     <section
       aria-labelledby="simpler-keys-title"
-      className="rounded-lg border border-background-ui p-[16px]"
+      className="rounded-xl bg-surface p-[16px]"
     >
       <h2
         id="simpler-keys-title"

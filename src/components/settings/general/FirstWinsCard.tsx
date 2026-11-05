@@ -1,6 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Check } from "lucide-react";
+import { Check } from "iconoir-react";
 import { commands } from "@/bindings";
 import { keyLabel, triggerWord } from "@/lib/kusemaKey";
 import { useSettings } from "@/hooks/useSettings";
@@ -22,7 +22,7 @@ export const FirstWinsCard: React.FC = () => {
   return (
     <section
       aria-labelledby="first-wins-title"
-      className="rounded-lg border border-line p-[16px]"
+      className="rounded-xl border border-line bg-surface p-[16px]"
     >
       <div className="mb-[10px] flex flex-wrap items-center justify-between gap-[8px]">
         <h2 id="first-wins-title" className="m-0 text-base font-semibold">
@@ -41,7 +41,7 @@ export const FirstWinsCard: React.FC = () => {
           <li key={row.id} className="flex items-center gap-[10px]">
             <span
               aria-hidden="true"
-              className={`grid size-[20px] shrink-0 place-items-center rounded-full border ${row.done ? "border-background-ui bg-background-ui text-white" : "border-line-strong"}`}
+              className={`grid size-[20px] shrink-0 place-items-center rounded-full border ${row.done ? "border-moss bg-moss text-background" : "border-line-strong"}`}
             >
               {row.done && <Check className="size-[13px]" />}
             </span>

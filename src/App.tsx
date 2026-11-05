@@ -398,7 +398,7 @@ function App() {
           title: "font-medium",
           description: "text-ink-3",
           actionButton:
-            "px-2 py-1 text-xs font-medium rounded-lg border bg-wash border-line hover:bg-logo-primary/20 hover:border-logo-primary cursor-pointer whitespace-nowrap",
+            "px-2 py-1 text-xs font-medium rounded-lg border bg-wash border-line hover:bg-hover hover:border-line-strong cursor-pointer whitespace-nowrap",
         },
       }}
     />
@@ -426,7 +426,7 @@ function App() {
         <button
           type="button"
           onClick={() => setOnboardingPreview(null)}
-          className="fixed top-4 end-4 z-50 rounded-lg border border-line bg-background px-4 py-2 text-sm font-medium text-text shadow-lg hover:bg-logo-primary/20 cursor-pointer"
+          className="fixed top-4 end-4 z-50 rounded-lg border border-line bg-background px-4 py-2 text-sm font-medium text-text shadow-lg hover:bg-hover cursor-pointer"
         >
           {t("settings.debug.onboardingPreview.exitButton")}
         </button>

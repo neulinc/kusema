@@ -19,12 +19,13 @@
     "assistant": "Assistent",
     "models": "Modellen",
     "advanced": "Geavanceerd",
-    "postProcessing": "Naverwerking",
+    "postProcessing": "AI-provider",
     "history": "Geschiedenis",
     "debug": "Probleemoplossing",
     "about": "Over Kusema",
     "privacy": "Privacy",
-    "vocabulary": "Woordenschat"
+    "vocabulary": "Woordenschat",
+    "label": "Instellingsonderdelen"
   },
   "onboarding": {
     "customModelDescription": "Niet officieel ondersteund",
@@ -433,8 +434,8 @@
             "description": "De sneltoets om de huidige opname te annuleren."
           },
           "transcribe_with_post_process": {
-            "name": "Sneltoets voor naverwerking",
-            "description": "Optioneel: Een specifieke sneltoets die altijd AI-naverwerking toepast op je transcriptie."
+            "name": "Sneltoets voor AI-opschoning",
+            "description": "Optioneel: een eigen sneltoets die altijd AI-opschoning op je transcriptie toepast."
           },
           "assistant": {
             "name": "Vraag het Kusema",
@@ -800,16 +801,16 @@
       "provider": {
         "title": "AI-aanbieder",
         "provider": "Aanbieder",
-        "description": "De assistent gebruikt dezelfde aanbieder en API-sleutel als Naverwerking.",
+        "description": "De Assistent gebruikt dezelfde provider en API-sleutel als AI-opschoning, ingesteld op de pagina AI-provider.",
         "model": "Model",
-        "modelDescription": "Het model dat je vragen beantwoordt. Wijzig het op de pagina Naverwerking.",
+        "modelDescription": "Het model dat je vragen beantwoordt. Wijzig het op de pagina AI-provider.",
         "notSet": "Niet gekozen",
-        "open": "Instellingen van Naverwerking openen",
-        "disabled": "De assistent heeft een AI-aanbieder nodig (zoals Anthropic, OpenAI of een lokaal Ollama-model) om vragen te beantwoorden. Aanbieders stel je in op de pagina Naverwerking, die verschijnt zodra naverwerking aanstaat. Aanzetten verandert niets aan gewoon dicteren.",
-        "enable": "Naverwerking aanzetten",
-        "noProvider": "Kies een aanbieder op de pagina Naverwerking.",
-        "noKey": "Er is geen API-sleutel ingesteld voor {{provider}}. Voeg er een toe op de pagina Naverwerking.",
-        "noModel": "Kies een model op de pagina Naverwerking."
+        "open": "Instellingen van AI-provider openen",
+        "disabled": "Om vragen te beantwoorden heeft de Assistent een AI-provider nodig (zoals Anthropic, OpenAI of een lokaal Ollama-model). Providers stel je in op de pagina AI-provider, die verschijnt zodra AI-opschoning aan staat. Aanzetten verandert niets aan gewoon dicteren.",
+        "enable": "AI-opschoning aanzetten",
+        "noProvider": "Kies een provider op de pagina AI-provider.",
+        "noKey": "Er is geen API-sleutel voor {{provider}}. Voeg er een toe op de pagina AI-provider.",
+        "noModel": "Kies een model op de pagina AI-provider."
       },
       "screen": {
         "title": "Vraag over mijn scherm",
@@ -828,7 +829,7 @@
         },
         "model": {
           "label": "Model voor schermvragen",
-          "description": "Een model dat afbeeldingen kan zien. Laat leeg om het model te gebruiken dat op de pagina Naverwerking voor deze aanbieder is gekozen.",
+          "description": "Een model dat afbeeldingen kan zien. Laat leeg om het model te gebruiken dat voor deze provider op de pagina AI-provider is gekozen.",
           "placeholder": "bijv. qwen2.5vl"
         }
       },
@@ -965,7 +966,7 @@
         "createPrompt": "Prompt maken",
         "cancel": "Annuleren",
         "selectToEdit": "Selecteer hierboven een prompt om de details te bekijken en te bewerken.",
-        "createFirst": "Klik hierboven op 'Nieuwe prompt maken' om je eerste naverwerkingsprompt aan te maken."
+        "createFirst": "Klik hierboven op 'Nieuwe prompt maken' om je eerste prompt voor AI-opschoning aan te maken."
       }
     },
     "history": {

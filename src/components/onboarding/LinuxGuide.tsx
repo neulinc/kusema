@@ -1,7 +1,7 @@
 import React from "react";
 import { Trans } from "react-i18next";
 import { openUrl } from "@tauri-apps/plugin-opener";
-import { ExternalLink } from "lucide-react";
+import { OpenNewWindow as ExternalLink } from "iconoir-react";
 import { TextLink } from "../ui/TextLink";
 
 const LINUX_SETUP_URL = "https://github.com/neulinc/kusema#linux";

@@ -86,7 +86,7 @@ Check your AI provider's own terms for how they handle the text you send them.
 2. The first time Kusema opens, a short setup walks you through it: pick the languages you'll speak, allow microphone access, and choose a speech model (the recommended one is the best balance of speed and accuracy for your languages; it downloads while you finish setup). Then try dictation right there.
 3. Later, try it anywhere: open Notepad, hold **Right Ctrl**, speak, release.
 4. To use **Ask Kusema**:
-   - On the **Assistant** page, click **Turn on Post Processing** (or turn it on under **Advanced**), then **Open Post Process settings**: choose a provider (e.g. Anthropic), paste your API key and pick a model.
+   - On the **Assistant** page, click **Turn on AI cleanup** (or turn it on under **Advanced**), then **Open AI Provider settings**: choose a provider (e.g. Anthropic), paste your API key and pick a model.
    - On the **Assistant** page, download the **Kokoro** voices for natural speech (about 200 MB, one time) and choose a voice.
    - Hold **Right Ctrl**, tap **Space**, and ask your question.
 5. To ask about your screen, pick a model that can see images (Claude models can), then in the window you want to ask about, hold **Right Ctrl**, tap **Space** and say "what's on my screen?" (or your own question about it).
@@ -136,7 +136,7 @@ Kusema is built on **[Handy](https://github.com/cjpais/Handy)** by CJ Pais, a fr
 
 Kusema is an independent project and is not affiliated with or endorsed by Handy.
 
-Also built with: [Tauri](https://tauri.app), [Parakeet](https://huggingface.co/nvidia) and [Whisper](https://github.com/openai/whisper) speech models, [Silero VAD](https://github.com/snakers4/silero-vad), [Kokoro](https://huggingface.co/hexgrad/Kokoro-82M) text-to-speech, [misaki](https://github.com/hexgrad/misaki) pronunciation data, and [ONNX Runtime](https://onnxruntime.ai).
+Also built with: [Tauri](https://tauri.app), [Parakeet](https://huggingface.co/nvidia) and [Whisper](https://github.com/openai/whisper) speech models, [Silero VAD](https://github.com/snakers4/silero-vad), [Kokoro](https://huggingface.co/hexgrad/Kokoro-82M) text-to-speech, [misaki](https://github.com/hexgrad/misaki) pronunciation data, [ONNX Runtime](https://onnxruntime.ai), and [Iconoir](https://iconoir.com) icons (MIT).
 
 ## License
 

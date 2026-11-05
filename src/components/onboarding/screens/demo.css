@@ -44,7 +44,7 @@
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: var(--color-logo-primary);
+  background: var(--color-brand);
   animation: demo-pill-pulse 1.9s infinite;
 }
 @keyframes demo-pill-pulse {
@@ -61,7 +61,7 @@
   height: 13px;
   border-radius: 50%;
   border: 2px solid var(--color-line);
-  border-top-color: var(--color-logo-primary);
+  border-top-color: var(--color-brand);
   animation: demo-spin 0.7s linear infinite;
 }
 @keyframes demo-spin {
@@ -277,7 +277,7 @@
   width: 17.5px;
   height: 17.5px;
   border-radius: 50%;
-  border: 2px solid var(--color-logo-primary);
+  border: 2px solid var(--color-brand);
   animation: demo-click 520ms var(--ease-glide) both;
 }
 @keyframes demo-click {

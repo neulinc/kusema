@@ -1,7 +1,12 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { listen } from "@tauri-apps/api/event";
-import { FileInput, Monitor, Square, X } from "lucide-react";
+import {
+  Import as FileInput,
+  Computer as Monitor,
+  Square,
+  Xmark as X,
+} from "iconoir-react";
 import { commands, type AskBoxInfo, type SetupPage } from "@/bindings";
 import { Button } from "@/components/ui/Button";
 import i18n, { syncLanguageFromSettings } from "@/i18n";
@@ -165,7 +170,7 @@ const AskBox: React.FC = () => {
       ref={rootRef}
       dir={direction}
       onKeyDown={onKeyDown}
-      className="flex flex-col gap-2 bg-background p-3 text-text"
+      className="flex flex-col gap-2 bg-surface p-3 text-text"
     >
       <div className="flex items-center gap-2">
         <span className="text-sm font-semibold">{t("askBox.title")}</span>
@@ -175,7 +180,7 @@ const AskBox: React.FC = () => {
           </span>
         )}
         {info?.style && (
-          <span className="shrink-0 rounded-full bg-logo-primary/20 px-2 py-0.5 text-xs">
+          <span className="shrink-0 rounded-full bg-selected px-2 py-0.5 text-xs">
             {t("askBox.style", {
               name:
                 info.style.name ??
@@ -231,7 +236,7 @@ const AskBox: React.FC = () => {
       </div>
 
       {problem && (
-        <p role="alert" className="m-0 text-xs text-red-500">
+        <p role="alert" className="m-0 text-xs text-error">
           {problem}
         </p>
       )}
@@ -248,7 +253,7 @@ const AskBox: React.FC = () => {
             role="log"
             aria-live="polite"
             className={`max-h-72 overflow-y-auto whitespace-pre-wrap text-sm select-text ${
-              answer.status === "error" ? "text-red-500" : ""
+              answer.status === "error" ? "text-error" : ""
             }`}
           >
             {answer.text ||

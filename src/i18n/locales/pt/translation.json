@@ -19,12 +19,13 @@
     "assistant": "Assistente",
     "models": "Modelos",
     "advanced": "Avançado",
-    "postProcessing": "Pós-Processamento",
+    "postProcessing": "Provedor de IA",
     "history": "Histórico",
     "debug": "Depuração",
     "about": "Sobre",
     "privacy": "Privacidade",
-    "vocabulary": "Vocabulário"
+    "vocabulary": "Vocabulário",
+    "label": "Seções das configurações"
   },
   "onboarding": {
     "customModelDescription": "Não suportado oficialmente",
@@ -435,8 +436,8 @@
             "description": "O atalho de teclado para cancelar a gravação atual."
           },
           "transcribe_with_post_process": {
-            "name": "Tecla de Pós-Processamento",
-            "description": "Opcional: Uma tecla de atalho dedicada que sempre aplica pós-processamento com IA à sua transcrição."
+            "name": "Atalho de limpeza com IA",
+            "description": "Opcional: um atalho próprio que sempre aplica a limpeza com IA à sua transcrição."
           },
           "assistant": {
             "name": "Perguntar ao Kusema",
@@ -803,16 +804,16 @@
       "provider": {
         "title": "Provedor de IA",
         "provider": "Provedor",
-        "description": "O assistente usa o mesmo provedor e a mesma chave de API do pós-processamento.",
+        "description": "O Assistente usa o mesmo provedor e a mesma chave de API da limpeza com IA, definidos na página Provedor de IA.",
         "model": "Modelo",
-        "modelDescription": "O modelo que responde às suas perguntas. Mude-o na página Pós-Processamento.",
+        "modelDescription": "O modelo que responde às suas perguntas. Mude-o na página Provedor de IA.",
         "notSet": "Não escolhido",
-        "open": "Abrir as configurações de Pós-Processamento",
-        "disabled": "O assistente precisa de um provedor de IA (como Anthropic, OpenAI ou um modelo local do Ollama) para responder. Os provedores são configurados na página Pós-Processamento, que aparece quando o pós-processamento está ativado. Ativá-lo não muda o ditado normal.",
-        "enable": "Ativar o pós-processamento",
-        "noProvider": "Escolha um provedor na página Pós-Processamento.",
-        "noKey": "Nenhuma chave de API definida para {{provider}}. Adicione uma na página Pós-Processamento.",
-        "noModel": "Escolha um modelo na página Pós-Processamento."
+        "open": "Abrir as configurações do provedor de IA",
+        "disabled": "Para responder perguntas, o Assistente precisa de um provedor de IA (como Anthropic, OpenAI ou um modelo local do Ollama). Os provedores são definidos na página Provedor de IA, que aparece quando a limpeza com IA é ligada. Ligá-la não muda o ditado normal.",
+        "enable": "Ligar a limpeza com IA",
+        "noProvider": "Escolha um provedor na página Provedor de IA.",
+        "noKey": "Não há chave de API para {{provider}}. Adicione uma na página Provedor de IA.",
+        "noModel": "Escolha um modelo na página Provedor de IA."
       },
       "screen": {
         "title": "Perguntar sobre minha tela",
@@ -831,7 +832,7 @@
         },
         "model": {
           "label": "Modelo para perguntas sobre a tela",
-          "description": "Um modelo que consiga ver imagens. Deixe vazio para usar o modelo escolhido para este provedor na página Pós-Processamento.",
+          "description": "Um modelo que enxerga imagens. Deixe vazio para usar o modelo escolhido para este provedor na página Provedor de IA.",
           "placeholder": "ex.: qwen2.5vl"
         }
       },
@@ -968,7 +969,7 @@
         "createPrompt": "Criar Prompt",
         "cancel": "Cancelar",
         "selectToEdit": "Selecione um prompt acima para visualizar e editar seus detalhes.",
-        "createFirst": "Clique em 'Criar Novo Prompt' acima para criar seu primeiro prompt de pós-processamento."
+        "createFirst": "Clique em 'Criar Novo Prompt' acima para criar seu primeiro prompt de limpeza com IA."
       }
     },
     "history": {

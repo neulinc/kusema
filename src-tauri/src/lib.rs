@@ -47,6 +47,7 @@ mod tts;
 mod utils;
 mod vocabulary;
 mod voice_edit;
+mod window_chrome;
 
 pub use cli::CliArgs;
 #[cfg(debug_assertions)]
@@ -1285,6 +1286,10 @@ pub fn run(cli_args: CliArgs) {
             }
             tauri::WindowEvent::ThemeChanged(theme) => {
                 log::info!("Theme changed to: {:?}", theme);
+                // Kusema: following the system theme, the title bar follows too.
+                if let Some(main) = window.app_handle().get_webview_window("main") {
+                    window_chrome::match_title_bar(&main);
+                }
                 // Re-apply the current tray state with the new theme's icon set
                 utils::refresh_tray_icon(window.app_handle());
             }

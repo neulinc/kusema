@@ -19,12 +19,13 @@
     "assistant": "Assistent",
     "models": "Models",
     "advanced": "Avançat",
-    "postProcessing": "Postprocessament",
+    "postProcessing": "Proveïdor d'IA",
     "history": "Historial",
     "debug": "Depuració",
     "about": "Quant a",
     "privacy": "Privadesa",
-    "vocabulary": "Vocabulari"
+    "vocabulary": "Vocabulari",
+    "label": "Seccions de configuració"
   },
   "onboarding": {
     "customModelDescription": "Sense suport oficial",
@@ -435,8 +436,8 @@
             "description": "La drecera de teclat per cancel·lar l'enregistrament actual."
           },
           "transcribe_with_post_process": {
-            "name": "Drecera de postprocessament",
-            "description": "Opcional: una drecera específica que sempre aplica postprocessament amb IA a la transcripció."
+            "name": "Drecera de neteja amb IA",
+            "description": "Opcional: una drecera dedicada que sempre aplica la neteja amb IA a la transcripció."
           },
           "assistant": {
             "name": "Pregunta al Kusema",
@@ -803,16 +804,16 @@
       "provider": {
         "title": "Proveïdor d'IA",
         "provider": "Proveïdor",
-        "description": "L'assistent fa servir el mateix proveïdor i la mateixa clau d'API que el postprocessament.",
+        "description": "L'Assistent fa servir el mateix proveïdor i la mateixa clau d'API que la neteja amb IA, configurats a la pàgina Proveïdor d'IA.",
         "model": "Model",
-        "modelDescription": "El model que respon les preguntes. Canvieu-lo a la pàgina Postprocessament.",
+        "modelDescription": "El model que respon les vostres preguntes. Canvieu-lo a la pàgina Proveïdor d'IA.",
         "notSet": "Cap triat",
-        "open": "Obre la configuració del postprocessament",
-        "disabled": "L'assistent necessita un proveïdor d'IA (com ara Anthropic, OpenAI o un model local de l'Ollama) per respondre. Els proveïdors es configuren a la pàgina Postprocessament, que apareix quan el postprocessament està activat. Activar-lo no canvia el dictat normal.",
-        "enable": "Activa el postprocessament",
-        "noProvider": "Trieu un proveïdor a la pàgina Postprocessament.",
-        "noKey": "No hi ha cap clau d'API per a {{provider}}. Afegiu-ne una a la pàgina Postprocessament.",
-        "noModel": "Trieu un model a la pàgina Postprocessament."
+        "open": "Obre la configuració del proveïdor d'IA",
+        "disabled": "Per respondre preguntes, l'Assistent necessita un proveïdor d'IA (com Anthropic, OpenAI o un model local d'Ollama). Els proveïdors es configuren a la pàgina Proveïdor d'IA, que apareix quan s'activa la neteja amb IA. Activar-la no canvia el dictat normal.",
+        "enable": "Activa la neteja amb IA",
+        "noProvider": "Trieu un proveïdor a la pàgina Proveïdor d'IA.",
+        "noKey": "No hi ha cap clau d'API per a {{provider}}. Afegiu-ne una a la pàgina Proveïdor d'IA.",
+        "noModel": "Trieu un model a la pàgina Proveïdor d'IA."
       },
       "screen": {
         "title": "Pregunta sobre la meva pantalla",
@@ -831,7 +832,7 @@
         },
         "model": {
           "label": "Model per a preguntes sobre la pantalla",
-          "description": "Un model que pugui veure imatges. Deixeu-ho buit per fer servir el model triat per a aquest proveïdor a la pàgina Postprocessament.",
+          "description": "Un model que pot veure imatges. Deixeu-ho buit per fer servir el model triat per a aquest proveïdor a la pàgina Proveïdor d'IA.",
           "placeholder": "p. ex. qwen2.5vl"
         }
       },
@@ -968,7 +969,7 @@
         "createPrompt": "Creeu la indicació",
         "cancel": "Cancel·leu",
         "selectToEdit": "Seleccioneu una indicació more amunt per veure'n i editar-ne els detalls.",
-        "createFirst": "Feu clic a «Creeu una indicació nova» més amunt per crear la primera indicació de postprocessament."
+        "createFirst": "Feu clic a «Creeu una indicació nova» més amunt per crear la primera indicació de neteja amb IA."
       }
     },
     "history": {

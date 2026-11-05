@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { AlertTriangle, X } from "lucide-react";
+import { WarningTriangle as AlertTriangle, Xmark as X } from "iconoir-react";
 import { commands, type ScreenCard as Card } from "@/bindings";
 import { Button } from "@/components/ui/Button";
 
@@ -34,7 +34,7 @@ const OfferCard: React.FC<{ card: Offer }> = ({ card }) => {
     return () => window.removeEventListener("keydown", onKey);
   }, [answer]);
   return (
-    <div className="flex h-full flex-col gap-3 bg-background p-4 text-text">
+    <div className="flex h-full flex-col gap-3 bg-surface p-4 text-text">
       <h1 className="m-0 text-base font-semibold">
         {t("screenCard.offer.title", {
           word: card.word,
@@ -119,7 +119,7 @@ const ConfirmCard: React.FC<{ card: Confirm }> = ({ card }) => {
   }, []);
 
   return (
-    <div className="flex h-full flex-col gap-3 bg-background p-4 text-text select-none">
+    <div className="flex h-full flex-col gap-3 bg-surface p-4 text-text select-none">
       <div className="flex items-baseline justify-between gap-2">
         <h1 className="text-sm font-semibold">{t("screenCard.title")}</h1>
         <span className="text-xs text-ink-3 tabular-nums">
@@ -186,7 +186,7 @@ const NoticeCard: React.FC<{ card: Notice }> = ({ card }) => {
   }, []);
 
   return (
-    <div className="flex h-full items-start gap-3 bg-background p-4 text-text">
+    <div className="flex h-full items-start gap-3 bg-surface p-4 text-text">
       <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0 text-warning" />
       <div className="min-w-0 flex-1 space-y-1">
         <h1 className="text-sm font-semibold">{t("screenCard.noticeTitle")}</h1>
@@ -262,7 +262,7 @@ const EditCard: React.FC<{ card: Edit }> = ({ card }) => {
       </h2>
       <div
         className={`min-h-0 flex-1 overflow-auto whitespace-pre-wrap rounded-md border border-line p-2 text-sm select-text ${
-          strong ? "bg-background" : "bg-wash text-ink-2"
+          strong ? "bg-background" : "bg-hover text-ink-2"
         }`}
       >
         {text}
@@ -271,7 +271,7 @@ const EditCard: React.FC<{ card: Edit }> = ({ card }) => {
   );
 
   return (
-    <div className="flex h-full flex-col gap-3 bg-background p-4 text-text select-none">
+    <div className="flex h-full flex-col gap-3 bg-surface p-4 text-text select-none">
       <div className="flex items-baseline justify-between gap-2">
         <h1 className="text-sm font-semibold">{t("screenCard.edit.title")}</h1>
         <span className="text-xs text-ink-3 tabular-nums">
@@ -347,7 +347,7 @@ const CorrectCard: React.FC<{ card: Correct }> = ({ card }) => {
   }, []);
 
   return (
-    <div className="flex h-full flex-col gap-3 bg-background p-4 text-text">
+    <div className="flex h-full flex-col gap-3 bg-surface p-4 text-text">
       <div className="flex items-baseline justify-between gap-2">
         <h1 className="text-sm font-semibold">
           {t("screenCard.correct.title")}

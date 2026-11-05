@@ -1,18 +1,18 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import {
-  Cog,
-  FlaskConical,
-  History,
-  Info,
-  Sparkles,
+  Settings as Cog,
+  Flask as FlaskConical,
+  ClockRotateRight as History,
+  InfoCircle as Info,
+  Sparks as Sparkles,
   Cpu,
-  MessageCircle,
-  Shield,
-  BookOpen,
-} from "lucide-react";
+  ChatBubble as MessageCircle,
+  ShieldCheck as Shield,
+  Book as BookOpen,
+  Microphone,
+} from "iconoir-react";
 import HandyTextLogo from "./icons/HandyTextLogo";
-import HandyHand from "./icons/HandyHand";
 import { useSettings } from "../hooks/useSettings";
 import {
   GeneralSettings,
@@ -46,7 +46,7 @@ interface SectionConfig {
 export const SECTIONS_CONFIG = {
   general: {
     labelKey: "sidebar.general",
-    icon: HandyHand,
+    icon: Microphone,
     component: GeneralSettings,
     enabled: () => true,
   },
@@ -130,34 +130,45 @@ export const Sidebar: React.FC<SidebarProps> = ({
     .map(([id, config]) => ({ id: id as SidebarSection, ...config }));
 
   return (
-    <div className="flex flex-col w-40 h-full border-e border-line items-center px-2">
-      <HandyTextLogo width={120} className="m-4" />
-      <div className="flex flex-col w-full items-center gap-1 pt-2 border-t border-line">
+    <nav
+      aria-label={t("sidebar.label")}
+      className="flex flex-col w-44 h-full shrink-0 bg-sidebar border-e border-line items-center px-2"
+    >
+      <HandyTextLogo width={112} className="m-4" />
+      <div className="flex flex-col w-full items-stretch gap-0.5 pt-2">
         {availableSections.map((section) => {
           const Icon = section.icon;
           const isActive = activeSection === section.id;
 
           return (
-            <div
+            <button
               key={section.id}
-              className={`flex gap-2 items-center p-2 w-full rounded-lg cursor-pointer transition-colors ${
+              type="button"
+              aria-current={isActive ? "page" : undefined}
+              className={`flex gap-2.5 items-center h-9 px-2.5 w-full rounded-lg cursor-pointer text-start transition-colors duration-150 motion-reduce:transition-none focus:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
                 isActive
-                  ? "bg-logo-primary/80"
-                  : "hover:bg-line hover:opacity-100 opacity-85"
+                  ? "bg-selected text-text"
+                  : "text-ink-2 hover:bg-hover hover:text-text"
               }`}
               onClick={() => onSectionChange(section.id)}
             >
-              <Icon width={24} height={24} className="shrink-0" />
+              <Icon
+                width={20}
+                height={20}
+                strokeWidth={1.5}
+                aria-hidden="true"
+                className="shrink-0"
+              />
               <p
                 className="text-sm font-medium truncate"
                 title={t(section.labelKey)}
               >
                 {t(section.labelKey)}
               </p>
-            </div>
+            </button>
           );
         })}
       </div>
-    </div>
+    </nav>
   );
 };

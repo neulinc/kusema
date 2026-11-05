@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { relaunch } from "@tauri-apps/plugin-process";
-import { Keyboard, Mic } from "lucide-react";
+import { KeyCommand as Keyboard, Microphone as Mic } from "iconoir-react";
 import { Button } from "../../ui/Button";
 import { Spinner } from "../../ui/Spinner";
 import { TextLink } from "../../ui/TextLink";
@@ -169,7 +169,7 @@ export const Permissions: React.FC<PermissionsProps> = ({
       >
         <div className="flex w-full flex-col rounded-panel border border-line-strong px-[22px] py-[4px] text-start">
           <PermissionRow
-            icon={<Mic size={20} aria-hidden="true" />}
+            icon={<Mic width={20} height={20} aria-hidden="true" />}
             title={t("onboarding.permissions.microphone.name")}
             why={t("onboarding.permissions.microphone.why")}
             status={permissions.microphone}
@@ -187,7 +187,7 @@ export const Permissions: React.FC<PermissionsProps> = ({
           />
           {isMac && (
             <PermissionRow
-              icon={<Keyboard size={20} aria-hidden="true" />}
+              icon={<Keyboard width={20} height={20} aria-hidden="true" />}
               title={t("onboarding.permissions.accessibility.name")}
               why={t("onboarding.permissions.accessibility.why")}
               status={permissions.accessibility}

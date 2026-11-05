@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { NavArrowDown } from "iconoir-react";
 
 export interface DropdownOption {
   value: string;
@@ -52,9 +53,9 @@ export const Dropdown: React.FC<DropdownProps> = ({
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const hover =
-    tone === "neutral" ? "hover:bg-wash" : "hover:bg-logo-primary/10";
-  const selected = tone === "neutral" ? "bg-line" : "bg-logo-primary/20";
+  // Both tones are neutral now; `tone` stays for the callers that pass it.
+  const hover = tone === "neutral" ? "hover:bg-hover" : "hover:bg-hover";
+  const selected = "bg-selected";
 
   const selectedOption = options.find(
     (option) => option.value === selectedValue,
@@ -75,33 +76,24 @@ export const Dropdown: React.FC<DropdownProps> = ({
     <div className={`relative ${className}`} ref={dropdownRef}>
       <button
         type="button"
-        className={`px-2 py-[5px] text-sm font-semibold bg-wash border border-line-strong rounded-md min-w-[200px] w-full text-start grid grid-cols-[1fr_auto] gap-2 items-center transition-all duration-150 ${
-          disabled
-            ? "opacity-50 cursor-not-allowed"
-            : `${hover} cursor-pointer ${tone === "neutral" ? "hover:border-ink-3" : "hover:border-logo-primary"}`
+        className={`px-2.5 py-1.5 text-sm font-medium bg-surface border border-line-strong rounded-lg min-w-[200px] w-full text-start grid grid-cols-[1fr_auto] gap-2 items-center transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
+          disabled ? "opacity-50 cursor-not-allowed" : `${hover} cursor-pointer`
         }`}
         onClick={handleToggle}
         disabled={disabled}
         aria-expanded={isOpen}
       >
         <span className="truncate">{selectedOption?.label || placeholder}</span>
-        <svg
-          className={`w-4 h-4 transition-transform duration-200 ${isOpen ? "transform rotate-180" : ""}`}
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M19 9l-7 7-7-7"
-          />
-        </svg>
+        <NavArrowDown
+          width={16}
+          height={16}
+          aria-hidden="true"
+          className={`text-ink-2 transition-transform duration-200 motion-reduce:transition-none ${isOpen ? "rotate-180" : ""}`}
+        />
       </button>
       {isOpen && !disabled && (
         <div
-          className={`absolute ${placement === "above" ? "bottom-full mb-1" : "top-full mt-1"} bg-background border border-line-strong rounded-md shadow-lg z-50 max-h-60 overflow-y-auto ${
+          className={`absolute ${placement === "above" ? "bottom-full mb-1" : "top-full mt-1"} bg-surface border border-line rounded-lg shadow-lg z-50 max-h-60 overflow-y-auto py-1 ${
             menuClassName ?? "left-0 right-0"
           }`}
         >

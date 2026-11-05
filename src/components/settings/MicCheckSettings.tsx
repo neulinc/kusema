@@ -10,10 +10,12 @@ export const MicCheckSettings: React.FC = () => {
   const { getSetting, updateSetting, isUpdating } = useSettings();
   return (
     <>
-      <div className="px-4 pt-2">
-        <h3 className="m-0 text-sm font-medium">{t("micCheck.title")}</h3>
+      <div>
+        <div className="px-4 pt-3">
+          <h3 className="m-0 text-sm font-medium">{t("micCheck.title")}</h3>
+        </div>
+        <MicCheck />
       </div>
-      <MicCheck />
       <ToggleSwitch
         checked={getSetting("adaptive_vad") ?? true}
         onChange={(on) => updateSetting("adaptive_vad", on)}

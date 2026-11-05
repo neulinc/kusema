@@ -687,6 +687,8 @@ pub fn apply_window_theme(app: &AppHandle, theme: Theme) {
         if let Err(e) = window.set_theme(window_theme) {
             warn!("Failed to apply window theme: {}", e);
         }
+        // Kusema: the title bar in the app's own colours.
+        crate::window_chrome::match_title_bar(&window);
     }
 }
 

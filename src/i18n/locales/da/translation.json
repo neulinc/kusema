@@ -19,12 +19,13 @@
     "assistant": "Assistent",
     "models": "Modeller",
     "advanced": "Avanceret",
-    "postProcessing": "Efterbehandling",
+    "postProcessing": "AI-udbyder",
     "history": "Historik",
     "debug": "Fejlfinding",
     "about": "Om",
     "privacy": "Privatliv",
-    "vocabulary": "Ordforråd"
+    "vocabulary": "Ordforråd",
+    "label": "Indstillingsafsnit"
   },
   "onboarding": {
     "customModelDescription": "Ikke officielt understøttet",
@@ -433,8 +434,8 @@
             "description": "Tastaturgenvejen til at annullere den aktuelle optagelse."
           },
           "transcribe_with_post_process": {
-            "name": "Genvej til efterbehandling",
-            "description": "Valgfrit: En dedikeret genvej, der altid anvender AI-efterbehandling på din transskription."
+            "name": "Genvej til AI-oprydning",
+            "description": "Valgfrit: en særskilt genvej, der altid anvender AI-oprydning på din transskription."
           },
           "assistant": {
             "name": "Spørg Kusema",
@@ -800,16 +801,16 @@
       "provider": {
         "title": "AI-udbyder",
         "provider": "Udbyder",
-        "description": "Assistenten bruger samme udbyder og API-nøgle som Efterbehandling.",
+        "description": "Assistenten bruger samme udbyder og API-nøgle som AI-oprydning, angivet på siden AI-udbyder.",
         "model": "Model",
-        "modelDescription": "Den model, der svarer på dine spørgsmål. Skift den på siden Efterbehandling.",
+        "modelDescription": "Modellen, der besvarer dine spørgsmål. Skift den på siden AI-udbyder.",
         "notSet": "Ikke valgt",
-        "open": "Åbn indstillinger for Efterbehandling",
-        "disabled": "Assistenten skal bruge en AI-udbyder (fx Anthropic, OpenAI eller en lokal Ollama-model) for at svare. Udbydere konfigureres på siden Efterbehandling, som vises, når efterbehandling er slået til. At slå den til ændrer ikke almindelig diktat.",
-        "enable": "Slå efterbehandling til",
-        "noProvider": "Vælg en udbyder på siden Efterbehandling.",
-        "noKey": "Der er ingen API-nøgle til {{provider}}. Tilføj en på siden Efterbehandling.",
-        "noModel": "Vælg en model på siden Efterbehandling."
+        "open": "Åbn indstillinger for AI-udbyder",
+        "disabled": "Assistenten skal bruge en AI-udbyder (som Anthropic, OpenAI eller en lokal Ollama-model) for at besvare spørgsmål. Udbydere sættes op på siden AI-udbyder, som vises, når AI-oprydning er slået til. At slå den til ændrer ikke almindelig diktering.",
+        "enable": "Slå AI-oprydning til",
+        "noProvider": "Vælg en udbyder på siden AI-udbyder.",
+        "noKey": "Der er ingen API-nøgle til {{provider}}. Tilføj en på siden AI-udbyder.",
+        "noModel": "Vælg en model på siden AI-udbyder."
       },
       "screen": {
         "title": "Spørg om min skærm",
@@ -828,7 +829,7 @@
         },
         "model": {
           "label": "Model til skærmspørgsmål",
-          "description": "En model, der kan se billeder. Lad feltet stå tomt for at bruge den model, der er valgt til denne udbyder på siden Efterbehandling.",
+          "description": "En model, der kan se billeder. Lad feltet stå tomt for at bruge den model, der er valgt til denne udbyder på siden AI-udbyder.",
           "placeholder": "fx qwen2.5vl"
         }
       },
@@ -965,7 +966,7 @@
         "createPrompt": "Opret prompt",
         "cancel": "Annuller",
         "selectToEdit": "Vælg en prompt ovenfor for at se og redigere dens detaljer.",
-        "createFirst": "Klik på 'Opret ny prompt' ovenfor for at oprette din første efterbehandlingsprompt."
+        "createFirst": "Klik på 'Opret ny prompt' ovenfor for at oprette din første prompt til AI-oprydning."
       }
     },
     "history": {

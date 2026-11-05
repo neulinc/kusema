@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { listen } from "@tauri-apps/api/event";
 import { open, save } from "@tauri-apps/plugin-dialog";
 import { toast } from "sonner";
-import { X } from "lucide-react";
+import { Xmark as X } from "iconoir-react";
 import {
   commands,
   type ExportFormat,

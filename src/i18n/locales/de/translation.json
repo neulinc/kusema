@@ -19,12 +19,13 @@
     "assistant": "Assistent",
     "models": "Modelle",
     "advanced": "Erweitert",
-    "postProcessing": "Nachbearbeitung",
+    "postProcessing": "KI-Anbieter",
     "history": "Verlauf",
     "debug": "Debug",
     "about": "Info",
     "privacy": "Datenschutz",
-    "vocabulary": "Wortschatz"
+    "vocabulary": "Wortschatz",
+    "label": "Einstellungsbereiche"
   },
   "onboarding": {
     "customModelDescription": "Nicht offiziell unterstützt",
@@ -433,8 +434,8 @@
             "description": "Das Tastenkürzel zum Abbrechen der aktuellen Aufnahme."
           },
           "transcribe_with_post_process": {
-            "name": "Nachbearbeitungs-Tastenkürzel",
-            "description": "Optional: Ein dediziertes Tastenkürzel, das immer die KI-Nachbearbeitung auf deine Transkription anwendet."
+            "name": "Kurzbefehl für KI-Bereinigung",
+            "description": "Optional: ein eigener Kurzbefehl, der die KI-Bereinigung immer auf Ihre Transkription anwendet."
           },
           "assistant": {
             "name": "Kusema fragen",
@@ -800,16 +801,16 @@
       "provider": {
         "title": "KI-Anbieter",
         "provider": "Anbieter",
-        "description": "Der Assistent nutzt denselben Anbieter und API-Schlüssel wie die Nachbearbeitung.",
+        "description": "Der Assistent nutzt denselben Anbieter und API-Schlüssel wie die KI-Bereinigung, eingerichtet auf der Seite KI-Anbieter.",
         "model": "Modell",
-        "modelDescription": "Das Modell, das deine Fragen beantwortet. Du änderst es auf der Seite Nachbearbeitung.",
+        "modelDescription": "Das Modell, das Ihre Fragen beantwortet. Ändern Sie es auf der Seite KI-Anbieter.",
         "notSet": "Nicht gewählt",
-        "open": "Einstellungen der Nachbearbeitung öffnen",
-        "disabled": "Der Assistent braucht einen KI-Anbieter (zum Beispiel Anthropic, OpenAI oder ein lokales Ollama-Modell), um Fragen zu beantworten. Anbieter richtest du auf der Seite Nachbearbeitung ein, die erscheint, sobald die Nachbearbeitung eingeschaltet ist. Das Einschalten ändert nichts am normalen Diktieren.",
-        "enable": "Nachbearbeitung einschalten",
-        "noProvider": "Wähle auf der Seite Nachbearbeitung einen Anbieter.",
-        "noKey": "Für {{provider}} ist kein API-Schlüssel hinterlegt. Füge auf der Seite Nachbearbeitung einen hinzu.",
-        "noModel": "Wähle auf der Seite Nachbearbeitung ein Modell."
+        "open": "Einstellungen des KI-Anbieters öffnen",
+        "disabled": "Um Fragen zu beantworten, braucht der Assistent einen KI-Anbieter (etwa Anthropic, OpenAI oder ein lokales Ollama-Modell). Anbieter werden auf der Seite KI-Anbieter eingerichtet, die erscheint, sobald die KI-Bereinigung eingeschaltet ist. Das Einschalten ändert nichts am normalen Diktieren.",
+        "enable": "KI-Bereinigung einschalten",
+        "noProvider": "Wählen Sie einen Anbieter auf der Seite KI-Anbieter.",
+        "noKey": "Für {{provider}} ist kein API-Schlüssel hinterlegt. Fügen Sie einen auf der Seite KI-Anbieter hinzu.",
+        "noModel": "Wählen Sie ein Modell auf der Seite KI-Anbieter."
       },
       "screen": {
         "title": "Zu meinem Bildschirm fragen",
@@ -828,7 +829,7 @@
         },
         "model": {
           "label": "Modell für Bildschirmfragen",
-          "description": "Ein Modell, das Bilder sehen kann. Leer lassen, um das Modell zu verwenden, das auf der Seite Nachbearbeitung für diesen Anbieter gewählt ist.",
+          "description": "Ein Modell, das Bilder sehen kann. Leer lassen, um das Modell zu verwenden, das für diesen Anbieter auf der Seite KI-Anbieter gewählt ist.",
           "placeholder": "z. B. qwen2.5vl"
         }
       },
@@ -965,7 +966,7 @@
         "createPrompt": "Prompt erstellen",
         "cancel": "Abbrechen",
         "selectToEdit": "Wähle oben einen Prompt aus, um dessen Details anzuzeigen und zu bearbeiten.",
-        "createFirst": "Klicke oben auf 'Neuen Prompt erstellen', um deinen ersten Nachbearbeitungs-Prompt zu erstellen."
+        "createFirst": "Klicke oben auf 'Neuen Prompt erstellen', um deinen ersten Prompt für die KI-Bereinigung zu erstellen."
       }
     },
     "history": {

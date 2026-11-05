@@ -39,27 +39,24 @@ type NonCreatableProps = {
 
 export type SelectProps = BaseProps & (CreatableProps | NonCreatableProps);
 
-const baseBackground = "var(--color-wash)";
-const hoverBackground =
-  "color-mix(in srgb, var(--color-logo-primary) 10%, transparent)";
-const focusBackground =
-  "color-mix(in srgb, var(--color-logo-primary) 20%, transparent)";
+const baseBackground = "var(--color-surface)";
+const hoverBackground = "var(--color-hover)";
+const focusBackground = "var(--color-selected)";
 const neutralBorder = "var(--color-line-strong)";
 
 const selectStyles: StylesConfig<SelectOption, false> = {
   control: (base, state) => ({
     ...base,
     minHeight: 40,
-    borderRadius: 6,
-    borderColor: state.isFocused ? "var(--color-logo-primary)" : neutralBorder,
-    boxShadow: state.isFocused ? "0 0 0 1px var(--color-logo-primary)" : "none",
-    backgroundColor: state.isFocused ? focusBackground : baseBackground,
+    borderRadius: 8,
+    borderColor: state.isFocused ? "var(--color-accent)" : neutralBorder,
+    boxShadow: state.isFocused ? "0 0 0 1px var(--color-accent)" : "none",
+    backgroundColor: baseBackground,
     fontSize: "0.875rem",
     color: "var(--color-text)",
     transition: "all 150ms ease",
     ":hover": {
-      borderColor: "var(--color-logo-primary)",
-      backgroundColor: hoverBackground,
+      borderColor: "var(--color-ink-2)",
     },
   }),
   valueContainer: (base) => ({
@@ -77,24 +74,25 @@ const selectStyles: StylesConfig<SelectOption, false> = {
   }),
   dropdownIndicator: (base, state) => ({
     ...base,
-    color: state.isFocused ? "var(--color-logo-primary)" : "var(--color-ink-3)",
+    color: "var(--color-ink-2)",
     ":hover": {
-      color: "var(--color-logo-primary)",
+      color: "var(--color-text)",
     },
   }),
   clearIndicator: (base) => ({
     ...base,
     color: "var(--color-ink-3)",
     ":hover": {
-      color: "var(--color-logo-primary)",
+      color: "var(--color-text)",
     },
   }),
   menu: (provided) => ({
     ...provided,
     zIndex: 30,
-    backgroundColor: "var(--color-background)",
+    backgroundColor: "var(--color-surface)",
     color: "var(--color-text)",
     border: "1px solid var(--color-line)",
+    borderRadius: 8,
     boxShadow: "0 10px 30px rgba(15, 15, 15, 0.2)",
   }),
   option: (base, state) => ({

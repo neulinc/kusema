@@ -25,6 +25,16 @@
   --color-ink-3: var(--color-ink-3);
   --color-line: var(--color-line);
   --color-line-strong: var(--color-line-strong);
+  --color-sidebar: var(--color-sidebar);
+  --color-surface: var(--color-surface);
+  --color-hover: var(--color-hover);
+  --color-selected: var(--color-selected);
+  --color-accent: var(--color-accent);
+  --color-accent-text: var(--color-accent-text);
+  --color-primary: var(--color-primary);
+  --color-on-primary: var(--color-on-primary);
+  --color-track: var(--color-track);
+  --color-brand: var(--color-brand);
 }
 
 /* Noto Sans CJK subset (see src/lib/utils/cjkFont.ts): Windows' CJK fonts
@@ -201,6 +211,9 @@
   /* Apply colors */
   color: var(--color-text);
   background-color: var(--color-background);
+
+  /* Native checkboxes, radios and range sliders take the accent. */
+  accent-color: var(--color-accent);
 
   /* Without this, Windows draws a <select> popup white under light text. */
   color-scheme: light dark;

@@ -1,6 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Shield } from "lucide-react";
+import { ShieldCheck as Shield } from "iconoir-react";
 import { useSettings } from "../../../hooks/useSettings";
 import { ToggleSwitch } from "../../ui/ToggleSwitch";
 
@@ -8,7 +8,7 @@ import { ToggleSwitch } from "../../ui/ToggleSwitch";
 export const PrivilegedChip: React.FC = () => {
   const { t } = useTranslation();
   return (
-    <span className="inline-flex items-center gap-1 rounded-full bg-logo-primary/20 px-2 py-0.5 text-xs font-medium">
+    <span className="inline-flex items-center gap-1 rounded-full bg-selected px-2 py-0.5 text-xs font-medium">
       <Shield width={12} height={12} />
       {t("settings.privacy.privileged.chip")}
     </span>

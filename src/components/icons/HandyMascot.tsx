@@ -8,7 +8,7 @@ const HandyMascot = ({ className }: { className?: string }) => (
   >
     <path
       d="M20 8H44A14 14 0 0 1 58 22V34A14 14 0 0 1 44 48H27L13.5 57.5L15.5 47.26A14 14 0 0 1 6 34V22A14 14 0 0 1 20 8Z"
-      fill="var(--color-logo-primary)"
+      fill="var(--color-brand)"
       stroke="var(--color-wordmark-stroke)"
       strokeWidth={2.5}
       strokeLinejoin="round"
