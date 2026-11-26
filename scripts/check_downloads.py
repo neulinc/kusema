@@ -93,14 +93,25 @@ def check(entry):
     return problems
 
 
+def transient(problems):
+    """A server hiccup (429 or 5xx), worth asking again; not a wrong file."""
+    return bool(problems) and all(
+        any(f"answered {code}" in p for code in ("429", "500", "502", "503", "504")) for p in problems
+    )
+
+
 def check_with_retries(entry):
-    for attempt in range(3):
+    """Network errors and temporary server errors are retried, then reported."""
+    for attempt in range(4):
         try:
-            return check(entry)
-        except Exception as error:  # noqa: BLE001 - network errors are retried, then reported
-            last = f"{type(error).__name__}: {error}"
-            time.sleep(2 * (attempt + 1))
-    return [last]
+            problems = check(entry)
+            if not transient(problems):
+                return problems
+            last = problems
+        except Exception as error:  # noqa: BLE001
+            last = [f"{type(error).__name__}: {error}"]
+        time.sleep(5 * (attempt + 1))
+    return last
 
 
 def main():
