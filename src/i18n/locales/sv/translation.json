@@ -1020,13 +1020,29 @@
           "deepseek": "Din text behandlas av DeepSeek, på servrar i Kina. DeepSeeks policy tillåter att data används för att förbättra tjänsterna; se deras villkor.",
           "gemini": "På gratisnivån får Google använda dina frågor och svar för att förbättra sina produkter, och människor kan läsa dem. Använd en betald nyckel (ett Google Cloud-projekt med fakturering) för konfidentiellt arbete.",
           "openai": "OpenAI tränar inte på API-data som standard och sparar den i upp till 30 dagar för att upptäcka missbruk.",
-          "details": "Detaljer"
+          "details": "Detaljer",
+          "bedrock": "Din text går till ditt eget AWS-konto, i den region du väljer, enligt ditt AWS-avtal. AWS uppger att det inte delar ditt innehåll med modelleverantörer, men kan spara det för säkerhets- och missbrukskontroller. Beroende på modell kan AWS behandla det i andra regioner."
         },
         "testKey": {
           "button": "Testa nyckel",
           "checking": "Kontrollerar…",
           "ok": "Nyckeln fungerar. Modeller: {{count}}.",
           "failed": "Nyckeln fungerade inte: {{error}}"
+        },
+        "bedrock": {
+          "region": "Region",
+          "regionDescription": "AWS-regionen dina förfrågningar går till. En kortsiktig nyckel fungerar bara i regionen där den skapades.",
+          "otherRegions": "Andra regioner…",
+          "govCloud": "AWS GovCloud (US)-regioner kräver ett AWS GovCloud-konto.",
+          "chooseRegion": "Välj en region",
+          "help": "Kusema når Amazon Bedrock via Mantle-slutpunkten med en Bedrock-API-nyckel: Claude-modeller använder Messages API, andra modeller Chat Completions. Kortsiktiga nycklar från konsolen gäller i upp till 12 timmar; långsiktiga nycklar är till för att prova.",
+          "webSearch": "Webbsökning med Amazon Bedrock använder Brave Search eller en SearXNG-server: Claudes egen sökning finns inte på Bedrock.",
+          "test": "Testa anslutning",
+          "testing": "Testar…",
+          "ok": "Ansluten. Modeller i den här regionen: {{count}}.",
+          "okModel": "Ansluten. Modeller i den här regionen: {{count}}. Den valda modellen svarade.",
+          "openWeight": "Modeller från andra utvecklare, som DeepSeek och Qwen, körs i konton som AWS äger och driver och som utvecklaren inte har åtkomst till, och AWS delar inte ditt innehåll med dem.",
+          "claudeAccess": "Claude-modeller på Bedrock kräver åtkomst till Anthropics modeller i ditt AWS-konto. I kommersiella regioner aktiveras den vid första användningen för de flesta konton; om Bedrock säger att en Claude-modell inte är tillgänglig för ditt konto måste AWS aktivera den åt dig (i AWS GovCloud: Bedrock-konsolen → Bedrock configurations → Model access)."
         }
       },
       "prompts": {
@@ -1696,7 +1712,12 @@
       "noLink": "Kusema hittade ingen länk att läsa. Kopiera länken först, eller säg hela adressen.",
       "linkFailed": "Kusema kunde inte läsa länken: {{name}}",
       "providerHidden": "Din administratör har stängt av {{name}} på den här datorn. Välj en annan AI under Assistent → Inställningar.",
-      "braveKeyRejected": "Brave avvisade nyckeln. Kontrollera att den abonnerar på en Search-plan och försök igen."
+      "braveKeyRejected": "Brave avvisade nyckeln. Kontrollera att den abonnerar på en Search-plan och försök igen.",
+      "screenNotForModel": "Skärmfrågor är inte tillgängliga med den här modellen. Välj en som kan se bilder under Assistent → Inställningar.",
+      "bedrockKeyExpired": "Din Amazon Bedrock-nyckel har gått ut. Nycklar från konsolen går ut efter högst 12 timmar; skapa en ny.",
+      "bedrockWrongRegion": "Den här Amazon Bedrock-nyckeln hör till en annan region. Välj regionen där den skapades, eller skapa en nyckel i den här.",
+      "bedrockModelAccess": "Den här modellen är inte tillgänglig för ditt AWS-konto i den här regionen. Kontrollera modellåtkomsten i Amazon Bedrock-konsolen, eller välj en annan modell eller region.",
+      "bedrockKeyInvalid": "Amazon Bedrock godkände inte nyckeln. Kontrollera den under Assistent → Inställningar."
     },
     "setUp": "Ställ in",
     "dismiss": "Stäng",

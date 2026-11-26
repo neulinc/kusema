@@ -367,6 +367,8 @@ pub async fn send_chat_completion(
     prompt: String,
     disable_reasoning: bool,
 ) -> Result<Option<String>, String> {
+    // Kusema: Claude on Amazon Bedrock takes the Messages API.
+    let provider = &crate::bedrock::for_model(provider, model);
     if provider.api_format == PostProcessApiFormat::Anthropic {
         return send_anthropic_message(provider, api_key, model, prompt).await;
     }
@@ -948,6 +950,8 @@ pub async fn send_conversation_for<F: FnMut(&str)>(
     turns: &[ChatTurn],
     mut on_text: F,
 ) -> Result<Option<String>, String> {
+    // Kusema: Claude on Amazon Bedrock takes the Messages API.
+    let provider = &crate::bedrock::for_model(provider, model);
     let base_url = provider.base_url.trim_end_matches('/');
     let anthropic = provider.api_format == PostProcessApiFormat::Anthropic;
     let truncated_error = || {
@@ -1103,6 +1107,11 @@ pub async fn fetch_models(
     // Handle OpenAI format: { data: [ { id: "..." }, ... ] }
     if let Some(data) = parsed.get("data").and_then(|d| d.as_array()) {
         for entry in data {
+            // Kusema: Amazon Bedrock lists models the account can't use with
+            // `"status": "unavailable"`; they aren't offered.
+            if entry.get("status").and_then(|s| s.as_str()) == Some("unavailable") {
+                continue;
+            }
             if let Some(id) = entry.get("id").and_then(|i| i.as_str()) {
                 // Kusema: Gemini's list may name models "models/<id>"; chat
                 // takes the bare id.

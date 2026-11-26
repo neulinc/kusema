@@ -1020,13 +1020,29 @@
           "deepseek": "你的文本由 DeepSeek 在位于中国的服务器上处理。DeepSeek 的政策允许其使用数据改进服务；请查看其条款。",
           "gemini": "在免费层级，Google 可能会用你的提示和回答改进其产品，并且可能有人阅读。处理机密工作请使用付费密钥（已开启结算的 Google Cloud 项目）。",
           "openai": "OpenAI 默认不会用 API 数据训练模型，并为监控滥用最多保留 30 天。",
-          "details": "详情"
+          "details": "详情",
+          "bedrock": "你的文本发送到你自己的 AWS 账户，位于你选择的区域，适用你的 AWS 协议。AWS 表示不会与模型提供方共享你的内容，但可能为安全和滥用检查而保留。视模型而定，AWS 可能在其他区域处理。"
         },
         "testKey": {
           "button": "测试密钥",
           "checking": "正在检查…",
           "ok": "密钥可用。模型：{{count}} 个。",
           "failed": "密钥不可用：{{error}}"
+        },
+        "bedrock": {
+          "region": "区域",
+          "regionDescription": "请求发送到的 AWS 区域。短期密钥只能在创建它的区域使用。",
+          "otherRegions": "其他区域…",
+          "govCloud": "AWS GovCloud (US) 区域需要 AWS GovCloud 账户。",
+          "chooseRegion": "选择区域",
+          "help": "Kusema 通过 Mantle 端点并使用 Bedrock API 密钥连接 Amazon Bedrock：Claude 模型使用 Messages API，其他模型使用 Chat Completions。控制台的短期密钥最长有效 12 小时；长期密钥用于试用。",
+          "webSearch": "使用 Amazon Bedrock 时，网页搜索使用 Brave Search 或 SearXNG 服务器：Claude 自带的搜索在 Bedrock 上不可用。",
+          "test": "测试连接",
+          "testing": "正在测试…",
+          "ok": "已连接。此区域的模型：{{count}} 个。",
+          "okModel": "已连接。此区域的模型：{{count}} 个。所选模型已回复。",
+          "openWeight": "其他开发者的模型（例如 DeepSeek 和 Qwen）在 AWS 拥有并运营、开发者无法访问的账户中运行，AWS 不会与他们共享你的内容。",
+          "claudeAccess": "在 Bedrock 上使用 Claude 模型，需要在你的 AWS 账户中拥有 Anthropic 模型访问权限。在商业区域，大多数账户首次使用时即会启用；如果 Bedrock 提示某个 Claude 模型对你的账户不可用，则需要由 AWS 为你启用（AWS GovCloud：Bedrock 控制台 → Bedrock configurations → Model access）。"
         }
       },
       "prompts": {
@@ -1696,7 +1712,12 @@
       "noLink": "Kusema 没有找到要读取的链接。请先复制链接，或说出完整地址。",
       "linkFailed": "Kusema 无法读取该链接：{{name}}",
       "providerHidden": "管理员已在这台电脑上关闭 {{name}}。请在助手 → 设置中选择其他 AI。",
-      "braveKeyRejected": "Brave 拒绝了该密钥。请确认它已订阅 Search 套餐，然后重试。"
+      "braveKeyRejected": "Brave 拒绝了该密钥。请确认它已订阅 Search 套餐，然后重试。",
+      "screenNotForModel": "此模型不支持屏幕提问。请在助手 → 设置中选择能看图片的模型。",
+      "bedrockKeyExpired": "你的 Amazon Bedrock 密钥已过期。控制台创建的密钥最多 12 小时后过期，请新建一个。",
+      "bedrockWrongRegion": "此 Amazon Bedrock 密钥属于其他区域。请选择创建它的区域，或在此区域新建密钥。",
+      "bedrockModelAccess": "此模型在该区域对你的 AWS 账户不可用。请在 Amazon Bedrock 控制台检查模型访问权限，或选择其他模型或区域。",
+      "bedrockKeyInvalid": "Amazon Bedrock 不接受该密钥。请在助手 → 设置中检查。"
     },
     "setUp": "设置",
     "dismiss": "关闭",

@@ -1020,13 +1020,29 @@
           "deepseek": "Metniniz DeepSeek tarafından Çin'deki sunucularda işlenir. DeepSeek'in politikası, hizmetlerini geliştirmek için verileri kullanmasına izin verir; koşullarına bakın.",
           "gemini": "Ücretsiz katmanda Google, istemlerinizi ve yanıtlarınızı ürünlerini geliştirmek için kullanabilir ve bunları insanlar okuyabilir. Gizli işler için ücretli bir anahtar (faturalandırması açık bir Google Cloud projesi) kullanın.",
           "openai": "OpenAI varsayılan olarak API verileriyle model eğitmez ve kötüye kullanımı izlemek için bunları 30 güne kadar saklar.",
-          "details": "Ayrıntılar"
+          "details": "Ayrıntılar",
+          "bedrock": "Metniniz kendi AWS hesabınıza, seçtiğiniz bölgeye, AWS sözleşmeniz kapsamında gider. AWS, içeriğinizi model sağlayıcılarla paylaşmadığını ancak güvenlik ve kötüye kullanım kontrolleri için saklayabileceğini belirtir. Modele bağlı olarak AWS onu başka bölgelerde işleyebilir."
         },
         "testKey": {
           "button": "Anahtarı test et",
           "checking": "Kontrol ediliyor…",
           "ok": "Anahtar çalışıyor. Model: {{count}}.",
           "failed": "Anahtar çalışmadı: {{error}}"
+        },
+        "bedrock": {
+          "region": "Bölge",
+          "regionDescription": "İsteklerinizin gittiği AWS bölgesi. Kısa vadeli bir anahtar yalnızca oluşturulduğu bölgede çalışır.",
+          "otherRegions": "Diğer bölgeler…",
+          "govCloud": "AWS GovCloud (US) bölgeleri bir AWS GovCloud hesabı gerektirir.",
+          "chooseRegion": "Bir bölge seçin",
+          "help": "Kusema, Amazon Bedrock'a Mantle uç noktası üzerinden bir Bedrock API anahtarıyla ulaşır: Claude modelleri Messages API'yi, diğer modeller Chat Completions'ı kullanır. Konsoldan alınan kısa vadeli anahtarlar en fazla 12 saat geçerlidir; uzun vadeli anahtarlar denemek içindir.",
+          "webSearch": "Amazon Bedrock ile web araması Brave Search veya bir SearXNG sunucusu kullanır: Claude'un kendi araması Bedrock'ta yok.",
+          "test": "Bağlantıyı test et",
+          "testing": "Test ediliyor…",
+          "ok": "Bağlandı. Bu bölgedeki modeller: {{count}}.",
+          "okModel": "Bağlandı. Bu bölgedeki modeller: {{count}}. Seçilen model yanıt verdi.",
+          "openWeight": "DeepSeek ve Qwen gibi diğer geliştiricilerin modelleri, AWS'nin sahip olduğu ve işlettiği, geliştiricinin erişemediği hesaplarda çalışır ve AWS içeriğinizi onlarla paylaşmaz.",
+          "claudeAccess": "Bedrock'taki Claude modelleri, AWS hesabınızda Anthropic model erişimi gerektirir. Ticari bölgelerde çoğu hesap için ilk kullanımda etkinleşir; Bedrock bir Claude modelinin hesabınız için kullanılamadığını söylerse AWS'nin bunu sizin için etkinleştirmesi gerekir (AWS GovCloud'da: Bedrock konsolu → Bedrock configurations → Model access)."
         }
       },
       "prompts": {
@@ -1696,7 +1712,12 @@
       "noLink": "Kusema okunacak bir bağlantı bulamadı. Önce bağlantıyı kopyalayın veya tam adresi söyleyin.",
       "linkFailed": "Kusema bu bağlantıyı okuyamadı: {{name}}",
       "providerHidden": "Yöneticiniz bu bilgisayarda {{name}} hizmetini kapattı. Asistan → Ayarlar'dan başka bir yapay zekâ seçin.",
-      "braveKeyRejected": "Brave anahtarı reddetti. Bir Search planına abone olduğunu kontrol edip yeniden deneyin."
+      "braveKeyRejected": "Brave anahtarı reddetti. Bir Search planına abone olduğunu kontrol edip yeniden deneyin.",
+      "screenNotForModel": "Bu modelle ekran soruları kullanılamaz. Asistan → Ayarlar'dan görüntüleri görebilen bir model seçin.",
+      "bedrockKeyExpired": "Amazon Bedrock anahtarınızın süresi doldu. Konsoldan alınan anahtarların süresi en fazla 12 saatte dolar; yeni bir anahtar oluşturun.",
+      "bedrockWrongRegion": "Bu Amazon Bedrock anahtarı başka bir bölgeye ait. Oluşturulduğu bölgeyi seçin veya bu bölgede bir anahtar oluşturun.",
+      "bedrockModelAccess": "Bu model, AWS hesabınız için bu bölgede kullanılamıyor. Amazon Bedrock konsolunda model erişimini kontrol edin veya başka bir model ya da bölge seçin.",
+      "bedrockKeyInvalid": "Amazon Bedrock anahtarı kabul etmedi. Asistan → Ayarlar'dan kontrol edin."
     },
     "setUp": "Kur",
     "dismiss": "Kapat",

@@ -3,6 +3,7 @@ import SelectComponent from "react-select";
 import CreatableSelect from "react-select/creatable";
 import type {
   ActionMeta,
+  GroupBase,
   Props as ReactSelectProps,
   SingleValue,
   StylesConfig,
@@ -25,6 +26,8 @@ type BaseProps = {
   onBlur?: () => void;
   className?: string;
   formatCreateLabel?: (input: string) => string;
+  /** Kusema: show `options` under these headings instead (same options). */
+  groups?: { label: string; options: SelectOption[] }[];
 };
 
 type CreatableProps = {
@@ -44,7 +47,15 @@ const hoverBackground = "var(--color-hover)";
 const focusBackground = "var(--color-selected)";
 const neutralBorder = "var(--color-line-strong)";
 
-const selectStyles: StylesConfig<SelectOption, false> = {
+const selectStyles: StylesConfig<
+  SelectOption,
+  false,
+  GroupBase<SelectOption>
+> = {
+  groupHeading: (base) => ({
+    ...base,
+    color: "var(--color-ink-3)",
+  }),
   control: (base, state) => ({
     ...base,
     minHeight: 40,
@@ -126,6 +137,7 @@ export const Select: React.FC<SelectProps> = React.memo(
     isCreatable,
     formatCreateLabel,
     onCreateOption,
+    groups,
   }) => {
     const selectValue = React.useMemo(() => {
       if (!value) return null;
@@ -145,7 +157,7 @@ export const Select: React.FC<SelectProps> = React.memo(
       className,
       classNamePrefix: "app-select",
       value: selectValue,
-      options,
+      options: groups ?? options,
       onChange: handleChange,
       placeholder,
       isDisabled: disabled,

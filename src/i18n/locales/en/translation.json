@@ -1020,13 +1020,29 @@
           "deepseek": "Your text is processed by DeepSeek, on servers in China. DeepSeek's policy allows it to use data to improve its services; see its terms.",
           "gemini": "On the free tier, Google may use your prompts and answers to improve its products, and people may read them. Use a paid key (a Google Cloud project with billing) for confidential work.",
           "openai": "OpenAI doesn't train on API data by default and keeps it up to 30 days for abuse monitoring.",
-          "details": "Details"
+          "details": "Details",
+          "bedrock": "Your text goes to your own AWS account, in the region you choose, under your AWS agreement. AWS states it doesn't share your content with model providers, but may keep it for safety and abuse checks. Depending on the model, AWS may process it in other regions."
         },
         "testKey": {
           "button": "Test key",
           "checking": "Checking…",
           "ok": "Key works. Models: {{count}}.",
           "failed": "Key didn't work: {{error}}"
+        },
+        "bedrock": {
+          "region": "Region",
+          "regionDescription": "The AWS region your requests go to. A short-term key only works in the region it was created in.",
+          "otherRegions": "Other regions…",
+          "govCloud": "AWS GovCloud (US) regions need an AWS GovCloud account.",
+          "chooseRegion": "Choose a region",
+          "help": "Kusema reaches Amazon Bedrock through its Mantle endpoint with a Bedrock API key: Claude models use the Messages API, other models Chat Completions. Short-term keys from the console last up to 12 hours; long-term keys are meant for trying things out.",
+          "webSearch": "Web search with Amazon Bedrock uses Brave Search or a SearXNG server: Claude's own search isn't available on Bedrock.",
+          "test": "Test connection",
+          "testing": "Testing…",
+          "ok": "Connected. Models in this region: {{count}}.",
+          "okModel": "Connected. Models in this region: {{count}}. The chosen model answered.",
+          "openWeight": "Models from other developers, such as DeepSeek and Qwen, run in accounts owned and operated by AWS that the developer can't access, and AWS doesn't share your content with them.",
+          "claudeAccess": "Claude models on Bedrock require Anthropic model access in your AWS account. In commercial regions it's enabled on first use for most accounts; if Bedrock says a Claude model isn't available for your account, AWS has to enable it for you (in AWS GovCloud: Bedrock console → Bedrock configurations → Model access)."
         }
       },
       "prompts": {
@@ -1696,7 +1712,12 @@
       "noLink": "Kusema didn't find a link to read. Copy the link first, or say the full address.",
       "linkFailed": "Kusema couldn't read that link: {{name}}",
       "providerHidden": "{{name}} is turned off on this computer by your administrator. Choose another AI in Assistant → Settings.",
-      "braveKeyRejected": "Brave rejected the key. Check that it's subscribed to a Search plan, then try again."
+      "braveKeyRejected": "Brave rejected the key. Check that it's subscribed to a Search plan, then try again.",
+      "screenNotForModel": "Screen questions aren't available with this model. Choose one that can see images in Assistant → Settings.",
+      "bedrockKeyExpired": "Your Amazon Bedrock key has expired. Bedrock keys from the console expire after up to 12 hours; create a new one.",
+      "bedrockWrongRegion": "This Amazon Bedrock key belongs to a different region. Choose the region it was created in, or create a key in this one.",
+      "bedrockModelAccess": "This model isn't available to your AWS account in this region. Check model access in the Amazon Bedrock console, or choose another model or region.",
+      "bedrockKeyInvalid": "Amazon Bedrock didn't accept the key. Check it in Assistant → Settings."
     },
     "setUp": "Set up",
     "dismiss": "Dismiss",

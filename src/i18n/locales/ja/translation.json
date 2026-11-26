@@ -1020,13 +1020,29 @@
           "deepseek": "テキストは中国のサーバーで DeepSeek が処理します。DeepSeek のポリシーでは、サービス改善のためにデータを使うことが認められています。規約を確認してください。",
           "gemini": "無料枠では、Google がプロンプトと回答を製品改善に使い、人が読むことがあります。機密性の高い作業には有料キー (請求先を設定した Google Cloud プロジェクト) を使ってください。",
           "openai": "OpenAI は既定では API のデータで学習せず、不正利用の監視のため最大 30 日間保持します。",
-          "details": "詳細"
+          "details": "詳細",
+          "bedrock": "テキストは、選んだリージョンのご自身の AWS アカウントに、AWS との契約のもとで送られます。AWS はモデル提供元とコンテンツを共有しないとしていますが、安全性や不正利用の確認のために保持することがあります。モデルによっては、AWS が他のリージョンで処理することがあります。"
         },
         "testKey": {
           "button": "キーをテスト",
           "checking": "確認中…",
           "ok": "キーは有効です。モデル: {{count}} 個。",
           "failed": "キーが使えませんでした: {{error}}"
+        },
+        "bedrock": {
+          "region": "リージョン",
+          "regionDescription": "リクエストの送信先の AWS リージョン。短期キーは作成したリージョンでのみ使えます。",
+          "otherRegions": "その他のリージョン…",
+          "govCloud": "AWS GovCloud (US) リージョンには AWS GovCloud アカウントが必要です。",
+          "chooseRegion": "リージョンを選択",
+          "help": "Kusema は Bedrock API キーを使い、Mantle エンドポイント経由で Amazon Bedrock に接続します。Claude モデルは Messages API、その他のモデルは Chat Completions を使います。コンソールの短期キーは最長 12 時間有効で、長期キーは試用向けです。",
+          "webSearch": "Amazon Bedrock での Web 検索には Brave Search か SearXNG サーバーを使います。Claude の内蔵検索は Bedrock では使えません。",
+          "test": "接続をテスト",
+          "testing": "テスト中…",
+          "ok": "接続しました。このリージョンのモデル: {{count}} 個。",
+          "okModel": "接続しました。このリージョンのモデル: {{count}} 個。選んだモデルが応答しました。",
+          "openWeight": "DeepSeek や Qwen など他の開発元のモデルは、AWS が所有・運用し開発元がアクセスできないアカウントで動作します。AWS はお客様のコンテンツを開発元と共有しません。",
+          "claudeAccess": "Bedrock で Claude モデルを使うには、AWS アカウントで Anthropic のモデルへのアクセスが必要です。商用リージョンでは多くのアカウントで初回利用時に有効になります。Bedrock が Claude モデルはこのアカウントでは利用できないと返す場合は、AWS に有効化してもらう必要があります（AWS GovCloud の場合: Bedrock コンソール → Bedrock configurations → Model access）。"
         }
       },
       "prompts": {
@@ -1696,7 +1712,12 @@
       "noLink": "読むリンクが見つかりませんでした。先にリンクをコピーするか、アドレス全体を言ってください。",
       "linkFailed": "そのリンクを読めませんでした: {{name}}",
       "providerHidden": "管理者がこのコンピューターで {{name}} をオフにしています。アシスタント → 設定 で別の AI を選んでください。",
-      "braveKeyRejected": "Brave がキーを拒否しました。Search プランに登録されているか確認して、もう一度試してください。"
+      "braveKeyRejected": "Brave がキーを拒否しました。Search プランに登録されているか確認して、もう一度試してください。",
+      "screenNotForModel": "このモデルでは画面についての質問は使えません。アシスタント → 設定 で画像を扱えるモデルを選んでください。",
+      "bedrockKeyExpired": "Amazon Bedrock のキーの有効期限が切れました。コンソールで作成したキーは最長 12 時間で期限切れになります。新しいキーを作成してください。",
+      "bedrockWrongRegion": "この Amazon Bedrock のキーは別のリージョンのものです。作成したリージョンを選ぶか、このリージョンでキーを作成してください。",
+      "bedrockModelAccess": "このモデルは、このリージョンではお使いの AWS アカウントで利用できません。Amazon Bedrock コンソールでモデルアクセスを確認するか、別のモデルまたはリージョンを選んでください。",
+      "bedrockKeyInvalid": "Amazon Bedrock がキーを受け付けませんでした。アシスタント → 設定 で確認してください。"
     },
     "setUp": "設定する",
     "dismiss": "閉じる",

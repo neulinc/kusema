@@ -44,6 +44,15 @@ export const PRIVACY_NOTES: Record<string, PrivacyNote> = {
     key: "openai",
     url: "https://developers.openai.com/api/docs/guides/your-data",
   },
+  // AWS: "Amazon Bedrock does not share your content with model providers";
+  // in the default retention mode "AWS may retain the data for safety and
+  // abuse-prevention purposes"; global or geographic inference profiles can
+  // process requests in other regions. data-retention and
+  // cross-region-inference pages of the Bedrock user guide, 2026-11-26.
+  bedrock_mantle: {
+    key: "bedrock",
+    url: "https://docs.aws.amazon.com/bedrock/latest/userguide/data-retention.html",
+  },
 };
 
 export const privacyNote = (id: string | undefined): PrivacyNote | undefined =>

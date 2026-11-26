@@ -1020,13 +1020,29 @@
           "deepseek": "Ihr Text wird von DeepSeek auf Servern in China verarbeitet. Die Richtlinie von DeepSeek erlaubt, Daten zur Verbesserung seiner Dienste zu nutzen; siehe die Bedingungen.",
           "gemini": "Im kostenlosen Tarif darf Google Ihre Eingaben und Antworten zur Verbesserung seiner Produkte nutzen, und Menschen können sie lesen. Nutzen Sie für vertrauliche Arbeit einen bezahlten Schlüssel (ein Google-Cloud-Projekt mit Abrechnung).",
           "openai": "OpenAI trainiert standardmäßig nicht mit API-Daten und bewahrt sie bis zu 30 Tage zur Missbrauchsüberwachung auf.",
-          "details": "Details"
+          "details": "Details",
+          "bedrock": "Ihr Text geht an Ihr eigenes AWS-Konto, in der gewählten Region, nach Ihrem AWS-Vertrag. AWS gibt an, Ihre Inhalte nicht an Modellanbieter weiterzugeben, sie aber für Sicherheits- und Missbrauchsprüfungen aufbewahren zu können. Je nach Modell kann AWS sie in anderen Regionen verarbeiten."
         },
         "testKey": {
           "button": "Schlüssel testen",
           "checking": "Wird geprüft…",
           "ok": "Der Schlüssel funktioniert. Modelle: {{count}}.",
           "failed": "Der Schlüssel hat nicht funktioniert: {{error}}"
+        },
+        "bedrock": {
+          "region": "Region",
+          "regionDescription": "Die AWS-Region, an die Ihre Anfragen gehen. Ein kurzfristiger Schlüssel funktioniert nur in der Region, in der er erstellt wurde.",
+          "otherRegions": "Weitere Regionen…",
+          "govCloud": "AWS-GovCloud-(US)-Regionen erfordern ein AWS-GovCloud-Konto.",
+          "chooseRegion": "Region wählen",
+          "help": "Kusema erreicht Amazon Bedrock über den Mantle-Endpunkt mit einem Bedrock-API-Schlüssel: Claude-Modelle nutzen die Messages API, andere Modelle Chat Completions. Kurzfristige Schlüssel aus der Konsole gelten bis zu 12 Stunden; langfristige Schlüssel sind zum Ausprobieren gedacht.",
+          "webSearch": "Die Websuche mit Amazon Bedrock nutzt Brave Search oder einen SearXNG-Server: Die eigene Suche von Claude ist auf Bedrock nicht verfügbar.",
+          "test": "Verbindung testen",
+          "testing": "Wird getestet…",
+          "ok": "Verbunden. Modelle in dieser Region: {{count}}.",
+          "okModel": "Verbunden. Modelle in dieser Region: {{count}}. Das gewählte Modell hat geantwortet.",
+          "openWeight": "Modelle anderer Entwickler wie DeepSeek und Qwen laufen in Konten, die AWS besitzt und betreibt und auf die der Entwickler keinen Zugriff hat, und AWS gibt Ihre Inhalte nicht an sie weiter.",
+          "claudeAccess": "Claude-Modelle auf Bedrock erfordern Zugriff auf Anthropic-Modelle in Ihrem AWS-Konto. In kommerziellen Regionen wird er für die meisten Konten bei der ersten Nutzung aktiviert; meldet Bedrock, dass ein Claude-Modell für Ihr Konto nicht verfügbar ist, muss AWS ihn für Sie freischalten (in AWS GovCloud: Bedrock-Konsole → Bedrock configurations → Model access)."
         }
       },
       "prompts": {
@@ -1696,7 +1712,12 @@
       "noLink": "Kusema hat keinen Link zum Lesen gefunden. Kopieren Sie zuerst den Link oder nennen Sie die vollständige Adresse.",
       "linkFailed": "Kusema konnte diesen Link nicht lesen: {{name}}",
       "providerHidden": "{{name}} ist auf diesem Computer von Ihrer Administration ausgeschaltet. Wählen Sie unter Assistent → Einstellungen eine andere KI.",
-      "braveKeyRejected": "Brave hat den Schlüssel abgelehnt. Prüfen Sie, ob er für einen Search-Tarif abonniert ist, und versuchen Sie es erneut."
+      "braveKeyRejected": "Brave hat den Schlüssel abgelehnt. Prüfen Sie, ob er für einen Search-Tarif abonniert ist, und versuchen Sie es erneut.",
+      "screenNotForModel": "Bildschirmfragen sind mit diesem Modell nicht möglich. Wählen Sie unter Assistent → Einstellungen eines, das Bilder sehen kann.",
+      "bedrockKeyExpired": "Ihr Amazon-Bedrock-Schlüssel ist abgelaufen. Schlüssel aus der Konsole laufen nach höchstens 12 Stunden ab; erstellen Sie einen neuen.",
+      "bedrockWrongRegion": "Dieser Amazon-Bedrock-Schlüssel gehört zu einer anderen Region. Wählen Sie die Region, in der er erstellt wurde, oder erstellen Sie einen Schlüssel in dieser.",
+      "bedrockModelAccess": "Dieses Modell ist für Ihr AWS-Konto in dieser Region nicht verfügbar. Prüfen Sie den Modellzugriff in der Amazon-Bedrock-Konsole oder wählen Sie ein anderes Modell oder eine andere Region.",
+      "bedrockKeyInvalid": "Amazon Bedrock hat den Schlüssel nicht angenommen. Prüfen Sie ihn unter Assistent → Einstellungen."
     },
     "setUp": "Einrichten",
     "dismiss": "Schließen",

@@ -261,6 +261,9 @@ async fn post_process_transcription(
         .cloned()
         .unwrap_or_default();
 
+    // Kusema: Claude on Amazon Bedrock takes the Messages API (see bedrock.rs).
+    let provider = crate::bedrock::for_model(&provider, &model);
+
     // Ask these providers to skip reasoning/thinking — post-processing rarely
     // benefits from it and it adds seconds of latency. llm_client picks the
     // field the endpoint understands and retries without it if rejected.

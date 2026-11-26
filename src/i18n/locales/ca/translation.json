@@ -1023,13 +1023,29 @@
           "deepseek": "El vostre text el processa DeepSeek, en servidors a la Xina. La política de DeepSeek li permet fer servir dades per millorar els seus serveis; consulteu-ne les condicions.",
           "gemini": "Al nivell gratuït, Google pot fer servir les vostres peticions i respostes per millorar els seus productes, i algunes persones les poden llegir. Feu servir una clau de pagament (un projecte de Google Cloud amb facturació) per a la feina confidencial.",
           "openai": "OpenAI no entrena amb dades de l'API per defecte i les conserva fins a 30 dies per vigilar abusos.",
-          "details": "Detalls"
+          "details": "Detalls",
+          "bedrock": "El vostre text va al vostre propi compte d'AWS, a la regió que trieu, segons el vostre acord amb AWS. AWS indica que no comparteix el vostre contingut amb els proveïdors de models, però pot conservar-lo per a controls de seguretat i abús. Segons el model, AWS el pot processar en altres regions."
         },
         "testKey": {
           "button": "Prova la clau",
           "checking": "S'està comprovant…",
           "ok": "La clau funciona. Models: {{count}}.",
           "failed": "La clau no ha funcionat: {{error}}"
+        },
+        "bedrock": {
+          "region": "Regió",
+          "regionDescription": "La regió d'AWS on van les vostres peticions. Una clau a curt termini només funciona a la regió on es va crear.",
+          "otherRegions": "Altres regions…",
+          "govCloud": "Les regions AWS GovCloud (US) requereixen un compte d'AWS GovCloud.",
+          "chooseRegion": "Trieu una regió",
+          "help": "El Kusema accedeix a Amazon Bedrock pel punt d'accés Mantle amb una clau d'API de Bedrock: els models Claude fan servir l'API Messages i els altres Chat Completions. Les claus a curt termini de la consola duren fins a 12 hores; les de llarg termini són per fer proves.",
+          "webSearch": "La cerca web amb Amazon Bedrock fa servir Brave Search o un servidor SearXNG: la cerca pròpia de Claude no està disponible a Bedrock.",
+          "test": "Prova la connexió",
+          "testing": "S'està provant…",
+          "ok": "Connectat. Models en aquesta regió: {{count}}.",
+          "okModel": "Connectat. Models en aquesta regió: {{count}}. El model triat ha respost.",
+          "openWeight": "Els models d'altres desenvolupadors, com DeepSeek i Qwen, s'executen en comptes propietat d'AWS i gestionats per AWS als quals el desenvolupador no té accés, i AWS no comparteix el vostre contingut amb ells.",
+          "claudeAccess": "Els models Claude a Bedrock requereixen accés als models d'Anthropic al vostre compte d'AWS. A les regions comercials s'activa en el primer ús per a la majoria de comptes; si Bedrock diu que un model Claude no està disponible per al vostre compte, AWS us l'ha d'activar (a AWS GovCloud: consola de Bedrock → Bedrock configurations → Model access)."
         }
       },
       "prompts": {
@@ -1702,7 +1718,12 @@
       "noLink": "El Kusema no ha trobat cap enllaç per llegir. Copieu primer l'enllaç o digueu l'adreça completa.",
       "linkFailed": "El Kusema no ha pogut llegir aquest enllaç: {{name}}",
       "providerHidden": "El vostre administrador ha desactivat {{name}} en aquest ordinador. Trieu una altra IA a Assistent → Configuració.",
-      "braveKeyRejected": "Brave ha rebutjat la clau. Comproveu que estigui subscrita a un pla Search i torneu-ho a provar."
+      "braveKeyRejected": "Brave ha rebutjat la clau. Comproveu que estigui subscrita a un pla Search i torneu-ho a provar.",
+      "screenNotForModel": "Les preguntes sobre la pantalla no estan disponibles amb aquest model. Trieu-ne un que vegi imatges a Assistent → Configuració.",
+      "bedrockKeyExpired": "La vostra clau d'Amazon Bedrock ha caducat. Les claus de la consola caduquen com a màxim a les 12 hores; creeu-ne una de nova.",
+      "bedrockWrongRegion": "Aquesta clau d'Amazon Bedrock pertany a una altra regió. Trieu la regió on es va crear o creeu una clau en aquesta.",
+      "bedrockModelAccess": "Aquest model no està disponible per al vostre compte d'AWS en aquesta regió. Comproveu l'accés als models a la consola d'Amazon Bedrock, o trieu un altre model o regió.",
+      "bedrockKeyInvalid": "Amazon Bedrock no ha acceptat la clau. Reviseu-la a Assistent → Configuració."
     },
     "setUp": "Configura",
     "dismiss": "Tanca",

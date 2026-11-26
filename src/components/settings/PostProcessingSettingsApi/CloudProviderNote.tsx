@@ -18,7 +18,9 @@ type Check =
 export const CloudProviderNote: React.FC<{
   providerId: string;
   hasKey: boolean;
-}> = ({ providerId, hasKey }) => {
+  /** Amazon Bedrock has its own "Test connection". */
+  showTest?: boolean;
+}> = ({ providerId, hasKey, showTest = true }) => {
   const { t } = useTranslation();
   const note = privacyNote(providerId);
   const [check, setCheck] = useState<Check>({ state: "idle" });
@@ -49,35 +51,37 @@ export const CloudProviderNote: React.FC<{
           </TextLink>
         </p>
       )}
-      <div className="flex flex-wrap items-center gap-3">
-        <Button
-          variant="secondary"
-          size="sm"
-          onClick={() => void testKey()}
-          disabled={!hasKey || check.state === "checking"}
-        >
-          {check.state === "checking"
-            ? t("settings.postProcessing.api.testKey.checking")
-            : t("settings.postProcessing.api.testKey.button")}
-        </Button>
-        {check.state === "ok" && (
-          <span role="status" className="text-[13px]/5 text-ink-2">
-            {t("settings.postProcessing.api.testKey.ok", {
-              count: check.count,
-            })}
-          </span>
-        )}
-        {check.state === "failed" && (
-          <span
-            role="alert"
-            className="text-[13px]/5 text-error [overflow-wrap:anywhere]"
+      {showTest && (
+        <div className="flex flex-wrap items-center gap-3">
+          <Button
+            variant="secondary"
+            size="sm"
+            onClick={() => void testKey()}
+            disabled={!hasKey || check.state === "checking"}
           >
-            {t("settings.postProcessing.api.testKey.failed", {
-              error: check.error,
-            })}
-          </span>
-        )}
-      </div>
+            {check.state === "checking"
+              ? t("settings.postProcessing.api.testKey.checking")
+              : t("settings.postProcessing.api.testKey.button")}
+          </Button>
+          {check.state === "ok" && (
+            <span role="status" className="text-[13px]/5 text-ink-2">
+              {t("settings.postProcessing.api.testKey.ok", {
+                count: check.count,
+              })}
+            </span>
+          )}
+          {check.state === "failed" && (
+            <span
+              role="alert"
+              className="text-[13px]/5 text-error [overflow-wrap:anywhere]"
+            >
+              {t("settings.postProcessing.api.testKey.failed", {
+                error: check.error,
+              })}
+            </span>
+          )}
+        </div>
+      )}
     </div>
   );
 };

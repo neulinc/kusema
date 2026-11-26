@@ -1020,13 +1020,29 @@
           "deepseek": "Teks Anda diproses oleh DeepSeek, di server di Tiongkok. Kebijakan DeepSeek mengizinkannya memakai data untuk meningkatkan layanannya; lihat ketentuannya.",
           "gemini": "Di paket gratis, Google dapat memakai prompt dan jawaban Anda untuk meningkatkan produknya, dan orang dapat membacanya. Gunakan kunci berbayar (proyek Google Cloud dengan penagihan) untuk pekerjaan rahasia.",
           "openai": "Secara default OpenAI tidak melatih model dengan data API dan menyimpannya hingga 30 hari untuk memantau penyalahgunaan.",
-          "details": "Detail"
+          "details": "Detail",
+          "bedrock": "Teks Anda dikirim ke akun AWS Anda sendiri, di region yang Anda pilih, berdasarkan perjanjian AWS Anda. AWS menyatakan tidak membagikan konten Anda kepada penyedia model, tetapi dapat menyimpannya untuk pemeriksaan keamanan dan penyalahgunaan. Tergantung modelnya, AWS dapat memprosesnya di region lain."
         },
         "testKey": {
           "button": "Uji kunci",
           "checking": "Memeriksa…",
           "ok": "Kunci berfungsi. Model: {{count}}.",
           "failed": "Kunci tidak berhasil: {{error}}"
+        },
+        "bedrock": {
+          "region": "Region",
+          "regionDescription": "Region AWS tujuan permintaan Anda. Kunci jangka pendek hanya berfungsi di region tempat kunci itu dibuat.",
+          "otherRegions": "Region lain…",
+          "govCloud": "Region AWS GovCloud (US) memerlukan akun AWS GovCloud.",
+          "chooseRegion": "Pilih region",
+          "help": "Kusema mengakses Amazon Bedrock lewat endpoint Mantle dengan kunci API Bedrock: model Claude memakai Messages API, model lain Chat Completions. Kunci jangka pendek dari konsol berlaku hingga 12 jam; kunci jangka panjang untuk mencoba-coba.",
+          "webSearch": "Pencarian web dengan Amazon Bedrock memakai Brave Search atau server SearXNG: pencarian bawaan Claude tidak tersedia di Bedrock.",
+          "test": "Uji koneksi",
+          "testing": "Menguji…",
+          "ok": "Terhubung. Model di region ini: {{count}}.",
+          "okModel": "Terhubung. Model di region ini: {{count}}. Model yang dipilih menjawab.",
+          "openWeight": "Model dari pengembang lain, seperti DeepSeek dan Qwen, berjalan di akun yang dimiliki dan dioperasikan AWS yang tidak dapat diakses pengembang, dan AWS tidak membagikan konten Anda kepada mereka.",
+          "claudeAccess": "Model Claude di Bedrock memerlukan akses model Anthropic di akun AWS Anda. Di region komersial, akses ini aktif saat pertama digunakan untuk sebagian besar akun; jika Bedrock menyatakan model Claude tidak tersedia untuk akun Anda, AWS harus mengaktifkannya untuk Anda (di AWS GovCloud: konsol Bedrock → Bedrock configurations → Model access)."
         }
       },
       "prompts": {
@@ -1696,7 +1712,12 @@
       "noLink": "Kusema tidak menemukan tautan untuk dibaca. Salin tautannya dulu, atau ucapkan alamat lengkapnya.",
       "linkFailed": "Kusema tidak dapat membaca tautan itu: {{name}}",
       "providerHidden": "Administrator Anda menonaktifkan {{name}} di komputer ini. Pilih AI lain di Asisten → Pengaturan.",
-      "braveKeyRejected": "Brave menolak kunci itu. Pastikan kunci berlangganan paket Search, lalu coba lagi."
+      "braveKeyRejected": "Brave menolak kunci itu. Pastikan kunci berlangganan paket Search, lalu coba lagi.",
+      "screenNotForModel": "Pertanyaan tentang layar tidak tersedia dengan model ini. Pilih model yang bisa melihat gambar di Asisten → Pengaturan.",
+      "bedrockKeyExpired": "Kunci Amazon Bedrock Anda sudah kedaluwarsa. Kunci dari konsol kedaluwarsa paling lama setelah 12 jam; buat yang baru.",
+      "bedrockWrongRegion": "Kunci Amazon Bedrock ini milik region lain. Pilih region tempat kunci dibuat, atau buat kunci di region ini.",
+      "bedrockModelAccess": "Model ini tidak tersedia untuk akun AWS Anda di region ini. Periksa akses model di konsol Amazon Bedrock, atau pilih model atau region lain.",
+      "bedrockKeyInvalid": "Amazon Bedrock tidak menerima kunci itu. Periksa di Asisten → Pengaturan."
     },
     "setUp": "Siapkan",
     "dismiss": "Tutup",

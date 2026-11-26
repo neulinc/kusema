@@ -12,6 +12,7 @@ type ModelSelectProps = {
   onCreate: (value: string) => void;
   onBlur: () => void;
   className?: string;
+  groups?: { label: string; options: ModelOption[] }[];
 };
 
 export const ModelSelect: React.FC<ModelSelectProps> = React.memo(
@@ -25,6 +26,7 @@ export const ModelSelect: React.FC<ModelSelectProps> = React.memo(
     onCreate,
     onBlur,
     className = "flex-1 min-w-[360px]",
+    groups,
   }) => {
     const handleCreate = (inputValue: string) => {
       const trimmed = inputValue.trim();
@@ -39,6 +41,7 @@ export const ModelSelect: React.FC<ModelSelectProps> = React.memo(
         className={computedClassName}
         value={value || null}
         options={options}
+        groups={groups}
         onChange={(selected) => onSelect(selected ?? "")}
         onCreateOption={handleCreate}
         onBlur={onBlur}

@@ -184,12 +184,24 @@ pub fn suggested_model(provider_id: &str, models: &[String]) -> Option<String> {
         OPENAI_ID => &["gpt-6.2-sol", "gpt-6.2-astra", "gpt-6-luna"],
         DEEPSEEK_ID => &["deepseek-flash", "deepseek-v4-pro"],
         GEMINI_ID => &["gemini-3.8-flash", "gemini-3.6-flash"],
+        // Claude on Amazon Bedrock (bedrock-mantle), when the region lists it.
+        crate::bedrock::ID => &[
+            "anthropic.claude-sonnet-5-5",
+            "anthropic.claude-haiku-5-5",
+            "anthropic.claude-opus-5-5",
+        ],
         _ => &[],
     };
     preferred
         .iter()
         .find(|want| models.iter().any(|m| m == *want))
         .map(|m| m.to_string())
+        .or_else(|| {
+            // Bedrock without the preferred ones: the newest Claude it lists.
+            (provider_id == crate::bedrock::ID)
+                .then(|| crate::bedrock::newest_claude(models))
+                .flatten()
+        })
 }
 
 #[cfg(test)]

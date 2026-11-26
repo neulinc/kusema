@@ -1026,13 +1026,29 @@
           "deepseek": "Twój tekst jest przetwarzany przez DeepSeek, na serwerach w Chinach. Zasady DeepSeek pozwalają mu używać danych do ulepszania usług; zobacz jego warunki.",
           "gemini": "W planie bezpłatnym Google może używać twoich zapytań i odpowiedzi do ulepszania swoich produktów, a ludzie mogą je czytać. Do poufnej pracy używaj płatnego klucza (projektu Google Cloud z rozliczeniami).",
           "openai": "OpenAI domyślnie nie trenuje modeli na danych z API i przechowuje je do 30 dni w celu wykrywania nadużyć.",
-          "details": "Szczegóły"
+          "details": "Szczegóły",
+          "bedrock": "Twój tekst trafia do twojego własnego konta AWS, w wybranym regionie, na warunkach twojej umowy z AWS. AWS deklaruje, że nie udostępnia twoich treści dostawcom modeli, ale może je przechowywać na potrzeby kontroli bezpieczeństwa i nadużyć. Zależnie od modelu AWS może je przetwarzać w innych regionach."
         },
         "testKey": {
           "button": "Testuj klucz",
           "checking": "Sprawdzanie…",
           "ok": "Klucz działa. Modele: {{count}}.",
           "failed": "Klucz nie zadziałał: {{error}}"
+        },
+        "bedrock": {
+          "region": "Region",
+          "regionDescription": "Region AWS, do którego trafiają twoje żądania. Klucz krótkoterminowy działa tylko w regionie, w którym go utworzono.",
+          "otherRegions": "Inne regiony…",
+          "govCloud": "Regiony AWS GovCloud (US) wymagają konta AWS GovCloud.",
+          "chooseRegion": "Wybierz region",
+          "help": "Kusema łączy się z Amazon Bedrock przez punkt końcowy Mantle za pomocą klucza API Bedrock: modele Claude używają Messages API, pozostałe Chat Completions. Klucze krótkoterminowe z konsoli działają do 12 godzin; długoterminowe służą do testów.",
+          "webSearch": "Wyszukiwanie w sieci z Amazon Bedrock używa Brave Search lub serwera SearXNG: wbudowane wyszukiwanie Claude nie jest dostępne w Bedrock.",
+          "test": "Testuj połączenie",
+          "testing": "Testowanie…",
+          "ok": "Połączono. Modele w tym regionie: {{count}}.",
+          "okModel": "Połączono. Modele w tym regionie: {{count}}. Wybrany model odpowiedział.",
+          "openWeight": "Modele innych twórców, takie jak DeepSeek i Qwen, działają na kontach należących do AWS i przez nie obsługiwanych, do których twórca nie ma dostępu, a AWS nie udostępnia im Twoich treści.",
+          "claudeAccess": "Modele Claude w Bedrock wymagają dostępu do modeli Anthropic na Twoim koncie AWS. W regionach komercyjnych dla większości kont włącza się on przy pierwszym użyciu; jeśli Bedrock informuje, że model Claude nie jest dostępny dla Twojego konta, AWS musi go włączyć (w AWS GovCloud: konsola Bedrock → Bedrock configurations → Model access)."
         }
       },
       "prompts": {
@@ -1708,7 +1724,12 @@
       "noLink": "Kusema nie znalazła linku do przeczytania. Najpierw skopiuj link albo podaj pełny adres.",
       "linkFailed": "Kusema nie mogła przeczytać tego linku: {{name}}",
       "providerHidden": "Administrator wyłączył {{name}} na tym komputerze. Wybierz inną AI w Asystent → Ustawienia.",
-      "braveKeyRejected": "Brave odrzucił klucz. Sprawdź, czy jest przypisany do planu Search, i spróbuj ponownie."
+      "braveKeyRejected": "Brave odrzucił klucz. Sprawdź, czy jest przypisany do planu Search, i spróbuj ponownie.",
+      "screenNotForModel": "Pytania o ekran nie są dostępne z tym modelem. Wybierz model, który widzi obrazy, w Asystent → Ustawienia.",
+      "bedrockKeyExpired": "Twój klucz Amazon Bedrock wygasł. Klucze z konsoli wygasają najpóźniej po 12 godzinach; utwórz nowy.",
+      "bedrockWrongRegion": "Ten klucz Amazon Bedrock należy do innego regionu. Wybierz region, w którym go utworzono, albo utwórz klucz w tym regionie.",
+      "bedrockModelAccess": "Ten model nie jest dostępny dla twojego konta AWS w tym regionie. Sprawdź dostęp do modeli w konsoli Amazon Bedrock albo wybierz inny model lub region.",
+      "bedrockKeyInvalid": "Amazon Bedrock nie przyjął klucza. Sprawdź go w Asystent → Ustawienia."
     },
     "setUp": "Skonfiguruj",
     "dismiss": "Zamknij",

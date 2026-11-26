@@ -1020,13 +1020,29 @@
           "deepseek": "Din tekst behandles af DeepSeek, på servere i Kina. DeepSeeks politik tillader, at data bruges til at forbedre tjenesterne; se deres vilkår.",
           "gemini": "På gratisniveauet må Google bruge dine forespørgsler og svar til at forbedre sine produkter, og mennesker kan læse dem. Brug en betalt nøgle (et Google Cloud-projekt med fakturering) til fortroligt arbejde.",
           "openai": "OpenAI træner som standard ikke på API-data og gemmer dem i op til 30 dage for at opdage misbrug.",
-          "details": "Detaljer"
+          "details": "Detaljer",
+          "bedrock": "Din tekst går til din egen AWS-konto, i den region du vælger, under din AWS-aftale. AWS oplyser, at den ikke deler dit indhold med modeludbydere, men kan gemme det til sikkerheds- og misbrugstjek. Afhængigt af modellen kan AWS behandle det i andre regioner."
         },
         "testKey": {
           "button": "Test nøgle",
           "checking": "Tjekker…",
           "ok": "Nøglen virker. Modeller: {{count}}.",
           "failed": "Nøglen virkede ikke: {{error}}"
+        },
+        "bedrock": {
+          "region": "Region",
+          "regionDescription": "Den AWS-region, dine forespørgsler går til. En kortvarig nøgle virker kun i den region, den blev oprettet i.",
+          "otherRegions": "Andre regioner…",
+          "govCloud": "AWS GovCloud (US)-regioner kræver en AWS GovCloud-konto.",
+          "chooseRegion": "Vælg en region",
+          "help": "Kusema når Amazon Bedrock via Mantle-slutpunktet med en Bedrock-API-nøgle: Claude-modeller bruger Messages API, andre modeller Chat Completions. Kortvarige nøgler fra konsollen gælder i op til 12 timer; langvarige nøgler er beregnet til at prøve ting af.",
+          "webSearch": "Websøgning med Amazon Bedrock bruger Brave Search eller en SearXNG-server: Claudes egen søgning findes ikke på Bedrock.",
+          "test": "Test forbindelse",
+          "testing": "Tester…",
+          "ok": "Forbundet. Modeller i denne region: {{count}}.",
+          "okModel": "Forbundet. Modeller i denne region: {{count}}. Den valgte model svarede.",
+          "openWeight": "Modeller fra andre udviklere, som DeepSeek og Qwen, kører i konti, som AWS ejer og driver, og som udvikleren ikke har adgang til, og AWS deler ikke dit indhold med dem.",
+          "claudeAccess": "Claude-modeller på Bedrock kræver adgang til Anthropics modeller i din AWS-konto. I kommercielle regioner slås den til ved første brug for de fleste konti; hvis Bedrock siger, at en Claude-model ikke er tilgængelig for din konto, skal AWS slå den til for dig (i AWS GovCloud: Bedrock-konsollen → Bedrock configurations → Model access)."
         }
       },
       "prompts": {
@@ -1696,7 +1712,12 @@
       "noLink": "Kusema fandt ikke et link at læse. Kopiér linket først, eller sig hele adressen.",
       "linkFailed": "Kusema kunne ikke læse linket: {{name}}",
       "providerHidden": "Din administrator har slået {{name}} fra på denne computer. Vælg en anden AI under Assistent → Indstillinger.",
-      "braveKeyRejected": "Brave afviste nøglen. Tjek, at den abonnerer på et Search-abonnement, og prøv igen."
+      "braveKeyRejected": "Brave afviste nøglen. Tjek, at den abonnerer på et Search-abonnement, og prøv igen.",
+      "screenNotForModel": "Skærmspørgsmål er ikke tilgængelige med denne model. Vælg en, der kan se billeder, under Assistent → Indstillinger.",
+      "bedrockKeyExpired": "Din Amazon Bedrock-nøgle er udløbet. Nøgler fra konsollen udløber efter højst 12 timer; opret en ny.",
+      "bedrockWrongRegion": "Denne Amazon Bedrock-nøgle hører til en anden region. Vælg den region, den blev oprettet i, eller opret en nøgle i denne.",
+      "bedrockModelAccess": "Denne model er ikke tilgængelig for din AWS-konto i denne region. Tjek modeladgang i Amazon Bedrock-konsollen, eller vælg en anden model eller region.",
+      "bedrockKeyInvalid": "Amazon Bedrock accepterede ikke nøglen. Tjek den under Assistent → Indstillinger."
     },
     "setUp": "Sæt op",
     "dismiss": "Luk",

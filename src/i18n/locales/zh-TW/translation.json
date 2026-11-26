@@ -1020,13 +1020,29 @@
           "deepseek": "你的文字由 DeepSeek 在位於中國的伺服器上處理。DeepSeek 的政策允許其使用資料改善服務；請參閱其條款。",
           "gemini": "在免費方案中，Google 可能會用你的提示和回答改善其產品，也可能有人閱讀。處理機密工作請使用付費金鑰（已啟用帳單的 Google Cloud 專案）。",
           "openai": "OpenAI 預設不會用 API 資料訓練模型，並為監控濫用最多保留 30 天。",
-          "details": "詳細資料"
+          "details": "詳細資料",
+          "bedrock": "你的文字會送到你自己的 AWS 帳戶，位於你選擇的區域，適用你的 AWS 協議。AWS 表示不會與模型供應商分享你的內容，但可能為安全與濫用檢查而保留。視模型而定，AWS 可能在其他區域處理。"
         },
         "testKey": {
           "button": "測試金鑰",
           "checking": "正在檢查…",
           "ok": "金鑰可用。模型：{{count}} 個。",
           "failed": "金鑰無法使用：{{error}}"
+        },
+        "bedrock": {
+          "region": "區域",
+          "regionDescription": "請求送往的 AWS 區域。短期金鑰只能在建立它的區域使用。",
+          "otherRegions": "其他區域…",
+          "govCloud": "AWS GovCloud (US) 區域需要 AWS GovCloud 帳戶。",
+          "chooseRegion": "選擇區域",
+          "help": "Kusema 透過 Mantle 端點並使用 Bedrock API 金鑰連線至 Amazon Bedrock：Claude 模型使用 Messages API，其他模型使用 Chat Completions。主控台的短期金鑰最長有效 12 小時；長期金鑰用於試用。",
+          "webSearch": "使用 Amazon Bedrock 時，網頁搜尋使用 Brave Search 或 SearXNG 伺服器：Claude 內建的搜尋在 Bedrock 上無法使用。",
+          "test": "測試連線",
+          "testing": "正在測試…",
+          "ok": "已連線。此區域的模型：{{count}} 個。",
+          "okModel": "已連線。此區域的模型：{{count}} 個。所選模型已回覆。",
+          "openWeight": "其他開發者的模型（例如 DeepSeek 和 Qwen）在 AWS 擁有並營運、開發者無法存取的帳戶中執行，AWS 不會與他們分享您的內容。",
+          "claudeAccess": "在 Bedrock 上使用 Claude 模型，需要在您的 AWS 帳戶中具備 Anthropic 模型存取權。在商業區域，大多數帳戶首次使用時即會啟用；若 Bedrock 表示您的帳戶無法使用某個 Claude 模型，則需由 AWS 為您啟用（AWS GovCloud：Bedrock 主控台 → Bedrock configurations → Model access）。"
         }
       },
       "prompts": {
@@ -1696,7 +1712,12 @@
       "noLink": "Kusema 找不到要讀取的連結。請先複製連結，或說出完整網址。",
       "linkFailed": "Kusema 無法讀取該連結：{{name}}",
       "providerHidden": "系統管理員已在這部電腦上關閉 {{name}}。請在助理 → 設定中選擇其他 AI。",
-      "braveKeyRejected": "Brave 拒絕了該金鑰。請確認它已訂閱 Search 方案，然後再試一次。"
+      "braveKeyRejected": "Brave 拒絕了該金鑰。請確認它已訂閱 Search 方案，然後再試一次。",
+      "screenNotForModel": "此模型不支援螢幕提問。請在助理 → 設定中選擇能看圖片的模型。",
+      "bedrockKeyExpired": "你的 Amazon Bedrock 金鑰已過期。主控台建立的金鑰最多 12 小時後過期，請建立新的金鑰。",
+      "bedrockWrongRegion": "此 Amazon Bedrock 金鑰屬於其他區域。請選擇建立它的區域，或在此區域建立金鑰。",
+      "bedrockModelAccess": "此模型在該區域對你的 AWS 帳戶無法使用。請在 Amazon Bedrock 主控台檢查模型存取權，或選擇其他模型或區域。",
+      "bedrockKeyInvalid": "Amazon Bedrock 不接受該金鑰。請在助理 → 設定中檢查。"
     },
     "setUp": "設定",
     "dismiss": "關閉",

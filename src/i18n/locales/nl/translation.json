@@ -1020,13 +1020,29 @@
           "deepseek": "Je tekst wordt verwerkt door DeepSeek, op servers in China. Het beleid van DeepSeek staat toe dat het gegevens gebruikt om zijn diensten te verbeteren; zie de voorwaarden.",
           "gemini": "Bij het gratis abonnement mag Google je vragen en antwoorden gebruiken om zijn producten te verbeteren, en mensen kunnen ze lezen. Gebruik een betaalde sleutel (een Google Cloud-project met facturering) voor vertrouwelijk werk.",
           "openai": "OpenAI traint standaard niet op API-gegevens en bewaart ze tot 30 dagen om misbruik op te sporen.",
-          "details": "Details"
+          "details": "Details",
+          "bedrock": "Je tekst gaat naar je eigen AWS-account, in de regio die je kiest, onder je AWS-overeenkomst. AWS zegt je inhoud niet met modelaanbieders te delen, maar kan die bewaren voor veiligheids- en misbruikcontroles. Afhankelijk van het model kan AWS hem in andere regio's verwerken."
         },
         "testKey": {
           "button": "Sleutel testen",
           "checking": "Bezig met controleren…",
           "ok": "De sleutel werkt. Modellen: {{count}}.",
           "failed": "De sleutel werkte niet: {{error}}"
+        },
+        "bedrock": {
+          "region": "Regio",
+          "regionDescription": "De AWS-regio waar je verzoeken naartoe gaan. Een kortlopende sleutel werkt alleen in de regio waarin hij is gemaakt.",
+          "otherRegions": "Andere regio's…",
+          "govCloud": "AWS GovCloud (US)-regio's vereisen een AWS GovCloud-account.",
+          "chooseRegion": "Kies een regio",
+          "help": "Kusema bereikt Amazon Bedrock via het Mantle-eindpunt met een Bedrock-API-sleutel: Claude-modellen gebruiken de Messages API, andere modellen Chat Completions. Kortlopende sleutels uit de console gelden tot 12 uur; langlopende sleutels zijn bedoeld om uit te proberen.",
+          "webSearch": "Zoeken op het web met Amazon Bedrock gebruikt Brave Search of een SearXNG-server: de eigen zoekfunctie van Claude is niet beschikbaar op Bedrock.",
+          "test": "Verbinding testen",
+          "testing": "Bezig met testen…",
+          "ok": "Verbonden. Modellen in deze regio: {{count}}.",
+          "okModel": "Verbonden. Modellen in deze regio: {{count}}. Het gekozen model heeft geantwoord.",
+          "openWeight": "Modellen van andere ontwikkelaars, zoals DeepSeek en Qwen, draaien in accounts die AWS bezit en beheert en waar de ontwikkelaar geen toegang toe heeft, en AWS deelt je inhoud niet met hen.",
+          "claudeAccess": "Claude-modellen op Bedrock vereisen toegang tot de modellen van Anthropic in je AWS-account. In commerciële regio's wordt die voor de meeste accounts bij het eerste gebruik ingeschakeld; zegt Bedrock dat een Claude-model niet beschikbaar is voor je account, dan moet AWS het voor je inschakelen (in AWS GovCloud: Bedrock-console → Bedrock configurations → Model access)."
         }
       },
       "prompts": {
@@ -1696,7 +1712,12 @@
       "noLink": "Kusema vond geen link om te lezen. Kopieer eerst de link, of noem het volledige adres.",
       "linkFailed": "Kusema kon die link niet lezen: {{name}}",
       "providerHidden": "Je beheerder heeft {{name}} op deze computer uitgezet. Kies een andere AI bij Assistent → Instellingen.",
-      "braveKeyRejected": "Brave heeft de sleutel geweigerd. Controleer of die geabonneerd is op een Search-abonnement en probeer het opnieuw."
+      "braveKeyRejected": "Brave heeft de sleutel geweigerd. Controleer of die geabonneerd is op een Search-abonnement en probeer het opnieuw.",
+      "screenNotForModel": "Schermvragen zijn niet mogelijk met dit model. Kies er een dat afbeeldingen kan zien bij Assistent → Instellingen.",
+      "bedrockKeyExpired": "Je Amazon Bedrock-sleutel is verlopen. Sleutels uit de console verlopen na hoogstens 12 uur; maak een nieuwe.",
+      "bedrockWrongRegion": "Deze Amazon Bedrock-sleutel hoort bij een andere regio. Kies de regio waarin hij is gemaakt, of maak een sleutel in deze regio.",
+      "bedrockModelAccess": "Dit model is in deze regio niet beschikbaar voor je AWS-account. Controleer de modeltoegang in de Amazon Bedrock-console, of kies een ander model of een andere regio.",
+      "bedrockKeyInvalid": "Amazon Bedrock heeft de sleutel niet geaccepteerd. Controleer hem bij Assistent → Instellingen."
     },
     "setUp": "Instellen",
     "dismiss": "Sluiten",

@@ -18,9 +18,14 @@ import { ProviderSelect } from "../PostProcessingSettingsApi/ProviderSelect";
 import { BaseUrlField } from "../PostProcessingSettingsApi/BaseUrlField";
 import { ApiKeyField } from "../PostProcessingSettingsApi/ApiKeyField";
 import { ModelSelect } from "../PostProcessingSettingsApi/ModelSelect";
+import { groupByDeveloper } from "../PostProcessingSettingsApi/bedrockModels";
 import { usePostProcessProviderState } from "../PostProcessingSettingsApi/usePostProcessProviderState";
 import { LocalProviderStatus } from "../PostProcessingSettingsApi/LocalProviderStatus";
 import { CloudProviderNote } from "../PostProcessingSettingsApi/CloudProviderNote";
+import {
+  BEDROCK_ID,
+  BedrockSettings,
+} from "../PostProcessingSettingsApi/BedrockSettings";
 import { ShortcutInput } from "../ShortcutInput";
 import { hiddenShortcut } from "@/lib/kusemaKey";
 import { useSettings } from "../../../hooks/useSettings";
@@ -140,7 +145,11 @@ const PostProcessingSettingsApiComponent: React.FC = () => {
             <CloudProviderNote
               providerId={state.selectedProvider.id}
               hasKey={state.apiKey.trim() !== ""}
+              showTest={state.selectedProvider.id !== BEDROCK_ID}
             />
+          )}
+          {state.selectedProvider?.id === BEDROCK_ID && (
+            <BedrockSettings baseUrl={state.baseUrl} />
           )}
         </>
       )}
@@ -161,6 +170,11 @@ const PostProcessingSettingsApiComponent: React.FC = () => {
             <ModelSelect
               value={state.model}
               options={state.modelOptions}
+              groups={
+                state.selectedProvider?.id === BEDROCK_ID
+                  ? groupByDeveloper(state.modelOptions)
+                  : undefined
+              }
               disabled={state.isModelUpdating}
               isLoading={state.isFetchingModels}
               placeholder={

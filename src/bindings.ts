@@ -1724,6 +1724,30 @@ async changeWebSearchSettings(web: WebSearchSettings) : Promise<Result<null, str
 }
 },
 /**
+ * Picks the region (one of `REGIONS` or `GOVCLOUD_REGIONS`).
+ */
+async setBedrockRegion(region: string) : Promise<Result<null, string>> {
+    try {
+    return { status: "ok", data: await TAURI_INVOKE("set_bedrock_region", { region }) };
+} catch (e) {
+    if(e instanceof Error) throw e;
+    else return { status: "error", error: e  as any };
+}
+},
+/**
+ * "Test connection": lists the region's models, then (if one is chosen)
+ * asks it for a one-word reply, so key, region and model access are all
+ * checked. Listed in the privacy ledger like any request.
+ */
+async testBedrockConnection() : Promise<Result<BedrockTest, string>> {
+    try {
+    return { status: "ok", data: await TAURI_INVOKE("test_bedrock_connection") };
+} catch (e) {
+    if(e instanceof Error) throw e;
+    else return { status: "error", error: e  as any };
+}
+},
+/**
  * Saves the Brave Search key (to the keychain, like the AI providers' keys).
  */
 async setBraveSearchKey(key: string) : Promise<Result<null, string>> {
@@ -2222,6 +2246,22 @@ export type AutoUnavailableReason =
  */
 { kind: "no_match" }
 export type AvailableAccelerators = { transcribe: string[]; gpu_devices: GpuDeviceOption[] }
+/**
+ * What "Test connection" found.
+ */
+export type BedrockTest = { 
+/**
+ * Models this region offers (unavailable ones left out).
+ */
+models: number; 
+/**
+ * The chosen model answered, if one is chosen.
+ */
+model_answered: boolean; 
+/**
+ * A failure, as a translation key with its `{{name}}`, and the English.
+ */
+problem_key: string | null; problem_name: string | null; problem: string | null }
 export type BindingResponse = { success: boolean; binding: ShortcutBinding | null; error: string | null }
 /**
  * Why the built-in search needs the user's go-ahead.

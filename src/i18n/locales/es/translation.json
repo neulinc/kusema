@@ -1023,13 +1023,29 @@
           "deepseek": "Tu texto lo procesa DeepSeek, en servidores en China. La política de DeepSeek le permite usar datos para mejorar sus servicios; consulta sus condiciones.",
           "gemini": "En el nivel gratuito, Google puede usar tus peticiones y respuestas para mejorar sus productos, y algunas personas pueden leerlas. Usa una clave de pago (un proyecto de Google Cloud con facturación) para el trabajo confidencial.",
           "openai": "OpenAI no entrena con los datos de la API por defecto y los guarda hasta 30 días para vigilar abusos.",
-          "details": "Detalles"
+          "details": "Detalles",
+          "bedrock": "Tu texto va a tu propia cuenta de AWS, en la región que elijas, según tu acuerdo con AWS. AWS indica que no comparte tu contenido con los proveedores de modelos, pero puede conservarlo para controles de seguridad y abuso. Según el modelo, AWS puede procesarlo en otras regiones."
         },
         "testKey": {
           "button": "Probar clave",
           "checking": "Comprobando…",
           "ok": "La clave funciona. Modelos: {{count}}.",
           "failed": "La clave no funcionó: {{error}}"
+        },
+        "bedrock": {
+          "region": "Región",
+          "regionDescription": "La región de AWS a la que van tus solicitudes. Una clave a corto plazo solo funciona en la región en la que se creó.",
+          "otherRegions": "Otras regiones…",
+          "govCloud": "Las regiones de AWS GovCloud (US) requieren una cuenta de AWS GovCloud.",
+          "chooseRegion": "Elige una región",
+          "help": "Kusema accede a Amazon Bedrock a través de su punto de conexión Mantle con una clave de API de Bedrock: los modelos Claude usan la API Messages y los demás Chat Completions. Las claves a corto plazo de la consola duran hasta 12 horas; las de largo plazo son para pruebas.",
+          "webSearch": "La búsqueda web con Amazon Bedrock usa Brave Search o un servidor SearXNG: la búsqueda propia de Claude no está disponible en Bedrock.",
+          "test": "Probar conexión",
+          "testing": "Probando…",
+          "ok": "Conectado. Modelos en esta región: {{count}}.",
+          "okModel": "Conectado. Modelos en esta región: {{count}}. El modelo elegido respondió.",
+          "openWeight": "Los modelos de otros desarrolladores, como DeepSeek y Qwen, se ejecutan en cuentas propiedad de AWS y gestionadas por AWS a las que el desarrollador no tiene acceso, y AWS no comparte tu contenido con ellos.",
+          "claudeAccess": "Los modelos Claude en Bedrock requieren acceso a los modelos de Anthropic en tu cuenta de AWS. En las regiones comerciales se activa con el primer uso en la mayoría de las cuentas; si Bedrock indica que un modelo Claude no está disponible para tu cuenta, AWS tiene que activarlo (en AWS GovCloud: consola de Bedrock → Bedrock configurations → Model access)."
         }
       },
       "prompts": {
@@ -1702,7 +1718,12 @@
       "noLink": "Kusema no encontró ningún enlace que leer. Copia primero el enlace o di la dirección completa.",
       "linkFailed": "Kusema no pudo leer ese enlace: {{name}}",
       "providerHidden": "Tu administrador ha desactivado {{name}} en este equipo. Elige otra IA en Asistente → Ajustes.",
-      "braveKeyRejected": "Brave rechazó la clave. Comprueba que esté suscrita a un plan Search y vuelve a intentarlo."
+      "braveKeyRejected": "Brave rechazó la clave. Comprueba que esté suscrita a un plan Search y vuelve a intentarlo.",
+      "screenNotForModel": "Las preguntas sobre la pantalla no están disponibles con este modelo. Elige uno que vea imágenes en Asistente → Ajustes.",
+      "bedrockKeyExpired": "Tu clave de Amazon Bedrock ha caducado. Las claves de la consola caducan como máximo a las 12 horas; crea una nueva.",
+      "bedrockWrongRegion": "Esta clave de Amazon Bedrock pertenece a otra región. Elige la región en la que se creó o crea una clave en esta.",
+      "bedrockModelAccess": "Este modelo no está disponible para tu cuenta de AWS en esta región. Revisa el acceso a modelos en la consola de Amazon Bedrock o elige otro modelo o región.",
+      "bedrockKeyInvalid": "Amazon Bedrock no aceptó la clave. Revísala en Asistente → Ajustes."
     },
     "setUp": "Configurar",
     "dismiss": "Cerrar",

@@ -7,6 +7,7 @@ mod assistant;
 mod audio_feedback;
 pub mod audio_toolkit;
 mod autostart;
+mod bedrock;
 mod catalog;
 mod chinese_script;
 mod cleanup;
@@ -933,6 +934,8 @@ pub fn run(cli_args: CliArgs) {
             screen::card::answer_correction_card,
             screen::card::answer_web_card,
             web::change_web_search_settings,
+            bedrock::set_bedrock_region,
+            bedrock::test_bedrock_connection,
             web::set_brave_search_key,
             web::has_brave_search_key,
             web::test_web_search,

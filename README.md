@@ -68,7 +68,7 @@ Kusema writes legal terms and citations correctly out of the box ("habeas corpus
 
 ### AI providers
 
-Choose the AI that answers on the **AI Provider** page (or in setup). On your computer: **Ollama** and **LM Studio**, nothing leaves the machine. In the cloud, with your own API key: **Anthropic** (Claude), **DeepSeek**, **Google Gemini** and **OpenAI**, then OpenRouter, Groq, Z.AI, Cerebras, AWS Bedrock and any OpenAI-compatible server (**Custom**). Each cloud provider shows a one-line note on what it does with your text, with a link to its terms, and **Test key** checks your key and lists its models. Keys are kept in Windows Credential Manager.
+Choose the AI that answers on the **AI Provider** page (or in setup). On your computer: **Ollama** and **LM Studio**, nothing leaves the machine. In the cloud, with your own API key: **Anthropic** (Claude), **DeepSeek**, **Google Gemini** and **OpenAI**, then **Amazon Bedrock** in your own AWS account (Claude and other models, in the region you choose; see [IT administration](docs/it-admin.md#using-kusema-with-amazon-bedrock)), OpenRouter, Groq, Z.AI, Cerebras and any OpenAI-compatible server (**Custom**). Each cloud provider shows a one-line note on what it does with your text, with a link to its terms, and **Test key** checks your key and lists its models. Keys are kept in Windows Credential Manager.
 
 - **Anthropic** and **OpenAI** don't train on API data by default; Anthropic deletes it within 30 days, OpenAI keeps it up to 30 days for abuse monitoring.
 - **DeepSeek** processes your text on servers in China. DeepSeek's policy allows it to use data to improve its services; see its terms. Its thinking text is never shown, spoken, pasted or kept.

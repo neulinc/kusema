@@ -1026,13 +1026,29 @@
           "deepseek": "Váš text zpracovává DeepSeek na serverech v Číně. Zásady DeepSeek mu dovolují používat data ke zlepšování služeb; viz jeho podmínky.",
           "gemini": "V bezplatné úrovni smí Google používat vaše dotazy a odpovědi ke zlepšování svých produktů a mohou je číst lidé. Pro důvěrnou práci použijte placený klíč (projekt Google Cloud s fakturací).",
           "openai": "OpenAI ve výchozím nastavení netrénuje na datech z API a uchovává je až 30 dnů kvůli odhalování zneužití.",
-          "details": "Podrobnosti"
+          "details": "Podrobnosti",
+          "bedrock": "Váš text jde do vašeho vlastního účtu AWS, ve zvoleném regionu, podle vaší smlouvy s AWS. AWS uvádí, že váš obsah nesdílí s poskytovateli modelů, ale může ho uchovávat pro kontroly bezpečnosti a zneužití. Podle modelu ho AWS může zpracovat v jiných regionech."
         },
         "testKey": {
           "button": "Vyzkoušet klíč",
           "checking": "Ověřuji…",
           "ok": "Klíč funguje. Modely: {{count}}.",
           "failed": "Klíč nefungoval: {{error}}"
+        },
+        "bedrock": {
+          "region": "Region",
+          "regionDescription": "Region AWS, kam míří vaše požadavky. Krátkodobý klíč funguje jen v regionu, ve kterém byl vytvořen.",
+          "otherRegions": "Další regiony…",
+          "govCloud": "Regiony AWS GovCloud (US) vyžadují účet AWS GovCloud.",
+          "chooseRegion": "Vyberte region",
+          "help": "Kusema se k Amazon Bedrock připojuje přes koncový bod Mantle s klíčem API Bedrock: modely Claude používají Messages API, ostatní modely Chat Completions. Krátkodobé klíče z konzole platí až 12 hodin; dlouhodobé klíče jsou na zkoušení.",
+          "webSearch": "Vyhledávání na webu s Amazon Bedrock používá Brave Search nebo server SearXNG: vlastní vyhledávání Claude není na Bedrock dostupné.",
+          "test": "Otestovat připojení",
+          "testing": "Testuji…",
+          "ok": "Připojeno. Modely v tomto regionu: {{count}}.",
+          "okModel": "Připojeno. Modely v tomto regionu: {{count}}. Zvolený model odpověděl.",
+          "openWeight": "Modely jiných vývojářů, například DeepSeek a Qwen, běží v účtech, které vlastní a provozuje AWS a ke kterým vývojář nemá přístup, a AWS s nimi váš obsah nesdílí.",
+          "claudeAccess": "Modely Claude v Bedrocku vyžadují přístup k modelům Anthropic ve vašem účtu AWS. V komerčních regionech se u většiny účtů zapne při prvním použití; pokud Bedrock hlásí, že model Claude není pro váš účet dostupný, musí ho AWS zapnout (v AWS GovCloud: konzole Bedrock → Bedrock configurations → Model access)."
         }
       },
       "prompts": {
@@ -1708,7 +1724,12 @@
       "noLink": "Kusema nenašla odkaz ke čtení. Nejdřív odkaz zkopírujte, nebo řekněte celou adresu.",
       "linkFailed": "Kusema nemohla odkaz přečíst: {{name}}",
       "providerHidden": "Správce na tomto počítači vypnul {{name}}. Vyberte jinou AI v Asistent → Nastavení.",
-      "braveKeyRejected": "Brave klíč odmítl. Zkontrolujte, že je předplacený pro plán Search, a zkuste to znovu."
+      "braveKeyRejected": "Brave klíč odmítl. Zkontrolujte, že je předplacený pro plán Search, a zkuste to znovu.",
+      "screenNotForModel": "Otázky na obrazovku nejsou s tímto modelem k dispozici. V Asistent → Nastavení vyberte model, který vidí obrázky.",
+      "bedrockKeyExpired": "Váš klíč Amazon Bedrock vypršel. Klíče z konzole vyprší nejpozději po 12 hodinách; vytvořte nový.",
+      "bedrockWrongRegion": "Tento klíč Amazon Bedrock patří do jiného regionu. Vyberte region, ve kterém vznikl, nebo vytvořte klíč v tomto.",
+      "bedrockModelAccess": "Tento model není pro váš účet AWS v tomto regionu dostupný. Zkontrolujte přístup k modelům v konzoli Amazon Bedrock, nebo vyberte jiný model či region.",
+      "bedrockKeyInvalid": "Amazon Bedrock klíč nepřijal. Zkontrolujte ho v Asistent → Nastavení."
     },
     "setUp": "Nastavit",
     "dismiss": "Zavřít",

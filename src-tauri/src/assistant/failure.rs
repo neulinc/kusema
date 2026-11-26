@@ -58,6 +58,16 @@ pub enum Failure {
     LinkFailed(String),
     /// Kusema: the administrator hid this AI provider.
     ProviderHidden(String),
+    /// Kusema: the model can't take a screenshot (Amazon Bedrock).
+    ScreenNotForModel,
+    /// Kusema Amazon Bedrock: a short-term key past its 12 hours.
+    BedrockKeyExpired,
+    /// Kusema Amazon Bedrock: a key made for another region.
+    BedrockWrongRegion,
+    /// Kusema Amazon Bedrock: the model isn't available to the account here.
+    BedrockModelAccess,
+    /// Kusema Amazon Bedrock: the key isn't accepted.
+    BedrockKeyInvalid,
     /// Anything else, with the provider's own words.
     Other(String, String),
 }
@@ -89,6 +99,11 @@ impl Failure {
             Failure::NoLink => "noLink",
             Failure::LinkFailed(_) => "linkFailed",
             Failure::ProviderHidden(_) => "providerHidden",
+            Failure::ScreenNotForModel => "screenNotForModel",
+            Failure::BedrockKeyExpired => "bedrockKeyExpired",
+            Failure::BedrockWrongRegion => "bedrockWrongRegion",
+            Failure::BedrockModelAccess => "bedrockModelAccess",
+            Failure::BedrockKeyInvalid => "bedrockKeyInvalid",
             Failure::Other(_, _) => "other",
         }
     }
@@ -159,6 +174,11 @@ impl Failure {
             Failure::NoLink => "Kusema didn't find a link to read. Copy the link first, or say the full address.".to_string(),
             Failure::LinkFailed(_) => format!("Kusema couldn't read that link: {n}"),
             Failure::ProviderHidden(_) => format!("{n} is turned off on this computer by your administrator. Choose another AI in Assistant \u{2192} Settings."),
+            Failure::ScreenNotForModel => "Screen questions aren't available with this model. Choose one that can see images in Assistant \u{2192} Settings.".to_string(),
+            Failure::BedrockKeyExpired => "Your Amazon Bedrock key has expired. Bedrock keys from the console expire after up to 12 hours; create a new one.".to_string(),
+            Failure::BedrockWrongRegion => "This Amazon Bedrock key belongs to a different region. Choose the region it was created in, or create a key in this one.".to_string(),
+            Failure::BedrockModelAccess => "This model isn't available to your AWS account in this region. Check model access in the Amazon Bedrock console, or choose another model or region.".to_string(),
+            Failure::BedrockKeyInvalid => "Amazon Bedrock didn't accept the key. Check it in Assistant \u{2192} Settings.".to_string(),
             Failure::Other(_, _) => format!("Kusema couldn't get an answer: {n}"),
         }
     }
@@ -179,7 +199,12 @@ impl Failure {
             | Failure::NoSearchProvider
             | Failure::SearchFailed(_)
             | Failure::BraveKeyRejected
-            | Failure::ProviderHidden(_) => Some(SetupPage::Assistant),
+            | Failure::ProviderHidden(_)
+            | Failure::ScreenNotForModel
+            | Failure::BedrockKeyExpired
+            | Failure::BedrockWrongRegion
+            | Failure::BedrockModelAccess
+            | Failure::BedrockKeyInvalid => Some(SetupPage::Assistant),
             Failure::Privileged(_) | Failure::WebPrivileged => Some(SetupPage::Privacy),
             Failure::WebByAdmin | Failure::NoLink | Failure::LinkFailed(_) => None,
             Failure::LocalNotRunning(_)
@@ -216,6 +241,13 @@ pub fn classify(provider: &PostProcessProvider, error: &str, with_image: bool) -
     let label = provider.label.clone();
     let connect = error.contains("kind: connect") || error.contains("kind: timeout");
     let on_this_computer = crate::network::is_on_this_computer(&provider.base_url);
+    // Kusema: Amazon Bedrock's own errors first.
+    if provider.id == crate::bedrock::ID && !crate::network::is_blocked(error) {
+        if let Some(failure) = crate::bedrock::classify(error, "", with_image) {
+            log::warn!("Amazon Bedrock: {error}");
+            return failure;
+        }
+    }
     if crate::network::is_blocked(error) {
         Failure::Privileged(label)
     } else if error.contains("status 401") || error.contains("status 403") {
@@ -381,6 +413,11 @@ mod tests {
             Failure::NoLink,
             Failure::LinkFailed("timeout".into()),
             Failure::ProviderHidden("DeepSeek".into()),
+            Failure::ScreenNotForModel,
+            Failure::BedrockKeyExpired,
+            Failure::BedrockWrongRegion,
+            Failure::BedrockModelAccess,
+            Failure::BedrockKeyInvalid,
             Failure::Other("A".into(), "boom".into()),
         ] {
             // The pill's translation and the spoken English say the same.

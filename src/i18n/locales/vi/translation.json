@@ -1020,13 +1020,29 @@
           "deepseek": "Văn bản của bạn được DeepSeek xử lý trên máy chủ ở Trung Quốc. Chính sách của DeepSeek cho phép dùng dữ liệu để cải thiện dịch vụ; hãy xem điều khoản của họ.",
           "gemini": "Ở gói miễn phí, Google có thể dùng câu lệnh và câu trả lời của bạn để cải thiện sản phẩm, và con người có thể đọc chúng. Hãy dùng khóa trả phí (dự án Google Cloud có thanh toán) cho công việc bảo mật.",
           "openai": "Theo mặc định OpenAI không huấn luyện trên dữ liệu API và lưu tối đa 30 ngày để giám sát lạm dụng.",
-          "details": "Chi tiết"
+          "details": "Chi tiết",
+          "bedrock": "Văn bản của bạn được gửi tới tài khoản AWS của chính bạn, ở vùng bạn chọn, theo thỏa thuận AWS của bạn. AWS cho biết không chia sẻ nội dung của bạn với nhà cung cấp mô hình, nhưng có thể lưu để kiểm tra an toàn và lạm dụng. Tùy mô hình, AWS có thể xử lý ở các vùng khác."
         },
         "testKey": {
           "button": "Kiểm tra khóa",
           "checking": "Đang kiểm tra…",
           "ok": "Khóa hoạt động. Mô hình: {{count}}.",
           "failed": "Khóa không hoạt động: {{error}}"
+        },
+        "bedrock": {
+          "region": "Vùng",
+          "regionDescription": "Vùng AWS mà yêu cầu của bạn được gửi tới. Khóa ngắn hạn chỉ dùng được ở vùng đã tạo ra nó.",
+          "otherRegions": "Vùng khác…",
+          "govCloud": "Các vùng AWS GovCloud (US) cần tài khoản AWS GovCloud.",
+          "chooseRegion": "Chọn vùng",
+          "help": "Kusema kết nối Amazon Bedrock qua điểm cuối Mantle bằng khóa API Bedrock: mô hình Claude dùng Messages API, mô hình khác dùng Chat Completions. Khóa ngắn hạn từ bảng điều khiển dùng được tối đa 12 giờ; khóa dài hạn dành để dùng thử.",
+          "webSearch": "Tìm kiếm web với Amazon Bedrock dùng Brave Search hoặc máy chủ SearXNG: tìm kiếm riêng của Claude không có trên Bedrock.",
+          "test": "Kiểm tra kết nối",
+          "testing": "Đang kiểm tra…",
+          "ok": "Đã kết nối. Mô hình ở vùng này: {{count}}.",
+          "okModel": "Đã kết nối. Mô hình ở vùng này: {{count}}. Mô hình đã chọn đã trả lời.",
+          "openWeight": "Các mô hình của nhà phát triển khác, như DeepSeek và Qwen, chạy trong các tài khoản do AWS sở hữu và vận hành mà nhà phát triển không thể truy cập, và AWS không chia sẻ nội dung của bạn với họ.",
+          "claudeAccess": "Các mô hình Claude trên Bedrock cần quyền truy cập mô hình Anthropic trong tài khoản AWS của bạn. Ở các khu vực thương mại, quyền này được bật khi dùng lần đầu với hầu hết tài khoản; nếu Bedrock báo mô hình Claude không khả dụng cho tài khoản của bạn, AWS phải bật nó cho bạn (trong AWS GovCloud: bảng điều khiển Bedrock → Bedrock configurations → Model access)."
         }
       },
       "prompts": {
@@ -1696,7 +1712,12 @@
       "noLink": "Kusema không tìm thấy liên kết để đọc. Hãy sao chép liên kết trước, hoặc nói địa chỉ đầy đủ.",
       "linkFailed": "Kusema không đọc được liên kết đó: {{name}}",
       "providerHidden": "Quản trị viên đã tắt {{name}} trên máy tính này. Hãy chọn AI khác trong Trợ lý → Cài đặt.",
-      "braveKeyRejected": "Brave đã từ chối khóa. Hãy kiểm tra khóa đã đăng ký gói Search chưa, rồi thử lại."
+      "braveKeyRejected": "Brave đã từ chối khóa. Hãy kiểm tra khóa đã đăng ký gói Search chưa, rồi thử lại.",
+      "screenNotForModel": "Câu hỏi về màn hình không dùng được với mô hình này. Hãy chọn mô hình xem được hình ảnh trong Trợ lý → Cài đặt.",
+      "bedrockKeyExpired": "Khóa Amazon Bedrock của bạn đã hết hạn. Khóa tạo trong bảng điều khiển hết hạn sau tối đa 12 giờ; hãy tạo khóa mới.",
+      "bedrockWrongRegion": "Khóa Amazon Bedrock này thuộc một vùng khác. Hãy chọn vùng đã tạo khóa, hoặc tạo khóa trong vùng này.",
+      "bedrockModelAccess": "Mô hình này không khả dụng cho tài khoản AWS của bạn ở vùng này. Hãy kiểm tra quyền truy cập mô hình trong bảng điều khiển Amazon Bedrock, hoặc chọn mô hình hay vùng khác.",
+      "bedrockKeyInvalid": "Amazon Bedrock không chấp nhận khóa. Hãy kiểm tra trong Trợ lý → Cài đặt."
     },
     "setUp": "Thiết lập",
     "dismiss": "Đóng",
