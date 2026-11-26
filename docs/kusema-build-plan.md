@@ -278,8 +278,34 @@ If the build fails, open Claude Code in the folder and paste:
 | v0.4.1  | Step 10b recording indicator, About page cleanup, Assistant page tabs                                                                             |
 | v0.5    | Step 11a voice editing and navigation ✅; 11b vocabulary; 11c type-to-ask, paste-the-answer, tutor style, styles per app. Release 0.5.0 after 11c |
 | v0.5.x  | Step 11d live preview and microphone check; 11e personal stats, beta channel, keyboard access to the settings sidebar                             |
-| v0.6    | Step 12 legal templates and snippets, foot pedal and dictation mics, transcribing recordings, ramble then structure, voice-called snippets        |
+| v0.5.5  | Step 11f web search and link reading (off by default); DeepSeek and Google Gemini providers                                                       |
+| Next    | Kusema Meetings, in three stages (see [Roadmap after 0.5.5](#roadmap-after-055))                                                                  |
+| v0.6.0  | Signed launch (Azure Artifact Signing), with Meetings as the headline if ready, otherwise Meetings in 0.6.1                                       |
+| v0.6.x  | Quick wins; then Kusema for Firms, Ask your files, the Mac port and Linux                                                                         |
 | Launch  | Launch gate: model hosting ✅, Windows code signing, product page, launch                                                                         |
+
+### Roadmap after 0.5.5
+
+Agreed 2026-11-26. Steps 11e and 12 below still stand; their items are scheduled into these releases as they're picked up.
+
+**Kusema Meetings (next), in three stages:**
+
+1. **Recording and transcript.** Microphone plus system audio (WASAPI loopback), behind a platform-neutral audio capture interface so macOS and Linux can plug in later. Live transcription in chunks. "You" and "Others" labels from the two separate streams. Crash-safe incremental saving, encrypted storage, and a consent reminder at the start of every meeting.
+2. **Notes.** Templates (general meeting, client intake, billable time entry, SOAP/DAP, lecture notes); summaries and action items with local AI by default, summarizing section by section for long meetings; private notes during the meeting; export to Word and Markdown; a follow-up email draft; a ledger entry for any text sent to a cloud AI.
+3. **Hardening.** Bluetooth and device switching; echo handling (or guidance to use headphones); retention settings, with audio deleted after processing by default; one-click delete; testing on slow laptops.
+   Later: speaker diarization (sherpa-onnx), asking questions across meetings, a local MCP server (off by default), filing to Clio and MyCase.
+
+**v0.6.0:** the signed launch (Azure Artifact Signing), with Meetings as the headline if it's ready; otherwise Meetings ships in 0.6.1.
+
+**v0.6.x quick wins:** voice snippets; a shared dictionary and snippets from a folder; more Whisper languages, labelled "less tested"; an admin policy file (force Privileged mode, block cloud AI and the web, lock packs); ledger export to CSV and PDF; exporting time-saved stats.
+
+**Kusema for Firms:** an MSI with silent install (Intune, Group Policy); a trust page with a security whitepaper, a data-flow diagram, an SBOM and an independent review.
+
+**Ask your files:** local folders, including synced cloud-drive folders (skipping placeholders that aren't downloaded); collections per matter; hybrid keyword and vector search (Tantivy and LanceDB, with a small ONNX embedding model); cited answers that say "not found" instead of guessing; local AI by default, with an excerpt preview and a ledger entry when a cloud AI is used; an encrypted index; Windows OCR for scans; meeting transcripts searchable too. For firms: a shared index on an in-office server.
+
+**Then:** the Mac port, then Linux (X11 first, Wayland best effort).
+
+**Not planned:** meeting bots, SOC 2 or ISO certification, a BAA, SSO/SCIM, cloud sync or workspaces, mobile apps, and direct cloud-drive APIs for now (the Proton SDK isn't ready for third parties).
 
 ---
 
@@ -562,6 +588,21 @@ Everything else moves behind a "Show all models" link under Advanced, including 
 - **Beta update channel:** opt-in; testers get new versions a week early.
 - **Keyboard access to the settings sidebar:** reach every settings page without a mouse. Found in Step 10; the setup flow already works by keyboard.
 
+### Step 11f — Web search, link reading, DeepSeek and Gemini ✅ Done (2026-11-26), in 0.5.5
+
+- **Off by default** (`web::WebSearchSettings`). **Only when I ask** (the default: "search the web for…", "look up … online", or the **Search the web** switch beside the Ask box and the Assistant page's question box) or **Automatic** (the AI decides). Hard limits in both: 3 searches per question, the top 5 results of each, snippets only (`web::search`).
+- **One place for the rules:** `web::decide` takes the settings, the admin policy, Privileged mode, the AI provider, the question (without any attached selection) and what private context it carries, and says what happens: nothing, a refusal that names why, read a link, search with an engine, use the provider's built-in search, or ask first. Every case has a test. `web::flow` carries it out.
+- **Providers:** Brave Search (`GET https://api.search.brave.com/res/v1/web/search`, `X-Subscription-Token`, the user's key in Credential Manager beside the AI keys as `brave_search`); a SearXNG server (`/search?format=json`; the admin's `SearxngUrl` wins); Claude's `web_search_20250305` server tool with `max_uses: 3`, streamed; OpenAI's Responses API with `tools: [{"type":"web_search"}]`, `max_tool_calls: 3`, `include: ["web_search_call.action.sources"]` and `store: false`, not streamed (the streaming event names couldn't be verified). Sources for each detail are in the code comments, checked 2026-11-26.
+- **Gemini search grounding: not done.** Gemini uses its OpenAI-compatible endpoint (chat, streaming and `/models` work there, and it fits Kusema's existing client), which doesn't offer Google Search grounding for chat. The native API does, but its terms require showing Google's Search Suggestions with the result, unmodified and with nothing interspersed, which doesn't fit spoken answers or pasting, and it isn't available on Gemini 3's free tier. Brave and SearXNG work with Gemini.
+- **Automatic with Brave/SearXNG:** one extra request to the same AI first, with only the question (never a screenshot or selection), asking for up to 3 searches as JSON (`web::PLANNER_PROMPT`); anything unreadable means no search.
+- **Safety:** results and pages go after the question inside `<untrusted_web_content>`, with `<` and `>` in web text replaced so nothing can close the block, and a system rule that it's data, never instructions, and that nothing is searched or opened because the content says so (`web::untrusted`). The question in the conversation stays as asked; web text is sent once, for that answer. **Confirm searches** and **ask before mixing** use one card (`ScreenCard::Web`): the searches (editable with Confirm searches), the private-context notice ("Your screenshot won't be included in the search"), Send or Cancel, 30 s timeout, Escape and the Cancel hotkey cancel. The built-in search chooses its own searches, so with Confirm searches on or private context in the question Kusema uses Brave or SearXNG if set up, else asks ("Search anyway").
+- **Link reading** (`web::fetch`, `network::public_only`): only the address in the question, or the copied text if it's a lone address ("this link"); http and https only, no credentials in the address; refused if the address, any redirect (at most 3) or any address a name resolves to is loopback, private, link-local, CGNAT, multicast, documentation or reserved, IPv4-mapped included. Names resolve through Kusema's own resolver at connection time, so a name can't pass the check and then point elsewhere; no proxy (it would resolve names unchecked). 2 MB, 15 s, no cookies, HTML and plain text only; text extracted without scripts, styles or navigation; no link on the page is followed.
+- **Ledger:** `web_search` and `link_fetch` purposes in the requests table (host only, as before) and a new `web_requests` table with the search text or address, the provider, results or bytes received and the result; the requests table still has no content column. Built-in searches are listed too (from the stream or the response). Privacy page: a **Web search** section.
+- **Privileged mode** blocks the `Web` category whatever the destination, even a SearXNG server on this computer, since it passes searches on. **Admin policy** (`web::admin`): `HKLM\SOFTWARE\Policies\Neulinc\Kusema` `DisableWebAccess`, `HiddenProviders`, `SearxngUrl`, read once at startup; documented in `docs/it-admin.md`. No admin flag existed before; this is the mechanism the 0.6.x admin policy file will extend. Debug builds can stand in for the registry with `KUSEMA_DEBUG_ADMIN_POLICY`.
+- **Answers:** sources as links under the answer (only listed sources can be opened, through `open_web_source`); spoken answers without addresses or citation numbers, then "Sources are in the panel."; pasted answers end with a sources list unless **Add sources when pasting answers** is off.
+- **Providers** (`cloud_providers.rs`): DeepSeek (`https://api.deepseek.com`) and Google Gemini (`…/v1beta/openai`) presets; the list ordered Ollama, LM Studio, Anthropic, DeepSeek, Gemini, OpenAI, then the rest, Custom last, for existing installs too; an OpenAI setup on Custom moves to the OpenAI provider with its key and model; a recommended model is picked once a key lists it (`suggested_model`: claude-sonnet-5-5, gpt-6.2-sol, deepseek-flash, gemini-3.8-flash), never assumed. DeepSeek's `reasoning_content` is never read, so it can't reach answers, speech, pasting or History (tested with streamed and whole answers). Privacy notes, **Details** links and **Test key** under each cloud provider's key.
+- **Not done here:** the beta update channel (still Step 11e). Not checked against the real services: no keys were available, so every provider was tested with mocked HTTP and the request and response shapes from their documentation.
+
 ### Not scheduled from Step 11
 
 - **"Clean up this dictation session":** AI cleanup of a whole continuous session, with a preview, at its end. Deferred from Step 9 because replacing text already in the document isn't safe: clicking the preview loses the caret, the app can't see the document, and deleting thousands of characters by count could eat other text, the same risk "scratch that" refuses. A version that replaces only the History entry, for the user to copy, is safe if that's enough.
@@ -677,7 +718,7 @@ Evaluate Moonshine as a low-latency streaming engine for dictation.
 
 ### Meeting notes with consent
 
-Turn meetings into notes, only with a clear consent step: recording a conversation has legal consent requirements, and some US states require every party's consent.
+Now **Kusema Meetings**, next on the [roadmap](#roadmap-after-055). The consent step stays: recording a conversation has legal consent requirements, and some US states require every party's consent.
 
 ### Other ideas
 
