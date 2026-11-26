@@ -11,7 +11,7 @@ use std::error::Error as StdError;
 use std::sync::{Arc, Mutex, OnceLock};
 
 #[derive(Debug, Serialize)]
-struct ChatMessage {
+pub(crate) struct ChatMessage {
     role: String,
     content: String,
 }
@@ -144,7 +144,7 @@ struct ChatMessageResponse {
 const ANTHROPIC_MAX_TOKENS: u32 = 4096;
 
 #[derive(Debug, Serialize)]
-struct AnthropicMessagesRequest<M = ChatMessage> {
+pub(crate) struct AnthropicMessagesRequest<M = ChatMessage> {
     model: String,
     max_tokens: u32,
     #[serde(skip_serializing_if = "std::ops::Not::not")]
@@ -672,6 +672,13 @@ pub struct ChatTurn {
     /// The screenshot itself, while it's still attached. Never sent to the UI.
     #[serde(skip)]
     pub image: Option<ChatImage>,
+    /// Kusema web search: the pages an answer drew on, shown as links under
+    /// it. Never sent to the AI.
+    #[serde(default)]
+    pub sources: Vec<crate::web::WebSource>,
+    /// Kusema web search: the web was searched for this answer.
+    #[serde(default)]
+    pub searched: bool,
 }
 
 impl ChatTurn {
@@ -681,6 +688,8 @@ impl ChatTurn {
             content: content.into(),
             screenshot: false,
             image: None,
+            sources: Vec::new(),
+            searched: false,
         }
     }
 }
@@ -688,7 +697,7 @@ impl ChatTurn {
 /// A conversation message whose content is either plain text or, for a turn
 /// with an image, a list of content blocks.
 #[derive(Debug, Serialize)]
-struct ConversationMessage {
+pub(crate) struct ConversationMessage {
     role: String,
     content: Value,
 }
@@ -730,7 +739,7 @@ fn conversation_messages(turns: &[ChatTurn], anthropic: bool) -> Vec<Conversatio
 
 /// Anthropic Messages body for a conversation: the system prompt goes in the
 /// top-level `system` field, never in the message list.
-fn anthropic_conversation_request(
+pub(crate) fn anthropic_conversation_request(
     model: &str,
     system_prompt: &str,
     turns: &[ChatTurn],
@@ -769,7 +778,7 @@ fn chat_conversation_request(
 }
 
 /// POST a JSON body; returns the response once its status is a success.
-async fn post_json<B: Serialize>(
+pub(crate) async fn post_json<B: Serialize>(
     provider: &PostProcessProvider,
     api_key: &str,
     url: &str,
@@ -815,12 +824,12 @@ async fn post_json<B: Serialize>(
 /// Collects the payloads of `data:` lines from a server-sent event stream,
 /// whatever way the bytes are chunked.
 #[derive(Default)]
-struct SseParser {
+pub(crate) struct SseParser {
     buf: Vec<u8>,
 }
 
 impl SseParser {
-    fn push(&mut self, chunk: &[u8]) -> Vec<String> {
+    pub(crate) fn push(&mut self, chunk: &[u8]) -> Vec<String> {
         self.buf.extend_from_slice(chunk);
         let mut payloads = Vec::new();
         while let Some(newline) = self.buf.iter().position(|&b| b == b'\n') {
@@ -1095,7 +1104,9 @@ pub async fn fetch_models(
     if let Some(data) = parsed.get("data").and_then(|d| d.as_array()) {
         for entry in data {
             if let Some(id) = entry.get("id").and_then(|i| i.as_str()) {
-                models.push(id.to_string());
+                // Kusema: Gemini's list may name models "models/<id>"; chat
+                // takes the bare id.
+                models.push(id.strip_prefix("models/").unwrap_or(id).to_string());
             } else if let Some(name) = entry.get("name").and_then(|n| n.as_str()) {
                 models.push(name.to_string());
             }

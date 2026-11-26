@@ -120,6 +120,15 @@ pub fn get_privacy_ledger(filter: LedgerFilter) -> Result<Vec<LedgerEntry>, Stri
         .map_err(|e| e.to_string())
 }
 
+/// Kusema web search: the searches and links read, newest first.
+#[tauri::command]
+#[specta::specta]
+pub fn get_web_ledger(since: Option<i64>) -> Result<Vec<super::WebEntry>, String> {
+    ledger()?
+        .list_web(since, LIST_LIMIT)
+        .map_err(|e| e.to_string())
+}
+
 #[tauri::command]
 #[specta::specta]
 pub fn clear_privacy_ledger(app: AppHandle) -> Result<(), String> {

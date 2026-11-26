@@ -66,10 +66,29 @@ Kusema writes legal terms and citations correctly out of the box ("habeas corpus
 - **Tutor style:** turn it on, or say "step by step" in a question, and Kusema explains one step at a time and checks you've followed, instead of handing over homework answers. Follow your school's or exam's rules on AI use.
 - **Styles per app:** AI cleanup, AI voice edits and typed answers follow the program they go into: email format in Outlook, formal in Word and ONLYOFFICE, short and casual in Teams and Slack, neutral elsewhere. Kusema looks only at the program's name, on your computer. Edit the styles in plain words and add programs on the Assistant page.
 
+### AI providers
+
+Choose the AI that answers on the **AI Provider** page (or in setup). On your computer: **Ollama** and **LM Studio**, nothing leaves the machine. In the cloud, with your own API key: **Anthropic** (Claude), **DeepSeek**, **Google Gemini** and **OpenAI**, then OpenRouter, Groq, Z.AI, Cerebras, AWS Bedrock and any OpenAI-compatible server (**Custom**). Each cloud provider shows a one-line note on what it does with your text, with a link to its terms, and **Test key** checks your key and lists its models. Keys are kept in Windows Credential Manager.
+
+- **Anthropic** and **OpenAI** don't train on API data by default; Anthropic deletes it within 30 days, OpenAI keeps it up to 30 days for abuse monitoring.
+- **DeepSeek** processes your text on servers in China. DeepSeek's policy allows it to use data to improve its services; see its terms. Its thinking text is never shown, spoken, pasted or kept.
+- **Google Gemini**: on the free tier, Google may use your prompts and answers to improve its products, and people may read them. Use a paid key (a Google Cloud project with billing) for confidential work.
+
+### Web search and link reading (off by default)
+
+Turn on **Use the web** under **Assistant → Settings → Web search**, then ask "search the web for…", "look up…", "what's the latest on…" or "news about…", or switch on **Search the web** beside the typed question box, or let the AI decide (**Automatic**). An answer given without searching has a **Search the web for this** button that asks again with a search. Ask "summarize this link" with a link copied, or say an address, to read one page.
+
+- **Search with** your own [Brave Search](https://brave.com/search/api/) key, a **SearXNG** server (your firm's, see [Running a private SearXNG server](docs/searxng-hosting.md)), or Claude's or OpenAI's own search when that's your AI. Brave and SearXNG work with any AI, local ones included.
+- **Limits:** at most 3 searches per question and the top 5 results of each, as short snippets. Link reading fetches only the page you named: public web pages only (never this computer or your office network), up to 2 MB, 15 seconds, no cookies, no logins, no scripts, and no links followed.
+- **Answers cite their sources** as links under the answer. Spoken answers don't read addresses aloud; pasted answers end with a short sources list (you can turn that off).
+- **Web content is treated as information, never as instructions**: it goes to the AI marked as untrusted, and Kusema never searches again or follows links because a page says so.
+- **You stay in control:** **Confirm searches** shows each search, editable, before it's sent. A question about a screenshot or selected text asks before searching, and the search is made from your question alone. Every search and page is listed on the Privacy page; the search text and page addresses are stored only on this computer, and **Clear** removes them with the rest of the list. Privileged mode blocks all web access, and IT can turn it off for the whole computer ([IT administration](docs/it-admin.md)).
+
 ## Privacy, in plain terms
 
 - **Your voice stays on your computer.** Speech recognition runs locally (Parakeet or Whisper models). No audio is uploaded, ever.
-- **Only text is sent, and only where you choose.** Ask Kusema sends the _text_ of your question to the AI provider you configure: Anthropic (Claude), OpenAI, OpenRouter, Groq and others.
+- **Only text is sent, and only where you choose.** Ask Kusema sends the _text_ of your question to the AI provider you configure: Anthropic (Claude), DeepSeek, Google Gemini, OpenAI and others.
+- **The web only if you turn it on.** Web search and link reading are off until you turn them on; then searches go to the search provider you chose, and each one is listed on the Privacy page.
 - **Or keep everything local.** Point Kusema at a model running on your own machine (for example through [Ollama](https://ollama.com)) and nothing leaves the computer at all.
 - **Screenshots are opt-in, every time.** "Ask about my screen" captures only the active window, shows you exactly what will be sent and where, and waits for you to confirm (you can turn the confirmation off, but it's on unless you do). Screenshots are kept in memory only, never saved to disk or history. You can also send screen questions to a local model while normal questions go to the cloud.
 - **Spoken replies are generated locally** with Kokoro voices or your built-in Windows voices.

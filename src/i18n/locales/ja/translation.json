@@ -899,6 +899,73 @@
           "description": "段階的に説明し、理解を確かめ、宿題の答えをそのまま渡さずに答えへ導きます。答えを求めた場合は答えます。どの質問でも「explain step by step」と言うこともできます。",
           "note": "AI の利用については、学校や試験の規則に従ってください。"
         }
+      },
+      "web": {
+        "title": "Web 検索",
+        "description": "Kusema が Web を検索したり、指定したリンクを読んだりできるようにします。オンにするまではオフです。検索や読んだページはすべてプライバシーのページに記録されます。",
+        "adminOff": "管理者がこのコンピューターで Web 検索とリンクの読み取りをオフにしています。",
+        "privileged": "Privileged モードがオンです。オフにするまで、Kusema は Web を検索せず、リンクも読みません。",
+        "enabled": {
+          "label": "Web を使う",
+          "description": "頼まれたときに Web を検索したりリンクを読んだりします。例: \"search the web for…\" や \"summarize this link\"。"
+        },
+        "mode": {
+          "label": "検索するタイミング",
+          "description": "頼まれたときだけ、または質問に必要だと AI が判断したときに検索します。",
+          "whenAsked": "頼んだときだけ",
+          "automatic": "自動",
+          "whenAskedNote": "質問で頼まれたとき (\"search the web for…\")、または「Web を検索」スイッチがオンのときに検索します。",
+          "automaticNote": "質問に Web が必要かどうかを AI が判断します。Brave か SearXNG の場合は、まず質問だけをもとに、どの検索をするかを AI に尋ねます。"
+        },
+        "limits": "1 つの質問につき検索は最大 3 回、各検索の上位 5 件を短い抜粋で使います。",
+        "provider": {
+          "label": "検索に使うもの",
+          "description": "Brave と SearXNG は、このコンピューター上の AI も含め、どの AI でも使えます。",
+          "brave": "Brave Search (自分のキー)",
+          "searxng": "SearXNG サーバー",
+          "builtin": "{{name}} の内蔵検索",
+          "builtinAny": "AI の内蔵検索 (Claude または OpenAI)"
+        },
+        "brave": {
+          "key": "Brave Search の API キー",
+          "keyDescription": "AI のキーと同じく、Windows 資格情報マネージャーに保存されます。",
+          "saved": "キーを保存しました",
+          "remove": "削除",
+          "placeholder": "キーを貼り付け",
+          "save": "保存",
+          "pricing": "Brave は 1,000 回の検索につき $5 で、毎月 $5 分 (約 1,000 回) の無料クレジットがあります (brave.com、2026 年 11 月)。",
+          "getKey": "キーを取得"
+        },
+        "searxng": {
+          "label": "サーバーのアドレス",
+          "description": "JSON 形式の結果を有効にした SearXNG サーバーのアドレス。",
+          "adminSet": "管理者が設定しています。",
+          "neulinc": "事務所専用の検索サーバーが必要ですか？ Neulinc が SearXNG サーバーを設定し、保守します。",
+          "learnMore": "詳しく見る"
+        },
+        "builtin": {
+          "pricing": {
+            "anthropic": "Claude の検索は 1,000 回につき $10 と、結果が使うトークン分の料金がかかり、Anthropic から請求されます。",
+            "openai": "OpenAI の検索は 1,000 回につき $10 と、結果が使うトークン分の料金がかかり、OpenAI から請求されます。"
+          },
+          "cantConfirm": "{{name}} は検索内容を自分で選ぶため、送信前に表示できません。「検索を確認」がオンの場合、Brave か SearXNG を設定していればそれを使い、なければ毎回確認します。",
+          "unavailable": "{{name}} には Kusema が使える Web 検索がありません。Brave Search か SearXNG サーバーを選んでください。"
+        },
+        "test": {
+          "button": "テスト",
+          "testing": "テスト中…",
+          "ok": "検索は正常に動作しています。結果: {{count}} 件。",
+          "failed": "検索がうまくいきませんでした: {{error}}"
+        },
+        "confirm": {
+          "label": "検索を確認",
+          "description": "Kusema が Brave や SearXNG で検索する前に、各検索を確認し、必要なら変更してから送信またはキャンセルできます。"
+        },
+        "pasteSources": {
+          "label": "回答の貼り付け時に出典を付ける",
+          "description": "貼り付けた回答の最後に、出典の短い一覧が付きます。"
+        },
+        "links": "ページを読むには、リンクをコピーして \"summarize this link\" と頼むか、アドレスを言ってください。Kusema が読むのは公開 Web ページだけで、このコンピューターや事務所のネットワーク上のページは読まず、ページ内のリンクもたどりません。"
       }
     },
     "postProcessing": {
@@ -947,6 +1014,19 @@
           "notRunning": "このコンピューターで {{name}} が起動していません。起動してから、モデルの一覧を更新してください。",
           "noModels": "{{name}} は起動していますが、まだモデルがインストールされていません。",
           "howTo": "{{name}} の設定方法"
+        },
+        "privacy": {
+          "anthropic": "Anthropic は既定では API のデータで学習せず、30 日以内に削除します。",
+          "deepseek": "テキストは中国のサーバーで DeepSeek が処理します。DeepSeek のポリシーでは、サービス改善のためにデータを使うことが認められています。規約を確認してください。",
+          "gemini": "無料枠では、Google がプロンプトと回答を製品改善に使い、人が読むことがあります。機密性の高い作業には有料キー (請求先を設定した Google Cloud プロジェクト) を使ってください。",
+          "openai": "OpenAI は既定では API のデータで学習せず、不正利用の監視のため最大 30 日間保持します。",
+          "details": "詳細"
+        },
+        "testKey": {
+          "button": "キーをテスト",
+          "checking": "確認中…",
+          "ok": "キーは有効です。モデル: {{count}} 個。",
+          "failed": "キーが使えませんでした: {{error}}"
         }
       },
       "prompts": {
@@ -1262,7 +1342,9 @@
         "model_download": "音声認識モデルのダウンロード",
         "voice_download": "音声のダウンロード",
         "update_check": "更新の確認",
-        "voice_edit": "音声編集"
+        "voice_edit": "音声編集",
+        "web_search": "Web 検索",
+        "link_fetch": "リンクの読み取り"
       },
       "data": {
         "text": "テキスト",
@@ -1294,6 +1376,21 @@
           "days_one": "{{count}} 日",
           "days_other": "{{count}} 日"
         }
+      },
+      "web": {
+        "title": "Web 検索",
+        "description": "Kusema が行ったすべての検索と読んだページを、検索した内容やアドレスと一緒に表示します。",
+        "empty": "まだ検索やページはありません。",
+        "columns": {
+          "what": "検索またはページ",
+          "provider": "送信先",
+          "found": "件数"
+        },
+        "kinds": {
+          "search": "検索",
+          "fetch": "ページ"
+        },
+        "local": "検索した内容とページのアドレスは、このコンピューターにのみ保存されます。「クリア」で一覧の他の項目と一緒に削除され、同じ日数が過ぎると削除されます。"
       }
     },
     "cleanup": {
@@ -1590,11 +1687,21 @@
       "noVision": "この AI は画面を見られません。Claude や Ollama の画像対応モデルなど、画像を見られる AI を選んでください。",
       "emptyReply": "{{name}} から答えが届きませんでした。もう一度質問してください。",
       "nothingHeard": "Kusema に質問が聞こえませんでした。キーを押したまま Space を押してから話してください。",
-      "other": "Kusema は答えを受け取れませんでした: {{name}}"
+      "other": "Kusema は答えを受け取れませんでした: {{name}}",
+      "webOff": "Web 検索はオフです。アシスタント → 設定 → Web 検索 でオンにしてください。",
+      "webByAdmin": "管理者がこのコンピューターで Web 検索とリンクの読み取りをオフにしています。",
+      "webPrivileged": "Privileged モードがオンのため、Kusema は Web を検索せず、リンクも読みません。使うには Privileged モードをオフにしてください。",
+      "noSearchProvider": "Web 検索が設定されていません。アシスタント → 設定 → Web 検索 で Brave Search のキーか SearXNG サーバーを追加してください。",
+      "searchFailed": "Web 検索がうまくいきませんでした ({{name}})。もう一度試すか、アシスタント → 設定 の Web 検索 を確認してください。",
+      "noLink": "読むリンクが見つかりませんでした。先にリンクをコピーするか、アドレス全体を言ってください。",
+      "linkFailed": "そのリンクを読めませんでした: {{name}}",
+      "providerHidden": "管理者がこのコンピューターで {{name}} をオフにしています。アシスタント → 設定 で別の AI を選んでください。",
+      "braveKeyRejected": "Brave がキーを拒否しました。Search プランに登録されているか確認して、もう一度試してください。"
     },
     "setUp": "設定する",
     "dismiss": "閉じる",
-    "previewOff": "ライブ プレビューはオフです。このコンピューターでは処理が追いつきませんでした。設定でもう一度オンにできます。"
+    "previewOff": "ライブ プレビューはオフです。このコンピューターでは処理が追いつきませんでした。設定でもう一度オンにできます。",
+    "webNotSearched": "Web を使わずに回答しました。検索するには \"search the web for…\" と言ってください。"
   },
   "screenCard": {
     "title": "このスクリーンショットを送信しますか?",
@@ -1631,6 +1738,28 @@
       "body": "追加すると、「{{word}}」で始めた言葉は Kusema に届きます。文の途中のこの言葉はそのまま残ります。",
       "yes": "追加",
       "no": "今はしない"
+    },
+    "web": {
+      "title": {
+        "search": "Web を検索しますか？",
+        "link": "このページを読みますか？",
+        "builtin": "{{name}} に Web を検索させますか？"
+      },
+      "private": "Web を検索します。{{kind}}は検索に含まれません。続けますか？",
+      "privateLink": "Web ページを読みます。{{kind}}はそのページに送られません。続けますか？",
+      "kind": {
+        "screenshot": "スクリーンショット",
+        "selection": "選択したテキスト"
+      },
+      "builtinPrivate": "{{name}} は検索内容を自分で選ぶため、{{kind}}を検索に使う可能性があります。",
+      "builtinUnconfirmable": "{{name}} は検索内容を自分で選ぶため、事前に表示できません。",
+      "editHint": "Kusema はこれらの検索を {{provider}} に送ります。必要なら変更してください。",
+      "sendHint": "Kusema はこれらの検索を {{provider}} に送ります。",
+      "searchLabel": "検索 {{n}}",
+      "cancel": "キャンセル",
+      "send": "検索",
+      "continue": "続ける",
+      "searchAnyway": "それでも検索"
     }
   },
   "secureInput": {
@@ -1726,7 +1855,11 @@
     "stop": "停止",
     "close": "閉じる",
     "hint": "Enter で質問 · Shift+Enter で改行 · Esc で閉じる",
-    "noWindow": "質問したいウィンドウをクリックしてから、このボックスをもう一度開いてください。"
+    "noWindow": "質問したいウィンドウをクリックしてから、このボックスをもう一度開いてください。",
+    "sources": "出典",
+    "searchWeb": "Web を検索",
+    "searchWebHint": "この質問で Web を検索する",
+    "searchThis": "これを Web で検索"
   },
   "kusemaKey": {
     "presets": {

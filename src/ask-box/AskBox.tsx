@@ -7,7 +7,17 @@ import {
   Square,
   Xmark as X,
 } from "iconoir-react";
-import { commands, type AskBoxInfo, type SetupPage } from "@/bindings";
+import {
+  commands,
+  type AskBoxInfo,
+  type SetupPage,
+  type WebSource,
+} from "@/bindings";
+import {
+  SearchThisButton,
+  SearchToggle,
+  WebSources,
+} from "@/components/shared/WebSources";
 import { Button } from "@/components/ui/Button";
 import i18n, { syncLanguageFromSettings } from "@/i18n";
 import { getLanguageDirection } from "@/lib/utils/rtl";
@@ -29,6 +39,11 @@ const AskBox: React.FC = () => {
   const [answer, setAnswer] = useState<AnswerState>(EMPTY);
   const [problem, setProblem] = useState<string | null>(null);
   const [errorSetup, setErrorSetup] = useState<SetupPage | null>(null);
+  // Kusema web search: the switch for the next question, and each answer's
+  // sources by question id.
+  const [searchWeb, setSearchWeb] = useState(false);
+  const [sources, setSources] = useState<Record<number, WebSource[]>>({});
+  const [searched, setSearched] = useState<Record<number, boolean>>({});
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const rootRef = useRef<HTMLDivElement>(null);
   const answerRef = useRef(answer);
@@ -49,6 +64,7 @@ const AskBox: React.FC = () => {
       setDraft("");
       setAnswer(EMPTY);
       setProblem(null);
+      setSearchWeb(false);
       requestAnimationFrame(() => inputRef.current?.focus());
     });
     // The question's streamed text, answer, error or quiet end.
@@ -60,10 +76,22 @@ const AskBox: React.FC = () => {
       "assistant-stream",
       (e) => apply({ kind: "stream", ...e.payload }),
     );
-    const reply = listen<{ id: number; answer: string }>(
-      "assistant-reply",
-      (e) => apply({ kind: "reply", id: e.payload.id, text: e.payload.answer }),
-    );
+    const reply = listen<{
+      id: number;
+      answer: string;
+      sources?: WebSource[];
+      searched?: boolean;
+    }>("assistant-reply", (e) => {
+      const found = e.payload.sources ?? [];
+      if (found.length > 0) {
+        setSources((all) => ({ ...all, [e.payload.id]: found }));
+      }
+      setSearched((all) => ({
+        ...all,
+        [e.payload.id]: e.payload.searched ?? false,
+      }));
+      apply({ kind: "reply", id: e.payload.id, text: e.payload.answer });
+    });
     const error = listen<{
       id: number;
       message: string;
@@ -122,12 +150,17 @@ const AskBox: React.FC = () => {
   }, []);
 
   const submit = useCallback(
-    async (screen: boolean) => {
-      const question = draft.trim();
+    async (screen: boolean, again?: string) => {
+      // `again`: "Search the web for this", the same question with search.
+      const question = (again ?? draft).trim();
       if (!question || busy) return;
       setProblem(null);
       early.current = [];
-      const result = await commands.askBoxSubmit(question, screen);
+      const result = await commands.askBoxSubmit(
+        question,
+        screen,
+        !!info?.web_search && (again !== undefined || searchWeb),
+      );
       const before = early.current;
       early.current = null;
       if (result.status === "ok") {
@@ -137,14 +170,15 @@ const AskBox: React.FC = () => {
             before ?? [],
           ),
         );
-        setDraft("");
+        if (again === undefined) setDraft("");
+        setSearchWeb(false);
       } else {
         setProblem(
           result.error === "noWindow" ? t("askBox.noWindow") : result.error,
         );
       }
     },
-    [draft, busy, t],
+    [draft, busy, t, info?.web_search, searchWeb],
   );
 
   const stop = () => {
@@ -235,6 +269,16 @@ const AskBox: React.FC = () => {
         </button>
       </div>
 
+      {info?.web_search && (
+        <div className="flex">
+          <SearchToggle
+            on={searchWeb}
+            onChange={setSearchWeb}
+            disabled={busy}
+          />
+        </div>
+      )}
+
       {problem && (
         <p role="alert" className="m-0 text-xs text-error">
           {problem}
@@ -259,6 +303,17 @@ const AskBox: React.FC = () => {
             {answer.text ||
               (answer.status === "thinking" ? t("askBox.thinking") : "")}
           </div>
+          {answer.status === "done" && answer.id !== null && (
+            <WebSources sources={sources[answer.id] ?? []} />
+          )}
+          {answer.status === "done" &&
+            answer.id !== null &&
+            info?.web_search &&
+            searched[answer.id] === false && (
+              <SearchThisButton
+                onClick={() => void submit(false, answer.question)}
+              />
+            )}
           <div className="flex items-center gap-2">
             {busy && (
               <Button variant="secondary" size="sm" onClick={stop}>

@@ -37,6 +37,7 @@ const PRIVILEGED: Rules = Rules {
     privileged: true,
     allow_lan: false,
     block_downloads: false,
+    web_disabled: false,
 };
 
 fn entries(ledger: &Ledger) -> Vec<LedgerEntry> {

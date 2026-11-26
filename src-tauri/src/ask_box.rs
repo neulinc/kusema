@@ -100,6 +100,8 @@ pub struct AskBoxInfo {
     pub style: Option<crate::app_styles::Active>,
     /// "Ask about my screen" has a window to look at.
     pub can_see_screen: bool,
+    /// Kusema web search: the "Search the web" switch is offered.
+    pub web_search: bool,
 }
 
 #[derive(Default)]
@@ -257,6 +259,7 @@ fn note_front(app: &AppHandle, inner: &mut Inner) {
             .and_then(|p| crate::app_styles::active(&settings, p)),
         app: process,
         can_see_screen: near.is_some(),
+        web_search: settings.web_search.enabled && !crate::web::admin::policy().disable_web_access,
     });
 }
 
@@ -454,7 +457,12 @@ pub fn set_ask_box_height(app: AppHandle, state: State<'_, AskBoxState>, height:
 /// `assistant-reply` or `assistant-error`.
 #[tauri::command]
 #[specta::specta]
-pub fn ask_box_submit(app: AppHandle, question: String, screen: bool) -> Result<u64, String> {
+pub fn ask_box_submit(
+    app: AppHandle,
+    question: String,
+    screen: bool,
+    web: Option<bool>,
+) -> Result<u64, String> {
     let question = question.trim().to_string();
     if question.is_empty() {
         return Err("empty".to_string());
@@ -475,6 +483,7 @@ pub fn ask_box_submit(app: AppHandle, question: String, screen: bool) -> Result<
         target,
         id,
         in_dictation: false,
+        web: web.unwrap_or(false),
     };
     let cancelled = cancel_flag(&app, id);
     let app_for_task = app.clone();

@@ -1,6 +1,7 @@
 import React, { useEffect, useId, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { openUrl } from "@tauri-apps/plugin-opener";
+import { isHidden, useAdminPolicy } from "@/lib/cloudProviders";
 import { commands, type LocalAiStatus } from "@/bindings";
 import { useSettings } from "@/hooks/useSettings";
 import { Button } from "../../ui/Button";
@@ -96,8 +97,9 @@ export const SetupAssistant: React.FC<SetupAssistantProps> = ({
 
   /* ---------- a cloud provider ---------- */
 
+  const policy = useAdminPolicy();
   const providers = (getSetting("post_process_providers") ?? []).filter(
-    (p) => !NOT_CLOUD.includes(p.id),
+    (p) => !NOT_CLOUD.includes(p.id) && !isHidden(policy, p.id),
   );
   const [providerId, setProviderId] = useState("");
   const provider = providers.find((p) => p.id === providerId) ?? providers[0];

@@ -6,6 +6,7 @@ import {
   isLocalProvider,
   localFirst,
 } from "@/lib/localProviders";
+import { isHidden, useAdminPolicy } from "@/lib/cloudProviders";
 import {
   commands,
   type PostProcessApiFormat,
@@ -86,9 +87,15 @@ export const usePostProcessProviderState = (): PostProcessProviderState => {
   const apiKey = settings?.post_process_api_keys?.[selectedProviderId] ?? "";
   const model = settings?.post_process_models?.[selectedProviderId] ?? "";
 
-  // Kusema: the private ones first, and labelled so.
+  // Kusema: the private ones first, and labelled so; none the administrator
+  // hid (unless it's the one already chosen, so the choice stays visible).
+  const policy = useAdminPolicy();
   const providerOptions = useMemo<DropdownOption[]>(() => {
-    return localFirst(providers).map((provider) =>
+    return localFirst(
+      providers.filter(
+        (p) => !isHidden(policy, p.id) || p.id === selectedProviderId,
+      ),
+    ).map((provider) =>
       isLocalProvider(provider.id)
         ? {
             value: provider.id,
@@ -99,7 +106,7 @@ export const usePostProcessProviderState = (): PostProcessProviderState => {
           }
         : { value: provider.id, label: provider.label },
     );
-  }, [providers, t]);
+  }, [providers, t, policy, selectedProviderId]);
 
   const handleProviderSelect = useCallback(
     async (providerId: string) => {

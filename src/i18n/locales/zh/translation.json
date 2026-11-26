@@ -899,6 +899,73 @@
           "description": "分步讲解、确认理解，引导你得出答案，而不是直接给出作业答案，除非你要求答案。你也可以在任何问题中说“explain step by step”。",
           "note": "请遵守你所在学校或考试关于使用 AI 的规定。"
         }
+      },
+      "web": {
+        "title": "网页搜索",
+        "description": "让 Kusema 搜索网页，或读取你指定的链接。在你开启之前保持关闭。每次搜索和读取的页面都会列在隐私页面上。",
+        "adminOff": "管理员已在这台电脑上关闭网页搜索和链接读取。",
+        "privileged": "Privileged 模式已开启：在你关闭之前，Kusema 不会搜索网页或读取链接。",
+        "enabled": {
+          "label": "使用网页",
+          "description": "在你要求时搜索网页或读取链接，例如 \"search the web for…\" 或 \"summarize this link\"。"
+        },
+        "mode": {
+          "label": "何时搜索",
+          "description": "只在你要求时，或每当 AI 认为问题需要时。",
+          "whenAsked": "仅在我要求时",
+          "automatic": "自动",
+          "whenAskedNote": "当你的问题要求时（\"search the web for…\"）或“搜索网页”开关打开时，Kusema 才会搜索。",
+          "automaticNote": "由 AI 决定问题是否需要网页。使用 Brave 或 SearXNG 时，会先仅根据你的问题询问 AI 要做哪些搜索。"
+        },
+        "limits": "每个问题最多搜索 3 次，每次取前 5 条结果，仅为简短摘要。",
+        "provider": {
+          "label": "搜索方式",
+          "description": "Brave 和 SearXNG 适用于任何 AI，包括这台电脑上的 AI。",
+          "brave": "Brave Search（你的密钥）",
+          "searxng": "SearXNG 服务器",
+          "builtin": "{{name}} 自带的搜索",
+          "builtinAny": "AI 自带的搜索（Claude 或 OpenAI）"
+        },
+        "brave": {
+          "key": "Brave Search API 密钥",
+          "keyDescription": "和你的 AI 密钥一样，保存在 Windows 凭据管理器中。",
+          "saved": "密钥已保存",
+          "remove": "移除",
+          "placeholder": "粘贴你的密钥",
+          "save": "保存",
+          "pricing": "Brave 每 1,000 次搜索收费 $5，每月赠送 $5 免费额度，约 1,000 次搜索（brave.com，2026 年 11 月）。",
+          "getKey": "获取密钥"
+        },
+        "searxng": {
+          "label": "服务器地址",
+          "description": "已开启 JSON 结果的 SearXNG 服务器地址。",
+          "adminSet": "由管理员设置。",
+          "neulinc": "你的事务所需要私有搜索服务器吗？Neulinc 可以为你搭建并维护 SearXNG 服务器。",
+          "learnMore": "了解更多"
+        },
+        "builtin": {
+          "pricing": {
+            "anthropic": "Claude 的搜索每 1,000 次 $10，另加结果所用的 token，由 Anthropic 计费。",
+            "openai": "OpenAI 的搜索每 1,000 次 $10，另加结果所用的 token，由 OpenAI 计费。"
+          },
+          "cantConfirm": "{{name}} 会自行选择搜索内容，所以无法在发送前显示。开启“确认搜索”后，如果你设置了 Brave 或 SearXNG，Kusema 会改用它们，否则每次都会询问你。",
+          "unavailable": "{{name}} 没有 Kusema 可用的网页搜索。请选择 Brave Search 或 SearXNG 服务器。"
+        },
+        "test": {
+          "button": "测试",
+          "testing": "正在测试…",
+          "ok": "搜索可用。结果：{{count}} 条。",
+          "failed": "搜索没有成功：{{error}}"
+        },
+        "confirm": {
+          "label": "确认搜索",
+          "description": "在 Kusema 用 Brave 或 SearXNG 搜索之前，先查看每条搜索，可按需修改，然后发送或取消。"
+        },
+        "pasteSources": {
+          "label": "粘贴回答时附上来源",
+          "description": "粘贴的回答末尾会附上简短的来源列表。"
+        },
+        "links": "要读取页面，请复制链接并说 \"summarize this link\"，或说出地址。Kusema 只读取公开网页，绝不读取这台电脑或办公室网络上的页面，也绝不打开页面中的链接。"
       }
     },
     "postProcessing": {
@@ -947,6 +1014,19 @@
           "notRunning": "{{name}} 没有在这台电脑上运行。请启动它，然后刷新模型列表。",
           "noModels": "{{name}} 正在运行，但还没有安装任何模型。",
           "howTo": "如何设置 {{name}}"
+        },
+        "privacy": {
+          "anthropic": "Anthropic 默认不会用 API 数据训练模型，并在 30 天内删除。",
+          "deepseek": "你的文本由 DeepSeek 在位于中国的服务器上处理。DeepSeek 的政策允许其使用数据改进服务；请查看其条款。",
+          "gemini": "在免费层级，Google 可能会用你的提示和回答改进其产品，并且可能有人阅读。处理机密工作请使用付费密钥（已开启结算的 Google Cloud 项目）。",
+          "openai": "OpenAI 默认不会用 API 数据训练模型，并为监控滥用最多保留 30 天。",
+          "details": "详情"
+        },
+        "testKey": {
+          "button": "测试密钥",
+          "checking": "正在检查…",
+          "ok": "密钥可用。模型：{{count}} 个。",
+          "failed": "密钥不可用：{{error}}"
         }
       },
       "prompts": {
@@ -1262,7 +1342,9 @@
         "model_download": "下载语音识别模型",
         "voice_download": "下载语音",
         "update_check": "检查更新",
-        "voice_edit": "语音编辑"
+        "voice_edit": "语音编辑",
+        "web_search": "网页搜索",
+        "link_fetch": "读取链接"
       },
       "data": {
         "text": "文字",
@@ -1294,6 +1376,21 @@
           "days_one": "{{count}} 天",
           "days_other": "{{count}} 天"
         }
+      },
+      "web": {
+        "title": "网页搜索",
+        "description": "Kusema 为你进行的每次搜索和读取的每个页面，附带搜索内容或地址。",
+        "empty": "还没有搜索或页面。",
+        "columns": {
+          "what": "搜索或页面",
+          "provider": "去向",
+          "found": "结果"
+        },
+        "kinds": {
+          "search": "搜索",
+          "fetch": "页面"
+        },
+        "local": "搜索内容和页面地址只保存在这台电脑上。“清除”会将它们与列表其余部分一起删除，并在相同天数后自动删除。"
       }
     },
     "cleanup": {
@@ -1590,11 +1687,21 @@
       "noVision": "这个 AI 看不到屏幕。请选择能看图片的 AI，例如 Claude 或 Ollama 中的视觉模型。",
       "emptyReply": "{{name}} 没有发回答案。请再问一次。",
       "nothingHeard": "Kusema 没有听到问题。按住按键，点一下空格，然后说话。",
-      "other": "Kusema 没能获得答案：{{name}}"
+      "other": "Kusema 没能获得答案：{{name}}",
+      "webOff": "网页搜索已关闭。请在助手 → 设置 → 网页搜索中开启。",
+      "webByAdmin": "管理员已在这台电脑上关闭网页搜索和链接读取。",
+      "webPrivileged": "Privileged 模式已开启，因此 Kusema 不会搜索网页或读取链接。要使用它们，请关闭 Privileged 模式。",
+      "noSearchProvider": "网页搜索尚未设置。请在助手 → 设置 → 网页搜索中添加 Brave Search 密钥或 SearXNG 服务器。",
+      "searchFailed": "网页搜索没有成功（{{name}}）。请重试，或在助手 → 设置中检查网页搜索。",
+      "noLink": "Kusema 没有找到要读取的链接。请先复制链接，或说出完整地址。",
+      "linkFailed": "Kusema 无法读取该链接：{{name}}",
+      "providerHidden": "管理员已在这台电脑上关闭 {{name}}。请在助手 → 设置中选择其他 AI。",
+      "braveKeyRejected": "Brave 拒绝了该密钥。请确认它已订阅 Search 套餐，然后重试。"
     },
     "setUp": "设置",
     "dismiss": "关闭",
-    "previewOff": "实时预览已关闭：这台电脑跟不上。你可以在设置中重新开启。"
+    "previewOff": "实时预览已关闭：这台电脑跟不上。你可以在设置中重新开启。",
+    "webNotSearched": "未使用网页作答。要搜索，请说 \"search the web for…\"。"
   },
   "screenCard": {
     "title": "发送这张截图？",
@@ -1631,6 +1738,28 @@
       "body": "添加后，以“{{word}}”开头的话会交给 Kusema。句子中间的这个词保持不变。",
       "yes": "添加",
       "no": "暂不"
+    },
+    "web": {
+      "title": {
+        "search": "搜索网页？",
+        "link": "读取此页面？",
+        "builtin": "让 {{name}} 搜索网页？"
+      },
+      "private": "这将搜索网页。你的{{kind}}不会包含在搜索中。继续吗？",
+      "privateLink": "这将读取一个网页。你的{{kind}}不会发送给它。继续吗？",
+      "kind": {
+        "screenshot": "截图",
+        "selection": "所选文本"
+      },
+      "builtinPrivate": "{{name}} 会自行选择搜索内容，可能会用到你的{{kind}}。",
+      "builtinUnconfirmable": "{{name}} 会自行选择搜索内容，所以无法提前显示。",
+      "editHint": "Kusema 会把这些搜索发送到 {{provider}}。如有需要可修改。",
+      "sendHint": "Kusema 会把这些搜索发送到 {{provider}}。",
+      "searchLabel": "搜索 {{n}}",
+      "cancel": "取消",
+      "send": "搜索",
+      "continue": "继续",
+      "searchAnyway": "仍然搜索"
     }
   },
   "secureInput": {
@@ -1726,7 +1855,11 @@
     "stop": "停止",
     "close": "关闭",
     "hint": "Enter 提问 · Shift+Enter 换行 · Esc 关闭",
-    "noWindow": "请点击你想询问的窗口，然后重新打开此框。"
+    "noWindow": "请点击你想询问的窗口，然后重新打开此框。",
+    "sources": "来源",
+    "searchWeb": "搜索网页",
+    "searchWebHint": "为这个问题搜索网页",
+    "searchThis": "在网页上搜索这个"
   },
   "kusemaKey": {
     "presets": {

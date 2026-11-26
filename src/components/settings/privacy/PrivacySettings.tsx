@@ -20,6 +20,7 @@ import { SettingsGroup } from "../../ui/SettingsGroup";
 import { ToggleSwitch } from "../../ui/ToggleSwitch";
 import { ShortcutInput } from "../ShortcutInput";
 import { PrivilegedChip, PrivilegedToggle } from "./PrivilegedToggle";
+import { WebLedger } from "./WebLedger";
 
 const PURPOSES: Purpose[] = [
   "assistant_question",
@@ -30,6 +31,8 @@ const PURPOSES: Purpose[] = [
   "model_download",
   "voice_download",
   "update_check",
+  "web_search",
+  "link_fetch",
 ];
 const RESULTS: RequestResult[] = ["sent", "blocked", "failed"];
 const RETENTION_DAYS = [7, 30, 90, 365];
@@ -373,6 +376,7 @@ export const PrivacySettings: React.FC = () => {
           </Button>
         </div>
       </SettingsGroup>
+      <WebLedger />
       {privileged && (
         <div className="flex justify-center">
           <PrivilegedChip />

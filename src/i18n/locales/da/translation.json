@@ -899,6 +899,73 @@
           "description": "Forklar trin for trin, tjek forståelsen, og led dig frem til svaret i stedet for at udlevere færdige lektiesvar, medmindre du beder om svaret. Du kan også sige “explain step by step” i ethvert spørgsmål.",
           "note": "Følg din skoles eller eksamens regler for brug af AI."
         }
+      },
+      "web": {
+        "title": "Websøgning",
+        "description": "Lad Kusema søge på nettet eller læse et link, du angiver. Slået fra, indtil du slår det til. Hver søgning og læst side står på siden Privatliv.",
+        "adminOff": "Din administrator har slået websøgning og læsning af links fra på denne computer.",
+        "privileged": "Privileged-tilstand er slået til: Kusema søger ikke på nettet og læser ikke links, før du slår den fra.",
+        "enabled": {
+          "label": "Brug nettet",
+          "description": "Søg på nettet eller læs et link, når du beder om det, for eksempel \"search the web for…\" eller \"summarize this link\"."
+        },
+        "mode": {
+          "label": "Hvornår der søges",
+          "description": "Kun når du beder om det, eller når AI'en mener, at et spørgsmål har brug for det.",
+          "whenAsked": "Kun når jeg beder om det",
+          "automatic": "Automatisk",
+          "whenAskedNote": "Kusema søger, når dit spørgsmål beder om det (\"search the web for…\"), eller når kontakten Søg på nettet er slået til.",
+          "automaticNote": "AI'en afgør, hvornår et spørgsmål har brug for nettet. Med Brave eller SearXNG bliver den først spurgt, hvilke søgninger den vil lave, kun ud fra dit spørgsmål."
+        },
+        "limits": "Højst 3 søgninger pr. spørgsmål og de første 5 resultater af hver, som korte uddrag.",
+        "provider": {
+          "label": "Søg med",
+          "description": "Brave og SearXNG virker med enhver AI, også én på denne computer.",
+          "brave": "Brave Search (din nøgle)",
+          "searxng": "SearXNG-server",
+          "builtin": "{{name}}s egen søgning",
+          "builtinAny": "AI'ens egen søgning (Claude eller OpenAI)"
+        },
+        "brave": {
+          "key": "API-nøgle til Brave Search",
+          "keyDescription": "Gemmes i Windows Legitimationsadministration, ligesom dine AI-nøgler.",
+          "saved": "Nøglen er gemt",
+          "remove": "Fjern",
+          "placeholder": "Indsæt din nøgle",
+          "save": "Gem",
+          "pricing": "Brave tager 5 $ pr. 1.000 søgninger og giver 5 $ i gratis kredit hver måned, cirka 1.000 søgninger (brave.com, november 2026).",
+          "getKey": "Få en nøgle"
+        },
+        "searxng": {
+          "label": "Serveradresse",
+          "description": "Adressen på en SearXNG-server med JSON-resultater slået til.",
+          "adminSet": "Angivet af din administrator.",
+          "neulinc": "Har dit firma brug for en privat søgeserver? Neulinc kan sætte en SearXNG-server op og vedligeholde den for jer.",
+          "learnMore": "Læs mere"
+        },
+        "builtin": {
+          "pricing": {
+            "anthropic": "Claudes søgning koster 10 $ pr. 1.000 søgninger plus de tokens, resultaterne bruger, faktureret af Anthropic.",
+            "openai": "OpenAI's søgning koster 10 $ pr. 1.000 søgninger plus de tokens, resultaterne bruger, faktureret af OpenAI."
+          },
+          "cantConfirm": "{{name}} vælger selv sine søgninger, så de kan ikke vises, før de sendes. Med Bekræft søgninger slået til bruger Kusema Brave eller SearXNG, hvis du har sat en op, og spørger dig ellers hver gang.",
+          "unavailable": "{{name}} har ingen websøgning, Kusema kan bruge. Vælg Brave Search eller en SearXNG-server."
+        },
+        "test": {
+          "button": "Test",
+          "testing": "Tester…",
+          "ok": "Søgningen virker. Resultater: {{count}}.",
+          "failed": "Søgningen virkede ikke: {{error}}"
+        },
+        "confirm": {
+          "label": "Bekræft søgninger",
+          "description": "Før Kusema søger med Brave eller SearXNG, ser du hver søgning, kan ændre den og så sende eller annullere."
+        },
+        "pasteSources": {
+          "label": "Tilføj kilder, når svar indsættes",
+          "description": "Et indsat svar slutter med en kort liste over dets kilder."
+        },
+        "links": "For at læse en side kopierer du linket og beder om \"summarize this link\", eller du siger adressen. Kusema læser kun offentlige websider, aldrig sider på denne computer eller kontorets netværk, og følger aldrig links på siden."
       }
     },
     "postProcessing": {
@@ -947,6 +1014,19 @@
           "notRunning": "{{name}} kører ikke på denne computer. Start det, og opdater derefter listen over modeller.",
           "noModels": "{{name}} kører, men har endnu ingen modeller installeret.",
           "howTo": "Sådan konfigurerer du {{name}}"
+        },
+        "privacy": {
+          "anthropic": "Anthropic træner som standard ikke på API-data og sletter dem inden for 30 dage.",
+          "deepseek": "Din tekst behandles af DeepSeek, på servere i Kina. DeepSeeks politik tillader, at data bruges til at forbedre tjenesterne; se deres vilkår.",
+          "gemini": "På gratisniveauet må Google bruge dine forespørgsler og svar til at forbedre sine produkter, og mennesker kan læse dem. Brug en betalt nøgle (et Google Cloud-projekt med fakturering) til fortroligt arbejde.",
+          "openai": "OpenAI træner som standard ikke på API-data og gemmer dem i op til 30 dage for at opdage misbrug.",
+          "details": "Detaljer"
+        },
+        "testKey": {
+          "button": "Test nøgle",
+          "checking": "Tjekker…",
+          "ok": "Nøglen virker. Modeller: {{count}}.",
+          "failed": "Nøglen virkede ikke: {{error}}"
         }
       },
       "prompts": {
@@ -1262,7 +1342,9 @@
         "model_download": "Download af talemodel",
         "voice_download": "Download af stemme",
         "update_check": "Søgning efter opdatering",
-        "voice_edit": "Stemmeredigering"
+        "voice_edit": "Stemmeredigering",
+        "web_search": "Websøgning",
+        "link_fetch": "Læsning af link"
       },
       "data": {
         "text": "Tekst",
@@ -1294,6 +1376,21 @@
           "days_one": "{{count}} dag",
           "days_other": "{{count}} dage"
         }
+      },
+      "web": {
+        "title": "Websøgning",
+        "description": "Hver søgning og side, Kusema læste for dig, med hvad der blev søgt efter eller adressen.",
+        "empty": "Ingen søgninger eller sider endnu.",
+        "columns": {
+          "what": "Søgning eller side",
+          "provider": "Hvor",
+          "found": "Fundet"
+        },
+        "kinds": {
+          "search": "Søgning",
+          "fetch": "Side"
+        },
+        "local": "Søgetekst og sideadresser gemmes kun på denne computer. Ryd fjerner dem sammen med resten af listen, og de slettes efter det samme antal dage."
       }
     },
     "cleanup": {
@@ -1590,11 +1687,21 @@
       "noVision": "Denne AI kan ikke se skærmen. Vælg en, der kan se billeder, som Claude eller en visionsmodel i Ollama.",
       "emptyReply": "{{name}} sendte ikke noget svar. Prøv at spørge igen.",
       "nothingHeard": "Kusema hørte ikke noget spørgsmål. Hold tasten nede, tryk på Mellemrum, og tal så.",
-      "other": "Kusema kunne ikke få et svar: {{name}}"
+      "other": "Kusema kunne ikke få et svar: {{name}}",
+      "webOff": "Websøgning er slået fra. Slå den til under Assistent → Indstillinger → Websøgning.",
+      "webByAdmin": "Din administrator har slået websøgning og læsning af links fra på denne computer.",
+      "webPrivileged": "Privileged-tilstand er slået til, så Kusema søger ikke på nettet og læser ikke links. Slå Privileged-tilstand fra for at bruge dem.",
+      "noSearchProvider": "Websøgning er ikke sat op. Tilføj en Brave Search-nøgle eller en SearXNG-server under Assistent → Indstillinger → Websøgning.",
+      "searchFailed": "Websøgningen virkede ikke ({{name}}). Prøv igen, eller tjek Websøgning under Assistent → Indstillinger.",
+      "noLink": "Kusema fandt ikke et link at læse. Kopiér linket først, eller sig hele adressen.",
+      "linkFailed": "Kusema kunne ikke læse linket: {{name}}",
+      "providerHidden": "Din administrator har slået {{name}} fra på denne computer. Vælg en anden AI under Assistent → Indstillinger.",
+      "braveKeyRejected": "Brave afviste nøglen. Tjek, at den abonnerer på et Search-abonnement, og prøv igen."
     },
     "setUp": "Sæt op",
     "dismiss": "Luk",
-    "previewOff": "Live forhåndsvisning er slået fra: denne computer kunne ikke følge med. Du kan slå den til igen under Indstillinger."
+    "previewOff": "Live forhåndsvisning er slået fra: denne computer kunne ikke følge med. Du kan slå den til igen under Indstillinger.",
+    "webNotSearched": "Svaret uden nettet. Sig \"search the web for…\" for at søge."
   },
   "screenCard": {
     "title": "Send dette skærmbillede?",
@@ -1631,6 +1738,28 @@
       "body": "Så går alt, hvad du begynder med “{{word}}”, til Kusema. Senere i en sætning bliver ordet stående.",
       "yes": "Tilføj",
       "no": "Ikke nu"
+    },
+    "web": {
+      "title": {
+        "search": "Søge på nettet?",
+        "link": "Læse denne side?",
+        "builtin": "Lade {{name}} søge på nettet?"
+      },
+      "private": "Dette søger på nettet. Dit {{kind}} kommer ikke med i søgningen. Fortsæt?",
+      "privateLink": "Dette læser en webside. Dit {{kind}} sendes ikke til den. Fortsæt?",
+      "kind": {
+        "screenshot": "skærmbillede",
+        "selection": "markerede tekst"
+      },
+      "builtinPrivate": "{{name}} vælger selv sine søgninger og kan bruge dit {{kind}} i dem.",
+      "builtinUnconfirmable": "{{name}} vælger selv sine søgninger, så de kan ikke vises på forhånd.",
+      "editHint": "Kusema sender disse søgninger til {{provider}}. Ret dem, hvis du vil.",
+      "sendHint": "Kusema sender disse søgninger til {{provider}}.",
+      "searchLabel": "Søgning {{n}}",
+      "cancel": "Annuller",
+      "send": "Søg",
+      "continue": "Fortsæt",
+      "searchAnyway": "Søg alligevel"
     }
   },
   "secureInput": {
@@ -1726,7 +1855,11 @@
     "stop": "Stop",
     "close": "Luk",
     "hint": "Enter spørger · Skift+Enter: ny linje · Esc lukker",
-    "noWindow": "Klik i det vindue, du vil spørge om, og åbn så boksen igen."
+    "noWindow": "Klik i det vindue, du vil spørge om, og åbn så boksen igen.",
+    "sources": "Kilder",
+    "searchWeb": "Søg på nettet",
+    "searchWebHint": "Søg på nettet til dette spørgsmål",
+    "searchThis": "Søg efter dette på nettet"
   },
   "kusemaKey": {
     "presets": {

@@ -39,6 +39,25 @@ pub enum Failure {
     EmptyReply(String),
     /// Nothing was heard after switching to the Assistant.
     NothingHeard,
+    /// Kusema web search: the question asked for the web, which is off.
+    WebOff,
+    /// Kusema web search: the administrator turned web access off.
+    WebByAdmin,
+    /// Kusema web search: Privileged mode blocks web search and links.
+    WebPrivileged,
+    /// Kusema web search: no Brave key, SearXNG server or built-in search.
+    NoSearchProvider,
+    /// Kusema web search: the search failed ("provider: what it said").
+    SearchFailed(String),
+    /// Kusema web search: Brave refused the key (unknown, revoked, or not on
+    /// a plan with web search).
+    BraveKeyRejected,
+    /// Kusema link reading: "this link", but no link was copied.
+    NoLink,
+    /// Kusema link reading: the page couldn't be read, and why.
+    LinkFailed(String),
+    /// Kusema: the administrator hid this AI provider.
+    ProviderHidden(String),
     /// Anything else, with the provider's own words.
     Other(String, String),
 }
@@ -61,6 +80,15 @@ impl Failure {
             Failure::NoVision => "noVision",
             Failure::EmptyReply(_) => "emptyReply",
             Failure::NothingHeard => "nothingHeard",
+            Failure::WebOff => "webOff",
+            Failure::WebByAdmin => "webByAdmin",
+            Failure::WebPrivileged => "webPrivileged",
+            Failure::NoSearchProvider => "noSearchProvider",
+            Failure::SearchFailed(_) => "searchFailed",
+            Failure::BraveKeyRejected => "braveKeyRejected",
+            Failure::NoLink => "noLink",
+            Failure::LinkFailed(_) => "linkFailed",
+            Failure::ProviderHidden(_) => "providerHidden",
             Failure::Other(_, _) => "other",
         }
     }
@@ -78,7 +106,10 @@ impl Failure {
             | Failure::Privileged(n)
             | Failure::RateLimited(n)
             | Failure::NotFound(n)
-            | Failure::EmptyReply(n) => Some(n.clone()),
+            | Failure::EmptyReply(n)
+            | Failure::SearchFailed(n)
+            | Failure::LinkFailed(n)
+            | Failure::ProviderHidden(n) => Some(n.clone()),
             Failure::Other(n, error) => Some(format!("{n}: {error}")),
             _ => None,
         }
@@ -119,6 +150,15 @@ impl Failure {
             Failure::NothingHeard => {
                 "Kusema didn't hear a question. Hold the key, tap Space, then speak.".to_string()
             }
+            Failure::WebOff => "Web search is off. Turn it on in Assistant \u{2192} Settings \u{2192} Web search.".to_string(),
+            Failure::WebByAdmin => "Web search and link reading are turned off on this computer by your administrator.".to_string(),
+            Failure::WebPrivileged => "Privileged mode is on, so Kusema doesn't search the web or read links. Turn Privileged mode off to use them.".to_string(),
+            Failure::NoSearchProvider => "Web search isn't set up. Add a Brave Search key or a SearXNG server in Assistant \u{2192} Settings \u{2192} Web search.".to_string(),
+            Failure::SearchFailed(_) => format!("The web search didn't work ({n}). Try again, or check Web search in Assistant \u{2192} Settings."),
+            Failure::BraveKeyRejected => "Brave rejected the key. Check that it's subscribed to a Search plan, then try again.".to_string(),
+            Failure::NoLink => "Kusema didn't find a link to read. Copy the link first, or say the full address.".to_string(),
+            Failure::LinkFailed(_) => format!("Kusema couldn't read that link: {n}"),
+            Failure::ProviderHidden(_) => format!("{n} is turned off on this computer by your administrator. Choose another AI in Assistant \u{2192} Settings."),
             Failure::Other(_, _) => format!("Kusema couldn't get an answer: {n}"),
         }
     }
@@ -134,8 +174,14 @@ impl Failure {
             | Failure::KeyRejected(_)
             | Failure::NotFound(_)
             | Failure::NoVision
-            | Failure::Unreachable(_) => Some(SetupPage::Assistant),
-            Failure::Privileged(_) => Some(SetupPage::Privacy),
+            | Failure::Unreachable(_)
+            | Failure::WebOff
+            | Failure::NoSearchProvider
+            | Failure::SearchFailed(_)
+            | Failure::BraveKeyRejected
+            | Failure::ProviderHidden(_) => Some(SetupPage::Assistant),
+            Failure::Privileged(_) | Failure::WebPrivileged => Some(SetupPage::Privacy),
+            Failure::WebByAdmin | Failure::NoLink | Failure::LinkFailed(_) => None,
             Failure::LocalNotRunning(_)
             | Failure::RateLimited(_)
             | Failure::EmptyReply(_)
@@ -326,6 +372,15 @@ mod tests {
             Failure::NoVision,
             Failure::EmptyReply("A".into()),
             Failure::NothingHeard,
+            Failure::WebOff,
+            Failure::WebByAdmin,
+            Failure::WebPrivileged,
+            Failure::NoSearchProvider,
+            Failure::SearchFailed("Brave Search: boom".into()),
+            Failure::BraveKeyRejected,
+            Failure::NoLink,
+            Failure::LinkFailed("timeout".into()),
+            Failure::ProviderHidden("DeepSeek".into()),
             Failure::Other("A".into(), "boom".into()),
         ] {
             // The pill's translation and the spoken English say the same.

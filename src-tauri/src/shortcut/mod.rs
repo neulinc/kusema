@@ -1231,6 +1231,10 @@ pub fn change_post_process_model_setting(
 pub fn set_post_process_provider(app: AppHandle, provider_id: String) -> Result<(), String> {
     let mut settings = settings::get_settings(&app);
     validate_provider_exists(&settings, &provider_id)?;
+    // Kusema: an AI the administrator hid can't be chosen.
+    if crate::web::admin::policy().hides(&provider_id) {
+        return Err("This AI is turned off on this computer by your administrator.".to_string());
+    }
     settings.post_process_provider_id = provider_id;
     settings::write_settings(&app, settings);
     Ok(())
@@ -1357,7 +1361,7 @@ pub async fn fetch_post_process_models(
         ));
     }
 
-    crate::llm_client::fetch_models(provider, api_key)
+    let models = crate::llm_client::fetch_models(provider, api_key)
         .await
         .map_err(|e| {
             if crate::network::is_blocked(&e) {
@@ -1365,7 +1369,23 @@ pub async fn fetch_post_process_models(
             } else {
                 e
             }
-        })
+        })?;
+    // Kusema: a key that works gets a recommended model, if none is chosen yet.
+    let chosen = settings
+        .post_process_models
+        .get(&provider_id)
+        .map(|m| m.trim().to_string())
+        .unwrap_or_default();
+    if chosen.is_empty() {
+        if let Some(model) = crate::cloud_providers::suggested_model(&provider_id, &models) {
+            let mut settings = settings::get_settings(&app);
+            settings
+                .post_process_models
+                .insert(provider_id.clone(), model);
+            settings::write_settings(&app, settings);
+        }
+    }
+    Ok(models)
 }
 
 #[tauri::command]

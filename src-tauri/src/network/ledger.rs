@@ -1,5 +1,10 @@
 //! The local record of outbound requests: where, why, what kind of data and how
 //! many bytes. There is no column for content, so it can't be stored by accident.
+//!
+//! Kusema web search: searches and links read are listed in a second table,
+//! `web_requests`, with the search text or the address, because that's what
+//! the user needs to see to know what went out. Nothing else is kept there:
+//! never a result, a page or the question that led to it.
 
 use anyhow::Result;
 use rusqlite::{params, params_from_iter, types::Value, Connection};
@@ -21,6 +26,10 @@ pub enum Purpose {
     ModelDownload,
     VoiceDownload,
     UpdateCheck,
+    /// Kusema: a web search (Brave or a SearXNG server): the search text.
+    WebSearch,
+    /// Kusema: reading a link the user named: the address, nothing else.
+    LinkFetch,
 }
 
 impl Purpose {
@@ -34,6 +43,8 @@ impl Purpose {
             Purpose::ModelDownload => "model_download",
             Purpose::VoiceDownload => "voice_download",
             Purpose::UpdateCheck => "update_check",
+            Purpose::WebSearch => "web_search",
+            Purpose::LinkFetch => "link_fetch",
         }
     }
 
@@ -47,6 +58,8 @@ impl Purpose {
             "model_download" => Purpose::ModelDownload,
             "voice_download" => Purpose::VoiceDownload,
             "update_check" => Purpose::UpdateCheck,
+            "web_search" => Purpose::WebSearch,
+            "link_fetch" => Purpose::LinkFetch,
             _ => return None,
         })
     }
@@ -146,6 +159,49 @@ pub struct Ledger {
     path: PathBuf,
 }
 
+/// Kusema web search: what kind of web request.
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize, Deserialize, Type)]
+#[serde(rename_all = "snake_case")]
+pub enum WebKind {
+    Search,
+    Fetch,
+}
+
+impl WebKind {
+    fn as_str(self) -> &'static str {
+        match self {
+            WebKind::Search => "search",
+            WebKind::Fetch => "fetch",
+        }
+    }
+
+    fn parse(value: &str) -> Self {
+        match value {
+            "fetch" => WebKind::Fetch,
+            _ => WebKind::Search,
+        }
+    }
+}
+
+/// One web search or link read, as listed under "Web search".
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize, Type)]
+pub struct WebEntry {
+    pub id: i64,
+    /// Seconds since the epoch.
+    pub timestamp: i64,
+    pub kind: WebKind,
+    /// Who searched or served the page: "Brave Search", "SearXNG (host)",
+    /// "Claude (built-in search)", or the page's host.
+    pub provider: String,
+    /// The search text, or the address read.
+    pub detail: String,
+    /// Results a search returned.
+    pub results: Option<i64>,
+    /// Bytes of page received for a link.
+    pub bytes_received: Option<i64>,
+    pub result: RequestResult,
+}
+
 const SCHEMA: &str = "CREATE TABLE IF NOT EXISTS requests (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         timestamp INTEGER NOT NULL,
@@ -155,7 +211,21 @@ const SCHEMA: &str = "CREATE TABLE IF NOT EXISTS requests (
         bytes INTEGER NOT NULL,
         result TEXT NOT NULL
     );
-    CREATE INDEX IF NOT EXISTS requests_timestamp ON requests (timestamp);";
+    CREATE INDEX IF NOT EXISTS requests_timestamp ON requests (timestamp);
+    CREATE TABLE IF NOT EXISTS web_requests (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        timestamp INTEGER NOT NULL,
+        kind TEXT NOT NULL,
+        provider TEXT NOT NULL,
+        detail TEXT NOT NULL,
+        results INTEGER,
+        bytes_received INTEGER,
+        result TEXT NOT NULL
+    );
+    CREATE INDEX IF NOT EXISTS web_requests_timestamp ON web_requests (timestamp);";
+
+/// The longest search text or address kept, in characters.
+const MAX_WEB_DETAIL: usize = 2000;
 
 impl Ledger {
     pub fn open(path: &Path) -> Result<Self> {
@@ -211,9 +281,106 @@ impl Ledger {
     }
 
     pub fn clear(&self) -> Result<()> {
-        self.connection()?.execute("DELETE FROM requests", [])?;
+        let conn = self.connection()?;
+        conn.execute("DELETE FROM requests", [])?;
+        conn.execute("DELETE FROM web_requests", [])?;
         Ok(())
     }
+
+    /// Kusema web search: lists a search or a link read. `results` and
+    /// `bytes_received` are filled in later with `finish_web`.
+    pub fn record_web(
+        &self,
+        timestamp: i64,
+        kind: WebKind,
+        provider: &str,
+        detail: &str,
+        result: RequestResult,
+    ) -> Result<i64> {
+        insert_web(
+            &self.connection()?,
+            timestamp,
+            kind,
+            provider,
+            detail,
+            result,
+        )
+    }
+
+    pub fn finish_web(
+        &self,
+        id: i64,
+        result: RequestResult,
+        results: Option<usize>,
+        bytes_received: Option<usize>,
+    ) -> Result<()> {
+        finish_web(&self.connection()?, id, result, results, bytes_received)
+    }
+
+    pub fn list_web(&self, since: Option<i64>, limit: i64) -> Result<Vec<WebEntry>> {
+        list_web(&self.connection()?, since, limit)
+    }
+}
+
+fn insert_web(
+    conn: &Connection,
+    timestamp: i64,
+    kind: WebKind,
+    provider: &str,
+    detail: &str,
+    result: RequestResult,
+) -> Result<i64> {
+    let detail: String = detail.chars().take(MAX_WEB_DETAIL).collect();
+    conn.execute(
+        "INSERT INTO web_requests (timestamp, kind, provider, detail, result)
+         VALUES (?1, ?2, ?3, ?4, ?5)",
+        params![timestamp, kind.as_str(), provider, detail, result.as_str()],
+    )?;
+    Ok(conn.last_insert_rowid())
+}
+
+fn finish_web(
+    conn: &Connection,
+    id: i64,
+    result: RequestResult,
+    results: Option<usize>,
+    bytes_received: Option<usize>,
+) -> Result<()> {
+    conn.execute(
+        "UPDATE web_requests SET result = ?1,
+             results = COALESCE(?2, results),
+             bytes_received = COALESCE(?3, bytes_received)
+         WHERE id = ?4",
+        params![
+            result.as_str(),
+            results.map(|n| n as i64),
+            bytes_received.map(|n| n as i64),
+            id
+        ],
+    )?;
+    Ok(())
+}
+
+fn list_web(conn: &Connection, since: Option<i64>, limit: i64) -> Result<Vec<WebEntry>> {
+    let mut statement = conn.prepare(
+        "SELECT id, timestamp, kind, provider, detail, results, bytes_received, result
+         FROM web_requests WHERE timestamp >= ?1 ORDER BY id DESC LIMIT ?2",
+    )?;
+    let rows = statement.query_map(params![since.unwrap_or(0), limit], |row| {
+        let kind: String = row.get(2)?;
+        let result: String = row.get(7)?;
+        Ok(WebEntry {
+            id: row.get(0)?,
+            timestamp: row.get(1)?,
+            kind: WebKind::parse(&kind),
+            provider: row.get(3)?,
+            detail: row.get(4)?,
+            results: row.get(5)?,
+            bytes_received: row.get(6)?,
+            result: RequestResult::parse(&result),
+        })
+    })?;
+    Ok(rows.collect::<rusqlite::Result<_>>()?)
 }
 
 fn insert(
@@ -242,7 +409,11 @@ fn insert(
 
 /// Deletes everything older than `cutoff`.
 fn prune(conn: &Connection, cutoff: i64) -> Result<usize> {
-    Ok(conn.execute("DELETE FROM requests WHERE timestamp < ?1", params![cutoff])?)
+    let web = conn.execute(
+        "DELETE FROM web_requests WHERE timestamp < ?1",
+        params![cutoff],
+    )?;
+    Ok(conn.execute("DELETE FROM requests WHERE timestamp < ?1", params![cutoff])? + web)
 }
 
 fn list(conn: &Connection, filter: &LedgerFilter, limit: i64) -> Result<Vec<LedgerEntry>> {
@@ -529,6 +700,115 @@ mod tests {
             to_csv(&[entry], |t| format!("t{t}")),
             "time,destination,purpose,data,bytes,result\r\nt5,\"a,b.example\",screen_question,image,42,blocked\r\n"
         );
+    }
+
+    #[test]
+    fn web_searches_and_links_are_listed_with_their_text_and_counts() {
+        let conn = conn();
+        let search = insert_web(
+            &conn,
+            10,
+            WebKind::Search,
+            "Brave Search",
+            "statute of limitations Ohio",
+            RequestResult::Sent,
+        )
+        .unwrap();
+        finish_web(&conn, search, RequestResult::Sent, Some(5), None).unwrap();
+        let fetch = insert_web(
+            &conn,
+            20,
+            WebKind::Fetch,
+            "example.com",
+            "https://example.com/page",
+            RequestResult::Sent,
+        )
+        .unwrap();
+        finish_web(&conn, fetch, RequestResult::Failed, None, Some(1234)).unwrap();
+        let entries = list_web(&conn, None, 10).unwrap();
+        assert_eq!(entries.len(), 2);
+        assert_eq!(entries[0].kind, WebKind::Fetch);
+        assert_eq!(entries[0].detail, "https://example.com/page");
+        assert_eq!(entries[0].bytes_received, Some(1234));
+        assert_eq!(entries[0].result, RequestResult::Failed);
+        assert_eq!(entries[1].provider, "Brave Search");
+        assert_eq!(entries[1].detail, "statute of limitations Ohio");
+        assert_eq!(entries[1].results, Some(5));
+        assert_eq!(list_web(&conn, Some(15), 10).unwrap().len(), 1);
+        // Retention covers them too.
+        prune(&conn, 15).unwrap();
+        assert_eq!(list_web(&conn, None, 10).unwrap().len(), 1);
+    }
+
+    #[test]
+    fn clearing_the_ledger_also_clears_searches_and_pages() {
+        let dir = tempfile::TempDir::new().unwrap();
+        let ledger = Ledger::open(&dir.path().join("l.db")).unwrap();
+        ledger
+            .record(
+                1,
+                "a.example",
+                Purpose::WebSearch,
+                DataKind::Text,
+                0,
+                RequestResult::Sent,
+            )
+            .unwrap();
+        ledger
+            .record_web(
+                1,
+                WebKind::Search,
+                "Brave Search",
+                "private matter",
+                RequestResult::Sent,
+            )
+            .unwrap();
+        ledger
+            .record_web(
+                2,
+                WebKind::Fetch,
+                "example.com",
+                "https://example.com/",
+                RequestResult::Sent,
+            )
+            .unwrap();
+        ledger.clear().unwrap();
+        assert!(ledger
+            .list(&LedgerFilter::default(), 10)
+            .unwrap()
+            .is_empty());
+        assert!(ledger.list_web(None, 10).unwrap().is_empty());
+    }
+
+    #[test]
+    fn the_web_table_keeps_only_the_search_text_or_address() {
+        let conn = conn();
+        let mut statement = conn
+            .prepare("SELECT name FROM pragma_table_info('web_requests')")
+            .unwrap();
+        let columns: Vec<String> = statement
+            .query_map([], |row| row.get(0))
+            .unwrap()
+            .collect::<rusqlite::Result<_>>()
+            .unwrap();
+        assert_eq!(
+            columns,
+            [
+                "id",
+                "timestamp",
+                "kind",
+                "provider",
+                "detail",
+                "results",
+                "bytes_received",
+                "result"
+            ]
+        );
+        let long = "x".repeat(5000);
+        let id = insert_web(&conn, 1, WebKind::Search, "b", &long, RequestResult::Sent).unwrap();
+        let kept = list_web(&conn, None, 1).unwrap();
+        assert_eq!(kept[0].id, id);
+        assert_eq!(kept[0].detail.chars().count(), MAX_WEB_DETAIL);
     }
 
     #[test]

@@ -11,8 +11,12 @@
 mod ledger;
 mod policy;
 mod privileged;
+pub mod public_only;
 
-pub use ledger::{DataKind, DestinationCount, LedgerEntry, LedgerFilter, Purpose, RequestResult};
+pub use ledger::{
+    DataKind, DestinationCount, LedgerEntry, LedgerFilter, Purpose, RequestResult, WebEntry,
+    WebKind,
+};
 pub use policy::Rules;
 pub use privileged::*;
 
@@ -30,6 +34,8 @@ use policy::{classify, decide, Category, Reach, Verdict};
 /// Starts every "couldn't send" error that means policy, not failure, so
 /// callers can tell them apart through the string errors `llm_client` returns.
 const BLOCKED_MARKER: &str = "Blocked by Privileged mode: ";
+/// Kusema: starts a refusal because the administrator turned web access off.
+const ADMIN_MARKER: &str = "Turned off by your administrator: ";
 const PRUNE_EVERY_SECS: i64 = 60 * 60;
 const SECS_PER_DAY: i64 = 24 * 60 * 60;
 
@@ -44,6 +50,7 @@ impl Purpose {
             Purpose::ModelDownload | Purpose::VoiceDownload | Purpose::UpdateCheck => {
                 Category::Download
             }
+            Purpose::WebSearch | Purpose::LinkFetch => Category::Web,
         }
     }
 }
@@ -75,6 +82,10 @@ pub enum BlockReason {
     CloudAi,
     LanAi,
     Download,
+    /// Kusema: web search or link reading in Privileged mode.
+    Web,
+    /// Kusema: web access turned off by the administrator.
+    WebByAdmin,
     /// The gate was never set up. Should not happen; nothing is sent if it does.
     NotReady,
 }
@@ -88,6 +99,14 @@ impl fmt::Display for Blocked {
                 self.host
             ),
             BlockReason::NotReady => write!(f, "{BLOCKED_MARKER}not ready yet."),
+            BlockReason::Web => write!(
+                f,
+                "{BLOCKED_MARKER}Kusema doesn't search the web or read links while Privileged mode is on."
+            ),
+            BlockReason::WebByAdmin => write!(
+                f,
+                "{ADMIN_MARKER}web search and link reading are turned off on this computer."
+            ),
             _ => write!(f, "{BLOCKED_MARKER}nothing was sent to {}.", self.host),
         }
     }
@@ -125,6 +144,11 @@ pub fn is_blocked(error: &str) -> bool {
     error.starts_with(BLOCKED_MARKER)
 }
 
+/// Kusema: whether an error means the administrator turned web access off.
+pub fn is_blocked_by_admin(error: &str) -> bool {
+    error.starts_with(ADMIN_MARKER)
+}
+
 fn now() -> i64 {
     chrono::Utc::now().timestamp()
 }
@@ -150,6 +174,8 @@ impl Gate {
             Verdict::BlockCloudAi => Some(BlockReason::CloudAi),
             Verdict::BlockLanAi => Some(BlockReason::LanAi),
             Verdict::BlockDownload => Some(BlockReason::Download),
+            Verdict::BlockWeb => Some(BlockReason::Web),
+            Verdict::BlockWebByAdmin => Some(BlockReason::WebByAdmin),
         }
     }
 
@@ -294,6 +320,7 @@ pub fn init(app: &AppHandle) {
                     privileged: settings.privileged_mode,
                     allow_lan: settings.privileged_allow_lan,
                     block_downloads: settings.privileged_block_downloads,
+                    web_disabled: crate::web::admin::policy().disable_web_access,
                 },
                 retention_days: settings.ledger_retention_days,
             }
@@ -402,6 +429,85 @@ pub fn announce(purpose: Purpose, url: &str) -> Result<(), Blocked> {
     };
     gate.authorize(purpose, DataKind::None, &host, 0)
         .map(|_| ())
+}
+
+/// Kusema link reading: a client that reaches only the public internet (see
+/// `public_only`). Each redirect is checked by the gate and for its address,
+/// at most `MAX_LINK_REDIRECTS`; names resolve through `PublicResolver`; no
+/// proxy (it would resolve names where they can't be checked), no cookies.
+pub fn link_client_builder(timeout: std::time::Duration) -> reqwest::ClientBuilder {
+    let gate = gate();
+    let policy = redirect::Policy::custom(move |attempt| {
+        let host = attempt.url().host_str().unwrap_or_default().to_string();
+        let Some(gate) = &gate else {
+            return attempt.error(RedirectBlocked(not_ready(&host)));
+        };
+        if let Some(verdict) = gate.verdict(Purpose::LinkFetch, &host) {
+            return attempt.error(RedirectBlocked(Blocked { host, verdict }));
+        }
+        if let Err(not_public) = public_only::check_url(attempt.url()) {
+            return attempt.error(not_public);
+        }
+        if attempt.previous().len() > MAX_LINK_REDIRECTS {
+            attempt.error("too many redirects")
+        } else {
+            attempt.follow()
+        }
+    });
+    reqwest::Client::builder()
+        .redirect(policy)
+        .dns_resolver(Arc::new(public_only::PublicResolver))
+        .no_proxy()
+        .timeout(timeout)
+        .connect_timeout(timeout)
+        .user_agent(concat!(
+            "Kusema/",
+            env!("CARGO_PKG_VERSION"),
+            " (link reader)"
+        ))
+}
+
+/// Redirects a link may take before Kusema gives up.
+pub const MAX_LINK_REDIRECTS: usize = 3;
+
+/// Kusema web search: lists a search or a link read in the ledger's web
+/// table. `None` if the ledger isn't available (the request still goes:
+/// the requests table has it).
+pub fn record_web(
+    kind: WebKind,
+    provider: &str,
+    detail: &str,
+    result: RequestResult,
+) -> Option<i64> {
+    let gate = gate()?;
+    let ledger = gate.ledger.as_ref()?;
+    let id = match ledger.record_web(now(), kind, provider, detail, result) {
+        Ok(id) => Some(id),
+        Err(e) => {
+            error!("Couldn't record a web request in the privacy ledger: {e}");
+            None
+        }
+    };
+    (gate.on_change)();
+    id
+}
+
+/// Fills in how a listed web request went.
+pub fn finish_web(
+    id: Option<i64>,
+    result: RequestResult,
+    results: Option<usize>,
+    bytes_received: Option<usize>,
+) {
+    let (Some(id), Some(gate)) = (id, gate()) else {
+        return;
+    };
+    if let Some(ledger) = gate.ledger.as_ref() {
+        if let Err(e) = ledger.finish_web(id, result, results, bytes_received) {
+            error!("Couldn't update the privacy ledger: {e}");
+        }
+        (gate.on_change)();
+    }
 }
 
 /// Whether a request would be refused right now. Records nothing: for skipping

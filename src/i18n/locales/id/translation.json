@@ -899,6 +899,73 @@
           "description": "Menjelaskan langkah demi langkah, memeriksa pemahaman, dan menuntun ke jawaban alih-alih memberikan jawaban PR begitu saja, kecuali Anda meminta jawabannya. Anda juga bisa mengucapkan “explain step by step” dalam pertanyaan apa pun.",
           "note": "Ikuti aturan sekolah atau ujian Anda tentang penggunaan AI."
         }
+      },
+      "web": {
+        "title": "Pencarian web",
+        "description": "Biarkan Kusema mencari di web atau membaca tautan yang Anda sebutkan. Nonaktif sampai Anda mengaktifkannya. Setiap pencarian dan halaman yang dibaca tercantum di halaman Privasi.",
+        "adminOff": "Administrator Anda menonaktifkan pencarian web dan pembacaan tautan di komputer ini.",
+        "privileged": "Mode Privileged aktif: Kusema tidak akan mencari di web atau membaca tautan sampai Anda menonaktifkannya.",
+        "enabled": {
+          "label": "Gunakan web",
+          "description": "Cari di web atau baca tautan saat Anda memintanya, misalnya \"search the web for…\" atau \"summarize this link\"."
+        },
+        "mode": {
+          "label": "Kapan mencari",
+          "description": "Hanya saat Anda meminta, atau setiap kali AI menilai pertanyaan membutuhkannya.",
+          "whenAsked": "Hanya saat saya minta",
+          "automatic": "Otomatis",
+          "whenAskedNote": "Kusema mencari saat pertanyaan Anda memintanya (\"search the web for…\") atau sakelar Cari di web aktif.",
+          "automaticNote": "AI memutuskan kapan pertanyaan membutuhkan web. Dengan Brave atau SearXNG, AI ditanya dulu pencarian apa yang akan dijalankan, hanya dari pertanyaan Anda."
+        },
+        "limits": "Paling banyak 3 pencarian per pertanyaan dan 5 hasil teratas dari masing-masing, sebagai cuplikan singkat.",
+        "provider": {
+          "label": "Cari dengan",
+          "description": "Brave dan SearXNG bekerja dengan AI apa pun, termasuk yang ada di komputer ini.",
+          "brave": "Brave Search (kunci Anda)",
+          "searxng": "Server SearXNG",
+          "builtin": "Pencarian bawaan {{name}}",
+          "builtinAny": "Pencarian bawaan AI (Claude atau OpenAI)"
+        },
+        "brave": {
+          "key": "Kunci API Brave Search",
+          "keyDescription": "Disimpan di Windows Credential Manager, seperti kunci AI Anda.",
+          "saved": "Kunci tersimpan",
+          "remove": "Hapus",
+          "placeholder": "Tempel kunci Anda",
+          "save": "Simpan",
+          "pricing": "Brave mengenakan $5 per 1.000 pencarian dan memberi kredit gratis $5 setiap bulan, sekitar 1.000 pencarian (brave.com, November 2026).",
+          "getKey": "Dapatkan kunci"
+        },
+        "searxng": {
+          "label": "Alamat server",
+          "description": "Alamat server SearXNG dengan hasil JSON diaktifkan.",
+          "adminSet": "Ditetapkan oleh administrator Anda.",
+          "neulinc": "Butuh server pencarian pribadi untuk kantor Anda? Neulinc dapat menyiapkan dan merawat server SearXNG untuk Anda.",
+          "learnMore": "Pelajari lebih lanjut"
+        },
+        "builtin": {
+          "pricing": {
+            "anthropic": "Pencarian Claude berbiaya $10 per 1.000 pencarian ditambah token yang dipakai hasilnya, ditagih oleh Anthropic.",
+            "openai": "Pencarian OpenAI berbiaya $10 per 1.000 pencarian ditambah token yang dipakai hasilnya, ditagih oleh OpenAI."
+          },
+          "cantConfirm": "{{name}} memilih pencariannya sendiri, jadi pencarian itu tidak bisa ditampilkan sebelum dikirim. Dengan Konfirmasi pencarian aktif, Kusema memakai Brave atau SearXNG jika Anda sudah menyiapkannya, dan jika tidak, menanyakan Anda setiap kali.",
+          "unavailable": "{{name}} tidak memiliki pencarian web yang bisa dipakai Kusema. Pilih Brave Search atau server SearXNG."
+        },
+        "test": {
+          "button": "Uji",
+          "testing": "Menguji…",
+          "ok": "Pencarian berfungsi. Hasil: {{count}}.",
+          "failed": "Pencarian tidak berhasil: {{error}}"
+        },
+        "confirm": {
+          "label": "Konfirmasi pencarian",
+          "description": "Sebelum Kusema mencari dengan Brave atau SearXNG, lihat setiap pencarian, ubah jika mau, lalu kirim atau batalkan."
+        },
+        "pasteSources": {
+          "label": "Tambahkan sumber saat menempel jawaban",
+          "description": "Jawaban yang ditempel diakhiri daftar singkat sumbernya."
+        },
+        "links": "Untuk membaca halaman, salin tautannya lalu minta \"summarize this link\", atau ucapkan alamatnya. Kusema hanya membaca halaman web publik, tidak pernah halaman di komputer ini atau jaringan kantor, dan tidak pernah mengikuti tautan di halaman."
       }
     },
     "postProcessing": {
@@ -947,6 +1014,19 @@
           "notRunning": "{{name}} tidak berjalan di komputer ini. Jalankan, lalu segarkan daftar model.",
           "noModels": "{{name}} berjalan, tetapi belum ada model yang terpasang.",
           "howTo": "Cara menyiapkan {{name}}"
+        },
+        "privacy": {
+          "anthropic": "Secara default Anthropic tidak melatih model dengan data API dan menghapusnya dalam 30 hari.",
+          "deepseek": "Teks Anda diproses oleh DeepSeek, di server di Tiongkok. Kebijakan DeepSeek mengizinkannya memakai data untuk meningkatkan layanannya; lihat ketentuannya.",
+          "gemini": "Di paket gratis, Google dapat memakai prompt dan jawaban Anda untuk meningkatkan produknya, dan orang dapat membacanya. Gunakan kunci berbayar (proyek Google Cloud dengan penagihan) untuk pekerjaan rahasia.",
+          "openai": "Secara default OpenAI tidak melatih model dengan data API dan menyimpannya hingga 30 hari untuk memantau penyalahgunaan.",
+          "details": "Detail"
+        },
+        "testKey": {
+          "button": "Uji kunci",
+          "checking": "Memeriksa…",
+          "ok": "Kunci berfungsi. Model: {{count}}.",
+          "failed": "Kunci tidak berhasil: {{error}}"
         }
       },
       "prompts": {
@@ -1262,7 +1342,9 @@
         "model_download": "Unduhan model ucapan",
         "voice_download": "Unduhan suara",
         "update_check": "Pemeriksaan pembaruan",
-        "voice_edit": "Edit suara"
+        "voice_edit": "Edit suara",
+        "web_search": "Pencarian web",
+        "link_fetch": "Pembacaan tautan"
       },
       "data": {
         "text": "Teks",
@@ -1294,6 +1376,21 @@
           "days_one": "{{count}} hari",
           "days_other": "{{count}} hari"
         }
+      },
+      "web": {
+        "title": "Pencarian web",
+        "description": "Setiap pencarian dan halaman yang dibaca Kusema untuk Anda, dengan kata yang dicari atau alamatnya.",
+        "empty": "Belum ada pencarian atau halaman.",
+        "columns": {
+          "what": "Pencarian atau halaman",
+          "provider": "Di mana",
+          "found": "Ditemukan"
+        },
+        "kinds": {
+          "search": "Pencarian",
+          "fetch": "Halaman"
+        },
+        "local": "Teks pencarian dan alamat halaman hanya disimpan di komputer ini. Hapus menghapusnya bersama isi daftar lainnya, dan semuanya dihapus setelah jumlah hari yang sama."
       }
     },
     "cleanup": {
@@ -1590,11 +1687,21 @@
       "noVision": "AI ini tidak bisa melihat layar. Pilih yang bisa melihat gambar, seperti Claude atau model visi di Ollama.",
       "emptyReply": "{{name}} tidak mengirim jawaban. Coba tanya lagi.",
       "nothingHeard": "Kusema tidak mendengar pertanyaan. Tahan tombolnya, ketuk Spasi, lalu bicara.",
-      "other": "Kusema tidak bisa mendapat jawaban: {{name}}"
+      "other": "Kusema tidak bisa mendapat jawaban: {{name}}",
+      "webOff": "Pencarian web nonaktif. Aktifkan di Asisten → Pengaturan → Pencarian web.",
+      "webByAdmin": "Administrator Anda menonaktifkan pencarian web dan pembacaan tautan di komputer ini.",
+      "webPrivileged": "Mode Privileged aktif, jadi Kusema tidak mencari di web atau membaca tautan. Nonaktifkan mode Privileged untuk menggunakannya.",
+      "noSearchProvider": "Pencarian web belum disiapkan. Tambahkan kunci Brave Search atau server SearXNG di Asisten → Pengaturan → Pencarian web.",
+      "searchFailed": "Pencarian web tidak berhasil ({{name}}). Coba lagi, atau periksa Pencarian web di Asisten → Pengaturan.",
+      "noLink": "Kusema tidak menemukan tautan untuk dibaca. Salin tautannya dulu, atau ucapkan alamat lengkapnya.",
+      "linkFailed": "Kusema tidak dapat membaca tautan itu: {{name}}",
+      "providerHidden": "Administrator Anda menonaktifkan {{name}} di komputer ini. Pilih AI lain di Asisten → Pengaturan.",
+      "braveKeyRejected": "Brave menolak kunci itu. Pastikan kunci berlangganan paket Search, lalu coba lagi."
     },
     "setUp": "Siapkan",
     "dismiss": "Tutup",
-    "previewOff": "Pratinjau langsung nonaktif: komputer ini tidak bisa mengikuti. Anda bisa mengaktifkannya lagi di Pengaturan."
+    "previewOff": "Pratinjau langsung nonaktif: komputer ini tidak bisa mengikuti. Anda bisa mengaktifkannya lagi di Pengaturan.",
+    "webNotSearched": "Dijawab tanpa web. Untuk mencari, ucapkan \"search the web for…\"."
   },
   "screenCard": {
     "title": "Kirim tangkapan layar ini?",
@@ -1631,6 +1738,28 @@
       "body": "Setelah itu, semua yang Anda awali dengan “{{word}}” akan dikirim ke Kusema. Di tengah kalimat, kata itu dibiarkan apa adanya.",
       "yes": "Tambahkan",
       "no": "Nanti saja"
+    },
+    "web": {
+      "title": {
+        "search": "Cari di web?",
+        "link": "Baca halaman ini?",
+        "builtin": "Izinkan {{name}} mencari di web?"
+      },
+      "private": "Ini akan mencari di web. {{kind}} Anda tidak akan disertakan dalam pencarian. Lanjutkan?",
+      "privateLink": "Ini akan membaca halaman web. {{kind}} Anda tidak akan dikirim ke sana. Lanjutkan?",
+      "kind": {
+        "screenshot": "Tangkapan layar",
+        "selection": "Teks yang dipilih"
+      },
+      "builtinPrivate": "{{name}} memilih pencariannya sendiri dan bisa memakai {{kind}} Anda di dalamnya.",
+      "builtinUnconfirmable": "{{name}} memilih pencariannya sendiri, jadi tidak bisa ditampilkan lebih dulu.",
+      "editHint": "Kusema akan mengirim pencarian ini ke {{provider}}. Ubah jika mau.",
+      "sendHint": "Kusema akan mengirim pencarian ini ke {{provider}}.",
+      "searchLabel": "Pencarian {{n}}",
+      "cancel": "Batal",
+      "send": "Cari",
+      "continue": "Lanjutkan",
+      "searchAnyway": "Tetap cari"
     }
   },
   "secureInput": {
@@ -1726,7 +1855,11 @@
     "stop": "Hentikan",
     "close": "Tutup",
     "hint": "Enter bertanya · Shift+Enter: baris baru · Esc menutup",
-    "noWindow": "Klik jendela yang ingin Anda tanyakan, lalu buka kotak ini lagi."
+    "noWindow": "Klik jendela yang ingin Anda tanyakan, lalu buka kotak ini lagi.",
+    "sources": "Sumber",
+    "searchWeb": "Cari di web",
+    "searchWebHint": "Cari di web untuk pertanyaan ini",
+    "searchThis": "Cari ini di web"
   },
   "kusemaKey": {
     "presets": {

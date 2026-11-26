@@ -12,6 +12,7 @@ mod chinese_script;
 mod cleanup;
 pub mod cli;
 mod clipboard;
+mod cloud_providers;
 mod commands;
 mod dictation;
 #[cfg(test)]
@@ -49,6 +50,7 @@ mod tts;
 mod utils;
 mod vocabulary;
 mod voice_edit;
+mod web;
 mod window_chrome;
 
 pub use cli::CliArgs;
@@ -929,6 +931,14 @@ pub fn run(cli_args: CliArgs) {
             vocabulary::export_vocabulary,
             vocabulary::correct_history_entry,
             screen::card::answer_correction_card,
+            screen::card::answer_web_card,
+            web::change_web_search_settings,
+            web::set_brave_search_key,
+            web::has_brave_search_key,
+            web::test_web_search,
+            web::open_web_source,
+            web::admin::get_admin_policy,
+            network::get_web_ledger,
             tts::get_tts_voices,
             tts::preview_tts_voice,
             tts::change_assistant_speak_replies_setting,

@@ -287,6 +287,7 @@ pub fn run_in_dictation(app: &AppHandle, rest: &str, window: isize) {
         target: crate::assistant::insert::at_press(),
         id: crate::assistant::next_id(app),
         in_dictation: true,
+        web: false,
     };
     match routed {
         Route::Command(_) => crate::voice_edit::run_trigger_in_dictation(app, rest, window),

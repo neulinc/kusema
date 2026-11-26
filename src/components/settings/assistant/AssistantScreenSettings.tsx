@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { isKeyOptional } from "@/lib/localProviders";
+import { isHidden, useAdminPolicy } from "@/lib/cloudProviders";
 import { useSettings } from "../../../hooks/useSettings";
 import { SettingsGroup } from "../../ui/SettingsGroup";
 import { SettingContainer } from "../../ui/SettingContainer";
@@ -19,6 +20,7 @@ const SAME_AS_ASSISTANT = "";
 export const AssistantScreenSettings: React.FC = () => {
   const { t } = useTranslation();
   const { getSetting, updateSetting, isUpdating } = useSettings();
+  const policy = useAdminPolicy();
 
   const confirm = getSetting("assistant_screen_confirm") ?? true;
   const screenProviderId = getSetting("assistant_screen_provider_id") ?? null;
@@ -46,6 +48,7 @@ export const AssistantScreenSettings: React.FC = () => {
     },
     ...providers
       .filter((p) => !UNSUPPORTED_PROVIDERS.includes(p.id))
+      .filter((p) => !isHidden(policy, p.id) || p.id === screenProviderId)
       .map((p) => ({ value: p.id, label: p.label })),
   ];
 

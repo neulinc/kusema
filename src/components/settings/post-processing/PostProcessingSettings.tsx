@@ -20,6 +20,7 @@ import { ApiKeyField } from "../PostProcessingSettingsApi/ApiKeyField";
 import { ModelSelect } from "../PostProcessingSettingsApi/ModelSelect";
 import { usePostProcessProviderState } from "../PostProcessingSettingsApi/usePostProcessProviderState";
 import { LocalProviderStatus } from "../PostProcessingSettingsApi/LocalProviderStatus";
+import { CloudProviderNote } from "../PostProcessingSettingsApi/CloudProviderNote";
 import { ShortcutInput } from "../ShortcutInput";
 import { hiddenShortcut } from "@/lib/kusemaKey";
 import { useSettings } from "../../../hooks/useSettings";
@@ -134,6 +135,12 @@ const PostProcessingSettingsApiComponent: React.FC = () => {
                 />
               </div>
             </SettingContainer>
+          )}
+          {!state.isLocalProvider && state.selectedProvider && (
+            <CloudProviderNote
+              providerId={state.selectedProvider.id}
+              hasKey={state.apiKey.trim() !== ""}
+            />
           )}
         </>
       )}

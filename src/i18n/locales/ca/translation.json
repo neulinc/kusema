@@ -902,6 +902,73 @@
           "description": "Explicar pas a pas, comprovar que s'entén i guiar-te cap a la resposta en lloc de donar els deures fets, tret que demanis la resposta. També pots dir «explain step by step» en qualsevol pregunta.",
           "note": "Segueix les normes de la teva escola o examen sobre l'ús de la IA."
         }
+      },
+      "web": {
+        "title": "Cerca web",
+        "description": "Deixeu que el Kusema cerqui al web o llegeixi un enllaç que indiqueu. Desactivat fins que l'activeu. Cada cerca i pàgina llegida apareix a la pàgina Privadesa.",
+        "adminOff": "El vostre administrador ha desactivat la cerca web i la lectura d'enllaços en aquest ordinador.",
+        "privileged": "El mode Privileged està activat: el Kusema no cercarà al web ni llegirà enllaços fins que el desactiveu.",
+        "enabled": {
+          "label": "Fer servir el web",
+          "description": "Cercar al web o llegir un enllaç quan ho demaneu, per exemple «search the web for…» o «summarize this link»."
+        },
+        "mode": {
+          "label": "Quan cercar",
+          "description": "Només quan ho demaneu, o sempre que la IA cregui que una pregunta ho necessita.",
+          "whenAsked": "Només quan ho demani",
+          "automatic": "Automàtic",
+          "whenAskedNote": "El Kusema cerca quan la pregunta ho demana («search the web for…») o quan l'interruptor Cerca al web està activat.",
+          "automaticNote": "La IA decideix quan una pregunta necessita el web. Amb Brave o SearXNG, primer se li pregunta quines cerques fer, només a partir de la vostra pregunta."
+        },
+        "limits": "Com a màxim 3 cerques per pregunta i els 5 primers resultats de cadascuna, com a fragments breus.",
+        "provider": {
+          "label": "Cerca amb",
+          "description": "Brave i SearXNG funcionen amb qualsevol IA, també una d'aquest ordinador.",
+          "brave": "Brave Search (la vostra clau)",
+          "searxng": "Servidor SearXNG",
+          "builtin": "Cerca pròpia de {{name}}",
+          "builtinAny": "Cerca pròpia de la IA (Claude o OpenAI)"
+        },
+        "brave": {
+          "key": "Clau de l'API de Brave Search",
+          "keyDescription": "Es desa a l'Administrador de credencials del Windows, com les vostres claus d'IA.",
+          "saved": "Clau desada",
+          "remove": "Elimina",
+          "placeholder": "Enganxeu la clau",
+          "save": "Desa",
+          "pricing": "Brave cobra 5 $ per cada 1.000 cerques i dona 5 $ de crèdit gratuït cada mes, unes 1.000 cerques (brave.com, novembre de 2026).",
+          "getKey": "Obteniu una clau"
+        },
+        "searxng": {
+          "label": "Adreça del servidor",
+          "description": "L'adreça d'un servidor SearXNG amb els resultats JSON activats.",
+          "adminSet": "Definit pel vostre administrador.",
+          "neulinc": "Necessiteu un servidor de cerca privat per al vostre despatx? Neulinc us pot instal·lar i mantenir un servidor SearXNG.",
+          "learnMore": "Més informació"
+        },
+        "builtin": {
+          "pricing": {
+            "anthropic": "La cerca de Claude costa 10 $ per cada 1.000 cerques més els testimonis que fan servir els resultats, facturats per Anthropic.",
+            "openai": "La cerca d'OpenAI costa 10 $ per cada 1.000 cerques més els testimonis que fan servir els resultats, facturats per OpenAI."
+          },
+          "cantConfirm": "{{name}} tria les seves pròpies cerques, així que no es poden mostrar abans d'enviar-les. Amb Confirma les cerques activat, el Kusema fa servir Brave o SearXNG si n'heu configurat un, i si no, us ho pregunta cada vegada.",
+          "unavailable": "{{name}} no té cap cerca web que el Kusema pugui fer servir. Trieu Brave Search o un servidor SearXNG."
+        },
+        "test": {
+          "button": "Prova",
+          "testing": "S'està provant…",
+          "ok": "La cerca funciona. Resultats: {{count}}.",
+          "failed": "La cerca no ha funcionat: {{error}}"
+        },
+        "confirm": {
+          "label": "Confirma les cerques",
+          "description": "Abans que el Kusema cerqui amb Brave o SearXNG, vegeu cada cerca, canvieu-la si voleu i després envieu-la o cancel·leu-la."
+        },
+        "pasteSources": {
+          "label": "Afegeix les fonts en enganxar respostes",
+          "description": "Una resposta enganxada acaba amb una llista breu de les seves fonts."
+        },
+        "links": "Per llegir una pàgina, copieu-ne l'enllaç i demaneu «summarize this link», o digueu l'adreça. El Kusema només llegeix pàgines web públiques, mai les d'aquest ordinador o de la xarxa de l'oficina, i mai segueix els enllaços de la pàgina."
       }
     },
     "postProcessing": {
@@ -950,6 +1017,19 @@
           "notRunning": "{{name}} no s'està executant en aquest ordinador. Inicieu-lo i després actualitzeu la llista de models.",
           "noModels": "{{name}} s'està executant, però encara no té cap model instal·lat.",
           "howTo": "Com configurar {{name}}"
+        },
+        "privacy": {
+          "anthropic": "Anthropic no entrena amb dades de l'API per defecte i les esborra en 30 dies.",
+          "deepseek": "El vostre text el processa DeepSeek, en servidors a la Xina. La política de DeepSeek li permet fer servir dades per millorar els seus serveis; consulteu-ne les condicions.",
+          "gemini": "Al nivell gratuït, Google pot fer servir les vostres peticions i respostes per millorar els seus productes, i algunes persones les poden llegir. Feu servir una clau de pagament (un projecte de Google Cloud amb facturació) per a la feina confidencial.",
+          "openai": "OpenAI no entrena amb dades de l'API per defecte i les conserva fins a 30 dies per vigilar abusos.",
+          "details": "Detalls"
+        },
+        "testKey": {
+          "button": "Prova la clau",
+          "checking": "S'està comprovant…",
+          "ok": "La clau funciona. Models: {{count}}.",
+          "failed": "La clau no ha funcionat: {{error}}"
         }
       },
       "prompts": {
@@ -1265,7 +1345,9 @@
         "model_download": "Baixada d'un model de veu",
         "voice_download": "Baixada d'una veu",
         "update_check": "Comprovació d'actualitzacions",
-        "voice_edit": "Edició per veu"
+        "voice_edit": "Edició per veu",
+        "web_search": "Cerca web",
+        "link_fetch": "Lectura d'enllaços"
       },
       "data": {
         "text": "Text",
@@ -1300,6 +1382,21 @@
           "days_other": "{{count}} dies",
           "days_many": "{{count}} dies"
         }
+      },
+      "web": {
+        "title": "Cerca web",
+        "description": "Cada cerca i pàgina que el Kusema ha llegit per a vós, amb el text cercat o l'adreça.",
+        "empty": "Encara no hi ha cerques ni pàgines.",
+        "columns": {
+          "what": "Cerca o pàgina",
+          "provider": "On",
+          "found": "Trobats"
+        },
+        "kinds": {
+          "search": "Cerca",
+          "fetch": "Pàgina"
+        },
+        "local": "El text de les cerques i les adreces de les pàgines es desen només en aquest ordinador. Esborra els elimina amb la resta de la llista, i se suprimeixen passats els mateixos dies."
       }
     },
     "cleanup": {
@@ -1596,11 +1693,21 @@
       "noVision": "Aquesta IA no pot veure la pantalla. Trieu-ne una que vegi imatges, com Claude o un model de visió a Ollama.",
       "emptyReply": "{{name}} no ha enviat cap resposta. Torneu a preguntar.",
       "nothingHeard": "El Kusema no ha sentit cap pregunta. Manteniu premuda la tecla, toqueu Espai i després parleu.",
-      "other": "El Kusema no ha pogut obtenir resposta: {{name}}"
+      "other": "El Kusema no ha pogut obtenir resposta: {{name}}",
+      "webOff": "La cerca web està desactivada. Activeu-la a Assistent → Configuració → Cerca web.",
+      "webByAdmin": "El vostre administrador ha desactivat la cerca web i la lectura d'enllaços en aquest ordinador.",
+      "webPrivileged": "El mode Privileged està activat, així que el Kusema no cerca al web ni llegeix enllaços. Desactiveu el mode Privileged per fer-los servir.",
+      "noSearchProvider": "La cerca web no està configurada. Afegiu una clau de Brave Search o un servidor SearXNG a Assistent → Configuració → Cerca web.",
+      "searchFailed": "La cerca web no ha funcionat ({{name}}). Torneu-ho a provar o reviseu la cerca web a Assistent → Configuració.",
+      "noLink": "El Kusema no ha trobat cap enllaç per llegir. Copieu primer l'enllaç o digueu l'adreça completa.",
+      "linkFailed": "El Kusema no ha pogut llegir aquest enllaç: {{name}}",
+      "providerHidden": "El vostre administrador ha desactivat {{name}} en aquest ordinador. Trieu una altra IA a Assistent → Configuració.",
+      "braveKeyRejected": "Brave ha rebutjat la clau. Comproveu que estigui subscrita a un pla Search i torneu-ho a provar."
     },
     "setUp": "Configura",
     "dismiss": "Tanca",
-    "previewOff": "La previsualització en directe està desactivada: aquest ordinador no podia seguir el ritme. La podeu tornar a activar a Configuració."
+    "previewOff": "La previsualització en directe està desactivada: aquest ordinador no podia seguir el ritme. La podeu tornar a activar a Configuració.",
+    "webNotSearched": "S'ha respost sense el web. Per cercar, digueu «search the web for…»."
   },
   "screenCard": {
     "title": "Voleu enviar aquesta captura?",
@@ -1637,6 +1744,28 @@
       "body": "Així, tot el que comencis amb «{{word}}» anirà al Kusema. Més endavant en una frase, la paraula es queda com és.",
       "yes": "Afegeix",
       "no": "Ara no"
+    },
+    "web": {
+      "title": {
+        "search": "Cercar al web?",
+        "link": "Llegir aquesta pàgina?",
+        "builtin": "Deixar que {{name}} cerqui al web?"
+      },
+      "private": "Això cercarà al web. La vostra {{kind}} no s'inclourà a la cerca. Continuar?",
+      "privateLink": "Això llegirà una pàgina web. La vostra {{kind}} no s'hi enviarà. Continuar?",
+      "kind": {
+        "screenshot": "captura de pantalla",
+        "selection": "selecció de text"
+      },
+      "builtinPrivate": "{{name}} tria les seves pròpies cerques i podria fer-hi servir la vostra {{kind}}.",
+      "builtinUnconfirmable": "{{name}} tria les seves pròpies cerques, així que no es poden mostrar abans.",
+      "editHint": "El Kusema enviarà aquestes cerques a {{provider}}. Canvieu-les si voleu.",
+      "sendHint": "El Kusema enviarà aquestes cerques a {{provider}}.",
+      "searchLabel": "Cerca {{n}}",
+      "cancel": "Cancel·la",
+      "send": "Cerca",
+      "continue": "Continua",
+      "searchAnyway": "Cerca igualment"
     }
   },
   "secureInput": {
@@ -1734,7 +1863,11 @@
     "stop": "Atura",
     "close": "Tanca",
     "hint": "Retorn pregunta · Maj+Retorn: línia nova · Esc tanca",
-    "noWindow": "Fes clic a la finestra sobre la qual vols preguntar i torna a obrir aquest quadre."
+    "noWindow": "Fes clic a la finestra sobre la qual vols preguntar i torna a obrir aquest quadre.",
+    "sources": "Fonts",
+    "searchWeb": "Cerca al web",
+    "searchWebHint": "Cerca al web per a aquesta pregunta",
+    "searchThis": "Cerca això al web"
   },
   "kusemaKey": {
     "presets": {

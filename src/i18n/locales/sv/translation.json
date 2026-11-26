@@ -899,6 +899,73 @@
           "description": "Förklara steg för steg, kontrollera förståelsen och led dig fram till svaret i stället för att lämna ut färdiga läxsvar, om du inte ber om svaret. Du kan också säga ”explain step by step” i vilken fråga som helst.",
           "note": "Följ din skolas eller ditt provs regler för AI-användning."
         }
+      },
+      "web": {
+        "title": "Webbsökning",
+        "description": "Låt Kusema söka på webben eller läsa en länk du anger. Av tills du slår på det. Varje sökning och läst sida listas på sidan Integritet.",
+        "adminOff": "Din administratör har stängt av webbsökning och läsning av länkar på den här datorn.",
+        "privileged": "Privileged-läget är på: Kusema söker inte på webben och läser inte länkar förrän du slår av det.",
+        "enabled": {
+          "label": "Använd webben",
+          "description": "Sök på webben eller läs en länk när du ber om det, till exempel \"search the web for…\" eller \"summarize this link\"."
+        },
+        "mode": {
+          "label": "När ska den söka",
+          "description": "Bara när du ber om det, eller när AI:n tycker att en fråga behöver det.",
+          "whenAsked": "Bara när jag ber om det",
+          "automatic": "Automatiskt",
+          "whenAskedNote": "Kusema söker när din fråga ber om det (\"search the web for…\") eller när reglaget Sök på webben är på.",
+          "automaticNote": "AI:n avgör när en fråga behöver webben. Med Brave eller SearXNG frågas den först vilka sökningar den vill göra, bara utifrån din fråga."
+        },
+        "limits": "Högst 3 sökningar per fråga och de 5 första träffarna i varje, som korta utdrag.",
+        "provider": {
+          "label": "Sök med",
+          "description": "Brave och SearXNG fungerar med alla AI:er, även en på den här datorn.",
+          "brave": "Brave Search (din nyckel)",
+          "searxng": "SearXNG-server",
+          "builtin": "{{name}}s egen sökning",
+          "builtinAny": "AI:ns egen sökning (Claude eller OpenAI)"
+        },
+        "brave": {
+          "key": "API-nyckel för Brave Search",
+          "keyDescription": "Sparas i Windows Autentiseringshanteraren, precis som dina AI-nycklar.",
+          "saved": "Nyckeln är sparad",
+          "remove": "Ta bort",
+          "placeholder": "Klistra in din nyckel",
+          "save": "Spara",
+          "pricing": "Brave tar 5 $ per 1 000 sökningar och ger 5 $ i gratis kredit varje månad, ungefär 1 000 sökningar (brave.com, november 2026).",
+          "getKey": "Skaffa en nyckel"
+        },
+        "searxng": {
+          "label": "Serveradress",
+          "description": "Adressen till en SearXNG-server med JSON-resultat påslagna.",
+          "adminSet": "Inställd av din administratör.",
+          "neulinc": "Behöver din byrå en egen sökserver? Neulinc kan sätta upp och underhålla en SearXNG-server åt er.",
+          "learnMore": "Läs mer"
+        },
+        "builtin": {
+          "pricing": {
+            "anthropic": "Claudes sökning kostar 10 $ per 1 000 sökningar plus de tokens som resultaten använder, fakturerat av Anthropic.",
+            "openai": "OpenAI:s sökning kostar 10 $ per 1 000 sökningar plus de tokens som resultaten använder, fakturerat av OpenAI."
+          },
+          "cantConfirm": "{{name}} väljer sina egna sökningar, så de kan inte visas innan de skickas. Med Bekräfta sökningar på använder Kusema Brave eller SearXNG om du har ställt in någon, och frågar dig annars varje gång.",
+          "unavailable": "{{name}} har ingen webbsökning som Kusema kan använda. Välj Brave Search eller en SearXNG-server."
+        },
+        "test": {
+          "button": "Testa",
+          "testing": "Testar…",
+          "ok": "Sökningen fungerar. Träffar: {{count}}.",
+          "failed": "Sökningen fungerade inte: {{error}}"
+        },
+        "confirm": {
+          "label": "Bekräfta sökningar",
+          "description": "Innan Kusema söker med Brave eller SearXNG ser du varje sökning, kan ändra den och sedan skicka eller avbryta."
+        },
+        "pasteSources": {
+          "label": "Lägg till källor när svar klistras in",
+          "description": "Ett inklistrat svar slutar med en kort lista över sina källor."
+        },
+        "links": "För att läsa en sida kopierar du länken och ber \"summarize this link\", eller säger adressen. Kusema läser bara offentliga webbsidor, aldrig sidor på den här datorn eller kontorets nätverk, och följer aldrig länkar på sidan."
       }
     },
     "postProcessing": {
@@ -947,6 +1014,19 @@
           "notRunning": "{{name}} körs inte på den här datorn. Starta det och uppdatera sedan modellistan.",
           "noModels": "{{name}} körs, men har inga modeller installerade än.",
           "howTo": "Så konfigurerar du {{name}}"
+        },
+        "privacy": {
+          "anthropic": "Anthropic tränar inte på API-data som standard och raderar den inom 30 dagar.",
+          "deepseek": "Din text behandlas av DeepSeek, på servrar i Kina. DeepSeeks policy tillåter att data används för att förbättra tjänsterna; se deras villkor.",
+          "gemini": "På gratisnivån får Google använda dina frågor och svar för att förbättra sina produkter, och människor kan läsa dem. Använd en betald nyckel (ett Google Cloud-projekt med fakturering) för konfidentiellt arbete.",
+          "openai": "OpenAI tränar inte på API-data som standard och sparar den i upp till 30 dagar för att upptäcka missbruk.",
+          "details": "Detaljer"
+        },
+        "testKey": {
+          "button": "Testa nyckel",
+          "checking": "Kontrollerar…",
+          "ok": "Nyckeln fungerar. Modeller: {{count}}.",
+          "failed": "Nyckeln fungerade inte: {{error}}"
         }
       },
       "prompts": {
@@ -1262,7 +1342,9 @@
         "model_download": "Nedladdning av talmodell",
         "voice_download": "Nedladdning av röst",
         "update_check": "Uppdateringskontroll",
-        "voice_edit": "Röstredigering"
+        "voice_edit": "Röstredigering",
+        "web_search": "Webbsökning",
+        "link_fetch": "Läsa länk"
       },
       "data": {
         "text": "Text",
@@ -1294,6 +1376,21 @@
           "days_one": "{{count}} dag",
           "days_other": "{{count}} dagar"
         }
+      },
+      "web": {
+        "title": "Webbsökning",
+        "description": "Varje sökning och sida som Kusema läste åt dig, med vad som söktes eller adressen.",
+        "empty": "Inga sökningar eller sidor än.",
+        "columns": {
+          "what": "Sökning eller sida",
+          "provider": "Var",
+          "found": "Hittade"
+        },
+        "kinds": {
+          "search": "Sökning",
+          "fetch": "Sida"
+        },
+        "local": "Söktext och sidadresser sparas bara på den här datorn. Rensa tar bort dem tillsammans med resten av listan, och de raderas efter samma antal dagar."
       }
     },
     "cleanup": {
@@ -1590,11 +1687,21 @@
       "noVision": "Den här AI:n kan inte se skärmen. Välj en som kan se bilder, till exempel Claude eller en bildmodell i Ollama.",
       "emptyReply": "{{name}} skickade inget svar. Försök fråga igen.",
       "nothingHeard": "Kusema hörde ingen fråga. Håll ned tangenten, tryck på Blanksteg och tala sedan.",
-      "other": "Kusema fick inget svar: {{name}}"
+      "other": "Kusema fick inget svar: {{name}}",
+      "webOff": "Webbsökning är av. Slå på den under Assistent → Inställningar → Webbsökning.",
+      "webByAdmin": "Din administratör har stängt av webbsökning och läsning av länkar på den här datorn.",
+      "webPrivileged": "Privileged-läget är på, så Kusema söker inte på webben och läser inte länkar. Slå av Privileged-läget för att använda dem.",
+      "noSearchProvider": "Webbsökning är inte inställd. Lägg till en Brave Search-nyckel eller en SearXNG-server under Assistent → Inställningar → Webbsökning.",
+      "searchFailed": "Webbsökningen fungerade inte ({{name}}). Försök igen eller kontrollera Webbsökning under Assistent → Inställningar.",
+      "noLink": "Kusema hittade ingen länk att läsa. Kopiera länken först, eller säg hela adressen.",
+      "linkFailed": "Kusema kunde inte läsa länken: {{name}}",
+      "providerHidden": "Din administratör har stängt av {{name}} på den här datorn. Välj en annan AI under Assistent → Inställningar.",
+      "braveKeyRejected": "Brave avvisade nyckeln. Kontrollera att den abonnerar på en Search-plan och försök igen."
     },
     "setUp": "Ställ in",
     "dismiss": "Stäng",
-    "previewOff": "Liveförhandsvisningen är av: den här datorn hann inte med. Du kan slå på den igen under Inställningar."
+    "previewOff": "Liveförhandsvisningen är av: den här datorn hann inte med. Du kan slå på den igen under Inställningar.",
+    "webNotSearched": "Besvarat utan webben. Säg \"search the web for…\" för att söka."
   },
   "screenCard": {
     "title": "Skicka den här skärmbilden?",
@@ -1631,6 +1738,28 @@
       "body": "Då går allt du börjar med ”{{word}}” till Kusema. Längre in i en mening lämnas ordet som det är.",
       "yes": "Lägg till",
       "no": "Inte nu"
+    },
+    "web": {
+      "title": {
+        "search": "Söka på webben?",
+        "link": "Läsa den här sidan?",
+        "builtin": "Låta {{name}} söka på webben?"
+      },
+      "private": "Det här söker på webben. Din {{kind}} tas inte med i sökningen. Fortsätta?",
+      "privateLink": "Det här läser en webbsida. Din {{kind}} skickas inte dit. Fortsätta?",
+      "kind": {
+        "screenshot": "skärmbild",
+        "selection": "markerade text"
+      },
+      "builtinPrivate": "{{name}} väljer sina egna sökningar och kan använda din {{kind}} i dem.",
+      "builtinUnconfirmable": "{{name}} väljer sina egna sökningar, så de kan inte visas i förväg.",
+      "editHint": "Kusema skickar de här sökningarna till {{provider}}. Ändra dem om du vill.",
+      "sendHint": "Kusema skickar de här sökningarna till {{provider}}.",
+      "searchLabel": "Sökning {{n}}",
+      "cancel": "Avbryt",
+      "send": "Sök",
+      "continue": "Fortsätt",
+      "searchAnyway": "Sök ändå"
     }
   },
   "secureInput": {
@@ -1726,7 +1855,11 @@
     "stop": "Stoppa",
     "close": "Stäng",
     "hint": "Enter frågar · Skift+Enter: ny rad · Esc stänger",
-    "noWindow": "Klicka i fönstret du vill fråga om och öppna sedan rutan igen."
+    "noWindow": "Klicka i fönstret du vill fråga om och öppna sedan rutan igen.",
+    "sources": "Källor",
+    "searchWeb": "Sök på webben",
+    "searchWebHint": "Sök på webben för den här frågan",
+    "searchThis": "Sök efter detta på webben"
   },
   "kusemaKey": {
     "presets": {

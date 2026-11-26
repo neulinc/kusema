@@ -12,6 +12,7 @@ import type {
   LanguageDetectionMode,
   GlowPalette,
   AnswerTo,
+  WebSearchSettings,
 } from "@/bindings";
 import { commands } from "@/bindings";
 import { toast } from "sonner";
@@ -217,6 +218,8 @@ const settingUpdaters: {
     commands.changeAssistantAnswerToSetting(value as AnswerTo),
   assistant_tutor: (value) =>
     commands.changeAssistantTutorSetting(value as boolean),
+  web_search: (value) =>
+    commands.changeWebSearchSettings(value as WebSearchSettings),
   app_styles_enabled: (value) =>
     commands.changeAppStylesEnabledSetting(value as boolean),
   glow_thickness: (value) =>

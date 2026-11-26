@@ -654,6 +654,9 @@ pub struct AppSettings {
     /// Kusema tutor style: explain step by step instead of handing over answers.
     #[serde(default)]
     pub assistant_tutor: bool,
+    /// Kusema web search and link reading, off by default.
+    #[serde(default)]
+    pub web_search: crate::web::WebSearchSettings,
     /// Kusema styles per app.
     #[serde(default = "crate::app_styles::default_styles")]
     pub app_styles: Vec<crate::app_styles::AppStyle>,
@@ -1018,6 +1021,8 @@ fn default_post_process_providers() -> Vec<PostProcessProvider> {
 
     // Kusema: Ollama and LM Studio on this computer, listed first.
     providers.splice(0..0, crate::local_providers::providers());
+    // Kusema: DeepSeek and Gemini, and the list's order.
+    crate::cloud_providers::add_to(&mut providers);
     providers
 }
 
@@ -1404,6 +1409,7 @@ pub fn get_default_settings() -> AppSettings {
         assistant_speak_typed: false,
         assistant_answer_to: Default::default(),
         assistant_tutor: false,
+        web_search: crate::web::WebSearchSettings::default(),
         app_styles: crate::app_styles::default_styles(),
         app_styles_enabled: default_app_styles_enabled(),
         glow_dictation: false,
@@ -1520,6 +1526,7 @@ pub fn get_settings(app: &AppHandle) -> AppSettings {
     // Kusema: then move a Custom provider on Ollama or LM Studio to the built-in one.
     if ensure_post_process_defaults(&mut settings)
         | crate::local_providers::migrate(&mut settings)
+        | crate::cloud_providers::apply(&mut settings)
         | crate::vocabulary::migrate(&mut settings)
         | crate::kusema_key::migrate::apply(&mut settings, &get_default_settings())
     {

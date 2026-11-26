@@ -905,6 +905,73 @@
           "description": "Wyjaśniać krok po kroku, sprawdzać zrozumienie i prowadzić do odpowiedzi zamiast podawać gotowe rozwiązania prac domowych, chyba że poprosisz o odpowiedź. W każdym pytaniu możesz też powiedzieć „explain step by step”.",
           "note": "Przestrzegaj zasad swojej szkoły lub egzaminu dotyczących korzystania z AI."
         }
+      },
+      "web": {
+        "title": "Wyszukiwanie w sieci",
+        "description": "Pozwól Kusemie szukać w sieci albo przeczytać podany przez ciebie link. Wyłączone, dopóki tego nie włączysz. Każde wyszukiwanie i przeczytana strona są na stronie Prywatność.",
+        "adminOff": "Administrator wyłączył na tym komputerze wyszukiwanie w sieci i czytanie linków.",
+        "privileged": "Tryb Privileged jest włączony: Kusema nie będzie szukać w sieci ani czytać linków, dopóki go nie wyłączysz.",
+        "enabled": {
+          "label": "Korzystaj z sieci",
+          "description": "Szukaj w sieci albo czytaj link, gdy o to poprosisz, na przykład „search the web for…” albo „summarize this link”."
+        },
+        "mode": {
+          "label": "Kiedy szukać",
+          "description": "Tylko gdy poprosisz albo zawsze, gdy AI uzna, że pytanie tego wymaga.",
+          "whenAsked": "Tylko gdy poproszę",
+          "automatic": "Automatycznie",
+          "whenAskedNote": "Kusema szuka, gdy pytanie o to prosi („search the web for…”) albo gdy przełącznik Szukaj w sieci jest włączony.",
+          "automaticNote": "AI decyduje, kiedy pytanie potrzebuje sieci. Przy Brave lub SearXNG najpierw pyta się ją, jakie wyszukiwania wykonać, tylko na podstawie twojego pytania."
+        },
+        "limits": "Najwyżej 3 wyszukiwania na pytanie i 5 pierwszych wyników każdego, jako krótkie fragmenty.",
+        "provider": {
+          "label": "Szukaj za pomocą",
+          "description": "Brave i SearXNG działają z każdą AI, także z tą na tym komputerze.",
+          "brave": "Brave Search (twój klucz)",
+          "searxng": "Serwer SearXNG",
+          "builtin": "Wbudowane wyszukiwanie {{name}}",
+          "builtinAny": "Wbudowane wyszukiwanie AI (Claude lub OpenAI)"
+        },
+        "brave": {
+          "key": "Klucz API Brave Search",
+          "keyDescription": "Przechowywany w Menedżerze poświadczeń Windows, tak jak twoje klucze AI.",
+          "saved": "Klucz zapisany",
+          "remove": "Usuń",
+          "placeholder": "Wklej swój klucz",
+          "save": "Zapisz",
+          "pricing": "Brave pobiera 5 $ za 1000 wyszukiwań i daje co miesiąc 5 $ darmowego kredytu, czyli około 1000 wyszukiwań (brave.com, listopad 2026).",
+          "getKey": "Zdobądź klucz"
+        },
+        "searxng": {
+          "label": "Adres serwera",
+          "description": "Adres serwera SearXNG z włączonymi wynikami w formacie JSON.",
+          "adminSet": "Ustawione przez administratora.",
+          "neulinc": "Potrzebujesz prywatnego serwera wyszukiwania dla swojej kancelarii? Neulinc może skonfigurować i utrzymywać dla ciebie serwer SearXNG.",
+          "learnMore": "Dowiedz się więcej"
+        },
+        "builtin": {
+          "pricing": {
+            "anthropic": "Wyszukiwanie Claude kosztuje 10 $ za 1000 wyszukiwań plus tokeny zużyte przez wyniki, rozliczane przez Anthropic.",
+            "openai": "Wyszukiwanie OpenAI kosztuje 10 $ za 1000 wyszukiwań plus tokeny zużyte przez wyniki, rozliczane przez OpenAI."
+          },
+          "cantConfirm": "{{name}} samo wybiera wyszukiwania, więc nie da się ich pokazać przed wysłaniem. Gdy Potwierdzaj wyszukiwania jest włączone, Kusema używa Brave lub SearXNG, jeśli któreś skonfigurowano, a w przeciwnym razie pyta cię za każdym razem.",
+          "unavailable": "{{name}} nie ma wyszukiwania w sieci, z którego Kusema może korzystać. Wybierz Brave Search lub serwer SearXNG."
+        },
+        "test": {
+          "button": "Testuj",
+          "testing": "Testowanie…",
+          "ok": "Wyszukiwanie działa. Wyniki: {{count}}.",
+          "failed": "Wyszukiwanie nie zadziałało: {{error}}"
+        },
+        "confirm": {
+          "label": "Potwierdzaj wyszukiwania",
+          "description": "Zanim Kusema poszuka przez Brave lub SearXNG, zobaczysz każde wyszukiwanie, możesz je zmienić, a potem wysłać albo anulować."
+        },
+        "pasteSources": {
+          "label": "Dodawaj źródła przy wklejaniu odpowiedzi",
+          "description": "Wklejona odpowiedź kończy się krótką listą jej źródeł."
+        },
+        "links": "Żeby przeczytać stronę, skopiuj jej link i poproś „summarize this link” albo podaj adres. Kusema czyta tylko publiczne strony internetowe, nigdy strony na tym komputerze ani w sieci biura, i nigdy nie otwiera linków ze strony."
       }
     },
     "postProcessing": {
@@ -953,6 +1020,19 @@
           "notRunning": "{{name}} nie działa na tym komputerze. Uruchom go, a potem odśwież listę modeli.",
           "noModels": "{{name}} działa, ale nie ma jeszcze zainstalowanych modeli.",
           "howTo": "Jak skonfigurować {{name}}"
+        },
+        "privacy": {
+          "anthropic": "Anthropic domyślnie nie trenuje modeli na danych z API i usuwa je w ciągu 30 dni.",
+          "deepseek": "Twój tekst jest przetwarzany przez DeepSeek, na serwerach w Chinach. Zasady DeepSeek pozwalają mu używać danych do ulepszania usług; zobacz jego warunki.",
+          "gemini": "W planie bezpłatnym Google może używać twoich zapytań i odpowiedzi do ulepszania swoich produktów, a ludzie mogą je czytać. Do poufnej pracy używaj płatnego klucza (projektu Google Cloud z rozliczeniami).",
+          "openai": "OpenAI domyślnie nie trenuje modeli na danych z API i przechowuje je do 30 dni w celu wykrywania nadużyć.",
+          "details": "Szczegóły"
+        },
+        "testKey": {
+          "button": "Testuj klucz",
+          "checking": "Sprawdzanie…",
+          "ok": "Klucz działa. Modele: {{count}}.",
+          "failed": "Klucz nie zadziałał: {{error}}"
         }
       },
       "prompts": {
@@ -1268,7 +1348,9 @@
         "model_download": "Pobranie modelu mowy",
         "voice_download": "Pobranie głosu",
         "update_check": "Sprawdzenie aktualizacji",
-        "voice_edit": "Edycja głosowa"
+        "voice_edit": "Edycja głosowa",
+        "web_search": "Wyszukiwanie w sieci",
+        "link_fetch": "Czytanie linku"
       },
       "data": {
         "text": "Tekst",
@@ -1306,6 +1388,21 @@
           "days_many": "{{count}} dni",
           "days_few": "{{count}} dni"
         }
+      },
+      "web": {
+        "title": "Wyszukiwanie w sieci",
+        "description": "Każde wyszukiwanie i każda strona, które Kusema przeczytała dla ciebie, z wyszukiwanym tekstem lub adresem.",
+        "empty": "Na razie brak wyszukiwań i stron.",
+        "columns": {
+          "what": "Wyszukiwanie lub strona",
+          "provider": "Gdzie",
+          "found": "Znaleziono"
+        },
+        "kinds": {
+          "search": "Wyszukiwanie",
+          "fetch": "Strona"
+        },
+        "local": "Wyszukiwany tekst i adresy stron są przechowywane tylko na tym komputerze. Wyczyść usuwa je razem z resztą listy, a po tej samej liczbie dni są usuwane."
       }
     },
     "cleanup": {
@@ -1602,11 +1699,21 @@
       "noVision": "Ta AI nie widzi ekranu. Wybierz taką, która widzi obrazy, na przykład Claude albo model wizyjny w Ollama.",
       "emptyReply": "{{name}} nie przysłał odpowiedzi. Zapytaj ponownie.",
       "nothingHeard": "Kusema nie usłyszała pytania. Przytrzymaj klawisz, naciśnij Spację, a potem mów.",
-      "other": "Kusema nie dostała odpowiedzi: {{name}}"
+      "other": "Kusema nie dostała odpowiedzi: {{name}}",
+      "webOff": "Wyszukiwanie w sieci jest wyłączone. Włącz je w Asystent → Ustawienia → Wyszukiwanie w sieci.",
+      "webByAdmin": "Administrator wyłączył na tym komputerze wyszukiwanie w sieci i czytanie linków.",
+      "webPrivileged": "Tryb Privileged jest włączony, więc Kusema nie szuka w sieci ani nie czyta linków. Wyłącz tryb Privileged, żeby z nich korzystać.",
+      "noSearchProvider": "Wyszukiwanie w sieci nie jest skonfigurowane. Dodaj klucz Brave Search albo serwer SearXNG w Asystent → Ustawienia → Wyszukiwanie w sieci.",
+      "searchFailed": "Wyszukiwanie w sieci nie zadziałało ({{name}}). Spróbuj ponownie albo sprawdź Wyszukiwanie w sieci w Asystent → Ustawienia.",
+      "noLink": "Kusema nie znalazła linku do przeczytania. Najpierw skopiuj link albo podaj pełny adres.",
+      "linkFailed": "Kusema nie mogła przeczytać tego linku: {{name}}",
+      "providerHidden": "Administrator wyłączył {{name}} na tym komputerze. Wybierz inną AI w Asystent → Ustawienia.",
+      "braveKeyRejected": "Brave odrzucił klucz. Sprawdź, czy jest przypisany do planu Search, i spróbuj ponownie."
     },
     "setUp": "Skonfiguruj",
     "dismiss": "Zamknij",
-    "previewOff": "Podgląd na żywo jest wyłączony: ten komputer nie nadążał. Możesz go znów włączyć w Ustawieniach."
+    "previewOff": "Podgląd na żywo jest wyłączony: ten komputer nie nadążał. Możesz go znów włączyć w Ustawieniach.",
+    "webNotSearched": "Odpowiedź bez sieci. Aby wyszukać, powiedz „search the web for…”."
   },
   "screenCard": {
     "title": "Wysłać ten zrzut ekranu?",
@@ -1643,6 +1750,28 @@
       "body": "Wtedy wszystko, co zaczniesz od „{{word}}”, trafi do Kusema. Dalej w zdaniu słowo zostaje bez zmian.",
       "yes": "Dodaj",
       "no": "Nie teraz"
+    },
+    "web": {
+      "title": {
+        "search": "Szukać w sieci?",
+        "link": "Przeczytać tę stronę?",
+        "builtin": "Pozwolić {{name}} szukać w sieci?"
+      },
+      "private": "To wyszuka w sieci. Twój {{kind}} nie zostanie dołączony do wyszukiwania. Kontynuować?",
+      "privateLink": "To przeczyta stronę internetową. Twój {{kind}} nie zostanie do niej wysłany. Kontynuować?",
+      "kind": {
+        "screenshot": "zrzut ekranu",
+        "selection": "zaznaczony tekst"
+      },
+      "builtinPrivate": "{{name}} samo wybiera wyszukiwania i mogłoby użyć w nich twojego elementu: {{kind}}.",
+      "builtinUnconfirmable": "{{name}} samo wybiera wyszukiwania, więc nie da się ich pokazać wcześniej.",
+      "editHint": "Kusema wyśle te wyszukiwania do {{provider}}. Zmień je, jeśli chcesz.",
+      "sendHint": "Kusema wyśle te wyszukiwania do {{provider}}.",
+      "searchLabel": "Wyszukiwanie {{n}}",
+      "cancel": "Anuluj",
+      "send": "Szukaj",
+      "continue": "Kontynuuj",
+      "searchAnyway": "Szukaj mimo to"
     }
   },
   "secureInput": {
@@ -1742,7 +1871,11 @@
     "stop": "Zatrzymaj",
     "close": "Zamknij",
     "hint": "Enter pyta · Shift+Enter: nowy wiersz · Esc zamyka",
-    "noWindow": "Kliknij okno, o które chcesz zapytać, i otwórz to pole ponownie."
+    "noWindow": "Kliknij okno, o które chcesz zapytać, i otwórz to pole ponownie.",
+    "sources": "Źródła",
+    "searchWeb": "Szukaj w sieci",
+    "searchWebHint": "Szukaj w sieci dla tego pytania",
+    "searchThis": "Wyszukaj to w sieci"
   },
   "kusemaKey": {
     "presets": {

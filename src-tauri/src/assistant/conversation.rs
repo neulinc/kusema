@@ -102,6 +102,36 @@ impl Conversation {
     pub fn clear(&mut self) {
         self.messages.clear();
     }
+
+    /// Kusema web search: the latest answer's sources, and whether the web
+    /// was searched for it.
+    pub fn set_last_web(&mut self, sources: Vec<crate::web::WebSource>, searched: bool) {
+        if let Some(last) = self
+            .messages
+            .last_mut()
+            .filter(|m| m.role == ChatRole::Assistant)
+        {
+            last.sources = sources;
+            last.searched = searched;
+        }
+    }
+
+    /// Kusema web search: the sources of an answer still in the conversation.
+    pub fn sources_of(&self, answer: &str) -> Vec<crate::web::WebSource> {
+        self.messages
+            .iter()
+            .rev()
+            .find(|m| m.role == ChatRole::Assistant && m.content == answer)
+            .map(|m| m.sources.clone())
+            .unwrap_or_default()
+    }
+
+    /// Kusema web search: whether `url` is a source of any answer here.
+    pub fn lists_source(&self, url: &str) -> bool {
+        self.messages
+            .iter()
+            .any(|m| m.sources.iter().any(|s| s.url == url))
+    }
 }
 
 fn screen_turn(question: String, image: ChatImage) -> ChatTurn {

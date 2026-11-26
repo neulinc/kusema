@@ -14,6 +14,13 @@ import { AssistantProviderSettings } from "./AssistantProviderSettings";
 import { AssistantScreenSettings } from "./AssistantScreenSettings";
 import { AssistantAnswerSettings } from "./AssistantAnswerSettings";
 import { AppStylesSettings } from "./AppStylesSettings";
+import { WebSearchSettings } from "./WebSearchSettings";
+import {
+  SearchThisButton,
+  SearchToggle,
+  WebSources,
+} from "../../shared/WebSources";
+import { useAdminPolicy } from "@/lib/cloudProviders";
 import { useSettings } from "../../../hooks/useSettings";
 import { PrivilegedChip, PrivilegedToggle } from "../privacy/PrivilegedToggle";
 import {
@@ -50,6 +57,23 @@ export const AssistantSettings: React.FC<{
   const [draft, setDraft] = useState("");
   const [typed, setTyped] = useState<Typed | null>(null);
   const [insertable, setInsertable] = useState<string[]>([]);
+  // Kusema web search: search the web for the next typed question.
+  const [searchWeb, setSearchWeb] = useState(false);
+  const policy = useAdminPolicy();
+  const webAvailable =
+    (getSetting("web_search")?.enabled ?? false) && !policy.disable_web_access;
+  // "Search the web for this" under an answer that didn't use the web.
+  const canSearchAgain = webAvailable && !getSetting("privileged_mode");
+  const lastAnswer = messages.length - 1;
+
+  const searchAgain = async (question: string) => {
+    if (typed) return;
+    setError(null);
+    const result = await commands.askTyped(question, true);
+    if (result.status === "ok") {
+      setTyped({ id: result.data, question, text: "" });
+    }
+  };
   const bottomRef = useRef<HTMLDivElement>(null);
   const [tab, setTab] = useState<AssistantTab>(loadTab);
   const tabRefs = useRef<
@@ -138,10 +162,11 @@ export const AssistantSettings: React.FC<{
     const question = draft.trim();
     if (!question || typed) return;
     setError(null);
-    const result = await commands.askTyped(question);
+    const result = await commands.askTyped(question, webAvailable && searchWeb);
     if (result.status === "ok") {
       setTyped({ id: result.data, question, text: "" });
       setDraft("");
+      setSearchWeb(false);
     }
   };
 
@@ -229,6 +254,8 @@ export const AssistantSettings: React.FC<{
 
           <AppStylesSettings />
 
+          <WebSearchSettings />
+
           <AssistantScreenSettings />
 
           <AssistantVoiceSettings />
@@ -297,6 +324,21 @@ export const AssistantSettings: React.FC<{
                     </span>
                   )}
                   {message.content}
+                  {message.role === "assistant" && (
+                    <WebSources sources={message.sources ?? []} />
+                  )}
+                  {message.role === "assistant" &&
+                    index === lastAnswer &&
+                    canSearchAgain &&
+                    !message.searched &&
+                    messages[index - 1]?.role === "user" && (
+                      <SearchThisButton
+                        disabled={!!typed}
+                        onClick={() =>
+                          void searchAgain(messages[index - 1].content)
+                        }
+                      />
+                    )}
                   {message.role === "assistant" &&
                     insertable.includes(message.content) && (
                       <button
@@ -368,6 +410,13 @@ export const AssistantSettings: React.FC<{
           </div>
           {/* Kusema type-to-ask: stays in reach at the bottom. */}
           <div className="sticky bottom-0 z-10 flex items-end gap-2 bg-background py-2">
+            {webAvailable && (
+              <SearchToggle
+                on={searchWeb}
+                onChange={setSearchWeb}
+                disabled={!hasModel || !!typed}
+              />
+            )}
             <textarea
               value={draft}
               onChange={(e) => setDraft(e.target.value)}

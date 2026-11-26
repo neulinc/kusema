@@ -905,6 +905,73 @@
           "description": "Vysvětlovat krok za krokem, ověřovat porozumění a vést k odpovědi místo předání hotových domácích úkolů, pokud o odpověď nepožádáte. V jakékoli otázce můžete také říct „explain step by step“.",
           "note": "Dodržujte pravidla své školy nebo zkoušky pro používání AI."
         }
+      },
+      "web": {
+        "title": "Vyhledávání na webu",
+        "description": "Nechte Kusemu hledat na webu nebo přečíst odkaz, který uvedete. Vypnuto, dokud to nezapnete. Každé hledání a přečtená stránka jsou uvedeny na stránce Soukromí.",
+        "adminOff": "Správce na tomto počítači vypnul vyhledávání na webu a čtení odkazů.",
+        "privileged": "Režim Privileged je zapnutý: Kusema nebude hledat na webu ani číst odkazy, dokud ho nevypnete.",
+        "enabled": {
+          "label": "Používat web",
+          "description": "Hledat na webu nebo přečíst odkaz, když o to požádáte, například „search the web for…“ nebo „summarize this link“."
+        },
+        "mode": {
+          "label": "Kdy hledat",
+          "description": "Jen když o to požádáte, nebo kdykoli AI usoudí, že to otázka potřebuje.",
+          "whenAsked": "Jen když požádám",
+          "automatic": "Automaticky",
+          "whenAskedNote": "Kusema hledá, když o to otázka žádá („search the web for…“), nebo když je zapnutý přepínač Hledat na webu.",
+          "automaticNote": "AI rozhoduje, kdy otázka potřebuje web. S Brave nebo SearXNG se jí nejdřív zeptá, která hledání provést, jen podle vaší otázky."
+        },
+        "limits": "Nejvýše 3 hledání na otázku a prvních 5 výsledků z každého, jako krátké úryvky.",
+        "provider": {
+          "label": "Hledat pomocí",
+          "description": "Brave a SearXNG fungují s jakoukoli AI, i s tou na tomto počítači.",
+          "brave": "Brave Search (váš klíč)",
+          "searxng": "Server SearXNG",
+          "builtin": "Vlastní vyhledávání {{name}}",
+          "builtinAny": "Vlastní vyhledávání AI (Claude nebo OpenAI)"
+        },
+        "brave": {
+          "key": "Klíč API Brave Search",
+          "keyDescription": "Uložený ve Správci pověření Windows, stejně jako vaše klíče AI.",
+          "saved": "Klíč uložen",
+          "remove": "Odebrat",
+          "placeholder": "Vložte svůj klíč",
+          "save": "Uložit",
+          "pricing": "Brave účtuje 5 $ za 1 000 hledání a každý měsíc dává 5 $ kreditu zdarma, asi 1 000 hledání (brave.com, listopad 2026).",
+          "getKey": "Získat klíč"
+        },
+        "searxng": {
+          "label": "Adresa serveru",
+          "description": "Adresa serveru SearXNG se zapnutými výsledky JSON.",
+          "adminSet": "Nastaveno správcem.",
+          "neulinc": "Potřebuje vaše kancelář soukromý vyhledávací server? Neulinc vám může server SearXNG nastavit a udržovat.",
+          "learnMore": "Další informace"
+        },
+        "builtin": {
+          "pricing": {
+            "anthropic": "Vyhledávání Claude stojí 10 $ za 1 000 hledání plus tokeny, které výsledky spotřebují, účtuje Anthropic.",
+            "openai": "Vyhledávání OpenAI stojí 10 $ za 1 000 hledání plus tokeny, které výsledky spotřebují, účtuje OpenAI."
+          },
+          "cantConfirm": "{{name}} si hledání volí samo, takže je nelze ukázat před odesláním. Se zapnutým Potvrzovat hledání použije Kusema Brave nebo SearXNG, pokud jste některé nastavili, jinak se vás pokaždé zeptá.",
+          "unavailable": "{{name}} nemá vyhledávání na webu, které by Kusema mohla použít. Vyberte Brave Search nebo server SearXNG."
+        },
+        "test": {
+          "button": "Vyzkoušet",
+          "testing": "Zkouším…",
+          "ok": "Vyhledávání funguje. Výsledky: {{count}}.",
+          "failed": "Vyhledávání nefungovalo: {{error}}"
+        },
+        "confirm": {
+          "label": "Potvrzovat hledání",
+          "description": "Než Kusema hledá přes Brave nebo SearXNG, uvidíte každé hledání, můžete ho upravit a pak odeslat nebo zrušit."
+        },
+        "pasteSources": {
+          "label": "Přidávat zdroje při vkládání odpovědí",
+          "description": "Vložená odpověď končí krátkým seznamem svých zdrojů."
+        },
+        "links": "Chcete-li přečíst stránku, zkopírujte její odkaz a požádejte „summarize this link“, nebo řekněte adresu. Kusema čte jen veřejné webové stránky, nikdy stránky na tomto počítači nebo v síti kanceláře, a nikdy neotevírá odkazy ze stránky."
       }
     },
     "postProcessing": {
@@ -953,6 +1020,19 @@
           "notRunning": "{{name}} v tomto počítači neběží. Spusťte ho a pak obnovte seznam modelů.",
           "noModels": "{{name}} běží, ale zatím nemá nainstalované žádné modely.",
           "howTo": "Jak nastavit {{name}}"
+        },
+        "privacy": {
+          "anthropic": "Anthropic ve výchozím nastavení netrénuje na datech z API a maže je do 30 dnů.",
+          "deepseek": "Váš text zpracovává DeepSeek na serverech v Číně. Zásady DeepSeek mu dovolují používat data ke zlepšování služeb; viz jeho podmínky.",
+          "gemini": "V bezplatné úrovni smí Google používat vaše dotazy a odpovědi ke zlepšování svých produktů a mohou je číst lidé. Pro důvěrnou práci použijte placený klíč (projekt Google Cloud s fakturací).",
+          "openai": "OpenAI ve výchozím nastavení netrénuje na datech z API a uchovává je až 30 dnů kvůli odhalování zneužití.",
+          "details": "Podrobnosti"
+        },
+        "testKey": {
+          "button": "Vyzkoušet klíč",
+          "checking": "Ověřuji…",
+          "ok": "Klíč funguje. Modely: {{count}}.",
+          "failed": "Klíč nefungoval: {{error}}"
         }
       },
       "prompts": {
@@ -1268,7 +1348,9 @@
         "model_download": "Stažení modelu řeči",
         "voice_download": "Stažení hlasu",
         "update_check": "Kontrola aktualizací",
-        "voice_edit": "Hlasové úpravy"
+        "voice_edit": "Hlasové úpravy",
+        "web_search": "Vyhledávání na webu",
+        "link_fetch": "Čtení odkazu"
       },
       "data": {
         "text": "Text",
@@ -1306,6 +1388,21 @@
           "days_many": "{{count}} dní",
           "days_few": "{{count}} dny"
         }
+      },
+      "web": {
+        "title": "Vyhledávání na webu",
+        "description": "Každé hledání a stránka, které pro vás Kusema přečetla, s hledaným textem nebo adresou.",
+        "empty": "Zatím žádná hledání ani stránky.",
+        "columns": {
+          "what": "Hledání nebo stránka",
+          "provider": "Kde",
+          "found": "Nalezeno"
+        },
+        "kinds": {
+          "search": "Hledání",
+          "fetch": "Stránka"
+        },
+        "local": "Hledaný text a adresy stránek se ukládají jen v tomto počítači. „Vymazat“ je odstraní spolu se zbytkem seznamu a po stejném počtu dní se smažou."
       }
     },
     "cleanup": {
@@ -1602,11 +1699,21 @@
       "noVision": "Tato AI nevidí obrazovku. Vyberte takovou, která vidí obrázky, třeba Claude nebo model s viděním v Ollama.",
       "emptyReply": "{{name}} neposlal odpověď. Zkuste se zeptat znovu.",
       "nothingHeard": "Kusema neslyšela otázku. Podržte klávesu, klepněte na mezerník a pak mluvte.",
-      "other": "Kusema nedostala odpověď: {{name}}"
+      "other": "Kusema nedostala odpověď: {{name}}",
+      "webOff": "Vyhledávání na webu je vypnuté. Zapněte ho v Asistent → Nastavení → Vyhledávání na webu.",
+      "webByAdmin": "Správce na tomto počítači vypnul vyhledávání na webu a čtení odkazů.",
+      "webPrivileged": "Režim Privileged je zapnutý, takže Kusema nehledá na webu ani nečte odkazy. Pro jejich použití režim Privileged vypněte.",
+      "noSearchProvider": "Vyhledávání na webu není nastavené. Přidejte klíč Brave Search nebo server SearXNG v Asistent → Nastavení → Vyhledávání na webu.",
+      "searchFailed": "Vyhledávání na webu nefungovalo ({{name}}). Zkuste to znovu, nebo zkontrolujte Vyhledávání na webu v Asistent → Nastavení.",
+      "noLink": "Kusema nenašla odkaz ke čtení. Nejdřív odkaz zkopírujte, nebo řekněte celou adresu.",
+      "linkFailed": "Kusema nemohla odkaz přečíst: {{name}}",
+      "providerHidden": "Správce na tomto počítači vypnul {{name}}. Vyberte jinou AI v Asistent → Nastavení.",
+      "braveKeyRejected": "Brave klíč odmítl. Zkontrolujte, že je předplacený pro plán Search, a zkuste to znovu."
     },
     "setUp": "Nastavit",
     "dismiss": "Zavřít",
-    "previewOff": "Živý náhled je vypnutý: tento počítač nestíhal. Znovu ho můžete zapnout v Nastavení."
+    "previewOff": "Živý náhled je vypnutý: tento počítač nestíhal. Znovu ho můžete zapnout v Nastavení.",
+    "webNotSearched": "Odpověď bez webu. Chcete-li hledat, řekněte „search the web for…“."
   },
   "screenCard": {
     "title": "Odeslat tento snímek obrazovky?",
@@ -1643,6 +1750,28 @@
       "body": "Pak vše, co začnete slovem „{{word}}“, půjde Kusemě. Dál ve větě zůstane slovo, jak je.",
       "yes": "Přidat",
       "no": "Teď ne"
+    },
+    "web": {
+      "title": {
+        "search": "Hledat na webu?",
+        "link": "Přečíst tuto stránku?",
+        "builtin": "Nechat {{name}} hledat na webu?"
+      },
+      "private": "Tímto se bude hledat na webu. Do hledání nebude zahrnut váš {{kind}}. Pokračovat?",
+      "privateLink": "Tímto se přečte webová stránka. Váš {{kind}} jí nebude odeslán. Pokračovat?",
+      "kind": {
+        "screenshot": "snímek obrazovky",
+        "selection": "vybraný text"
+      },
+      "builtinPrivate": "{{name}} si hledání volí samo a mohlo by v nich použít váš {{kind}}.",
+      "builtinUnconfirmable": "{{name}} si hledání volí samo, takže je nelze ukázat předem.",
+      "editHint": "Kusema pošle tato hledání do {{provider}}. Pokud chcete, upravte je.",
+      "sendHint": "Kusema pošle tato hledání do {{provider}}.",
+      "searchLabel": "Hledání {{n}}",
+      "cancel": "Zrušit",
+      "send": "Hledat",
+      "continue": "Pokračovat",
+      "searchAnyway": "Přesto hledat"
     }
   },
   "secureInput": {
@@ -1742,7 +1871,11 @@
     "stop": "Zastavit",
     "close": "Zavřít",
     "hint": "Enter se zeptá · Shift+Enter: nový řádek · Esc zavře",
-    "noWindow": "Klikněte do okna, na které se chcete zeptat, a otevřete toto pole znovu."
+    "noWindow": "Klikněte do okna, na které se chcete zeptat, a otevřete toto pole znovu.",
+    "sources": "Zdroje",
+    "searchWeb": "Hledat na webu",
+    "searchWebHint": "Hledat na webu pro tuto otázku",
+    "searchThis": "Vyhledat to na webu"
   },
   "kusemaKey": {
     "presets": {

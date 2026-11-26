@@ -28,6 +28,8 @@ const CONFIRM_SIZE: (f64, f64) = (380.0, 460.0);
 const NOTICE_SIZE: (f64, f64) = (380.0, 150.0);
 const EDIT_SIZE: (f64, f64) = (460.0, 440.0);
 const OFFER_SIZE: (f64, f64) = (400.0, 220.0);
+/// Kusema web search: the search (or page) about to be sent.
+const WEB_SIZE: (f64, f64) = (420.0, 380.0);
 /// A voice edit's preview left unanswered this long is cancelled: there's
 /// more to read than a screenshot question.
 pub const EDIT_TIMEOUT: Duration = Duration::from_secs(60);
@@ -68,6 +70,22 @@ pub enum ScreenCard {
         trigger: String,
         timeout_secs: u32,
     },
+    /// Kusema web search: what's about to go to the web, for Send or Cancel.
+    /// With `editable`, the searches can be changed first ("Confirm
+    /// searches"); with `private`, the question has context that won't be
+    /// included ("ask before mixing").
+    #[serde(rename_all = "camelCase")]
+    Web {
+        action: WebCardAction,
+        queries: Vec<String>,
+        editable: bool,
+        url: Option<String>,
+        /// Who searches: "Brave Search", "SearXNG (host)", "Claude".
+        provider: String,
+        private: Option<crate::web::PrivateKind>,
+        concern: Option<crate::web::BuiltinConcern>,
+        timeout_secs: u32,
+    },
     /// Kusema voice editing: the selected text and what it would become.
     #[serde(rename_all = "camelCase")]
     Edit {
@@ -79,6 +97,16 @@ pub enum ScreenCard {
         rich_text: bool,
         timeout_secs: u32,
     },
+}
+
+/// What a web card asks about.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Type)]
+#[serde(rename_all = "snake_case")]
+pub enum WebCardAction {
+    Search,
+    ReadLink,
+    /// The AI provider's own search, which can't be shown first.
+    Builtin,
 }
 
 /// The user's answer to a confirmation card.
@@ -106,6 +134,8 @@ struct Inner {
     reply: Option<oneshot::Sender<bool>>,
     /// Kusema: the corrected text, or `None` for Cancel.
     correction: Option<oneshot::Sender<Option<String>>>,
+    /// Kusema web search: the searches to send, or `None` for Cancel.
+    web: Option<oneshot::Sender<Option<Vec<String>>>>,
     captured: Option<CapturedWindow>,
     label: Option<String>,
     focus: bool,
@@ -235,6 +265,7 @@ fn open(
     let size = match card {
         ScreenCard::Edit { .. } | ScreenCard::Correct { .. } => EDIT_SIZE,
         ScreenCard::Offer { .. } => OFFER_SIZE,
+        ScreenCard::Web { .. } => WEB_SIZE,
         _ if focus => CONFIRM_SIZE,
         _ => NOTICE_SIZE,
     };
@@ -252,10 +283,14 @@ fn open(
         if let Some(previous) = inner.correction.take() {
             let _ = previous.send(None);
         }
+        if let Some(previous) = inner.web.take() {
+            let _ = previous.send(None);
+        }
         *inner = Inner {
             card: Some(card),
             reply,
             correction: None,
+            web: None,
             captured,
             label: Some(label.clone()),
             focus,
@@ -496,12 +531,20 @@ pub fn cancel_open(app: &AppHandle) -> bool {
     let Some(state) = app.try_state::<ScreenState>() else {
         return false;
     };
-    let (reply, correction, captured) = {
+    let (reply, correction, web, captured) = {
         let mut inner = state.card.lock();
-        (inner.reply.take(), inner.correction.take(), inner.captured)
+        (
+            inner.reply.take(),
+            inner.correction.take(),
+            inner.web.take(),
+            inner.captured,
+        )
     };
-    if reply.is_none() && correction.is_none() {
+    if reply.is_none() && correction.is_none() && web.is_none() {
         return false;
+    }
+    if let Some(web) = web {
+        let _ = web.send(None);
     }
     if let Some(window) = captured {
         restore_focus(&window);
@@ -543,6 +586,57 @@ pub async fn confirm_correction(
             close(app, true);
             None
         }
+    }
+}
+
+/// Kusema web search: shows what's about to go to the web and waits for
+/// Send (the searches, as edited) or Cancel, the timeout or the Cancel hotkey
+/// (`None`). Beside `near` if the question was about a window.
+pub async fn confirm_web<C: Fn() -> bool>(
+    app: &AppHandle,
+    near: Option<CapturedWindow>,
+    card: ScreenCard,
+    is_cancelled: C,
+) -> Option<Vec<String>> {
+    let (tx, rx) = oneshot::channel();
+    // Opened as a card that takes focus; the answer comes on its own channel.
+    let (focus_tx, _focus_rx) = oneshot::channel();
+    open(app, card, near, Some(focus_tx))?;
+    if let Some(state) = app.try_state::<ScreenState>() {
+        let mut inner = state.card.lock();
+        inner.reply = None;
+        inner.web = Some(tx);
+    }
+    let answer =
+        complete_unless_cancelled(tokio::time::timeout(CONFIRM_TIMEOUT, rx), is_cancelled).await;
+    match answer {
+        Some(Ok(Ok(queries))) => queries,
+        _ => {
+            close(app, true);
+            None
+        }
+    }
+}
+
+/// Kusema web search: the web card's Send (`Some`, with the searches) or
+/// Cancel (`None`).
+#[tauri::command]
+#[specta::specta]
+pub fn answer_web_card(
+    app: AppHandle,
+    state: State<'_, ScreenState>,
+    queries: Option<Vec<String>>,
+) {
+    let (reply, captured) = {
+        let mut inner = state.card.lock();
+        (inner.web.take(), inner.captured)
+    };
+    if let Some(window) = captured {
+        restore_focus(&window);
+    }
+    close(&app, false);
+    if let Some(reply) = reply {
+        let _ = reply.send(queries);
     }
 }
 

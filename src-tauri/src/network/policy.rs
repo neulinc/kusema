@@ -64,6 +64,8 @@ pub struct Rules {
     pub privileged: bool,
     pub allow_lan: bool,
     pub block_downloads: bool,
+    /// Kusema: the machine-wide admin policy turned web access off.
+    pub web_disabled: bool,
 }
 
 /// What a request carries, for the rules' purposes.
@@ -73,6 +75,8 @@ pub enum Category {
     Ai,
     /// A model, voice or update: no user content.
     Download,
+    /// Kusema: a web search or a link the user asked to read.
+    Web,
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -81,14 +85,23 @@ pub enum Verdict {
     BlockCloudAi,
     BlockLanAi,
     BlockDownload,
+    /// Privileged mode: no web search or link reading at all, even to a
+    /// search server on this computer (it would pass the query on).
+    BlockWeb,
+    /// The administrator turned web access off.
+    BlockWebByAdmin,
 }
 
 /// The rule itself. Outside Privileged mode, everything is allowed (and logged).
 pub fn decide(rules: Rules, category: Category, reach: Reach) -> Verdict {
+    if category == Category::Web && rules.web_disabled {
+        return Verdict::BlockWebByAdmin;
+    }
     if !rules.privileged {
         return Verdict::Allow;
     }
     match (category, reach) {
+        (Category::Web, _) => Verdict::BlockWeb,
         (_, Reach::Loopback) => Verdict::Allow,
         (Category::Ai, Reach::Lan) if rules.allow_lan => Verdict::Allow,
         (Category::Ai, Reach::Lan) => Verdict::BlockLanAi,
@@ -106,11 +119,13 @@ mod tests {
         privileged: false,
         allow_lan: false,
         block_downloads: false,
+        web_disabled: false,
     };
     const ON: Rules = Rules {
         privileged: true,
         allow_lan: false,
         block_downloads: false,
+        web_disabled: false,
     };
 
     #[test]
@@ -173,6 +188,46 @@ mod tests {
         ] {
             assert_eq!(classify(host), Reach::Public, "{host}");
         }
+    }
+
+    #[test]
+    fn privileged_mode_blocks_all_web_access_wherever_it_goes() {
+        for reach in [Reach::Loopback, Reach::Lan, Reach::Public] {
+            assert_eq!(decide(ON, Category::Web, reach), Verdict::BlockWeb);
+            // Allowing LAN AI servers doesn't open the web.
+            let lan = Rules {
+                allow_lan: true,
+                ..ON
+            };
+            assert_eq!(decide(lan, Category::Web, reach), Verdict::BlockWeb);
+        }
+        assert_eq!(decide(OFF, Category::Web, Reach::Public), Verdict::Allow);
+    }
+
+    #[test]
+    fn the_admin_switch_blocks_web_access_in_any_mode() {
+        for rules in [OFF, ON] {
+            let admin = Rules {
+                web_disabled: true,
+                ..rules
+            };
+            for reach in [Reach::Loopback, Reach::Lan, Reach::Public] {
+                assert_eq!(
+                    decide(admin, Category::Web, reach),
+                    Verdict::BlockWebByAdmin
+                );
+            }
+            // Only web access: AI questions follow the usual rules.
+            assert_eq!(decide(admin, Category::Ai, Reach::Loopback), Verdict::Allow);
+        }
+        let admin_off = Rules {
+            web_disabled: true,
+            ..OFF
+        };
+        assert_eq!(
+            decide(admin_off, Category::Ai, Reach::Public),
+            Verdict::Allow
+        );
     }
 
     #[test]

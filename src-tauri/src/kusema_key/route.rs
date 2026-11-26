@@ -219,7 +219,40 @@ pub fn route(rest: &str, text: TextHere) -> Route {
 
 /// A question about the selection, with the selection attached as content.
 pub fn question_about(question: &str, selection: &str) -> String {
-    format!("{question}\n\nThe text I've selected:\n\"\"\"\n{selection}\n\"\"\"")
+    format!("{question}{SELECTION_HEADER}\"\"\"\n{selection}\n\"\"\"")
+}
+
+/// Kusema web search: where `question_about` puts the selection.
+const SELECTION_HEADER: &str = "\n\nThe text I've selected:\n";
+
+/// Kusema web search: the question without a selection attached by
+/// `question_about`, and whether one was. Searches are made from the
+/// question alone, so selected text never goes to the web.
+pub fn without_selection(question: &str) -> (&str, bool) {
+    match question.find(SELECTION_HEADER) {
+        Some(at) => (&question[..at], true),
+        None => (question, false),
+    }
+}
+
+#[cfg(test)]
+mod selection_tests {
+    use super::*;
+
+    #[test]
+    fn the_selection_is_kept_out_of_the_question_for_the_web() {
+        let asked = question_about(
+            "Search the web for this case",
+            "Smith v. Jones, confidential",
+        );
+        let (question, had) = without_selection(&asked);
+        assert_eq!(question, "Search the web for this case");
+        assert!(had);
+        assert_eq!(
+            without_selection("Just a question"),
+            ("Just a question", false)
+        );
+    }
 }
 
 #[cfg(test)]

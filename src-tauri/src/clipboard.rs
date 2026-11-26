@@ -80,6 +80,14 @@ fn refuse_clipboard_in_isolated_run() -> Result<(), String> {
     Ok(())
 }
 
+/// Kusema link reading ("summarize this link"): the copied text, if it's a
+/// web address and nothing else. Never read in an isolated test run.
+pub fn copied_link(app_handle: &AppHandle) -> Result<Option<String>, String> {
+    refuse_clipboard_in_isolated_run()?;
+    let text = app_handle.clipboard().read_text().ok();
+    Ok(text.and_then(|t| crate::web::intent::single_url(&t)))
+}
+
 /// Pastes text using the clipboard: saves current content, writes text, sends paste keystroke, restores clipboard.
 fn paste_via_clipboard(
     text: &str,

@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { WarningTriangle as AlertTriangle, Xmark as X } from "iconoir-react";
 import { commands, type ScreenCard as Card } from "@/bindings";
 import { Button } from "@/components/ui/Button";
+import { WebCard } from "./WebCard";
 
 type Confirm = Extract<Card, { kind: "confirm" }>;
 type Notice = Extract<Card, { kind: "notice" }>;
@@ -400,6 +401,7 @@ const ScreenCard: React.FC = () => {
   if (card.kind === "edit") return <EditCard card={card} />;
   if (card.kind === "correct") return <CorrectCard card={card} />;
   if (card.kind === "offer") return <OfferCard card={card} />;
+  if (card.kind === "web") return <WebCard card={card} />;
   return card.kind === "confirm" ? (
     <ConfirmCard card={card} />
   ) : (

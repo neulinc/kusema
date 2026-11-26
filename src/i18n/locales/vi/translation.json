@@ -899,6 +899,73 @@
           "description": "Giải thích từng bước, kiểm tra mức hiểu và dẫn bạn tới đáp án thay vì đưa sẵn lời giải bài tập, trừ khi bạn yêu cầu đáp án. Bạn cũng có thể nói “explain step by step” trong bất kỳ câu hỏi nào.",
           "note": "Hãy tuân theo quy định của trường hoặc kỳ thi về việc dùng AI."
         }
+      },
+      "web": {
+        "title": "Tìm kiếm web",
+        "description": "Cho phép Kusema tìm trên web hoặc đọc liên kết bạn chỉ định. Tắt cho đến khi bạn bật. Mọi lượt tìm kiếm và trang đã đọc đều có trong trang Quyền riêng tư.",
+        "adminOff": "Quản trị viên đã tắt tìm kiếm web và đọc liên kết trên máy tính này.",
+        "privileged": "Chế độ Privileged đang bật: Kusema sẽ không tìm trên web hay đọc liên kết cho đến khi bạn tắt nó.",
+        "enabled": {
+          "label": "Dùng web",
+          "description": "Tìm trên web hoặc đọc liên kết khi bạn yêu cầu, ví dụ \"search the web for…\" hoặc \"summarize this link\"."
+        },
+        "mode": {
+          "label": "Khi nào tìm",
+          "description": "Chỉ khi bạn yêu cầu, hoặc bất cứ khi nào AI thấy câu hỏi cần đến.",
+          "whenAsked": "Chỉ khi tôi yêu cầu",
+          "automatic": "Tự động",
+          "whenAskedNote": "Kusema tìm khi câu hỏi của bạn yêu cầu (\"search the web for…\") hoặc khi công tắc Tìm trên web đang bật.",
+          "automaticNote": "AI quyết định khi nào câu hỏi cần web. Với Brave hoặc SearXNG, AI được hỏi trước nên tìm những gì, chỉ dựa vào câu hỏi của bạn."
+        },
+        "limits": "Tối đa 3 lượt tìm cho mỗi câu hỏi và 5 kết quả đầu của mỗi lượt, dưới dạng đoạn trích ngắn.",
+        "provider": {
+          "label": "Tìm bằng",
+          "description": "Brave và SearXNG dùng được với mọi AI, kể cả AI trên máy tính này.",
+          "brave": "Brave Search (khóa của bạn)",
+          "searxng": "Máy chủ SearXNG",
+          "builtin": "Tìm kiếm riêng của {{name}}",
+          "builtinAny": "Tìm kiếm riêng của AI (Claude hoặc OpenAI)"
+        },
+        "brave": {
+          "key": "Khóa API Brave Search",
+          "keyDescription": "Được lưu trong Windows Credential Manager, giống các khóa AI của bạn.",
+          "saved": "Đã lưu khóa",
+          "remove": "Xóa",
+          "placeholder": "Dán khóa của bạn",
+          "save": "Lưu",
+          "pricing": "Brave tính $5 cho mỗi 1.000 lượt tìm và tặng $5 tín dụng miễn phí mỗi tháng, khoảng 1.000 lượt tìm (brave.com, tháng 11 năm 2026).",
+          "getKey": "Lấy khóa"
+        },
+        "searxng": {
+          "label": "Địa chỉ máy chủ",
+          "description": "Địa chỉ của một máy chủ SearXNG đã bật kết quả JSON.",
+          "adminSet": "Do quản trị viên đặt.",
+          "neulinc": "Văn phòng của bạn cần máy chủ tìm kiếm riêng? Neulinc có thể cài đặt và bảo trì máy chủ SearXNG cho bạn.",
+          "learnMore": "Tìm hiểu thêm"
+        },
+        "builtin": {
+          "pricing": {
+            "anthropic": "Tìm kiếm của Claude có giá $10 cho mỗi 1.000 lượt tìm cộng token mà kết quả dùng, do Anthropic tính phí.",
+            "openai": "Tìm kiếm của OpenAI có giá $10 cho mỗi 1.000 lượt tìm cộng token mà kết quả dùng, do OpenAI tính phí."
+          },
+          "cantConfirm": "{{name}} tự chọn các lượt tìm, nên không thể hiển thị trước khi gửi. Khi bật Xác nhận tìm kiếm, Kusema dùng Brave hoặc SearXNG nếu bạn đã thiết lập, nếu không sẽ hỏi bạn mỗi lần.",
+          "unavailable": "{{name}} không có tìm kiếm web nào Kusema dùng được. Hãy chọn Brave Search hoặc máy chủ SearXNG."
+        },
+        "test": {
+          "button": "Kiểm tra",
+          "testing": "Đang kiểm tra…",
+          "ok": "Tìm kiếm hoạt động. Kết quả: {{count}}.",
+          "failed": "Tìm kiếm không thành công: {{error}}"
+        },
+        "confirm": {
+          "label": "Xác nhận tìm kiếm",
+          "description": "Trước khi Kusema tìm bằng Brave hoặc SearXNG, bạn xem từng lượt tìm, sửa nếu muốn, rồi gửi hoặc hủy."
+        },
+        "pasteSources": {
+          "label": "Thêm nguồn khi dán câu trả lời",
+          "description": "Câu trả lời được dán sẽ kết thúc bằng danh sách ngắn các nguồn."
+        },
+        "links": "Để đọc một trang, hãy sao chép liên kết rồi yêu cầu \"summarize this link\", hoặc nói địa chỉ. Kusema chỉ đọc trang web công khai, không bao giờ đọc trang trên máy tính này hay mạng văn phòng, và không bao giờ mở các liên kết trên trang."
       }
     },
     "postProcessing": {
@@ -947,6 +1014,19 @@
           "notRunning": "{{name}} không chạy trên máy tính này. Hãy khởi động nó, rồi làm mới danh sách mô hình.",
           "noModels": "{{name}} đang chạy nhưng chưa cài mô hình nào.",
           "howTo": "Cách thiết lập {{name}}"
+        },
+        "privacy": {
+          "anthropic": "Theo mặc định Anthropic không huấn luyện trên dữ liệu API và xóa dữ liệu trong vòng 30 ngày.",
+          "deepseek": "Văn bản của bạn được DeepSeek xử lý trên máy chủ ở Trung Quốc. Chính sách của DeepSeek cho phép dùng dữ liệu để cải thiện dịch vụ; hãy xem điều khoản của họ.",
+          "gemini": "Ở gói miễn phí, Google có thể dùng câu lệnh và câu trả lời của bạn để cải thiện sản phẩm, và con người có thể đọc chúng. Hãy dùng khóa trả phí (dự án Google Cloud có thanh toán) cho công việc bảo mật.",
+          "openai": "Theo mặc định OpenAI không huấn luyện trên dữ liệu API và lưu tối đa 30 ngày để giám sát lạm dụng.",
+          "details": "Chi tiết"
+        },
+        "testKey": {
+          "button": "Kiểm tra khóa",
+          "checking": "Đang kiểm tra…",
+          "ok": "Khóa hoạt động. Mô hình: {{count}}.",
+          "failed": "Khóa không hoạt động: {{error}}"
         }
       },
       "prompts": {
@@ -1262,7 +1342,9 @@
         "model_download": "Tải mô hình giọng nói",
         "voice_download": "Tải giọng đọc",
         "update_check": "Kiểm tra cập nhật",
-        "voice_edit": "Sửa bằng giọng nói"
+        "voice_edit": "Sửa bằng giọng nói",
+        "web_search": "Tìm kiếm web",
+        "link_fetch": "Đọc liên kết"
       },
       "data": {
         "text": "Văn bản",
@@ -1294,6 +1376,21 @@
           "days_one": "{{count}} ngày",
           "days_other": "{{count}} ngày"
         }
+      },
+      "web": {
+        "title": "Tìm kiếm web",
+        "description": "Mọi lượt tìm và trang Kusema đã đọc cho bạn, kèm nội dung tìm hoặc địa chỉ.",
+        "empty": "Chưa có lượt tìm hay trang nào.",
+        "columns": {
+          "what": "Lượt tìm hoặc trang",
+          "provider": "Ở đâu",
+          "found": "Tìm thấy"
+        },
+        "kinds": {
+          "search": "Tìm kiếm",
+          "fetch": "Trang"
+        },
+        "local": "Nội dung tìm kiếm và địa chỉ trang chỉ được lưu trên máy tính này. Xóa sẽ xóa chúng cùng phần còn lại của danh sách, và chúng bị xóa sau cùng số ngày đó."
       }
     },
     "cleanup": {
@@ -1590,11 +1687,21 @@
       "noVision": "AI này không nhìn được màn hình. Hãy chọn AI xem được hình ảnh, như Claude hoặc một mô hình thị giác trong Ollama.",
       "emptyReply": "{{name}} không gửi câu trả lời. Hãy thử hỏi lại.",
       "nothingHeard": "Kusema không nghe thấy câu hỏi. Giữ phím, chạm Space, rồi nói.",
-      "other": "Kusema không nhận được câu trả lời: {{name}}"
+      "other": "Kusema không nhận được câu trả lời: {{name}}",
+      "webOff": "Tìm kiếm web đang tắt. Hãy bật trong Trợ lý → Cài đặt → Tìm kiếm web.",
+      "webByAdmin": "Quản trị viên đã tắt tìm kiếm web và đọc liên kết trên máy tính này.",
+      "webPrivileged": "Chế độ Privileged đang bật nên Kusema không tìm trên web và không đọc liên kết. Hãy tắt chế độ Privileged để dùng.",
+      "noSearchProvider": "Tìm kiếm web chưa được thiết lập. Hãy thêm khóa Brave Search hoặc máy chủ SearXNG trong Trợ lý → Cài đặt → Tìm kiếm web.",
+      "searchFailed": "Tìm kiếm web không thành công ({{name}}). Hãy thử lại, hoặc kiểm tra Tìm kiếm web trong Trợ lý → Cài đặt.",
+      "noLink": "Kusema không tìm thấy liên kết để đọc. Hãy sao chép liên kết trước, hoặc nói địa chỉ đầy đủ.",
+      "linkFailed": "Kusema không đọc được liên kết đó: {{name}}",
+      "providerHidden": "Quản trị viên đã tắt {{name}} trên máy tính này. Hãy chọn AI khác trong Trợ lý → Cài đặt.",
+      "braveKeyRejected": "Brave đã từ chối khóa. Hãy kiểm tra khóa đã đăng ký gói Search chưa, rồi thử lại."
     },
     "setUp": "Thiết lập",
     "dismiss": "Đóng",
-    "previewOff": "Xem trước trực tiếp đã tắt: máy tính này không theo kịp. Bạn có thể bật lại trong Cài đặt."
+    "previewOff": "Xem trước trực tiếp đã tắt: máy tính này không theo kịp. Bạn có thể bật lại trong Cài đặt.",
+    "webNotSearched": "Đã trả lời không dùng web. Để tìm, hãy nói \"search the web for…\"."
   },
   "screenCard": {
     "title": "Gửi ảnh chụp màn hình này?",
@@ -1631,6 +1738,28 @@
       "body": "Khi đó, mọi điều bạn bắt đầu bằng “{{word}}” sẽ được gửi tới Kusema. Ở giữa câu, từ này vẫn giữ nguyên.",
       "yes": "Thêm",
       "no": "Để sau"
+    },
+    "web": {
+      "title": {
+        "search": "Tìm trên web?",
+        "link": "Đọc trang này?",
+        "builtin": "Cho {{name}} tìm trên web?"
+      },
+      "private": "Thao tác này sẽ tìm trên web. {{kind}} của bạn sẽ không được đưa vào tìm kiếm. Tiếp tục?",
+      "privateLink": "Thao tác này sẽ đọc một trang web. {{kind}} của bạn sẽ không được gửi tới trang đó. Tiếp tục?",
+      "kind": {
+        "screenshot": "Ảnh chụp màn hình",
+        "selection": "Đoạn văn bản đã chọn"
+      },
+      "builtinPrivate": "{{name}} tự chọn các lượt tìm và có thể dùng {{kind}} của bạn trong đó.",
+      "builtinUnconfirmable": "{{name}} tự chọn các lượt tìm, nên không thể hiển thị trước.",
+      "editHint": "Kusema sẽ gửi các lượt tìm này đến {{provider}}. Sửa nếu bạn muốn.",
+      "sendHint": "Kusema sẽ gửi các lượt tìm này đến {{provider}}.",
+      "searchLabel": "Lượt tìm {{n}}",
+      "cancel": "Hủy",
+      "send": "Tìm",
+      "continue": "Tiếp tục",
+      "searchAnyway": "Vẫn tìm"
     }
   },
   "secureInput": {
@@ -1726,7 +1855,11 @@
     "stop": "Dừng",
     "close": "Đóng",
     "hint": "Enter để hỏi · Shift+Enter: xuống dòng · Esc để đóng",
-    "noWindow": "Hãy bấm vào cửa sổ bạn muốn hỏi, rồi mở lại hộp này."
+    "noWindow": "Hãy bấm vào cửa sổ bạn muốn hỏi, rồi mở lại hộp này.",
+    "sources": "Nguồn",
+    "searchWeb": "Tìm trên web",
+    "searchWebHint": "Tìm trên web cho câu hỏi này",
+    "searchThis": "Tìm điều này trên web"
   },
   "kusemaKey": {
     "presets": {

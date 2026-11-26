@@ -899,6 +899,73 @@
           "description": "Adım adım açıklar, anlayıp anlamadığınızı kontrol eder ve ödev yanıtlarını hazır vermek yerine sizi yanıta yönlendirir; yanıtı isterseniz verir. Herhangi bir soruda “explain step by step” de diyebilirsiniz.",
           "note": "Okulunuzun veya sınavınızın yapay zekâ kullanımı kurallarına uyun."
         }
+      },
+      "web": {
+        "title": "Web araması",
+        "description": "Kusema'nın web'de arama yapmasına veya belirttiğiniz bir bağlantıyı okumasına izin verin. Siz açana kadar kapalı. Her arama ve okunan sayfa Gizlilik sayfasında listelenir.",
+        "adminOff": "Yöneticiniz bu bilgisayarda web aramasını ve bağlantı okumayı kapattı.",
+        "privileged": "Privileged modu açık: Siz kapatana kadar Kusema web'de arama yapmaz ve bağlantı okumaz.",
+        "enabled": {
+          "label": "Web'i kullan",
+          "description": "İstediğinizde web'de ara veya bir bağlantıyı oku, örneğin \"search the web for…\" veya \"summarize this link\"."
+        },
+        "mode": {
+          "label": "Ne zaman aransın",
+          "description": "Yalnızca siz istediğinizde veya yapay zekâ bir sorunun buna ihtiyacı olduğunu düşündüğünde.",
+          "whenAsked": "Yalnızca istediğimde",
+          "automatic": "Otomatik",
+          "whenAskedNote": "Kusema, sorunuz istediğinde (\"search the web for…\") veya Web'de ara düğmesi açıkken arama yapar.",
+          "automaticNote": "Bir sorunun web'e ihtiyacı olup olmadığına yapay zekâ karar verir. Brave veya SearXNG ile önce yalnızca sorunuza bakarak hangi aramaları yapacağı sorulur."
+        },
+        "limits": "Soru başına en fazla 3 arama ve her birinin ilk 5 sonucu, kısa alıntılar olarak.",
+        "provider": {
+          "label": "Arama aracı",
+          "description": "Brave ve SearXNG, bu bilgisayardaki dahil her yapay zekâyla çalışır.",
+          "brave": "Brave Search (sizin anahtarınız)",
+          "searxng": "SearXNG sunucusu",
+          "builtin": "{{name}} yerleşik araması",
+          "builtinAny": "Yapay zekânın yerleşik araması (Claude veya OpenAI)"
+        },
+        "brave": {
+          "key": "Brave Search API anahtarı",
+          "keyDescription": "Yapay zekâ anahtarlarınız gibi Windows Kimlik Bilgisi Yöneticisi'nde saklanır.",
+          "saved": "Anahtar kaydedildi",
+          "remove": "Kaldır",
+          "placeholder": "Anahtarınızı yapıştırın",
+          "save": "Kaydet",
+          "pricing": "Brave 1.000 arama için 5 $ alır ve her ay 5 $ ücretsiz kredi verir, yaklaşık 1.000 arama (brave.com, Kasım 2026).",
+          "getKey": "Anahtar alın"
+        },
+        "searxng": {
+          "label": "Sunucu adresi",
+          "description": "JSON sonuçları açık bir SearXNG sunucusunun adresi.",
+          "adminSet": "Yöneticiniz tarafından ayarlandı.",
+          "neulinc": "Büronuz için özel bir arama sunucusuna mı ihtiyacınız var? Neulinc sizin için bir SearXNG sunucusu kurup bakımını yapabilir.",
+          "learnMore": "Daha fazla bilgi"
+        },
+        "builtin": {
+          "pricing": {
+            "anthropic": "Claude'un araması 1.000 arama için 10 $ artı sonuçların kullandığı token'lardır; faturayı Anthropic keser.",
+            "openai": "OpenAI'ın araması 1.000 arama için 10 $ artı sonuçların kullandığı token'lardır; faturayı OpenAI keser."
+          },
+          "cantConfirm": "{{name}} aramalarını kendi seçer, bu yüzden gönderilmeden önce gösterilemez. Aramaları onayla açıkken Kusema, kurduysanız Brave veya SearXNG kullanır; kurmadıysanız her seferinde size sorar.",
+          "unavailable": "{{name}} için Kusema'nın kullanabileceği bir web araması yok. Brave Search veya bir SearXNG sunucusu seçin."
+        },
+        "test": {
+          "button": "Test et",
+          "testing": "Test ediliyor…",
+          "ok": "Arama çalışıyor. Sonuç: {{count}}.",
+          "failed": "Arama çalışmadı: {{error}}"
+        },
+        "confirm": {
+          "label": "Aramaları onayla",
+          "description": "Kusema Brave veya SearXNG ile aramadan önce her aramayı görün, isterseniz değiştirin, sonra gönderin veya iptal edin."
+        },
+        "pasteSources": {
+          "label": "Yanıtları yapıştırırken kaynakları ekle",
+          "description": "Yapıştırılan yanıt, kaynaklarının kısa bir listesiyle biter."
+        },
+        "links": "Bir sayfayı okumak için bağlantısını kopyalayıp \"summarize this link\" deyin veya adresi söyleyin. Kusema yalnızca herkese açık web sayfalarını okur; bu bilgisayardaki veya ofis ağındaki sayfaları asla okumaz ve sayfadaki bağlantıları asla izlemez."
       }
     },
     "postProcessing": {
@@ -947,6 +1014,19 @@
           "notRunning": "{{name}} bu bilgisayarda çalışmıyor. Başlatın, ardından model listesini yenileyin.",
           "noModels": "{{name}} çalışıyor ancak henüz yüklü bir model yok.",
           "howTo": "{{name}} nasıl kurulur"
+        },
+        "privacy": {
+          "anthropic": "Anthropic varsayılan olarak API verileriyle model eğitmez ve bunları 30 gün içinde siler.",
+          "deepseek": "Metniniz DeepSeek tarafından Çin'deki sunucularda işlenir. DeepSeek'in politikası, hizmetlerini geliştirmek için verileri kullanmasına izin verir; koşullarına bakın.",
+          "gemini": "Ücretsiz katmanda Google, istemlerinizi ve yanıtlarınızı ürünlerini geliştirmek için kullanabilir ve bunları insanlar okuyabilir. Gizli işler için ücretli bir anahtar (faturalandırması açık bir Google Cloud projesi) kullanın.",
+          "openai": "OpenAI varsayılan olarak API verileriyle model eğitmez ve kötüye kullanımı izlemek için bunları 30 güne kadar saklar.",
+          "details": "Ayrıntılar"
+        },
+        "testKey": {
+          "button": "Anahtarı test et",
+          "checking": "Kontrol ediliyor…",
+          "ok": "Anahtar çalışıyor. Model: {{count}}.",
+          "failed": "Anahtar çalışmadı: {{error}}"
         }
       },
       "prompts": {
@@ -1262,7 +1342,9 @@
         "model_download": "Konuşma modeli indirme",
         "voice_download": "Ses indirme",
         "update_check": "Güncelleme denetimi",
-        "voice_edit": "Sesle düzenleme"
+        "voice_edit": "Sesle düzenleme",
+        "web_search": "Web araması",
+        "link_fetch": "Bağlantı okuma"
       },
       "data": {
         "text": "Metin",
@@ -1294,6 +1376,21 @@
           "days_one": "{{count}} gün",
           "days_other": "{{count}} gün"
         }
+      },
+      "web": {
+        "title": "Web araması",
+        "description": "Kusema'nın sizin için yaptığı her arama ve okuduğu her sayfa, aranan metin veya adresle birlikte.",
+        "empty": "Henüz arama veya sayfa yok.",
+        "columns": {
+          "what": "Arama veya sayfa",
+          "provider": "Nerede",
+          "found": "Bulunan"
+        },
+        "kinds": {
+          "search": "Arama",
+          "fetch": "Sayfa"
+        },
+        "local": "Arama metni ve sayfa adresleri yalnızca bu bilgisayarda saklanır. Temizle bunları listenin geri kalanıyla birlikte kaldırır ve aynı gün sayısından sonra silinirler."
       }
     },
     "cleanup": {
@@ -1590,11 +1687,21 @@
       "noVision": "Bu yapay zekâ ekranı göremiyor. Claude veya Ollama'daki bir görüntü modeli gibi resimleri görebilen birini seçin.",
       "emptyReply": "{{name}} bir yanıt göndermedi. Yeniden sormayı deneyin.",
       "nothingHeard": "Kusema bir soru duymadı. Tuşu basılı tutun, Boşluk'a dokunun, sonra konuşun.",
-      "other": "Kusema yanıt alamadı: {{name}}"
+      "other": "Kusema yanıt alamadı: {{name}}",
+      "webOff": "Web araması kapalı. Asistan → Ayarlar → Web araması'ndan açın.",
+      "webByAdmin": "Yöneticiniz bu bilgisayarda web aramasını ve bağlantı okumayı kapattı.",
+      "webPrivileged": "Privileged modu açık, bu yüzden Kusema web'de arama yapmaz ve bağlantı okumaz. Kullanmak için Privileged modunu kapatın.",
+      "noSearchProvider": "Web araması kurulmadı. Asistan → Ayarlar → Web araması'na bir Brave Search anahtarı veya SearXNG sunucusu ekleyin.",
+      "searchFailed": "Web araması çalışmadı ({{name}}). Yeniden deneyin veya Asistan → Ayarlar'daki Web araması'nı kontrol edin.",
+      "noLink": "Kusema okunacak bir bağlantı bulamadı. Önce bağlantıyı kopyalayın veya tam adresi söyleyin.",
+      "linkFailed": "Kusema bu bağlantıyı okuyamadı: {{name}}",
+      "providerHidden": "Yöneticiniz bu bilgisayarda {{name}} hizmetini kapattı. Asistan → Ayarlar'dan başka bir yapay zekâ seçin.",
+      "braveKeyRejected": "Brave anahtarı reddetti. Bir Search planına abone olduğunu kontrol edip yeniden deneyin."
     },
     "setUp": "Kur",
     "dismiss": "Kapat",
-    "previewOff": "Canlı önizleme kapalı: bu bilgisayar yetişemedi. Ayarlar'dan yeniden açabilirsiniz."
+    "previewOff": "Canlı önizleme kapalı: bu bilgisayar yetişemedi. Ayarlar'dan yeniden açabilirsiniz.",
+    "webNotSearched": "Web kullanılmadan yanıtlandı. Aramak için \"search the web for…\" deyin."
   },
   "screenCard": {
     "title": "Bu ekran görüntüsü gönderilsin mi?",
@@ -1631,6 +1738,28 @@
       "body": "Böylece “{{word}}” ile başladığınız her şey Kusema'ya gider. Cümlenin ilerisinde sözcük olduğu gibi kalır.",
       "yes": "Ekle",
       "no": "Şimdi değil"
+    },
+    "web": {
+      "title": {
+        "search": "Web'de aransın mı?",
+        "link": "Bu sayfa okunsun mu?",
+        "builtin": "{{name}} web'de arasın mı?"
+      },
+      "private": "Bu işlem web'de arama yapacak. {{kind}} aramaya dahil edilmeyecek. Devam edilsin mi?",
+      "privateLink": "Bu işlem bir web sayfasını okuyacak. {{kind}} ona gönderilmeyecek. Devam edilsin mi?",
+      "kind": {
+        "screenshot": "Ekran görüntünüz",
+        "selection": "Seçtiğiniz metin"
+      },
+      "builtinPrivate": "{{name}} aramalarını kendi seçer ve bunlarda şunu kullanabilir: {{kind}}.",
+      "builtinUnconfirmable": "{{name}} aramalarını kendi seçer, bu yüzden önceden gösterilemez.",
+      "editHint": "Kusema bu aramaları {{provider}} hizmetine gönderecek. İsterseniz değiştirin.",
+      "sendHint": "Kusema bu aramaları {{provider}} hizmetine gönderecek.",
+      "searchLabel": "Arama {{n}}",
+      "cancel": "İptal",
+      "send": "Ara",
+      "continue": "Devam",
+      "searchAnyway": "Yine de ara"
     }
   },
   "secureInput": {
@@ -1726,7 +1855,11 @@
     "stop": "Durdur",
     "close": "Kapat",
     "hint": "Enter sorar · Shift+Enter: yeni satır · Esc kapatır",
-    "noWindow": "Hakkında sormak istediğiniz pencereye tıklayın, sonra bu kutuyu yeniden açın."
+    "noWindow": "Hakkında sormak istediğiniz pencereye tıklayın, sonra bu kutuyu yeniden açın.",
+    "sources": "Kaynaklar",
+    "searchWeb": "Web'de ara",
+    "searchWebHint": "Bu soru için web'de ara",
+    "searchThis": "Bunu web'de ara"
   },
   "kusemaKey": {
     "presets": {

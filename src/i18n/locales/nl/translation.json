@@ -899,6 +899,73 @@
           "description": "Stap voor stap uitleggen, begrip controleren en je naar het antwoord leiden in plaats van huiswerk voor te zeggen, tenzij je om het antwoord vraagt. Je kunt ook ‘explain step by step’ zeggen in elke vraag.",
           "note": "Volg de regels van je school of examen over het gebruik van AI."
         }
+      },
+      "web": {
+        "title": "Zoeken op het web",
+        "description": "Laat Kusema op het web zoeken of een link lezen die je noemt. Uit tot je het aanzet. Elke zoekopdracht en gelezen pagina staat op de pagina Privacy.",
+        "adminOff": "Je beheerder heeft zoeken op het web en links lezen op deze computer uitgezet.",
+        "privileged": "Privileged-modus staat aan: Kusema zoekt niet op het web en leest geen links tot je hem uitzet.",
+        "enabled": {
+          "label": "Het web gebruiken",
+          "description": "Zoek op het web of lees een link als je erom vraagt, bijvoorbeeld \"search the web for…\" of \"summarize this link\"."
+        },
+        "mode": {
+          "label": "Wanneer zoeken",
+          "description": "Alleen als je erom vraagt, of telkens als de AI vindt dat een vraag het nodig heeft.",
+          "whenAsked": "Alleen als ik erom vraag",
+          "automatic": "Automatisch",
+          "whenAskedNote": "Kusema zoekt als je vraag erom vraagt (\"search the web for…\") of als de schakelaar Zoeken op het web aan staat.",
+          "automaticNote": "De AI beslist wanneer een vraag het web nodig heeft. Met Brave of SearXNG wordt eerst gevraagd welke zoekopdrachten nodig zijn, alleen op basis van je vraag."
+        },
+        "limits": "Hoogstens 3 zoekopdrachten per vraag en de eerste 5 resultaten van elk, als korte fragmenten.",
+        "provider": {
+          "label": "Zoeken met",
+          "description": "Brave en SearXNG werken met elke AI, ook een op deze computer.",
+          "brave": "Brave Search (je eigen sleutel)",
+          "searxng": "SearXNG-server",
+          "builtin": "Eigen zoekfunctie van {{name}}",
+          "builtinAny": "Eigen zoekfunctie van de AI (Claude of OpenAI)"
+        },
+        "brave": {
+          "key": "Brave Search API-sleutel",
+          "keyDescription": "Bewaard in Windows Referentiebeheer, net als je AI-sleutels.",
+          "saved": "Sleutel opgeslagen",
+          "remove": "Verwijderen",
+          "placeholder": "Plak je sleutel",
+          "save": "Opslaan",
+          "pricing": "Brave rekent $5 per 1.000 zoekopdrachten en geeft elke maand $5 gratis tegoed, ongeveer 1.000 zoekopdrachten (brave.com, november 2026).",
+          "getKey": "Sleutel aanvragen"
+        },
+        "searxng": {
+          "label": "Serveradres",
+          "description": "Het adres van een SearXNG-server met JSON-resultaten aan.",
+          "adminSet": "Ingesteld door je beheerder.",
+          "neulinc": "Een eigen zoekserver nodig voor je kantoor? Neulinc kan een SearXNG-server voor je opzetten en onderhouden.",
+          "learnMore": "Meer informatie"
+        },
+        "builtin": {
+          "pricing": {
+            "anthropic": "De zoekfunctie van Claude kost $10 per 1.000 zoekopdrachten plus de tokens van de resultaten, gefactureerd door Anthropic.",
+            "openai": "De zoekfunctie van OpenAI kost $10 per 1.000 zoekopdrachten plus de tokens van de resultaten, gefactureerd door OpenAI."
+          },
+          "cantConfirm": "{{name}} kiest zelf zijn zoekopdrachten, dus die kunnen niet vooraf getoond worden. Met Zoekopdrachten bevestigen aan gebruikt Kusema Brave of SearXNG als je er een hebt ingesteld, en vraagt het anders elke keer.",
+          "unavailable": "{{name}} heeft geen zoekfunctie die Kusema kan gebruiken. Kies Brave Search of een SearXNG-server."
+        },
+        "test": {
+          "button": "Testen",
+          "testing": "Bezig met testen…",
+          "ok": "Zoeken werkt. Resultaten: {{count}}.",
+          "failed": "Zoeken werkte niet: {{error}}"
+        },
+        "confirm": {
+          "label": "Zoekopdrachten bevestigen",
+          "description": "Voordat Kusema met Brave of SearXNG zoekt, zie je elke zoekopdracht, kun je die aanpassen en daarna versturen of annuleren."
+        },
+        "pasteSources": {
+          "label": "Bronnen toevoegen bij plakken van antwoorden",
+          "description": "Een geplakt antwoord eindigt met een korte lijst van zijn bronnen."
+        },
+        "links": "Om een pagina te lezen, kopieer je de link en vraag je \"summarize this link\", of noem je het adres. Kusema leest alleen openbare webpagina's, nooit pagina's op deze computer of het kantoornetwerk, en volgt nooit links op de pagina."
       }
     },
     "postProcessing": {
@@ -947,6 +1014,19 @@
           "notRunning": "{{name}} draait niet op deze computer. Start het en vernieuw daarna de lijst met modellen.",
           "noModels": "{{name}} draait, maar heeft nog geen modellen geïnstalleerd.",
           "howTo": "{{name}} instellen"
+        },
+        "privacy": {
+          "anthropic": "Anthropic traint standaard niet op API-gegevens en verwijdert ze binnen 30 dagen.",
+          "deepseek": "Je tekst wordt verwerkt door DeepSeek, op servers in China. Het beleid van DeepSeek staat toe dat het gegevens gebruikt om zijn diensten te verbeteren; zie de voorwaarden.",
+          "gemini": "Bij het gratis abonnement mag Google je vragen en antwoorden gebruiken om zijn producten te verbeteren, en mensen kunnen ze lezen. Gebruik een betaalde sleutel (een Google Cloud-project met facturering) voor vertrouwelijk werk.",
+          "openai": "OpenAI traint standaard niet op API-gegevens en bewaart ze tot 30 dagen om misbruik op te sporen.",
+          "details": "Details"
+        },
+        "testKey": {
+          "button": "Sleutel testen",
+          "checking": "Bezig met controleren…",
+          "ok": "De sleutel werkt. Modellen: {{count}}.",
+          "failed": "De sleutel werkte niet: {{error}}"
         }
       },
       "prompts": {
@@ -1262,7 +1342,9 @@
         "model_download": "Download van spraakmodel",
         "voice_download": "Download van stem",
         "update_check": "Updatecontrole",
-        "voice_edit": "Spraakbewerking"
+        "voice_edit": "Spraakbewerking",
+        "web_search": "Zoeken op het web",
+        "link_fetch": "Link lezen"
       },
       "data": {
         "text": "Tekst",
@@ -1294,6 +1376,21 @@
           "days_one": "{{count}} dag",
           "days_other": "{{count}} dagen"
         }
+      },
+      "web": {
+        "title": "Zoeken op het web",
+        "description": "Elke zoekopdracht en pagina die Kusema voor je las, met waarop gezocht is of het adres.",
+        "empty": "Nog geen zoekopdrachten of pagina's.",
+        "columns": {
+          "what": "Zoekopdracht of pagina",
+          "provider": "Waar",
+          "found": "Gevonden"
+        },
+        "kinds": {
+          "search": "Zoekopdracht",
+          "fetch": "Pagina"
+        },
+        "local": "Zoektekst en paginaadressen worden alleen op deze computer bewaard. Wissen verwijdert ze samen met de rest van de lijst, en ze worden na hetzelfde aantal dagen verwijderd."
       }
     },
     "cleanup": {
@@ -1590,11 +1687,21 @@
       "noVision": "Deze AI kan het scherm niet zien. Kies er een die afbeeldingen kan zien, zoals Claude of een vision-model in Ollama.",
       "emptyReply": "{{name}} stuurde geen antwoord. Vraag het opnieuw.",
       "nothingHeard": "Kusema hoorde geen vraag. Houd de toets vast, tik op Spatie en spreek dan.",
-      "other": "Kusema kreeg geen antwoord: {{name}}"
+      "other": "Kusema kreeg geen antwoord: {{name}}",
+      "webOff": "Zoeken op het web staat uit. Zet het aan bij Assistent → Instellingen → Zoeken op het web.",
+      "webByAdmin": "Je beheerder heeft zoeken op het web en links lezen op deze computer uitgezet.",
+      "webPrivileged": "Privileged-modus staat aan, dus Kusema zoekt niet op het web en leest geen links. Zet Privileged-modus uit om ze te gebruiken.",
+      "noSearchProvider": "Zoeken op het web is niet ingesteld. Voeg een Brave Search-sleutel of een SearXNG-server toe bij Assistent → Instellingen → Zoeken op het web.",
+      "searchFailed": "Het zoeken op het web is mislukt ({{name}}). Probeer het opnieuw of controleer Zoeken op het web bij Assistent → Instellingen.",
+      "noLink": "Kusema vond geen link om te lezen. Kopieer eerst de link, of noem het volledige adres.",
+      "linkFailed": "Kusema kon die link niet lezen: {{name}}",
+      "providerHidden": "Je beheerder heeft {{name}} op deze computer uitgezet. Kies een andere AI bij Assistent → Instellingen.",
+      "braveKeyRejected": "Brave heeft de sleutel geweigerd. Controleer of die geabonneerd is op een Search-abonnement en probeer het opnieuw."
     },
     "setUp": "Instellen",
     "dismiss": "Sluiten",
-    "previewOff": "Live voorbeeld staat uit: deze computer kon het niet bijhouden. Je kunt het weer aanzetten bij Instellingen."
+    "previewOff": "Live voorbeeld staat uit: deze computer kon het niet bijhouden. Je kunt het weer aanzetten bij Instellingen.",
+    "webNotSearched": "Beantwoord zonder het web. Zeg \"search the web for…\" om te zoeken."
   },
   "screenCard": {
     "title": "Deze schermafbeelding versturen?",
@@ -1631,6 +1738,28 @@
       "body": "Dan gaat alles wat je met ‘{{word}}’ begint naar Kusema. Verderop in een zin blijft het woord zoals het is.",
       "yes": "Toevoegen",
       "no": "Niet nu"
+    },
+    "web": {
+      "title": {
+        "search": "Op het web zoeken?",
+        "link": "Deze pagina lezen?",
+        "builtin": "{{name}} op het web laten zoeken?"
+      },
+      "private": "Er wordt op het web gezocht. Je {{kind}} gaat niet mee in de zoekopdracht. Doorgaan?",
+      "privateLink": "Er wordt een webpagina gelezen. Je {{kind}} wordt er niet naartoe gestuurd. Doorgaan?",
+      "kind": {
+        "screenshot": "schermafbeelding",
+        "selection": "geselecteerde tekst"
+      },
+      "builtinPrivate": "{{name}} kiest zelf zijn zoekopdrachten en zou je {{kind}} daarin kunnen gebruiken.",
+      "builtinUnconfirmable": "{{name}} kiest zelf zijn zoekopdrachten, dus die kunnen niet vooraf getoond worden.",
+      "editHint": "Kusema stuurt deze zoekopdrachten naar {{provider}}. Pas ze aan als je wilt.",
+      "sendHint": "Kusema stuurt deze zoekopdrachten naar {{provider}}.",
+      "searchLabel": "Zoekopdracht {{n}}",
+      "cancel": "Annuleren",
+      "send": "Zoeken",
+      "continue": "Doorgaan",
+      "searchAnyway": "Toch zoeken"
     }
   },
   "secureInput": {
@@ -1726,7 +1855,11 @@
     "stop": "Stoppen",
     "close": "Sluiten",
     "hint": "Enter vraagt · Shift+Enter: nieuwe regel · Esc sluit",
-    "noWindow": "Klik in het venster waarover je wilt vragen en open dit vak opnieuw."
+    "noWindow": "Klik in het venster waarover je wilt vragen en open dit vak opnieuw.",
+    "sources": "Bronnen",
+    "searchWeb": "Zoeken op het web",
+    "searchWebHint": "Voor deze vraag op het web zoeken",
+    "searchThis": "Dit op het web zoeken"
   },
   "kusemaKey": {
     "presets": {

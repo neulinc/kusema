@@ -1280,9 +1280,9 @@ async changeAssistantTutorSetting(enabled: boolean) : Promise<Result<null, strin
  * A question typed on the Assistant page. Returns its id at once; the answer
  * comes as `assistant-stream`, then `assistant-reply` or `assistant-error`.
  */
-async askTyped(question: string) : Promise<Result<number, string>> {
+async askTyped(question: string, web: boolean | null) : Promise<Result<number, string>> {
     try {
-    return { status: "ok", data: await TAURI_INVOKE("ask_typed", { question }) };
+    return { status: "ok", data: await TAURI_INVOKE("ask_typed", { question, web }) };
 } catch (e) {
     if(e instanceof Error) throw e;
     else return { status: "error", error: e  as any };
@@ -1360,9 +1360,9 @@ async setAskBoxHeight(height: number) : Promise<void> {
  * the question's id; the answer comes as `assistant-stream`, then
  * `assistant-reply` or `assistant-error`.
  */
-async askBoxSubmit(question: string, screen: boolean) : Promise<Result<number, string>> {
+async askBoxSubmit(question: string, screen: boolean, web: boolean | null) : Promise<Result<number, string>> {
     try {
-    return { status: "ok", data: await TAURI_INVOKE("ask_box_submit", { question, screen }) };
+    return { status: "ok", data: await TAURI_INVOKE("ask_box_submit", { question, screen, web }) };
 } catch (e) {
     if(e instanceof Error) throw e;
     else return { status: "error", error: e  as any };
@@ -1708,6 +1708,76 @@ async correctHistoryEntry(id: number, text: string) : Promise<Result<LearnedWord
 async answerCorrectionCard(text: string | null) : Promise<void> {
     await TAURI_INVOKE("answer_correction_card", { text });
 },
+/**
+ * Kusema web search: the web card's Send (`Some`, with the searches) or
+ * Cancel (`None`).
+ */
+async answerWebCard(queries: string[] | null) : Promise<void> {
+    await TAURI_INVOKE("answer_web_card", { queries });
+},
+async changeWebSearchSettings(web: WebSearchSettings) : Promise<Result<null, string>> {
+    try {
+    return { status: "ok", data: await TAURI_INVOKE("change_web_search_settings", { web }) };
+} catch (e) {
+    if(e instanceof Error) throw e;
+    else return { status: "error", error: e  as any };
+}
+},
+/**
+ * Saves the Brave Search key (to the keychain, like the AI providers' keys).
+ */
+async setBraveSearchKey(key: string) : Promise<Result<null, string>> {
+    try {
+    return { status: "ok", data: await TAURI_INVOKE("set_brave_search_key", { key }) };
+} catch (e) {
+    if(e instanceof Error) throw e;
+    else return { status: "error", error: e  as any };
+}
+},
+/**
+ * Whether a Brave Search key is saved. The key itself never goes to the page.
+ */
+async hasBraveSearchKey() : Promise<boolean> {
+    return await TAURI_INVOKE("has_brave_search_key");
+},
+/**
+ * "Test" beside the search settings: one real search, listed in the ledger
+ * like any other. Returns how many results came back.
+ */
+async testWebSearch() : Promise<Result<number, string>> {
+    try {
+    return { status: "ok", data: await TAURI_INVOKE("test_web_search") };
+} catch (e) {
+    if(e instanceof Error) throw e;
+    else return { status: "error", error: e  as any };
+}
+},
+/**
+ * Opens a source's link in the browser. Only http(s) addresses, and only
+ * ones an answer listed (the page can't open anything else through this).
+ */
+async openWebSource(url: string) : Promise<Result<null, string>> {
+    try {
+    return { status: "ok", data: await TAURI_INVOKE("open_web_source", { url }) };
+} catch (e) {
+    if(e instanceof Error) throw e;
+    else return { status: "error", error: e  as any };
+}
+},
+async getAdminPolicy() : Promise<AdminPolicy> {
+    return await TAURI_INVOKE("get_admin_policy");
+},
+/**
+ * Kusema web search: the searches and links read, newest first.
+ */
+async getWebLedger(since: number | null) : Promise<Result<WebEntry[], string>> {
+    try {
+    return { status: "ok", data: await TAURI_INVOKE("get_web_ledger", { since }) };
+} catch (e) {
+    if(e instanceof Error) throw e;
+    else return { status: "error", error: e  as any };
+}
+},
 async getTtsVoices() : Promise<Result<Voice[], string>> {
     try {
     return { status: "ok", data: await TAURI_INVOKE("get_tts_voices") };
@@ -1806,6 +1876,18 @@ transcriptionJob: "transcription-job"
  * A style that applies to some text, and what the overlay shows for it.
  */
 export type Active = { id: string; name: string | null }
+/**
+ * What the administrator decided. Everything off when nothing is set.
+ */
+export type AdminPolicy = { disable_web_access: boolean; 
+/**
+ * Provider ids, lowercase ("deepseek", "gemini", "openai"...).
+ */
+hidden_providers: string[]; 
+/**
+ * The SearXNG server set for everyone; the user can't change it.
+ */
+searxng_url: string | null }
 /**
  * What the Cleanup settings say about AI cleanup's provider.
  */
@@ -2035,6 +2117,10 @@ assistant_answer_to?: AnswerTo;
  */
 assistant_tutor?: boolean; 
 /**
+ * Kusema web search and link reading, off by default.
+ */
+web_search?: WebSearchSettings; 
+/**
  * Kusema styles per app.
  */
 app_styles?: AppStyle[]; app_styles_enabled?: boolean; 
@@ -2115,7 +2201,11 @@ style: Active | null;
 /**
  * "Ask about my screen" has a window to look at.
  */
-can_see_screen: boolean }
+can_see_screen: boolean; 
+/**
+ * Kusema web search: the "Search the web" switch is offered.
+ */
+web_search: boolean }
 export type AudioDevice = { index: string; name: string; is_default: boolean }
 export type AutoSubmitKey = "enter" | "ctrl_enter" | "cmd_enter"
 export type AutoUnavailableReason = 
@@ -2134,6 +2224,18 @@ export type AutoUnavailableReason =
 export type AvailableAccelerators = { transcribe: string[]; gpu_devices: GpuDeviceOption[] }
 export type BindingResponse = { success: boolean; binding: ShortcutBinding | null; error: string | null }
 /**
+ * Why the built-in search needs the user's go-ahead.
+ */
+export type BuiltinConcern = 
+/**
+ * "Confirm searches" is on, and it can't show its searches first.
+ */
+"unconfirmable" | 
+/**
+ * The question has private context the provider could search with.
+ */
+"private_context"
+/**
  * Who sent a message in a multi-turn conversation.
  */
 export type ChatRole = "user" | "assistant"
@@ -2144,7 +2246,16 @@ export type ChatTurn = { role: ChatRole; content: string;
 /**
  * The question was asked about a screenshot (the UI shows a marker).
  */
-screenshot?: boolean }
+screenshot?: boolean; 
+/**
+ * Kusema web search: the pages an answer drew on, shown as links under
+ * it. Never sent to the AI.
+ */
+sources?: WebSource[]; 
+/**
+ * Kusema web search: the web was searched for this answer.
+ */
+searched?: boolean }
 /**
  * Script applied to Mandarin and Cantonese output. Traditional carries its region
  * (Taiwan vs Hong Kong forms, e.g. 裡/裏) rather than guessing it.
@@ -2521,6 +2632,18 @@ export type PostProcessProvider = { id: string; label: string; base_url: string;
  */
 export type PrivacyOverview = { today: DestinationCount[]; last_7_days: DestinationCount[] }
 /**
+ * What in a question isn't for the web.
+ */
+export type PrivateKind = 
+/**
+ * A screenshot is attached, or the conversation is about one.
+ */
+"screenshot" | 
+/**
+ * Selected text is attached ("Kusema, what does this mean?").
+ */
+"selection"
+/**
  * Why a request was made.
  */
 export type Purpose = "assistant_question" | "screen_question" | "post_processing" | 
@@ -2531,7 +2654,15 @@ export type Purpose = "assistant_question" | "screen_question" | "post_processin
 /**
  * Listing a provider's models in the settings: the API key, no content.
  */
-"provider_models" | "model_download" | "voice_download" | "update_check"
+"provider_models" | "model_download" | "voice_download" | "update_check" | 
+/**
+ * Kusema: a web search (Brave or a SearXNG server): the search text.
+ */
+"web_search" | 
+/**
+ * Kusema: reading a link the user named: the address, nothing else.
+ */
+"link_fetch"
 /**
  * Recording phase events for windows that follow along (onboarding's Try it).
  */
@@ -2573,6 +2704,13 @@ export type ScreenCard = { kind: "confirm"; image: string; question: string; pro
  * as a way `trigger` is heard?
  */
 { kind: "offer"; word: string; trigger: string; timeoutSecs: number } | 
+/**
+ * Kusema web search: what's about to go to the web, for Send or Cancel.
+ * With `editable`, the searches can be changed first ("Confirm
+ * searches"); with `private`, the question has context that won't be
+ * included ("ask before mixing").
+ */
+{ kind: "web"; action: WebCardAction; queries: string[]; editable: boolean; url: string | null; provider: string; private: PrivateKind | null; concern: BuiltinConcern | null; timeoutSecs: number } | 
 /**
  * Kusema voice editing: the selected text and what it would become.
  */
@@ -2756,6 +2894,83 @@ language: string;
  * Engine label for the voice picker: "Kokoro", "Windows", "macOS"...
  */
 engine: string }
+/**
+ * What a web card asks about.
+ */
+export type WebCardAction = "search" | "read_link" | 
+/**
+ * The AI provider's own search, which can't be shown first.
+ */
+"builtin"
+/**
+ * One web search or link read, as listed under "Web search".
+ */
+export type WebEntry = { id: number; 
+/**
+ * Seconds since the epoch.
+ */
+timestamp: number; kind: WebKind; 
+/**
+ * Who searched or served the page: "Brave Search", "SearXNG (host)",
+ * "Claude (built-in search)", or the page's host.
+ */
+provider: string; 
+/**
+ * The search text, or the address read.
+ */
+detail: string; 
+/**
+ * Results a search returned.
+ */
+results: number | null; 
+/**
+ * Bytes of page received for a link.
+ */
+bytes_received: number | null; result: RequestResult }
+/**
+ * Kusema web search: what kind of web request.
+ */
+export type WebKind = "search" | "fetch"
+export type WebSearchMode = 
+/**
+ * Only when the question asks ("search the web for…") or the search
+ * toggle is on.
+ */
+"when_asked" | 
+/**
+ * The AI decides whether a question needs the web.
+ */
+"automatic"
+export type WebSearchProvider = 
+/**
+ * Brave Search API with the user's own key.
+ */
+"brave" | 
+/**
+ * A SearXNG server (the user's, or the firm's).
+ */
+"searxng" | 
+/**
+ * The AI provider's own search: Claude or OpenAI.
+ */
+"builtin"
+export type WebSearchSettings = { enabled: boolean; mode: WebSearchMode; provider: WebSearchProvider; 
+/**
+ * The user's SearXNG server; the administrator's, if set, wins.
+ */
+searxng_url: string; 
+/**
+ * Show each Brave/SearXNG search, editable, before it's sent.
+ */
+confirm_searches: boolean; 
+/**
+ * "Paste the answer" adds a short sources list.
+ */
+paste_sources: boolean }
+/**
+ * A page an answer drew on, shown as a link under it.
+ */
+export type WebSource = { title: string; url: string }
 export type WindowsMicrophonePermissionStatus = { supported: boolean; overall_access: PermissionAccess; device_access: PermissionAccess; app_access: PermissionAccess; desktop_app_access: PermissionAccess }
 
 /** tauri-specta globals **/

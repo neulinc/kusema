@@ -97,6 +97,17 @@ mod tests {
     }
 
     #[test]
+    fn the_preview_has_no_prefix_unless_a_test_run_asks_for_one() {
+        // "[preview]" exists only behind KUSEMA_DEBUG_PREVIEW_MARK, in debug
+        // builds, for automated tests; release builds compile it out.
+        if std::env::var_os("KUSEMA_DEBUG_PREVIEW_MARK").is_none() {
+            let (committed, tentative) = shown("Please send the ", "contract");
+            assert!(!committed.contains("[preview]"));
+            assert!(!tentative.contains("[preview]"));
+        }
+    }
+
+    #[test]
     fn plain_words_pass_through_split_as_they_came() {
         // Cleanup trims the settled part's last space; it moves to the rest.
         assert_eq!(

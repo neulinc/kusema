@@ -899,6 +899,73 @@
           "description": "Explain step by step, check understanding, and guide you to answers instead of handing over homework answers, unless you ask for the answer. You can also say “explain step by step” in any question.",
           "note": "Follow your school's or exam's rules on AI use."
         }
+      },
+      "web": {
+        "title": "Web search",
+        "description": "Let Kusema search the web or read a link you name. Off unless you turn it on. Every search and page read is listed on the Privacy page.",
+        "adminOff": "Web search and link reading are turned off on this computer by your administrator.",
+        "privileged": "Privileged mode is on, so Kusema won't search the web or read links until you turn it off.",
+        "enabled": {
+          "label": "Use the web",
+          "description": "Search the web or read a link when you ask, for example \"search the web for…\" or \"summarize this link\"."
+        },
+        "mode": {
+          "label": "When to search",
+          "description": "Only when you ask, or whenever the AI thinks a question needs it.",
+          "whenAsked": "Only when I ask",
+          "automatic": "Automatic",
+          "whenAskedNote": "Kusema searches when your question asks it to (\"search the web for…\") or the Search the web switch is on.",
+          "automaticNote": "The AI decides when a question needs the web. With Brave or SearXNG, it's first asked which searches to run, from your question alone."
+        },
+        "limits": "At most 3 searches per question and the top 5 results of each, as short snippets.",
+        "provider": {
+          "label": "Search with",
+          "description": "Brave and SearXNG work with any AI, including one on this computer.",
+          "brave": "Brave Search (your key)",
+          "searxng": "SearXNG server",
+          "builtin": "{{name}}'s own search",
+          "builtinAny": "The AI's own search (Claude or OpenAI)"
+        },
+        "brave": {
+          "key": "Brave Search API key",
+          "keyDescription": "Kept in Windows Credential Manager, like your AI keys.",
+          "saved": "Key saved",
+          "remove": "Remove",
+          "placeholder": "Paste your key",
+          "save": "Save",
+          "pricing": "Brave charges $5 per 1,000 searches and gives $5 of free credit every month, about 1,000 searches (brave.com, November 2026).",
+          "getKey": "Get a key"
+        },
+        "searxng": {
+          "label": "Server address",
+          "description": "The address of a SearXNG server with JSON results turned on.",
+          "adminSet": "Set by your administrator.",
+          "neulinc": "Need a private search server for your firm? Neulinc can set up and maintain a SearXNG server for you.",
+          "learnMore": "Learn more"
+        },
+        "builtin": {
+          "pricing": {
+            "anthropic": "Claude's search costs $10 per 1,000 searches plus the tokens the results use, billed by Anthropic.",
+            "openai": "OpenAI's search costs $10 per 1,000 searches plus the tokens the results use, billed by OpenAI."
+          },
+          "cantConfirm": "{{name}} chooses its own searches, so they can't be shown before they're sent. With Confirm searches on, Kusema uses Brave or SearXNG if you've set one up, and otherwise asks you each time.",
+          "unavailable": "{{name}} has no web search Kusema can use. Choose Brave Search or a SearXNG server."
+        },
+        "test": {
+          "button": "Test",
+          "testing": "Testing…",
+          "ok": "Search works. Results: {{count}}.",
+          "failed": "Search didn't work: {{error}}"
+        },
+        "confirm": {
+          "label": "Confirm searches",
+          "description": "Before Kusema searches with Brave or SearXNG, see each search, change it if you like, then send or cancel."
+        },
+        "pasteSources": {
+          "label": "Add sources when pasting answers",
+          "description": "A pasted answer ends with a short list of its sources."
+        },
+        "links": "To read a page, copy its link and ask \"summarize this link\", or say the address. Kusema reads public web pages only, never ones on this computer or your office network, and never follows links on the page."
       }
     },
     "postProcessing": {
@@ -947,6 +1014,19 @@
           "notRunning": "{{name}} isn't running on this computer. Start it, then refresh the model list.",
           "noModels": "{{name}} is running, but has no models installed yet.",
           "howTo": "How to set up {{name}}"
+        },
+        "privacy": {
+          "anthropic": "Anthropic doesn't train on API data by default and deletes it within 30 days.",
+          "deepseek": "Your text is processed by DeepSeek, on servers in China. DeepSeek's policy allows it to use data to improve its services; see its terms.",
+          "gemini": "On the free tier, Google may use your prompts and answers to improve its products, and people may read them. Use a paid key (a Google Cloud project with billing) for confidential work.",
+          "openai": "OpenAI doesn't train on API data by default and keeps it up to 30 days for abuse monitoring.",
+          "details": "Details"
+        },
+        "testKey": {
+          "button": "Test key",
+          "checking": "Checking…",
+          "ok": "Key works. Models: {{count}}.",
+          "failed": "Key didn't work: {{error}}"
         }
       },
       "prompts": {
@@ -1262,7 +1342,9 @@
         "model_download": "Speech model download",
         "voice_download": "Voice download",
         "update_check": "Update check",
-        "voice_edit": "Voice edit"
+        "voice_edit": "Voice edit",
+        "web_search": "Web search",
+        "link_fetch": "Link reading"
       },
       "data": {
         "text": "Text",
@@ -1294,6 +1376,21 @@
           "days_one": "{{count}} day",
           "days_other": "{{count}} days"
         }
+      },
+      "web": {
+        "title": "Web search",
+        "description": "Every search and page Kusema read for you, with what was searched for or the address.",
+        "empty": "No web searches or pages yet.",
+        "columns": {
+          "what": "Search or page",
+          "provider": "Where",
+          "found": "Found"
+        },
+        "kinds": {
+          "search": "Search",
+          "fetch": "Page"
+        },
+        "local": "Search text and page addresses are stored only on this computer. Clear removes them with the rest of the list, and they're deleted after the same number of days."
       }
     },
     "cleanup": {
@@ -1590,11 +1687,21 @@
       "noVision": "This AI can't see the screen. Choose one that can see images, like Claude or a vision model in Ollama.",
       "emptyReply": "{{name}} didn't send an answer. Try asking again.",
       "nothingHeard": "Kusema didn't hear a question. Hold the key, tap Space, then speak.",
-      "other": "Kusema couldn't get an answer: {{name}}"
+      "other": "Kusema couldn't get an answer: {{name}}",
+      "webOff": "Web search is off. Turn it on in Assistant → Settings → Web search.",
+      "webByAdmin": "Web search and link reading are turned off on this computer by your administrator.",
+      "webPrivileged": "Privileged mode is on, so Kusema doesn't search the web or read links. Turn Privileged mode off to use them.",
+      "noSearchProvider": "Web search isn't set up. Add a Brave Search key or a SearXNG server in Assistant → Settings → Web search.",
+      "searchFailed": "The web search didn't work ({{name}}). Try again, or check Web search in Assistant → Settings.",
+      "noLink": "Kusema didn't find a link to read. Copy the link first, or say the full address.",
+      "linkFailed": "Kusema couldn't read that link: {{name}}",
+      "providerHidden": "{{name}} is turned off on this computer by your administrator. Choose another AI in Assistant → Settings.",
+      "braveKeyRejected": "Brave rejected the key. Check that it's subscribed to a Search plan, then try again."
     },
     "setUp": "Set up",
     "dismiss": "Dismiss",
-    "previewOff": "Live preview is off: this computer couldn't keep up. You can turn it back on in Settings."
+    "previewOff": "Live preview is off: this computer couldn't keep up. You can turn it back on in Settings.",
+    "webNotSearched": "Answered without the web. To search, say “search the web for…”."
   },
   "screenCard": {
     "title": "Send this screenshot?",
@@ -1631,6 +1738,28 @@
       "body": "Then anything you start with “{{word}}” goes to Kusema. Later in a sentence, the word is left as it is.",
       "yes": "Add",
       "no": "Not now"
+    },
+    "web": {
+      "title": {
+        "search": "Search the web?",
+        "link": "Read this page?",
+        "builtin": "Let {{name}} search the web?"
+      },
+      "private": "This will search the web. Your {{kind}} won't be included in the search. Continue?",
+      "privateLink": "This will read a web page. Your {{kind}} won't be sent to it. Continue?",
+      "kind": {
+        "screenshot": "screenshot",
+        "selection": "selected text"
+      },
+      "builtinPrivate": "{{name}} chooses its own searches and could use your {{kind}} in them.",
+      "builtinUnconfirmable": "{{name}} chooses its own searches, so they can't be shown first.",
+      "editHint": "Kusema will send these searches to {{provider}}. Change them if you like.",
+      "sendHint": "Kusema will send these searches to {{provider}}.",
+      "searchLabel": "Search {{n}}",
+      "cancel": "Cancel",
+      "send": "Search",
+      "continue": "Continue",
+      "searchAnyway": "Search anyway"
     }
   },
   "secureInput": {
@@ -1726,7 +1855,11 @@
     "stop": "Stop",
     "close": "Close",
     "hint": "Enter asks · Shift+Enter: new line · Esc closes",
-    "noWindow": "Click the window you want to ask about, then open this box again."
+    "noWindow": "Click the window you want to ask about, then open this box again.",
+    "sources": "Sources",
+    "searchWeb": "Search the web",
+    "searchWebHint": "Search the web for this question",
+    "searchThis": "Search the web for this"
   },
   "kusemaKey": {
     "presets": {
