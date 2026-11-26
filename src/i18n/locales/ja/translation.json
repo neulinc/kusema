@@ -861,7 +861,9 @@
           "download": "ダウンロード ({{size}} MB)",
           "downloading": "ダウンロード中… {{percentage}}%",
           "cancel": "キャンセル",
-          "delete": "削除"
+          "delete": "削除",
+          "failed": "音声エンジンをダウンロードできませんでした。接続を確認して、もう一度お試しください。それまでの間も Windows の音声は使えます。",
+          "retry": "再試行"
         },
         "rate": {
           "label": "話す速さ",

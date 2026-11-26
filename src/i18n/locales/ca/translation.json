@@ -864,7 +864,9 @@
           "download": "Baixa ({{size}} MB)",
           "downloading": "S'està baixant… {{percentage}} %",
           "cancel": "Cancel·la",
-          "delete": "Treu"
+          "delete": "Treu",
+          "failed": "No s'ha pogut baixar el motor de veu. Comproveu la connexió i torneu-ho a provar. Mentrestant, les veus de Windows continuen funcionant.",
+          "retry": "Torna-ho a provar"
         },
         "rate": {
           "label": "Velocitat de lectura",

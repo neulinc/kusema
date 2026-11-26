@@ -864,7 +864,9 @@
           "download": "Descargar ({{size}} MB)",
           "downloading": "Descargando… {{percentage}} %",
           "cancel": "Cancelar",
-          "delete": "Quitar"
+          "delete": "Quitar",
+          "failed": "No se pudo descargar el motor de voz. Revisa tu conexión e inténtalo de nuevo. Mientras tanto, las voces de Windows siguen funcionando.",
+          "retry": "Reintentar"
         },
         "rate": {
           "label": "Velocidad de lectura",

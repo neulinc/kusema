@@ -20,6 +20,9 @@ export const KokoroVoices: React.FC<{ onChange: () => void }> = ({
   const [status, setStatus] = useState<KokoroStatus | null>(null);
   const [percentage, setPercentage] = useState(0);
   const [error, setError] = useState<string | null>(null);
+  // Why the last download failed, for the info tooltip. The row says it in
+  // plain words and offers Retry; the backend logs it too.
+  const [downloadFailure, setDownloadFailure] = useState<string | null>(null);
 
   useEffect(() => {
     commands.getKokoroStatus().then(setStatus);
@@ -46,10 +49,11 @@ export const KokoroVoices: React.FC<{ onChange: () => void }> = ({
 
   const handleDownload = async () => {
     setError(null);
+    setDownloadFailure(null);
     setPercentage(0);
     const result = await commands.downloadKokoro();
     if (result.status === "error") {
-      setError(result.error);
+      setDownloadFailure(result.error);
     }
   };
 
@@ -85,6 +89,12 @@ export const KokoroVoices: React.FC<{ onChange: () => void }> = ({
         {t("settings.assistant.voice.kokoro.delete")}
       </Button>
     );
+  } else if (downloadFailure) {
+    action = (
+      <Button variant="primary" size="sm" onClick={handleDownload}>
+        {t("settings.assistant.voice.kokoro.retry")}
+      </Button>
+    );
   } else {
     action = (
       <Button variant="primary" size="sm" onClick={handleDownload}>
@@ -95,19 +105,29 @@ export const KokoroVoices: React.FC<{ onChange: () => void }> = ({
     );
   }
 
+  const failed = !!downloadFailure && !status.downloading && !status.downloaded;
+
   return (
-    <SettingContainer
-      title={t("settings.assistant.voice.kokoro.label")}
-      description={
-        error ??
-        (status.downloaded
-          ? t("settings.assistant.voice.kokoro.installed")
-          : t("settings.assistant.voice.kokoro.description"))
-      }
-      descriptionMode="tooltip"
-      grouped
-    >
-      {action}
-    </SettingContainer>
+    <div>
+      <SettingContainer
+        title={t("settings.assistant.voice.kokoro.label")}
+        description={
+          (failed ? downloadFailure : null) ??
+          error ??
+          (status.downloaded
+            ? t("settings.assistant.voice.kokoro.installed")
+            : t("settings.assistant.voice.kokoro.description"))
+        }
+        descriptionMode="tooltip"
+        grouped
+      >
+        {action}
+      </SettingContainer>
+      {failed && (
+        <p role="alert" className="m-0 px-4 pb-3 text-[13px]/5 text-error">
+          {t("settings.assistant.voice.kokoro.failed")}
+        </p>
+      )}
+    </div>
   );
 };

@@ -861,7 +861,9 @@
           "download": "Downloaden ({{size}} MB)",
           "downloading": "Downloaden… {{percentage}}%",
           "cancel": "Annuleren",
-          "delete": "Verwijderen"
+          "delete": "Verwijderen",
+          "failed": "De spraakengine kon niet worden gedownload. Controleer je verbinding en probeer het opnieuw. Windows-stemmen werken intussen gewoon.",
+          "retry": "Opnieuw proberen"
         },
         "rate": {
           "label": "Spreeksnelheid",

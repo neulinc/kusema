@@ -867,7 +867,9 @@
           "download": "Stáhnout ({{size}} MB)",
           "downloading": "Stahování… {{percentage}} %",
           "cancel": "Zrušit",
-          "delete": "Odebrat"
+          "delete": "Odebrat",
+          "failed": "Hlasový modul se nepodařilo stáhnout. Zkontrolujte připojení a zkuste to znovu. Hlasy Windows mezitím dál fungují.",
+          "retry": "Zkusit znovu"
         },
         "rate": {
           "label": "Rychlost řeči",

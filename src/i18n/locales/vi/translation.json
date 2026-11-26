@@ -861,7 +861,9 @@
           "download": "Tải xuống ({{size}} MB)",
           "downloading": "Đang tải xuống… {{percentage}}%",
           "cancel": "Hủy",
-          "delete": "Gỡ bỏ"
+          "delete": "Gỡ bỏ",
+          "failed": "Không tải được bộ máy giọng nói. Hãy kiểm tra kết nối và thử lại. Trong lúc đó, giọng nói của Windows vẫn dùng được.",
+          "retry": "Thử lại"
         },
         "rate": {
           "label": "Tốc Độ Đọc",

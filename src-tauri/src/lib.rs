@@ -14,6 +14,8 @@ pub mod cli;
 mod clipboard;
 mod commands;
 mod dictation;
+#[cfg(test)]
+mod download_manifest;
 pub mod engine_supervisor;
 mod glow;
 mod helpers;

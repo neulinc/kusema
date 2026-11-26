@@ -13,6 +13,10 @@ public URL and hashes the actual bytes.
 Which files are hosted is decided here, and must match:
   - `KUSEMA_MIRRORS` in src-tauri/src/catalog/mod.rs (catalog models)
   - the `ModelSource::Url` entries in src-tauri/src/managers/model.rs (legacy)
+  - `RUNTIME_MIRROR` and each platform's `Runtime` in
+    src-tauri/src/tts/kokoro/assets.rs (ONNX Runtime for Kokoro voices: small
+    per-platform zips of the library from Microsoft's official NuGet package,
+    and the package itself)
 
 Run after `hf auth login` with write access to the organization. This uses the
 stored login and never reads or prints the token. Safe to re-run: anything
@@ -61,6 +65,34 @@ WHISPER_GGML = {
 BREEZE_GGML = {
     "breeze-asr-q5_k.bin": (1080732108, "8efbf0ce8a3f50fe332b7617da787fb81354b358c288b008d3bdef8359df64c6"),
 }
+
+# ONNX Runtime for Kokoro voices, from Microsoft's official NuGet package (nuget.org
+# packages can't be changed once published). Kusema used to download the GitHub
+# release zip; that URL answered 404 to Kusema's downloads in November 2026.
+ORT_VERSION = "1.31.1"
+ORT_PACKAGE = f"microsoft.ml.onnxruntime.{ORT_VERSION}.nupkg"
+ORT_PACKAGE_FILE = (159626394, "6871ccbc97f3d5bdb4095a1dcec33aa78d56f6ed8de5980ef5fa1d9f2e7c679a")
+ORT_NUGET = f"https://api.nuget.org/v3-flatcontainer/microsoft.ml.onnxruntime/{ORT_VERSION}/{ORT_PACKAGE}"
+# What Kokoro downloads first: per platform, a small zip with only the runtime
+# library (Kokoro loads nothing else: no execution providers, so no
+# onnxruntime_providers_shared) plus Microsoft's LICENSE and ThirdPartyNotices.txt,
+# copied byte for byte out of the package. Platform: (library inside the package,
+# (zip size, zip SHA-256)). Rebuilt identically by slim_runtimes().
+ORT_SLIM = {
+    "win-x64": ("runtimes/win-x64/native/onnxruntime.dll", (6336551, "9bac539eadb05f6e11e25d90b404c60c734306924a82d8e98157d06fd574c9d7")),
+    "win-arm64": ("runtimes/win-arm64/native/onnxruntime.dll", (6309517, "98e080b1b05cc493a6850b45a09f7af823c7da518afe86f9940183fd2cb03110")),
+    "osx-arm64": ("runtimes/osx-arm64/native/libonnxruntime.dylib", (12514848, "0ea6c7909f0902085e8cc62285f48ee0bcd45da3fb7483652cade01b439aed7d")),
+    "linux-x64": ("runtimes/linux-x64/native/libonnxruntime.so", (11128618, "1e6397b39dc5886e4c4160e86ec026d15000df19fdf1bc54db61e6365ead6418")),
+    "linux-arm64": ("runtimes/linux-arm64/native/libonnxruntime.so", (10062535, "38461512dbda3d856f7da5ec17bb75f5dc3c5ececfa9ad66ab153c64d3907d65")),
+}
+ORT_NOTICES = ["LICENSE", "ThirdPartyNotices.txt"]
+
+
+def slim_name(platform):
+    return f"onnxruntime-{ORT_VERSION}-{platform}.zip"
+
+
+ORT_FILES = {ORT_PACKAGE: ORT_PACKAGE_FILE, **{slim_name(p): pin for p, (_, pin) in ORT_SLIM.items()}}
 
 # Catalog models hosted here: their default quant only, the file Kusema downloads.
 CATALOG_MODELS = {
@@ -251,6 +283,79 @@ tags:
 {file_table(files)}"""
 
 
+def card_for_runtime(files):
+    return f"""---
+license: mit
+library_name: onnxruntime
+tags:
+  - onnxruntime
+  - mirror
+---
+
+# ONNX Runtime {ORT_VERSION}
+
+**This is a mirror for [Kusema](https://github.com/neulinc/kusema), a Windows dictation app.** The
+files come from Microsoft's official NuGet package, unmodified, and their sizes and SHA-256s match
+what Kusema checks after every download. Kusema's authors did not create this software and are not
+affiliated with or endorsed by Microsoft. Use the original source below unless you need this copy.
+
+## Source and attribution
+
+- **Original:** [Microsoft.ML.OnnxRuntime {ORT_VERSION}](https://www.nuget.org/packages/Microsoft.ML.OnnxRuntime/{ORT_VERSION})
+  on nuget.org, published by Microsoft ([onnxruntime.ai](https://onnxruntime.ai)).
+- **License:** MIT, copyright Microsoft Corporation. `LICENSE` and `ThirdPartyNotices.txt` here, and
+  in every zip, are the copies inside the package.
+- **`{ORT_PACKAGE}`:** the package itself, unmodified.
+- **`onnxruntime-{ORT_VERSION}-<platform>.zip`:** for a smaller download, each holds one platform's
+  native library from the package (for example `runtimes/win-x64/native/onnxruntime.dll`, saved as
+  `onnxruntime.dll`), byte for byte, with `LICENSE` and `ThirdPartyNotices.txt`. The Windows DLLs
+  keep Microsoft's Authenticode signature. Kusema uses the library to run its Kokoro voices.
+
+## Files
+
+{file_table(files)}"""
+
+
+def runtime_package(tmp):
+    """The NuGet package, downloaded once and checked against the pinned hash."""
+    size, sha = ORT_FILES[ORT_PACKAGE]
+    path = Path(tmp) / "runtime" / ORT_PACKAGE
+    path.parent.mkdir(parents=True, exist_ok=True)
+    if not (path.exists() and path.stat().st_size == size and sha256_of(path) == sha):
+        say(f"  downloading {ORT_NUGET}")
+        download_to(ORT_NUGET, path)
+        if path.stat().st_size != size or sha256_of(path) != sha:
+            path.unlink()
+            raise SystemExit(f"{ORT_PACKAGE}: nuget.org's copy doesn't match the pinned hash")
+    return path
+
+
+def runtime_notices(path):
+    import zipfile
+
+    with zipfile.ZipFile(path) as package:
+        return {name: package.read(name).decode("utf-8") for name in ORT_NOTICES}
+
+
+def slim_runtimes(tmp, package):
+    """The small per-platform zips, built from the verified package. Fixed
+    timestamps, order and compression, so a rebuild gives the same bytes."""
+    import zipfile
+
+    out = {}
+    with zipfile.ZipFile(package) as source:
+        for platform, (member, _) in ORT_SLIM.items():
+            path = Path(tmp) / "runtime" / slim_name(platform)
+            with zipfile.ZipFile(path, "w") as slim:
+                for name, data in [(member.rsplit("/", 1)[1], source.read(member))] + [(n, source.read(n)) for n in ORT_NOTICES]:
+                    info = zipfile.ZipInfo(name, date_time=(2026, 10, 26, 0, 0, 0))
+                    info.compress_type = zipfile.ZIP_DEFLATED
+                    info.external_attr = 0o644 << 16
+                    slim.writestr(info, data, compresslevel=9)
+            out[slim_name(platform)] = path
+    return out
+
+
 def sha256_of(path):
     digest = hashlib.sha256()
     with open(path, "rb") as handle:
@@ -308,6 +413,10 @@ def publish(api, plan, tmp, verify_only):
                 say(f"  {name}: already there")
                 continue
             source = plan["source"](name)
+            if source["kind"] == "local":
+                say(f"  {name}: verified; uploading")
+                api.upload_file(path_or_fileobj=str(source["path"]), path_in_repo=name, repo_id=repo, commit_message=f"Add {name}")
+                continue
             if source["kind"] == "copy":
                 try:
                     api.copy_files(source["hf"], f"hf://{repo}/{name}")
@@ -336,7 +445,7 @@ def publish(api, plan, tmp, verify_only):
         say(f"  {name}: OK, {size:,} bytes, sha256 {sha}")
 
 
-def plans():
+def plans(tmp, verify_only=False):
     catalog = json.loads(CATALOG.read_text(encoding="utf-8"))
     by_id = {m["id"]: m for m in catalog["models"]}
     for model_id, info in CATALOG_MODELS.items():
@@ -372,12 +481,26 @@ def plans():
         "licenses": license_files("apache"),
         "source": legacy_source,
     }
+    runtime = None if verify_only else runtime_package(tmp)
+    local = {ORT_PACKAGE: runtime, **slim_runtimes(tmp, runtime)} if runtime else {}
+    for name, path in local.items():
+        size, sha = ORT_FILES[name]
+        if (path.stat().st_size, sha256_of(path)) != (size, sha):
+            raise SystemExit(f"{name}: built {path.stat().st_size} bytes hashing {sha256_of(path)}, expected {size} {sha}")
+    yield {
+        "repo": f"{ORG}/onnxruntime",
+        "files": ORT_FILES,
+        "card": card_for_runtime(ORT_FILES),
+        "licenses": runtime_notices(runtime) if runtime else {},
+        "source": lambda name: {"kind": "local", "path": local[name]},
+    }
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--tmpdir")
     parser.add_argument("--verify-only", action="store_true")
+    parser.add_argument("--only", help="publish just this repo, e.g. kusema/onnxruntime")
     args = parser.parse_args()
 
     tmp = args.tmpdir or tempfile.mkdtemp(prefix="kusema-mirror-")
@@ -388,9 +511,13 @@ def main():
 
     api = HfApi()
     say(f"Publishing as {api.whoami().get('name')}")
-    all_plans = list(plans())
+    all_plans = list(plans(tmp, args.verify_only))
+    if args.only:
+        all_plans = [p for p in all_plans if p["repo"] == args.only]
     for plan in all_plans:
         publish(api, plan, tmp, args.verify_only)
+        if not args.verify_only:
+            say(f"  revision: {api.repo_info(plan['repo']).sha}")
     say(f"\nAll {sum(len(p['files']) for p in all_plans)} files verified.")
 
 

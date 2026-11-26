@@ -864,7 +864,9 @@
           "download": "Télécharger ({{size}} Mo)",
           "downloading": "Téléchargement… {{percentage}} %",
           "cancel": "Annuler",
-          "delete": "Supprimer"
+          "delete": "Supprimer",
+          "failed": "Impossible de télécharger le moteur vocal. Vérifiez votre connexion et réessayez. En attendant, les voix de Windows fonctionnent toujours.",
+          "retry": "Réessayer"
         },
         "rate": {
           "label": "Débit de parole",

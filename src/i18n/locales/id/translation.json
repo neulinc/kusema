@@ -861,7 +861,9 @@
           "download": "Unduh ({{size}} MB)",
           "downloading": "Mengunduh… {{percentage}}%",
           "cancel": "Batal",
-          "delete": "Hapus"
+          "delete": "Hapus",
+          "failed": "Mesin suara tidak bisa diunduh. Periksa koneksi Anda dan coba lagi. Sementara itu, suara Windows tetap berfungsi.",
+          "retry": "Coba lagi"
         },
         "rate": {
           "label": "Kecepatan Bicara",

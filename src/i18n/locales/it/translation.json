@@ -864,7 +864,9 @@
           "download": "Scarica ({{size}} MB)",
           "downloading": "Download… {{percentage}}%",
           "cancel": "Annulla",
-          "delete": "Rimuovi"
+          "delete": "Rimuovi",
+          "failed": "Impossibile scaricare il motore vocale. Controlla la connessione e riprova. Nel frattempo le voci di Windows continuano a funzionare.",
+          "retry": "Riprova"
         },
         "rate": {
           "label": "Velocità di lettura",

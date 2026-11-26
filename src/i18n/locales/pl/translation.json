@@ -867,7 +867,9 @@
           "download": "Pobierz ({{size}} MB)",
           "downloading": "Pobieranie… {{percentage}}%",
           "cancel": "Anuluj",
-          "delete": "Usuń"
+          "delete": "Usuń",
+          "failed": "Nie udało się pobrać silnika głosu. Sprawdź połączenie i spróbuj ponownie. W międzyczasie głosy Windows nadal działają.",
+          "retry": "Ponów"
         },
         "rate": {
           "label": "Tempo mowy",

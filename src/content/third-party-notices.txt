@@ -241,7 +241,7 @@ Whisper Tiny English: Apache 2.0
 Other components
 ==============================================================================
 ONNX Runtime: MIT
-  https://github.com/microsoft/onnxruntime
+  https://onnxruntime.ai
 
 ==============================================================================
 @babel/code-frame 7.27.1

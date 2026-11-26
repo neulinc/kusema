@@ -130,6 +130,25 @@ here can still fail there, so keep tests independent of the platform:
   from `/mnt/d` is slow). Not needed for every change, but worth it for
   anything touching `cfg(target_os)` code.
 
+**Downloads, before every release.** The release workflow's first job,
+`check-downloads`, lists every file the app can download (catalog models at
+their pinned revisions, Kusema's mirrors, the language detector, the legacy
+Whisper and Breeze files, and Kokoro's ONNX Runtime for every platform, model, voices and
+dictionaries) from the code itself (`src-tauri/src/download_manifest.rs`), and
+checks that each URL answers 200 with the pinned size and SHA-256 (Hugging Face
+files from the Hub's own record of them, the rest downloaded and hashed). If
+any doesn't, no release is created. Run it yourself before tagging:
+
+```bash
+cd src-tauri && KUSEMA_DOWNLOAD_MANIFEST=../manifest.json cargo test --lib download_manifest::writes_the_manifest -- --ignored
+cd .. && python scripts/check_downloads.py manifest.json
+```
+
+A file that moved upstream (as ONNX Runtime's GitHub release zips did in
+November 2026) is fixed by pinning a new source and mirroring it to the
+`kusema` organization on Hugging Face (`scripts/kusema_mirror.py`), never by
+resolving "latest".
+
 **When CI fails:** the run's log has the failing test or check
 (`gh run view <id> -R neulinc/kusema --log-failed`; `-R` matters, since the
 clone also has Handy's repo as a remote). Fix the cause; never weaken a check

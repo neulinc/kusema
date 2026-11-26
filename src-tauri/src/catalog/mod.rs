@@ -453,6 +453,55 @@ pub fn mirror_fallbacks(model_id: &str) -> Vec<MirrorFile> {
     mirror_files(&m.repository, &file.filename, &file.sha256, file.size)
 }
 
+/// Every file the catalog can be downloaded from, as (what, URL, size,
+/// SHA-256): each offered model's files at its pinned revision, the language
+/// detector, and Kusema's mirrors of both. For the release check
+/// (`download_manifest`).
+#[cfg(test)]
+pub(crate) fn download_urls() -> Vec<(String, String, u64, String)> {
+    let pinned = |repo: &str, revision: &str, filename: &str| {
+        format!("https://huggingface.co/{repo}/resolve/{revision}/{filename}")
+    };
+    let mut out = Vec::new();
+    for m in transcription_models().filter(|m| m.is_offered()) {
+        for f in m.files.values() {
+            out.push((
+                "model".to_string(),
+                pinned(&m.repository, &m.revision, &f.filename),
+                f.size,
+                f.sha256.clone(),
+            ));
+        }
+        if let Some(f) = m.default_file() {
+            for mirror in mirror_files(&m.repository, &f.filename, &f.sha256, f.size) {
+                out.push((
+                    "model mirror".to_string(),
+                    mirror.url,
+                    mirror.size_bytes,
+                    mirror.sha256,
+                ));
+            }
+        }
+    }
+    if let Some(d) = LANGUAGE_DETECTOR.as_ref() {
+        out.push((
+            "language detector".to_string(),
+            pinned(&d.repo_id, &d.revision, &d.filename),
+            d.size_bytes,
+            d.sha256.clone(),
+        ));
+        for mirror in language_detector_mirrors() {
+            out.push((
+                "model mirror".to_string(),
+                mirror.url,
+                mirror.size_bytes,
+                mirror.sha256,
+            ));
+        }
+    }
+    out
+}
+
 /// Ordered mirror URLs for the language detector's file.
 pub fn language_detector_mirrors() -> Vec<MirrorFile> {
     LANGUAGE_DETECTOR.as_ref().map_or_else(Vec::new, |d| {

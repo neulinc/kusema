@@ -128,7 +128,7 @@ export const Tooltip: React.FC<TooltipProps> = ({
               left: place?.left ?? -9999,
               visibility: place ? "visible" : "hidden",
             }}
-            className="pointer-events-none fixed z-[9999] w-max max-w-[248px] rounded-[9px] bg-plum px-[11px] py-[7px] text-start font-ui text-label leading-[17px] text-background shadow-[0_8px_24px_-10px_rgba(0,0,0,0.45)]"
+            className="pointer-events-none fixed z-[9999] w-max max-w-[248px] [overflow-wrap:anywhere] rounded-[9px] bg-plum px-[11px] py-[7px] text-start font-ui text-label leading-[17px] text-background shadow-[0_8px_24px_-10px_rgba(0,0,0,0.45)]"
           >
             {title && <b className="block font-semibold">{title}</b>}
             {/* Block, not inline: WebKit applies a grid's margin in an inline span only

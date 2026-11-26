@@ -861,7 +861,9 @@
           "download": "Download ({{size}} MB)",
           "downloading": "Downloader… {{percentage}} %",
           "cancel": "Annuller",
-          "delete": "Fjern"
+          "delete": "Fjern",
+          "failed": "Stemmemotoren kunne ikke hentes. Tjek din forbindelse, og prøv igen. Windows-stemmerne virker stadig i mellemtiden.",
+          "retry": "Prøv igen"
         },
         "rate": {
           "label": "Talehastighed",

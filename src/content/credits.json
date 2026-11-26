@@ -4698,9 +4698,9 @@
  "others": [
   {
    "name": "ONNX Runtime",
-   "version": "",
+   "version": "1.31.1",
    "license": "MIT",
-   "url": "https://github.com/microsoft/onnxruntime"
+   "url": "https://onnxruntime.ai"
   }
  ]
 }

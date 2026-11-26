@@ -861,7 +861,9 @@
           "download": "Herunterladen ({{size}} MB)",
           "downloading": "Wird heruntergeladen… {{percentage}} %",
           "cancel": "Abbrechen",
-          "delete": "Entfernen"
+          "delete": "Entfernen",
+          "failed": "Die Sprachausgabe konnte nicht heruntergeladen werden. Prüfen Sie Ihre Verbindung und versuchen Sie es erneut. Die Windows-Stimmen funktionieren solange weiter.",
+          "retry": "Erneut versuchen"
         },
         "rate": {
           "label": "Sprechtempo",

@@ -87,10 +87,12 @@ const OTHER_MODELS: Model[] = [
 // Downloaded at run time, so in no package manifest.
 const OTHER_COMPONENTS: Component[] = [
   {
+    // The library from Microsoft's NuGet package, mirrored at
+    // huggingface.co/kusema/onnxruntime with its LICENSE and ThirdPartyNotices.txt.
     name: "ONNX Runtime",
-    version: "",
+    version: "1.31.1",
     license: "MIT",
-    url: "https://github.com/microsoft/onnxruntime",
+    url: "https://onnxruntime.ai",
   },
 ];
 

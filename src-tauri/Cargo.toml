@@ -1,6 +1,6 @@
 [package]
 name = "handy"
-version = "0.5.3"
+version = "0.5.4"
 description = "Kusema"
 authors = ["Neulinc", "cjpais"]
 edition = "2021"
@@ -108,12 +108,11 @@ tauri-plugin-dialog = "2.6"
 hf-hub = { git = "https://github.com/cjpais/hf-hub", branch = "cancellable-downloads", features = [
   "tokio",
 ] }
+# Kusema: unpacks ONNX Runtime from its NuGet package for Kokoro voices
+zip = { version = "4", default-features = false, features = ["deflate"] }
 
 [target.'cfg(unix)'.dependencies]
 signal-hook = "0.3"
-# Kusema: unpacks the ONNX Runtime archive for Kokoro voices
-flate2 = "1"
-tar = "0.4"
 
 [target.'cfg(not(any(target_os = "android", target_os = "ios")))'.dependencies]
 tauri-plugin-autostart = "2.5.1"
@@ -153,8 +152,6 @@ windows = { version = "0.61.3", features = [
   "Win32_UI_Accessibility",
 ] }
 winreg = "0.55"
-# Kusema: unpacks the ONNX Runtime archive for Kokoro voices
-zip = { version = "4", default-features = false, features = ["deflate"] }
 
 # Whisper backend per Windows arch. x86_64 ships the Vulkan GPU backend and
 # keeps the dynamic-backends posture (loadable per-ISA CPU modules + Vulkan),

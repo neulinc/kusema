@@ -861,7 +861,9 @@
           "download": "İndir ({{size}} MB)",
           "downloading": "İndiriliyor… %{{percentage}}",
           "cancel": "İptal",
-          "delete": "Kaldır"
+          "delete": "Kaldır",
+          "failed": "Ses motoru indirilemedi. Bağlantınızı kontrol edip yeniden deneyin. Bu arada Windows sesleri çalışmaya devam eder.",
+          "retry": "Yeniden dene"
         },
         "rate": {
           "label": "Konuşma Hızı",

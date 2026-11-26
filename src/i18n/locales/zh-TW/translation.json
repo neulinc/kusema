@@ -861,7 +861,9 @@
           "download": "下載（{{size}} MB）",
           "downloading": "正在下載… {{percentage}}%",
           "cancel": "取消",
-          "delete": "移除"
+          "delete": "移除",
+          "failed": "無法下載語音引擎。請檢查網路連線後再試一次。在此期間，Windows 語音仍可使用。",
+          "retry": "重試"
         },
         "rate": {
           "label": "語速",

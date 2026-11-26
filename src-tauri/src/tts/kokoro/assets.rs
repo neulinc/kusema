@@ -2,8 +2,10 @@
 //!
 //! Everything is pinned (revision + size + SHA-256) and fetched with Handy's
 //! resumable model downloader into `<app data>/kokoro/`:
-//! - ONNX Runtime, the official Microsoft build. Only its shared library is
-//!   kept; `ort` loads it at runtime (`load-dynamic`).
+//! - ONNX Runtime, Microsoft's official build: a small zip of this platform's
+//!   library from Kusema's mirror, or else Microsoft's full NuGet package from
+//!   nuget.org. Only the library is kept; `ort` loads it at runtime
+//!   (`load-dynamic`).
 //! - The Kokoro-82M v1.0 int8 ONNX model and the English voice styles, from
 //!   onnx-community/Kokoro-82M-v1.0-ONNX (Apache-2.0).
 //! - misaki's US and UK pronunciation dictionaries (Apache-2.0), Kokoro's own
@@ -26,7 +28,18 @@ use tauri::{AppHandle, Emitter, State};
 const MODEL_BASE: &str = "https://huggingface.co/onnx-community/Kokoro-82M-v1.0-ONNX/resolve/1939ad2a8e416c0acfeecc08a694d14ef25f2231";
 const MISAKI_BASE: &str =
     "https://raw.githubusercontent.com/hexgrad/misaki/fba1236595f2d2bf21d414ba6e57d25256afada3/misaki/data";
-const ORT_BASE: &str = "https://github.com/microsoft/onnxruntime/releases/download/v1.31.1";
+
+/// ONNX Runtime, pinned: never "latest". 1.31.1 is the newest version `ort`
+/// 2.0.0-rc.15 knows (its API 31) and the one Kokoro was tested with. It comes
+/// from Microsoft's official NuGet package (nuget.org packages can't change
+/// once published). Until 0.5.4 Kusema downloaded the GitHub release zip; that
+/// URL answered 404 to Kusema's downloads in November 2026.
+const RUNTIME_MIRROR: &str =
+    "https://huggingface.co/kusema/onnxruntime/resolve/caf47470a42e102ffcbfc53047b21166c9007924";
+const RUNTIME_NUGET: &str = "https://api.nuget.org/v3-flatcontainer/microsoft.ml.onnxruntime/1.31.1/microsoft.ml.onnxruntime.1.31.1.nupkg";
+const RUNTIME_NUGET_SIZE: u64 = 159_626_394;
+const RUNTIME_NUGET_SHA256: &str =
+    "6871ccbc97f3d5bdb4095a1dcec33aa78d56f6ed8de5980ef5fa1d9f2e7c679a";
 
 pub const MODEL_FILE: &str = "kokoro-v1.0-int8.onnx";
 pub const VOCAB_FILE: &str = "tokenizer.json";
@@ -153,56 +166,75 @@ pub const VOICES: &[(&str, &str)] = &[
 ];
 const VOICE_SIZE: u64 = 522_240;
 
-/// The official ONNX Runtime build for this platform: archive, the shared
-/// library inside it, and the name it's saved under.
+/// A platform's ONNX Runtime library. Kokoro loads only this one file (no
+/// execution providers, so no `onnxruntime_providers_shared`). Every
+/// platform's is defined here so the release check can test all their
+/// downloads; each build uses its own, `RUNTIME`.
+#[derive(Clone, Copy)]
+#[cfg_attr(not(test), allow(dead_code))]
 struct Runtime {
-    archive: &'static str,
-    size: u64,
-    sha256: &'static str,
+    /// The small zip on Kusema's mirror (scripts/kusema_mirror.py builds it):
+    /// just the library, at its root, plus Microsoft's LICENSE and notices.
+    zip: &'static str,
+    zip_size: u64,
+    zip_sha256: &'static str,
+    /// Where the library is inside the NuGet package, the fallback.
     member: &'static str,
+    /// The name it's saved under, and its name inside the small zip.
     library: &'static str,
 }
 
-#[cfg(all(windows, target_arch = "x86_64"))]
-const RUNTIME: Option<Runtime> = Some(Runtime {
-    archive: "onnxruntime-win-x64-1.31.1.zip",
-    size: 82_929_944,
-    sha256: "5869e26bb25314375f2d5ef1877e3ea06b1543d6c710e6e4a1ec2f7177ab4b2c",
-    member: "onnxruntime-win-x64-1.31.1/lib/onnxruntime.dll",
+#[cfg_attr(not(test), allow(dead_code))]
+const WIN_X64: Runtime = Runtime {
+    zip: "onnxruntime-1.31.1-win-x64.zip",
+    zip_size: 6_336_551,
+    zip_sha256: "9bac539eadb05f6e11e25d90b404c60c734306924a82d8e98157d06fd574c9d7",
+    member: "runtimes/win-x64/native/onnxruntime.dll",
     library: "onnxruntime.dll",
-});
-#[cfg(all(windows, target_arch = "aarch64"))]
-const RUNTIME: Option<Runtime> = Some(Runtime {
-    archive: "onnxruntime-win-arm64-1.31.1.zip",
-    size: 85_851_069,
-    sha256: "817f4129073f84f81cde3ff92b1a4e06d007691e7208deed08a8b6d6df143f7f",
-    member: "onnxruntime-win-arm64-1.31.1/lib/onnxruntime.dll",
+};
+#[cfg_attr(not(test), allow(dead_code))]
+const WIN_ARM64: Runtime = Runtime {
+    zip: "onnxruntime-1.31.1-win-arm64.zip",
+    zip_size: 6_309_517,
+    zip_sha256: "98e080b1b05cc493a6850b45a09f7af823c7da518afe86f9940183fd2cb03110",
+    member: "runtimes/win-arm64/native/onnxruntime.dll",
     library: "onnxruntime.dll",
-});
-#[cfg(all(target_os = "macos", target_arch = "aarch64"))]
-const RUNTIME: Option<Runtime> = Some(Runtime {
-    archive: "onnxruntime-osx-arm64-1.31.1.tgz",
-    size: 36_936_435,
-    sha256: "2e1344a1926ee50eb25b38153cb6992c3567515aef0e677a1a520a1798896d6f",
-    member: "onnxruntime-osx-arm64-1.31.1/lib/libonnxruntime.1.31.1.dylib",
+};
+#[cfg_attr(not(test), allow(dead_code))]
+const OSX_ARM64: Runtime = Runtime {
+    zip: "onnxruntime-1.31.1-osx-arm64.zip",
+    zip_size: 12_514_848,
+    zip_sha256: "0ea6c7909f0902085e8cc62285f48ee0bcd45da3fb7483652cade01b439aed7d",
+    member: "runtimes/osx-arm64/native/libonnxruntime.dylib",
     library: "libonnxruntime.dylib",
-});
+};
+#[cfg_attr(not(test), allow(dead_code))]
+const LINUX_X64: Runtime = Runtime {
+    zip: "onnxruntime-1.31.1-linux-x64.zip",
+    zip_size: 11_128_618,
+    zip_sha256: "1e6397b39dc5886e4c4160e86ec026d15000df19fdf1bc54db61e6365ead6418",
+    member: "runtimes/linux-x64/native/libonnxruntime.so",
+    library: "libonnxruntime.so",
+};
+#[cfg_attr(not(test), allow(dead_code))]
+const LINUX_ARM64: Runtime = Runtime {
+    zip: "onnxruntime-1.31.1-linux-arm64.zip",
+    zip_size: 10_062_535,
+    zip_sha256: "38461512dbda3d856f7da5ec17bb75f5dc3c5ececfa9ad66ab153c64d3907d65",
+    member: "runtimes/linux-arm64/native/libonnxruntime.so",
+    library: "libonnxruntime.so",
+};
+
+#[cfg(all(windows, target_arch = "x86_64"))]
+const RUNTIME: Option<Runtime> = Some(WIN_X64);
+#[cfg(all(windows, target_arch = "aarch64"))]
+const RUNTIME: Option<Runtime> = Some(WIN_ARM64);
+#[cfg(all(target_os = "macos", target_arch = "aarch64"))]
+const RUNTIME: Option<Runtime> = Some(OSX_ARM64);
 #[cfg(all(target_os = "linux", target_arch = "x86_64"))]
-const RUNTIME: Option<Runtime> = Some(Runtime {
-    archive: "onnxruntime-linux-x64-1.31.1.tgz",
-    size: 11_413_655,
-    sha256: "c849e36a1ef3e22d4ff217b9d1ce4a3cf5b9467b975610913ae959ad5b16bdc9",
-    member: "onnxruntime-linux-x64-1.31.1/lib/libonnxruntime.so.1.31.1",
-    library: "libonnxruntime.so",
-});
+const RUNTIME: Option<Runtime> = Some(LINUX_X64);
 #[cfg(all(target_os = "linux", target_arch = "aarch64"))]
-const RUNTIME: Option<Runtime> = Some(Runtime {
-    archive: "onnxruntime-linux-aarch64-1.31.1.tgz",
-    size: 10_332_381,
-    sha256: "5317505e2da99be65f8e2775ba3c2afd6d2961fd78aba1bd8f56159f48820c78",
-    member: "onnxruntime-linux-aarch64-1.31.1/lib/libonnxruntime.so.1.31.1",
-    library: "libonnxruntime.so",
-});
+const RUNTIME: Option<Runtime> = Some(LINUX_ARM64);
 #[cfg(not(any(
     all(windows, any(target_arch = "x86_64", target_arch = "aarch64")),
     all(target_os = "macos", target_arch = "aarch64"),
@@ -213,42 +245,105 @@ const RUNTIME: Option<Runtime> = Some(Runtime {
 )))]
 const RUNTIME: Option<Runtime> = None;
 
+/// One place a file can be fetched from. Each source has its own size and
+/// SHA-256, checked after download.
+pub(crate) struct Source {
+    pub(crate) url: String,
+    pub(crate) size: u64,
+    pub(crate) sha256: &'static str,
+    /// For an archive: the file to take out of it (the runtime library).
+    member: Option<&'static str>,
+}
+
 /// One downloadable file.
-struct Asset {
+pub(crate) struct Asset {
     /// Where it's saved, relative to the Kokoro folder.
-    file: String,
-    url: String,
-    size: u64,
-    sha256: &'static str,
-    /// The runtime archive: unpack its library instead of keeping it.
+    pub(crate) file: String,
+    /// Where it's fetched from, tried in order until one downloads and
+    /// matches its own size and SHA-256.
+    pub(crate) sources: Vec<Source>,
+    /// The runtime library, unpacked from an archive.
     runtime: bool,
 }
 
-fn assets() -> Vec<Asset> {
+impl Asset {
+    /// A file with one source, saved as downloaded.
+    fn plain(file: String, url: String, size: u64, sha256: &'static str) -> Self {
+        Asset {
+            file,
+            sources: vec![Source {
+                url,
+                size,
+                sha256,
+                member: None,
+            }],
+            runtime: false,
+        }
+    }
+
+    /// The size counted for progress and the total shown: the first source's.
+    pub(crate) fn size(&self) -> u64 {
+        self.sources[0].size
+    }
+}
+
+/// The runtime's sources: the small zip on Kusema's mirror, then Microsoft's
+/// full NuGet package. Debug builds can replace the first URL with
+/// `KUSEMA_DEBUG_RUNTIME_PRIMARY_URL`, to test the fallback.
+fn runtime_sources(rt: &Runtime) -> Vec<Source> {
+    #[allow(unused_mut)]
+    let mut primary = format!("{RUNTIME_MIRROR}/{}", rt.zip);
+    #[cfg(debug_assertions)]
+    if let Ok(url) = std::env::var("KUSEMA_DEBUG_RUNTIME_PRIMARY_URL") {
+        primary = url;
+    }
+    vec![
+        Source {
+            url: primary,
+            size: rt.zip_size,
+            sha256: rt.zip_sha256,
+            member: Some(rt.library),
+        },
+        Source {
+            url: RUNTIME_NUGET.to_string(),
+            size: RUNTIME_NUGET_SIZE,
+            sha256: RUNTIME_NUGET_SHA256,
+            member: Some(rt.member),
+        },
+    ]
+}
+
+/// Every platform's runtime sources, for the release check.
+#[cfg(test)]
+pub(crate) fn every_runtime_source() -> Vec<(&'static str, Source)> {
+    [WIN_X64, WIN_ARM64, OSX_ARM64, LINUX_X64, LINUX_ARM64]
+        .iter()
+        .flat_map(|rt| runtime_sources(rt).into_iter().map(|s| (rt.zip, s)))
+        .collect()
+}
+
+/// Every file Kokoro downloads, on this platform.
+pub(crate) fn assets() -> Vec<Asset> {
     let mut assets = Vec::new();
-    if let Some(rt) = &RUNTIME {
+    if let Some(rt) = RUNTIME.as_ref() {
         assets.push(Asset {
-            file: rt.archive.to_string(),
-            url: format!("{ORT_BASE}/{}", rt.archive),
-            size: rt.size,
-            sha256: rt.sha256,
+            file: rt.library.to_string(),
+            sources: runtime_sources(rt),
             runtime: true,
         });
     }
-    assets.push(Asset {
-        file: MODEL_FILE.to_string(),
-        url: format!("{MODEL_BASE}/onnx/model_quantized.onnx"),
-        size: 92_361_116,
-        sha256: "fbae9257e1e05ffc727e951ef9b9c98418e6d79f1c9b6b13bd59f5c9028a1478",
-        runtime: false,
-    });
-    assets.push(Asset {
-        file: VOCAB_FILE.to_string(),
-        url: format!("{MODEL_BASE}/tokenizer.json"),
-        size: 3_497,
-        sha256: "77a02c8e164413299b4b4c403b14f8e0e1c1b727db4d46a09d6327b861060a34",
-        runtime: false,
-    });
+    assets.push(Asset::plain(
+        MODEL_FILE.to_string(),
+        format!("{MODEL_BASE}/onnx/model_quantized.onnx"),
+        92_361_116,
+        "fbae9257e1e05ffc727e951ef9b9c98418e6d79f1c9b6b13bd59f5c9028a1478",
+    ));
+    assets.push(Asset::plain(
+        VOCAB_FILE.to_string(),
+        format!("{MODEL_BASE}/tokenizer.json"),
+        3_497,
+        "77a02c8e164413299b4b4c403b14f8e0e1c1b727db4d46a09d6327b861060a34",
+    ));
     for (file, size, sha256) in [
         (
             "us_gold.json",
@@ -271,22 +366,20 @@ fn assets() -> Vec<Asset> {
             "48131e2d92ccc41655f4543e87e0f938e71463eb5a54be7f0693bb712ebb6bce",
         ),
     ] {
-        assets.push(Asset {
-            file: file.to_string(),
-            url: format!("{MISAKI_BASE}/{file}"),
+        assets.push(Asset::plain(
+            file.to_string(),
+            format!("{MISAKI_BASE}/{file}"),
             size,
             sha256,
-            runtime: false,
-        });
+        ));
     }
     for (name, sha256) in VOICES {
-        assets.push(Asset {
-            file: format!("{VOICES_DIR}/{name}.bin"),
-            url: format!("{MODEL_BASE}/voices/{name}.bin"),
-            size: VOICE_SIZE,
+        assets.push(Asset::plain(
+            format!("{VOICES_DIR}/{name}.bin"),
+            format!("{MODEL_BASE}/voices/{name}.bin"),
+            VOICE_SIZE,
             sha256,
-            runtime: false,
-        });
+        ));
     }
     assets
 }
@@ -302,7 +395,7 @@ fn is_present(dir: &Path, asset: &Asset) -> bool {
     }
     dir.join(&asset.file)
         .metadata()
-        .is_ok_and(|m| m.len() == asset.size)
+        .is_ok_and(|m| m.len() == asset.size())
 }
 
 /// Whether every file is in place (sizes only; hashes are checked on download).
@@ -352,7 +445,7 @@ impl Kokoro {
             downloading: self.downloads.active.load(Ordering::SeqCst),
             size_mb: assets()
                 .iter()
-                .map(|a| a.size)
+                .map(|a| a.size())
                 .sum::<u64>()
                 .div_ceil(1_000_000),
         }
@@ -392,6 +485,9 @@ impl Kokoro {
         drop(_active);
         self.status_changed();
 
+        if let Err(e) = &result {
+            warn!("Kokoro voices couldn't be downloaded: {e}");
+        }
         if result.is_ok() && is_ready(&self.dir) {
             info!("Kokoro voices downloaded");
             // First download: switch from the system default to Kokoro.
@@ -468,56 +564,112 @@ async fn fetch_missing(
 ) -> Result<(), String> {
     fs::create_dir_all(dir.join(VOICES_DIR)).map_err(|e| e.to_string())?;
     let assets = assets();
-    let total: u64 = assets.iter().map(|a| a.size).sum();
+    let total: u64 = assets.iter().map(|a| a.size()).sum();
     let mut done: u64 = assets
         .iter()
         .filter(|a| is_present(dir, a))
-        .map(|a| a.size)
+        .map(|a| a.size())
         .sum();
 
     for asset in assets.iter().filter(|a| !is_present(dir, a)) {
-        let partial = dir.join(format!("{}.partial", asset.file));
-        let base = done;
-        let emit = |event: HttpDownloadEvent<'_>| {
-            if let HttpDownloadEvent::Progress(p) = event {
-                let downloaded = base + p.downloaded;
-                progress(KokoroDownloadProgress {
-                    downloaded,
-                    total,
-                    percentage: downloaded as f64 * 100.0 / total as f64,
-                    bytes_per_sec: p.bytes_per_sec,
-                });
+        // Each source in turn. A file that doesn't match that source's size
+        // and SHA-256 is deleted by the downloader, and counts as a failure.
+        let mut failures = Vec::new();
+        let mut fetched = None;
+        for source in &asset.sources {
+            let partial = partial_path(dir, asset, source);
+            let base = done;
+            // A fallback can be bigger than the first source; the total grows
+            // with it so progress never passes 100%.
+            let total = total - asset.size() + source.size;
+            let emit = |event: HttpDownloadEvent<'_>| {
+                if let HttpDownloadEvent::Progress(p) = event {
+                    let downloaded = base + p.downloaded;
+                    progress(KokoroDownloadProgress {
+                        downloaded,
+                        total,
+                        percentage: downloaded as f64 * 100.0 / total as f64,
+                        bytes_per_sec: p.bytes_per_sec,
+                    });
+                }
+            };
+            match ModelManager::download_http_resumable_with_events(
+                crate::network::Purpose::VoiceDownload,
+                "kokoro",
+                &source.url,
+                &partial,
+                Some(source.size),
+                Some(source.sha256),
+                token,
+                &emit,
+            )
+            .await
+            {
+                Ok(outcome) => {
+                    fetched = Some((outcome, source, partial));
+                    break;
+                }
+                Err(e) => {
+                    warn!(
+                        "Kokoro: downloading {} from {} failed: {e}",
+                        asset.file, source.url
+                    );
+                    failures.push(format!("{}: {e}", source.url));
+                }
             }
-        };
-        let outcome = ModelManager::download_http_resumable_with_events(
-            crate::network::Purpose::VoiceDownload,
-            "kokoro",
-            &asset.url,
-            &partial,
-            Some(asset.size),
-            Some(asset.sha256),
-            token,
-            &emit,
-        )
-        .await
-        .map_err(|e| format!("Downloading {} failed: {e}", asset.file))?;
+        }
+        let (outcome, source, partial) = fetched.ok_or_else(|| {
+            format!(
+                "Downloading {} failed. {}",
+                asset.file,
+                failures.join(" | ")
+            )
+        })?;
         if let HttpDownloadOutcome::Cancelled = outcome {
             info!("Kokoro download cancelled");
             return Ok(());
         }
-        if asset.runtime {
+        let target = dir.join(&asset.file);
+        if let Some(member) = source.member {
             let archive = partial.clone();
-            let target = runtime_library(dir).expect("runtime is supported");
-            tokio::task::spawn_blocking(move || unpack_runtime(&archive, &target))
+            tokio::task::spawn_blocking(move || unpack_runtime(&archive, member, &target))
                 .await
                 .map_err(|e| e.to_string())??;
+            info!("Kokoro: ONNX Runtime unpacked from {}", source.url);
             let _ = fs::remove_file(&partial);
         } else {
-            fs::rename(&partial, dir.join(&asset.file)).map_err(|e| e.to_string())?;
+            fs::rename(&partial, &target).map_err(|e| e.to_string())?;
         }
-        done += asset.size;
+        if asset.runtime {
+            remove_runtime_partials(dir);
+        }
+        done += asset.size();
     }
     Ok(())
+}
+
+/// Where a source is downloaded to before it's checked. The runtime's
+/// sources are different files, so each gets its own partial (named by its
+/// SHA-256): an interrupted download only ever resumes the same file.
+fn partial_path(dir: &Path, asset: &Asset, source: &Source) -> PathBuf {
+    if asset.runtime {
+        dir.join(format!("runtime-{}.partial", &source.sha256[..16]))
+    } else {
+        dir.join(format!("{}.partial", asset.file))
+    }
+}
+
+/// The runtime's leftover partials, once it's in place: a source that failed
+/// part way, and the GitHub release archives used before 0.5.4.
+fn remove_runtime_partials(dir: &Path) {
+    let entries = fs::read_dir(dir).into_iter().flatten().flatten();
+    for entry in entries {
+        let name = entry.file_name().to_string_lossy().to_string();
+        let runtime = name.starts_with("runtime-") || name.starts_with("onnxruntime-");
+        if runtime && name.ends_with(".partial") {
+            let _ = fs::remove_file(entry.path());
+        }
+    }
 }
 
 fn voice_setting_changed(app: &AppHandle) {
@@ -527,11 +679,10 @@ fn voice_setting_changed(app: &AppHandle) {
     );
 }
 
-/// Copy the runtime library out of the downloaded archive.
-fn unpack_runtime(archive: &Path, target: &Path) -> Result<(), String> {
-    let rt = RUNTIME.as_ref().ok_or("Unsupported platform")?;
+/// Copy the runtime library (`member`) out of the downloaded archive.
+fn unpack_runtime(archive: &Path, member: &str, target: &Path) -> Result<(), String> {
     let tmp = target.with_extension("unpacking");
-    let unpacked = extract_member(archive, rt.member, &tmp);
+    let unpacked = extract_member(archive, member, &tmp);
     if let Err(e) = unpacked {
         let _ = fs::remove_file(&tmp);
         return Err(format!("Could not unpack ONNX Runtime: {e}"));
@@ -539,35 +690,16 @@ fn unpack_runtime(archive: &Path, target: &Path) -> Result<(), String> {
     fs::rename(&tmp, target).map_err(|e| e.to_string())
 }
 
-#[cfg(windows)]
+/// Copy `member` out of a zip `archive` (a NuGet package is one) to `out`.
 fn extract_member(archive: &Path, member: &str, out: &Path) -> Result<(), String> {
     let mut zip = zip::ZipArchive::new(fs::File::open(archive).map_err(|e| e.to_string())?)
         .map_err(|e| e.to_string())?;
-    let mut entry = zip.by_name(member).map_err(|e| e.to_string())?;
+    let mut entry = zip
+        .by_name(member)
+        .map_err(|_| format!("{member} is missing from the package"))?;
     let mut file = fs::File::create(out).map_err(|e| e.to_string())?;
     std::io::copy(&mut entry, &mut file).map_err(|e| e.to_string())?;
     Ok(())
-}
-
-#[cfg(unix)]
-fn extract_member(archive: &Path, member: &str, out: &Path) -> Result<(), String> {
-    let file = fs::File::open(archive).map_err(|e| e.to_string())?;
-    let mut tar = tar::Archive::new(flate2::read::GzDecoder::new(file));
-    for entry in tar.entries().map_err(|e| e.to_string())? {
-        let mut entry = entry.map_err(|e| e.to_string())?;
-        let path = entry.path().map_err(|e| e.to_string())?;
-        if path.to_str() == Some(member) && entry.header().entry_type().is_file() {
-            let mut file = fs::File::create(out).map_err(|e| e.to_string())?;
-            std::io::copy(&mut entry, &mut file).map_err(|e| e.to_string())?;
-            return Ok(());
-        }
-    }
-    Err(format!("{member} is missing from the archive"))
-}
-
-#[cfg(not(any(windows, unix)))]
-fn extract_member(_: &Path, _: &str, _: &Path) -> Result<(), String> {
-    Err("Unsupported platform".to_string())
 }
 
 #[tauri::command]
@@ -608,14 +740,18 @@ mod tests {
         files.dedup();
         assert_eq!(files.len(), assets.len(), "duplicate file names");
         for asset in &assets {
-            assert_eq!(asset.sha256.len(), 64, "{}", asset.file);
-            assert!(asset.sha256.bytes().all(|b| b.is_ascii_hexdigit()));
-            assert!(asset.url.starts_with("https://"));
+            assert!(!asset.sources.is_empty(), "{}", asset.file);
+            for source in &asset.sources {
+                assert_eq!(source.sha256.len(), 64, "{}", asset.file);
+                assert!(source.sha256.bytes().all(|b| b.is_ascii_hexdigit()));
+                assert!(source.url.starts_with("https://"));
+                assert!(source.size > 0);
+            }
         }
         assert!(VOICES.iter().any(|(name, _)| *name == DEFAULT_VOICE));
     }
 
-    /// Downloads everything (~200 MB) through the real downloader, checking
+    /// Downloads everything (~126 MB) through the real downloader, checking
     /// every URL, size and hash, and unpacks ONNX Runtime:
     /// `KUSEMA_KOKORO_DOWNLOAD_DIR=... cargo test kokoro_downloads -- --ignored --nocapture`
     #[tokio::test]
@@ -639,6 +775,103 @@ mod tests {
             .unwrap()
             .flatten()
             .all(|e| !e.file_name().to_string_lossy().ends_with(".partial")));
+    }
+
+    #[test]
+    fn the_runtime_is_pinned_slim_first_with_nuget_as_the_fallback() {
+        let assets = assets();
+        // Nothing from the GitHub release zips any more, and never "latest".
+        for source in assets.iter().flat_map(|a| &a.sources) {
+            assert!(!source.url.contains("onnxruntime/releases"));
+            assert!(!source.url.contains("latest"));
+        }
+        let Some(rt) = RUNTIME.as_ref() else {
+            assert!(assets.iter().all(|a| !a.runtime));
+            return;
+        };
+        let runtime = assets.iter().find(|a| a.runtime).unwrap();
+        assert_eq!(runtime.file, rt.library);
+        let [slim, nuget] = runtime.sources.as_slice() else {
+            panic!("the runtime has two sources");
+        };
+        // First: the small zip on the mirror, at a fixed revision, with its
+        // own size and hash; the library sits at its root.
+        assert!(slim.url.starts_with(
+            "https://huggingface.co/kusema/onnxruntime/resolve/caf47470a42e102ffcbfc53047b21166c9007924/onnxruntime-1.31.1-"
+        ));
+        assert!(slim.url.ends_with(".zip"));
+        assert_eq!(slim.member, Some(rt.library));
+        assert!(slim.size < 20_000_000);
+        // Then Microsoft's full package, with its own size and hash.
+        assert_eq!(nuget.url, RUNTIME_NUGET);
+        assert!(nuget.url.starts_with(
+            "https://api.nuget.org/v3-flatcontainer/microsoft.ml.onnxruntime/1.31.1/"
+        ));
+        assert_eq!(
+            (nuget.size, nuget.sha256),
+            (RUNTIME_NUGET_SIZE, RUNTIME_NUGET_SHA256)
+        );
+        assert_eq!(nuget.member, Some(rt.member));
+        assert_ne!(slim.sha256, nuget.sha256);
+        // Separate partials, so a resume never mixes the two files.
+        assert_ne!(
+            partial_path(Path::new("k"), runtime, slim),
+            partial_path(Path::new("k"), runtime, nuget)
+        );
+        // The total shown counts the small zip.
+        assert_eq!(runtime.size(), rt.zip_size);
+    }
+
+    #[test]
+    fn the_runtime_library_is_unpacked_from_the_package() {
+        use std::io::Write;
+        let dir = std::env::temp_dir().join(format!("kusema-ort-unpack-{}", std::process::id()));
+        fs::create_dir_all(&dir).unwrap();
+        let package = dir.join("test.nupkg");
+        let mut zip = zip::ZipWriter::new(fs::File::create(&package).unwrap());
+        let stored = zip::write::SimpleFileOptions::default()
+            .compression_method(zip::CompressionMethod::Stored);
+        zip.start_file("LICENSE", stored).unwrap();
+        zip.write_all(b"MIT").unwrap();
+        zip.start_file("runtimes/win-x64/native/onnxruntime.dll", stored)
+            .unwrap();
+        zip.write_all(b"the library").unwrap();
+        zip.finish().unwrap();
+
+        let out = dir.join("onnxruntime.dll");
+        unpack_runtime(&package, "runtimes/win-x64/native/onnxruntime.dll", &out).unwrap();
+        assert_eq!(fs::read(&out).unwrap(), b"the library");
+        assert!(!dir.join("onnxruntime.unpacking").exists());
+
+        // The small zip: the library at its root.
+        let slim = dir.join("slim.zip");
+        let mut zip = zip::ZipWriter::new(fs::File::create(&slim).unwrap());
+        let deflated = zip::write::SimpleFileOptions::default()
+            .compression_method(zip::CompressionMethod::Deflated);
+        zip.start_file("onnxruntime.dll", deflated).unwrap();
+        zip.write_all(b"the small library").unwrap();
+        zip.start_file("LICENSE", deflated).unwrap();
+        zip.write_all(b"MIT").unwrap();
+        zip.finish().unwrap();
+        unpack_runtime(&slim, "onnxruntime.dll", &out).unwrap();
+        assert_eq!(fs::read(&out).unwrap(), b"the small library");
+        let missing = extract_member(&package, "runtimes/nowhere/lib.so", &dir.join("x"));
+        assert!(missing.unwrap_err().contains("missing from the package"));
+        let _ = fs::remove_dir_all(&dir);
+    }
+
+    #[test]
+    fn runtime_partials_are_cleared() {
+        let dir = std::env::temp_dir().join(format!("kusema-ort-partials-{}", std::process::id()));
+        fs::create_dir_all(&dir).unwrap();
+        fs::write(dir.join("onnxruntime-win-x64-1.31.1.zip.partial"), b"x").unwrap();
+        fs::write(dir.join("runtime-6871ccbc97f3d5bd.partial"), b"x").unwrap();
+        fs::write(dir.join("tokenizer.json.partial"), b"x").unwrap();
+        remove_runtime_partials(&dir);
+        assert!(!dir.join("onnxruntime-win-x64-1.31.1.zip.partial").exists());
+        assert!(!dir.join("runtime-6871ccbc97f3d5bd.partial").exists());
+        assert!(dir.join("tokenizer.json.partial").exists());
+        let _ = fs::remove_dir_all(&dir);
     }
 
     #[test]

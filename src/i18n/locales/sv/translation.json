@@ -861,7 +861,9 @@
           "download": "Ladda ner ({{size}} MB)",
           "downloading": "Laddar ner… {{percentage}} %",
           "cancel": "Avbryt",
-          "delete": "Ta bort"
+          "delete": "Ta bort",
+          "failed": "Röstmotorn kunde inte laddas ned. Kontrollera anslutningen och försök igen. Windows-rösterna fungerar under tiden.",
+          "retry": "Försök igen"
         },
         "rate": {
           "label": "Talhastighet",

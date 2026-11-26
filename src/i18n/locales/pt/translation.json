@@ -864,7 +864,9 @@
           "download": "Baixar ({{size}} MB)",
           "downloading": "Baixando… {{percentage}}%",
           "cancel": "Cancelar",
-          "delete": "Remover"
+          "delete": "Remover",
+          "failed": "Não foi possível baixar o motor de voz. Verifique sua conexão e tente de novo. Enquanto isso, as vozes do Windows continuam funcionando.",
+          "retry": "Tentar de novo"
         },
         "rate": {
           "label": "Velocidade da fala",

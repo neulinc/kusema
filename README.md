@@ -87,7 +87,7 @@ Check your AI provider's own terms for how they handle the text you send them.
 3. Later, try it anywhere: open Notepad, hold **Right Ctrl**, speak, release.
 4. To use **Ask Kusema**:
    - On the **Assistant** page, click **Turn on AI cleanup** (or turn it on under **Advanced**), then **Open AI Provider settings**: choose a provider (e.g. Anthropic), paste your API key and pick a model.
-   - On the **Assistant** page, download the **Kokoro** voices for natural speech (about 200 MB, one time) and choose a voice.
+   - On the **Assistant** page, download the **Kokoro** voices for natural speech (about 126 MB, one time) and choose a voice.
    - Hold **Right Ctrl**, tap **Space**, and ask your question.
 5. To ask about your screen, pick a model that can see images (Claude models can), then in the window you want to ask about, hold **Right Ctrl**, tap **Space** and say "what's on my screen?" (or your own question about it).
 

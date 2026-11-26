@@ -861,7 +861,9 @@
           "download": "Download ({{size}} MB)",
           "downloading": "Downloading… {{percentage}}%",
           "cancel": "Cancel",
-          "delete": "Remove"
+          "delete": "Remove",
+          "failed": "Couldn't download the voice engine. Check your connection and try again. Windows voices still work in the meantime.",
+          "retry": "Retry"
         },
         "rate": {
           "label": "Speaking Rate",

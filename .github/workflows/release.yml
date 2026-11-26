@@ -19,7 +19,35 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  # Every file the app downloads (models, mirrors, the ONNX Runtime package for
+  # Kokoro, its model, voices and dictionaries) must answer 200 with the size
+  # and SHA-256 the app pins; otherwise no release is created. The list comes
+  # from the code itself (src-tauri/src/download_manifest.rs).
+  check-downloads:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev libasound2-dev libssl-dev libgtk-layer-shell-dev             libvulkan-dev glslc spirv-headers
+
+      - uses: swatinem/rust-cache@v2
+        with:
+          workspaces: "./src-tauri -> target"
+
+      - name: List every download the app makes
+        working-directory: src-tauri
+        env:
+          KUSEMA_DOWNLOAD_MANIFEST: ${{ runner.temp }}/downloads.json
+        run: cargo test --lib download_manifest::writes_the_manifest -- --ignored --nocapture
+
+      - name: Check each one answers with the pinned size and SHA-256
+        run: python3 scripts/check_downloads.py "${{ runner.temp }}/downloads.json"
+
   create-release:
+    needs: check-downloads
     permissions:
       contents: write
     runs-on: ubuntu-latest

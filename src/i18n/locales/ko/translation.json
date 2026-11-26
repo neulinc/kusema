@@ -861,7 +861,9 @@
           "download": "다운로드({{size}}MB)",
           "downloading": "다운로드 중… {{percentage}}%",
           "cancel": "취소",
-          "delete": "제거"
+          "delete": "제거",
+          "failed": "음성 엔진을 다운로드하지 못했습니다. 연결을 확인하고 다시 시도하세요. 그동안 Windows 음성은 계속 사용할 수 있습니다.",
+          "retry": "다시 시도"
         },
         "rate": {
           "label": "말하기 속도",
